@@ -1,0 +1,43 @@
+/* CIF PROCESS (184, 178), (325, 195) */
+process obsw;
+    /* CIF TEXT (112, 46), (272, 161) */
+    -- Text area for declarations and comments
+    
+    dcl F, h Myreal;
+    /* CIF ENDTEXT */
+    /* CIF START (457, 48), (70, 35) */
+    START;
+        /* CIF PROCEDURECALL (399, 103), (185, 35) */
+        call writeln('SDL startup');
+        /* CIF NEXTSTATE (457, 153), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (785, 75), (70, 35) */
+    state Running;
+        /* CIF input (707, 138), (70, 35) */
+        input pulse;
+            /* CIF PROCEDURECALL (650, 193), (183, 35) */
+            call Compute_Thrust(F,h);
+            /* CIF output (666, 248), (151, 35) */
+            output Thrust_Update(h);
+            /* CIF NEXTSTATE (707, 303), (70, 35) */
+            NEXTSTATE Running;
+        /* CIF input (842, 142), (114, 35) */
+        input start_work(F);
+            /* CIF NEXTSTATE (864, 197), (70, 35) */
+            NEXTSTATE Wait;
+    endstate;
+    /* CIF state (650, 46), (70, 35) */
+    state Wait;
+    endstate;
+    /* CIF state (457, 153), (70, 35) */
+    state Wait;
+        /* CIF input (399, 208), (70, 35) */
+        input pulse;
+            /* CIF NEXTSTATE (399, 263), (70, 35) */
+            NEXTSTATE Wait;
+        /* CIF input (525, 210), (115, 35) */
+        input Start_work(F);
+            /* CIF NEXTSTATE (547, 265), (70, 35) */
+            NEXTSTATE Running;
+    endstate;
+endprocess obsw;

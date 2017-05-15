@@ -1,0 +1,37 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM obsw;
+
+	SIGNAL Pulse;
+
+	/* CIF Keep Specific Geode PARAMNAMES Int_F */
+	SIGNAL Start_work (MyReal);
+
+	PROCEDURE Compute_Thrust COMMENT '#c_predef';
+		FPAR
+			IN F MyReal,
+			IN/OUT h MyReal,
+			IN/OUT dh MyReal;
+ 	EXTERNAL;
+
+	/* CIF Keep Specific Geode PARAMNAMES H */
+	SIGNAL Thrust_Update (MyReal);
+
+	CHANNEL c
+		FROM ENV TO obsw WITH Pulse,Start_work;
+		FROM obsw TO ENV WITH Thrust_Update;
+	ENDCHANNEL;
+
+	BLOCK obsw;
+
+		SIGNALROUTE r
+			FROM ENV TO obsw WITH Pulse,Start_work;
+			FROM obsw TO ENV WITH Thrust_Update;
+
+		CONNECT c and r;
+
+		PROCESS obsw REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;

@@ -1,0 +1,269 @@
+---------------------------------------------------
+-- AADL2.0
+-- TASTE
+-- 
+-- 
+---------------------------------------------------
+
+PACKAGE interfaceview::FV::OBSW
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_Pulse
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Pulse;
+
+SUBPROGRAM IMPLEMENTATION PI_Pulse.others
+END PI_Pulse.others;
+
+SUBPROGRAM PI_Start_work
+FEATURES
+  Int_F : IN PARAMETER DataView::MyReal {
+    Taste::encoding => UPER;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Start_work;
+
+SUBPROGRAM IMPLEMENTATION PI_Start_work.others
+END PI_Start_work.others;
+
+SUBPROGRAM RI_Compute_Thrust
+FEATURES
+  F : IN PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+  h : OUT PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+  dh : OUT PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+END RI_Compute_Thrust;
+
+SUBPROGRAM IMPLEMENTATION RI_Compute_Thrust.others
+END RI_Compute_Thrust.others;
+
+SUBPROGRAM RI_Thrust_Update
+FEATURES
+  H : IN PARAMETER DataView::MyReal {
+    Taste::encoding => UPER;
+  };
+END RI_Thrust_Update;
+
+SUBPROGRAM IMPLEMENTATION RI_Thrust_Update.others
+END RI_Thrust_Update.others;
+
+END interfaceview::FV::OBSW;
+
+PACKAGE interfaceview::FV::Model_1DoF
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_Compute_Thrust
+FEATURES
+  F : IN PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+  h : OUT PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+  dh : OUT PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+END PI_Compute_Thrust;
+
+SUBPROGRAM IMPLEMENTATION PI_Compute_Thrust.others
+END PI_Compute_Thrust.others;
+
+END interfaceview::FV::Model_1DoF;
+
+PACKAGE interfaceview::FV::Ground
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_Thrust_Update
+FEATURES
+  H : IN PARAMETER DataView::MyReal {
+    Taste::encoding => UPER;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Thrust_Update;
+
+SUBPROGRAM IMPLEMENTATION PI_Thrust_Update.others
+END PI_Thrust_Update.others;
+
+SUBPROGRAM RI_Start_work
+FEATURES
+  Int_F : IN PARAMETER DataView::MyReal {
+    Taste::encoding => UPER;
+  };
+END RI_Start_work;
+
+SUBPROGRAM IMPLEMENTATION RI_Start_work.others
+END RI_Start_work.others;
+
+END interfaceview::FV::Ground;
+
+PACKAGE interfaceview::IV
+-- { interfaceview::IV - 538 1285 1039 1367 
+--GUI 
+--}
+PUBLIC
+
+WITH interfaceview::FV::OBSW;
+WITH interfaceview::FV::Model_1DoF;
+WITH interfaceview::FV::Ground;
+WITH interfaceview::FV;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SYSTEM OBSW
+FEATURES
+  PI_Pulse : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::OBSW::PI_Pulse.others {
+    Taste::coordinates => "460 550";
+    Taste::RCMoperationKind => cyclic;
+    Taste::RCMperiod => 100 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Pulse";
+  };
+  PI_Start_work : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::OBSW::PI_Start_work.others {
+    Taste::coordinates => "672 786";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Start_work";
+  };
+  RI_Compute_Thrust : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Model_1DoF::PI_Compute_Thrust.others {
+    Taste::coordinates => "1144 540";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Compute_Thrust";
+    Taste::labelInheritance => "true";
+  };
+  RI_Thrust_Update : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Ground::PI_Thrust_Update.others {
+    Taste::coordinates => "955 786";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Thrust_Update";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (SDL);
+END OBSW;
+
+SYSTEM IMPLEMENTATION OBSW.others
+SUBCOMPONENTS
+  Pulse_impl : SUBPROGRAM interfaceview::FV::OBSW::PI_Pulse.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+  Start_work_impl : SUBPROGRAM interfaceview::FV::OBSW::PI_Start_work.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_Pulse_impl : SUBPROGRAM ACCESS Pulse_impl -> PI_Pulse;
+  OpToPICnx_Start_work_impl : SUBPROGRAM ACCESS Start_work_impl -> PI_Start_work;
+END OBSW.others;
+
+SYSTEM Model_1DoF
+FEATURES
+  PI_Compute_Thrust : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Model_1DoF::PI_Compute_Thrust.others {
+    Taste::coordinates => "1583 542";
+    Taste::RCMoperationKind => unprotected;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Compute_Thrust";
+  };
+PROPERTIES
+  Source_Language => (C);
+END Model_1DoF;
+
+SYSTEM IMPLEMENTATION Model_1DoF.others
+SUBCOMPONENTS
+  Compute_Thrust_impl : SUBPROGRAM interfaceview::FV::Model_1DoF::PI_Compute_Thrust.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_Compute_Thrust_impl : SUBPROGRAM ACCESS Compute_Thrust_impl -> PI_Compute_Thrust;
+END Model_1DoF.others;
+
+SYSTEM Ground
+FEATURES
+  PI_Thrust_Update : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Ground::PI_Thrust_Update.others {
+    Taste::coordinates => "955 1060";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Thrust_Update";
+  };
+  RI_Start_work : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::OBSW::PI_Start_work.others {
+    Taste::coordinates => "674 1060";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Start_work";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (GUI);
+END Ground;
+
+SYSTEM IMPLEMENTATION Ground.others
+SUBCOMPONENTS
+  Thrust_Update_impl : SUBPROGRAM interfaceview::FV::Ground::PI_Thrust_Update.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_Thrust_Update_impl : SUBPROGRAM ACCESS Thrust_Update_impl -> PI_Thrust_Update;
+END Ground.others;
+
+SYSTEM interfaceview
+END interfaceview;
+
+SYSTEM IMPLEMENTATION interfaceview.others
+SUBCOMPONENTS
+-- { interfaceview::IV::interfaceview.others.OBSW - 558 648 1022 729 
+--SDL(High level) 
+--}
+  OBSW : SYSTEM interfaceview::IV::OBSW.others {
+    Taste::coordinates => "460 360 1144 786";
+  };
+-- { interfaceview::IV::interfaceview.others.Model_1DoF - 1701 676 2399 758 
+--C{Simulink (low level) 
+--}
+  Model_1DoF : SYSTEM interfaceview::IV::Model_1DoF.others {
+    Taste::coordinates => "1583 316 2474 859";
+  };
+  Ground : SYSTEM interfaceview::IV::Ground.others {
+    Taste::coordinates => "506 1060 1125 1414";
+  };
+CONNECTIONS
+  OBSW_Start_work_Ground_Start_work : SUBPROGRAM ACCESS OBSW.PI_Start_work -> Ground.RI_Start_work {
+    Taste::coordinates => "674 1060 674 981 672 981 672 786";
+  };
+  Model_1DoF_Compute_Thrust_OBSW_Compute_Thrust : SUBPROGRAM ACCESS Model_1DoF.PI_Compute_Thrust -> OBSW.RI_Compute_Thrust {
+    Taste::coordinates => "1144 540 1237 540 1237 542 1583 542";
+  };
+  Ground_Thrust_Update_OBSW_Thrust_Update : SUBPROGRAM ACCESS Ground.PI_Thrust_Update -> OBSW.RI_Thrust_Update {
+    Taste::coordinates => "955 786 955 982 955 982 955 1060";
+  };
+END interfaceview.others;
+
+PROPERTIES
+  Taste::dataView => ("DataView");
+  Taste::dataViewPath => ("DataView.aadl");
+  Taste::coordinates => "0 0 2970 2100";
+  Taste::version => "1.3.19";
+END interfaceview::IV;
+
+PACKAGE interfaceview::FV
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+END interfaceview::FV;
+
