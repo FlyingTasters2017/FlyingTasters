@@ -1,0 +1,328 @@
+From: /home/assert/demo_1/binary.c
+"$DMT/asn1scc/taste-extract-asn-from-design.exe" -i "/home/assert/demo_1/InterfaceView.aadl" -k "/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn" -c "/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.acn"
+From: /home/assert/demo_1/binary.c
+cp "/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn" . 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c
+cp "/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.acn" . 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c
+mono "$DMT"/asn1scc/asn1.exe -ACND "dataview-uniq.asn"
+From: /home/assert/demo_1/binary.c
+"$DMT/asn1scc/taste-extract-asn-from-design.exe" -i "/home/assert/demo_1/InterfaceView.aadl" -j "/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn"
+From: /home/assert/demo_1/binary.c
+asn2aadlPlus -acn "/home/assert/demo_1/binary.c/dataview-uniq.acn" "/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn" D_view.aadl
+From: /home/assert/demo_1/binary.c
+asn2aadlPlus -aadlv2  -acn "/home/assert/demo_1/binary.c/dataview-uniq.acn" "/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn" D_view_aadlv2.aadl
+From: /home/assert/demo_1/binary.c
+"$DMT/asn1scc/taste-extract-asn-from-design.exe" -i "/home/assert/demo_1/InterfaceView.aadl" -k "/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn"
+From: /home/assert/demo_1/binary.c/auto-src
+cp "$DMT"/AutoGUI/debug_messages.? .
+From: /home/assert/demo_1/binary.c/auto-src
+cp "$DMT"/AutoGUI/timeInMS.? .
+From: /home/assert/demo_1/binary.c/auto-src
+cp "/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn" .
+From: /home/assert/demo_1/binary.c/auto-src
+cp "/home/assert/demo_1/binary.c/dataview-uniq.acn" .
+From: /home/assert/demo_1/binary.c/auto-src
+mono "$DMT"/asn1scc/asn1.exe -c -uPER -typePrefix asn1Scc -wordSize 8 -ACN "dataview-uniq.acn" "dataview-uniq.asn"
+From: /home/assert/demo_1/binary.c/auto-src
+msgPrinter "dataview-uniq.asn"
+From: /home/assert/demo_1/binary.c/auto-src
+msgPrinterASN1 "dataview-uniq.asn"
+From: /home/assert/demo_1/binary.c/controller
+unzip -o "/home/assert/demo_1/controller.zip"
+From: /home/assert/demo_1/binary.c/controller
+find "controller"/ ! -type d -exec chmod -x '{}' ';'
+From: /home/assert/demo_1/binary.c/controller
+find "controller"/ -exec touch '{}' ';'
+From: /home/assert/demo_1/binary.c/controller
+find "controller"/ -type f -iname '*.o' -exec rm -f '{}' ';'
+From: /home/assert/demo_1/binary.c/controller
+find "controller"/ -type f -iname xer.c -exec rm -f '{}' ';'
+From: /home/assert/demo_1/binary.c/controller
+find "controller"/ -type f -iname ber.c -exec rm -f '{}' ';'
+From: /home/assert/demo_1/binary.c/controller
+find "controller"/ -type f -iname real.c -exec rm -f '{}' ';'
+From: /home/assert/demo_1/binary.c/controller
+find "controller"/ -type f -iname asn1crt.c -exec rm -f '{}' ';'
+From: /home/assert/demo_1/binary.c/controller
+find "controller"/ -type f -iname and -exec rm -f '{}' ';'
+From: /home/assert/demo_1/binary.c/controller
+find "controller"/ -type f -iname acn.c -exec rm -f '{}' ';'
+From: /home/assert/demo_1/binary.c/drone_model
+unzip -o "/home/assert/demo_1/drone_model.zip"
+From: /home/assert/demo_1/binary.c/drone_model
+find "drone_model"/ ! -type d -exec chmod -x '{}' ';'
+From: /home/assert/demo_1/binary.c/drone_model
+find "drone_model"/ -exec touch '{}' ';'
+From: /home/assert/demo_1/binary.c/drone_model
+find "drone_model"/ -type f -iname '*.o' -exec rm -f '{}' ';'
+From: /home/assert/demo_1/binary.c/drone_model
+find "drone_model"/ -type f -iname xer.c -exec rm -f '{}' ';'
+From: /home/assert/demo_1/binary.c/drone_model
+find "drone_model"/ -type f -iname ber.c -exec rm -f '{}' ';'
+From: /home/assert/demo_1/binary.c/drone_model
+find "drone_model"/ -type f -iname real.c -exec rm -f '{}' ';'
+From: /home/assert/demo_1/binary.c/drone_model
+find "drone_model"/ -type f -iname asn1crt.c -exec rm -f '{}' ';'
+From: /home/assert/demo_1/binary.c/drone_model
+find "drone_model"/ -type f -iname and -exec rm -f '{}' ';'
+From: /home/assert/demo_1/binary.c/drone_model
+find "drone_model"/ -type f -iname acn.c -exec rm -f '{}' ';'
+From: /home/assert/demo_1/binary.c/obsw
+unzip -o "/home/assert/demo_1/obsw.zip"
+From: /home/assert/demo_1/binary.c/obsw
+find "obsw"/ ! -type d -exec chmod -x '{}' ';'
+From: /home/assert/demo_1/binary.c/obsw
+find "obsw"/ -exec touch '{}' ';'
+From: /home/assert/demo_1/binary.c/obsw
+find "obsw"/ -type f -iname '*.o' -exec rm -f '{}' ';'
+From: /home/assert/demo_1/binary.c
+cp $(ocarina-config --resources)/AADLv2/ocarina_components.aadl .
+From: /home/assert/demo_1/binary.c
+cleanupDV.pl "DeploymentView.aadl" > a_temp_name && mv a_temp_name "DeploymentView.aadl"
+From: /home/assert/demo_1/binary.c
+"buildsupport"  -x 100  -g  --keep-case  --gw --glue -i "/home/assert/demo_1/InterfaceView.aadl"  -c "DeploymentView.aadl" ocarina_components.aadl  -d D_view_aadlv2.aadl --polyorb-hi-c --smp2 /home/assert/tool-inst/share/config_ellidiss/TASTE_IV_Properties.aadl /home/assert/tool-inst/share/config_ellidiss/TASTE_DV_Properties.aadl
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+mv main.aadl.new main.aadl
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+cp $(ocarina-config --resources)/AADLv2/ocarina_components.aadl .
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+cleanupDV.pl "DeploymentView.aadl" > a_temp_name && mv a_temp_name "DeploymentView.aadl"
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+find . -type d \( -iname 'glue*' -prune -o -exec rm -rf '{}' ';' \) 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+ocarina -x main.aadl
+From: /home/assert/demo_1/binary.c/obsw
+rm -f "obsw.adb"
+From: /home/assert/demo_1/binary.c/obsw
+mv "obsw.ads" "obsw"
+for x86_partition, identified CC:
+gcc
+for x86_partition, identified CFLAGS:
+-DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT
+for x86_partition, identified LDFLAGS:
+-lpthread -lrt -m32 -L/home/assert/tool-inst/include/ocarina/runtime/polyorb-hi-c/libs/linux32/ -llua -lm
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+cp "/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn" .
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+aadl2glueC -o "gluecontroller" ../D_view.aadl "../controller/mini_cv.aadl"
+From: /home/assert/demo_1/binary.c/GlueAndBuild/gluecontroller
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../controller/controller/" -I "../../drone_model/drone_model/"   -I "../../obsw/obsw/"     *.c
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+aadl2glueC -o "gluedrone_model" ../D_view.aadl "../drone_model/mini_cv.aadl"
+From: /home/assert/demo_1/binary.c/GlueAndBuild/gluedrone_model
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../controller/controller/" -I "../../drone_model/drone_model/"   -I "../../obsw/obsw/"     *.c
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+aadl2glueC -o "glueobsw" ../D_view.aadl "../obsw/mini_cv.aadl"
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueobsw
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../controller/controller/" -I "../../drone_model/drone_model/"   -I "../../obsw/obsw/"     *.c
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+aadl2glueC -o "glueground" ../D_view.aadl "../ground/mini_cv.aadl"
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueground
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../controller/controller/" -I "../../drone_model/drone_model/"   -I "../../obsw/obsw/"     *.c
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+aadl2glueC -o "gluevt_ground_gui_polling_ground" ../D_view.aadl "../vt_ground_gui_polling_ground/mini_cv.aadl"
+From: /home/assert/demo_1/binary.c/GlueAndBuild/gluevt_ground_gui_polling_ground
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../controller/controller/" -I "../../drone_model/drone_model/"   -I "../../obsw/obsw/"     *.c
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+aadl2glueC -o "gluevt_ground_height" ../D_view.aadl "../vt_ground_height/mini_cv.aadl"
+From: /home/assert/demo_1/binary.c/GlueAndBuild/gluevt_ground_height
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../controller/controller/" -I "../../drone_model/drone_model/"   -I "../../obsw/obsw/"     *.c
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+aadl2glueC -o "gluevt_obsw_pulse" ../D_view.aadl "../vt_obsw_pulse/mini_cv.aadl"
+From: /home/assert/demo_1/binary.c/GlueAndBuild/gluevt_obsw_pulse
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../controller/controller/" -I "../../drone_model/drone_model/"   -I "../../obsw/obsw/"     *.c
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+aadl2glueC -o "gluevt_obsw_takeoff" ../D_view.aadl "../vt_obsw_takeoff/mini_cv.aadl"
+From: /home/assert/demo_1/binary.c/GlueAndBuild/gluevt_obsw_takeoff
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../controller/controller/" -I "../../drone_model/drone_model/"   -I "../../obsw/obsw/"     *.c
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+aadl2glueC -o "gluex86_partition_taste_api" ../D_view.aadl "../x86_partition_taste_api/mini_cv.aadl"
+From: /home/assert/demo_1/binary.c/GlueAndBuild/gluex86_partition_taste_api
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../controller/controller/" -I "../../drone_model/drone_model/"   -I "../../obsw/obsw/"     *.c
+From: /home/assert/demo_1/binary.c/controller/controller
+for i in controller_vm_if.c controller_vm_if.h controller.h ; do if [ -f ../$i ] ; then cp ../$i . ; fi ; done
+From: /home/assert/demo_1/binary.c/controller/controller
+for i in hpredef.h invoke_ri.c ; do if [ -f ../$i ] ; then cp ../$i . ; fi ; done
+From: /home/assert/demo_1/binary.c/controller/controller
+cp ../*polyorb_interface.? . 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/controller/controller
+cp ../Context-*.? . 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/controller/controller
+rm -f ../*-uniq.? *-uniq.? 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/controller/controller
+rm -f ../dataview.[ch] dataview.* 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/controller/controller
+"$GNATGCC" -c -I . -DSTATIC="" -g   -m32   -I /home/assert/demo_1/binary.c/GlueAndBuild/deploymentview_final/x86_partition -I /opt/ocarina-2.0w-suite-x86-linux-2016.svn/include/ocarina/runtime/polyorb-hi-c/include/   -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../GlueAndBuild/gluecontroller/  -I ../../GlueAndBuild/gluecontroller/ -I ../../auto-src/ *.c
+From: /home/assert/demo_1/binary.c/drone_model/drone_model
+for i in drone_model_vm_if.c drone_model_vm_if.h drone_model.h ; do if [ -f ../$i ] ; then cp ../$i . ; fi ; done
+From: /home/assert/demo_1/binary.c/drone_model/drone_model
+for i in hpredef.h invoke_ri.c ; do if [ -f ../$i ] ; then cp ../$i . ; fi ; done
+From: /home/assert/demo_1/binary.c/drone_model/drone_model
+cp ../*polyorb_interface.? . 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/drone_model/drone_model
+cp ../Context-*.? . 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/drone_model/drone_model
+rm -f ../*-uniq.? *-uniq.? 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/drone_model/drone_model
+rm -f ../dataview.[ch] dataview.* 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/drone_model/drone_model
+"$GNATGCC" -c -I . -DSTATIC="" -g   -m32   -I /home/assert/demo_1/binary.c/GlueAndBuild/deploymentview_final/x86_partition -I /opt/ocarina-2.0w-suite-x86-linux-2016.svn/include/ocarina/runtime/polyorb-hi-c/include/   -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../GlueAndBuild/gluedrone_model/  -I ../../GlueAndBuild/gluedrone_model/ -I ../../auto-src/ *.c
+From: /home/assert/demo_1/binary.c/obsw/obsw
+for i in `/bin/ls ../../GlueAndBuild/glueobsw/*.ad? 2>/dev/null | grep -v '/asn1_'` ; do cp "$i"  . ; done
+From: /home/assert/demo_1/binary.c/obsw/obsw
+cp ../../GlueAndBuild/glueobsw/adaasn1rtl.ad? . 2>/dev/null ; exit 0
+From: /home/assert/demo_1/binary.c/obsw/obsw
+cp ../../GlueAndBuild/glueobsw/taste_dataview.ad? . 2>/dev/null ; exit 0
+From: /home/assert/demo_1/binary.c/obsw/obsw
+cp ../../GlueAndBuild/glueobsw/adaasn1rtl.ad? . 2>/dev/null ; exit 0
+From: /home/assert/demo_1/binary.c/obsw/obsw
+cp ../../GlueAndBuild/glueobsw/taste_basictypes.ad? . 2>/dev/null ; exit 0
+From: /home/assert/demo_1/binary.c/obsw/obsw
+for i in obsw_vm_if.c obsw_vm_if.h vm_callback.c ; do if [ -f ../$i ] ; then cp ../$i . ; fi ; done
+From: /home/assert/demo_1/binary.c/obsw/obsw
+for i in hpredef.h invoke_ri.c vm_callback.h ; do if [ -f ../$i ] ; then cp ../$i . ; fi ; done
+From: /home/assert/demo_1/binary.c/obsw/obsw
+cp ../*polyorb_interface.h . 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/obsw/obsw
+rm -f ../dataview.ad[sb] 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/obsw/obsw
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32   -I /home/assert/demo_1/binary.c/GlueAndBuild/deploymentview_final/x86_partition -I /opt/ocarina-2.0w-suite-x86-linux-2016.svn/include/ocarina/runtime/polyorb-hi-c/include/   -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../GlueAndBuild/glueobsw/ -I ../../auto-src/ *.c
+From: /home/assert/demo_1/binary.c/obsw
+"$GNATGCC" -c -I ../GlueAndBuild/glueobsw/ -I ../auto-src/ -I . -DSTATIC="" -g  -m32   -I /home/assert/demo_1/binary.c/GlueAndBuild/deploymentview_final/x86_partition -I /opt/ocarina-2.0w-suite-x86-linux-2016.svn/include/ocarina/runtime/polyorb-hi-c/include/   -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  *.c
+From: /home/assert/demo_1/binary.c/ground
+for i in * ; do if [ -f "$i" -a ! -e ext/"$i" ] ; then ln -s ../"$i" ext/ ; fi ; done
+From: /home/assert/demo_1/binary.c/ground/ext
+cp "$DMT"/AutoGUI/queue_manager.? .
+From: /home/assert/demo_1/binary.c/ground/ext
+cp ../*polyorb_interface.? . 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/ground/ext
+cp ../Context-*.? . 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/ground/ext
+rm -f ../*-uniq.? *-uniq.? 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/ground/ext
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32   -I /home/assert/demo_1/binary.c/GlueAndBuild/deploymentview_final/x86_partition -I /opt/ocarina-2.0w-suite-x86-linux-2016.svn/include/ocarina/runtime/polyorb-hi-c/include/   -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../GlueAndBuild/glueground/ -I ../../auto-src/ *.c
+From: /home/assert/demo_1/binary.c/ground
+for i in * ; do if [ -f "$i" -a ! -e GUI/"$i" ] ; then ln -s ../"$i" GUI/ ; fi ; done
+From: /home/assert/demo_1/binary.c/ground/GUI
+cp "$DMT"/AutoGUI/* .
+From: /home/assert/demo_1/binary.c/ground/GUI
+cat Makefile | sed 's,DataView,dataview-uniq,g' > a_temp_name && mv a_temp_name Makefile
+From: /home/assert/demo_1/binary.c/ground/GUI
+cat Makefile | sed 's,applicationName,ground_GUI,g' > a_temp_name && mv a_temp_name Makefile
+From: /home/assert/demo_1/binary.c/ground/GUI
+cp -u ../../GlueAndBuild/glueground/C_*.[ch] .
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueground/python
+cp "$DMT"/AutoGUI/queue_manager.? .
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueground/python
+cp "$DMT"/AutoGUI/timeInMS.? .
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueground/python
+cp "$DMT"/AutoGUI/debug_messages.? .
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueground/python
+cp "/home/assert/demo_1/binary.c"/ground/ground_enums_def.h .
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueground/python
+cp "/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn" .
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueground/python
+cp "/home/assert/demo_1/binary.c/dataview-uniq.acn" .
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueground/python
+asn2dataModel -o asn2dataModel -toPython dataview-uniq.asn
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueground/python/asn2dataModel
+cp "/home/assert/demo_1/binary.c/dataview-uniq.acn" .
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueground/python/asn2dataModel
+cp "/home/assert/demo_1/binary.c"/ground/interface_enum.h .
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueground/python/asn2dataModel
+make -f Makefile.python
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueground/python
+cp asn2dataModel/asn1crt.h asn2dataModel/Stubs.py asn2dataModel/DV* asn2dataModel/*.so .
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueground/python
+cp asn2dataModel/dataview-uniq.h .
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueground/python
+cp asn2dataModel/dataview_uniq_asn.py .
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueground/python
+gcc -g -fPIC -c `python-config --cflags` gui_api.c queue_manager.c timeInMS.c debug_messages.c
+From: /home/assert/demo_1/binary.c/GlueAndBuild/glueground/python
+gcc -g -shared -o PythonAccess.so gui_api.o queue_manager.o timeInMS.o debug_messages.o `python-config --ldflags` -lrt
+From: /home/assert/demo_1/binary.c/vt_ground_gui_polling_ground
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32   -I /home/assert/demo_1/binary.c/GlueAndBuild/deploymentview_final/x86_partition -I /opt/ocarina-2.0w-suite-x86-linux-2016.svn/include/ocarina/runtime/polyorb-hi-c/include/   -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../GlueAndBuild/gluevt_ground_gui_polling_ground/ -I ../auto-src/ *.c
+From: /home/assert/demo_1/binary.c/vt_ground_height
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32   -I /home/assert/demo_1/binary.c/GlueAndBuild/deploymentview_final/x86_partition -I /opt/ocarina-2.0w-suite-x86-linux-2016.svn/include/ocarina/runtime/polyorb-hi-c/include/   -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../GlueAndBuild/gluevt_ground_height/ -I ../auto-src/ *.c
+From: /home/assert/demo_1/binary.c/vt_obsw_pulse
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32   -I /home/assert/demo_1/binary.c/GlueAndBuild/deploymentview_final/x86_partition -I /opt/ocarina-2.0w-suite-x86-linux-2016.svn/include/ocarina/runtime/polyorb-hi-c/include/   -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../GlueAndBuild/gluevt_obsw_pulse/ -I ../auto-src/ *.c
+From: /home/assert/demo_1/binary.c/vt_obsw_takeoff
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32   -I /home/assert/demo_1/binary.c/GlueAndBuild/deploymentview_final/x86_partition -I /opt/ocarina-2.0w-suite-x86-linux-2016.svn/include/ocarina/runtime/polyorb-hi-c/include/   -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../GlueAndBuild/gluevt_obsw_takeoff/ -I ../auto-src/ *.c
+From: /home/assert/demo_1/binary.c/x86_partition_taste_api
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32   -I /home/assert/demo_1/binary.c/GlueAndBuild/deploymentview_final/x86_partition -I /opt/ocarina-2.0w-suite-x86-linux-2016.svn/include/ocarina/runtime/polyorb-hi-c/include/   -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../GlueAndBuild/gluex86_partition_taste_api/ -I ../auto-src/ *.c
+From: /home/assert/demo_1/binary.c
+mv GlueAndBuild/gluecontroller/*.o controller/controller/
+From: /home/assert/demo_1/binary.c
+mv GlueAndBuild/gluedrone_model/*.o drone_model/drone_model/
+From: /home/assert/demo_1/binary.c
+mv GlueAndBuild/glueobsw/*.o obsw/obsw/
+From: /home/assert/demo_1/binary.c
+mv GlueAndBuild/glueground/*.o ground/ext/
+From: /home/assert/demo_1/binary.c
+mv GlueAndBuild/gluevt_ground_gui_polling_ground/*.o vt_ground_gui_polling_ground/
+From: /home/assert/demo_1/binary.c
+mv GlueAndBuild/gluevt_ground_height/*.o vt_ground_height/
+From: /home/assert/demo_1/binary.c
+mv GlueAndBuild/gluevt_obsw_pulse/*.o vt_obsw_pulse/
+From: /home/assert/demo_1/binary.c
+mv GlueAndBuild/gluevt_obsw_takeoff/*.o vt_obsw_takeoff/
+From: /home/assert/demo_1/binary.c
+mv GlueAndBuild/gluex86_partition_taste_api/*.o x86_partition_taste_api/
+From: /home/assert/demo_1/binary.c
+patchAPLCs.py  "controller/controller/" "controller_renamed" "controller/controller/" "controller" "drone_model/drone_model/" "drone_model_renamed" "drone_model/drone_model/" "drone_model" "obsw/obsw/" "obsw_renamed" "ground/ext/" "ground_renamed" "ground/ext/" "ground" "vt_ground_gui_polling_ground/" "vt_ground_gui_polling_ground_renamed" "vt_ground_gui_polling_ground/" "vt_ground_gui_polling_ground" "vt_ground_height/" "vt_ground_height_renamed" "vt_ground_height/" "vt_ground_height" "vt_obsw_pulse/" "vt_obsw_pulse_renamed" "vt_obsw_pulse/" "vt_obsw_pulse" "vt_obsw_takeoff/" "vt_obsw_takeoff_renamed" "vt_obsw_takeoff/" "vt_obsw_takeoff" "x86_partition_taste_api/" "x86_partition_taste_api_renamed" "x86_partition_taste_api/" "x86_partition_taste_api"
+From: /home/assert/demo_1/binary.c
+rm -rf "/home/assert/demo_1/binary.c/auto-src_PLATFORM_LINUX32" 2>/dev/null ; exit 0
+From: /home/assert/demo_1/binary.c/auto-src_PLATFORM_LINUX32
+cp ../auto-src/*.[ch] .
+From: /home/assert/demo_1/binary.c/auto-src_PLATFORM_LINUX32
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32   -I /opt/ocarina-2.0w-suite-x86-linux-2016.svn/include/ocarina/runtime/polyorb-hi-c/include/   -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  *.c
+From: /home/assert/demo_1/binary.c/auto-src_PLATFORM_LINUX32
+cp ../GlueAndBuild/glueobsw/*.adb . 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/auto-src_PLATFORM_LINUX32
+cp ../GlueAndBuild/glueobsw/*.ads . 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/auto-src_PLATFORM_LINUX32
+"$GNATMAKE" -c  -m32  -I.  -gnat2012 tasteada.ads
+From: /home/assert/demo_1/binary.c/auto-src_PLATFORM_LINUX32
+"$GNATBIND" -t -n tasteada.ali -o ada-start.adb
+From: /home/assert/demo_1/binary.c/auto-src_PLATFORM_LINUX32
+"$GNATMAKE" -c -g  -m32  -gnat2012 ada-start.adb
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+rm -f /home/assert/demo_1/binary.c/obsw//obsw_vm_if.o
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+rm -f /home/assert/demo_1/binary.c/obsw//invoke_ri.o
+From: /home/assert/demo_1/binary.c/GlueAndBuild
+cd './deploymentview_final/x86_partition' && ADA_INCLUDE_PATH="/home/assert/demo_1/binary.c/obsw/obsw:/home/assert/demo_1/binary.c/vt_ground_height:/home/assert/demo_1/binary.c/vt_obsw_takeoff:/home/assert/demo_1/binary.c/vt_obsw_pulse:/home/assert/demo_1/binary.c/vt_ground_gui_polling_ground:/home/assert/demo_1/binary.c/ground"  USER_CFLAGS="${USER_CFLAGS} -g -D__PO_HI_USE_VCD=1 -m32 -I . -DSTATIC=\"\" " USER_LDFLAGS="${USER_LDFLAGS} -g -m32 -lm -L/usr/lib/gcc/i586-linux-gnu/4.9/adalib/ -Wl,-R/usr/lib/gcc/i586-linux-gnu/4.9/adalib/ -lgnat -lgnarl -lpthread -lrt -L/home/assert/tool-inst/include/ocarina/runtime/polyorb-hi-c/libs/linux32/ -llua " EXTERNAL_OBJECTS="-lrt /home/assert/demo_1/binary.c/auto-src_PLATFORM_LINUX32/*.o /home/assert/demo_1/binary.c/obsw/obsw/*.o /home/assert/demo_1/binary.c/obsw/*.o /home/assert/demo_1/binary.c/ground/ext/*.o /home/assert/demo_1/binary.c/drone_model/drone_model/*.o /home/assert/demo_1/binary.c/controller/controller/*.o /home/assert/demo_1/binary.c/x86_partition_taste_api/*.o /home/assert/demo_1/binary.c/vt_obsw_pulse/*.o /home/assert/demo_1/binary.c/vt_obsw_takeoff/*.o /home/assert/demo_1/binary.c/vt_ground_height/*.o /home/assert/demo_1/binary.c/vt_ground_gui_polling_ground/*.o " make
+From: /home/assert/demo_1/binary.c
+find '/home/assert/demo_1/binary.c'/GlueAndBuild -type f -perm /111 ! -iname '*.so' -a ! -iname '*.pyd' | while read ANS ; do file "$ANS" | egrep 'ELF|PE32' >/dev/null 2>/dev/null && mv "$ANS" "/home/assert/demo_1/binary.c/binaries/" ; done ; exit 0
+From: /home/assert/demo_1/binary.c
+find '/home/assert/demo_1/binary.c'/ -name binaries -prune -o -type f -perm /111 -iname '*_GUI' -exec sh -c 'F="{}"; D=$(dirname "$F"); B=$(basename "$F") ; B="${B/_GUI/}"; mv "$F" "/home/assert/demo_1/binary.c/binaries/" ; mv "$D"/../../../${B}.pl "/home/assert/demo_1/binary.c/binaries/" ; mv "$D"/../../../${B}_RunAndPlot.sh "/home/assert/demo_1/binary.c/binaries/" ; ' ';' 2>/dev/null
+From: /home/assert/demo_1/binary.c/binaries
+rm -rf "/tmp/uniqhomeassertdemo_1InterfaceView.aadl"
+From: /home/assert/demo_1/binary.c/binaries
+mkdir -p "/home/assert/demo_1/binary.c/binaries/ground-GUI"
+From: /home/assert/demo_1/binary.c/binaries
+cp "/home/assert/demo_1/binary.c/GlueAndBuild/glueground//"*.py "/home/assert/demo_1/binary.c/binaries/ground-GUI"
+From: /home/assert/demo_1/binary.c/binaries
+cp "/home/assert/demo_1/binary.c/GlueAndBuild/glueground//guilayout.ui" "/home/assert/demo_1/binary.c/binaries/ground-GUI"
+From: /home/assert/demo_1/binary.c/binaries
+cp "/home/assert/demo_1/binary.c/GlueAndBuild/glueground//python/"*.py "/home/assert/demo_1/binary.c/binaries/ground-GUI"
+From: /home/assert/demo_1/binary.c/binaries
+echo "errCodes = $(taste-asn1-errCodes /home/assert/demo_1/binary.c/GlueAndBuild/glueground//python/dataview-uniq.h)" >> "/home/assert/demo_1/binary.c/binaries/ground-GUI/datamodel.py"
+From: /home/assert/demo_1/binary.c/binaries
+cp "/home/assert/demo_1/binary.c/GlueAndBuild/glueground//python/"*.so "/home/assert/demo_1/binary.c/binaries/ground-GUI"
+From: /home/assert/demo_1/binary.c/binaries
+cp "/home/assert/demo_1/binary.c/GlueAndBuild/glueground//python/asn2dataModel/"*.pyd "/home/assert/demo_1/binary.c/binaries/ground-GUI" 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/binaries
+cp "/home/assert/demo_1/binary.c/GlueAndBuild/glueground//python/asn2dataModel/"*.so "/home/assert/demo_1/binary.c/binaries/ground-GUI" 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/binaries
+cp "/home/assert/demo_1/binary.c/GlueAndBuild/glueground//python/asn2dataModel/"DV_Types.py "/home/assert/demo_1/binary.c/binaries/ground-GUI" 2>/dev/null || exit 0
+From: /home/assert/demo_1/binary.c/binaries
+echo 'A=$(dirname "$0") ; cd "$A/ground-GUI" && PYTHONPATH=$(taste-config --prefix)/share:$PYTHONPATH taste-gui "$@"' > "/home/assert/demo_1/binary.c/binaries/GUI-ground" && chmod +x "/home/assert/demo_1/binary.c/binaries/GUI-ground"
+From: /home/assert/demo_1/binary.c/binaries
+cp "/home/assert/demo_1/InterfaceView.aadl" "/home/assert/demo_1/binary.c/binaries/ground-GUI"/InterfaceView.aadl
+From: /home/assert/demo_1/binary.c/binaries
+cp "/home/assert/demo_1/InterfaceView.aadl" "/home/assert/demo_1/binary.c/binaries/ground-GUI"/InterfaceView.aadl
+From: /home/assert/demo_1/binary.c/binaries
+cp "/home/assert/demo_1/binary.c/dataview-uniq.asn" "/home/assert/demo_1/binary.c/binaries/ground-GUI"/

@@ -1,0 +1,129 @@
+V "GNAT Lib v4.9"
+A -m32
+A -gnat2012
+P ZX
+
+RN
+RV NO_FLOATING_POINT
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_UNCHECKED_CONVERSION
+RV NO_DEFAULT_INITIALIZATION
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_ELABORATION_CODE
+RV SPARK_05
+
+U obsw%b		obsw.adb		764debe7 OO PK IL
+W ada%s			ada.ads			ada.ali
+W ada.numerics%s	a-numeri.ads		a-numeri.ali
+W ada.numerics.generic_elementary_functions%s
+W ada.unchecked_conversion%s
+W adaasn1rtl%s		adaasn1rtl.adb		adaasn1rtl.ali
+W interfaces%s		interfac.ads		interfac.ali
+W system%s		system.ads		system.ali
+W system.io%s		s-io.adb		s-io.ali
+W taste_basictypes%s	taste_basictypes.adb	taste_basictypes.ali
+W taste_dataview%s	taste_dataview.adb	taste_dataview.ali
+
+U obsw%s		obsw.ads		0cf9c5c5 EE NE OO PK IL
+W adaasn1rtl%s		adaasn1rtl.adb		adaasn1rtl.ali
+W taste_basictypes%s	taste_basictypes.adb	taste_basictypes.ali
+W taste_dataview%s	taste_dataview.adb	taste_dataview.ali
+
+D ada.ads		20070406091342 3ffc8e18
+D a-charac.ads		20070912115821 2d3ec45b
+D a-chlat1.ads		20140225151544 66457d31
+D a-numeri.ads		20080324174807 bb51c45a
+D a-numaux.ads		20140129155348 243fe0b7
+D a-ngelfu.ads		20140123165334 ff061ca9
+D a-ngelfu.adb		20121001094122 859ccdff
+D a-unccon.ads		20070406091342 f9eb8f06
+D adaasn1rtl.ads	20170516141138 78aa37f4
+D interfac.ads		20140225151838 69adb1b9
+D obsw.ads		20170516141118 1777e2dc
+D obsw.adb		20170516141118 8bb6fb7b
+D system.ads		20141120002343 bd760655
+D s-exctab.ads		20140225151139 54135002
+D s-io.ads		20090409150019 9e42f74f
+D s-stalib.ads		20140225151139 a891183f
+D s-unstyp.ads		20140225151139 510692af
+D taste_basictypes.ads	20170516141138 08c4ff04
+D taste_dataview.ads	20170516141138 6be0efe9
+X 1 ada.ads
+16K9*Ada 19e8 12|6r6 7r6
+X 4 a-numeri.ads
+16K13*Numerics 32e17 12|7r10
+X 6 a-ngelfu.ads
+39k22*Generic_Elementary_Functions 154e46 12|7w19
+X 8 a-unccon.ads
+20v14*Unchecked_Conversion 12|6w10
+X 9 adaasn1rtl.ads
+7K9*adaasn1rtl 945e15 11|10w6 11r5 12|13w6 14r5
+24F12*Asn1Real{long_float}
+26B12*Asn1Boolean{boolean}
+X 10 interfac.ads
+38K9*Interfaces 179e15 12|16w6 17r5
+X 11 obsw.ads
+16K9*obsw 55l5 55e9 12|19b14 121l5 121t9
+21U19*Pulse 22i<c,obsw_PI_Pulse>26 12|33b15 43l13 43t18
+27U19*Takeoff 27^27 28i<c,obsw_PI_Takeoff>26 12|46b15 58l13 58t20
+27p27 Ref_h(19|37F9) 12|46b23 50r35 53r35
+33U19*Height 33^26 34b<c,obsw_RI_Height>26 35r62
+33p26 h(19|37F9)
+35U19*RIÜHeight=35:62 12|80s25
+35p29 h(19|37F9)
+40U19*Compute_Input 40^33 40^62 40^88 40^113 41b<c,obsw_RI_Compute_Input>26
+. 42r149
+40p33 Ref_h(19|37F9)
+40p62 dh(19|37F9)
+40p88 h(19|37F9)
+40p113 F(19|37F9)
+42U19*RIÜCompute_Input=42:149 12|76s25
+42p36 Ref_h(19|37F9)
+42p65 dh(19|37F9)
+42p91 h(19|37F9)
+42p116 F(19|37F9)
+47U19*Response 47^28 47^53 47^79 48b<c,obsw_RI_Response>26 49r115
+47p28 F(19|37F9)
+47p53 dh(19|37F9)
+47p79 h(19|37F9)
+49U19*RIÜResponse=49:115 12|78s25
+49p31 F(19|37F9)
+49p56 dh(19|37F9)
+49p82 h(19|37F9)
+52U19*check_queue 52^31 53b<c,obsw_RI_check_queue>26
+52p31 res(18|94E9)
+X 12 obsw.adb
+20E10 States 20e34 23r17
+20n21 runing{20E10} 38r22 52r22 83r39 104r39
+20n29 wait{20E10} 36r22 49r22 72r39 88r39 93r39
+21R10 ctxt_Ty 29e15 30r19
+23e9*state{20E10} 35r23 48r23 72m30 83m30 88m30 93m30 104m30
+24b9*initDone{boolean} 120m14
+25f9*h{19|37F9} 76m66 78m57 80m40 99m30
+26f9*ref_h{19|37F9} 50m26 53m26 76m47
+27f9*dh{19|37F9} 76m81 78m72 97m30
+28f9*f{19|37F9} 76m97 78m42 101m30
+30r5 ctxt{21R10} 35r18 48r18 50m21 53m21 72m25 76m42 76r42 76m61 76r61 76m76
+. 76r76 76m92 76r92 78m37 78r37 78m52 78r52 78m67 78r67 80m35 80r35 83m25
+. 88m25 93m25 97m25 99m25 101m25 104m25 120m9
+31i5 CS_Only{integer} 41r35 56r35 106r26
+32U15 runTransition 32>29 37s21 39s21 41s21 51s21 54s21 56s21 61b15 115l13
+. 115t26 119s9
+32i29 Id{integer} 61b29 62r27
+62i9 trId{integer} 64r20 65r22 71m25 82m25 87m25 92m25 103m25 107m25
+112L19 next_transition 73r30 84r30 89r30 94r30 105r30 108r30
+X 13 system.ads
+37K9*System 12|3r6 4r5 13|152e11
+X 15 s-io.ads
+37K16*IO 12|3w13 4r12 15|64e14
+44U14*Put 12|68s25
+47U14*New_Line 12|69s25
+X 18 taste_basictypes.ads
+13K9*TASTE_BasicTypes 11|7w6 8r5 12|9w6 10r5 18|116e21
+94B9*asn1SccT_Boolean{9|26E12} 11|52r43
+X 19 taste_dataview.ads
+14K9*TASTE_Dataview 11|13w6 14r5 12|11w6 12r5 19|241e19
+37F9*asn1SccMyReal{9|24F12} 11|27r41 33r36 35r39 40r47 40r73 40r98 40r123
+. 42r50 42r76 42r101 42r126 47r38 47r64 47r89 49r41 49r67 49r92 12|25r21
+. 26r25 27r22 28r21 46r37
+

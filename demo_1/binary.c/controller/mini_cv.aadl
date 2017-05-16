@@ -1,0 +1,16 @@
+-- Automatically Generated - For use with AADL2GlueC only - Do NOT modify! --
+
+SUBPROGRAM Compute_Input
+FEATURES
+	Ref_h:IN PARAMETER DataView::MyReal {encoding=>NATIVE;};
+	dh:IN PARAMETER DataView::MyReal {encoding=>NATIVE;};
+	h:IN PARAMETER DataView::MyReal {encoding=>NATIVE;};
+	F:OUT PARAMETER DataView::MyReal {encoding=>NATIVE;};
+END Compute_Input;
+
+SUBPROGRAM IMPLEMENTATION Compute_Input.C
+PROPERTIES
+	FV_Name => "controller";
+	Source_Language => C;
+END Compute_Input.C;
+

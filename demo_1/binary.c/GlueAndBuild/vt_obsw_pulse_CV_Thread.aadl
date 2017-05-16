@@ -1,0 +1,30 @@
+--  This file was generated automatically: DO NOT MODIFY IT !
+
+--  This file contains a part of the system CONCURRENCY VIEW.
+--  It is an input file for OCARINA.
+
+package vt_obsw_pulse_CV_Thread
+public
+	with Deployment;
+	with process_package;
+	with Dataview;
+
+THREAD vt_obsw_pulse_vt_obsw_pulse
+features
+	OUTPORT_Height_vt : OUT EVENT DATA PORT DataView::MyReal_Buffer.impl;
+	obsw_protected : requires data access process_package::TASTE_Protected.Object;
+END vt_obsw_pulse_vt_obsw_pulse;
+
+THREAD IMPLEMENTATION vt_obsw_pulse_vt_obsw_pulse.others
+PROPERTIES
+	Initialize_Entrypoint_Source_Text => "init_obsw";
+	Compute_Entrypoint_Source_Text => "po_hi_c_vt_obsw_pulse_artificial_Pulse";
+	Dispatch_Protocol => Periodic;
+	Period            => 100 ms;
+	Dispatch_Offset   => 0 ms;
+	Compute_Execution_Time => 0 ms .. 10 ms;
+	Source_Stack_Size => 50 KByte;
+	Priority => 5;
+END vt_obsw_pulse_vt_obsw_pulse.others;
+
+end vt_obsw_pulse_CV_Thread;

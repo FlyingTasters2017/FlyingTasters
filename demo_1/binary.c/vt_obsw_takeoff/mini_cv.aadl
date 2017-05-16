@@ -1,0 +1,73 @@
+-- Automatically Generated - For use with AADL2GlueC only - Do NOT modify! --
+
+SUBPROGRAM artificial_Takeoff
+FEATURES
+	Ref_h:IN PARAMETER DataView::MyReal {encoding=>UPER;};
+END artificial_Takeoff;
+
+SUBPROGRAM IMPLEMENTATION artificial_Takeoff.C
+PROPERTIES
+	FV_Name => "vt_obsw_takeoff";
+	Source_Language => C;
+END artificial_Takeoff.C;
+
+SUBPROGRAM Takeoff
+FEATURES
+	Ref_h:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+END Takeoff;
+
+SUBPROGRAM IMPLEMENTATION Takeoff.C
+PROPERTIES
+	FV_Name => "vt_obsw_takeoff";
+	Source_Language => C;
+END Takeoff.C;
+
+SUBPROGRAM Height_vt
+FEATURES
+	h:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+END Height_vt;
+
+SUBPROGRAM IMPLEMENTATION Height_vt.C
+PROPERTIES
+	FV_Name => "vt_obsw_takeoff";
+	Source_Language => C;
+END Height_vt.C;
+
+SUBPROGRAM Compute_Input_vt
+FEATURES
+	Ref_h:OUT PARAMETER DataView::MyReal {encoding=>NATIVE;};
+	dh:OUT PARAMETER DataView::MyReal {encoding=>NATIVE;};
+	h:OUT PARAMETER DataView::MyReal {encoding=>NATIVE;};
+	F:IN PARAMETER DataView::MyReal {encoding=>NATIVE;};
+END Compute_Input_vt;
+
+SUBPROGRAM IMPLEMENTATION Compute_Input_vt.C
+PROPERTIES
+	FV_Name => "vt_obsw_takeoff";
+	Source_Language => C;
+END Compute_Input_vt.C;
+
+SUBPROGRAM Response_vt
+FEATURES
+	F:OUT PARAMETER DataView::MyReal {encoding=>NATIVE;};
+	dh:IN PARAMETER DataView::MyReal {encoding=>NATIVE;};
+	h:IN PARAMETER DataView::MyReal {encoding=>NATIVE;};
+END Response_vt;
+
+SUBPROGRAM IMPLEMENTATION Response_vt.C
+PROPERTIES
+	FV_Name => "vt_obsw_takeoff";
+	Source_Language => C;
+END Response_vt.C;
+
+SUBPROGRAM check_queue_vt
+FEATURES
+	res:IN PARAMETER DataView::T_Boolean {encoding=>NATIVE;};
+END check_queue_vt;
+
+SUBPROGRAM IMPLEMENTATION check_queue_vt.C
+PROPERTIES
+	FV_Name => "vt_obsw_takeoff";
+	Source_Language => C;
+END check_queue_vt.C;
+

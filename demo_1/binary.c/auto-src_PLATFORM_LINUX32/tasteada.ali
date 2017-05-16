@@ -1,0 +1,28 @@
+V "GNAT Lib v4.9"
+A -m32
+A -gnat2012
+P ZX
+
+RN
+
+U tasteada%s		tasteada.ads		5cae9d76 NE OO PK
+W obsw%s		obsw.adb		obsw.ali
+
+D ada.ads		20070406091342 3ffc8e18
+D a-charac.ads		20070912115821 2d3ec45b
+D a-chlat1.ads		20140225151544 66457d31
+D adaasn1rtl.ads	20170516141138 78aa37f4
+D interfac.ads		20140225151838 69adb1b9
+D obsw.ads		20170516141118 1777e2dc
+D system.ads		20141120002343 bd760655
+D s-unstyp.ads		20140225151139 510692af
+D taste_basictypes.ads	20170516141138 08c4ff04
+D taste_dataview.ads	20170516141138 6be0efe9
+D tasteada.ads		20170516141138 4bd97faa
+X 6 obsw.ads
+16K9*obsw 55e9 11|1w6
+21U19*Pulse 22i<c,obsw_PI_Pulse>26
+27U19*Takeoff 28i<c,obsw_PI_Takeoff>26
+X 11 tasteada.ads
+2K9*TasteAda 3l5 3e13
+

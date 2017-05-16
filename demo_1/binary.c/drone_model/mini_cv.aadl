@@ -1,0 +1,15 @@
+-- Automatically Generated - For use with AADL2GlueC only - Do NOT modify! --
+
+SUBPROGRAM Response
+FEATURES
+	F:IN PARAMETER DataView::MyReal {encoding=>NATIVE;};
+	dh:OUT PARAMETER DataView::MyReal {encoding=>NATIVE;};
+	h:OUT PARAMETER DataView::MyReal {encoding=>NATIVE;};
+END Response;
+
+SUBPROGRAM IMPLEMENTATION Response.C
+PROPERTIES
+	FV_Name => "drone_model";
+	Source_Language => C;
+END Response.C;
+

@@ -1,0 +1,346 @@
+---------------------------------------------------
+-- AADL2.0
+-- TASTE
+-- 
+-- 
+---------------------------------------------------
+
+PACKAGE interfaceview::FV::OBSW
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_Pulse
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Pulse;
+
+SUBPROGRAM IMPLEMENTATION PI_Pulse.others
+END PI_Pulse.others;
+
+SUBPROGRAM PI_Takeoff
+FEATURES
+  Ref_h : IN PARAMETER DataView::MyReal {
+    Taste::encoding => UPER;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Takeoff;
+
+SUBPROGRAM IMPLEMENTATION PI_Takeoff.others
+END PI_Takeoff.others;
+
+SUBPROGRAM RI_Height
+FEATURES
+  h : IN PARAMETER DataView::MyReal {
+    Taste::encoding => UPER;
+  };
+END RI_Height;
+
+SUBPROGRAM IMPLEMENTATION RI_Height.others
+END RI_Height.others;
+
+SUBPROGRAM RI_Compute_Input
+FEATURES
+  Ref_h : IN PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+  F : OUT PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+  dh : IN PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+  h : IN PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+END RI_Compute_Input;
+
+SUBPROGRAM IMPLEMENTATION RI_Compute_Input.others
+END RI_Compute_Input.others;
+
+SUBPROGRAM RI_Response
+FEATURES
+  F : IN PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+  dh : OUT PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+  h : OUT PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+END RI_Response;
+
+SUBPROGRAM IMPLEMENTATION RI_Response.others
+END RI_Response.others;
+
+END interfaceview::FV::OBSW;
+
+PACKAGE interfaceview::FV::Ground
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_Height
+FEATURES
+  h : IN PARAMETER DataView::MyReal {
+    Taste::encoding => UPER;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Height;
+
+SUBPROGRAM IMPLEMENTATION PI_Height.others
+END PI_Height.others;
+
+SUBPROGRAM RI_Takeoff
+FEATURES
+  Ref_h : IN PARAMETER DataView::MyReal {
+    Taste::encoding => UPER;
+  };
+END RI_Takeoff;
+
+SUBPROGRAM IMPLEMENTATION RI_Takeoff.others
+END RI_Takeoff.others;
+
+END interfaceview::FV::Ground;
+
+PACKAGE interfaceview::FV::Drone_Model
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_Response
+FEATURES
+  F : IN PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+  dh : OUT PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+  h : OUT PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Response;
+
+SUBPROGRAM IMPLEMENTATION PI_Response.others
+END PI_Response.others;
+
+END interfaceview::FV::Drone_Model;
+
+PACKAGE interfaceview::FV::Controller
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_Compute_Input
+FEATURES
+  Ref_h : IN PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+  F : OUT PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+  dh : IN PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+  h : IN PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_Compute_Input;
+
+SUBPROGRAM IMPLEMENTATION PI_Compute_Input.others
+END PI_Compute_Input.others;
+
+END interfaceview::FV::Controller;
+
+PACKAGE interfaceview::IV
+PUBLIC
+
+WITH interfaceview::FV::OBSW;
+WITH interfaceview::FV::Ground;
+WITH interfaceview::FV::Controller;
+WITH interfaceview::FV::Drone_Model;
+WITH interfaceview::FV;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SYSTEM OBSW
+FEATURES
+  PI_Pulse : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::OBSW::PI_Pulse.others {
+    Taste::coordinates => "461 550";
+    Taste::RCMoperationKind => cyclic;
+    Taste::RCMperiod => 100 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Pulse";
+  };
+  PI_Takeoff : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::OBSW::PI_Takeoff.others {
+    Taste::coordinates => "673 789";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Takeoff";
+  };
+  RI_Height : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Ground::PI_Height.others {
+    Taste::coordinates => "832 789";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Height";
+    Taste::labelInheritance => "true";
+  };
+  RI_Compute_Input : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Controller::PI_Compute_Input.others {
+    Taste::coordinates => "1145 465";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Compute_Input";
+    Taste::labelInheritance => "true";
+  };
+  RI_Response : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Drone_Model::PI_Response.others {
+    Taste::coordinates => "1145 644";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Response";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (SDL);
+END OBSW;
+
+SYSTEM IMPLEMENTATION OBSW.others
+SUBCOMPONENTS
+  Pulse_impl : SUBPROGRAM interfaceview::FV::OBSW::PI_Pulse.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+  Takeoff_impl : SUBPROGRAM interfaceview::FV::OBSW::PI_Takeoff.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_Pulse_impl : SUBPROGRAM ACCESS Pulse_impl -> PI_Pulse;
+  OpToPICnx_Takeoff_impl : SUBPROGRAM ACCESS Takeoff_impl -> PI_Takeoff;
+END OBSW.others;
+
+SYSTEM Ground
+FEATURES
+  PI_Height : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Ground::PI_Height.others {
+    Taste::coordinates => "833 1028";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Height";
+  };
+  RI_Takeoff : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::OBSW::PI_Takeoff.others {
+    Taste::coordinates => "673 1028";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "Takeoff";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (GUI);
+END Ground;
+
+SYSTEM IMPLEMENTATION Ground.others
+SUBCOMPONENTS
+  Height_impl : SUBPROGRAM interfaceview::FV::Ground::PI_Height.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_Height_impl : SUBPROGRAM ACCESS Height_impl -> PI_Height;
+END Ground.others;
+
+SYSTEM Drone_Model
+FEATURES
+  PI_Response : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Drone_Model::PI_Response.others {
+    Taste::coordinates => "1573 801";
+    Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Response";
+  };
+PROPERTIES
+  Source_Language => (C);
+END Drone_Model;
+
+SYSTEM IMPLEMENTATION Drone_Model.others
+SUBCOMPONENTS
+  Response_impl : SUBPROGRAM interfaceview::FV::Drone_Model::PI_Response.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_Response_impl : SUBPROGRAM ACCESS Response_impl -> PI_Response;
+END Drone_Model.others;
+
+SYSTEM Controller
+FEATURES
+  PI_Compute_Input : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Controller::PI_Compute_Input.others {
+    Taste::coordinates => "1605 391";
+    Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "Compute_Input";
+  };
+PROPERTIES
+  Source_Language => (C);
+END Controller;
+
+SYSTEM IMPLEMENTATION Controller.others
+SUBCOMPONENTS
+  Compute_Input_impl : SUBPROGRAM interfaceview::FV::Controller::PI_Compute_Input.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_Compute_Input_impl : SUBPROGRAM ACCESS Compute_Input_impl -> PI_Compute_Input;
+END Controller.others;
+
+SYSTEM interfaceview
+END interfaceview;
+
+SYSTEM IMPLEMENTATION interfaceview.others
+SUBCOMPONENTS
+  OBSW : SYSTEM interfaceview::IV::OBSW.others {
+    Taste::coordinates => "461 363 1145 789";
+  };
+  Ground : SYSTEM interfaceview::IV::Ground.others {
+    Taste::coordinates => "493 1028 1112 1382";
+  };
+  Drone_Model : SYSTEM interfaceview::IV::Drone_Model.others {
+    Taste::coordinates => "1573 666 2031 985";
+  };
+  Controller : SYSTEM interfaceview::IV::Controller.others {
+    Taste::coordinates => "1605 296 2028 615";
+  };
+CONNECTIONS
+  OBSW_Takeoff_Ground_Takeoff : SUBPROGRAM ACCESS OBSW.PI_Takeoff -> Ground.RI_Takeoff {
+    Taste::coordinates => "673 1028 673 981 673 981 673 789";
+  };
+  Ground_Height_OBSW_Height : SUBPROGRAM ACCESS Ground.PI_Height -> OBSW.RI_Height {
+    Taste::coordinates => "832 789 832 982 833 982 833 1028";
+  };
+  Controller_Compute_Input_OBSW_Compute_Input : SUBPROGRAM ACCESS Controller.PI_Compute_Input -> OBSW.RI_Compute_Input {
+    Taste::coordinates => "1145 465 1362 465 1362 391 1605 391";
+  };
+  Drone_Model_Response_OBSW_Response : SUBPROGRAM ACCESS Drone_Model.PI_Response -> OBSW.RI_Response {
+    Taste::coordinates => "1145 644 1370 644 1370 801 1573 801";
+  };
+END interfaceview.others;
+
+PROPERTIES
+  Taste::dataView => ("DataView");
+  Taste::dataViewPath => ("DataView.aadl");
+  Taste::coordinates => "0 0 2970 2100";
+  Taste::version => "1.3.19";
+END interfaceview::IV;
+
+PACKAGE interfaceview::FV
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+END interfaceview::FV;
+
