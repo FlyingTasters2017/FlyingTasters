@@ -7,7 +7,7 @@
 
 #  Distributed application name : deploymentview_final
 #  Node name                    : x86_partition
-#  Execution platform           : PLATFORM_LINUX32
+#  Execution platform           : linux32
 #  Transport API                : TRANSPORT_NONE
 
 USER_OBJS = 
@@ -16,12 +16,14 @@ MAINAPP = deploymentview_final
 BINARY = x86_partition
 TARGET = linux32
 NEED_TRANSPORT = yes
-RUNTIME_PATH=/home/assert/tool-inst/include/ocarina/runtime/polyorb-hi-c
-USER_SOURCES_DIRS= /home/assert/FlyingTasters/demo_1/binary.c/GlueAndBuild/
+RUNTIME_PATH=$(shell echo "/home/taste/tool-inst/include/ocarina/runtime/polyorb-hi-c" | sed 's/ /\\ /g')
+USER_SOURCES_DIRS= "-I/home/taste/FlyingTasters/demo_1/binary.c/GlueAndBuild"
 ASN_SOURCES=
 include $(RUNTIME_PATH)/make/Makefile.common
 
 compile-c-files:
+
+compile-cpp-files:
 
 compile-ada-files:
 

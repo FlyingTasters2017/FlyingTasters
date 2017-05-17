@@ -1,7 +1,11 @@
 /* This file was generated automatically: DO NOT MODIFY IT ! */
 
-#include <stdlib.h>
-#include <stdio.h>
+#ifdef __unix__
+    #include <stdlib.h>
+    #include <stdio.h>
+#else
+    typedef unsigned size_t;
+#endif
 
 #include "obsw_vm_if.h"
 
@@ -41,7 +45,9 @@ void obsw_Takeoff (void *pmy_Ref_H, size_t size_my_Ref_H)
 
     /* Decode each input parameter */
     if (0 != Decode_UPER_MyReal (&IN_Ref_H, pmy_Ref_H, size_my_Ref_H)) {
-        printf("\nError Decoding MyReal\n");
+        #ifdef __unix__
+            printf("\nError Decoding MyReal\n");
+        #endif
         return;
     }
 

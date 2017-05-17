@@ -228,7 +228,7 @@ END OBSW.others;
 SYSTEM Ground
 FEATURES
   PI_Height : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Ground::PI_Height.others {
-    Taste::coordinates => "837 1028";
+    Taste::coordinates => "832 1028";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -319,7 +319,7 @@ CONNECTIONS
     Taste::coordinates => "673 1028 673 981 675 981 675 789";
   };
   Ground_Height_OBSW_Height : SUBPROGRAM ACCESS Ground.PI_Height -> OBSW.RI_Height {
-    Taste::coordinates => "834 789 834 982 837 982 837 1028";
+    Taste::coordinates => "834 789 834 982 832 982 832 1028";
   };
   Controller_Compute_Input_OBSW_Compute_Input : SUBPROGRAM ACCESS Controller.PI_Compute_Input -> OBSW.RI_Compute_Input {
     Taste::coordinates => "1147 465 1362 465 1362 463 1647 463";

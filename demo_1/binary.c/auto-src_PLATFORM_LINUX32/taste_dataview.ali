@@ -1,4 +1,4 @@
-V "GNAT Lib v4.9"
+V "GNAT Lib v6"
 A -m32
 A -gnat2012
 P ZX
@@ -8,6 +8,7 @@ RV NO_DIRECT_BOOLEAN_OPERATORS
 RV NO_FLOATING_POINT
 RV NO_IMPLICIT_CONDITIONALS
 RV NO_STANDARD_STORAGE_POOLS
+RV NO_DYNAMIC_SIZED_OBJECTS
 RV SPARK_05
 
 U taste_dataview%b	taste_dataview.adb	af02ec74 NE OO PK KU
@@ -15,22 +16,22 @@ W adaasn1rtl%s		adaasn1rtl.adb		adaasn1rtl.ali
 W system.unsigned_types%s  s-unstyp.ads		s-unstyp.ali
 W taste_basictypes%s	taste_basictypes.adb	taste_basictypes.ali
 
-U taste_dataview%s	taste_dataview.ads	b43ce7c2 EE NE OO PK KU
+U taste_dataview%s	taste_dataview.ads	cfbd75d2 EE NE OO PK KU
 W adaasn1rtl%s		adaasn1rtl.adb		adaasn1rtl.ali
 W system%s		system.ads		system.ali
 W system.unsigned_types%s  s-unstyp.ads		s-unstyp.ali
 W taste_basictypes%s	taste_basictypes.adb	taste_basictypes.ali
 
-D ada.ads		20070406091342 3ffc8e18
-D a-charac.ads		20070912115821 2d3ec45b
-D a-chlat1.ads		20140225151544 66457d31
-D adaasn1rtl.ads	20170516151745 78aa37f4
-D interfac.ads		20140225151838 69adb1b9
-D system.ads		20141120002343 bd760655
-D s-unstyp.ads		20140225151139 510692af
-D taste_basictypes.ads	20170516151745 1634caf5
-D taste_dataview.ads	20170516151745 67d41c96
-D taste_dataview.adb	20170516151745 a6480de3
+D ada.ads		20070406091342 3ffc8e18 ada%s
+D a-charac.ads		20070912115821 2d3ec45b ada.characters%s
+D a-chlat1.ads		20140225151544 66457d31 ada.characters.latin_1%s
+D adaasn1rtl.ads	20170517141415 78aa37f4 adaasn1rtl%s
+D interfac.ads		20151118101227 4be8ce1b interfaces%s
+D system.ads		20151123113124 c6f79445 system%s
+D s-unstyp.ads		20140731130224 9d58a4c0 system.unsigned_types%s
+D taste_basictypes.ads	20170517141415 1634caf5 taste_basictypes%s
+D taste_dataview.ads	20170517141415 67d41c96 taste_dataview%s
+D taste_dataview.adb	20170517141415 a6480de3 taste_dataview%b
 X 4 adaasn1rtl.ads
 7K9*adaasn1rtl 945e15 9|2w6 3r5 4r10 5r10 6r10 7r10 8r10 29r79 37r26 47r73
 . 56r26 86r73 110r75 120r34 154r89 178r71 197r60 199r36 212r77 230r19 10|2w6
@@ -39,10 +40,10 @@ X 4 adaasn1rtl.ads
 . 277r77 279r11 295r20
 14M9*BIT 9|8r21 10|6r21
 15A9*BitArray(14M9)<integer> 9|5r21 10|13r48 18r44
-19M12*Asn1Byte{5|57M9}
+19M12*Asn1Byte{5|62M9}
 20A9*OctetBuffer(19M12)<integer> 9|4r21 120r45
 22I12*Asn1Int{5|54I9} 9|7r21 10|5r21
-23M12*Asn1UInt{5|66M9} 9|6r21 10|4r21
+23M12*Asn1UInt{5|76M9} 9|6r21 10|4r21
 24F12*Asn1Real{long_float} 9|37r37
 26B12*Asn1Boolean{boolean} 9|56r37 197r71 199r47 230r30 10|248r71 254r47
 39V13*Asn1Real_Equal{boolean} 10|70s12
@@ -55,10 +56,10 @@ X 4 adaasn1rtl.ads
 90i10*ErrorCode{integer} 10|63m124 109m125 135m53 185m97 229m65 295m61
 X 5 interfac.ads
 54I9*Integer_64<long_long_integer>
-57M9*Unsigned_8
-66M9*Unsigned_64
+62M9*Unsigned_8
+76M9*Unsigned_64
 X 6 system.ads
-37K9*System 152e11 9|9w6
+37K9*System 156e11 9|9w6
 X 8 taste_basictypes.ads
 13K9*TASTE_BasicTypes 116e21 9|10w6 19r29 10|3w6 37r12 44r12
 75I9*asn1SccT_UInt8{4|22I12} 9|19r46

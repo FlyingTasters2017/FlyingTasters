@@ -1,4 +1,4 @@
-V "GNAT Lib v4.9"
+V "GNAT Lib v6"
 A -m32
 A -gnat2012
 P ZX
@@ -11,29 +11,29 @@ U taste_basictypes%b	taste_basictypes.adb	c31032b5 NE OO PK KU
 W adaasn1rtl%s		adaasn1rtl.adb		adaasn1rtl.ali
 W system.unsigned_types%s  s-unstyp.ads		s-unstyp.ali
 
-U taste_basictypes%s	taste_basictypes.ads	d3e8fb54 EE NE OO PK KU
+U taste_basictypes%s	taste_basictypes.ads	a8696944 EE NE OO PK KU
 W adaasn1rtl%s		adaasn1rtl.adb		adaasn1rtl.ali
 W system%s		system.ads		system.ali
 
-D ada.ads		20070406091342 3ffc8e18
-D a-charac.ads		20070912115821 2d3ec45b
-D a-chlat1.ads		20140225151544 66457d31
-D adaasn1rtl.ads	20170516151745 78aa37f4
-D interfac.ads		20140225151838 69adb1b9
-D system.ads		20141120002343 bd760655
-D s-unstyp.ads		20140225151139 510692af
-D taste_basictypes.ads	20170516151745 1634caf5
-D taste_basictypes.adb	20170516151745 ad8ecfb4
+D ada.ads		20070406091342 3ffc8e18 ada%s
+D a-charac.ads		20070912115821 2d3ec45b ada.characters%s
+D a-chlat1.ads		20140225151544 66457d31 ada.characters.latin_1%s
+D adaasn1rtl.ads	20170517141415 78aa37f4 adaasn1rtl%s
+D interfac.ads		20151118101227 4be8ce1b interfaces%s
+D system.ads		20151123113124 c6f79445 system%s
+D s-unstyp.ads		20140731130224 9d58a4c0 system.unsigned_types%s
+D taste_basictypes.ads	20170517141415 1634caf5 taste_basictypes%s
+D taste_basictypes.adb	20170517141415 ad8ecfb4 taste_basictypes%b
 X 4 adaasn1rtl.ads
 7K9*adaasn1rtl 945e15 8|2w6 3r5 4r10 5r10 6r10 7r10 8r10 18r27 28r75 37r28
 . 47r77 56r26 66r73 75r27 85r75 94r29 9|2w6 3r10 4r10 5r10 12r36 21r75 23r11
 . 31r12 47r77 49r11 57r12 73r73 75r11 83r12 99r75 101r11 109r12
 14M9*BIT 8|8r21 9|5r21
 15A9*BitArray(14M9)<integer> 8|5r21 9|12r47
-19M12*Asn1Byte{5|57M9}
+19M12*Asn1Byte{5|62M9}
 20A9*OctetBuffer(19M12)<integer> 8|4r21
 22I12*Asn1Int{5|54I9} 8|7r21 18r38 37r39 56r37 75r38 9|4r21
-23M12*Asn1UInt{5|66M9} 8|6r21 9|3r21
+23M12*Asn1UInt{5|76M9} 8|6r21 9|3r21
 26B12*Asn1Boolean{boolean} 8|94r40
 88R10*ASN1_RESULT 91e15 8|28r86 47r88 66r84 85r86 9|21r86 23r22 31r23 47r88
 . 49r22 57r23 73r84 75r22 83r23 99r86 101r22 109r23
@@ -41,10 +41,10 @@ X 4 adaasn1rtl.ads
 90i10*ErrorCode{integer} 9|31m91 57m81 83m77 109m74
 X 5 interfac.ads
 54I9*Integer_64<long_long_integer>
-57M9*Unsigned_8
-66M9*Unsigned_64
+62M9*Unsigned_8
+76M9*Unsigned_64
 X 6 system.ads
-37K9*System 152e11 8|9w6
+37K9*System 156e11 8|9w6
 X 8 taste_basictypes.ads
 13K9*TASTE_BasicTypes 116l5 116e21 9|8b14 133l5 133t21
 18I9*asn1SccT_Int32{4|22I12} 26r37 28r52 30r46 9|15r37 21r52 35r46

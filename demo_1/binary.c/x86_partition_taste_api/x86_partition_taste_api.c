@@ -25,9 +25,9 @@ void x86_partition_taste_api_PI_obsw_has_pending_msg(asn1SccT_Boolean *res) {
     if (__po_hi_gqueue_get_count(x86_partition_vt_obsw_takeoff_k, vt_obsw_takeoff_local_inport_artificial_takeoff)) {
         *res = 1;
         #ifdef __unix__
-        if (debugCheckQ) {
-            printf ("[DEBUG] Pending message Takeoff in function obsw\n");
-        }
+            if (debugCheckQ) {
+                printf ("[DEBUG] Pending message Takeoff in function obsw\n");
+            }
         #endif
     }
 }

@@ -11,17 +11,14 @@ process obsw;
         call writeln('SDL startup');
         /* CIF NEXTSTATE (680, 171), (70, 35) */
         NEXTSTATE Wait;
-    /* CIF state (786, 42), (70, 35) */
-    state Wait;
-    endstate;
     /* CIF state (965, 68), (70, 35) */
     state Runing;
         /* CIF input (909, 123), (70, 35) */
         input pulse;
-            /* CIF PROCEDURECALL (844, 178), (200, 35) */
-            call Compute_Input(Ref_h,h,dh,F);
-            /* CIF PROCEDURECALL (881, 240), (126, 35) */
-            call Response(F,h,dh);
+            /* CIF PROCEDURECALL (840, 178), (208, 35) */
+            call Compute_Input(Ref_h,dh,h,F);
+            /* CIF PROCEDURECALL (877, 240), (134, 35) */
+            call Response(F,dh,h);
             /* CIF output (903, 300), (81, 35) */
             output Height(h);
             /* CIF NEXTSTATE (909, 368), (70, 35) */
@@ -30,6 +27,9 @@ process obsw;
         input Takeoff(Ref_h);
             /* CIF NEXTSTATE (1075, 178), (70, 35) */
             NEXTSTATE Wait;
+    endstate;
+    /* CIF state (786, 42), (70, 35) */
+    state Wait;
     endstate;
     /* CIF state (680, 171), (70, 35) */
     state Wait;

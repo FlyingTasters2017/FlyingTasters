@@ -37,8 +37,9 @@ void ground_RI_Takeoff(const asn1SccMyReal *IN_Ref_H)
 #ifdef __unix__
         printf ("** Encoding error in ground_RI_Takeoff!!\n");
 #endif
-        /* Major error, we must stop the application and let the FDIR/Watchdogs recover */
-        exit (-1);
+        /* Crash the application due to message loss */
+        extern void abort (void);
+        abort();
     }
 
     /* Call to VM callback function */

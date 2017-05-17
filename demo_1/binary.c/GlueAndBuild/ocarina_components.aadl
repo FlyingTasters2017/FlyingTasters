@@ -112,7 +112,7 @@ public
       Type_Source_Name                 => "IP-Conf-T";
       Deployment::ASN1_Module_Name     => "POHICDRIVER-IP";
       Source_Language                  => (ASN1);
-      Source_Text                      => ("/home/assert/tool-inst/include/ocarina/runtime/polyorb-hi-c/src/drivers/configuration/ip.asn" , "drivers/configuration/ip.h");
+      Source_Text                      => ("/home/taste/tool-inst/include/ocarina/runtime/polyorb-hi-c/src/drivers/configuration/ip.asn" , "drivers/configuration/ip.h");
    end configuration_type_ip;
 
    data configuration_type_serial
@@ -120,7 +120,7 @@ public
       Type_Source_Name              => "Serial-Conf-T";
       Deployment::ASN1_Module_Name  => "POHICDRIVER-UART";
       Source_Language               => (ASN1);
-      Source_Text                   => ("/home/assert/tool-inst/include/ocarina/runtime/polyorb-hi-c/src/drivers/configuration/serial.asn", "drivers/configuration/serial.h");
+      Source_Text                   => ("/home/taste/tool-inst/include/ocarina/runtime/polyorb-hi-c/src/drivers/configuration/serial.asn", "drivers/configuration/serial.h");
    end configuration_type_serial;
 
    data configuration_type_spacewire
@@ -128,7 +128,7 @@ public
       Type_Source_Name              => "Spacewire-Conf-T";
       Deployment::ASN1_Module_Name  => "POHICDRIVER-SPACEWIRE";
       Source_Language               => (ASN1);
-      Source_Text                   => ("/home/assert/tool-inst/include/ocarina/runtime/polyorb-hi-c/src/drivers/configuration/spacewire.asn", "drivers/configuration/spacewire.h");
+      Source_Text                   => ("/home/taste/tool-inst/include/ocarina/runtime/polyorb-hi-c/src/drivers/configuration/spacewire.asn", "drivers/configuration/spacewire.h");
    end configuration_type_spacewire;
 
   --------------
@@ -465,7 +465,6 @@ public
   end exarm_ni_6071e_digital.i;
 
 end ocarina_drivers;
-
 package ocarina_types
 
 public
@@ -561,22 +560,22 @@ calls
 	  pspg : subprogram spg_poller;
 	};
 connections
-   parameter pspg.data1 -> data1;   
-   parameter pspg.data2 -> data2;   
-   parameter pspg.data3 -> data3;   
-   parameter pspg.data4 -> data4;   
-   parameter pspg.data5 -> data5;   
-   parameter pspg.data6 -> data6;   
-   parameter pspg.data7 -> data7;   
-   parameter pspg.data8 -> data8;   
-   parameter pspg.data9 -> data9;   
-   parameter pspg.data10 -> data10;   
-   parameter pspg.data11 -> data11;   
-   parameter pspg.data12 -> data12;   
-   parameter pspg.data13 -> data13;   
-   parameter pspg.data14 -> data14;   
-   parameter pspg.data15 -> data15;   
-   parameter pspg.data16 -> data16; 
+   parameter pspg.data1 -> data1;
+   parameter pspg.data2 -> data2;
+   parameter pspg.data3 -> data3;
+   parameter pspg.data4 -> data4;
+   parameter pspg.data5 -> data5;
+   parameter pspg.data6 -> data6;
+   parameter pspg.data7 -> data7;
+   parameter pspg.data8 -> data8;
+   parameter pspg.data9 -> data9;
+   parameter pspg.data10 -> data10;
+   parameter pspg.data11 -> data11;
+   parameter pspg.data12 -> data12;
+   parameter pspg.data13 -> data13;
+   parameter pspg.data14 -> data14;
+   parameter pspg.data15 -> data15;
+   parameter pspg.data16 -> data16;
 properties
    Period => 100 ms;
    Dispatch_Protocol => Periodic;
@@ -607,22 +606,22 @@ abstract implementation driver.i
 subcomponents
    ni6071e_analog_poller : thread thr_poller.i;
 connections
-   port ni6071e_analog_poller.data1 -> data1;   
-   port ni6071e_analog_poller.data2 -> data2;   
-   port ni6071e_analog_poller.data3 -> data3;   
-   port ni6071e_analog_poller.data4 -> data4;   
-   port ni6071e_analog_poller.data5 -> data5;   
-   port ni6071e_analog_poller.data6 -> data6;   
-   port ni6071e_analog_poller.data7 -> data7;   
-   port ni6071e_analog_poller.data8 -> data8;   
-   port ni6071e_analog_poller.data9 -> data9;   
-   port ni6071e_analog_poller.data10 -> data10;   
-   port ni6071e_analog_poller.data11 -> data11;   
-   port ni6071e_analog_poller.data12 -> data12;   
-   port ni6071e_analog_poller.data13 -> data13;   
-   port ni6071e_analog_poller.data14 -> data14;   
-   port ni6071e_analog_poller.data15 -> data15;   
-   port ni6071e_analog_poller.data16 -> data16; 
+   port ni6071e_analog_poller.data1 -> data1;
+   port ni6071e_analog_poller.data2 -> data2;
+   port ni6071e_analog_poller.data3 -> data3;
+   port ni6071e_analog_poller.data4 -> data4;
+   port ni6071e_analog_poller.data5 -> data5;
+   port ni6071e_analog_poller.data6 -> data6;
+   port ni6071e_analog_poller.data7 -> data7;
+   port ni6071e_analog_poller.data8 -> data8;
+   port ni6071e_analog_poller.data9 -> data9;
+   port ni6071e_analog_poller.data10 -> data10;
+   port ni6071e_analog_poller.data11 -> data11;
+   port ni6071e_analog_poller.data12 -> data12;
+   port ni6071e_analog_poller.data13 -> data13;
+   port ni6071e_analog_poller.data14 -> data14;
+   port ni6071e_analog_poller.data15 -> data15;
+   port ni6071e_analog_poller.data16 -> data16;
 end driver.i;
 
 end ocarina_drivers_exarm_ni_6071e_analog;
@@ -662,8 +661,8 @@ calls
 	  pspg : subprogram spg_poller;
 	};
 connections
-   parameter pspg.data1 -> data1;   
-   parameter pspg.data2 -> data2;   
+   parameter pspg.data1 -> data1;
+   parameter pspg.data2 -> data2;
 properties
    Period => 100 ms;
    Dispatch_Protocol => Periodic;
@@ -683,11 +682,29 @@ abstract implementation driver.i
 subcomponents
    ni6071e_digital_poller : thread thr_poller.i;
 connections
-   port ni6071e_digital_poller.data1 -> data1; 
-   port ni6071e_digital_poller.data2 -> data2; 
+   port ni6071e_digital_poller.data1 -> data1;
+   port ni6071e_digital_poller.data2 -> data2;
 end driver.i;
 
 end ocarina_drivers_exarm_ni_6071e_digital;
+package Generic_Bus
+public
+
+  ---------
+  -- BUS --
+  ---------
+
+  -- Generic bus to model connections between processors and
+  -- devices. It is not used by the code generation process, so it is
+  -- made fully generic.
+
+  bus Generic_Bus
+  end Generic_Bus;
+
+  bus implementation Generic_Bus.impl
+  end Generic_Bus.impl;
+
+end Generic_Bus;
 package ocarina_drivers_generic_keyboard
 
 public
@@ -746,24 +763,6 @@ end generic_keyboard_driver.i;
 
 
 end ocarina_drivers_generic_keyboard;
-package Generic_Bus
-public
-
-  ---------
-  -- BUS --
-  ---------
-
-  -- Generic bus to model connections between processors and
-  -- devices. It is not used by the code generation process, so it is
-  -- made fully generic.
-
-  bus Generic_Bus
-  end Generic_Bus;
-
-  bus implementation Generic_Bus.impl
-  end Generic_Bus.impl;
-
-end Generic_Bus;
 package Generic_Native
 
 -- This package models a generic native platform with one generic bus. 
@@ -2133,6 +2132,19 @@ with Cheddar_Properties;
 processor arm
 end arm;
 
+processor cortex_m extends arm
+properties
+   Deployment::Execution_Platform => ARM_CORTEX;
+end cortex_m;
+
+processor implementation cortex_m.i
+properties
+   Scheduling_Protocol => (Posix_1003_Highest_Priority_First_Protocol);
+   Priority_Range => 0 .. 255;
+   Cheddar_Properties::Scheduler_Quantum => 0 Ms;
+   Cheddar_Properties::Preemptive_Scheduler => true;
+end cortex_m.i;
+
 processor nds extends arm
 end nds;
 
@@ -2164,7 +2176,6 @@ package ocarina_processors_leon
 public
 
 with Deployment;
-with ARINC653;
 with Cheddar_Properties;
 
 processor leon
@@ -2219,10 +2230,10 @@ subcomponents
       { Deployment::Execution_Platform => LEON3_XM3;};
 	part2 : virtual processor xtratum_partition.generic
       { Deployment::Execution_Platform => LEON3_XM3;};
-properties
-   ARINC653::Partition_Slots => (500ms, 500ms);
-   ARINC653::Slots_Allocation => (reference (part1), reference (part2));
-	ARINC653::Module_Major_Frame => 1000ms;
+--  properties
+--   ARINC653::Partition_Slots => (500ms, 500ms);
+--   ARINC653::Slots_Allocation => (reference (part1), reference (part2));
+--	ARINC653::Module_Major_Frame => 1000ms;
 end leon3.xtratum_2partitions;
 
 end ocarina_processors_leon;
@@ -2234,7 +2245,7 @@ with Deployment;
 
 processor x86
 properties
-   Scheduling_Protocol => (RATE_MONOTONIC_PROTOCOL);
+   Scheduling_Protocol => (POSIX_1003_HIGHEST_PRIORITY_FIRST_PROTOCOL);
    Deployment::Execution_Platform => Native;
 end x86;
 
@@ -2251,7 +2262,7 @@ end x86.win32;
 
 processor implementation x86.linux_bench
 properties
-   Scheduling_Protocol => (RATE_MONOTONIC_PROTOCOL);
+   Scheduling_Protocol => (POSIX_1003_HIGHEST_PRIORITY_FIRST_PROTOCOL);
    Deployment::Execution_Platform => bench;
 end x86.linux_bench;
 

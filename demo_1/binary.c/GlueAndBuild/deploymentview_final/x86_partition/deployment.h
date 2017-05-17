@@ -104,4 +104,6 @@ typedef enum
 
 #define __PO_HI_NB_PROTOCOLS 0
 
+#define __PO_HI_PORT_TYPE_CONTENT __po_hi_vt_obsw_pulse_nb_ports, __po_hi_vt_obsw_takeoff_nb_ports, __po_hi_vt_ground_height_nb_ports, __po_hi_vt_ground_gui_polling_ground_nb_ports
+
 #endif

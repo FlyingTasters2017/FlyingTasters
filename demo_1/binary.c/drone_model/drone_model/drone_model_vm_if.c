@@ -1,7 +1,11 @@
 /* This file was generated automatically: DO NOT MODIFY IT ! */
 
-#include <stdlib.h>
-#include <stdio.h>
+#ifdef __unix__
+    #include <stdlib.h>
+    #include <stdio.h>
+#else
+    typedef unsigned size_t;
+#endif
 
 #include "drone_model_vm_if.h"
 
@@ -36,7 +40,9 @@ void drone_model_Response (void *pmy_F, size_t size_my_F, void *pmy_dh, size_t *
 
     /* Decode each input parameter */
     if (0 != Decode_NATIVE_MyReal (&IN_F, pmy_F, size_my_F)) {
-        printf("\nError Decoding MyReal\n");
+        #ifdef __unix__
+            printf("\nError Decoding MyReal\n");
+        #endif
         return;
     }
 

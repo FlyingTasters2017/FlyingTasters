@@ -37,8 +37,9 @@ void obsw_RI_Height(const asn1SccMyReal *IN_H)
 #ifdef __unix__
         printf ("** Encoding error in obsw_RI_Height!!\n");
 #endif
-        /* Major error, we must stop the application and let the FDIR/Watchdogs recover */
-        exit (-1);
+        /* Crash the application due to message loss */
+        extern void abort (void);
+        abort();
     }
 
     /* Call to VM callback function */
@@ -89,24 +90,27 @@ void obsw_RI_Compute_Input(const asn1SccMyReal *IN_Ref_h, const asn1SccMyReal *I
 #ifdef __unix__
         printf ("** Encoding error in obsw_RI_Compute_Input!!\n");
 #endif
-        /* Major error, we must stop the application and let the FDIR/Watchdogs recover */
-        exit (-1);
+        /* Crash the application due to message loss */
+        extern void abort (void);
+        abort();
     }
     size_IN_buf_dh = Encode_NATIVE_MyReal(IN_buf_dh, sizeof(asn1SccMyReal), IN_dh);
     if (-1 == size_IN_buf_dh) {
 #ifdef __unix__
         printf ("** Encoding error in obsw_RI_Compute_Input!!\n");
 #endif
-        /* Major error, we must stop the application and let the FDIR/Watchdogs recover */
-        exit (-1);
+        /* Crash the application due to message loss */
+        extern void abort (void);
+        abort();
     }
     size_IN_buf_h = Encode_NATIVE_MyReal(IN_buf_h, sizeof(asn1SccMyReal), IN_h);
     if (-1 == size_IN_buf_h) {
 #ifdef __unix__
         printf ("** Encoding error in obsw_RI_Compute_Input!!\n");
 #endif
-        /* Major error, we must stop the application and let the FDIR/Watchdogs recover */
-        exit (-1);
+        /* Crash the application due to message loss */
+        extern void abort (void);
+        abort();
     }
 
     /* Call to VM callback function */
@@ -157,8 +161,9 @@ void obsw_RI_Response(const asn1SccMyReal *IN_F, asn1SccMyReal *OUT_dh, asn1SccM
 #ifdef __unix__
         printf ("** Encoding error in obsw_RI_Response!!\n");
 #endif
-        /* Major error, we must stop the application and let the FDIR/Watchdogs recover */
-        exit (-1);
+        /* Crash the application due to message loss */
+        extern void abort (void);
+        abort();
     }
 
     /* Call to VM callback function */

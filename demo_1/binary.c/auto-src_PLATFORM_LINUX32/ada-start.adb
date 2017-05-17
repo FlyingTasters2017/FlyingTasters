@@ -1,19 +1,19 @@
 pragma Ada_95;
+pragma Warnings (Off);
 pragma Source_File_Name (ada_main, Spec_File_Name => "ada-start.ads");
 pragma Source_File_Name (ada_main, Body_File_Name => "ada-start.adb");
+pragma Suppress (Overflow_Check);
 
 package body ada_main is
-   pragma Warnings (Off);
 
-   E16 : Short_Integer; pragma Import (Ada, E16, "system__soft_links_E");
-   E53 : Short_Integer; pragma Import (Ada, E53, "system__fat_lflt_E");
+   E12 : Short_Integer; pragma Import (Ada, E12, "system__soft_links_E");
    E10 : Short_Integer; pragma Import (Ada, E10, "system__exception_table_E");
    E07 : Short_Integer; pragma Import (Ada, E07, "ada__numerics_E");
-   E28 : Short_Integer; pragma Import (Ada, E28, "system__exceptions_E");
-   E20 : Short_Integer; pragma Import (Ada, E20, "system__secondary_stack_E");
-   E50 : Short_Integer; pragma Import (Ada, E50, "adaasn1rtl_E");
-   E60 : Short_Integer; pragma Import (Ada, E60, "taste_basictypes_E");
-   E62 : Short_Integer; pragma Import (Ada, E62, "taste_dataview_E");
+   E24 : Short_Integer; pragma Import (Ada, E24, "system__exceptions_E");
+   E16 : Short_Integer; pragma Import (Ada, E16, "system__secondary_stack_E");
+   E52 : Short_Integer; pragma Import (Ada, E52, "adaasn1rtl_E");
+   E62 : Short_Integer; pragma Import (Ada, E62, "taste_basictypes_E");
+   E64 : Short_Integer; pragma Import (Ada, E64, "taste_dataview_E");
    E05 : Short_Integer; pragma Import (Ada, E05, "obsw_E");
 
    Local_Priority_Specific_Dispatching : constant String := "";
@@ -22,11 +22,16 @@ package body ada_main is
    Is_Elaborated : Boolean := False;
 
    procedure adafinal is
+
+      procedure Runtime_Finalize;
+      pragma Import (C, Runtime_Finalize, "__gnat_runtime_finalize");
+
    begin
       if not Is_Elaborated then
          return;
       end if;
       Is_Elaborated := False;
+      Runtime_Finalize;
       null;
    end adafinal;
 
@@ -63,12 +68,11 @@ package body ada_main is
       pragma Import (C, Default_Stack_Size, "__gl_default_stack_size");
       Leap_Seconds_Support : Integer;
       pragma Import (C, Leap_Seconds_Support, "__gl_leap_seconds_support");
+      Bind_Env_Addr : System.Address;
+      pragma Import (C, Bind_Env_Addr, "__gl_bind_env_addr");
 
-      procedure Install_Handler;
-      pragma Import (C, Install_Handler, "__gnat_install_handler");
-
-      Handler_Installed : Integer;
-      pragma Import (C, Handler_Installed, "__gnat_handler_installed");
+      procedure Runtime_Initialize (Install_Handler : Integer);
+      pragma Import (C, Runtime_Initialize, "__gnat_runtime_initialize");
 
       Finalize_Library_Objects : No_Param_Proc;
       pragma Import (C, Finalize_Library_Objects, "__gnat_finalize_library_objects");
@@ -94,17 +98,11 @@ package body ada_main is
       Default_Stack_Size := -1;
       Leap_Seconds_Support := 0;
 
-      if Handler_Installed = 0 then
-         Install_Handler;
-      end if;
+      Runtime_Initialize (1);
 
-      if E16 = 0 then
+      if E12 = 0 then
          System.Soft_Links'Elab_Spec;
       end if;
-      if E53 = 0 then
-         System.Fat_Lflt'Elab_Spec;
-      end if;
-      E53 := E53 + 1;
       if E10 = 0 then
          System.Exception_Table'Elab_Body;
       end if;
@@ -113,21 +111,21 @@ package body ada_main is
          Ada.Numerics'Elab_Spec;
       end if;
       E07 := E07 + 1;
-      if E28 = 0 then
+      if E24 = 0 then
          System.Exceptions'Elab_Spec;
       end if;
-      E28 := E28 + 1;
-      if E16 = 0 then
+      E24 := E24 + 1;
+      if E12 = 0 then
          System.Soft_Links'Elab_Body;
       end if;
-      E16 := E16 + 1;
-      if E20 = 0 then
+      E12 := E12 + 1;
+      if E16 = 0 then
          System.Secondary_Stack'Elab_Body;
       end if;
-      E20 := E20 + 1;
-      E50 := E50 + 1;
-      E60 := E60 + 1;
+      E16 := E16 + 1;
+      E52 := E52 + 1;
       E62 := E62 + 1;
+      E64 := E64 + 1;
       if E05 = 0 then
          obsw'elab_body;
       end if;
@@ -141,9 +139,9 @@ package body ada_main is
    --   ./obsw.o
    --   ./tasteada.o
    --   -L./
-   --   -L/usr/lib/gcc/i586-linux-gnu/4.9/adalib/
+   --   -L/usr/lib/gcc/i686-linux-gnu/6/adalib/
    --   -shared
-   --   -lgnat-4.9
+   --   -lgnat-6
 --  END Object file/option list   
 
 end ada_main;

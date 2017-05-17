@@ -1,3 +1,5 @@
+#ifdef __unix__
+
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
@@ -31,3 +33,5 @@ void debug_printf(DebugLevel level, const char *fmt, ...)
     if (level == LVL_PANIC)
 	exit(1);
 }
+
+#endif

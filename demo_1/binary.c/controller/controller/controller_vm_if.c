@@ -1,7 +1,11 @@
 /* This file was generated automatically: DO NOT MODIFY IT ! */
 
-#include <stdlib.h>
-#include <stdio.h>
+#ifdef __unix__
+    #include <stdlib.h>
+    #include <stdio.h>
+#else
+    typedef unsigned size_t;
+#endif
 
 #include "controller_vm_if.h"
 
@@ -38,17 +42,23 @@ void controller_Compute_Input (void *pmy_Ref_h, size_t size_my_Ref_h, void *pmy_
 
     /* Decode each input parameter */
     if (0 != Decode_NATIVE_MyReal (&IN_Ref_h, pmy_Ref_h, size_my_Ref_h)) {
-        printf("\nError Decoding MyReal\n");
+        #ifdef __unix__
+            printf("\nError Decoding MyReal\n");
+        #endif
         return;
     }
 
     if (0 != Decode_NATIVE_MyReal (&IN_dh, pmy_dh, size_my_dh)) {
-        printf("\nError Decoding MyReal\n");
+        #ifdef __unix__
+            printf("\nError Decoding MyReal\n");
+        #endif
         return;
     }
 
     if (0 != Decode_NATIVE_MyReal (&IN_h, pmy_h, size_my_h)) {
-        printf("\nError Decoding MyReal\n");
+        #ifdef __unix__
+            printf("\nError Decoding MyReal\n");
+        #endif
         return;
     }
 

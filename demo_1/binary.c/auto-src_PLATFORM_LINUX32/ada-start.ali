@@ -1,4 +1,4 @@
-V "GNAT Lib v4.9"
+V "GNAT Lib v6"
 A -g
 A -m32
 A -gnat2012
@@ -10,25 +10,25 @@ RV NO_IMPLEMENTATION_ATTRIBUTES
 RV NO_IMPLEMENTATION_PRAGMAS
 RV SPARK_05
 
-U ada_main%b		ada-start.adb		b0a734f6 NE OO PK IL
+U ada_main%b		ada-start.adb		be367ddd NE OO PK IL
 W system%s		system.ads		system.ali
 
-U ada_main%s		ada-start.ads		a627fb04 EE NE OO PK IL
+U ada_main%s		ada-start.ads		a4ed2d6c EE NE OO PK IL
 W system%s		system.ads		system.ali
 
-D ada-start.ads		20170516151746 1b51fd51
-D ada-start.adb		20170516151746 abf6c9a7
-D system.ads		20141120002343 bd760655
+D ada-start.ads		20170517141416 621ab929 ada_main%s
+D ada-start.adb		20170517141416 dc2cc4f4 ada_main%b
+D system.ads		20151123113124 c6f79445 system%s
 X 1 ada-start.ads
-3K9*ada_main 212l5 212e13 2|5b14 149l5 149t13
-6U14*adainit 7i<c,adainit>22 2|35b14 135l8 135t15
-9U14*adafinal 10i<c,adafinal>22 2|24b14 31l8 31t16
+4K9*ada_main 218l5 218e13 2|7b14 147l5 147t13
+6U14*adainit 7i<c,adainit>22 2|40b14 133l8 133t15
+9U14*adafinal 10i<c,adafinal>22 2|24b14 36l8 36t16
 12M9*Version_32 13r22 15r22 17r22 19r22 21r22 23r22 25r22 27r22 29r22 31r22
 . 33r22 35r22 37r22 39r22 41r22 43r22 45r22 47r22 49r22 51r22 53r22 55r22
 . 57r22 59r22 61r22 63r22 65r22 67r22 69r22 71r22 73r22 75r22 77r22 79r22
 . 81r22 83r22 85r22 87r22 89r22 91r22 93r22 95r22 97r22 99r22 101r22 103r22
 . 105r22 107r22 109r22 111r22 113r22 115r22 117r22 119r22 121r22 123r22 125r22
-. 127r22 129r22 131r22 133r22 135r22 137r22 139r22 141r22
+. 127r22 129r22 131r22 133r22 135r22 137r22 139r22 141r22 143r22 145r22
 13m4*u00001{12M9} 14r22
 15m4*u00002{12M9} 16r22
 17m4*u00003{12M9} 18r22
@@ -94,40 +94,43 @@ X 1 ada-start.ads
 137m4*u00063{12M9} 138r22
 139m4*u00064{12M9} 140r22
 141m4*u00065{12M9} 142r22
+143m4*u00066{12M9} 144r22
+145m4*u00067{12M9} 146r22
 X 2 ada-start.adb
-8i4 E16{short_integer} 8m45 8r45 101r10 120r10 123m7 123r14
-9i4 E53{short_integer} 9m45 9r45 104r10 107m7 107r14
-10i4 E10{short_integer} 10m45 10r45 108r10 111m7 111r14
-11i4 E07{short_integer} 11m45 11r45 112r10 115m7 115r14
-12i4 E28{short_integer} 12m45 12r45 116r10 119m7 119r14
-13i4 E20{short_integer} 13m45 13r45 124r10 127m7 127r14
-14i4 E50{short_integer} 14m45 14r45 128m7 128r14
-15i4 E60{short_integer} 15m45 15r45 129m7 129r14
-16i4 E62{short_integer} 16m45 16r45 130m7 130r14
-17i4 E05{short_integer} 17m45 17r45 131r10 134m7 134r14
-19a4 Local_Priority_Specific_Dispatching{string} 87r9
-20a4 Local_Interrupt_States{string} 90r27
-22b4 Is_Elaborated{boolean} 26r14 29m7 76r10 79m7
-33P9 No_Param_Proc 73r34
-36i7*Main_Priority{integer} 37m25 37r25 80m7
-38i7*Time_Slice_Value{integer} 39m25 39r25 81m7
-40e7*WC_Encoding{character} 41m25 41r25 82m7
-42e7*Locking_Policy{character} 43m25 43r25 83m7
-44e7*Queuing_Policy{character} 45m25 45r25 84m7
-46e7*Task_Dispatching_Policy{character} 47m25 47r25 85m7
-48m7*Priority_Specific_Dispatching{3|64M9} 49m25 49r25 86m7
-50i7*Num_Specific_Dispatching{integer} 51m25 51r25 88m7
-52i7*Main_CPU{integer} 53m25 53r25 89m7
-54m7*Interrupt_States{3|64M9} 55m25 55r25 90m7
-56i7*Num_Interrupt_States{integer} 57m25 57r25 91m7
-58i7*Unreserve_All_Interrupts{integer} 59m25 59r25 92m7
-60i7*Detect_Blocking{integer} 61m25 61r25 93m7
-62i7*Default_Stack_Size{integer} 63m25 63r25 94m7
-64i7*Leap_Seconds_Support{integer} 65m25 65r25 95m7
-67U17*Install_Handler 68b<c,__gnat_install_handler>25 98s10
-70i7*Handler_Installed{integer} 71m25 71r25 97r10
-73p7*Finalize_Library_Objects{33P9} 74m25 74r25
+9i4 E12{short_integer} 9m45 9r45 103r10 118r10 121m7 121r14
+10i4 E10{short_integer} 10m45 10r45 106r10 109m7 109r14
+11i4 E07{short_integer} 11m45 11r45 110r10 113m7 113r14
+12i4 E24{short_integer} 12m45 12r45 114r10 117m7 117r14
+13i4 E16{short_integer} 13m45 13r45 122r10 125m7 125r14
+14i4 E52{short_integer} 14m45 14r45 126m7 126r14
+15i4 E62{short_integer} 15m45 15r45 127m7 127r14
+16i4 E64{short_integer} 16m45 16r45 128m7 128r14
+17i4 E05{short_integer} 17m45 17r45 129r10 132m7 132r14
+19a4 Local_Priority_Specific_Dispatching{string} 91r9
+20a4 Local_Interrupt_States{string} 94r27
+22b4 Is_Elaborated{boolean} 30r14 33m7 80r10 83m7
+26U17*Runtime_Finalize 27b<c,__gnat_runtime_finalize>25 34s7
+38P9 No_Param_Proc 77r34
+41i7*Main_Priority{integer} 42m25 42r25 84m7
+43i7*Time_Slice_Value{integer} 44m25 44r25 85m7
+45e7*WC_Encoding{character} 46m25 46r25 86m7
+47e7*Locking_Policy{character} 48m25 48r25 87m7
+49e7*Queuing_Policy{character} 50m25 50r25 88m7
+51e7*Task_Dispatching_Policy{character} 52m25 52r25 89m7
+53m7*Priority_Specific_Dispatching{3|67M9} 54m25 54r25 90m7
+55i7*Num_Specific_Dispatching{integer} 56m25 56r25 92m7
+57i7*Main_CPU{integer} 58m25 58r25 93m7
+59m7*Interrupt_States{3|67M9} 60m25 60r25 94m7
+61i7*Num_Interrupt_States{integer} 62m25 62r25 95m7
+63i7*Unreserve_All_Interrupts{integer} 64m25 64r25 96m7
+65i7*Detect_Blocking{integer} 66m25 66r25 97m7
+67i7*Default_Stack_Size{integer} 68m25 68r25 98m7
+69i7*Leap_Seconds_Support{integer} 70m25 70r25 99m7
+71m7*Bind_Env_Addr{3|67M9} 72m25 72r25
+74U17*Runtime_Initialize 74>37 75b<c,__gnat_runtime_initialize>25 101s7
+74i37 Install_Handler{integer}
+77p7*Finalize_Library_Objects{38P9} 78m25 78r25
 X 3 system.ads
-37K9*System 1|2w6 2|48r39 54r26 3|152e11
-64M9*Address 2|48r46 54r33
+37K9*System 1|3w6 2|53r39 59r26 71r23 3|156e11
+67M9*Address 2|53r46 59r33 71r30
 

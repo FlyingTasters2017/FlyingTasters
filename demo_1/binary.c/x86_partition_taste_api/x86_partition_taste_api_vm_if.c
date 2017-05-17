@@ -1,7 +1,11 @@
 /* This file was generated automatically: DO NOT MODIFY IT ! */
 
-#include <stdlib.h>
-#include <stdio.h>
+#ifdef __unix__
+    #include <stdlib.h>
+    #include <stdio.h>
+#else
+    typedef unsigned size_t;
+#endif
 
 #include "x86_partition_taste_api_vm_if.h"
 

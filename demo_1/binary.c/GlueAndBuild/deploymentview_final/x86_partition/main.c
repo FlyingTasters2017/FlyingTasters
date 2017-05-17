@@ -62,7 +62,7 @@ __PO_HI_MAIN_TYPE __PO_HI_MAIN_NAME (void)
  * AADL model. Third is the task priority ( 5), fourth is the stack size ( 
  * 50000 bytes) and last is the subprogram executed by the task
  */
-  __po_hi_create_periodic_task (x86_partition_vt_obsw_pulse_k, &(period), 5, 50000, vt_obsw_pulse_job);
+  __po_hi_create_periodic_task (x86_partition_vt_obsw_pulse_k, &(period), 5, 50000, 0, vt_obsw_pulse_job);
   
 /*!
  * Store the period time for task vt_obsw_takeoff
@@ -72,7 +72,7 @@ __PO_HI_MAIN_TYPE __PO_HI_MAIN_NAME (void)
 /*!
  * Making Sporadic task
  */
-  __po_hi_create_sporadic_task (x86_partition_vt_obsw_takeoff_k, &(period), 1, 50000, vt_obsw_takeoff_job);
+  __po_hi_create_sporadic_task (x86_partition_vt_obsw_takeoff_k, &(period), 1, 50000, 0, vt_obsw_takeoff_job);
   
 /*!
  * Store the period time for task vt_ground_height
@@ -82,7 +82,7 @@ __PO_HI_MAIN_TYPE __PO_HI_MAIN_NAME (void)
 /*!
  * Making Sporadic task
  */
-  __po_hi_create_sporadic_task (x86_partition_vt_ground_height_k, &(period), 1, 50000, vt_ground_height_job);
+  __po_hi_create_sporadic_task (x86_partition_vt_ground_height_k, &(period), 1, 50000, 0, vt_ground_height_job);
   
 /*!
  * Store the period time for task vt_ground_gui_polling_ground
@@ -99,7 +99,7 @@ __PO_HI_MAIN_TYPE __PO_HI_MAIN_NAME (void)
  *  stack size ( 50000 bytes) and last is the subprogram executed by the 
  * task
  */
-  __po_hi_create_periodic_task (x86_partition_vt_ground_gui_polling_ground_k, &(period), 1, 50000, vt_ground_gui_polling_ground_job);
+  __po_hi_create_periodic_task (x86_partition_vt_ground_gui_polling_ground_k, &(period), 1, 50000, 0, vt_ground_gui_polling_ground_job);
   
 /*!
  * Waiting for other tasks initialization

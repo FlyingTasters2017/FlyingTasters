@@ -92,8 +92,8 @@ __po_hi_port_t* __po_hi_vt_obsw_takeoff_destinations[__po_hi_vt_obsw_takeoff_nb_
  * \fn void vt_obsw_takeoff_deliver (__po_hi_request_t* request)
  * \brief Function that delivers requests to the task vt_obsw_takeoff
  *
- * When the generated application received a request,it calls a main delivery 
- * function that redirectsto local functions for each task. This function 
+ * When the generated application received a request, it calls a main delivery
+ *  function that redirects to localfunctions for each task. This function 
  * (vt_obsw_takeoff_deliver) stores the incoming request for the 
  * taskvt_obsw_takeoff
  */
@@ -132,7 +132,7 @@ extern void po_hi_c_vt_obsw_takeoff_artificial_takeoff
 void* vt_obsw_takeoff_job (void)
 {
   __po_hi_local_port_t port;
-  __po_hi_request_t inport_artificial_takeoff_request;
+  __po_hi_request_t static inport_artificial_takeoff_request;
   __po_hi_int32_t error;
 
   __po_hi_gqueue_init (x86_partition_vt_obsw_takeoff_k, __po_hi_vt_obsw_takeoff_nb_ports, __po_hi_vt_obsw_takeoff_queue, __po_hi_vt_obsw_takeoff_fifo_size, __po_hi_vt_obsw_takeoff_first, __po_hi_vt_obsw_takeoff_offsets, __po_hi_vt_obsw_takeoff_woffsets, __po_hi_vt_obsw_takeoff_n_dest, __po_hi_vt_obsw_takeoff_destinations, __po_hi_vt_obsw_takeoff_used_size, __po_hi_vt_obsw_takeoff_history, __po_hi_vt_obsw_takeoff_recent, __po_hi_vt_obsw_takeoff_empties, __po_hi_vt_obsw_takeoff_total_fifo_size);
@@ -196,8 +196,8 @@ __po_hi_port_t* __po_hi_vt_ground_height_destinations[__po_hi_vt_ground_height_n
  * \fn void vt_ground_height_deliver (__po_hi_request_t* request)
  * \brief Function that delivers requests to the task vt_ground_height
  *
- * When the generated application received a request,it calls a main delivery 
- * function that redirectsto local functions for each task. This function 
+ * When the generated application received a request, it calls a main delivery
+ *  function that redirects to localfunctions for each task. This function 
  * (vt_ground_height_deliver) stores the incoming request for the 
  * taskvt_ground_height
  */
@@ -236,7 +236,7 @@ extern void po_hi_c_vt_ground_height_artificial_height
 void* vt_ground_height_job (void)
 {
   __po_hi_local_port_t port;
-  __po_hi_request_t inport_artificial_height_request;
+  __po_hi_request_t static inport_artificial_height_request;
   __po_hi_int32_t error;
 
   __po_hi_gqueue_init (x86_partition_vt_ground_height_k, __po_hi_vt_ground_height_nb_ports, __po_hi_vt_ground_height_queue, __po_hi_vt_ground_height_fifo_size, __po_hi_vt_ground_height_first, __po_hi_vt_ground_height_offsets, __po_hi_vt_ground_height_woffsets, __po_hi_vt_ground_height_n_dest, __po_hi_vt_ground_height_destinations, __po_hi_vt_ground_height_used_size, __po_hi_vt_ground_height_history, __po_hi_vt_ground_height_recent, __po_hi_vt_ground_height_empties, __po_hi_vt_ground_height_total_fifo_size);
@@ -347,8 +347,8 @@ void* vt_ground_gui_polling_ground_job (void)
  * \brief Used to deliver request to the appropriate ports
  *
  * This function takes a request as argument (\arg request) and calls the 
- * appropriate function for its delivery. To specify which function should be 
- * called, it extracts  the receiver entity using the destination port.
+ * appropriate function for its delivery.To specify which function should be 
+ * called, it extracts the receiver entity using the destination port.
  */
 void __po_hi_main_deliver 
     (__po_hi_request_t* request)

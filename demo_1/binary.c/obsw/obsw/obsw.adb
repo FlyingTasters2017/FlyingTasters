@@ -17,7 +17,7 @@ with Interfaces;
 use Interfaces;
 
 package body obsw is
-    type States is (runing, wait);
+    type States is (wait, runing);
     type ctxt_Ty is
         record
         state : States;
@@ -33,10 +33,10 @@ package body obsw is
     procedure Pulse is
         begin
             case ctxt.state is
-                when wait =>
-                    runTransition(3);
                 when runing =>
                     runTransition(1);
+                when wait =>
+                    runTransition(3);
                 when others =>
                     runTransition(CS_Only);
             end case;
@@ -46,12 +46,12 @@ package body obsw is
     procedure Takeoff(Ref_H: access asn1SccMyReal) is
         begin
             case ctxt.state is
-                when wait =>
-                    ctxt.ref_h := Ref_H.all;
-                    runTransition(4);
                 when runing =>
                     ctxt.ref_h := Ref_H.all;
                     runTransition(2);
+                when wait =>
+                    ctxt.ref_h := Ref_H.all;
+                    runTransition(4);
                 when others =>
                     runTransition(CS_Only);
             end case;
@@ -72,18 +72,18 @@ package body obsw is
                         ctxt.state := Wait;
                         goto next_transition;
                     when 1 =>
-                        -- Compute_Input(Ref_h,h,dh,F) (22,17)
-                        RIÜCompute_Input(ctxt.Ref_h'Access, ctxt.h'Access, ctxt.dh'Access, ctxt.F'Access);
-                        -- Response(F,h,dh) (24,17)
-                        RIÜResponse(ctxt.F'Access, ctxt.h'Access, ctxt.dh'Access);
-                        -- Height(h) (26,19)
+                        -- Compute_Input(Ref_h,dh,h,F) (19,17)
+                        RIÜCompute_Input(ctxt.Ref_h'Access, ctxt.dh'Access, ctxt.h'Access, ctxt.F'Access);
+                        -- Response(F,dh,h) (21,17)
+                        RIÜResponse(ctxt.F'Access, ctxt.dh'Access, ctxt.h'Access);
+                        -- Height(h) (23,19)
                         RIÜHeight(ctxt.h'Access);
-                        -- NEXT_STATE Runing (28,22) at 909, 368
+                        -- NEXT_STATE Runing (25,22) at 909, 368
                         trId := -1;
                         ctxt.state := Runing;
                         goto next_transition;
                     when 2 =>
-                        -- NEXT_STATE Wait (32,22) at 1075, 178
+                        -- NEXT_STATE Wait (29,22) at 1075, 178
                         trId := -1;
                         ctxt.state := Wait;
                         goto next_transition;

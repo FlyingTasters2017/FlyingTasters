@@ -6,13 +6,13 @@
 
 #include "C_ASN1_Types.h"
 #ifdef __cplusplus
-extern "C" {
+    extern "C" {
 #endif
 
 #ifdef __unix__
-#include <stdbool.h>
-#include <stdlib.h>
-static bool debugCheckQ = false;
+    #include <stdbool.h>
+    #include <stdlib.h>
+    static bool debugCheckQ = false;
 #endif
 
 void x86_partition_taste_api_startup();

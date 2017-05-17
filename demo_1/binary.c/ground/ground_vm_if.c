@@ -1,7 +1,11 @@
 /* This file was generated automatically: DO NOT MODIFY IT ! */
 
-#include <stdlib.h>
-#include <stdio.h>
+#ifdef __unix__
+    #include <stdlib.h>
+    #include <stdio.h>
+#else
+    typedef unsigned size_t;
+#endif
 
 #include "ground_vm_if.h"
 
@@ -30,7 +34,9 @@ void ground_Height (void *pmy_H, size_t size_my_H)
 
     /* Decode each input parameter */
     if (0 != Decode_UPER_MyReal (&IN_H, pmy_H, size_my_H)) {
-        printf("\nError Decoding MyReal\n");
+        #ifdef __unix__
+            printf("\nError Decoding MyReal\n");
+        #endif
         return;
     }
 
