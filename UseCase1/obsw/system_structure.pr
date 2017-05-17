@@ -1,0 +1,45 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM obsw;
+
+	SIGNAL Pulse;
+
+	/* CIF Keep Specific Geode PARAMNAMES ReferenceHeight */
+	SIGNAL Takeoff (MyReal);
+
+	/* CIF Keep Specific Geode PARAMNAMES Height */
+	SIGNAL GetHeight (MyReal);
+
+	PROCEDURE Compute_Force COMMENT '#c_predef';
+		FPAR
+			IN ReferenceHeight MyReal,
+			IN HeightVelocity MyReal,
+			IN Height MyReal,
+			IN/OUT Force MyReal;
+ 	EXTERNAL;
+
+	PROCEDURE Response COMMENT '#c_predef';
+		FPAR
+			IN Force MyReal,
+			IN/OUT HeightVelocity MyReal,
+			IN/OUT Height MyReal;
+ 	EXTERNAL;
+
+	CHANNEL c
+		FROM ENV TO obsw WITH Pulse,Takeoff;
+		FROM obsw TO ENV WITH GetHeight;
+	ENDCHANNEL;
+
+	BLOCK obsw;
+
+		SIGNALROUTE r
+			FROM ENV TO obsw WITH Pulse,Takeoff;
+			FROM obsw TO ENV WITH GetHeight;
+
+		CONNECT c and r;
+
+		PROCESS obsw REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;

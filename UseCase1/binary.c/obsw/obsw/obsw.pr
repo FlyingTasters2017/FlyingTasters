@@ -1,0 +1,45 @@
+/* CIF PROCESS (122, 150), (406, 219) */
+process obsw;
+    /* CIF TEXT (263, 61), (395, 140) */
+    -- Text area for declarations and comments
+    
+    dcl ReferenceHeight, Height, HeightVelocity, Force Myreal;
+    /* CIF ENDTEXT */
+    /* CIF START (763, 66), (70, 35) */
+    START;
+        /* CIF PROCEDURECALL (718, 121), (160, 35) */
+        call writeln('SDL startup');
+        /* CIF NEXTSTATE (763, 171), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (1213, 93), (70, 35) */
+    state Runing;
+        /* CIF input (1121, 148), (70, 35) */
+        input pulse;
+            /* CIF PROCEDURECALL (942, 203), (428, 35) */
+            call Compute_Force(ReferenceHeight,HeightVelocity,Height,Force);
+            /* CIF PROCEDURECALL (1019, 265), (273, 35) */
+            call Response(Force,HeightVelocity,Height);
+            /* CIF output (1085, 325), (142, 35) */
+            output GetHeight(Height);
+            /* CIF NEXTSTATE (1121, 380), (70, 35) */
+            NEXTSTATE Runing;
+        /* CIF input (1374, 148), (189, 35) */
+        input Takeoff(ReferenceHeight);
+            /* CIF NEXTSTATE (1433, 203), (70, 35) */
+            NEXTSTATE Wait;
+    endstate;
+    /* CIF state (949, 42), (70, 35) */
+    state Wait;
+    endstate;
+    /* CIF state (763, 171), (70, 35) */
+    state Wait;
+        /* CIF input (668, 226), (70, 35) */
+        input pulse;
+            /* CIF NEXTSTATE (668, 282), (70, 35) */
+            NEXTSTATE Wait;
+        /* CIF input (748, 226), (189, 35) */
+        input Takeoff(ReferenceHeight);
+            /* CIF NEXTSTATE (807, 281), (70, 35) */
+            NEXTSTATE Runing;
+    endstate;
+endprocess obsw;
