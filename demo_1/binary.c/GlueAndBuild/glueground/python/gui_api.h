@@ -7,6 +7,6 @@ int OpenMsgQueueForReading(char *queueName);
 void CloseMsgQueue(int queue_id);
 int GetMsgQueueBufferSize(int queue_id);
 int RetrieveMessageFromQueue(int queue_id, int maxSize, byte *pBuf);
-int SendTC_Takeoff(void *p_Ref_h);
+int SendTC_Takeoff(void *p_Ref_H);
 
 #endif

@@ -42,11 +42,11 @@ def ProcessTM(self):
     if self.messageReceivedType == i_Height:
         print "\n"+chr(27)+"[32m" + "Received Telemetry: Height" + chr(27) + "[0m\n"
         backup = self._pMem
-        # Read the data for param h
-        var_h = dataview_uniq_asn.MyReal()
-        var_h.SetData(self._pMem)
-        print "Parameter h:"
-        var_h.PrintAll()
+        # Read the data for param H
+        var_H = dataview_uniq_asn.MyReal()
+        var_H.SetData(self._pMem)
+        print "Parameter H:"
+        var_H.PrintAll()
         print
         # self._pMem = DV.MovePtrBySizeOf_MyReal(self._pMem)
         # Revert the pointer to start of the data

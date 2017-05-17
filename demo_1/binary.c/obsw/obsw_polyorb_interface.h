@@ -25,7 +25,7 @@ void sync_obsw_Takeoff(void *, size_t);
 /* ------------------------------------------------------
 --  Asynchronous Required Interface "Height"
 ------------------------------------------------------ */
-void vm_async_obsw_Height(void *h, size_t h_len);
+void vm_async_obsw_Height(void *H, size_t H_len);
 /* ------------------------------------------------------
 --  Synchronous Required Interface "Compute_Input"
 ------------------------------------------------------ */

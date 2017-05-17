@@ -59,12 +59,12 @@ void ground_PI_gui_polling_ground()
 
    return;
 }
-void ground_PI_Height(const asn1SccMyReal* h)
+void ground_PI_Height(const asn1SccMyReal* H)
 {
    //Create a variable of type T_Height__data to be contained in the queue
    T_Height__data Height__data;
 
-   Height__data.h = *h;
+   Height__data.H = *H;
 
    write_message_to_queue(ground_PI_queue_id, sizeof(T_Height__data), (void*)&Height__data, i_Height);
 

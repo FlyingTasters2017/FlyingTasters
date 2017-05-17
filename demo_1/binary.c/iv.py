@@ -61,15 +61,15 @@ functions['obsw']['interfaces']['Takeoff'] = {
     'queue_size': 1
 }
 
-functions['obsw']['interfaces']['Takeoff']['paramsInOrdered'] = ['Ref_h']
+functions['obsw']['interfaces']['Takeoff']['paramsInOrdered'] = ['Ref_H']
 
 functions['obsw']['interfaces']['Takeoff']['paramsOutOrdered'] = []
 
-functions['obsw']['interfaces']['Takeoff']['in']['Ref_h'] = {
+functions['obsw']['interfaces']['Takeoff']['in']['Ref_H'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'Takeoff',
     'param_direction': param_in
@@ -94,15 +94,15 @@ functions['obsw']['interfaces']['Height'] = {
     'queue_size': 1
 }
 
-functions['obsw']['interfaces']['Height']['paramsInOrdered'] = ['h']
+functions['obsw']['interfaces']['Height']['paramsInOrdered'] = ['H']
 
 functions['obsw']['interfaces']['Height']['paramsOutOrdered'] = []
 
-functions['obsw']['interfaces']['Height']['in']['h'] = {
+functions['obsw']['interfaces']['Height']['in']['H'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'Height',
     'param_direction': param_in
@@ -135,7 +135,7 @@ functions['obsw']['interfaces']['Compute_Input']['in']['Ref_h'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'Compute_Input',
     'param_direction': param_in
@@ -145,7 +145,7 @@ functions['obsw']['interfaces']['Compute_Input']['in']['dh'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'Compute_Input',
     'param_direction': param_in
@@ -155,7 +155,7 @@ functions['obsw']['interfaces']['Compute_Input']['in']['h'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'Compute_Input',
     'param_direction': param_in
@@ -165,7 +165,7 @@ functions['obsw']['interfaces']['Compute_Input']['out']['F'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'Compute_Input',
     'param_direction': param_out
@@ -198,7 +198,7 @@ functions['obsw']['interfaces']['Response']['in']['F'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'Response',
     'param_direction': param_in
@@ -208,7 +208,7 @@ functions['obsw']['interfaces']['Response']['out']['dh'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'Response',
     'param_direction': param_out
@@ -218,7 +218,7 @@ functions['obsw']['interfaces']['Response']['out']['h'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'Response',
     'param_direction': param_out
@@ -252,15 +252,15 @@ functions['ground']['interfaces']['Height'] = {
     'queue_size': 1
 }
 
-functions['ground']['interfaces']['Height']['paramsInOrdered'] = ['h']
+functions['ground']['interfaces']['Height']['paramsInOrdered'] = ['H']
 
 functions['ground']['interfaces']['Height']['paramsOutOrdered'] = []
 
-functions['ground']['interfaces']['Height']['in']['h'] = {
+functions['ground']['interfaces']['Height']['in']['H'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'Height',
     'param_direction': param_in
@@ -285,15 +285,15 @@ functions['ground']['interfaces']['Takeoff'] = {
     'queue_size': 1
 }
 
-functions['ground']['interfaces']['Takeoff']['paramsInOrdered'] = ['Ref_h']
+functions['ground']['interfaces']['Takeoff']['paramsInOrdered'] = ['Ref_H']
 
 functions['ground']['interfaces']['Takeoff']['paramsOutOrdered'] = []
 
-functions['ground']['interfaces']['Takeoff']['in']['Ref_h'] = {
+functions['ground']['interfaces']['Takeoff']['in']['Ref_H'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'Takeoff',
     'param_direction': param_in
@@ -335,7 +335,7 @@ functions['drone_model']['interfaces']['Response']['in']['F'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'Response',
     'param_direction': param_in
@@ -345,7 +345,7 @@ functions['drone_model']['interfaces']['Response']['out']['dh'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'Response',
     'param_direction': param_out
@@ -355,7 +355,7 @@ functions['drone_model']['interfaces']['Response']['out']['h'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'Response',
     'param_direction': param_out
@@ -397,7 +397,7 @@ functions['controller']['interfaces']['Compute_Input']['in']['Ref_h'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'Compute_Input',
     'param_direction': param_in
@@ -407,7 +407,7 @@ functions['controller']['interfaces']['Compute_Input']['in']['dh'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'Compute_Input',
     'param_direction': param_in
@@ -417,7 +417,7 @@ functions['controller']['interfaces']['Compute_Input']['in']['h'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'Compute_Input',
     'param_direction': param_in
@@ -427,7 +427,7 @@ functions['controller']['interfaces']['Compute_Input']['out']['F'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
-    'asn1_filename': '/tmp/uniqhomeassertdemo_1InterfaceView.aadl/dataview-uniq.asn',
+    'asn1_filename': '/tmp/uniqhomeassertFlyingTastersdemo_1InterfaceView.aadl/dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'Compute_Input',
     'param_direction': param_out

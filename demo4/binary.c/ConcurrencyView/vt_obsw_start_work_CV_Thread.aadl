@@ -1,0 +1,34 @@
+--  This file was generated automatically: DO NOT MODIFY IT !
+
+--  This file contains a part of the system CONCURRENCY VIEW.
+--  It is an input file for OCARINA.
+
+package vt_obsw_start_work_CV_Thread
+public
+	with Deployment;
+	with process_package;
+	with Dataview;
+
+THREAD vt_obsw_start_work_vt_obsw_start_work
+features
+	INPORT_artificial_Start_work : IN EVENT DATA PORT DataView::MyReal_Buffer.impl
+		{ Compute_Execution_Time => 0 ms .. 0 ms;
+		  Queue_Size => 1;
+		  Compute_Entrypoint_Source_Text => "po_hi_c_vt_obsw_start_work_artificial_Start_work"; };
+	OUTPORT_Thrust_Update_vt : OUT EVENT DATA PORT DataView::MyReal_Buffer.impl;
+	OUTPORT_dHeight_vt : OUT EVENT DATA PORT DataView::MyReal_Buffer.impl;
+	obsw_protected : requires data access process_package::TASTE_Protected.Object;
+END vt_obsw_start_work_vt_obsw_start_work;
+
+THREAD IMPLEMENTATION vt_obsw_start_work_vt_obsw_start_work.others
+PROPERTIES
+	Initialize_Entrypoint_Source_Text => "init_obsw";
+	Dispatch_Protocol => Sporadic;
+	Period            => 1 ms;
+	Dispatch_Offset   => 0 ms;
+	Compute_Execution_Time => 0 ms .. 10 ms;
+	Source_Stack_Size => 50 KByte;
+	Priority => 1;
+END vt_obsw_start_work_vt_obsw_start_work.others;
+
+end vt_obsw_start_work_CV_Thread;

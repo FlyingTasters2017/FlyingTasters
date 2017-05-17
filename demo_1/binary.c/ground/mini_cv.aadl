@@ -2,7 +2,7 @@
 
 SUBPROGRAM Height
 FEATURES
-	h:IN PARAMETER DataView::MyReal {encoding=>UPER;};
+	H:IN PARAMETER DataView::MyReal {encoding=>UPER;};
 END Height;
 
 SUBPROGRAM IMPLEMENTATION Height.GUI_PI
@@ -13,7 +13,7 @@ END Height.GUI_PI;
 
 SUBPROGRAM Takeoff
 FEATURES
-	Ref_h:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+	Ref_H:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
 END Takeoff;
 
 SUBPROGRAM IMPLEMENTATION Takeoff.GUI_RI

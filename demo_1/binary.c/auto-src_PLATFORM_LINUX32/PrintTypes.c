@@ -9,6 +9,21 @@ static pthread_mutex_t g_printing_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 #endif
 
+void PrintT_UInt32(const char *paramName, const asn1SccT_UInt32 *pData)
+{
+#ifdef __linux__
+    pthread_mutex_lock(&g_printing_mutex);
+#endif
+    #if WORD_SIZE==8
+    printf("%s %lld\n", paramName, (*pData));
+    #else
+    printf("%s %d\n", paramName, (*pData));
+    #endif
+#ifdef __linux__
+    pthread_mutex_unlock(&g_printing_mutex);
+#endif
+}
+
 void PrintT_Int32(const char *paramName, const asn1SccT_Int32 *pData)
 {
 #ifdef __linux__
@@ -19,61 +34,6 @@ void PrintT_Int32(const char *paramName, const asn1SccT_Int32 *pData)
     #else
     printf("%s %d\n", paramName, (*pData));
     #endif
-#ifdef __linux__
-    pthread_mutex_unlock(&g_printing_mutex);
-#endif
-}
-
-void PrintMyBool(const char *paramName, const asn1SccMyBool *pData)
-{
-#ifdef __linux__
-    pthread_mutex_lock(&g_printing_mutex);
-#endif
-    printf("%s %d\n", paramName, (int)(*pData));
-#ifdef __linux__
-    pthread_mutex_unlock(&g_printing_mutex);
-#endif
-}
-
-void PrintMyOctStr(const char *paramName, const asn1SccMyOctStr *pData)
-{
-#ifdef __linux__
-    pthread_mutex_lock(&g_printing_mutex);
-#endif
-    {
-        int i;
-        printf("%s ", paramName);
-        for(i=0; i<3; i++)
-            printf("%c", (*pData).arr[i]);
-        printf("\n");
-    }
-
-#ifdef __linux__
-    pthread_mutex_unlock(&g_printing_mutex);
-#endif
-}
-
-void PrintT_Int8(const char *paramName, const asn1SccT_Int8 *pData)
-{
-#ifdef __linux__
-    pthread_mutex_lock(&g_printing_mutex);
-#endif
-    #if WORD_SIZE==8
-    printf("%s %lld\n", paramName, (*pData));
-    #else
-    printf("%s %d\n", paramName, (*pData));
-    #endif
-#ifdef __linux__
-    pthread_mutex_unlock(&g_printing_mutex);
-#endif
-}
-
-void PrintMyReal(const char *paramName, const asn1SccMyReal *pData)
-{
-#ifdef __linux__
-    pthread_mutex_lock(&g_printing_mutex);
-#endif
-    printf("%s %f\n", paramName, (*pData));
 #ifdef __linux__
     pthread_mutex_unlock(&g_printing_mutex);
 #endif
@@ -94,22 +54,12 @@ void PrintMyInteger(const char *paramName, const asn1SccMyInteger *pData)
 #endif
 }
 
-void PrintMySeq(const char *paramName, const asn1SccMySeq *pData)
+void PrintMyBool(const char *paramName, const asn1SccMyBool *pData)
 {
 #ifdef __linux__
     pthread_mutex_lock(&g_printing_mutex);
 #endif
-    #if WORD_SIZE==8
-    printf("%s::input_data %lld\n", paramName, (*pData).input_data);
-    #else
-    printf("%s::input_data %d\n", paramName, (*pData).input_data);
-    #endif
-    #if WORD_SIZE==8
-    printf("%s::output_data %lld\n", paramName, (*pData).output_data);
-    #else
-    printf("%s::output_data %d\n", paramName, (*pData).output_data);
-    #endif
-    printf("%s::validity %d\n", paramName, (int)(*pData).validity);
+    printf("%s %d\n", paramName, (int)(*pData));
 #ifdef __linux__
     pthread_mutex_unlock(&g_printing_mutex);
 #endif
@@ -156,12 +106,40 @@ void PrintT_UInt8(const char *paramName, const asn1SccT_UInt8 *pData)
 #endif
 }
 
-void PrintT_Boolean(const char *paramName, const asn1SccT_Boolean *pData)
+void PrintMyOctStr(const char *paramName, const asn1SccMyOctStr *pData)
 {
 #ifdef __linux__
     pthread_mutex_lock(&g_printing_mutex);
 #endif
-    printf("%s %d\n", paramName, (int)(*pData));
+    {
+        int i;
+        printf("%s ", paramName);
+        for(i=0; i<3; i++)
+            printf("%c", (*pData).arr[i]);
+        printf("\n");
+    }
+
+#ifdef __linux__
+    pthread_mutex_unlock(&g_printing_mutex);
+#endif
+}
+
+void PrintMySeq(const char *paramName, const asn1SccMySeq *pData)
+{
+#ifdef __linux__
+    pthread_mutex_lock(&g_printing_mutex);
+#endif
+    #if WORD_SIZE==8
+    printf("%s::input_data %lld\n", paramName, (*pData).input_data);
+    #else
+    printf("%s::input_data %d\n", paramName, (*pData).input_data);
+    #endif
+    #if WORD_SIZE==8
+    printf("%s::output_data %lld\n", paramName, (*pData).output_data);
+    #else
+    printf("%s::output_data %d\n", paramName, (*pData).output_data);
+    #endif
+    printf("%s::validity %d\n", paramName, (int)(*pData).validity);
 #ifdef __linux__
     pthread_mutex_unlock(&g_printing_mutex);
 #endif
@@ -183,7 +161,7 @@ void PrintMySeqOf(const char *paramName, const asn1SccMySeqOf *pData)
 #endif
 }
 
-void PrintMyEnum(const char *paramName, const asn1SccMyEnum *pData)
+void PrintT_Boolean(const char *paramName, const asn1SccT_Boolean *pData)
 {
 #ifdef __linux__
     pthread_mutex_lock(&g_printing_mutex);
@@ -194,7 +172,18 @@ void PrintMyEnum(const char *paramName, const asn1SccMyEnum *pData)
 #endif
 }
 
-void PrintT_UInt32(const char *paramName, const asn1SccT_UInt32 *pData)
+void PrintMyReal(const char *paramName, const asn1SccMyReal *pData)
+{
+#ifdef __linux__
+    pthread_mutex_lock(&g_printing_mutex);
+#endif
+    printf("%s %f\n", paramName, (*pData));
+#ifdef __linux__
+    pthread_mutex_unlock(&g_printing_mutex);
+#endif
+}
+
+void PrintT_Int8(const char *paramName, const asn1SccT_Int8 *pData)
 {
 #ifdef __linux__
     pthread_mutex_lock(&g_printing_mutex);
@@ -204,6 +193,17 @@ void PrintT_UInt32(const char *paramName, const asn1SccT_UInt32 *pData)
     #else
     printf("%s %d\n", paramName, (*pData));
     #endif
+#ifdef __linux__
+    pthread_mutex_unlock(&g_printing_mutex);
+#endif
+}
+
+void PrintMyEnum(const char *paramName, const asn1SccMyEnum *pData)
+{
+#ifdef __linux__
+    pthread_mutex_lock(&g_printing_mutex);
+#endif
+    printf("%s %d\n", paramName, (int)(*pData));
 #ifdef __linux__
     pthread_mutex_unlock(&g_printing_mutex);
 #endif

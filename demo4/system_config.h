@@ -7,8 +7,10 @@
 #define __NEED_MyReal_NATIVE
 #define __NEED_MyReal_NATIVE
 #define __NEED_MyReal_UPER
+#define __NEED_MyReal_UPER
 #define __NEED_MyReal_NATIVE
 #define __NEED_MyReal_NATIVE
 #define __NEED_MyReal_NATIVE
+#define __NEED_MyReal_UPER
 #define __NEED_MyReal_UPER
 #define __NEED_MyReal_UPER

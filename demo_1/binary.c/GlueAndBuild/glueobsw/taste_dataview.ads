@@ -50,7 +50,7 @@ FUNCTION asn1SccMyReal_Equal(val1, val2: in asn1SccMyReal) return Boolean;
 
 
 
-ERR_asn1SccMyReal:CONSTANT INTEGER := 1005; -- (0.00000000000000000000E+000 .. 1.00000000000000000000E+003)
+ERR_asn1SccMyReal:CONSTANT INTEGER := 1001; -- (0.00000000000000000000E+000 .. 1.00000000000000000000E+003)
 
 -----------------------------------------------------------asn1SccMyBool-------------------------------------------------------------
 SUBTYPE asn1SccMyBool IS adaasn1rtl.Asn1Boolean;
@@ -89,8 +89,8 @@ FUNCTION asn1SccMyEnum_Equal(val1, val2: in asn1SccMyEnum) return Boolean;
 
 
 
-ERR_asn1SccMyEnum_unknown_enumeration_value:CONSTANT INTEGER := 1007; -- 
-ERR_asn1SccMyEnum:CONSTANT INTEGER := 1006; -- 
+ERR_asn1SccMyEnum_unknown_enumeration_value:CONSTANT INTEGER := 1003; -- 
+ERR_asn1SccMyEnum:CONSTANT INTEGER := 1002; -- 
 
 -----------------------------------------------------------asn1SccMySeqOf-------------------------------------------------------------
 SUBTYPE asn1SccMySeqOf_index is integer range 1..2;
@@ -113,7 +113,7 @@ FUNCTION asn1SccMySeqOf_Equal(val1, val2: in asn1SccMySeqOf) return Boolean;
 
 FUNCTION "=" (val1, val2: in asn1SccMySeqOf) return Boolean renames asn1SccMySeqOf_Equal;
 
-ERR_asn1SccMySeqOf:CONSTANT INTEGER := 1008; -- (SIZE(2))
+ERR_asn1SccMySeqOf:CONSTANT INTEGER := 1004; -- (SIZE(2))
 
 -----------------------------------------------------------asn1SccMyOctStr-------------------------------------------------------------
 SUBTYPE asn1SccMyOctStr_index is integer range 1..3;
@@ -134,7 +134,7 @@ FUNCTION asn1SccMyOctStr_Equal(val1, val2: in asn1SccMyOctStr) return Boolean;
 
 FUNCTION "=" (val1, val2: in asn1SccMyOctStr) return Boolean renames asn1SccMyOctStr_Equal;
 
-ERR_asn1SccMyOctStr:CONSTANT INTEGER := 1009; -- (SIZE(3))
+ERR_asn1SccMyOctStr:CONSTANT INTEGER := 1005; -- (SIZE(3))
 
 -----------------------------------------------------------asn1SccMySeq_validity-------------------------------------------------------------
 SUBTYPE asn1SccMySeq_validity_index_range is integer range 0..1;
@@ -157,8 +157,8 @@ FUNCTION asn1SccMySeq_validity_Equal(val1, val2: in asn1SccMySeq_validity) retur
 
 
 
-ERR_asn1SccMySeq_validity_unknown_enumeration_value:CONSTANT INTEGER := 1011; -- 
-ERR_asn1SccMySeq_validity:CONSTANT INTEGER := 1010; -- 
+ERR_asn1SccMySeq_validity_unknown_enumeration_value:CONSTANT INTEGER := 1007; -- 
+ERR_asn1SccMySeq_validity:CONSTANT INTEGER := 1006; -- 
 
 -----------------------------------------------------------asn1SccMySeq-------------------------------------------------------------
 TYPE asn1SccMySeq IS RECORD 
@@ -215,7 +215,7 @@ FUNCTION asn1SccMyChoice_Equal(val1, val2: in asn1SccMyChoice) return Boolean;
 
 FUNCTION "=" (val1, val2: in asn1SccMyChoice) return Boolean renames asn1SccMyChoice_Equal;
 
-ERR_asn1SccMyChoice_unknown_choice_index:CONSTANT INTEGER := 1012; -- 
+ERR_asn1SccMyChoice_unknown_choice_index:CONSTANT INTEGER := 1008; -- 
 
 
 myVar : CONSTANT asn1SccMySeqOf:= asn1SccMySeqOf'(Data => asn1SccMySeqOf_array'(1=>asn1Scchello, 2=>asn1Sccworld, others => asn1Scchello)); 

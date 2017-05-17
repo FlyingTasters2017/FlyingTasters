@@ -18,8 +18,6 @@ void controller_PI_Compute_Input(const asn1SccMyReal *,
                                  const asn1SccMyReal *,
                                  asn1SccMyReal *);
 
-extern void controller_RI_PI1();
-
 #ifdef __cplusplus
 }
 #endif

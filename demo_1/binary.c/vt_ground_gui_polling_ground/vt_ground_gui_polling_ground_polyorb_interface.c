@@ -25,12 +25,12 @@ void vm_vt_ground_gui_polling_ground_gui_polling_ground()
 /* ------------------------------------------------------
 --  Asynchronous Required Interface "Takeoff_vt"
 ------------------------------------------------------ */
-void vm_async_vt_ground_gui_polling_ground_Takeoff_vt(void *Ref_h, size_t Ref_h_len)
+void vm_async_vt_ground_gui_polling_ground_Takeoff_vt(void *Ref_H, size_t Ref_H_len)
 {
 	__po_hi_request_t request;
 
-	__po_hi_copy_array(&(request.vars.vt_ground_gui_polling_ground_global_outport_takeoff_vt.vt_ground_gui_polling_ground_global_outport_takeoff_vt.buffer), Ref_h, Ref_h_len);
-	request.vars.vt_ground_gui_polling_ground_global_outport_takeoff_vt.vt_ground_gui_polling_ground_global_outport_takeoff_vt.length = Ref_h_len;
+	__po_hi_copy_array(&(request.vars.vt_ground_gui_polling_ground_global_outport_takeoff_vt.vt_ground_gui_polling_ground_global_outport_takeoff_vt.buffer), Ref_H, Ref_H_len);
+	request.vars.vt_ground_gui_polling_ground_global_outport_takeoff_vt.vt_ground_gui_polling_ground_global_outport_takeoff_vt.length = Ref_H_len;
 	request.port = vt_ground_gui_polling_ground_global_outport_takeoff_vt;
 	__po_hi_gqueue_store_out(x86_partition_vt_ground_gui_polling_ground_k, vt_ground_gui_polling_ground_local_outport_takeoff_vt, &request);
 	__po_hi_send_output(x86_partition_vt_ground_gui_polling_ground_k, vt_ground_gui_polling_ground_global_outport_takeoff_vt);

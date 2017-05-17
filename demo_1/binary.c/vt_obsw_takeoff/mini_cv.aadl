@@ -2,7 +2,7 @@
 
 SUBPROGRAM artificial_Takeoff
 FEATURES
-	Ref_h:IN PARAMETER DataView::MyReal {encoding=>UPER;};
+	Ref_H:IN PARAMETER DataView::MyReal {encoding=>UPER;};
 END artificial_Takeoff;
 
 SUBPROGRAM IMPLEMENTATION artificial_Takeoff.C
@@ -13,7 +13,7 @@ END artificial_Takeoff.C;
 
 SUBPROGRAM Takeoff
 FEATURES
-	Ref_h:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+	Ref_H:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
 END Takeoff;
 
 SUBPROGRAM IMPLEMENTATION Takeoff.C
@@ -24,7 +24,7 @@ END Takeoff.C;
 
 SUBPROGRAM Height_vt
 FEATURES
-	h:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+	H:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
 END Height_vt;
 
 SUBPROGRAM IMPLEMENTATION Height_vt.C

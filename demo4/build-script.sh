@@ -8,7 +8,7 @@
 # and/or 'user_init_post.sh - They will never get overwritten.'
 
 # Inside these files you may set some environment variables:
-#    C_INCLUDE_PATH=/usr/include/xenomai/analogy/:$C_INCLUDE_PATH
+#    C_INCLUDE_PATH=/usr/include/xenomai/analogy/:${C_INCLUDE_PATH}
 #    unset USE_POHIC   
 
 CWD=$(pwd)

@@ -18,7 +18,7 @@ void init_obsw();
 extern void adainit();
 void obsw_Pulse ();
 extern void obsw_PI_Pulse ();
-void obsw_Takeoff (void *pmy_Ref_h, size_t size_my_Ref_h);
+void obsw_Takeoff (void *pmy_Ref_H, size_t size_my_Ref_H);
 extern void obsw_PI_Takeoff (const asn1SccMyReal *);
 #ifdef __cplusplus
 }

@@ -1,0 +1,35 @@
+-- Automatically Generated - For use with AADL2GlueC only - Do NOT modify! --
+
+SUBPROGRAM artificial_dHeight
+FEATURES
+	dH:IN PARAMETER DataView::MyReal {encoding=>UPER;};
+END artificial_dHeight;
+
+SUBPROGRAM IMPLEMENTATION artificial_dHeight.C
+PROPERTIES
+	FV_Name => "vt_ground_dheight";
+	Source_Language => C;
+END artificial_dHeight.C;
+
+SUBPROGRAM dHeight
+FEATURES
+	dH:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+END dHeight;
+
+SUBPROGRAM IMPLEMENTATION dHeight.C
+PROPERTIES
+	FV_Name => "vt_ground_dheight";
+	Source_Language => C;
+END dHeight.C;
+
+SUBPROGRAM Start_work_vt
+FEATURES
+	Int_F:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+END Start_work_vt;
+
+SUBPROGRAM IMPLEMENTATION Start_work_vt.C
+PROPERTIES
+	FV_Name => "vt_ground_dheight";
+	Source_Language => C;
+END Start_work_vt.C;
+

@@ -5,15 +5,15 @@
 
 #include "C_ASN1_Types.h"
 
-#ifdef __NEED_MyEnum_UPER
-size_t Encode_UPER_MyEnum(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyEnum *pSrc)
+#ifdef __NEED_MyOctStr_UPER
+size_t Encode_UPER_MyOctStr(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyOctStr *pSrc)
 {
     int errorCode;
     STATIC BitStream strm;
 
     BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccMyEnum_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-	fprintf(stderr, "Could not encode MyEnum (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+    if (asn1SccMyOctStr_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+	fprintf(stderr, "Could not encode MyOctStr (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
         return -1;
     } else {
         return BitStream_GetLength(&strm);
@@ -21,15 +21,15 @@ size_t Encode_UPER_MyEnum(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyE
 }
 #endif
 
-#ifdef __NEED_MyEnum_ACN
-size_t Encode_ACN_MyEnum(void *pBuffer, size_t iMaxBufferSize, asn1SccMyEnum *pSrc)
+#ifdef __NEED_MyOctStr_ACN
+size_t Encode_ACN_MyOctStr(void *pBuffer, size_t iMaxBufferSize, asn1SccMyOctStr *pSrc)
 {
     int errorCode;
     STATIC BitStream strm;
 
     BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccMyEnum_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-	fprintf(stderr, "Could not encode MyEnum (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+    if (asn1SccMyOctStr_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+	fprintf(stderr, "Could not encode MyOctStr (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
         return -1;
     } else {
         return BitStream_GetLength(&strm);
@@ -37,16 +37,16 @@ size_t Encode_ACN_MyEnum(void *pBuffer, size_t iMaxBufferSize, asn1SccMyEnum *pS
 }
 #endif
 
-#ifdef __NEED_MyEnum_NATIVE
-size_t Encode_NATIVE_MyEnum(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyEnum *pSrc)
+#ifdef __NEED_MyOctStr_NATIVE
+size_t Encode_NATIVE_MyOctStr(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyOctStr *pSrc)
 {
-    memcpy(pBuffer, pSrc, sizeof(asn1SccMyEnum) );
-    return sizeof(asn1SccMyEnum);
+    memcpy(pBuffer, pSrc, sizeof(asn1SccMyOctStr) );
+    return sizeof(asn1SccMyOctStr);
 }
 #endif
 
-#ifdef __NEED_MyEnum_UPER
-int Decode_UPER_MyEnum(asn1SccMyEnum *pDst, void *pBuffer, size_t iBufferSize)
+#ifdef __NEED_MyOctStr_UPER
+int Decode_UPER_MyOctStr(asn1SccMyOctStr *pDst, void *pBuffer, size_t iBufferSize)
 {
     int errorCode;
 
@@ -54,18 +54,18 @@ int Decode_UPER_MyEnum(asn1SccMyEnum *pDst, void *pBuffer, size_t iBufferSize)
 
     BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
 
-    if (asn1SccMyEnum_Decode(pDst, &strm, &errorCode)) {
+    if (asn1SccMyOctStr_Decode(pDst, &strm, &errorCode)) {
         /* Decoding succeeded */
         return 0;
     } else {
-	fprintf(stderr, "Could not decode MyEnum (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+	fprintf(stderr, "Could not decode MyOctStr (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
         return -1;
     }
 }
 #endif
 
-#ifdef __NEED_MyEnum_ACN
-int Decode_ACN_MyEnum(asn1SccMyEnum *pDst, void *pBuffer, size_t iBufferSize)
+#ifdef __NEED_MyOctStr_ACN
+int Decode_ACN_MyOctStr(asn1SccMyOctStr *pDst, void *pBuffer, size_t iBufferSize)
 {
     int errorCode;
 
@@ -73,460 +73,20 @@ int Decode_ACN_MyEnum(asn1SccMyEnum *pDst, void *pBuffer, size_t iBufferSize)
 
     BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
 
-    if (asn1SccMyEnum_ACN_Decode(pDst, &strm, &errorCode)) {
+    if (asn1SccMyOctStr_ACN_Decode(pDst, &strm, &errorCode)) {
         /* Decoding succeeded */
         return 0;
     } else {
-	fprintf(stderr, "Could not decode MyEnum (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+	fprintf(stderr, "Could not decode MyOctStr (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
         return -1;
     }
 }
 #endif
 
-#ifdef __NEED_MyEnum_NATIVE
-int Decode_NATIVE_MyEnum(asn1SccMyEnum *pDst, void *pBuffer, size_t iBufferSize)
+#ifdef __NEED_MyOctStr_NATIVE
+int Decode_NATIVE_MyOctStr(asn1SccMyOctStr *pDst, void *pBuffer, size_t iBufferSize)
 {
-    *pDst = *(asn1SccMyEnum *) pBuffer;
-    {
-        return 0;
-    }
-}
-#endif
-
-#ifdef __NEED_T_UInt8_UPER
-size_t Encode_UPER_T_UInt8(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_UInt8 *pSrc)
-{
-    int errorCode;
-    STATIC BitStream strm;
-
-    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccT_UInt8_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-	fprintf(stderr, "Could not encode T-UInt8 (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    } else {
-        return BitStream_GetLength(&strm);
-    }
-}
-#endif
-
-#ifdef __NEED_T_UInt8_ACN
-size_t Encode_ACN_T_UInt8(void *pBuffer, size_t iMaxBufferSize, asn1SccT_UInt8 *pSrc)
-{
-    int errorCode;
-    STATIC BitStream strm;
-
-    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccT_UInt8_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-	fprintf(stderr, "Could not encode T-UInt8 (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    } else {
-        return BitStream_GetLength(&strm);
-    }
-}
-#endif
-
-#ifdef __NEED_T_UInt8_NATIVE
-size_t Encode_NATIVE_T_UInt8(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_UInt8 *pSrc)
-{
-    memcpy(pBuffer, pSrc, sizeof(asn1SccT_UInt8) );
-    return sizeof(asn1SccT_UInt8);
-}
-#endif
-
-#ifdef __NEED_T_UInt8_UPER
-int Decode_UPER_T_UInt8(asn1SccT_UInt8 *pDst, void *pBuffer, size_t iBufferSize)
-{
-    int errorCode;
-
-    STATIC BitStream strm;
-
-    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
-
-    if (asn1SccT_UInt8_Decode(pDst, &strm, &errorCode)) {
-        /* Decoding succeeded */
-        return 0;
-    } else {
-	fprintf(stderr, "Could not decode T-UInt8 (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    }
-}
-#endif
-
-#ifdef __NEED_T_UInt8_ACN
-int Decode_ACN_T_UInt8(asn1SccT_UInt8 *pDst, void *pBuffer, size_t iBufferSize)
-{
-    int errorCode;
-
-    STATIC BitStream strm;
-
-    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
-
-    if (asn1SccT_UInt8_ACN_Decode(pDst, &strm, &errorCode)) {
-        /* Decoding succeeded */
-        return 0;
-    } else {
-	fprintf(stderr, "Could not decode T-UInt8 (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    }
-}
-#endif
-
-#ifdef __NEED_T_UInt8_NATIVE
-int Decode_NATIVE_T_UInt8(asn1SccT_UInt8 *pDst, void *pBuffer, size_t iBufferSize)
-{
-    *pDst = *(asn1SccT_UInt8 *) pBuffer;
-    {
-        return 0;
-    }
-}
-#endif
-
-#ifdef __NEED_T_Boolean_UPER
-size_t Encode_UPER_T_Boolean(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_Boolean *pSrc)
-{
-    int errorCode;
-    STATIC BitStream strm;
-
-    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccT_Boolean_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-	fprintf(stderr, "Could not encode T-Boolean (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    } else {
-        return BitStream_GetLength(&strm);
-    }
-}
-#endif
-
-#ifdef __NEED_T_Boolean_ACN
-size_t Encode_ACN_T_Boolean(void *pBuffer, size_t iMaxBufferSize, asn1SccT_Boolean *pSrc)
-{
-    int errorCode;
-    STATIC BitStream strm;
-
-    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccT_Boolean_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-	fprintf(stderr, "Could not encode T-Boolean (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    } else {
-        return BitStream_GetLength(&strm);
-    }
-}
-#endif
-
-#ifdef __NEED_T_Boolean_NATIVE
-size_t Encode_NATIVE_T_Boolean(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_Boolean *pSrc)
-{
-    memcpy(pBuffer, pSrc, sizeof(asn1SccT_Boolean) );
-    return sizeof(asn1SccT_Boolean);
-}
-#endif
-
-#ifdef __NEED_T_Boolean_UPER
-int Decode_UPER_T_Boolean(asn1SccT_Boolean *pDst, void *pBuffer, size_t iBufferSize)
-{
-    int errorCode;
-
-    STATIC BitStream strm;
-
-    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
-
-    if (asn1SccT_Boolean_Decode(pDst, &strm, &errorCode)) {
-        /* Decoding succeeded */
-        return 0;
-    } else {
-	fprintf(stderr, "Could not decode T-Boolean (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    }
-}
-#endif
-
-#ifdef __NEED_T_Boolean_ACN
-int Decode_ACN_T_Boolean(asn1SccT_Boolean *pDst, void *pBuffer, size_t iBufferSize)
-{
-    int errorCode;
-
-    STATIC BitStream strm;
-
-    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
-
-    if (asn1SccT_Boolean_ACN_Decode(pDst, &strm, &errorCode)) {
-        /* Decoding succeeded */
-        return 0;
-    } else {
-	fprintf(stderr, "Could not decode T-Boolean (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    }
-}
-#endif
-
-#ifdef __NEED_T_Boolean_NATIVE
-int Decode_NATIVE_T_Boolean(asn1SccT_Boolean *pDst, void *pBuffer, size_t iBufferSize)
-{
-    *pDst = *(asn1SccT_Boolean *) pBuffer;
-    {
-        return 0;
-    }
-}
-#endif
-
-#ifdef __NEED_MyBool_UPER
-size_t Encode_UPER_MyBool(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyBool *pSrc)
-{
-    int errorCode;
-    STATIC BitStream strm;
-
-    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccMyBool_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-	fprintf(stderr, "Could not encode MyBool (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    } else {
-        return BitStream_GetLength(&strm);
-    }
-}
-#endif
-
-#ifdef __NEED_MyBool_ACN
-size_t Encode_ACN_MyBool(void *pBuffer, size_t iMaxBufferSize, asn1SccMyBool *pSrc)
-{
-    int errorCode;
-    STATIC BitStream strm;
-
-    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccMyBool_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-	fprintf(stderr, "Could not encode MyBool (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    } else {
-        return BitStream_GetLength(&strm);
-    }
-}
-#endif
-
-#ifdef __NEED_MyBool_NATIVE
-size_t Encode_NATIVE_MyBool(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyBool *pSrc)
-{
-    memcpy(pBuffer, pSrc, sizeof(asn1SccMyBool) );
-    return sizeof(asn1SccMyBool);
-}
-#endif
-
-#ifdef __NEED_MyBool_UPER
-int Decode_UPER_MyBool(asn1SccMyBool *pDst, void *pBuffer, size_t iBufferSize)
-{
-    int errorCode;
-
-    STATIC BitStream strm;
-
-    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
-
-    if (asn1SccMyBool_Decode(pDst, &strm, &errorCode)) {
-        /* Decoding succeeded */
-        return 0;
-    } else {
-	fprintf(stderr, "Could not decode MyBool (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    }
-}
-#endif
-
-#ifdef __NEED_MyBool_ACN
-int Decode_ACN_MyBool(asn1SccMyBool *pDst, void *pBuffer, size_t iBufferSize)
-{
-    int errorCode;
-
-    STATIC BitStream strm;
-
-    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
-
-    if (asn1SccMyBool_ACN_Decode(pDst, &strm, &errorCode)) {
-        /* Decoding succeeded */
-        return 0;
-    } else {
-	fprintf(stderr, "Could not decode MyBool (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    }
-}
-#endif
-
-#ifdef __NEED_MyBool_NATIVE
-int Decode_NATIVE_MyBool(asn1SccMyBool *pDst, void *pBuffer, size_t iBufferSize)
-{
-    *pDst = *(asn1SccMyBool *) pBuffer;
-    {
-        return 0;
-    }
-}
-#endif
-
-#ifdef __NEED_T_UInt32_UPER
-size_t Encode_UPER_T_UInt32(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_UInt32 *pSrc)
-{
-    int errorCode;
-    STATIC BitStream strm;
-
-    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccT_UInt32_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-	fprintf(stderr, "Could not encode T-UInt32 (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    } else {
-        return BitStream_GetLength(&strm);
-    }
-}
-#endif
-
-#ifdef __NEED_T_UInt32_ACN
-size_t Encode_ACN_T_UInt32(void *pBuffer, size_t iMaxBufferSize, asn1SccT_UInt32 *pSrc)
-{
-    int errorCode;
-    STATIC BitStream strm;
-
-    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccT_UInt32_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-	fprintf(stderr, "Could not encode T-UInt32 (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    } else {
-        return BitStream_GetLength(&strm);
-    }
-}
-#endif
-
-#ifdef __NEED_T_UInt32_NATIVE
-size_t Encode_NATIVE_T_UInt32(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_UInt32 *pSrc)
-{
-    memcpy(pBuffer, pSrc, sizeof(asn1SccT_UInt32) );
-    return sizeof(asn1SccT_UInt32);
-}
-#endif
-
-#ifdef __NEED_T_UInt32_UPER
-int Decode_UPER_T_UInt32(asn1SccT_UInt32 *pDst, void *pBuffer, size_t iBufferSize)
-{
-    int errorCode;
-
-    STATIC BitStream strm;
-
-    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
-
-    if (asn1SccT_UInt32_Decode(pDst, &strm, &errorCode)) {
-        /* Decoding succeeded */
-        return 0;
-    } else {
-	fprintf(stderr, "Could not decode T-UInt32 (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    }
-}
-#endif
-
-#ifdef __NEED_T_UInt32_ACN
-int Decode_ACN_T_UInt32(asn1SccT_UInt32 *pDst, void *pBuffer, size_t iBufferSize)
-{
-    int errorCode;
-
-    STATIC BitStream strm;
-
-    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
-
-    if (asn1SccT_UInt32_ACN_Decode(pDst, &strm, &errorCode)) {
-        /* Decoding succeeded */
-        return 0;
-    } else {
-	fprintf(stderr, "Could not decode T-UInt32 (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    }
-}
-#endif
-
-#ifdef __NEED_T_UInt32_NATIVE
-int Decode_NATIVE_T_UInt32(asn1SccT_UInt32 *pDst, void *pBuffer, size_t iBufferSize)
-{
-    *pDst = *(asn1SccT_UInt32 *) pBuffer;
-    {
-        return 0;
-    }
-}
-#endif
-
-#ifdef __NEED_MyReal_UPER
-size_t Encode_UPER_MyReal(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyReal *pSrc)
-{
-    int errorCode;
-    STATIC BitStream strm;
-
-    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccMyReal_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-	fprintf(stderr, "Could not encode MyReal (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    } else {
-        return BitStream_GetLength(&strm);
-    }
-}
-#endif
-
-#ifdef __NEED_MyReal_ACN
-size_t Encode_ACN_MyReal(void *pBuffer, size_t iMaxBufferSize, asn1SccMyReal *pSrc)
-{
-    int errorCode;
-    STATIC BitStream strm;
-
-    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccMyReal_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-	fprintf(stderr, "Could not encode MyReal (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    } else {
-        return BitStream_GetLength(&strm);
-    }
-}
-#endif
-
-#ifdef __NEED_MyReal_NATIVE
-size_t Encode_NATIVE_MyReal(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyReal *pSrc)
-{
-    memcpy(pBuffer, pSrc, sizeof(asn1SccMyReal) );
-    return sizeof(asn1SccMyReal);
-}
-#endif
-
-#ifdef __NEED_MyReal_UPER
-int Decode_UPER_MyReal(asn1SccMyReal *pDst, void *pBuffer, size_t iBufferSize)
-{
-    int errorCode;
-
-    STATIC BitStream strm;
-
-    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
-
-    if (asn1SccMyReal_Decode(pDst, &strm, &errorCode)) {
-        /* Decoding succeeded */
-        return 0;
-    } else {
-	fprintf(stderr, "Could not decode MyReal (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    }
-}
-#endif
-
-#ifdef __NEED_MyReal_ACN
-int Decode_ACN_MyReal(asn1SccMyReal *pDst, void *pBuffer, size_t iBufferSize)
-{
-    int errorCode;
-
-    STATIC BitStream strm;
-
-    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
-
-    if (asn1SccMyReal_ACN_Decode(pDst, &strm, &errorCode)) {
-        /* Decoding succeeded */
-        return 0;
-    } else {
-	fprintf(stderr, "Could not decode MyReal (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    }
-}
-#endif
-
-#ifdef __NEED_MyReal_NATIVE
-int Decode_NATIVE_MyReal(asn1SccMyReal *pDst, void *pBuffer, size_t iBufferSize)
-{
-    *pDst = *(asn1SccMyReal *) pBuffer;
+    *pDst = *(asn1SccMyOctStr *) pBuffer;
     {
         return 0;
     }
@@ -709,6 +269,94 @@ int Decode_NATIVE_MyChoice(asn1SccMyChoice *pDst, void *pBuffer, size_t iBufferS
 }
 #endif
 
+#ifdef __NEED_MyReal_UPER
+size_t Encode_UPER_MyReal(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyReal *pSrc)
+{
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccMyReal_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+	fprintf(stderr, "Could not encode MyReal (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_MyReal_ACN
+size_t Encode_ACN_MyReal(void *pBuffer, size_t iMaxBufferSize, asn1SccMyReal *pSrc)
+{
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccMyReal_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+	fprintf(stderr, "Could not encode MyReal (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_MyReal_NATIVE
+size_t Encode_NATIVE_MyReal(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyReal *pSrc)
+{
+    memcpy(pBuffer, pSrc, sizeof(asn1SccMyReal) );
+    return sizeof(asn1SccMyReal);
+}
+#endif
+
+#ifdef __NEED_MyReal_UPER
+int Decode_UPER_MyReal(asn1SccMyReal *pDst, void *pBuffer, size_t iBufferSize)
+{
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccMyReal_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+	fprintf(stderr, "Could not decode MyReal (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_MyReal_ACN
+int Decode_ACN_MyReal(asn1SccMyReal *pDst, void *pBuffer, size_t iBufferSize)
+{
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccMyReal_ACN_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+	fprintf(stderr, "Could not decode MyReal (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_MyReal_NATIVE
+int Decode_NATIVE_MyReal(asn1SccMyReal *pDst, void *pBuffer, size_t iBufferSize)
+{
+    *pDst = *(asn1SccMyReal *) pBuffer;
+    {
+        return 0;
+    }
+}
+#endif
+
 #ifdef __NEED_MySeq_UPER
 size_t Encode_UPER_MySeq(void *pBuffer, size_t iMaxBufferSize, const asn1SccMySeq *pSrc)
 {
@@ -791,94 +439,6 @@ int Decode_ACN_MySeq(asn1SccMySeq *pDst, void *pBuffer, size_t iBufferSize)
 int Decode_NATIVE_MySeq(asn1SccMySeq *pDst, void *pBuffer, size_t iBufferSize)
 {
     *pDst = *(asn1SccMySeq *) pBuffer;
-    {
-        return 0;
-    }
-}
-#endif
-
-#ifdef __NEED_T_Int8_UPER
-size_t Encode_UPER_T_Int8(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_Int8 *pSrc)
-{
-    int errorCode;
-    STATIC BitStream strm;
-
-    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccT_Int8_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-	fprintf(stderr, "Could not encode T-Int8 (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    } else {
-        return BitStream_GetLength(&strm);
-    }
-}
-#endif
-
-#ifdef __NEED_T_Int8_ACN
-size_t Encode_ACN_T_Int8(void *pBuffer, size_t iMaxBufferSize, asn1SccT_Int8 *pSrc)
-{
-    int errorCode;
-    STATIC BitStream strm;
-
-    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccT_Int8_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-	fprintf(stderr, "Could not encode T-Int8 (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    } else {
-        return BitStream_GetLength(&strm);
-    }
-}
-#endif
-
-#ifdef __NEED_T_Int8_NATIVE
-size_t Encode_NATIVE_T_Int8(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_Int8 *pSrc)
-{
-    memcpy(pBuffer, pSrc, sizeof(asn1SccT_Int8) );
-    return sizeof(asn1SccT_Int8);
-}
-#endif
-
-#ifdef __NEED_T_Int8_UPER
-int Decode_UPER_T_Int8(asn1SccT_Int8 *pDst, void *pBuffer, size_t iBufferSize)
-{
-    int errorCode;
-
-    STATIC BitStream strm;
-
-    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
-
-    if (asn1SccT_Int8_Decode(pDst, &strm, &errorCode)) {
-        /* Decoding succeeded */
-        return 0;
-    } else {
-	fprintf(stderr, "Could not decode T-Int8 (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    }
-}
-#endif
-
-#ifdef __NEED_T_Int8_ACN
-int Decode_ACN_T_Int8(asn1SccT_Int8 *pDst, void *pBuffer, size_t iBufferSize)
-{
-    int errorCode;
-
-    STATIC BitStream strm;
-
-    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
-
-    if (asn1SccT_Int8_ACN_Decode(pDst, &strm, &errorCode)) {
-        /* Decoding succeeded */
-        return 0;
-    } else {
-	fprintf(stderr, "Could not decode T-Int8 (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
-        return -1;
-    }
-}
-#endif
-
-#ifdef __NEED_T_Int8_NATIVE
-int Decode_NATIVE_T_Int8(asn1SccT_Int8 *pDst, void *pBuffer, size_t iBufferSize)
-{
-    *pDst = *(asn1SccT_Int8 *) pBuffer;
     {
         return 0;
     }
@@ -973,15 +533,15 @@ int Decode_NATIVE_MyInteger(asn1SccMyInteger *pDst, void *pBuffer, size_t iBuffe
 }
 #endif
 
-#ifdef __NEED_MyOctStr_UPER
-size_t Encode_UPER_MyOctStr(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyOctStr *pSrc)
+#ifdef __NEED_T_Boolean_UPER
+size_t Encode_UPER_T_Boolean(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_Boolean *pSrc)
 {
     int errorCode;
     STATIC BitStream strm;
 
     BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccMyOctStr_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-	fprintf(stderr, "Could not encode MyOctStr (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+    if (asn1SccT_Boolean_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+	fprintf(stderr, "Could not encode T-Boolean (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
         return -1;
     } else {
         return BitStream_GetLength(&strm);
@@ -989,15 +549,15 @@ size_t Encode_UPER_MyOctStr(void *pBuffer, size_t iMaxBufferSize, const asn1SccM
 }
 #endif
 
-#ifdef __NEED_MyOctStr_ACN
-size_t Encode_ACN_MyOctStr(void *pBuffer, size_t iMaxBufferSize, asn1SccMyOctStr *pSrc)
+#ifdef __NEED_T_Boolean_ACN
+size_t Encode_ACN_T_Boolean(void *pBuffer, size_t iMaxBufferSize, asn1SccT_Boolean *pSrc)
 {
     int errorCode;
     STATIC BitStream strm;
 
     BitStream_Init(&strm, pBuffer, iMaxBufferSize);
-    if (asn1SccMyOctStr_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
-	fprintf(stderr, "Could not encode MyOctStr (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+    if (asn1SccT_Boolean_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+	fprintf(stderr, "Could not encode T-Boolean (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
         return -1;
     } else {
         return BitStream_GetLength(&strm);
@@ -1005,16 +565,16 @@ size_t Encode_ACN_MyOctStr(void *pBuffer, size_t iMaxBufferSize, asn1SccMyOctStr
 }
 #endif
 
-#ifdef __NEED_MyOctStr_NATIVE
-size_t Encode_NATIVE_MyOctStr(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyOctStr *pSrc)
+#ifdef __NEED_T_Boolean_NATIVE
+size_t Encode_NATIVE_T_Boolean(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_Boolean *pSrc)
 {
-    memcpy(pBuffer, pSrc, sizeof(asn1SccMyOctStr) );
-    return sizeof(asn1SccMyOctStr);
+    memcpy(pBuffer, pSrc, sizeof(asn1SccT_Boolean) );
+    return sizeof(asn1SccT_Boolean);
 }
 #endif
 
-#ifdef __NEED_MyOctStr_UPER
-int Decode_UPER_MyOctStr(asn1SccMyOctStr *pDst, void *pBuffer, size_t iBufferSize)
+#ifdef __NEED_T_Boolean_UPER
+int Decode_UPER_T_Boolean(asn1SccT_Boolean *pDst, void *pBuffer, size_t iBufferSize)
 {
     int errorCode;
 
@@ -1022,18 +582,18 @@ int Decode_UPER_MyOctStr(asn1SccMyOctStr *pDst, void *pBuffer, size_t iBufferSiz
 
     BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
 
-    if (asn1SccMyOctStr_Decode(pDst, &strm, &errorCode)) {
+    if (asn1SccT_Boolean_Decode(pDst, &strm, &errorCode)) {
         /* Decoding succeeded */
         return 0;
     } else {
-	fprintf(stderr, "Could not decode MyOctStr (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+	fprintf(stderr, "Could not decode T-Boolean (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
         return -1;
     }
 }
 #endif
 
-#ifdef __NEED_MyOctStr_ACN
-int Decode_ACN_MyOctStr(asn1SccMyOctStr *pDst, void *pBuffer, size_t iBufferSize)
+#ifdef __NEED_T_Boolean_ACN
+int Decode_ACN_T_Boolean(asn1SccT_Boolean *pDst, void *pBuffer, size_t iBufferSize)
 {
     int errorCode;
 
@@ -1041,20 +601,372 @@ int Decode_ACN_MyOctStr(asn1SccMyOctStr *pDst, void *pBuffer, size_t iBufferSize
 
     BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
 
-    if (asn1SccMyOctStr_ACN_Decode(pDst, &strm, &errorCode)) {
+    if (asn1SccT_Boolean_ACN_Decode(pDst, &strm, &errorCode)) {
         /* Decoding succeeded */
         return 0;
     } else {
-	fprintf(stderr, "Could not decode MyOctStr (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+	fprintf(stderr, "Could not decode T-Boolean (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
         return -1;
     }
 }
 #endif
 
-#ifdef __NEED_MyOctStr_NATIVE
-int Decode_NATIVE_MyOctStr(asn1SccMyOctStr *pDst, void *pBuffer, size_t iBufferSize)
+#ifdef __NEED_T_Boolean_NATIVE
+int Decode_NATIVE_T_Boolean(asn1SccT_Boolean *pDst, void *pBuffer, size_t iBufferSize)
 {
-    *pDst = *(asn1SccMyOctStr *) pBuffer;
+    *pDst = *(asn1SccT_Boolean *) pBuffer;
+    {
+        return 0;
+    }
+}
+#endif
+
+#ifdef __NEED_T_UInt32_UPER
+size_t Encode_UPER_T_UInt32(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_UInt32 *pSrc)
+{
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccT_UInt32_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+	fprintf(stderr, "Could not encode T-UInt32 (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_T_UInt32_ACN
+size_t Encode_ACN_T_UInt32(void *pBuffer, size_t iMaxBufferSize, asn1SccT_UInt32 *pSrc)
+{
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccT_UInt32_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+	fprintf(stderr, "Could not encode T-UInt32 (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_T_UInt32_NATIVE
+size_t Encode_NATIVE_T_UInt32(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_UInt32 *pSrc)
+{
+    memcpy(pBuffer, pSrc, sizeof(asn1SccT_UInt32) );
+    return sizeof(asn1SccT_UInt32);
+}
+#endif
+
+#ifdef __NEED_T_UInt32_UPER
+int Decode_UPER_T_UInt32(asn1SccT_UInt32 *pDst, void *pBuffer, size_t iBufferSize)
+{
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccT_UInt32_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+	fprintf(stderr, "Could not decode T-UInt32 (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_T_UInt32_ACN
+int Decode_ACN_T_UInt32(asn1SccT_UInt32 *pDst, void *pBuffer, size_t iBufferSize)
+{
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccT_UInt32_ACN_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+	fprintf(stderr, "Could not decode T-UInt32 (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_T_UInt32_NATIVE
+int Decode_NATIVE_T_UInt32(asn1SccT_UInt32 *pDst, void *pBuffer, size_t iBufferSize)
+{
+    *pDst = *(asn1SccT_UInt32 *) pBuffer;
+    {
+        return 0;
+    }
+}
+#endif
+
+#ifdef __NEED_T_UInt8_UPER
+size_t Encode_UPER_T_UInt8(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_UInt8 *pSrc)
+{
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccT_UInt8_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+	fprintf(stderr, "Could not encode T-UInt8 (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_T_UInt8_ACN
+size_t Encode_ACN_T_UInt8(void *pBuffer, size_t iMaxBufferSize, asn1SccT_UInt8 *pSrc)
+{
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccT_UInt8_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+	fprintf(stderr, "Could not encode T-UInt8 (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_T_UInt8_NATIVE
+size_t Encode_NATIVE_T_UInt8(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_UInt8 *pSrc)
+{
+    memcpy(pBuffer, pSrc, sizeof(asn1SccT_UInt8) );
+    return sizeof(asn1SccT_UInt8);
+}
+#endif
+
+#ifdef __NEED_T_UInt8_UPER
+int Decode_UPER_T_UInt8(asn1SccT_UInt8 *pDst, void *pBuffer, size_t iBufferSize)
+{
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccT_UInt8_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+	fprintf(stderr, "Could not decode T-UInt8 (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_T_UInt8_ACN
+int Decode_ACN_T_UInt8(asn1SccT_UInt8 *pDst, void *pBuffer, size_t iBufferSize)
+{
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccT_UInt8_ACN_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+	fprintf(stderr, "Could not decode T-UInt8 (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_T_UInt8_NATIVE
+int Decode_NATIVE_T_UInt8(asn1SccT_UInt8 *pDst, void *pBuffer, size_t iBufferSize)
+{
+    *pDst = *(asn1SccT_UInt8 *) pBuffer;
+    {
+        return 0;
+    }
+}
+#endif
+
+#ifdef __NEED_MyEnum_UPER
+size_t Encode_UPER_MyEnum(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyEnum *pSrc)
+{
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccMyEnum_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+	fprintf(stderr, "Could not encode MyEnum (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_MyEnum_ACN
+size_t Encode_ACN_MyEnum(void *pBuffer, size_t iMaxBufferSize, asn1SccMyEnum *pSrc)
+{
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccMyEnum_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+	fprintf(stderr, "Could not encode MyEnum (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_MyEnum_NATIVE
+size_t Encode_NATIVE_MyEnum(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyEnum *pSrc)
+{
+    memcpy(pBuffer, pSrc, sizeof(asn1SccMyEnum) );
+    return sizeof(asn1SccMyEnum);
+}
+#endif
+
+#ifdef __NEED_MyEnum_UPER
+int Decode_UPER_MyEnum(asn1SccMyEnum *pDst, void *pBuffer, size_t iBufferSize)
+{
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccMyEnum_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+	fprintf(stderr, "Could not decode MyEnum (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_MyEnum_ACN
+int Decode_ACN_MyEnum(asn1SccMyEnum *pDst, void *pBuffer, size_t iBufferSize)
+{
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccMyEnum_ACN_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+	fprintf(stderr, "Could not decode MyEnum (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_MyEnum_NATIVE
+int Decode_NATIVE_MyEnum(asn1SccMyEnum *pDst, void *pBuffer, size_t iBufferSize)
+{
+    *pDst = *(asn1SccMyEnum *) pBuffer;
+    {
+        return 0;
+    }
+}
+#endif
+
+#ifdef __NEED_MyBool_UPER
+size_t Encode_UPER_MyBool(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyBool *pSrc)
+{
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccMyBool_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+	fprintf(stderr, "Could not encode MyBool (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_MyBool_ACN
+size_t Encode_ACN_MyBool(void *pBuffer, size_t iMaxBufferSize, asn1SccMyBool *pSrc)
+{
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccMyBool_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+	fprintf(stderr, "Could not encode MyBool (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_MyBool_NATIVE
+size_t Encode_NATIVE_MyBool(void *pBuffer, size_t iMaxBufferSize, const asn1SccMyBool *pSrc)
+{
+    memcpy(pBuffer, pSrc, sizeof(asn1SccMyBool) );
+    return sizeof(asn1SccMyBool);
+}
+#endif
+
+#ifdef __NEED_MyBool_UPER
+int Decode_UPER_MyBool(asn1SccMyBool *pDst, void *pBuffer, size_t iBufferSize)
+{
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccMyBool_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+	fprintf(stderr, "Could not decode MyBool (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_MyBool_ACN
+int Decode_ACN_MyBool(asn1SccMyBool *pDst, void *pBuffer, size_t iBufferSize)
+{
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccMyBool_ACN_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+	fprintf(stderr, "Could not decode MyBool (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_MyBool_NATIVE
+int Decode_NATIVE_MyBool(asn1SccMyBool *pDst, void *pBuffer, size_t iBufferSize)
+{
+    *pDst = *(asn1SccMyBool *) pBuffer;
     {
         return 0;
     }
@@ -1143,6 +1055,94 @@ int Decode_ACN_T_Int32(asn1SccT_Int32 *pDst, void *pBuffer, size_t iBufferSize)
 int Decode_NATIVE_T_Int32(asn1SccT_Int32 *pDst, void *pBuffer, size_t iBufferSize)
 {
     *pDst = *(asn1SccT_Int32 *) pBuffer;
+    {
+        return 0;
+    }
+}
+#endif
+
+#ifdef __NEED_T_Int8_UPER
+size_t Encode_UPER_T_Int8(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_Int8 *pSrc)
+{
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccT_Int8_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+	fprintf(stderr, "Could not encode T-Int8 (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_T_Int8_ACN
+size_t Encode_ACN_T_Int8(void *pBuffer, size_t iMaxBufferSize, asn1SccT_Int8 *pSrc)
+{
+    int errorCode;
+    STATIC BitStream strm;
+
+    BitStream_Init(&strm, pBuffer, iMaxBufferSize);
+    if (asn1SccT_Int8_ACN_Encode(pSrc, &strm, &errorCode, TRUE) == FALSE) {
+	fprintf(stderr, "Could not encode T-Int8 (at %s, %d), errorCode was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    } else {
+        return BitStream_GetLength(&strm);
+    }
+}
+#endif
+
+#ifdef __NEED_T_Int8_NATIVE
+size_t Encode_NATIVE_T_Int8(void *pBuffer, size_t iMaxBufferSize, const asn1SccT_Int8 *pSrc)
+{
+    memcpy(pBuffer, pSrc, sizeof(asn1SccT_Int8) );
+    return sizeof(asn1SccT_Int8);
+}
+#endif
+
+#ifdef __NEED_T_Int8_UPER
+int Decode_UPER_T_Int8(asn1SccT_Int8 *pDst, void *pBuffer, size_t iBufferSize)
+{
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccT_Int8_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+	fprintf(stderr, "Could not decode T-Int8 (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_T_Int8_ACN
+int Decode_ACN_T_Int8(asn1SccT_Int8 *pDst, void *pBuffer, size_t iBufferSize)
+{
+    int errorCode;
+
+    STATIC BitStream strm;
+
+    BitStream_AttachBuffer(&strm, pBuffer, iBufferSize);
+
+    if (asn1SccT_Int8_ACN_Decode(pDst, &strm, &errorCode)) {
+        /* Decoding succeeded */
+        return 0;
+    } else {
+	fprintf(stderr, "Could not decode T-Int8 (at %s, %d), error code was %d\n", __FILE__, __LINE__, errorCode);
+        return -1;
+    }
+}
+#endif
+
+#ifdef __NEED_T_Int8_NATIVE
+int Decode_NATIVE_T_Int8(asn1SccT_Int8 *pDst, void *pBuffer, size_t iBufferSize)
+{
+    *pDst = *(asn1SccT_Int8 *) pBuffer;
     {
         return 0;
     }

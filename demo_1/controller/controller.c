@@ -2,6 +2,7 @@
 
 #include "controller.h"
 
+ 
 void controller_startup()
 {
     /* Write your initialization code here,
@@ -14,8 +15,11 @@ void controller_PI_Compute_Input(const asn1SccMyReal *IN_Ref_h,
                                  asn1SccMyReal *OUT_F)
 {
     double k =0.2;
-    double d =0.08;
+    double d =0.1;
+    
+    
     *OUT_F = (*IN_Ref_h - *IN_h)*k - *IN_dh*d;
     /* Write your code here! */
 }
 
+   

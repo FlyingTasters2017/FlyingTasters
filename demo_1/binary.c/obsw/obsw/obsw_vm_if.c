@@ -30,22 +30,22 @@ void obsw_Pulse ()
     obsw_PI_Pulse ();
 
 }
-void obsw_Takeoff (void *pmy_Ref_h, size_t size_my_Ref_h)
+void obsw_Takeoff (void *pmy_Ref_H, size_t size_my_Ref_H)
 {
     /* Decoded input variable(s): developer can use them */
-    static asn1SccMyReal IN_Ref_h;
+    static asn1SccMyReal IN_Ref_H;
 
 #ifdef __unix__
-    asn1SccMyReal_Initialize(&IN_Ref_h);
+    asn1SccMyReal_Initialize(&IN_Ref_H);
 #endif
 
     /* Decode each input parameter */
-    if (0 != Decode_UPER_MyReal (&IN_Ref_h, pmy_Ref_h, size_my_Ref_h)) {
+    if (0 != Decode_UPER_MyReal (&IN_Ref_H, pmy_Ref_H, size_my_Ref_H)) {
         printf("\nError Decoding MyReal\n");
         return;
     }
 
     /* Call to User-defined function */
-    obsw_PI_Takeoff (&IN_Ref_h);
+    obsw_PI_Takeoff (&IN_Ref_H);
 
 }

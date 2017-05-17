@@ -1,0 +1,66 @@
+-- Automatically Generated - For use with AADL2GlueC only - Do NOT modify! --
+
+SUBPROGRAM artificial_Pulse
+END artificial_Pulse;
+
+SUBPROGRAM IMPLEMENTATION artificial_Pulse.C
+PROPERTIES
+	FV_Name => "vt_obsw_pulse";
+	Source_Language => C;
+END artificial_Pulse.C;
+
+SUBPROGRAM Pulse
+END Pulse;
+
+SUBPROGRAM IMPLEMENTATION Pulse.C
+PROPERTIES
+	FV_Name => "vt_obsw_pulse";
+	Source_Language => C;
+END Pulse.C;
+
+SUBPROGRAM Compute_Thrust_vt
+FEATURES
+	F:OUT PARAMETER DataView::MyReal {encoding=>NATIVE;};
+	h:IN PARAMETER DataView::MyReal {encoding=>NATIVE;};
+	dh:IN PARAMETER DataView::MyReal {encoding=>NATIVE;};
+END Compute_Thrust_vt;
+
+SUBPROGRAM IMPLEMENTATION Compute_Thrust_vt.C
+PROPERTIES
+	FV_Name => "vt_obsw_pulse";
+	Source_Language => C;
+END Compute_Thrust_vt.C;
+
+SUBPROGRAM Thrust_Update_vt
+FEATURES
+	H:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+END Thrust_Update_vt;
+
+SUBPROGRAM IMPLEMENTATION Thrust_Update_vt.C
+PROPERTIES
+	FV_Name => "vt_obsw_pulse";
+	Source_Language => C;
+END Thrust_Update_vt.C;
+
+SUBPROGRAM dHeight_vt
+FEATURES
+	dH:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+END dHeight_vt;
+
+SUBPROGRAM IMPLEMENTATION dHeight_vt.C
+PROPERTIES
+	FV_Name => "vt_obsw_pulse";
+	Source_Language => C;
+END dHeight_vt.C;
+
+SUBPROGRAM check_queue_vt
+FEATURES
+	res:IN PARAMETER DataView::T_Boolean {encoding=>NATIVE;};
+END check_queue_vt;
+
+SUBPROGRAM IMPLEMENTATION check_queue_vt.C
+PROPERTIES
+	FV_Name => "vt_obsw_pulse";
+	Source_Language => C;
+END check_queue_vt.C;
+

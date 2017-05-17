@@ -16,7 +16,7 @@ void ground_startup();
 
 typedef struct
 {
-	asn1SccMyReal h;
+	asn1SccMyReal H;
 } T_Height__data;
 
 typedef struct
@@ -28,7 +28,7 @@ typedef struct
 
 typedef struct
 {
-	asn1SccMyReal Ref_h;
+	asn1SccMyReal Ref_H;
 } T_Takeoff__data;
 
 typedef struct
@@ -40,11 +40,11 @@ typedef struct
 
 void ground_RI_Takeoff(const asn1SccMyReal *);
 
-#define INVOKE_RI_Takeoff(params) ground_RI_Takeoff(&((T_Takeoff__data*)params)->Ref_h);
+#define INVOKE_RI_Takeoff(params) ground_RI_Takeoff(&((T_Takeoff__data*)params)->Ref_H);
 
 void ground_PI_gui_polling_ground();
 
-void ground_PI_Height(const asn1SccMyReal* h);
+void ground_PI_Height(const asn1SccMyReal* H);
 
 
 

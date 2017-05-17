@@ -4,10 +4,10 @@ SYSTEM obsw;
 
 	SIGNAL Pulse;
 
-	/* CIF Keep Specific Geode PARAMNAMES Ref_h */
+	/* CIF Keep Specific Geode PARAMNAMES Ref_H */
 	SIGNAL Takeoff (MyReal);
 
-	/* CIF Keep Specific Geode PARAMNAMES h */
+	/* CIF Keep Specific Geode PARAMNAMES H */
 	SIGNAL Height (MyReal);
 
 	PROCEDURE Compute_Input COMMENT '#c_predef';

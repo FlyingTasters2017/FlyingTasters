@@ -1,0 +1,44 @@
+-- Automatically Generated - For use with AADL2GlueC only - Do NOT modify! --
+
+SUBPROGRAM Thrust_Update
+FEATURES
+	H:IN PARAMETER DataView::MyReal {encoding=>UPER;};
+END Thrust_Update;
+
+SUBPROGRAM IMPLEMENTATION Thrust_Update.GUI_PI
+PROPERTIES
+	FV_Name => "ground";
+	Source_Language => GUI_PI;
+END Thrust_Update.GUI_PI;
+
+SUBPROGRAM Start_work
+FEATURES
+	Int_F:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+END Start_work;
+
+SUBPROGRAM IMPLEMENTATION Start_work.GUI_RI
+PROPERTIES
+	FV_Name => "ground";
+	Source_Language => GUI_RI;
+END Start_work.GUI_RI;
+
+SUBPROGRAM dHeight
+FEATURES
+	dH:IN PARAMETER DataView::MyReal {encoding=>UPER;};
+END dHeight;
+
+SUBPROGRAM IMPLEMENTATION dHeight.GUI_PI
+PROPERTIES
+	FV_Name => "ground";
+	Source_Language => GUI_PI;
+END dHeight.GUI_PI;
+
+SUBPROGRAM gui_polling_ground
+END gui_polling_ground;
+
+SUBPROGRAM IMPLEMENTATION gui_polling_ground.GUI_PI
+PROPERTIES
+	FV_Name => "ground";
+	Source_Language => GUI_PI;
+END gui_polling_ground.GUI_PI;
+

@@ -2,7 +2,7 @@
 
 SUBPROGRAM artificial_Height
 FEATURES
-	h:IN PARAMETER DataView::MyReal {encoding=>UPER;};
+	H:IN PARAMETER DataView::MyReal {encoding=>UPER;};
 END artificial_Height;
 
 SUBPROGRAM IMPLEMENTATION artificial_Height.C
@@ -13,7 +13,7 @@ END artificial_Height.C;
 
 SUBPROGRAM Height
 FEATURES
-	h:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+	H:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
 END Height;
 
 SUBPROGRAM IMPLEMENTATION Height.C
@@ -24,7 +24,7 @@ END Height.C;
 
 SUBPROGRAM Takeoff_vt
 FEATURES
-	Ref_h:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+	Ref_H:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
 END Takeoff_vt;
 
 SUBPROGRAM IMPLEMENTATION Takeoff_vt.C

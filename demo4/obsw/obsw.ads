@@ -19,7 +19,10 @@ package obsw is
     --  Required interface "Thrust_Update"
     procedure RIÜThrust_Update(H: access asn1SccMyReal);
     pragma import(C, RIÜThrust_Update, "obsw_RI_Thrust_Update");
+    --  Required interface "dHeight"
+    procedure RIÜdHeight(dH: access asn1SccMyReal);
+    pragma import(C, RIÜdHeight, "obsw_RI_dHeight");
     --  Sync required interface "Compute_Thrust"
-    procedure RIÜCompute_Thrust(F: access asn1SccMyReal; h: access asn1SccMyReal);
+    procedure RIÜCompute_Thrust(F: access asn1SccMyReal; h: access asn1SccMyReal; dh: access asn1SccMyReal);
     pragma import(C, RIÜCompute_Thrust, "obsw_RI_Compute_Thrust");
 end obsw;

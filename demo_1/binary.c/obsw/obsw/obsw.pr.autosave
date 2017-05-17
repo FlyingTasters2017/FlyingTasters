@@ -11,6 +11,26 @@ process obsw;
         call writeln('SDL startup');
         /* CIF NEXTSTATE (680, 171), (70, 35) */
         NEXTSTATE Wait;
+    /* CIF state (965, 68), (70, 35) */
+    state Runing;
+        /* CIF input (909, 123), (70, 35) */
+        input pulse;
+            /* CIF PROCEDURECALL (844, 178), (200, 35) */
+            call Compute_Input(Ref_h,h,dh,F);
+            /* CIF PROCEDURECALL (881, 240), (126, 35) */
+            call Response(F,h,dh);
+            /* CIF output (903, 300), (81, 35) */
+            output Height(h);
+            /* CIF NEXTSTATE (909, 368), (70, 35) */
+            NEXTSTATE Runing;
+        /* CIF input (1054, 123), (112, 35) */
+        input Takeoff(Ref_h);
+            /* CIF NEXTSTATE (1075, 178), (70, 35) */
+            NEXTSTATE Wait;
+    endstate;
+    /* CIF state (786, 42), (70, 35) */
+    state Wait;
+    endstate;
     /* CIF state (680, 171), (70, 35) */
     state Wait;
         /* CIF input (624, 226), (70, 35) */
@@ -24,28 +44,8 @@ process obsw;
             /* CIF task (725, 339), (70, 35) */
             task h :=0.0;
             /* CIF task (725, 394), (70, 35) */
-            task F :;
+            task F :=0.0;
             /* CIF NEXTSTATE (725, 444), (70, 35) */
             NEXTSTATE Runing;
-    endstate;
-    /* CIF state (786, 42), (70, 35) */
-    state Wait;
-    endstate;
-    /* CIF state (965, 68), (70, 35) */
-    state Runing;
-        /* CIF input (909, 123), (70, 35) */
-        input pulse;
-            /* CIF PROCEDURECALL (844, 178), (200, 35) */
-            call Compute_Input(Ref_h,h,dh,F);
-            /* CIF PROCEDURECALL (881, 233), (126, 35) */
-            call Response(F,h,dh);
-            /* CIF output (903, 283), (81, 35) */
-            output Height(h);
-            /* CIF NEXTSTATE (909, 333), (70, 35) */
-            NEXTSTATE Runing;
-        /* CIF input (1054, 123), (112, 35) */
-        input Takeoff(Ref_h);
-            /* CIF NEXTSTATE (1075, 178), (70, 35) */
-            NEXTSTATE Wait;
     endstate;
 endprocess obsw;

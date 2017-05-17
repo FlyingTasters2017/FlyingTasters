@@ -1,0 +1,446 @@
+--  TASTE - Warning: This is NOT the real Concurrency view  --
+--  This file was automatically generated and should remain read-only
+--  Open it with TASTE-IV
+--  The only intended use of this file is visualization - not processing.
+
+package generated_cv::IV::ConcurrencyView
+public
+with dataview; 
+with exportedComponent::FV;
+with taste;
+
+  --{ interfaceview obj6480 10 10
+  --TASTE-generated concurrency view
+  --For visualization purposes.
+  --}
+
+  system exportedComponent
+  end exportedComponent;
+
+  system implementation exportedComponent.others
+    subcomponents
+	obsw : system interfaceview::IV::PASSIVE_obsw.others;
+	model_1dof : system interfaceview::IV::PASSIVE_model_1dof.others;
+	ground : system interfaceview::IV::PASSIVE_ground.others;
+	x86_partition_taste_api : system interfaceview::IV::PASSIVE_x86_partition_taste_api.others;
+	vt_obsw_pulse : system interfaceview::IV::THREAD_vt_obsw_pulse.others;
+	vt_obsw_start_work : system interfaceview::IV::THREAD_vt_obsw_start_work.others;
+	vt_ground_thrust_update : system interfaceview::IV::THREAD_vt_ground_thrust_update.others;
+	vt_ground_dheight : system interfaceview::IV::THREAD_vt_ground_dheight.others;
+	vt_ground_gui_polling_ground : system interfaceview::IV::THREAD_vt_ground_gui_polling_ground.others;
+    connections
+	unprotected_Compute_Thrust : subprogram access PASSIVE_model_1dof.Compute_Thrust -> PASSIVE_obsw.Compute_Thrust;
+	sporadic_artificial_Thrust_Update : subprogram access THREAD_vt_ground_thrust_update.artificial_Thrust_Update -> PASSIVE_obsw.Thrust_Update;
+	sporadic_artificial_dHeight : subprogram access THREAD_vt_ground_dheight.artificial_dHeight -> PASSIVE_obsw.dHeight;
+	unprotected_obsw_has_pending_msg : subprogram access PASSIVE_x86_partition_taste_api.obsw_has_pending_msg -> PASSIVE_obsw.check_queue;
+	sporadic_artificial_Start_work : subprogram access THREAD_vt_obsw_start_work.artificial_Start_work -> PASSIVE_ground.Start_work;
+	protected_Pulse : subprogram access PASSIVE_obsw.Pulse -> THREAD_vt_obsw_pulse.Pulse;
+	unprotected_Compute_Thrust : subprogram access PASSIVE_model_1dof.Compute_Thrust -> THREAD_vt_obsw_pulse.Compute_Thrust_vt;
+	sporadic_artificial_Thrust_Update : subprogram access THREAD_vt_ground_thrust_update.artificial_Thrust_Update -> THREAD_vt_obsw_pulse.Thrust_Update_vt;
+	sporadic_artificial_dHeight : subprogram access THREAD_vt_ground_dheight.artificial_dHeight -> THREAD_vt_obsw_pulse.dHeight_vt;
+	unprotected_obsw_has_pending_msg : subprogram access PASSIVE_x86_partition_taste_api.obsw_has_pending_msg -> THREAD_vt_obsw_pulse.check_queue_vt;
+	protected_Start_work : subprogram access PASSIVE_obsw.Start_work -> THREAD_vt_obsw_start_work.Start_work;
+	unprotected_Compute_Thrust : subprogram access PASSIVE_model_1dof.Compute_Thrust -> THREAD_vt_obsw_start_work.Compute_Thrust_vt;
+	sporadic_artificial_Thrust_Update : subprogram access THREAD_vt_ground_thrust_update.artificial_Thrust_Update -> THREAD_vt_obsw_start_work.Thrust_Update_vt;
+	sporadic_artificial_dHeight : subprogram access THREAD_vt_ground_dheight.artificial_dHeight -> THREAD_vt_obsw_start_work.dHeight_vt;
+	unprotected_obsw_has_pending_msg : subprogram access PASSIVE_x86_partition_taste_api.obsw_has_pending_msg -> THREAD_vt_obsw_start_work.check_queue_vt;
+	protected_Thrust_Update : subprogram access PASSIVE_ground.Thrust_Update -> THREAD_vt_ground_thrust_update.Thrust_Update;
+	sporadic_artificial_Start_work : subprogram access THREAD_vt_obsw_start_work.artificial_Start_work -> THREAD_vt_ground_thrust_update.Start_work_vt;
+	protected_dHeight : subprogram access PASSIVE_ground.dHeight -> THREAD_vt_ground_dheight.dHeight;
+	sporadic_artificial_Start_work : subprogram access THREAD_vt_obsw_start_work.artificial_Start_work -> THREAD_vt_ground_dheight.Start_work_vt;
+	protected_gui_polling_ground : subprogram access PASSIVE_ground.gui_polling_ground -> THREAD_vt_ground_gui_polling_ground.gui_polling_ground;
+	sporadic_artificial_Start_work : subprogram access THREAD_vt_obsw_start_work.artificial_Start_work -> THREAD_vt_ground_gui_polling_ground.Start_work_vt;
+  end exportedComponent.others;
+
+  system PASSIVE_obsw
+    features
+	Pulse : provides subprogram access exportedComponent::fv::Pulse.others
+	  { taste::Coordinates => "200 215 200 215";
+	    taste::RCMoperationKind => protected;
+	    taste::RCMperiod => 100;};
+	Start_work : provides subprogram access exportedComponent::fv::Start_work.others
+	  { taste::Coordinates => "200 260 200 260";
+	    taste::RCMoperationKind => protected;
+	    taste::RCMperiod => 0;};
+	Compute_Thrust : requires subprogram access exportedComponent::fv::Compute_Thrust.others
+	  { taste::Coordinates => "450 215 450 215";
+	    taste::RCMoperationKind => unprotected;
+	    taste::RCMperiod => 0;};
+	Thrust_Update : requires subprogram access exportedComponent::fv::artificial_Thrust_Update.others
+	  { taste::Coordinates => "450 260 450 260";
+	    taste::RCMoperationKind => sporadic;
+	    taste::RCMperiod => 0;};
+	dHeight : requires subprogram access exportedComponent::fv::artificial_dHeight.others
+	  { taste::Coordinates => "450 305 450 305";
+	    taste::RCMoperationKind => sporadic;
+	    taste::RCMperiod => 0;};
+	check_queue : requires subprogram access exportedComponent::fv::obsw_has_pending_msg.others
+	  { taste::Coordinates => "450 350 450 350";
+	    taste::RCMoperationKind => unprotected;
+	    taste::RCMperiod => 0;};
+    properties
+	source_language => C;
+	taste::coordinates => "200 200 450 380";
+	taste::instance_name => "obsw";
+  end PASSIVE_obsw;
+
+  system implementation PASSIVE_obsw.others
+    subcomponents
+	Pulse_impl : subprogram exportedComponent::FV::Pulse.others
+	  { compute_execution_time => 0ms..0ms;};
+	Start_work_impl : subprogram exportedComponent::FV::Start_work.others
+	  { compute_execution_time => 0ms..0ms;};
+	Compute_Thrust_impl : subprogram exportedComponent::FV::Compute_Thrust.others
+	  { compute_execution_time => 0ms..0ms;};
+	Thrust_Update_impl : subprogram exportedComponent::FV::artificial_Thrust_Update.others
+	  { compute_execution_time => 0ms..0ms;};
+	dHeight_impl : subprogram exportedComponent::FV::artificial_dHeight.others
+	  { compute_execution_time => 0ms..0ms;};
+	check_queue_impl : subprogram exportedComponent::FV::obsw_has_pending_msg.others
+	  { compute_execution_time => 0ms..0ms;};
+    connections
+	subprogram access Pulse_impl -> Pulse;
+	subprogram access Start_work_impl -> Start_work;
+	subprogram access Compute_Thrust_impl -> Compute_Thrust;
+	subprogram access Thrust_Update_impl -> Thrust_Update;
+	subprogram access dHeight_impl -> dHeight;
+	subprogram access check_queue_impl -> check_queue;
+  end PASSIVE_obsw.others;
+
+  system PASSIVE_model_1dof
+    features
+	Compute_Thrust : provides subprogram access exportedComponent::fv::Compute_Thrust.others
+	  { taste::Coordinates => "600 215 600 215";
+	    taste::RCMoperationKind => unprotected;
+	    taste::RCMperiod => 0;};
+    properties
+	source_language => C;
+	taste::coordinates => "600 200 850 245";
+	taste::instance_name => "model_1dof";
+  end PASSIVE_model_1dof;
+
+  system implementation PASSIVE_model_1dof.others
+    subcomponents
+	Compute_Thrust_impl : subprogram exportedComponent::FV::Compute_Thrust.others
+	  { compute_execution_time => 0ms..0ms;};
+    connections
+	subprogram access Compute_Thrust_impl -> Compute_Thrust;
+  end PASSIVE_model_1dof.others;
+
+  system PASSIVE_ground
+    features
+	Thrust_Update : provides subprogram access exportedComponent::fv::Thrust_Update.others
+	  { taste::Coordinates => "1000 215 1000 215";
+	    taste::RCMoperationKind => protected;
+	    taste::RCMperiod => 0;};
+	Start_work : requires subprogram access exportedComponent::fv::artificial_Start_work.others
+	  { taste::Coordinates => "1250 215 1250 215";
+	    taste::RCMoperationKind => sporadic;
+	    taste::RCMperiod => 0;};
+	dHeight : provides subprogram access exportedComponent::fv::dHeight.others
+	  { taste::Coordinates => "1000 260 1000 260";
+	    taste::RCMoperationKind => protected;
+	    taste::RCMperiod => 0;};
+	gui_polling_ground : provides subprogram access exportedComponent::fv::gui_polling_ground.others
+	  { taste::Coordinates => "1000 305 1000 305";
+	    taste::RCMoperationKind => protected;
+	    taste::RCMperiod => 40;};
+    properties
+	source_language => C;
+	taste::coordinates => "1000 200 1250 335";
+	taste::instance_name => "ground";
+  end PASSIVE_ground;
+
+  system implementation PASSIVE_ground.others
+    subcomponents
+	Thrust_Update_impl : subprogram exportedComponent::FV::Thrust_Update.others
+	  { compute_execution_time => 0ms..0ms;};
+	Start_work_impl : subprogram exportedComponent::FV::artificial_Start_work.others
+	  { compute_execution_time => 0ms..0ms;};
+	dHeight_impl : subprogram exportedComponent::FV::dHeight.others
+	  { compute_execution_time => 0ms..0ms;};
+	gui_polling_ground_impl : subprogram exportedComponent::FV::gui_polling_ground.others
+	  { compute_execution_time => 0ms..0ms;};
+    connections
+	subprogram access Thrust_Update_impl -> Thrust_Update;
+	subprogram access Start_work_impl -> Start_work;
+	subprogram access dHeight_impl -> dHeight;
+	subprogram access gui_polling_ground_impl -> gui_polling_ground;
+  end PASSIVE_ground.others;
+
+  system PASSIVE_x86_partition_taste_api
+    features
+	obsw_has_pending_msg : provides subprogram access exportedComponent::fv::check_queue.others
+	  { taste::Coordinates => "1400 215 1400 215";
+	    taste::RCMoperationKind => unprotected;
+	    taste::RCMperiod => 0;};
+    properties
+	source_language => C;
+	taste::coordinates => "1400 200 1650 245";
+	taste::instance_name => "x86_partition_taste_api";
+  end PASSIVE_x86_partition_taste_api;
+
+  system implementation PASSIVE_x86_partition_taste_api.others
+    subcomponents
+	obsw_has_pending_msg_impl : subprogram exportedComponent::FV::check_queue.others
+	  { compute_execution_time => 0ms..0ms;};
+    connections
+	subprogram access obsw_has_pending_msg_impl -> obsw_has_pending_msg;
+  end PASSIVE_x86_partition_taste_api.others;
+
+  system THREAD_vt_obsw_pulse
+    features
+	artificial_Pulse : provides subprogram access exportedComponent::fv::Pulse.others
+	  { taste::Coordinates => "1800 215 1800 215";
+	    taste::RCMoperationKind => cyclic;
+	    taste::RCMperiod => 100;};
+	Pulse : requires subprogram access exportedComponent::fv::Pulse.others
+	  { taste::Coordinates => "2050 215 2050 215";
+	    taste::RCMoperationKind => protected;
+	    taste::RCMperiod => 100;};
+	Compute_Thrust_vt : requires subprogram access exportedComponent::fv::Compute_Thrust.others
+	  { taste::Coordinates => "2050 260 2050 260";
+	    taste::RCMoperationKind => unprotected;
+	    taste::RCMperiod => 0;};
+	Thrust_Update_vt : requires subprogram access exportedComponent::fv::artificial_Thrust_Update.others
+	  { taste::Coordinates => "2050 305 2050 305";
+	    taste::RCMoperationKind => sporadic;
+	    taste::RCMperiod => 0;};
+	dHeight_vt : requires subprogram access exportedComponent::fv::artificial_dHeight.others
+	  { taste::Coordinates => "2050 350 2050 350";
+	    taste::RCMoperationKind => sporadic;
+	    taste::RCMperiod => 0;};
+	check_queue_vt : requires subprogram access exportedComponent::fv::obsw_has_pending_msg.others
+	  { taste::Coordinates => "2050 395 2050 395";
+	    taste::RCMoperationKind => unprotected;
+	    taste::RCMperiod => 0;};
+    properties
+	source_language => C;
+	taste::coordinates => "1800 200 2050 425";
+	taste::instance_name => "vt_obsw_pulse";
+  end THREAD_vt_obsw_pulse;
+
+  system implementation THREAD_vt_obsw_pulse.others
+    subcomponents
+	artificial_Pulse_impl : subprogram exportedComponent::FV::Pulse.others
+	  { compute_execution_time => 0ms..0ms;};
+	Pulse_impl : subprogram exportedComponent::FV::Pulse.others
+	  { compute_execution_time => 0ms..0ms;};
+	Compute_Thrust_vt_impl : subprogram exportedComponent::FV::Compute_Thrust.others
+	  { compute_execution_time => 0ms..0ms;};
+	Thrust_Update_vt_impl : subprogram exportedComponent::FV::artificial_Thrust_Update.others
+	  { compute_execution_time => 0ms..0ms;};
+	dHeight_vt_impl : subprogram exportedComponent::FV::artificial_dHeight.others
+	  { compute_execution_time => 0ms..0ms;};
+	check_queue_vt_impl : subprogram exportedComponent::FV::obsw_has_pending_msg.others
+	  { compute_execution_time => 0ms..0ms;};
+    connections
+	subprogram access artificial_Pulse_impl -> artificial_Pulse;
+	subprogram access Pulse_impl -> Pulse;
+	subprogram access Compute_Thrust_vt_impl -> Compute_Thrust_vt;
+	subprogram access Thrust_Update_vt_impl -> Thrust_Update_vt;
+	subprogram access dHeight_vt_impl -> dHeight_vt;
+	subprogram access check_queue_vt_impl -> check_queue_vt;
+  end THREAD_vt_obsw_pulse.others;
+
+  system THREAD_vt_obsw_start_work
+    features
+	artificial_Start_work : provides subprogram access exportedComponent::fv::Start_work.others
+	  { taste::Coordinates => "2200 215 2200 215";
+	    taste::RCMoperationKind => sporadic;
+	    taste::RCMperiod => 0;};
+	Start_work : requires subprogram access exportedComponent::fv::Start_work.others
+	  { taste::Coordinates => "2450 215 2450 215";
+	    taste::RCMoperationKind => protected;
+	    taste::RCMperiod => 0;};
+	Compute_Thrust_vt : requires subprogram access exportedComponent::fv::Compute_Thrust.others
+	  { taste::Coordinates => "2450 260 2450 260";
+	    taste::RCMoperationKind => unprotected;
+	    taste::RCMperiod => 0;};
+	Thrust_Update_vt : requires subprogram access exportedComponent::fv::artificial_Thrust_Update.others
+	  { taste::Coordinates => "2450 305 2450 305";
+	    taste::RCMoperationKind => sporadic;
+	    taste::RCMperiod => 0;};
+	dHeight_vt : requires subprogram access exportedComponent::fv::artificial_dHeight.others
+	  { taste::Coordinates => "2450 350 2450 350";
+	    taste::RCMoperationKind => sporadic;
+	    taste::RCMperiod => 0;};
+	check_queue_vt : requires subprogram access exportedComponent::fv::obsw_has_pending_msg.others
+	  { taste::Coordinates => "2450 395 2450 395";
+	    taste::RCMoperationKind => unprotected;
+	    taste::RCMperiod => 0;};
+    properties
+	source_language => C;
+	taste::coordinates => "2200 200 2450 425";
+	taste::instance_name => "vt_obsw_start_work";
+  end THREAD_vt_obsw_start_work;
+
+  system implementation THREAD_vt_obsw_start_work.others
+    subcomponents
+	artificial_Start_work_impl : subprogram exportedComponent::FV::Start_work.others
+	  { compute_execution_time => 0ms..0ms;};
+	Start_work_impl : subprogram exportedComponent::FV::Start_work.others
+	  { compute_execution_time => 0ms..0ms;};
+	Compute_Thrust_vt_impl : subprogram exportedComponent::FV::Compute_Thrust.others
+	  { compute_execution_time => 0ms..0ms;};
+	Thrust_Update_vt_impl : subprogram exportedComponent::FV::artificial_Thrust_Update.others
+	  { compute_execution_time => 0ms..0ms;};
+	dHeight_vt_impl : subprogram exportedComponent::FV::artificial_dHeight.others
+	  { compute_execution_time => 0ms..0ms;};
+	check_queue_vt_impl : subprogram exportedComponent::FV::obsw_has_pending_msg.others
+	  { compute_execution_time => 0ms..0ms;};
+    connections
+	subprogram access artificial_Start_work_impl -> artificial_Start_work;
+	subprogram access Start_work_impl -> Start_work;
+	subprogram access Compute_Thrust_vt_impl -> Compute_Thrust_vt;
+	subprogram access Thrust_Update_vt_impl -> Thrust_Update_vt;
+	subprogram access dHeight_vt_impl -> dHeight_vt;
+	subprogram access check_queue_vt_impl -> check_queue_vt;
+  end THREAD_vt_obsw_start_work.others;
+
+  system THREAD_vt_ground_thrust_update
+    features
+	artificial_Thrust_Update : provides subprogram access exportedComponent::fv::Thrust_Update.others
+	  { taste::Coordinates => "200 740 200 740";
+	    taste::RCMoperationKind => sporadic;
+	    taste::RCMperiod => 0;};
+	Thrust_Update : requires subprogram access exportedComponent::fv::Thrust_Update.others
+	  { taste::Coordinates => "450 740 450 740";
+	    taste::RCMoperationKind => protected;
+	    taste::RCMperiod => 0;};
+	Start_work_vt : requires subprogram access exportedComponent::fv::artificial_Start_work.others
+	  { taste::Coordinates => "450 785 450 785";
+	    taste::RCMoperationKind => sporadic;
+	    taste::RCMperiod => 0;};
+    properties
+	source_language => C;
+	taste::coordinates => "200 725 450 815";
+	taste::instance_name => "vt_ground_thrust_update";
+  end THREAD_vt_ground_thrust_update;
+
+  system implementation THREAD_vt_ground_thrust_update.others
+    subcomponents
+	artificial_Thrust_Update_impl : subprogram exportedComponent::FV::Thrust_Update.others
+	  { compute_execution_time => 0ms..0ms;};
+	Thrust_Update_impl : subprogram exportedComponent::FV::Thrust_Update.others
+	  { compute_execution_time => 0ms..0ms;};
+	Start_work_vt_impl : subprogram exportedComponent::FV::artificial_Start_work.others
+	  { compute_execution_time => 0ms..0ms;};
+    connections
+	subprogram access artificial_Thrust_Update_impl -> artificial_Thrust_Update;
+	subprogram access Thrust_Update_impl -> Thrust_Update;
+	subprogram access Start_work_vt_impl -> Start_work_vt;
+  end THREAD_vt_ground_thrust_update.others;
+
+  system THREAD_vt_ground_dheight
+    features
+	artificial_dHeight : provides subprogram access exportedComponent::fv::dHeight.others
+	  { taste::Coordinates => "600 740 600 740";
+	    taste::RCMoperationKind => sporadic;
+	    taste::RCMperiod => 0;};
+	dHeight : requires subprogram access exportedComponent::fv::dHeight.others
+	  { taste::Coordinates => "850 740 850 740";
+	    taste::RCMoperationKind => protected;
+	    taste::RCMperiod => 0;};
+	Start_work_vt : requires subprogram access exportedComponent::fv::artificial_Start_work.others
+	  { taste::Coordinates => "850 785 850 785";
+	    taste::RCMoperationKind => sporadic;
+	    taste::RCMperiod => 0;};
+    properties
+	source_language => C;
+	taste::coordinates => "600 725 850 815";
+	taste::instance_name => "vt_ground_dheight";
+  end THREAD_vt_ground_dheight;
+
+  system implementation THREAD_vt_ground_dheight.others
+    subcomponents
+	artificial_dHeight_impl : subprogram exportedComponent::FV::dHeight.others
+	  { compute_execution_time => 0ms..0ms;};
+	dHeight_impl : subprogram exportedComponent::FV::dHeight.others
+	  { compute_execution_time => 0ms..0ms;};
+	Start_work_vt_impl : subprogram exportedComponent::FV::artificial_Start_work.others
+	  { compute_execution_time => 0ms..0ms;};
+    connections
+	subprogram access artificial_dHeight_impl -> artificial_dHeight;
+	subprogram access dHeight_impl -> dHeight;
+	subprogram access Start_work_vt_impl -> Start_work_vt;
+  end THREAD_vt_ground_dheight.others;
+
+  system THREAD_vt_ground_gui_polling_ground
+    features
+	artificial_gui_polling_ground : provides subprogram access exportedComponent::fv::gui_polling_ground.others
+	  { taste::Coordinates => "1000 740 1000 740";
+	    taste::RCMoperationKind => cyclic;
+	    taste::RCMperiod => 40;};
+	gui_polling_ground : requires subprogram access exportedComponent::fv::gui_polling_ground.others
+	  { taste::Coordinates => "1250 740 1250 740";
+	    taste::RCMoperationKind => protected;
+	    taste::RCMperiod => 40;};
+	Start_work_vt : requires subprogram access exportedComponent::fv::artificial_Start_work.others
+	  { taste::Coordinates => "1250 785 1250 785";
+	    taste::RCMoperationKind => sporadic;
+	    taste::RCMperiod => 0;};
+    properties
+	source_language => C;
+	taste::coordinates => "1000 725 1250 815";
+	taste::instance_name => "vt_ground_gui_polling_ground";
+  end THREAD_vt_ground_gui_polling_ground;
+
+  system implementation THREAD_vt_ground_gui_polling_ground.others
+    subcomponents
+	artificial_gui_polling_ground_impl : subprogram exportedComponent::FV::gui_polling_ground.others
+	  { compute_execution_time => 0ms..0ms;};
+	gui_polling_ground_impl : subprogram exportedComponent::FV::gui_polling_ground.others
+	  { compute_execution_time => 0ms..0ms;};
+	Start_work_vt_impl : subprogram exportedComponent::FV::artificial_Start_work.others
+	  { compute_execution_time => 0ms..0ms;};
+    connections
+	subprogram access artificial_gui_polling_ground_impl -> artificial_gui_polling_ground;
+	subprogram access gui_polling_ground_impl -> gui_polling_ground;
+	subprogram access Start_work_vt_impl -> Start_work_vt;
+  end THREAD_vt_ground_gui_polling_ground.others;
+
+properties
+  taste::coordinates => "0 0 2970 2100";
+
+end generated_cv::IV;
+
+package exportedComponent::FV
+public
+with dataview;
+with taste;
+
+  subprogram Pulse
+  end Pulse;
+
+  subprogram Start_work
+  end Start_work;
+
+  subprogram Compute_Thrust
+  end Compute_Thrust;
+
+  subprogram artificial_Thrust_Update
+  end artificial_Thrust_Update;
+
+  subprogram artificial_dHeight
+  end artificial_dHeight;
+
+  subprogram obsw_has_pending_msg
+  end obsw_has_pending_msg;
+
+  subprogram Thrust_Update
+  end Thrust_Update;
+
+  subprogram artificial_Start_work
+  end artificial_Start_work;
+
+  subprogram dHeight
+  end dHeight;
+
+  subprogram gui_polling_ground
+  end gui_polling_ground;
+
+  subprogram check_queue
+  end check_queue;
+
+end exportedComponent::FV;

@@ -17,20 +17,20 @@ void po_hi_c_vt_obsw_takeoff_artificial_takeoff(__po_hi_task_id e, dataview__myr
 /* ------------------------------------------------------
 --  Synchronous Required Interface "Takeoff"
 ------------------------------------------------------ */
-void vm_vt_obsw_takeoff_Takeoff(void *Ref_h, size_t Ref_h_len)
+void vm_vt_obsw_takeoff_Takeoff(void *Ref_H, size_t Ref_H_len)
 {
-	sync_obsw_Takeoff(Ref_h, Ref_h_len);
+	sync_obsw_Takeoff(Ref_H, Ref_H_len);
 }
 
 /* ------------------------------------------------------
 --  Asynchronous Required Interface "Height_vt"
 ------------------------------------------------------ */
-void vm_async_vt_obsw_takeoff_Height_vt(void *h, size_t h_len)
+void vm_async_vt_obsw_takeoff_Height_vt(void *H, size_t H_len)
 {
 	__po_hi_request_t request;
 
-	__po_hi_copy_array(&(request.vars.vt_obsw_takeoff_global_outport_height_vt.vt_obsw_takeoff_global_outport_height_vt.buffer), h, h_len);
-	request.vars.vt_obsw_takeoff_global_outport_height_vt.vt_obsw_takeoff_global_outport_height_vt.length = h_len;
+	__po_hi_copy_array(&(request.vars.vt_obsw_takeoff_global_outport_height_vt.vt_obsw_takeoff_global_outport_height_vt.buffer), H, H_len);
+	request.vars.vt_obsw_takeoff_global_outport_height_vt.vt_obsw_takeoff_global_outport_height_vt.length = H_len;
 	request.port = vt_obsw_takeoff_global_outport_height_vt;
 	__po_hi_gqueue_store_out(x86_partition_vt_obsw_takeoff_k, vt_obsw_takeoff_local_outport_height_vt, &request);
 	__po_hi_send_output(x86_partition_vt_obsw_takeoff_k, vt_obsw_takeoff_global_outport_height_vt);

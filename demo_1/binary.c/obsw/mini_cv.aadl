@@ -11,7 +11,7 @@ END Pulse.Ada;
 
 SUBPROGRAM Takeoff
 FEATURES
-	Ref_h:IN PARAMETER DataView::MyReal {encoding=>UPER;};
+	Ref_H:IN PARAMETER DataView::MyReal {encoding=>UPER;};
 END Takeoff;
 
 SUBPROGRAM IMPLEMENTATION Takeoff.Ada
@@ -22,7 +22,7 @@ END Takeoff.Ada;
 
 SUBPROGRAM Height
 FEATURES
-	h:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+	H:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
 END Height;
 
 SUBPROGRAM IMPLEMENTATION Height.Ada

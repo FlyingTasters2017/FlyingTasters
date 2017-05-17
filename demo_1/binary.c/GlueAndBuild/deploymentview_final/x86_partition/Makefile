@@ -17,7 +17,7 @@ BINARY = x86_partition
 TARGET = linux32
 NEED_TRANSPORT = yes
 RUNTIME_PATH=/home/assert/tool-inst/include/ocarina/runtime/polyorb-hi-c
-USER_SOURCES_DIRS= /home/assert/demo_1/binary.c/GlueAndBuild/
+USER_SOURCES_DIRS= /home/assert/FlyingTasters/demo_1/binary.c/GlueAndBuild/
 ASN_SOURCES=
 include $(RUNTIME_PATH)/make/Makefile.common
 

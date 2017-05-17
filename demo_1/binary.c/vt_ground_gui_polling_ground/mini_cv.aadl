@@ -20,7 +20,7 @@ END gui_polling_ground.C;
 
 SUBPROGRAM Takeoff_vt
 FEATURES
-	Ref_h:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+	Ref_H:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
 END Takeoff_vt;
 
 SUBPROGRAM IMPLEMENTATION Takeoff_vt.C

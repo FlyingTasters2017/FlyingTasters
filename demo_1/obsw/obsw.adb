@@ -6,10 +6,10 @@ use System.IO;
 with Ada.Unchecked_Conversion;
 with Ada.Numerics.Generic_Elementary_Functions;
 
-with TASTE_BasicTypes;
-use TASTE_BasicTypes;
 with TASTE_Dataview;
 use TASTE_Dataview;
+with TASTE_BasicTypes;
+use TASTE_BasicTypes;
 with adaasn1rtl;
 use adaasn1rtl;
 
@@ -17,7 +17,7 @@ with Interfaces;
 use Interfaces;
 
 package body obsw is
-    type States is (wait, runing);
+    type States is (runing, wait);
     type ctxt_Ty is
         record
         state : States;
@@ -33,25 +33,25 @@ package body obsw is
     procedure Pulse is
         begin
             case ctxt.state is
-                when runing =>
-                    runTransition(1);
                 when wait =>
                     runTransition(3);
+                when runing =>
+                    runTransition(1);
                 when others =>
                     runTransition(CS_Only);
             end case;
         end Pulse;
         
 
-    procedure Takeoff(Ref_h: access asn1SccMyReal) is
+    procedure Takeoff(Ref_H: access asn1SccMyReal) is
         begin
             case ctxt.state is
-                when runing =>
-                    ctxt.ref_h := Ref_h.all;
-                    runTransition(2);
                 when wait =>
-                    ctxt.ref_h := Ref_h.all;
+                    ctxt.ref_h := Ref_H.all;
                     runTransition(4);
+                when runing =>
+                    ctxt.ref_h := Ref_H.all;
+                    runTransition(2);
                 when others =>
                     runTransition(CS_Only);
             end case;
@@ -72,34 +72,28 @@ package body obsw is
                         ctxt.state := Wait;
                         goto next_transition;
                     when 1 =>
-                        -- Compute_Input(Ref_h,h,dh,F) (19,17)
+                        -- Compute_Input(Ref_h,h,dh,F) (22,17)
                         RIÜCompute_Input(ctxt.Ref_h'Access, ctxt.h'Access, ctxt.dh'Access, ctxt.F'Access);
-                        -- Response(F,h,dh) (21,17)
+                        -- Response(F,h,dh) (24,17)
                         RIÜResponse(ctxt.F'Access, ctxt.h'Access, ctxt.dh'Access);
-                        -- Height(h) (23,19)
+                        -- Height(h) (26,19)
                         RIÜHeight(ctxt.h'Access);
-                        -- NEXT_STATE Runing (25,22) at 909, 368
+                        -- NEXT_STATE Runing (28,22) at 909, 368
                         trId := -1;
                         ctxt.state := Runing;
                         goto next_transition;
                     when 2 =>
-                        -- NEXT_STATE Wait (29,22) at 1075, 178
+                        -- NEXT_STATE Wait (32,22) at 1075, 178
                         trId := -1;
                         ctxt.state := Wait;
                         goto next_transition;
                     when 3 =>
-                        -- NEXT_STATE Wait (39,22) at 624, 343
+                        -- NEXT_STATE Wait (39,22) at 624, 282
                         trId := -1;
                         ctxt.state := Wait;
                         goto next_transition;
                     when 4 =>
-                        -- dh :=0.0 (43,17)
-                        ctxt.dh := 0.0;
-                        -- h :=0.0 (45,17)
-                        ctxt.h := 0.0;
-                        -- F :=0.0 (47,17)
-                        ctxt.F := 0.0;
-                        -- NEXT_STATE Runing (49,22) at 725, 444
+                        -- NEXT_STATE Runing (43,22) at 725, 281
                         trId := -1;
                         ctxt.state := Runing;
                         goto next_transition;

@@ -20,11 +20,11 @@ process obsw;
         input pulse;
             /* CIF PROCEDURECALL (844, 178), (200, 35) */
             call Compute_Input(Ref_h,h,dh,F);
-            /* CIF PROCEDURECALL (881, 233), (126, 35) */
+            /* CIF PROCEDURECALL (881, 240), (126, 35) */
             call Response(F,h,dh);
-            /* CIF output (903, 283), (81, 35) */
+            /* CIF output (903, 300), (81, 35) */
             output Height(h);
-            /* CIF NEXTSTATE (909, 333), (70, 35) */
+            /* CIF NEXTSTATE (909, 368), (70, 35) */
             NEXTSTATE Runing;
         /* CIF input (1054, 123), (112, 35) */
         input Takeoff(Ref_h);
@@ -35,17 +35,11 @@ process obsw;
     state Wait;
         /* CIF input (624, 226), (70, 35) */
         input pulse;
-            /* CIF NEXTSTATE (624, 343), (70, 35) */
+            /* CIF NEXTSTATE (624, 282), (70, 35) */
             NEXTSTATE Wait;
         /* CIF input (704, 226), (112, 35) */
         input Takeoff(Ref_h);
-            /* CIF task (724, 281), (72, 38) */
-            task dh :=0.0;
-            /* CIF task (725, 339), (70, 35) */
-            task h :=0.0;
-            /* CIF task (725, 394), (70, 35) */
-            task F :=0.0;
-            /* CIF NEXTSTATE (725, 444), (70, 35) */
+            /* CIF NEXTSTATE (725, 281), (70, 35) */
             NEXTSTATE Runing;
     endstate;
 endprocess obsw;

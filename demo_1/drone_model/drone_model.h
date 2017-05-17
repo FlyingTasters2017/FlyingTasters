@@ -17,8 +17,6 @@ void drone_model_PI_Response(const asn1SccMyReal *,
                              asn1SccMyReal *,
                              asn1SccMyReal *);
 
-void drone_model_PI_PI1();
-
 #ifdef __cplusplus
 }
 #endif

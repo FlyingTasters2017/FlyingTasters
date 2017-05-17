@@ -24,22 +24,22 @@ void sync_obsw_Pulse()
 /*----------------------------------------------------
 -- Protected Provided Interface "Takeoff"
 ----------------------------------------------------*/
-void sync_obsw_Takeoff(void *Ref_h, size_t Ref_h_len)
+void sync_obsw_Takeoff(void *Ref_H, size_t Ref_H_len)
 {
 	extern process_package__taste_protected_object obsw_protected;
 	__po_hi_protected_lock (obsw_protected.protected_id);
-	obsw_Takeoff(Ref_h, Ref_h_len);
+	obsw_Takeoff(Ref_H, Ref_H_len);
 	__po_hi_protected_unlock (obsw_protected.protected_id);
 }
 
 /* ------------------------------------------------------
 --  Asynchronous Required Interface "Height"
 ------------------------------------------------------ */
-void vm_async_obsw_Height(void *h, size_t h_len)
+void vm_async_obsw_Height(void *H, size_t H_len)
 {
 	switch(__po_hi_get_task_id()) {
-		case x86_partition_vt_obsw_pulse_k: vm_async_vt_obsw_pulse_Height_vt(h, h_len); break;
-		case x86_partition_vt_obsw_takeoff_k: vm_async_vt_obsw_takeoff_Height_vt(h, h_len); break;
+		case x86_partition_vt_obsw_pulse_k: vm_async_vt_obsw_pulse_Height_vt(H, H_len); break;
+		case x86_partition_vt_obsw_takeoff_k: vm_async_vt_obsw_takeoff_Height_vt(H, H_len); break;
 		default: break;
 	}
 }

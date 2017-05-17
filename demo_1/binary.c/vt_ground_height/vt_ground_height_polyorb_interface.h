@@ -16,9 +16,9 @@ void po_hi_c_vt_ground_height_artificial_height(__po_hi_task_id, dataview__myrea
 /* ------------------------------------------------------
 --  Synchronous Required Interface "Height"
 ------------------------------------------------------ */
-void vm_vt_ground_height_Height(void *h, size_t h_len);
+void vm_vt_ground_height_Height(void *H, size_t H_len);
 /* ------------------------------------------------------
 --  Asynchronous Required Interface "Takeoff_vt"
 ------------------------------------------------------ */
-void vm_async_vt_ground_height_Takeoff_vt(void *Ref_h, size_t Ref_h_len);
+void vm_async_vt_ground_height_Takeoff_vt(void *Ref_H, size_t Ref_H_len);
 #endif

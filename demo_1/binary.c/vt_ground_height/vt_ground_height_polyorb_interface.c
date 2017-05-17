@@ -17,20 +17,20 @@ void po_hi_c_vt_ground_height_artificial_height(__po_hi_task_id e, dataview__myr
 /* ------------------------------------------------------
 --  Synchronous Required Interface "Height"
 ------------------------------------------------------ */
-void vm_vt_ground_height_Height(void *h, size_t h_len)
+void vm_vt_ground_height_Height(void *H, size_t H_len)
 {
-	sync_ground_Height(h, h_len);
+	sync_ground_Height(H, H_len);
 }
 
 /* ------------------------------------------------------
 --  Asynchronous Required Interface "Takeoff_vt"
 ------------------------------------------------------ */
-void vm_async_vt_ground_height_Takeoff_vt(void *Ref_h, size_t Ref_h_len)
+void vm_async_vt_ground_height_Takeoff_vt(void *Ref_H, size_t Ref_H_len)
 {
 	__po_hi_request_t request;
 
-	__po_hi_copy_array(&(request.vars.vt_ground_height_global_outport_takeoff_vt.vt_ground_height_global_outport_takeoff_vt.buffer), Ref_h, Ref_h_len);
-	request.vars.vt_ground_height_global_outport_takeoff_vt.vt_ground_height_global_outport_takeoff_vt.length = Ref_h_len;
+	__po_hi_copy_array(&(request.vars.vt_ground_height_global_outport_takeoff_vt.vt_ground_height_global_outport_takeoff_vt.buffer), Ref_H, Ref_H_len);
+	request.vars.vt_ground_height_global_outport_takeoff_vt.vt_ground_height_global_outport_takeoff_vt.length = Ref_H_len;
 	request.port = vt_ground_height_global_outport_takeoff_vt;
 	__po_hi_gqueue_store_out(x86_partition_vt_ground_height_k, vt_ground_height_local_outport_takeoff_vt, &request);
 	__po_hi_send_output(x86_partition_vt_ground_height_k, vt_ground_height_global_outport_takeoff_vt);

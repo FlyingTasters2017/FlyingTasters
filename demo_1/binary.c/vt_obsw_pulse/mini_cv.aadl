@@ -20,7 +20,7 @@ END Pulse.C;
 
 SUBPROGRAM Height_vt
 FEATURES
-	h:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+	H:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
 END Height_vt;
 
 SUBPROGRAM IMPLEMENTATION Height_vt.C

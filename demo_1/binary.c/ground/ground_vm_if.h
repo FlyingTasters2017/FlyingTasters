@@ -15,7 +15,7 @@ extern "C" {
 */
 void init_ground();
 
-void ground_Height (void *pmy_h, size_t size_my_h);
+void ground_Height (void *pmy_H, size_t size_my_H);
 extern void ground_PI_Height (const asn1SccMyReal *);
 void ground_gui_polling_ground ();
 extern void ground_PI_gui_polling_ground ();

@@ -31,7 +31,7 @@ FUNCTION asn1SccT_Int32_Equal(val1, val2: in asn1SccT_Int32) return Boolean;
 
 
 
-ERR_asn1SccT_Int32:CONSTANT INTEGER := 1001; -- (-2147483648 .. 2147483647)
+ERR_asn1SccT_Int32:CONSTANT INTEGER := 1009; -- (-2147483648 .. 2147483647)
 
 -----------------------------------------------------------asn1SccT_UInt32-------------------------------------------------------------
 SUBTYPE asn1SccT_UInt32 IS adaasn1rtl.Asn1Int range 0..4294967295;
@@ -50,7 +50,7 @@ FUNCTION asn1SccT_UInt32_Equal(val1, val2: in asn1SccT_UInt32) return Boolean;
 
 
 
-ERR_asn1SccT_UInt32:CONSTANT INTEGER := 1002; -- (0 .. 4294967295)
+ERR_asn1SccT_UInt32:CONSTANT INTEGER := 1010; -- (0 .. 4294967295)
 
 -----------------------------------------------------------asn1SccT_Int8-------------------------------------------------------------
 SUBTYPE asn1SccT_Int8 IS adaasn1rtl.Asn1Int range -128..127;
@@ -69,7 +69,7 @@ FUNCTION asn1SccT_Int8_Equal(val1, val2: in asn1SccT_Int8) return Boolean;
 
 
 
-ERR_asn1SccT_Int8:CONSTANT INTEGER := 1003; -- (-128 .. 127)
+ERR_asn1SccT_Int8:CONSTANT INTEGER := 1011; -- (-128 .. 127)
 
 -----------------------------------------------------------asn1SccT_UInt8-------------------------------------------------------------
 SUBTYPE asn1SccT_UInt8 IS adaasn1rtl.Asn1Int range 0..255;
@@ -88,7 +88,7 @@ FUNCTION asn1SccT_UInt8_Equal(val1, val2: in asn1SccT_UInt8) return Boolean;
 
 
 
-ERR_asn1SccT_UInt8:CONSTANT INTEGER := 1004; -- (0 .. 255)
+ERR_asn1SccT_UInt8:CONSTANT INTEGER := 1012; -- (0 .. 255)
 
 -----------------------------------------------------------asn1SccT_Boolean-------------------------------------------------------------
 SUBTYPE asn1SccT_Boolean IS adaasn1rtl.Asn1Boolean;

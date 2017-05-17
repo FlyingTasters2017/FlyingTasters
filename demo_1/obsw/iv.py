@@ -61,11 +61,11 @@ functions['obsw']['interfaces']['Takeoff'] = {
     'queue_size': 1
 }
 
-functions['obsw']['interfaces']['Takeoff']['paramsInOrdered'] = ['Ref_h']
+functions['obsw']['interfaces']['Takeoff']['paramsInOrdered'] = ['Ref_H']
 
 functions['obsw']['interfaces']['Takeoff']['paramsOutOrdered'] = []
 
-functions['obsw']['interfaces']['Takeoff']['in']['Ref_h'] = {
+functions['obsw']['interfaces']['Takeoff']['in']['Ref_H'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
@@ -94,11 +94,11 @@ functions['obsw']['interfaces']['Height'] = {
     'queue_size': 1
 }
 
-functions['obsw']['interfaces']['Height']['paramsInOrdered'] = ['h']
+functions['obsw']['interfaces']['Height']['paramsInOrdered'] = ['H']
 
 functions['obsw']['interfaces']['Height']['paramsOutOrdered'] = []
 
-functions['obsw']['interfaces']['Height']['in']['h'] = {
+functions['obsw']['interfaces']['Height']['in']['H'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
@@ -252,11 +252,11 @@ functions['ground']['interfaces']['Height'] = {
     'queue_size': 1
 }
 
-functions['ground']['interfaces']['Height']['paramsInOrdered'] = ['h']
+functions['ground']['interfaces']['Height']['paramsInOrdered'] = ['H']
 
 functions['ground']['interfaces']['Height']['paramsOutOrdered'] = []
 
-functions['ground']['interfaces']['Height']['in']['h'] = {
+functions['ground']['interfaces']['Height']['in']['H'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
@@ -285,11 +285,11 @@ functions['ground']['interfaces']['Takeoff'] = {
     'queue_size': 1
 }
 
-functions['ground']['interfaces']['Takeoff']['paramsInOrdered'] = ['Ref_h']
+functions['ground']['interfaces']['Takeoff']['paramsInOrdered'] = ['Ref_H']
 
 functions['ground']['interfaces']['Takeoff']['paramsOutOrdered'] = []
 
-functions['ground']['interfaces']['Takeoff']['in']['Ref_h'] = {
+functions['ground']['interfaces']['Takeoff']['in']['Ref_H'] = {
     'type': 'MyReal',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': real,
@@ -360,29 +360,6 @@ functions['drone_model']['interfaces']['Response']['out']['h'] = {
     'interface': 'Response',
     'param_direction': param_out
 }
-
-functions['drone_model']['interfaces']['PI1'] = {
-    'port_name': 'PI1',
-    'parent_fv': 'drone_model',
-    'direction': PI,
-    'in': {},
-    'out': {},
-    'synchronism': synch,
-    'rcm': unprotected,
-    'period': 0,
-    'wcet_low': 0,
-    'wcet_low_unit': 'ms',
-    'wcet_high': 0,
-    'wcet_high_unit': 'ms',
-    'distant_fv': '',
-    'calling_threads': {},
-    'distant_name': '',
-    'queue_size': 1
-}
-
-functions['drone_model']['interfaces']['PI1']['paramsInOrdered'] = []
-
-functions['drone_model']['interfaces']['PI1']['paramsOutOrdered'] = []
 
 functions['controller'] = {
     'name_with_case' : 'Controller',
@@ -455,26 +432,3 @@ functions['controller']['interfaces']['Compute_Input']['out']['F'] = {
     'interface': 'Compute_Input',
     'param_direction': param_out
 }
-
-functions['controller']['interfaces']['PI1'] = {
-    'port_name': 'PI1',
-    'parent_fv': 'controller',
-    'direction': RI,
-    'in': {},
-    'out': {},
-    'synchronism': synch,
-    'rcm': unprotected,
-    'period': 0,
-    'wcet_low': 0,
-    'wcet_low_unit': '',
-    'wcet_high': 0,
-    'wcet_high_unit': '',
-    'distant_fv': 'drone_model',
-    'calling_threads': {},
-    'distant_name': 'PI1',
-    'queue_size': 1
-}
-
-functions['controller']['interfaces']['PI1']['paramsInOrdered'] = []
-
-functions['controller']['interfaces']['PI1']['paramsOutOrdered'] = []

@@ -17,7 +17,7 @@ void sync_ground_Height(void *, size_t);
 /* ------------------------------------------------------
 --  Asynchronous Required Interface "Takeoff"
 ------------------------------------------------------ */
-void vm_async_ground_Takeoff(void *Ref_h, size_t Ref_h_len);
+void vm_async_ground_Takeoff(void *Ref_H, size_t Ref_H_len);
 /*----------------------------------------------------
 -- Protected Provided Interface "gui_polling_ground"
 ----------------------------------------------------*/

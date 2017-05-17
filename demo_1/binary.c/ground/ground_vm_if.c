@@ -19,23 +19,23 @@ void init_ground()
     }
 }
 
-void ground_Height (void *pmy_h, size_t size_my_h)
+void ground_Height (void *pmy_H, size_t size_my_H)
 {
     /* Decoded input variable(s): developer can use them */
-    static asn1SccMyReal IN_h;
+    static asn1SccMyReal IN_H;
 
 #ifdef __unix__
-    asn1SccMyReal_Initialize(&IN_h);
+    asn1SccMyReal_Initialize(&IN_H);
 #endif
 
     /* Decode each input parameter */
-    if (0 != Decode_UPER_MyReal (&IN_h, pmy_h, size_my_h)) {
+    if (0 != Decode_UPER_MyReal (&IN_H, pmy_H, size_my_H)) {
         printf("\nError Decoding MyReal\n");
         return;
     }
 
     /* Call to User-defined function */
-    ground_PI_Height (&IN_h);
+    ground_PI_Height (&IN_H);
 
 }
 void ground_gui_polling_ground ()

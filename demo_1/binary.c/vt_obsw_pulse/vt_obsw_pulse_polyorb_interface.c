@@ -25,12 +25,12 @@ void vm_vt_obsw_pulse_Pulse()
 /* ------------------------------------------------------
 --  Asynchronous Required Interface "Height_vt"
 ------------------------------------------------------ */
-void vm_async_vt_obsw_pulse_Height_vt(void *h, size_t h_len)
+void vm_async_vt_obsw_pulse_Height_vt(void *H, size_t H_len)
 {
 	__po_hi_request_t request;
 
-	__po_hi_copy_array(&(request.vars.vt_obsw_pulse_global_outport_height_vt.vt_obsw_pulse_global_outport_height_vt.buffer), h, h_len);
-	request.vars.vt_obsw_pulse_global_outport_height_vt.vt_obsw_pulse_global_outport_height_vt.length = h_len;
+	__po_hi_copy_array(&(request.vars.vt_obsw_pulse_global_outport_height_vt.vt_obsw_pulse_global_outport_height_vt.buffer), H, H_len);
+	request.vars.vt_obsw_pulse_global_outport_height_vt.vt_obsw_pulse_global_outport_height_vt.length = H_len;
 	request.port = vt_obsw_pulse_global_outport_height_vt;
 	__po_hi_gqueue_store_out(x86_partition_vt_obsw_pulse_k, vt_obsw_pulse_local_outport_height_vt, &request);
 	__po_hi_send_output(x86_partition_vt_obsw_pulse_k, vt_obsw_pulse_global_outport_height_vt);

@@ -20,5 +20,5 @@ void vm_vt_ground_gui_polling_ground_gui_polling_ground();
 /* ------------------------------------------------------
 --  Asynchronous Required Interface "Takeoff_vt"
 ------------------------------------------------------ */
-void vm_async_vt_ground_gui_polling_ground_Takeoff_vt(void *Ref_h, size_t Ref_h_len);
+void vm_async_vt_ground_gui_polling_ground_Takeoff_vt(void *Ref_H, size_t Ref_H_len);
 #endif

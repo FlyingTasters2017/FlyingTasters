@@ -24,15 +24,15 @@ package obsw is
 	---------------------------------------------------------
 	-- Provided interface "Takeoff"
 	---------------------------------------------------------
-	procedure Takeoff(Ref_h: access asn1sccMyReal);
+	procedure Takeoff(Ref_H: access asn1sccMyReal);
 	pragma export(C, Takeoff, "obsw_PI_Takeoff");
 
 	---------------------------------------------------------
 	-- Required interface "Height"
 	---------------------------------------------------------
-	procedure Height(h: access asn1sccMyReal);
+	procedure Height(H: access asn1sccMyReal);
 	pragma import(C, Height, "obsw_RI_Height");
-	procedure RIÜHeight(h: access asn1sccMyReal) renames Height;
+	procedure RIÜHeight(H: access asn1sccMyReal) renames Height;
 
 	---------------------------------------------------------
 	-- Required interface "Compute_Input"

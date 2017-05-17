@@ -12,8 +12,6 @@ WITH Taste;
 WITH DataView;
 WITH TASTE_IV_Properties;
 SUBPROGRAM PI_Pulse
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
 END PI_Pulse;
 
 SUBPROGRAM IMPLEMENTATION PI_Pulse.others
@@ -21,7 +19,7 @@ END PI_Pulse.others;
 
 SUBPROGRAM PI_Takeoff
 FEATURES
-  Ref_h : IN PARAMETER DataView::MyReal {
+  Ref_H : IN PARAMETER DataView::MyReal {
     Taste::encoding => UPER;
   };
 PROPERTIES
@@ -33,7 +31,7 @@ END PI_Takeoff.others;
 
 SUBPROGRAM RI_Height
 FEATURES
-  h : IN PARAMETER DataView::MyReal {
+  H : IN PARAMETER DataView::MyReal {
     Taste::encoding => UPER;
   };
 END RI_Height;
@@ -86,7 +84,7 @@ WITH DataView;
 WITH TASTE_IV_Properties;
 SUBPROGRAM PI_Height
 FEATURES
-  h : IN PARAMETER DataView::MyReal {
+  H : IN PARAMETER DataView::MyReal {
     Taste::encoding => UPER;
   };
 PROPERTIES
@@ -98,7 +96,7 @@ END PI_Height.others;
 
 SUBPROGRAM RI_Takeoff
 FEATURES
-  Ref_h : IN PARAMETER DataView::MyReal {
+  Ref_H : IN PARAMETER DataView::MyReal {
     Taste::encoding => UPER;
   };
 END RI_Takeoff;
@@ -132,12 +130,6 @@ END PI_Response;
 SUBPROGRAM IMPLEMENTATION PI_Response.others
 END PI_Response.others;
 
-SUBPROGRAM PI_PI1
-END PI_PI1;
-
-SUBPROGRAM IMPLEMENTATION PI_PI1.others
-END PI_PI1.others;
-
 END interfaceview::FV::Drone_Model;
 
 PACKAGE interfaceview::FV::Controller
@@ -166,12 +158,6 @@ END PI_Compute_Input;
 
 SUBPROGRAM IMPLEMENTATION PI_Compute_Input.others
 END PI_Compute_Input.others;
-
-SUBPROGRAM RI_PI1
-END RI_PI1;
-
-SUBPROGRAM IMPLEMENTATION RI_PI1.others
-END RI_PI1.others;
 
 END interfaceview::FV::Controller;
 
@@ -240,7 +226,7 @@ END OBSW.others;
 SYSTEM Ground
 FEATURES
   PI_Height : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Ground::PI_Height.others {
-    Taste::coordinates => "833 1028";
+    Taste::coordinates => "837 1028";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -268,16 +254,11 @@ END Ground.others;
 SYSTEM Drone_Model
 FEATURES
   PI_Response : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Drone_Model::PI_Response.others {
-    Taste::coordinates => "1588 1031";
+    Taste::coordinates => "1610 946";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "Response";
-  };
-  PI_PI1 : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Drone_Model::PI_PI1.others {
-    Taste::coordinates => "1797 896";
-    Taste::RCMoperationKind => unprotected;
-    Taste::InterfaceName => "PI1";
   };
 PROPERTIES
   Source_Language => (C);
@@ -288,28 +269,18 @@ SUBCOMPONENTS
   Response_impl : SUBPROGRAM interfaceview::FV::Drone_Model::PI_Response.others {
     Compute_Execution_Time => 0 ms .. 0 ms;
   };
-  PI1_impl : SUBPROGRAM interfaceview::FV::Drone_Model::PI_PI1.others {
-    Compute_Execution_Time => 0 ms .. 0 ms;
-  };
 CONNECTIONS
   OpToPICnx_Response_impl : SUBPROGRAM ACCESS Response_impl -> PI_Response;
-  OpToPICnx_PI1_impl : SUBPROGRAM ACCESS PI1_impl -> PI_PI1;
 END Drone_Model.others;
 
 SYSTEM Controller
 FEATURES
   PI_Compute_Input : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Controller::PI_Compute_Input.others {
-    Taste::coordinates => "1601 466";
+    Taste::coordinates => "1647 463";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "Compute_Input";
-  };
-  RI_PI1 : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Drone_Model::PI_PI1.others {
-    Taste::coordinates => "1797 690";
-    Taste::RCMoperationKind => any;
-    Taste::InterfaceName => "PI1";
-    Taste::labelInheritance => "true";
   };
 PROPERTIES
   Source_Language => (C);
@@ -336,26 +307,23 @@ SUBCOMPONENTS
     Taste::coordinates => "493 1028 1112 1382";
   };
   Drone_Model : SYSTEM interfaceview::IV::Drone_Model.others {
-    Taste::coordinates => "1588 896 2046 1215";
+    Taste::coordinates => "1610 811 2068 1130";
   };
   Controller : SYSTEM interfaceview::IV::Controller.others {
-    Taste::coordinates => "1601 371 2024 690";
+    Taste::coordinates => "1647 368 2070 687";
   };
 CONNECTIONS
   OBSW_Takeoff_Ground_Takeoff : SUBPROGRAM ACCESS OBSW.PI_Takeoff -> Ground.RI_Takeoff {
     Taste::coordinates => "673 1028 673 981 675 981 675 789";
   };
   Ground_Height_OBSW_Height : SUBPROGRAM ACCESS Ground.PI_Height -> OBSW.RI_Height {
-    Taste::coordinates => "834 789 834 982 833 982 833 1028";
+    Taste::coordinates => "834 789 834 982 837 982 837 1028";
   };
   Controller_Compute_Input_OBSW_Compute_Input : SUBPROGRAM ACCESS Controller.PI_Compute_Input -> OBSW.RI_Compute_Input {
-    Taste::coordinates => "1147 465 1362 465 1362 466 1601 466";
+    Taste::coordinates => "1147 465 1362 465 1362 463 1647 463";
   };
   Drone_Model_Response_OBSW_Response : SUBPROGRAM ACCESS Drone_Model.PI_Response -> OBSW.RI_Response {
-    Taste::coordinates => "1147 690 1370 690 1370 1031 1588 1031";
-  };
-  Drone_Model_PI1_Controller_PI1 : SUBPROGRAM ACCESS Drone_Model.PI_PI1 -> Controller.RI_PI1 {
-    Taste::coordinates => "1797 690 1797 794 1797 794 1797 896";
+    Taste::coordinates => "1147 690 1370 690 1370 946 1610 946";
   };
 END interfaceview.others;
 

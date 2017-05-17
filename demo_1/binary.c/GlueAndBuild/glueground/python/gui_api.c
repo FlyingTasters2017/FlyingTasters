@@ -39,10 +39,10 @@ T_ground_PI_list ii_Height = i_Height;
 T_ground_RI_list ii_Takeoff = i_Takeoff;
 typedef struct {
     int tc_id;
-    MyReal Ref_h;
+    MyReal Ref_H;
 } Takeoff_TCDATA;
 
-int SendTC_Takeoff(void *p_Ref_h)
+int SendTC_Takeoff(void *p_Ref_H)
 {
     static mqd_t q = (mqd_t)-2;
     if (((mqd_t)-2) == q) {
@@ -52,9 +52,9 @@ int SendTC_Takeoff(void *p_Ref_h)
     }
     Takeoff_TCDATA data;
     data.tc_id = (int) i_Takeoff;
-    data.Ref_h = * (MyReal *) p_Ref_h;
+    data.Ref_H = * (MyReal *) p_Ref_H;
     if (((mqd_t)-1) != q) {
-        write_message_to_queue(q, sizeof(Takeoff_TCDATA)-4, &data.Ref_h, data.tc_id);
+        write_message_to_queue(q, sizeof(Takeoff_TCDATA)-4, &data.Ref_H, data.tc_id);
     } else {
         return -1;
     }

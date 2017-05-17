@@ -19,11 +19,11 @@ void po_hi_c_vt_obsw_takeoff_artificial_takeoff(__po_hi_task_id, dataview__myrea
 /* ------------------------------------------------------
 --  Synchronous Required Interface "Takeoff"
 ------------------------------------------------------ */
-void vm_vt_obsw_takeoff_Takeoff(void *Ref_h, size_t Ref_h_len);
+void vm_vt_obsw_takeoff_Takeoff(void *Ref_H, size_t Ref_H_len);
 /* ------------------------------------------------------
 --  Asynchronous Required Interface "Height_vt"
 ------------------------------------------------------ */
-void vm_async_vt_obsw_takeoff_Height_vt(void *h, size_t h_len);
+void vm_async_vt_obsw_takeoff_Height_vt(void *H, size_t H_len);
 /* ------------------------------------------------------
 --  Synchronous Required Interface "Compute_Input_vt"
 ------------------------------------------------------ */
