@@ -12,6 +12,8 @@ WITH Taste;
 WITH DataView;
 WITH TASTE_IV_Properties;
 SUBPROGRAM PI_readStabilizerSendThrust
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_readStabilizerSendThrust;
 
 SUBPROGRAM IMPLEMENTATION PI_readStabilizerSendThrust.others
@@ -30,9 +32,10 @@ WITH TASTE_IV_Properties;
 SYSTEM SocketClient
 FEATURES
   PI_readStabilizerSendThrust : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::SocketClient::PI_readStabilizerSendThrust.others {
-    Taste::coordinates => "857 682";
+    Taste::coordinates => "1011 882";
     Taste::RCMoperationKind => cyclic;
     Taste::RCMperiod => 500 ms;
+    Taste::Deadline => 0 ms;
     Taste::InterfaceName => "readStabilizerSendThrust";
   };
 PROPERTIES
@@ -54,7 +57,7 @@ END interfaceview;
 SYSTEM IMPLEMENTATION interfaceview.others
 SUBCOMPONENTS
   SocketClient : SYSTEM interfaceview::IV::SocketClient.others {
-    Taste::coordinates => "857 544 2042 1288";
+    Taste::coordinates => "1011 744 2196 1488";
   };
 END interfaceview.others;
 
