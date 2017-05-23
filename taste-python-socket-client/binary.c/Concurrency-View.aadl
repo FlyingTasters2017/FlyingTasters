@@ -1,0 +1,94 @@
+--  TASTE - Warning: This is NOT the real Concurrency view  --
+--  This file was automatically generated and should remain read-only
+--  Open it with TASTE-IV
+--  The only intended use of this file is visualization - not processing.
+
+package generated_cv::IV::ConcurrencyView
+public
+with dataview; 
+with exportedComponent::FV;
+with taste;
+
+  --{ interfaceview obj6480 10 10
+  --TASTE-generated concurrency view
+  --For visualization purposes.
+  --}
+
+  system exportedComponent
+  end exportedComponent;
+
+  system implementation exportedComponent.others
+    subcomponents
+	socketclient : system interfaceview::IV::THREAD_socketclient.others;
+	x86_partition_taste_api : system interfaceview::IV::PASSIVE_x86_partition_taste_api.others;
+    connections
+	unprotected_socketclient_has_pending_msg : subprogram access PASSIVE_x86_partition_taste_api.socketclient_has_pending_msg -> THREAD_socketclient.check_queue;
+  end exportedComponent.others;
+
+  system THREAD_socketclient
+    features
+	readStabilizerSendThrust : provides subprogram access exportedComponent::fv::readStabilizerSendThrust.others
+	  { taste::Coordinates => "200 215 200 215";
+	    taste::RCMoperationKind => cyclic;
+	    taste::RCMperiod => 500;};
+	check_queue : requires subprogram access exportedComponent::fv::socketclient_has_pending_msg.others
+	  { taste::Coordinates => "450 215 450 215";
+	    taste::RCMoperationKind => unprotected;
+	    taste::RCMperiod => 0;};
+    properties
+	source_language => C;
+	taste::coordinates => "200 200 450 245";
+	taste::instance_name => "socketclient";
+  end THREAD_socketclient;
+
+  system implementation THREAD_socketclient.others
+    subcomponents
+	readStabilizerSendThrust_impl : subprogram exportedComponent::FV::readStabilizerSendThrust.others
+	  { compute_execution_time => 0ms..0ms;};
+	check_queue_impl : subprogram exportedComponent::FV::socketclient_has_pending_msg.others
+	  { compute_execution_time => 0ms..0ms;};
+    connections
+	subprogram access readStabilizerSendThrust_impl -> readStabilizerSendThrust;
+	subprogram access check_queue_impl -> check_queue;
+  end THREAD_socketclient.others;
+
+  system PASSIVE_x86_partition_taste_api
+    features
+	socketclient_has_pending_msg : provides subprogram access exportedComponent::fv::check_queue.others
+	  { taste::Coordinates => "600 215 600 215";
+	    taste::RCMoperationKind => unprotected;
+	    taste::RCMperiod => 0;};
+    properties
+	source_language => C;
+	taste::coordinates => "600 200 850 245";
+	taste::instance_name => "x86_partition_taste_api";
+  end PASSIVE_x86_partition_taste_api;
+
+  system implementation PASSIVE_x86_partition_taste_api.others
+    subcomponents
+	socketclient_has_pending_msg_impl : subprogram exportedComponent::FV::check_queue.others
+	  { compute_execution_time => 0ms..0ms;};
+    connections
+	subprogram access socketclient_has_pending_msg_impl -> socketclient_has_pending_msg;
+  end PASSIVE_x86_partition_taste_api.others;
+
+properties
+  taste::coordinates => "0 0 2970 2100";
+
+end generated_cv::IV;
+
+package exportedComponent::FV
+public
+with dataview;
+with taste;
+
+  subprogram readStabilizerSendThrust
+  end readStabilizerSendThrust;
+
+  subprogram socketclient_has_pending_msg
+  end socketclient_has_pending_msg;
+
+  subprogram check_queue
+  end check_queue;
+
+end exportedComponent::FV;

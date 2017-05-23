@@ -1,0 +1,27 @@
+--  This file was generated automatically: DO NOT MODIFY IT !
+
+--  This file contains a part of the system CONCURRENCY VIEW.
+--  It is an input file for OCARINA.
+
+package socketclient_CV_Thread
+public
+	with Deployment;
+	with process_package;
+	with Dataview;
+
+THREAD socketclient_socketclient
+END socketclient_socketclient;
+
+THREAD IMPLEMENTATION socketclient_socketclient.others
+PROPERTIES
+	Initialize_Entrypoint_Source_Text => "init_socketclient";
+	Compute_Entrypoint_Source_Text => "po_hi_c_socketclient_readStabilizerSendThrust";
+	Dispatch_Protocol => Periodic;
+	Period            => 500 ms;
+	Dispatch_Offset   => 0 ms;
+	Compute_Execution_Time => 0 ms .. 10 ms;
+	Source_Stack_Size => 50 KByte;
+	Priority => 7;
+END socketclient_socketclient.others;
+
+end socketclient_CV_Thread;

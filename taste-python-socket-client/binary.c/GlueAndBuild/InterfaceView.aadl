@@ -1,0 +1,75 @@
+---------------------------------------------------
+-- AADL2.0
+-- TASTE
+-- 
+-- 
+---------------------------------------------------
+
+PACKAGE interfaceview::FV::SocketClient
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_readStabilizerSendThrust
+END PI_readStabilizerSendThrust;
+
+SUBPROGRAM IMPLEMENTATION PI_readStabilizerSendThrust.others
+END PI_readStabilizerSendThrust.others;
+
+END interfaceview::FV::SocketClient;
+
+PACKAGE interfaceview::IV
+PUBLIC
+
+WITH interfaceview::FV::SocketClient;
+WITH interfaceview::FV;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SYSTEM SocketClient
+FEATURES
+  PI_readStabilizerSendThrust : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::SocketClient::PI_readStabilizerSendThrust.others {
+    Taste::coordinates => "857 682";
+    Taste::RCMoperationKind => cyclic;
+    Taste::RCMperiod => 500 ms;
+    Taste::InterfaceName => "readStabilizerSendThrust";
+  };
+PROPERTIES
+  Source_Language => (C);
+END SocketClient;
+
+SYSTEM IMPLEMENTATION SocketClient.others
+SUBCOMPONENTS
+  readStabilizerSendThrust_impl : SUBPROGRAM interfaceview::FV::SocketClient::PI_readStabilizerSendThrust.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_readStabilizerSendThrust_impl : SUBPROGRAM ACCESS readStabilizerSendThrust_impl -> PI_readStabilizerSendThrust;
+END SocketClient.others;
+
+SYSTEM interfaceview
+END interfaceview;
+
+SYSTEM IMPLEMENTATION interfaceview.others
+SUBCOMPONENTS
+  SocketClient : SYSTEM interfaceview::IV::SocketClient.others {
+    Taste::coordinates => "857 544 2042 1288";
+  };
+END interfaceview.others;
+
+PROPERTIES
+  Taste::dataView => ("DataView");
+  Taste::dataViewPath => ("DataView.aadl");
+  Taste::coordinates => "0 0 2970 2100";
+  Taste::version => "1.3.19";
+END interfaceview::IV;
+
+PACKAGE interfaceview::FV
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+END interfaceview::FV;
+
