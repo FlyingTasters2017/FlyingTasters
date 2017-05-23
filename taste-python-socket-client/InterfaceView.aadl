@@ -32,7 +32,7 @@ WITH TASTE_IV_Properties;
 SYSTEM SocketClient
 FEATURES
   PI_readStabilizerSendThrust : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::SocketClient::PI_readStabilizerSendThrust.others {
-    Taste::coordinates => "857 477";
+    Taste::coordinates => "1267 1077";
     Taste::RCMoperationKind => cyclic;
     Taste::RCMperiod => 500 ms;
     Taste::Deadline => 0 ms;
@@ -57,7 +57,7 @@ END interfaceview;
 SYSTEM IMPLEMENTATION interfaceview.others
 SUBCOMPONENTS
   SocketClient : SYSTEM interfaceview::IV::SocketClient.others {
-    Taste::coordinates => "857 339 2042 1083";
+    Taste::coordinates => "1267 939 2452 1683";
   };
 END interfaceview.others;
 
