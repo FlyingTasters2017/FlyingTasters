@@ -121,16 +121,19 @@ class LoggingExample:
         at the speficied address)"""
         print('Connection to %s failed: %s' % (link_uri, msg))
         self.is_connected = False
+        sys.exit(1)
 
     def _connection_lost(self, link_uri, msg):
         """Callback when disconnected after a connection has been made (i.e
         Crazyflie moves out of range)"""
         print('Connection to %s lost: %s' % (link_uri, msg))
+        sys.exit(1)
 
     def _disconnected(self, link_uri):
         """Callback when the Crazyflie is disconnected (called in all cases)"""
         print('Disconnected from %s' % link_uri)
         self.is_connected = False
+        sys.exit(1)
 
 
 if __name__ == '__main__':
