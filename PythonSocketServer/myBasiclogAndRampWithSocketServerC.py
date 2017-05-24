@@ -30,6 +30,7 @@ and prints it to the console. After 10s the application disconnects and exits.
 import json
 import socket
 import logging
+import sys
 
 import cflib.crtp  # noqa
 from cflib.crazyflie import Crazyflie
