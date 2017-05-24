@@ -15,8 +15,8 @@ extern "C" {
 */
 void init_x86_partition_taste_api();
 
-void x86_partition_taste_api_socketclient_has_pending_msg (void *pmy_res, size_t *psize_my_res);
-extern void x86_partition_taste_api_PI_socketclient_has_pending_msg (asn1SccT_Boolean *);
+void x86_partition_taste_api_supervisor_has_pending_msg (void *pmy_res, size_t *psize_my_res);
+extern void x86_partition_taste_api_PI_supervisor_has_pending_msg (asn1SccT_Boolean *);
 #ifdef __cplusplus
 }
 #endif

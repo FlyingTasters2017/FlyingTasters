@@ -1,0 +1,1 @@
+A=$(dirname "$0") ; cd "$A/gcs-GUI" && PYTHONPATH=$(taste-config --prefix)/share:$PYTHONPATH taste-gui "$@"

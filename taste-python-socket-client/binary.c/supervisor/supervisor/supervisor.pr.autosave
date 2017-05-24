@@ -1,0 +1,32 @@
+/* CIF PROCESS (250, 150), (150, 75) */
+process supervisor;
+    /* CIF START (530, 106), (70, 35) */
+    START;
+        /* CIF PROCEDURECALL (485, 161), (160, 35) */
+        call writeln('SDl startup');
+        /* CIF NEXTSTATE (530, 211), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (965, 122), (70, 35) */
+    state Running;
+        /* CIF input (895, 177), (70, 35) */
+        input pulse;
+            /* CIF PROCEDURECALL (810, 232), (241, 35) */
+            call readStabilizerSendThrust(ref_thrus);
+        /* CIF input (1021, 177), (139, 35) */
+        input takeoff(ref_thrust);
+    endstate;
+    /* CIF state (1093, 64), (70, 35) */
+    state Wait;
+    endstate;
+    /* CIF state (530, 211), (70, 35) */
+    state Wait;
+        /* CIF input (460, 266), (70, 35) */
+        input pulse;
+            /* CIF NEXTSTATE (460, 321), (70, 35) */
+            NEXTSTATE Wait;
+        /* CIF input (540, 266), (139, 35) */
+        input takeoff(ref_thrust);
+            /* CIF NEXTSTATE (575, 321), (70, 35) */
+            NEXTSTATE Running;
+    endstate;
+endprocess supervisor;

@@ -17,7 +17,7 @@
 
 void x86_partition_taste_api_startup();
 
-void x86_partition_taste_api_PI_socketclient_has_pending_msg(asn1SccT_Boolean *res);
+void x86_partition_taste_api_PI_supervisor_has_pending_msg(asn1SccT_Boolean *res);
 
 #ifdef __cplusplus
 }

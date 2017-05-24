@@ -1,0 +1,30 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM supervisor;
+
+	SIGNAL pulse;
+
+	PROCEDURE readStabilizerSendThrust COMMENT '#c_predef';
+		FPAR
+			IN ref_thrust MyReal;
+ 	EXTERNAL;
+
+	/* CIF Keep Specific Geode PARAMNAMES ref_thrust */
+	SIGNAL takeoff (MyReal);
+
+	CHANNEL c
+		FROM ENV TO supervisor WITH pulse,takeoff;
+	ENDCHANNEL;
+
+	BLOCK supervisor;
+
+		SIGNALROUTE r
+			FROM ENV TO supervisor WITH pulse,takeoff;
+
+		CONNECT c and r;
+
+		PROCESS supervisor REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;

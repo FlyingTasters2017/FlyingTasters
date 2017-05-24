@@ -4,5 +4,9 @@
 --  It is an input file for the TASTE ORCHESTRATOR
 
 * x86_partition PLATFORM_LINUX32
+supervisor
+gcs
 socketclient
 x86_partition_taste_api
+vt_supervisor_pulse
+vt_supervisor_takeoff

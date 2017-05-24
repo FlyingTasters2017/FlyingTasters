@@ -1,0 +1,29 @@
+--  This file was generated automatically: DO NOT MODIFY IT !
+
+--  This file contains a part of the system CONCURRENCY VIEW.
+--  It is an input file for OCARINA.
+
+package gcs_CV_Thread
+public
+	with Deployment;
+	with process_package;
+	with Dataview;
+
+THREAD gcs_gcs
+features
+	OUTPORT_takeoff : OUT EVENT DATA PORT DataView::MyReal_Buffer.impl;
+END gcs_gcs;
+
+THREAD IMPLEMENTATION gcs_gcs.others
+PROPERTIES
+	Initialize_Entrypoint_Source_Text => "init_gcs";
+	Compute_Entrypoint_Source_Text => "po_hi_c_gcs_gui_polling_gcs";
+	Dispatch_Protocol => Periodic;
+	Period            => 40 ms;
+	Dispatch_Offset   => 0 ms;
+	Compute_Execution_Time => 1 ms .. 1 ms;
+	Source_Stack_Size => 50 KByte;
+	Priority => 1;
+END gcs_gcs.others;
+
+end gcs_CV_Thread;

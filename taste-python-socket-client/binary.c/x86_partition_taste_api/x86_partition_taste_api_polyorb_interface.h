@@ -7,8 +7,8 @@
 #include "deployment.h"
 #include "po_hi_transport.h"
 /*----------------------------------------------------
--- Unprotected Provided Interface "socketclient_has_pending_msg"
+-- Unprotected Provided Interface "supervisor_has_pending_msg"
 ----------------------------------------------------*/
-void sync_x86_partition_taste_api_socketclient_has_pending_msg(void *, size_t *);
+void sync_x86_partition_taste_api_supervisor_has_pending_msg(void *, size_t *);
 
 #endif

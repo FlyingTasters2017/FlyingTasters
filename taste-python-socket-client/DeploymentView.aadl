@@ -33,19 +33,29 @@ END Node1;
 
 SYSTEM IMPLEMENTATION Node1.others
 SUBCOMPONENTS
-  IV_SocketClient : SYSTEM interfaceview::IV::SocketClient.others {
-    Taste::coordinates => "1226 1477 1898 1672";
-    Taste::FunctionName => "SocketClient";
+  IV_supervisor : SYSTEM interfaceview::IV::supervisor.others {
+    Taste::coordinates => "918 1016 1257 1282";
+    Taste::FunctionName => "supervisor";
+  };
+  IV_gcs : SYSTEM interfaceview::IV::gcs.others {
+    Taste::coordinates => "1016 1385 1313 1544";
+    Taste::FunctionName => "gcs";
+  };
+  IV_socketClient : SYSTEM interfaceview::IV::socketClient.others {
+    Taste::coordinates => "1590 1093 1939 1334";
+    Taste::FunctionName => "socketClient";
   };
   x86_partition : PROCESS deploymentview::DV::Node1::x86_partition.others {
-    Taste::coordinates => "853 1205 2317 1869";
+    Taste::coordinates => "860 823 2223 1595";
     Deployment::Port_Number => 0;
   };
   x86_linux32 : PROCESSOR ocarina_processors_x86::x86.linux32 {
-    Taste::coordinates => "670 1015 2500 1964";
+    Taste::coordinates => "690 602 2393 1705";
   };
 PROPERTIES
-  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_SocketClient;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_supervisor;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_gcs;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_socketClient;
   Actual_Processor_Binding => (reference (x86_linux32)) APPLIES TO x86_partition;
 END Node1.others;
 
@@ -55,7 +65,7 @@ END deploymentview;
 SYSTEM IMPLEMENTATION deploymentview.others
 SUBCOMPONENTS
   Node1 : SYSTEM Node1.others {
-    Taste::coordinates => "441 744 2729 2100";
+    Taste::coordinates => "477 287 2606 1862";
   };
   interfaceview : SYSTEM interfaceview::IV::interfaceview.others;
 END deploymentview.others;
@@ -64,7 +74,6 @@ PROPERTIES
   Taste::coordinates => "0 0 2970 2100";
   Taste::version => "1.3.19";
   Taste::interfaceView => "InterfaceView.aadl";
-  Taste::HWLibraries => ("../../tool-inst/share/ocarina/AADLv2/ocarina_components.aadl");
+  Taste::HWLibraries => ("../tool-inst/share/ocarina/AADLv2/ocarina_components.aadl");
 END deploymentview::DV;
 
--- copied aadl libraries

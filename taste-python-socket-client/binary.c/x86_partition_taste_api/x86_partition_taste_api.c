@@ -19,7 +19,16 @@ void x86_partition_taste_api_startup()
     #endif
 }
 
-void x86_partition_taste_api_PI_socketclient_has_pending_msg(asn1SccT_Boolean *res) {
+void x86_partition_taste_api_PI_supervisor_has_pending_msg(asn1SccT_Boolean *res) {
     /* Check all incoming queues (if any) for a pending message */
+    *res = 0;
+    if (__po_hi_gqueue_get_count(x86_partition_vt_supervisor_takeoff_k, vt_supervisor_takeoff_local_inport_artificial_takeoff)) {
+        *res = 1;
+        #ifdef __unix__
+            if (debugCheckQ) {
+                printf ("[DEBUG] Pending message takeoff in function supervisor\n");
+            }
+        #endif
+    }
 }
 

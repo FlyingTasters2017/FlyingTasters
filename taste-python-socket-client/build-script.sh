@@ -56,6 +56,11 @@ SKELS="./"
 # Update the data view with local paths
 taste-update-data-view
 
+# Generate code for OpenGEODE function supervisor
+cd "$SKELS"/supervisor && opengeode --toAda supervisor.pr system_structure.pr && cd $OLDPWD
+
+cd "$SKELS" && rm -f supervisor.zip && zip supervisor supervisor/* && cd $OLDPWD
+
 cd "$SKELS" && rm -f socketclient.zip && zip socketclient socketclient/* && cd $OLDPWD
 
 [ ! -z "$CLEANUP" ] && rm -rf binary*
@@ -90,5 +95,6 @@ cd "$CWD" && assert-builder-ocarina.py \
 	--interfaceView "$INTERFACEVIEW" \
 	--deploymentView "$DEPLOYMENTVIEW" \
 	-o "$OUTPUTDIR" \
+	--subAda supervisor:"$SKELS"/supervisor.zip \
 	--subC socketclient:"$SKELS"/socketclient.zip \
 	$ORCHESTRATOR_OPTIONS
