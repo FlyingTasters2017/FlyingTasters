@@ -1,0 +1,4 @@
+2017-05-24 11:13:58,530 - INFO - msccore.io.mscio: Start to importing msc from file 'ground_trace_201705241044.msc'
+2017-05-24 11:13:58,575 - INFO - mscparser.mscmaker: Find and create document 'automade'
+2017-05-24 11:27:34,230 - INFO - msccore.io.mscio: Start to importing msc from file 'ground_trace_201705241044.msc'
+2017-05-24 11:27:34,312 - INFO - mscparser.mscmaker: Find and create document 'automade'

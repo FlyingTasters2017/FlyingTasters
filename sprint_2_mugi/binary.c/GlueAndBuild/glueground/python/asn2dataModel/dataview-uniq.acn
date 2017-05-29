@@ -1,0 +1,20 @@
+TASTE-Dataview DEFINITIONS ::= BEGIN
+    MyInteger[]
+    MyReal[]
+    MyPWM[]
+    MyTrajectory[]
+    MyStates[]
+    MyBool[]
+    MyEnum[]
+    MySeq[]
+    MyChoice[]
+    MySeqOf[]
+    MyOctStr[]
+END
+TASTE-BasicTypes DEFINITIONS ::= BEGIN
+    T-Int32[]
+    T-UInt32[]
+    T-Int8[]
+    T-UInt8[]
+    T-Boolean[]
+END

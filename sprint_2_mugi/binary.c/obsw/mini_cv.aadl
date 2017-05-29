@@ -1,0 +1,69 @@
+-- Automatically Generated - For use with AADL2GlueC only - Do NOT modify! --
+
+SUBPROGRAM Takeoff
+FEATURES
+	Trajectory:IN PARAMETER DataView::MyTrajectory {encoding=>UPER;};
+END Takeoff;
+
+SUBPROGRAM IMPLEMENTATION Takeoff.Ada
+PROPERTIES
+	FV_Name => "obsw";
+	Source_Language => Ada;
+END Takeoff.Ada;
+
+SUBPROGRAM Pulse
+END Pulse;
+
+SUBPROGRAM IMPLEMENTATION Pulse.Ada
+PROPERTIES
+	FV_Name => "obsw";
+	Source_Language => Ada;
+END Pulse.Ada;
+
+SUBPROGRAM Compute_PWM
+FEATURES
+	Trajectory:OUT PARAMETER DataView::MyTrajectory {encoding=>NATIVE;};
+	States:OUT PARAMETER DataView::MyStates {encoding=>NATIVE;};
+	PWM:IN PARAMETER DataView::MyPWM {encoding=>NATIVE;};
+END Compute_PWM;
+
+SUBPROGRAM IMPLEMENTATION Compute_PWM.Ada
+PROPERTIES
+	FV_Name => "obsw";
+	Source_Language => Ada;
+END Compute_PWM.Ada;
+
+SUBPROGRAM Respond_state
+FEATURES
+	PWM:OUT PARAMETER DataView::MyPWM {encoding=>NATIVE;};
+	States:IN PARAMETER DataView::MyStates {encoding=>NATIVE;};
+END Respond_state;
+
+SUBPROGRAM IMPLEMENTATION Respond_state.Ada
+PROPERTIES
+	FV_Name => "obsw";
+	Source_Language => Ada;
+END Respond_state.Ada;
+
+SUBPROGRAM GetHeight
+FEATURES
+	Height:OUT PARAMETER DataView::MyReal {encoding=>NATIVE;};
+END GetHeight;
+
+SUBPROGRAM IMPLEMENTATION GetHeight.Ada
+PROPERTIES
+	FV_Name => "obsw";
+	Source_Language => Ada;
+END GetHeight.Ada;
+
+SUBPROGRAM check_queue
+FEATURES
+	res:IN PARAMETER DataView::T_Boolean {encoding=>NATIVE;};
+END check_queue;
+
+SUBPROGRAM IMPLEMENTATION check_queue.Ada
+PROPERTIES
+	FV_Name => "obsw";
+	Source_Language => Ada;
+END check_queue.Ada;
+

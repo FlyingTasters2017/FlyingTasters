@@ -1,0 +1,15 @@
+-- Automatically Generated - For use with AADL2GlueC only - Do NOT modify! --
+
+SUBPROGRAM Compute_PWM
+FEATURES
+	Trajectory:IN PARAMETER DataView::MyTrajectory {encoding=>NATIVE;};
+	States:IN PARAMETER DataView::MyStates {encoding=>NATIVE;};
+	PWM:OUT PARAMETER DataView::MyPWM {encoding=>NATIVE;};
+END Compute_PWM;
+
+SUBPROGRAM IMPLEMENTATION Compute_PWM.Simulink
+PROPERTIES
+	FV_Name => "controller";
+	Source_Language => Simulink;
+END Compute_PWM.Simulink;
+
