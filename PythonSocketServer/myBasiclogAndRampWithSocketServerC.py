@@ -31,6 +31,7 @@ import json
 import socket
 import logging
 import sys
+import time
 
 import cflib.crtp  # noqa
 from cflib.crazyflie import Crazyflie
@@ -46,7 +47,7 @@ class LoggingExample:
     link uri and disconnects after 5s.
     """
 
-    def __init__(self, link_uri):
+    def __init__(self, link_uri, socket):
         """ Initialize and run the example with the specified link_uri """
 
         # Create a Crazyflie object without specifying any cache dirs
@@ -62,17 +63,19 @@ class LoggingExample:
 
         # Try to connect to the Crazyflie
         self._cf.open_link(link_uri)
+        self.is_connected = False
+        self._socket = socket
 
-        # Variable used to keep main loop occupied until disconnect
-        self.is_connected = True
 
     def _connected(self, link_uri):
         """ This callback is called form the Crazyflie API when a Crazyflie
         has been connected and the TOCs have been downloaded."""
         print('Connected to %s' % link_uri)
 
+        self.is_connected = True
+        print("socket", self._socket)
         # The definition of the logconfig can be made before connecting
-        self._lg_stab = LogConfig(name='Stabilizer', period_in_ms=100)
+        self._lg_stab = LogConfig(name='Stabilizer', period_in_ms=1000)
         self._lg_stab.add_variable('stabilizer.roll', 'float')
         self._lg_stab.add_variable('stabilizer.pitch', 'float')
         self._lg_stab.add_variable('stabilizer.yaw', 'float')
@@ -121,20 +124,30 @@ class LoggingExample:
         """Callback when connection initial connection fails (i.e no Crazyflie
         at the speficied address)"""
         print('Connection to %s failed: %s' % (link_uri, msg))
+        print('disconnected 1')
         self.is_connected = False
-        sys.exit(1)
+        self._socket.close()
+        print("socket", self._socket)
+        #sys.exit(10)
+
 
     def _connection_lost(self, link_uri, msg):
         """Callback when disconnected after a connection has been made (i.e
         Crazyflie moves out of range)"""
         print('Connection to %s lost: %s' % (link_uri, msg))
-        sys.exit(1)
+        print('disconnected 2')
+        self._socket.close()
+        print("socket", self._socket)
+        #sys.exit(2)
 
     def _disconnected(self, link_uri):
         """Callback when the Crazyflie is disconnected (called in all cases)"""
         print('Disconnected from %s' % link_uri)
+        print('disconnected 3')
         self.is_connected = False
-        sys.exit(1)
+        self._socket.close()
+        print("socket", self._socket)
+        #sys.exit(3)
 
 
 if __name__ == '__main__':
@@ -148,14 +161,17 @@ if __name__ == '__main__':
     # Initialize the low-level drivers (don't list the debug drivers)
     cflib.crtp.init_drivers(enable_debug_driver=False)
     #Insert correct Crazyflie URI
-    le = LoggingExample("radio://0/82/250K")
+    le = LoggingExample("radio://0/82/250K",socket= mySocket)
+    #time.sleep(10)
     #Init default thrust
     thrust = 0
-    while True:
+    while not mySocket._closed:
         # Wait for 1 client connection
+        print('mySocket.listen(1)')
         mySocket.listen(1)
+        print('conn, addr = mySocket.accept()')
         conn, addr = mySocket.accept()
-
+        print('if conn:')
         # If client connected to the server
         if conn:
             print('Connected by', addr)
@@ -165,7 +181,9 @@ if __name__ == '__main__':
             thrust = conn.recv(1024)
             thrust = int.from_bytes(thrust, byteorder='big')
             # Send commands to crazyflie
-            if thrust > 0:
-                le.unlock_thrust_protection()
-                le.ramp_motors(thrust)
-            conn.close()
+        if thrust > 0:
+            le.unlock_thrust_protection()
+            le.ramp_motors(thrust)
+        conn.close()
+    sys.exit(2)
+    print('Im here in the end')
