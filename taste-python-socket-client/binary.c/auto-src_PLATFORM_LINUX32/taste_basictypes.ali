@@ -1,0 +1,120 @@
+V "GNAT Lib v6"
+A -m32
+A -gnat2012
+P ZX
+
+RN
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV SPARK_05
+
+U taste_basictypes%b	taste_basictypes.adb	c31032b5 NE OO PK KU
+W adaasn1rtl%s		adaasn1rtl.adb		adaasn1rtl.ali
+W system.unsigned_types%s  s-unstyp.ads		s-unstyp.ali
+
+U taste_basictypes%s	taste_basictypes.ads	a8696944 EE NE OO PK KU
+W adaasn1rtl%s		adaasn1rtl.adb		adaasn1rtl.ali
+W system%s		system.ads		system.ali
+
+D ada.ads		20070406091342 3ffc8e18 ada%s
+D a-charac.ads		20070912115821 2d3ec45b ada.characters%s
+D a-chlat1.ads		20140225151544 66457d31 ada.characters.latin_1%s
+D adaasn1rtl.ads	20170524151909 78aa37f4 adaasn1rtl%s
+D interfac.ads		20151118101227 4be8ce1b interfaces%s
+D system.ads		20151123113124 c6f79445 system%s
+D s-unstyp.ads		20140731130224 9d58a4c0 system.unsigned_types%s
+D taste_basictypes.ads	20170524151909 1634caf5 taste_basictypes%s
+D taste_basictypes.adb	20170524151909 ad8ecfb4 taste_basictypes%b
+X 4 adaasn1rtl.ads
+7K9*adaasn1rtl 945e15 8|2w6 3r5 4r10 5r10 6r10 7r10 8r10 18r27 28r75 37r28
+. 47r77 56r26 66r73 75r27 85r75 94r29 9|2w6 3r10 4r10 5r10 12r36 21r75 23r11
+. 31r12 47r77 49r11 57r12 73r73 75r11 83r12 99r75 101r11 109r12
+14M9*BIT 8|8r21 9|5r21
+15A9*BitArray(14M9)<integer> 8|5r21 9|12r47
+19M12*Asn1Byte{5|62M9}
+20A9*OctetBuffer(19M12)<integer> 8|4r21
+22I12*Asn1Int{5|54I9} 8|7r21 18r38 37r39 56r37 75r38 9|4r21
+23M12*Asn1UInt{5|76M9} 8|6r21 9|3r21
+26B12*Asn1Boolean{boolean} 8|94r40
+88R10*ASN1_RESULT 91e15 8|28r86 47r88 66r84 85r86 9|21r86 23r22 31r23 47r88
+. 49r22 57r23 73r84 75r22 83r23 99r86 101r22 109r23
+89b10*Success{boolean} 9|31m36 57m36 83m36 109m36
+90i10*ErrorCode{integer} 9|31m91 57m81 83m77 109m74
+X 5 interfac.ads
+54I9*Integer_64<long_long_integer>
+62M9*Unsigned_8
+76M9*Unsigned_64
+X 6 system.ads
+37K9*System 156e11 8|9w6
+X 8 taste_basictypes.ads
+13K9*TASTE_BasicTypes 116l5 116e21 9|8b14 133l5 133t21
+18I9*asn1SccT_Int32{4|22I12} 26r37 28r52 30r46 9|15r37 21r52 35r46
+20i1*asn1SccT_Int32_REQUIRED_BYTES_FOR_ENCODING{integer}
+21i1*asn1SccT_Int32_REQUIRED_BITS_FOR_ENCODING{integer}
+22i1*asn1SccT_Int32_REQUIRED_BYTES_FOR_ACN_ENCODING{integer}
+23i1*asn1SccT_Int32_REQUIRED_BITS_FOR_ACN_ENCODING{integer}
+24i1*asn1SccT_Int32_REQUIRED_BYTES_FOR_XER_ENCODING{integer}
+26V10*asn1SccT_Int32_Init{18I9} 9|15b10 19l5 19t24
+28V10*asn1SccT_Int32_IsConstraintValid{4|88R10} 28>43 9|21b10 33l5 33t37
+28i43 val{18I9} 9|21b43 31r63 31r71
+30V10*asn1SccT_Int32_Equal{boolean} 30>31 30>37 9|35b10 39l5 39t25
+30i31 val1{18I9} 9|35b31 38r12
+30i37 val2{18I9} 9|35b37 38r19
+34i1*ERR_asn1SccT_Int32{integer} 9|31r104
+37I9*asn1SccT_UInt32{4|22I12} 45r38 47r53 49r47 9|41r38 47r53 61r47
+39i1*asn1SccT_UInt32_REQUIRED_BYTES_FOR_ENCODING{integer}
+40i1*asn1SccT_UInt32_REQUIRED_BITS_FOR_ENCODING{integer}
+41i1*asn1SccT_UInt32_REQUIRED_BYTES_FOR_ACN_ENCODING{integer}
+42i1*asn1SccT_UInt32_REQUIRED_BITS_FOR_ACN_ENCODING{integer}
+43i1*asn1SccT_UInt32_REQUIRED_BYTES_FOR_XER_ENCODING{integer}
+45V10*asn1SccT_UInt32_Init{37I9} 9|41b10 45l5 45t25
+47V10*asn1SccT_UInt32_IsConstraintValid{4|88R10} 47>44 9|47b10 59l5 59t38
+47i44 val{37I9} 9|47b44 57r53 57r61
+49V10*asn1SccT_UInt32_Equal{boolean} 49>32 49>38 9|61b10 65l5 65t26
+49i32 val1{37I9} 9|61b32 64r12
+49i38 val2{37I9} 9|61b38 64r19
+53i1*ERR_asn1SccT_UInt32{integer} 9|57r94
+56I9*asn1SccT_Int8{4|22I12} 64r36 66r51 68r45 9|67r36 73r51 87r45
+58i1*asn1SccT_Int8_REQUIRED_BYTES_FOR_ENCODING{integer}
+59i1*asn1SccT_Int8_REQUIRED_BITS_FOR_ENCODING{integer}
+60i1*asn1SccT_Int8_REQUIRED_BYTES_FOR_ACN_ENCODING{integer}
+61i1*asn1SccT_Int8_REQUIRED_BITS_FOR_ACN_ENCODING{integer}
+62i1*asn1SccT_Int8_REQUIRED_BYTES_FOR_XER_ENCODING{integer}
+64V10*asn1SccT_Int8_Init{56I9} 9|67b10 71l5 71t23
+66V10*asn1SccT_Int8_IsConstraintValid{4|88R10} 66>42 9|73b10 85l5 85t36
+66i42 val{56I9} 9|73b42 83r56 83r64
+68V10*asn1SccT_Int8_Equal{boolean} 68>30 68>36 9|87b10 91l5 91t24
+68i30 val1{56I9} 9|87b30 90r12
+68i36 val2{56I9} 9|87b36 90r19
+72i1*ERR_asn1SccT_Int8{integer} 9|83r90
+75I9*asn1SccT_UInt8{4|22I12} 83r37 85r52 87r46 9|93r37 99r52 113r46
+77i1*asn1SccT_UInt8_REQUIRED_BYTES_FOR_ENCODING{integer}
+78i1*asn1SccT_UInt8_REQUIRED_BITS_FOR_ENCODING{integer}
+79i1*asn1SccT_UInt8_REQUIRED_BYTES_FOR_ACN_ENCODING{integer}
+80i1*asn1SccT_UInt8_REQUIRED_BITS_FOR_ACN_ENCODING{integer}
+81i1*asn1SccT_UInt8_REQUIRED_BYTES_FOR_XER_ENCODING{integer}
+83V10*asn1SccT_UInt8_Init{75I9} 9|93b10 97l5 97t24
+85V10*asn1SccT_UInt8_IsConstraintValid{4|88R10} 85>43 9|99b10 111l5 111t37
+85i43 val{75I9} 9|99b43 109r53 109r61
+87V10*asn1SccT_UInt8_Equal{boolean} 87>31 87>37 9|113b10 117l5 117t25
+87i31 val1{75I9} 9|113b31 116r12
+87i37 val2{75I9} 9|113b37 116r19
+91i1*ERR_asn1SccT_UInt8{integer} 9|109r87
+94B9*asn1SccT_Boolean{4|26E12} 102r39 104r48 9|119r39 125r48
+96i1*asn1SccT_Boolean_REQUIRED_BYTES_FOR_ENCODING{integer}
+97i1*asn1SccT_Boolean_REQUIRED_BITS_FOR_ENCODING{integer}
+98i1*asn1SccT_Boolean_REQUIRED_BYTES_FOR_ACN_ENCODING{integer}
+99i1*asn1SccT_Boolean_REQUIRED_BITS_FOR_ACN_ENCODING{integer}
+100i1*asn1SccT_Boolean_REQUIRED_BYTES_FOR_XER_ENCODING{integer}
+102V10*asn1SccT_Boolean_Init{94E9} 9|119b10 123l5 123t26
+104V10*asn1SccT_Boolean_Equal{boolean} 104>33 104>39 9|125b10 129l5 129t27
+104b33 val1{94E9} 9|125b33 128r12
+104b39 val2{94E9} 9|125b39 128r19
+X 9 taste_basictypes.adb
+11I9 T_Boolean_pattern_array_range{natural} 12r56
+12A9 T_Boolean_pattern_array{4|15A9}<integer> 13r28 13r55
+13a1 T_Boolean_pattern{12A9}
+23r5 ret{4|88R10} 31m5 32r12
+49r5 ret{4|88R10} 57m5 58r12
+75r5 ret{4|88R10} 83m5 84r12
+101r5 ret{4|88R10} 109m5 110r12
+

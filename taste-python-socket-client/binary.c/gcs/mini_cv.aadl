@@ -1,0 +1,22 @@
+-- Automatically Generated - For use with AADL2GlueC only - Do NOT modify! --
+
+SUBPROGRAM takeoff
+FEATURES
+	ref_thrust:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+END takeoff;
+
+SUBPROGRAM IMPLEMENTATION takeoff.GUI_RI
+PROPERTIES
+	FV_Name => "gcs";
+	Source_Language => GUI_RI;
+END takeoff.GUI_RI;
+
+SUBPROGRAM gui_polling_gcs
+END gui_polling_gcs;
+
+SUBPROGRAM IMPLEMENTATION gui_polling_gcs.GUI_PI
+PROPERTIES
+	FV_Name => "gcs";
+	Source_Language => GUI_PI;
+END gui_polling_gcs.GUI_PI;
+

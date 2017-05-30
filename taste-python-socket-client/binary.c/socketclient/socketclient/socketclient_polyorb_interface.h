@@ -6,14 +6,9 @@
 
 #include "deployment.h"
 #include "po_hi_transport.h"
-#include "../../x86_partition_taste_api/x86_partition_taste_api_polyorb_interface.h"
 /*----------------------------------------------------
--- Asynchronous Provided Interface "readStabilizerSendThrust"
+-- Unprotected Provided Interface "readStabilizerSendThrust"
 ----------------------------------------------------*/
-void po_hi_c_socketclient_readstabilizersendthrust(__po_hi_task_id);
+void sync_socketclient_readStabilizerSendThrust(void *, size_t);
 
-/* ------------------------------------------------------
---  Synchronous Required Interface "check_queue"
------------------------------------------------------- */
-void vm_socketclient_check_queue(void *, size_t *);
 #endif

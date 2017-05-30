@@ -23,7 +23,7 @@ void init_x86_partition_taste_api()
     }
 }
 
-void x86_partition_taste_api_socketclient_has_pending_msg (void *pmy_res, size_t *psize_my_res)
+void x86_partition_taste_api_supervisor_has_pending_msg (void *pmy_res, size_t *psize_my_res)
 {
 
     /* Output variable(s): developer has to fill them */
@@ -33,7 +33,7 @@ void x86_partition_taste_api_socketclient_has_pending_msg (void *pmy_res, size_t
     asn1SccT_Boolean_Initialize(&OUT_res);
 #endif
     /* Call to User-defined function */
-    x86_partition_taste_api_PI_socketclient_has_pending_msg (&OUT_res);
+    x86_partition_taste_api_PI_supervisor_has_pending_msg (&OUT_res);
 
     /* Encode each output parameter */
 

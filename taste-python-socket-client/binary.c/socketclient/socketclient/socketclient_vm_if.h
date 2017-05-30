@@ -15,8 +15,8 @@ extern "C" {
 */
 void init_socketclient();
 
-void socketclient_readStabilizerSendThrust ();
-extern void socketclient_PI_readStabilizerSendThrust ();
+void socketclient_readStabilizerSendThrust (void *pmy_ref_thrust, size_t size_my_ref_thrust);
+extern void socketclient_PI_readStabilizerSendThrust (const asn1SccMyReal *);
 #ifdef __cplusplus
 }
 #endif

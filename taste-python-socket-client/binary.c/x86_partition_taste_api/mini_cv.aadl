@@ -1,13 +1,13 @@
 -- Automatically Generated - For use with AADL2GlueC only - Do NOT modify! --
 
-SUBPROGRAM socketclient_has_pending_msg
+SUBPROGRAM supervisor_has_pending_msg
 FEATURES
 	res:OUT PARAMETER DataView::T_Boolean {encoding=>NATIVE;};
-END socketclient_has_pending_msg;
+END supervisor_has_pending_msg;
 
-SUBPROGRAM IMPLEMENTATION socketclient_has_pending_msg.C
+SUBPROGRAM IMPLEMENTATION supervisor_has_pending_msg.C
 PROPERTIES
 	FV_Name => "x86_partition_taste_api";
 	Source_Language => C;
-END socketclient_has_pending_msg.C;
+END supervisor_has_pending_msg.C;
 

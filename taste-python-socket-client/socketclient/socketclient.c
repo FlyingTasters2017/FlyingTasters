@@ -15,10 +15,9 @@ void socketclient_startup()
        but do not make any call to a required interface. */
 }
 
-void socketclient_PI_readStabilizerSendThrust()
+void socketclient_PI_readStabilizerSendThrust(const asn1SccMyReal *IN_ref_thrust)
 {
-/* Write your code here! */
-//int main(int argc, char *argv[]) {
+  //int main(int argc, char *argv[]) {
    int sockfd, portno, n, thrust;
    struct sockaddr_in serv_addr;
    struct hostent *server;
@@ -36,7 +35,7 @@ void socketclient_PI_readStabilizerSendThrust()
       exit(1);
    }
 
-   server = gethostbyname("localhost");
+   server = gethostbyname("127.0.0.1");
 
    if (server == NULL) {
       fprintf(stderr,"ERROR, no such host\n");
@@ -65,7 +64,7 @@ void socketclient_PI_readStabilizerSendThrust()
    /* Print received message */
    printf("%s\n",buffer);
 
-   thrust = htonl(10000);
+   thrust = htonl(*IN_ref_thrust);
    sendData = (char*)&thrust;
 
    /* Send message to the server */

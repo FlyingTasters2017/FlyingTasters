@@ -1,0 +1,42 @@
+-- Automatically Generated - For use with AADL2GlueC only - Do NOT modify! --
+
+SUBPROGRAM artificial_pulse
+END artificial_pulse;
+
+SUBPROGRAM IMPLEMENTATION artificial_pulse.C
+PROPERTIES
+	FV_Name => "vt_supervisor_pulse";
+	Source_Language => C;
+END artificial_pulse.C;
+
+SUBPROGRAM pulse
+END pulse;
+
+SUBPROGRAM IMPLEMENTATION pulse.C
+PROPERTIES
+	FV_Name => "vt_supervisor_pulse";
+	Source_Language => C;
+END pulse.C;
+
+SUBPROGRAM readStabilizerSendThrust_vt
+FEATURES
+	ref_thrust:OUT PARAMETER DataView::MyReal {encoding=>NATIVE;};
+END readStabilizerSendThrust_vt;
+
+SUBPROGRAM IMPLEMENTATION readStabilizerSendThrust_vt.C
+PROPERTIES
+	FV_Name => "vt_supervisor_pulse";
+	Source_Language => C;
+END readStabilizerSendThrust_vt.C;
+
+SUBPROGRAM check_queue_vt
+FEATURES
+	res:IN PARAMETER DataView::T_Boolean {encoding=>NATIVE;};
+END check_queue_vt;
+
+SUBPROGRAM IMPLEMENTATION check_queue_vt.C
+PROPERTIES
+	FV_Name => "vt_supervisor_pulse";
+	Source_Language => C;
+END check_queue_vt.C;
+

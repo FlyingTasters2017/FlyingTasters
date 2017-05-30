@@ -8,10 +8,10 @@
 #include "x86_partition_taste_api_vm_if.h"
 
 /*----------------------------------------------------
--- Unprotected Provided Interface "socketclient_has_pending_msg"
+-- Unprotected Provided Interface "supervisor_has_pending_msg"
 ----------------------------------------------------*/
-void sync_x86_partition_taste_api_socketclient_has_pending_msg(void *res, size_t *res_len)
+void sync_x86_partition_taste_api_supervisor_has_pending_msg(void *res, size_t *res_len)
 {
-	x86_partition_taste_api_socketclient_has_pending_msg(res, res_len);
+	x86_partition_taste_api_supervisor_has_pending_msg(res, res_len);
 }
 

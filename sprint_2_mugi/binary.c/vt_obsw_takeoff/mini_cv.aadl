@@ -1,0 +1,71 @@
+-- Automatically Generated - For use with AADL2GlueC only - Do NOT modify! --
+
+SUBPROGRAM artificial_Takeoff
+FEATURES
+	Trajectory:IN PARAMETER DataView::MyTrajectory {encoding=>UPER;};
+END artificial_Takeoff;
+
+SUBPROGRAM IMPLEMENTATION artificial_Takeoff.C
+PROPERTIES
+	FV_Name => "vt_obsw_takeoff";
+	Source_Language => C;
+END artificial_Takeoff.C;
+
+SUBPROGRAM Takeoff
+FEATURES
+	Trajectory:OUT PARAMETER DataView::MyTrajectory {encoding=>UPER;};
+END Takeoff;
+
+SUBPROGRAM IMPLEMENTATION Takeoff.C
+PROPERTIES
+	FV_Name => "vt_obsw_takeoff";
+	Source_Language => C;
+END Takeoff.C;
+
+SUBPROGRAM Compute_PWM_vt
+FEATURES
+	Trajectory:OUT PARAMETER DataView::MyTrajectory {encoding=>NATIVE;};
+	States:OUT PARAMETER DataView::MyStates {encoding=>NATIVE;};
+	PWM:IN PARAMETER DataView::MyPWM {encoding=>NATIVE;};
+END Compute_PWM_vt;
+
+SUBPROGRAM IMPLEMENTATION Compute_PWM_vt.C
+PROPERTIES
+	FV_Name => "vt_obsw_takeoff";
+	Source_Language => C;
+END Compute_PWM_vt.C;
+
+SUBPROGRAM Respond_state_vt
+FEATURES
+	PWM:OUT PARAMETER DataView::MyPWM {encoding=>NATIVE;};
+	States:IN PARAMETER DataView::MyStates {encoding=>NATIVE;};
+END Respond_state_vt;
+
+SUBPROGRAM IMPLEMENTATION Respond_state_vt.C
+PROPERTIES
+	FV_Name => "vt_obsw_takeoff";
+	Source_Language => C;
+END Respond_state_vt.C;
+
+SUBPROGRAM GetHeight_vt
+FEATURES
+	Height:OUT PARAMETER DataView::MyReal {encoding=>NATIVE;};
+END GetHeight_vt;
+
+SUBPROGRAM IMPLEMENTATION GetHeight_vt.C
+PROPERTIES
+	FV_Name => "vt_obsw_takeoff";
+	Source_Language => C;
+END GetHeight_vt.C;
+
+SUBPROGRAM check_queue_vt
+FEATURES
+	res:IN PARAMETER DataView::T_Boolean {encoding=>NATIVE;};
+END check_queue_vt;
+
+SUBPROGRAM IMPLEMENTATION check_queue_vt.C
+PROPERTIES
+	FV_Name => "vt_obsw_takeoff";
+	Source_Language => C;
+END check_queue_vt.C;
+

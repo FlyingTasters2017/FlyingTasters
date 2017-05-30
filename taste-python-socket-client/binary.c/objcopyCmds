@@ -1,2 +1,2 @@
-__x86.get_pc_thunk.bx assert_auto-src_PLATFORM_LINUX32___x86.get_pc_thunk.bx
-__x86.get_pc_thunk.ax assert_auto-src_PLATFORM_LINUX32___x86.get_pc_thunk.ax
+__x86.get_pc_thunk.bx assert_x86_partition_taste_api___x86.get_pc_thunk.bx
+__x86.get_pc_thunk.ax assert_x86_partition_taste_api___x86.get_pc_thunk.ax

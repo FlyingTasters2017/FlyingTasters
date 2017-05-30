@@ -8,7 +8,7 @@ void socketclient_startup()
        but do not make any call to a required interface. */
 }
 
-void socketclient_PI_readStabilizerSendThrust()
+void socketclient_PI_readStabilizerSendThrust(const asn1SccMyReal *IN_ref_thrust)
 {
     /* Write your code here! */
 }

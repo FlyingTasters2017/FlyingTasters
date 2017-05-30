@@ -1,0 +1,105 @@
+V "GNAT Lib v6"
+A -m32
+A -gnat2012
+P ZX
+
+RN
+RV NO_FLOATING_POINT
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_UNCHECKED_CONVERSION
+RV NO_DEFAULT_INITIALIZATION
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_ELABORATION_CODE
+RV SPARK_05
+
+U supervisor%b		supervisor.adb		96d8aad7 OO PK IL
+W ada%s			ada.ads			ada.ali
+W ada.numerics%s	a-numeri.ads		a-numeri.ali
+W ada.numerics.generic_elementary_functions%s
+W ada.unchecked_conversion%s
+W adaasn1rtl%s		adaasn1rtl.adb		adaasn1rtl.ali
+W interfaces%s		interfac.ads		interfac.ali
+W system%s		system.ads		system.ali
+W system.io%s		s-io.adb		s-io.ali
+W taste_basictypes%s	taste_basictypes.adb	taste_basictypes.ali
+W taste_dataview%s	taste_dataview.adb	taste_dataview.ali
+
+U supervisor%s		supervisor.ads		64cc177e EE NE OO PK IL
+W adaasn1rtl%s		adaasn1rtl.adb		adaasn1rtl.ali
+W taste_basictypes%s	taste_basictypes.adb	taste_basictypes.ali
+W taste_dataview%s	taste_dataview.adb	taste_dataview.ali
+
+D ada.ads		20070406091342 3ffc8e18 ada%s
+D a-charac.ads		20070912115821 2d3ec45b ada.characters%s
+D a-chlat1.ads		20140225151544 66457d31 ada.characters.latin_1%s
+D a-numeri.ads		20080324174807 bb51c45a ada.numerics%s
+D a-numaux.ads		20140801094828 243fe0b7 ada.numerics.aux%s
+D a-ngelfu.ads		20151016131424 b8fdcb46 ada.numerics.generic_elementary_functions%s
+D a-ngelfu.adb		20151020124036 5e96a931 ada.numerics.generic_elementary_functions%b
+D a-unccon.ads		20070406091342 f9eb8f06 ada.unchecked_conversion%s
+D adaasn1rtl.ads	20170524151909 78aa37f4 adaasn1rtl%s
+D interfac.ads		20151118101227 4be8ce1b interfaces%s
+D supervisor.ads	20170524151858 6d86f6e9 supervisor%s
+D supervisor.adb	20170524151857 66a8c0bd supervisor%b
+D system.ads		20151123113124 c6f79445 system%s
+D s-exctab.ads		20140225151139 54135002 system.exception_table%s
+D s-io.ads		20090409150019 9e42f74f system.io%s
+D s-stalib.ads		20151112104907 09bd3940 system.standard_library%s
+D s-unstyp.ads		20140731130224 9d58a4c0 system.unsigned_types%s
+D taste_basictypes.ads	20170524151909 1634caf5 taste_basictypes%s
+D taste_dataview.ads	20170524151909 67d41c96 taste_dataview%s
+X 1 ada.ads
+16K9*Ada 19e8 12|6r6 7r6
+X 4 a-numeri.ads
+16K13*Numerics 32e17 12|7r10
+X 6 a-ngelfu.ads
+39k22*Generic_Elementary_Functions 170e46 12|7w19
+X 8 a-unccon.ads
+20v14*Unchecked_Conversion 12|6w10
+X 9 adaasn1rtl.ads
+7K9*adaasn1rtl 945e15 11|10w6 11r5 12|13w6 14r5
+24F12*Asn1Real{long_float}
+26B12*Asn1Boolean{boolean}
+X 10 interfac.ads
+38K9*Interfaces 183e15 12|16w6 17r5
+X 11 supervisor.ads
+16K9*supervisor 41l5 41e15 12|19b14 108l5 108t15
+21U19*pulse 22i<c,supervisor_PI_pulse>26 12|30b15 40l13 40t18
+27U19*readStabilizerSendThrust 27^44 28b<c,supervisor_RI_readStabilizerSendThrust>26
+. 29r89
+27p44 ref_thrust(19|37F9)
+29U19*RIÜreadStabilizerSendThrust=29:89 12|83s25
+29p47 ref_thrust(19|37F9)
+34U19*takeoff 34^27 35i<c,supervisor_PI_takeoff>26 12|43b15 55l13 55t20
+34p27 ref_thrust(19|37F9) 12|43b23 47r40 50r40
+38U19*check_queue 38^31 39b<c,supervisor_RI_check_queue>26
+38p31 res(18|94E9)
+X 12 supervisor.adb
+20E10 States 20e35 23r17
+20n21 running{20E10} 33r22 46r22 79r39 86r39
+20n30 wait{20E10} 35r22 49r22 69r39 74r39 91r39
+21R10 ctxt_Ty 26e15 27r19
+23e9*state{20E10} 32r23 45r23 69m30 74m30 79m30 86m30 91m30
+24b9*initDone{boolean} 107m14
+25f9*ref_thrust{19|37F9} 47m26 50m26 83m58
+27r5 ctxt{21R10} 32r18 45r18 47m21 50m21 69m25 74m25 79m25 83m53 83r53 86m25
+. 91m25 107m9
+28i5 CS_Only{integer} 38r35 53r35 93r26
+29U15 runTransition 29>29 34s21 36s21 38s21 48s21 51s21 53s21 58b15 102l13
+. 102t26 106s9
+29i29 Id{integer} 58b29 59r27
+59i9 trId{integer} 61r20 62r22 68m25 73m25 78m25 85m25 90m25 94m25
+99L19 next_transition 70r30 75r30 80r30 87r30 92r30 95r30
+X 13 system.ads
+37K9*System 12|3r6 4r5 13|156e11
+X 15 s-io.ads
+37K16*IO 12|3w13 4r12 15|64e14
+44U14*Put 12|65s25
+47U14*New_Line 12|66s25
+X 18 taste_basictypes.ads
+13K9*TASTE_BasicTypes 11|7w6 8r5 12|9w6 10r5 18|116e21
+94B9*asn1SccT_Boolean{9|26E12} 11|38r43
+X 19 taste_dataview.ads
+14K9*TASTE_Dataview 11|13w6 14r5 12|11w6 12r5 19|241e19
+37F9*asn1SccMyReal{9|24F12} 11|27r63 29r66 34r46 12|25r30 43r42
+
