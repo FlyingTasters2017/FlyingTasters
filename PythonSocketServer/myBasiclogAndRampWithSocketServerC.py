@@ -148,16 +148,13 @@ if __name__ == '__main__':
     # Initialize the low-level drivers (don't list the debug drivers)
     cflib.crtp.init_drivers(enable_debug_driver=False)
     #Insert correct Crazyflie URI
-    le = LoggingExample("radio://0/83/250K")
+    le = LoggingExample("radio://0/82/250K")
     #Init default thrust
     thrust = 0
     while True:
         # Wait for 1 client connection
         mySocket.listen(1)
         conn, addr = mySocket.accept()
-
-        if le.is_connected == False:
-            le = LoggingExample("radio://0/81/250K")
 
         # If client connected to the server
         if conn:
