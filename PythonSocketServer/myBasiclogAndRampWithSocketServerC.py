@@ -148,7 +148,7 @@ if __name__ == '__main__':
     # Initialize the low-level drivers (don't list the debug drivers)
     cflib.crtp.init_drivers(enable_debug_driver=False)
     #Insert correct Crazyflie URI
-    le = LoggingExample("radio://0/81/250K")
+    le = LoggingExample("radio://0/83/250K")
     #Init default thrust
     thrust = 0
     while True:

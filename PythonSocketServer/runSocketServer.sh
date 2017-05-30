@@ -2,5 +2,6 @@
 # My first script
 #
 clear
-python3 ./myBasiclogAndRampWithSocketServerC.py
+source activate cfclient
+python ./myBasiclogAndRampWithSocketServerC.py
 echo "Hello World!"
