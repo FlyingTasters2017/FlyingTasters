@@ -1,0 +1,31 @@
+-- Automatically Generated - For use with AADL2GlueC only - Do NOT modify! --
+
+SUBPROGRAM artificial_gui_polling_gcs
+END artificial_gui_polling_gcs;
+
+SUBPROGRAM IMPLEMENTATION artificial_gui_polling_gcs.C
+PROPERTIES
+	FV_Name => "vt_gcs_gui_polling_gcs";
+	Source_Language => C;
+END artificial_gui_polling_gcs.C;
+
+SUBPROGRAM gui_polling_gcs
+END gui_polling_gcs;
+
+SUBPROGRAM IMPLEMENTATION gui_polling_gcs.C
+PROPERTIES
+	FV_Name => "vt_gcs_gui_polling_gcs";
+	Source_Language => C;
+END gui_polling_gcs.C;
+
+SUBPROGRAM takeoff_vt
+FEATURES
+	ref_thrust:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+END takeoff_vt;
+
+SUBPROGRAM IMPLEMENTATION takeoff_vt.C
+PROPERTIES
+	FV_Name => "vt_gcs_gui_polling_gcs";
+	Source_Language => C;
+END takeoff_vt.C;
+
