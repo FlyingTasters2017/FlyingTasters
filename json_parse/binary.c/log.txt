@@ -71,9 +71,9 @@ for x86_partition, identified LDFLAGS:
 From: /home/taste/Git/FlyingTasters/json_parse/binary.c/GlueAndBuild
 cp "/tmp/uniqhometasteGitFlyingTastersjson_parseInterfaceView.aadl/dataview-uniq.asn" .
 From: /home/taste/Git/FlyingTasters/json_parse/binary.c/GlueAndBuild
-aadl2glueC -o "gluex86_partition_taste_api" ../D_view.aadl "../x86_partition_taste_api/mini_cv.aadl"
-From: /home/taste/Git/FlyingTasters/json_parse/binary.c/GlueAndBuild
 aadl2glueC -o "gluefunction1" ../D_view.aadl "../function1/mini_cv.aadl"
+From: /home/taste/Git/FlyingTasters/json_parse/binary.c/GlueAndBuild
+aadl2glueC -o "gluex86_partition_taste_api" ../D_view.aadl "../x86_partition_taste_api/mini_cv.aadl"
 From: /home/taste/Git/FlyingTasters/json_parse/binary.c/GlueAndBuild/gluex86_partition_taste_api
 "$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE  -I ../../auto-src    -I "../../function1/function1/"       *.c
 From: /home/taste/Git/FlyingTasters/json_parse/binary.c/GlueAndBuild/gluefunction1
