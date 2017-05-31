@@ -38,6 +38,11 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyReal *IN_ref_thrust
 
    /* Create a socket point */
    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+   
+   // to reuse the port number start
+   int optval = 1;
+   setsockopt(sockfd, SOL_SOCKET, SO_REUSEPORT, &optval, sizeof(optval));
+   // to reuse the port number end
 
    if (sockfd < 0) {
       perror("ERROR opening socket");
