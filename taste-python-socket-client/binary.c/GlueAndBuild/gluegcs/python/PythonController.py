@@ -9,16 +9,11 @@ GetMsgQueueBufferSize = PythonAccess.GetMsgQueueBufferSize
 GetMsgQueueBufferSize.restype = ctypes.c_int
 RetrieveMessageFromQueue = PythonAccess.RetrieveMessageFromQueue
 RetrieveMessageFromQueue.restype = ctypes.c_int
-i_takeoff = ctypes.c_int.in_dll(PythonAccess, "ii_takeoff").value
-SendTC_takeoff = PythonAccess.SendTC_takeoff
 import dataview_uniq_asn
 i_SensorData = ctypes.c_int.in_dll(PythonAccess, "ii_SensorData").value
+i_takeoff = ctypes.c_int.in_dll(PythonAccess, "ii_takeoff").value
+SendTC_takeoff = PythonAccess.SendTC_takeoff
 
-
-def Invoke_takeoff(var_MyReal):
-    if -1 == SendTC_takeoff(var_MyReal._ptr):
-        print 'Failed to send TC: takeoff...\n'
-        raise IOError("takeoff")
 class Poll_gcs(threading.Thread):
     def run(self):
         self._bDie = False
@@ -37,6 +32,11 @@ class Poll_gcs(threading.Thread):
                 time.sleep(0.01)
                 continue
             ProcessTM(self)
+
+def Invoke_takeoff(var_MyReal):
+    if -1 == SendTC_takeoff(var_MyReal._ptr):
+        print 'Failed to send TC: takeoff...\n'
+        raise IOError("takeoff")
 
 def ProcessTM(self):
     if self.messageReceivedType == i_SensorData:

@@ -102,13 +102,13 @@ void gcs_startup(void)
    FILE *f = fopen("/proc/sys/fs/mqueue/msgsize_max", "r");
    fscanf(f, "%d", &msgsize_max);
 
-    if (sizeof(T_takeoff_message) > msgsize_max) {
-        printf("[ERROR] The GUI is passing a message (takeoff) which parameter size (%d) exceeds your system limit (%d).\nYou can extend this limit by running: \n    echo NUMBER | sudo tee /proc/sys/fs/mqueue/msgsize_max  # ...with NUMBER > %d\nYou can also make it permanent (check TASTE wiki)\n\n", sizeof(T_takeoff_message), msgsize_max, sizeof(T_takeoff_message));
+    if (sizeof(T_SensorData_message) > msgsize_max) {
+        printf("[ERROR] The GUI is passing a message (SensorData) which parameter size (%d) exceeds your system limit (%d).\nYou can extend this limit by running: \n    echo NUMBER | sudo tee /proc/sys/fs/mqueue/msgsize_max  # ...with NUMBER > %d\nYou can also make it permanent (check TASTE wiki)\n\n", sizeof(T_SensorData_message), msgsize_max, sizeof(T_SensorData_message));
         exit(1);
     }
 
-    if (sizeof(T_SensorData_message) > msgsize_max) {
-        printf("[ERROR] The GUI is passing a message (SensorData) which parameter size (%d) exceeds your system limit (%d).\nYou can extend this limit by running: \n    echo NUMBER | sudo tee /proc/sys/fs/mqueue/msgsize_max  # ...with NUMBER > %d\nYou can also make it permanent (check TASTE wiki)\n\n", sizeof(T_SensorData_message), msgsize_max, sizeof(T_SensorData_message));
+    if (sizeof(T_takeoff_message) > msgsize_max) {
+        printf("[ERROR] The GUI is passing a message (takeoff) which parameter size (%d) exceeds your system limit (%d).\nYou can extend this limit by running: \n    echo NUMBER | sudo tee /proc/sys/fs/mqueue/msgsize_max  # ...with NUMBER > %d\nYou can also make it permanent (check TASTE wiki)\n\n", sizeof(T_takeoff_message), msgsize_max, sizeof(T_takeoff_message));
         exit(1);
     }
 

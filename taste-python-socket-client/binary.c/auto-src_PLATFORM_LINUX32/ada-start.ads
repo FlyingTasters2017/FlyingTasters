@@ -134,7 +134,7 @@ package ada_main is
    pragma Export (C, u00061, "taste_basictypesB");
    u00062 : constant Version_32 := 16#a8696944#;
    pragma Export (C, u00062, "taste_basictypesS");
-   u00063 : constant Version_32 := 16#af02ec74#;
+   u00063 : constant Version_32 := 16#c801a949#;
    pragma Export (C, u00063, "taste_dataviewB");
    u00064 : constant Version_32 := 16#cfbd75d2#;
    pragma Export (C, u00064, "taste_dataviewS");

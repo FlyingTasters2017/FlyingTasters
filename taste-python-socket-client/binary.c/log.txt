@@ -9,6 +9,10 @@ mono "$DMT"/asn1scc/asn1.exe -ACND "dataview-uniq.asn"
 From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c
 "$DMT/asn1scc/taste-extract-asn-from-design.exe" -i "/home/taste/GitHub/FlyingTasters/taste-python-socket-client/InterfaceView.aadl" -j "/tmp/uniqhometasteGitHubFlyingTasterstaste-python-socket-clientInterfaceView.aadl/dataview-uniq.asn"
 From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c
+asn2aadlPlus -acn "/home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/dataview-uniq.acn" "/tmp/uniqhometasteGitHubFlyingTasterstaste-python-socket-clientInterfaceView.aadl/dataview-uniq.asn" D_view.aadl
+From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c
+asn2aadlPlus -aadlv2  -acn "/home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/dataview-uniq.acn" "/tmp/uniqhometasteGitHubFlyingTasterstaste-python-socket-clientInterfaceView.aadl/dataview-uniq.asn" D_view_aadlv2.aadl
+From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c
 "$DMT/asn1scc/taste-extract-asn-from-design.exe" -i "/home/taste/GitHub/FlyingTasters/taste-python-socket-client/InterfaceView.aadl" -k "/tmp/uniqhometasteGitHubFlyingTasterstaste-python-socket-clientInterfaceView.aadl/dataview-uniq.asn"
 From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/auto-src
 cp "$DMT"/AutoGUI/debug_messages.? .
@@ -18,6 +22,8 @@ From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/auto-
 cp "/tmp/uniqhometasteGitHubFlyingTasterstaste-python-socket-clientInterfaceView.aadl/dataview-uniq.asn" .
 From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/auto-src
 cp "/home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/dataview-uniq.acn" .
+From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/auto-src
+mono "$DMT"/asn1scc/asn1.exe -c -uPER -typePrefix asn1Scc -wordSize 8 -ACN "dataview-uniq.acn" "dataview-uniq.asn"
 From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/auto-src
 msgPrinter "dataview-uniq.asn"
 From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/auto-src
@@ -60,6 +66,10 @@ From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueA
 cp $(ocarina-config --resources)/AADLv2/ocarina_components.aadl .
 From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild
 cleanupDV.pl "DeploymentView.aadl" > a_temp_name && mv a_temp_name "DeploymentView.aadl"
+From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild
+find . -type d \( -iname 'glue*' -prune -o -exec rm -rf '{}' ';' \) 2>/dev/null || exit 0
+From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild
+ocarina -x main.aadl
 From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/supervisor
 rm -f "supervisor.adb"
 From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/supervisor
@@ -72,18 +82,34 @@ for x86_partition, identified LDFLAGS:
 -lpthread -lrt -m32 -L/home/taste/tool-inst/include/ocarina/runtime/polyorb-hi-c/libs/linux32/ -llua -lm
 From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild
 cp "/tmp/uniqhometasteGitHubFlyingTasterstaste-python-socket-clientInterfaceView.aadl/dataview-uniq.asn" .
-From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild/gluesupervisor
-"$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../socketclient/socketclient/"   -I "../../supervisor/supervisor/"     *.c
+From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild
+aadl2glueC -o "gluesupervisor" ../D_view.aadl "../supervisor/mini_cv.aadl"
+From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild
+aadl2glueC -o "gluesocketclient" ../D_view.aadl "../socketclient/mini_cv.aadl"
 From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild/gluesocketclient
 "$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../socketclient/socketclient/"   -I "../../supervisor/supervisor/"     *.c
-From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild/gluevt_gcs_gui_polling_gcs
+From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild
+aadl2glueC -o "gluegcs" ../D_view.aadl "../gcs/mini_cv.aadl"
+From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild/gluesupervisor
 "$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../socketclient/socketclient/"   -I "../../supervisor/supervisor/"     *.c
+From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild
+aadl2glueC -o "gluevt_gcs_gui_polling_gcs" ../D_view.aadl "../vt_gcs_gui_polling_gcs/mini_cv.aadl"
 From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild/gluegcs
 "$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../socketclient/socketclient/"   -I "../../supervisor/supervisor/"     *.c
-From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild/gluevt_supervisor_pulse
+From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild
+aadl2glueC -o "gluevt_gcs_sensordata" ../D_view.aadl "../vt_gcs_sensordata/mini_cv.aadl"
+From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild/gluevt_gcs_gui_polling_gcs
 "$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../socketclient/socketclient/"   -I "../../supervisor/supervisor/"     *.c
+From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild
+aadl2glueC -o "gluevt_supervisor_pulse" ../D_view.aadl "../vt_supervisor_pulse/mini_cv.aadl"
 From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild/gluevt_gcs_sensordata
 "$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../socketclient/socketclient/"   -I "../../supervisor/supervisor/"     *.c
+From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild
+aadl2glueC -o "gluevt_supervisor_takeoff" ../D_view.aadl "../vt_supervisor_takeoff/mini_cv.aadl"
+From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild/gluevt_supervisor_pulse
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../socketclient/socketclient/"   -I "../../supervisor/supervisor/"     *.c
+From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild
+aadl2glueC -o "gluex86_partition_taste_api" ../D_view.aadl "../x86_partition_taste_api/mini_cv.aadl"
 From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild/gluevt_supervisor_takeoff
 "$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE -D__PO_HI_USE_TRANSPORT  -I ../../auto-src    -I "../../socketclient/socketclient/"   -I "../../supervisor/supervisor/"     *.c
 From: /home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild/gluex86_partition_taste_api

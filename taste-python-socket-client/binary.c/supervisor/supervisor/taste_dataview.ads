@@ -50,7 +50,7 @@ FUNCTION asn1SccMyReal_Equal(val1, val2: in asn1SccMyReal) return Boolean;
 
 
 
-ERR_asn1SccMyReal:CONSTANT INTEGER := 1001; -- (0.00000000000000000000E+000 .. 1.00000000000000000000E+003)
+ERR_asn1SccMyReal:CONSTANT INTEGER := 1001; -- (-1.00000000000000000000E+003 .. 1.00000000000000000000E+003)
 
 -----------------------------------------------------------asn1SccMyBool-------------------------------------------------------------
 SUBTYPE asn1SccMyBool IS adaasn1rtl.Asn1Boolean;

@@ -116,13 +116,13 @@ with taste;
 
   system PASSIVE_gcs
     features
-	takeoff : requires subprogram access exportedComponent::fv::artificial_takeoff.others
-	  { taste::Coordinates => "1250 215 1250 215";
-	    taste::RCMoperationKind => sporadic;
-	    taste::RCMperiod => 0;};
 	SensorData : provides subprogram access exportedComponent::fv::SensorData.others
 	  { taste::Coordinates => "1000 215 1000 215";
 	    taste::RCMoperationKind => protected;
+	    taste::RCMperiod => 0;};
+	takeoff : requires subprogram access exportedComponent::fv::artificial_takeoff.others
+	  { taste::Coordinates => "1250 215 1250 215";
+	    taste::RCMoperationKind => sporadic;
 	    taste::RCMperiod => 0;};
 	gui_polling_gcs : provides subprogram access exportedComponent::fv::gui_polling_gcs.others
 	  { taste::Coordinates => "1000 260 1000 260";
@@ -136,15 +136,15 @@ with taste;
 
   system implementation PASSIVE_gcs.others
     subcomponents
-	takeoff_impl : subprogram exportedComponent::FV::artificial_takeoff.others
-	  { compute_execution_time => 0ms..0ms;};
 	SensorData_impl : subprogram exportedComponent::FV::SensorData.others
+	  { compute_execution_time => 0ms..0ms;};
+	takeoff_impl : subprogram exportedComponent::FV::artificial_takeoff.others
 	  { compute_execution_time => 0ms..0ms;};
 	gui_polling_gcs_impl : subprogram exportedComponent::FV::gui_polling_gcs.others
 	  { compute_execution_time => 0ms..0ms;};
     connections
-	subprogram access takeoff_impl -> takeoff;
 	subprogram access SensorData_impl -> SensorData;
+	subprogram access takeoff_impl -> takeoff;
 	subprogram access gui_polling_gcs_impl -> gui_polling_gcs;
   end PASSIVE_gcs.others;
 
@@ -357,11 +357,11 @@ with taste;
   subprogram supervisor_has_pending_msg
   end supervisor_has_pending_msg;
 
-  subprogram artificial_takeoff
-  end artificial_takeoff;
-
   subprogram SensorData
   end SensorData;
+
+  subprogram artificial_takeoff
+  end artificial_takeoff;
 
   subprogram gui_polling_gcs
   end gui_polling_gcs;

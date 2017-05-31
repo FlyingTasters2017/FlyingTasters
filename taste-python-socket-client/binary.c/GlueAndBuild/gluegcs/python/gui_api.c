@@ -35,6 +35,7 @@ int RetrieveMessageFromQueue(int queue_id, int maxSize, byte *pBuf)
     return(message_received_type);
 }
 
+T_gcs_PI_list ii_SensorData = i_SensorData;
 T_gcs_RI_list ii_takeoff = i_takeoff;
 typedef struct {
     int tc_id;
@@ -59,4 +60,3 @@ int SendTC_takeoff(void *p_ref_thrust)
     }
     return 0;
 }
-T_gcs_PI_list ii_SensorData = i_SensorData;

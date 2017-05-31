@@ -8,6 +8,7 @@ use type adaasn1rtl.BIT;
 
 PACKAGE BODY TASTE_Dataview IS
 
+MINUS_minus_1_00000000000000000000E_plus_003:CONSTANT adaasn1rtl.Asn1Real := -1.00000000000000000000E+003;
 
 SUBTYPE MyChoice_a_pattern_array_range is Natural range 1..1;
 SUBTYPE MyChoice_a_pattern_array is adaasn1rtl.BitArray(MyChoice_a_pattern_array_range);
@@ -56,11 +57,11 @@ IS
  
  
 BEGIN
--- REAL (0.00000000000000000000E+000 .. 1.00000000000000000000E+003)-------
--- REAL (0.00000000000000000000E+000 .. 1.00000000000000000000E+003)
+-- REAL (-1.00000000000000000000E+003 .. 1.00000000000000000000E+003)-------
+-- REAL (-1.00000000000000000000E+003 .. 1.00000000000000000000E+003)
 
 
-    ret := adaasn1rtl.ASN1_RESULT'(Success => (0.00000000000000000000E+000 <= val AND val <= 1.00000000000000000000E+003), ErrorCode => ERR_asn1SccMyReal);
+    ret := adaasn1rtl.ASN1_RESULT'(Success => (MINUS_minus_1_00000000000000000000E_plus_003 <= val AND val <= 1.00000000000000000000E+003), ErrorCode => ERR_asn1SccMyReal);
     RETURN ret;
 END asn1SccMyReal_IsConstraintValid;
 

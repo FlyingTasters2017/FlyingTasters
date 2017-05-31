@@ -16,6 +16,18 @@ void gcs_startup();
 
 typedef struct
 {
+	asn1SccMyReal updated_thrust;
+} T_SensorData__data;
+
+typedef struct
+{
+	T_gcs_PI_list	message_identifier;
+	T_SensorData__data	message;
+} T_SensorData_message;
+
+
+typedef struct
+{
 	asn1SccMyReal ref_thrust;
 } T_takeoff__data;
 
@@ -29,18 +41,6 @@ typedef struct
 void gcs_RI_takeoff(const asn1SccMyReal *);
 
 #define INVOKE_RI_takeoff(params) gcs_RI_takeoff(&((T_takeoff__data*)params)->ref_thrust);
-
-typedef struct
-{
-	asn1SccMyReal updated_thrust;
-} T_SensorData__data;
-
-typedef struct
-{
-	T_gcs_PI_list	message_identifier;
-	T_SensorData__data	message;
-} T_SensorData_message;
-
 
 void gcs_PI_gui_polling_gcs();
 

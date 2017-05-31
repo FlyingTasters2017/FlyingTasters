@@ -100,7 +100,7 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyReal *IN_ref_thrust
 					buffer + t[i+1].start);
             strncpy(temp, buffer + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
-            printf("yaw is %.14f\n", strtol(temp, &ptr, 10));
+            printf("yaw is ", strtol(temp, &ptr, 10));
             *OUT_updated_thrust = strtol(temp, &ptr, 10);
             i++;
 

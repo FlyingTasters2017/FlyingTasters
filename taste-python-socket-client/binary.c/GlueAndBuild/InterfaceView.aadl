@@ -70,6 +70,8 @@ FEATURES
   updated_thrust : OUT PARAMETER DataView::MyReal {
     Taste::encoding => NATIVE;
   };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_readStabilizerSendThrust;
 
 SUBPROGRAM IMPLEMENTATION PI_readStabilizerSendThrust.others
@@ -83,16 +85,6 @@ PUBLIC
 WITH Taste;
 WITH DataView;
 WITH TASTE_IV_Properties;
-SUBPROGRAM RI_takeoff
-FEATURES
-  ref_thrust : IN PARAMETER DataView::MyReal {
-    Taste::encoding => UPER;
-  };
-END RI_takeoff;
-
-SUBPROGRAM IMPLEMENTATION RI_takeoff.others
-END RI_takeoff.others;
-
 SUBPROGRAM PI_SensorData
 FEATURES
   updated_thrust : IN PARAMETER DataView::MyReal {
@@ -104,6 +96,16 @@ END PI_SensorData;
 
 SUBPROGRAM IMPLEMENTATION PI_SensorData.others
 END PI_SensorData.others;
+
+SUBPROGRAM RI_takeoff
+FEATURES
+  ref_thrust : IN PARAMETER DataView::MyReal {
+    Taste::encoding => UPER;
+  };
+END RI_takeoff;
+
+SUBPROGRAM IMPLEMENTATION RI_takeoff.others
+END RI_takeoff.others;
 
 END interfaceview::FV::gcs;
 
@@ -167,6 +169,7 @@ FEATURES
   PI_readStabilizerSendThrust : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::socketClient::PI_readStabilizerSendThrust.others {
     Taste::coordinates => "2144 457";
     Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "readStabilizerSendThrust";
   };
@@ -185,18 +188,18 @@ END socketClient.others;
 
 SYSTEM gcs
 FEATURES
-  RI_takeoff : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::supervisor::PI_takeoff.others {
-    Taste::coordinates => "354 1308";
-    Taste::RCMoperationKind => any;
-    Taste::InterfaceName => "takeoff";
-    Taste::labelInheritance => "true";
-  };
   PI_SensorData : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::gcs::PI_SensorData.others {
     Taste::coordinates => "908 1308";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "SensorData";
+  };
+  RI_takeoff : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::supervisor::PI_takeoff.others {
+    Taste::coordinates => "354 1308";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "takeoff";
+    Taste::labelInheritance => "true";
   };
 PROPERTIES
   Source_Language => (GUI);
