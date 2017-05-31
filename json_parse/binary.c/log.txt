@@ -9,10 +9,6 @@ mono "$DMT"/asn1scc/asn1.exe -ACND "dataview-uniq.asn"
 From: /home/taste/Git/FlyingTasters/json_parse/binary.c
 "$DMT/asn1scc/taste-extract-asn-from-design.exe" -i "/home/taste/Git/FlyingTasters/json_parse/InterfaceView.aadl" -j "/tmp/uniqhometasteGitFlyingTastersjson_parseInterfaceView.aadl/dataview-uniq.asn"
 From: /home/taste/Git/FlyingTasters/json_parse/binary.c
-asn2aadlPlus -acn "/home/taste/Git/FlyingTasters/json_parse/binary.c/dataview-uniq.acn" "/tmp/uniqhometasteGitFlyingTastersjson_parseInterfaceView.aadl/dataview-uniq.asn" D_view.aadl
-From: /home/taste/Git/FlyingTasters/json_parse/binary.c
-asn2aadlPlus -aadlv2  -acn "/home/taste/Git/FlyingTasters/json_parse/binary.c/dataview-uniq.acn" "/tmp/uniqhometasteGitFlyingTastersjson_parseInterfaceView.aadl/dataview-uniq.asn" D_view_aadlv2.aadl
-From: /home/taste/Git/FlyingTasters/json_parse/binary.c
 "$DMT/asn1scc/taste-extract-asn-from-design.exe" -i "/home/taste/Git/FlyingTasters/json_parse/InterfaceView.aadl" -k "/tmp/uniqhometasteGitFlyingTastersjson_parseInterfaceView.aadl/dataview-uniq.asn"
 From: /home/taste/Git/FlyingTasters/json_parse/binary.c/auto-src
 cp "$DMT"/AutoGUI/debug_messages.? .
@@ -22,8 +18,6 @@ From: /home/taste/Git/FlyingTasters/json_parse/binary.c/auto-src
 cp "/tmp/uniqhometasteGitFlyingTastersjson_parseInterfaceView.aadl/dataview-uniq.asn" .
 From: /home/taste/Git/FlyingTasters/json_parse/binary.c/auto-src
 cp "/home/taste/Git/FlyingTasters/json_parse/binary.c/dataview-uniq.acn" .
-From: /home/taste/Git/FlyingTasters/json_parse/binary.c/auto-src
-mono "$DMT"/asn1scc/asn1.exe -c -uPER -typePrefix asn1Scc -wordSize 8 -ACN "dataview-uniq.acn" "dataview-uniq.asn"
 From: /home/taste/Git/FlyingTasters/json_parse/binary.c/auto-src
 msgPrinter "dataview-uniq.asn"
 From: /home/taste/Git/FlyingTasters/json_parse/binary.c/auto-src
@@ -58,10 +52,6 @@ From: /home/taste/Git/FlyingTasters/json_parse/binary.c/GlueAndBuild
 cp $(ocarina-config --resources)/AADLv2/ocarina_components.aadl .
 From: /home/taste/Git/FlyingTasters/json_parse/binary.c/GlueAndBuild
 cleanupDV.pl "DeploymentView.aadl" > a_temp_name && mv a_temp_name "DeploymentView.aadl"
-From: /home/taste/Git/FlyingTasters/json_parse/binary.c/GlueAndBuild
-find . -type d \( -iname 'glue*' -prune -o -exec rm -rf '{}' ';' \) 2>/dev/null || exit 0
-From: /home/taste/Git/FlyingTasters/json_parse/binary.c/GlueAndBuild
-ocarina -x main.aadl
 for x86_partition, identified CC:
 gcc
 for x86_partition, identified CFLAGS:
@@ -70,13 +60,9 @@ for x86_partition, identified LDFLAGS:
 -lpthread -lrt -m32 -L/home/taste/tool-inst/include/ocarina/runtime/polyorb-hi-c/libs/linux32/ -llua -lm
 From: /home/taste/Git/FlyingTasters/json_parse/binary.c/GlueAndBuild
 cp "/tmp/uniqhometasteGitFlyingTastersjson_parseInterfaceView.aadl/dataview-uniq.asn" .
-From: /home/taste/Git/FlyingTasters/json_parse/binary.c/GlueAndBuild
-aadl2glueC -o "gluefunction1" ../D_view.aadl "../function1/mini_cv.aadl"
-From: /home/taste/Git/FlyingTasters/json_parse/binary.c/GlueAndBuild
-aadl2glueC -o "gluex86_partition_taste_api" ../D_view.aadl "../x86_partition_taste_api/mini_cv.aadl"
-From: /home/taste/Git/FlyingTasters/json_parse/binary.c/GlueAndBuild/gluefunction1
-"$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE  -I ../../auto-src    -I "../../function1/function1/"       *.c
 From: /home/taste/Git/FlyingTasters/json_parse/binary.c/GlueAndBuild/gluex86_partition_taste_api
+"$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE  -I ../../auto-src    -I "../../function1/function1/"       *.c
+From: /home/taste/Git/FlyingTasters/json_parse/binary.c/GlueAndBuild/gluefunction1
 "$GNATGCC" -c -I . -DSTATIC="" -g  -m32    -DPOSIX -m32 -D_POSIX_SOURCE -D_GNU_SOURCE  -I ../../auto-src    -I "../../function1/function1/"       *.c
 From: /home/taste/Git/FlyingTasters/json_parse/binary.c/function1/function1
 for i in function1_vm_if.c function1_vm_if.h function1.h ; do if [ -f ../$i ] ; then cp ../$i . ; fi ; done
