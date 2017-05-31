@@ -188,6 +188,7 @@ if __name__ == '__main__':
             conn.close()
     except KeyboardInterrupt:
         # conn.close()
+        print('Keyboard Interrupt occurred')
         logging.log(logging.INFO, "Socket server stopped")
     # sys.exit(2)
     # print('Im here in the end')
