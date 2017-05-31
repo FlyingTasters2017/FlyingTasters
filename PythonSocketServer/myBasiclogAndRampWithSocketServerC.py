@@ -157,6 +157,7 @@ if __name__ == '__main__':
     HOST = ''  # Symbolic name meaning all available interfaces
     PORT = 50007  # Arbitrary non-privileged port
     mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #Create socket object
+    mySocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) #re-use same port
     mySocket.bind((HOST, PORT))
     # Initialize the low-level drivers (don't list the debug drivers)
     cflib.crtp.init_drivers(enable_debug_driver=False)
