@@ -24,6 +24,12 @@ END RI_reference_input_LLC;
 SUBPROGRAM IMPLEMENTATION RI_reference_input_LLC.others
 END RI_reference_input_LLC.others;
 
+SUBPROGRAM RI_raw_AS_data
+END RI_raw_AS_data;
+
+SUBPROGRAM IMPLEMENTATION RI_raw_AS_data.others
+END RI_raw_AS_data.others;
+
 END interfaceview::FV::Houston;
 
 PACKAGE interfaceview::FV::MS_Comm
@@ -38,6 +44,12 @@ END PI_raw_MSD;
 
 SUBPROGRAM IMPLEMENTATION PI_raw_MSD.others
 END PI_raw_MSD.others;
+
+SUBPROGRAM RI_raw_MS_data
+END RI_raw_MS_data;
+
+SUBPROGRAM IMPLEMENTATION RI_raw_MS_data.others
+END RI_raw_MS_data.others;
 
 END interfaceview::FV::MS_Comm;
 
@@ -234,12 +246,40 @@ END RI_agent_trajectory_error.others;
 
 END interfaceview::FV::Agent_HLC;
 
+PACKAGE interfaceview::FV::DroneDummy
+PUBLIC
+
+WITH Taste;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_raw_AS_data
+END PI_raw_AS_data;
+
+SUBPROGRAM IMPLEMENTATION PI_raw_AS_data.others
+END PI_raw_AS_data.others;
+
+END interfaceview::FV::DroneDummy;
+
+PACKAGE interfaceview::FV::MS_dummy
+PUBLIC
+
+WITH Taste;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_raw_MS_data
+END PI_raw_MS_data;
+
+SUBPROGRAM IMPLEMENTATION PI_raw_MS_data.others
+END PI_raw_MS_data.others;
+
+END interfaceview::FV::MS_dummy;
+
 PACKAGE interfaceview::IV
 PUBLIC
 
 WITH interfaceview::FV::Houston;
 WITH interfaceview::FV::Agent_HLC;
+WITH interfaceview::FV::DroneDummy;
 WITH interfaceview::FV::MS_Comm;
+WITH interfaceview::FV::MS_dummy;
 WITH interfaceview::FV::ASD_Processing;
 WITH interfaceview::FV::MSD_Processing;
 WITH interfaceview::FV::GUI;
@@ -264,6 +304,12 @@ FEATURES
     Taste::InterfaceName => "reference_input_LLC";
     Taste::labelInheritance => "true";
   };
+  RI_raw_AS_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::DroneDummy::PI_raw_AS_data.others {
+    Taste::coordinates => "421 1268";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "raw_AS_data";
+    Taste::labelInheritance => "true";
+  };
 PROPERTIES
   Source_Language => (C);
 END Houston;
@@ -285,6 +331,12 @@ FEATURES
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "raw_MSD";
+  };
+  RI_raw_MS_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::MS_dummy::PI_raw_MS_data.others {
+    Taste::coordinates => "1799 1271";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "raw_MS_data";
+    Taste::labelInheritance => "true";
   };
 PROPERTIES
   Source_Language => (C);
@@ -547,6 +599,46 @@ CONNECTIONS
   OpToPICnx_reference_input_LLC_impl : SUBPROGRAM ACCESS reference_input_LLC_impl -> PI_reference_input_LLC;
 END Agent_HLC.others;
 
+SYSTEM DroneDummy
+FEATURES
+  PI_raw_AS_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::DroneDummy::PI_raw_AS_data.others {
+    Taste::coordinates => "421 1453";
+    Taste::RCMoperationKind => unprotected;
+    Taste::InterfaceName => "raw_AS_data";
+  };
+PROPERTIES
+  Source_Language => (C);
+END DroneDummy;
+
+SYSTEM IMPLEMENTATION DroneDummy.others
+SUBCOMPONENTS
+  raw_AS_data_impl : SUBPROGRAM interfaceview::FV::DroneDummy::PI_raw_AS_data.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_raw_AS_data_impl : SUBPROGRAM ACCESS raw_AS_data_impl -> PI_raw_AS_data;
+END DroneDummy.others;
+
+SYSTEM MS_dummy
+FEATURES
+  PI_raw_MS_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MS_dummy::PI_raw_MS_data.others {
+    Taste::coordinates => "1799 1452";
+    Taste::RCMoperationKind => unprotected;
+    Taste::InterfaceName => "raw_MS_data";
+  };
+PROPERTIES
+  Source_Language => (C);
+END MS_dummy;
+
+SYSTEM IMPLEMENTATION MS_dummy.others
+SUBCOMPONENTS
+  raw_MS_data_impl : SUBPROGRAM interfaceview::FV::MS_dummy::PI_raw_MS_data.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_raw_MS_data_impl : SUBPROGRAM ACCESS raw_MS_data_impl -> PI_raw_MS_data;
+END MS_dummy.others;
+
 SYSTEM interfaceview
 END interfaceview;
 
@@ -579,6 +671,12 @@ SUBCOMPONENTS
   Agent_HLC : SYSTEM interfaceview::IV::Agent_HLC.others {
     Taste::coordinates => "369 1195 943 1355";
   };
+  DroneDummy : SYSTEM interfaceview::IV::DroneDummy.others {
+    Taste::coordinates => "288 1453 570 1643";
+  };
+  MS_dummy : SYSTEM interfaceview::IV::MS_dummy.others {
+    Taste::coordinates => "1659 1452 1941 1642";
+  };
 CONNECTIONS
   Houston_raw_ASD_ASD_Processing_raw_ASD : SUBPROGRAM ACCESS Houston.PI_raw_ASD -> ASD_Processing.RI_raw_ASD {
     Taste::coordinates => "1157 1763 996 1763 996 1903 865 1903";
@@ -586,8 +684,14 @@ CONNECTIONS
   Agent_HLC_reference_input_LLC_Houston_reference_input_LLC : SUBPROGRAM ACCESS Agent_HLC.PI_reference_input_LLC -> Houston.RI_reference_input_LLC {
     Taste::coordinates => "651 1710 651 1402 656 1402 656 1355";
   };
+  DroneDummy_raw_AS_data_Houston_raw_AS_data : SUBPROGRAM ACCESS DroneDummy.PI_raw_AS_data -> Houston.RI_raw_AS_data {
+    Taste::coordinates => "421 1268 421 1361 421 1361 421 1453";
+  };
   MS_Comm_raw_MSD_MSD_Processing_raw_MSD : SUBPROGRAM ACCESS MS_Comm.PI_raw_MSD -> MSD_Processing.RI_raw_MSD {
     Taste::coordinates => "2285 1765 2418 1765 2418 1898 2531 1898";
+  };
+  MS_dummy_raw_MS_data_MS_Comm_raw_MS_data : SUBPROGRAM ACCESS MS_dummy.PI_raw_MS_data -> MS_Comm.RI_raw_MS_data {
+    Taste::coordinates => "1799 1271 1799 1361 1799 1361 1799 1452";
   };
   ASD_Processing_processed_ASD_WorldModel_processed_ASD : SUBPROGRAM ACCESS ASD_Processing.PI_processed_ASD -> WorldModel.RI_processed_ASD {
     Taste::coordinates => "1622 1088 1622 1311 1422 1311 1422 1632";

@@ -1,0 +1,94 @@
+--  TASTE - Warning: This is NOT the real Concurrency view  --
+--  This file was automatically generated and should remain read-only
+--  Open it with TASTE-IV
+--  The only intended use of this file is visualization - not processing.
+
+package generated_cv::IV::ConcurrencyView
+public
+with dataview; 
+with exportedComponent::FV;
+with taste;
+
+  --{ interfaceview obj6480 10 10
+  --TASTE-generated concurrency view
+  --For visualization purposes.
+  --}
+
+  system exportedComponent
+  end exportedComponent;
+
+  system implementation exportedComponent.others
+    subcomponents
+	function1 : system interfaceview::IV::THREAD_function1.others;
+	x86_partition_taste_api : system interfaceview::IV::PASSIVE_x86_partition_taste_api.others;
+    connections
+	unprotected_function1_has_pending_msg : subprogram access PASSIVE_x86_partition_taste_api.function1_has_pending_msg -> THREAD_function1.check_queue;
+  end exportedComponent.others;
+
+  system THREAD_function1
+    features
+	pulse : provides subprogram access exportedComponent::fv::pulse.others
+	  { taste::Coordinates => "200 215 200 215";
+	    taste::RCMoperationKind => cyclic;
+	    taste::RCMperiod => 0;};
+	check_queue : requires subprogram access exportedComponent::fv::function1_has_pending_msg.others
+	  { taste::Coordinates => "450 215 450 215";
+	    taste::RCMoperationKind => unprotected;
+	    taste::RCMperiod => 0;};
+    properties
+	source_language => C;
+	taste::coordinates => "200 200 450 245";
+	taste::instance_name => "function1";
+  end THREAD_function1;
+
+  system implementation THREAD_function1.others
+    subcomponents
+	pulse_impl : subprogram exportedComponent::FV::pulse.others
+	  { compute_execution_time => 0ms..0ms;};
+	check_queue_impl : subprogram exportedComponent::FV::function1_has_pending_msg.others
+	  { compute_execution_time => 0ms..0ms;};
+    connections
+	subprogram access pulse_impl -> pulse;
+	subprogram access check_queue_impl -> check_queue;
+  end THREAD_function1.others;
+
+  system PASSIVE_x86_partition_taste_api
+    features
+	function1_has_pending_msg : provides subprogram access exportedComponent::fv::check_queue.others
+	  { taste::Coordinates => "600 215 600 215";
+	    taste::RCMoperationKind => unprotected;
+	    taste::RCMperiod => 0;};
+    properties
+	source_language => C;
+	taste::coordinates => "600 200 850 245";
+	taste::instance_name => "x86_partition_taste_api";
+  end PASSIVE_x86_partition_taste_api;
+
+  system implementation PASSIVE_x86_partition_taste_api.others
+    subcomponents
+	function1_has_pending_msg_impl : subprogram exportedComponent::FV::check_queue.others
+	  { compute_execution_time => 0ms..0ms;};
+    connections
+	subprogram access function1_has_pending_msg_impl -> function1_has_pending_msg;
+  end PASSIVE_x86_partition_taste_api.others;
+
+properties
+  taste::coordinates => "0 0 2970 2100";
+
+end generated_cv::IV;
+
+package exportedComponent::FV
+public
+with dataview;
+with taste;
+
+  subprogram pulse
+  end pulse;
+
+  subprogram function1_has_pending_msg
+  end function1_has_pending_msg;
+
+  subprogram check_queue
+  end check_queue;
+
+end exportedComponent::FV;

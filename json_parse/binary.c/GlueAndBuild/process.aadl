@@ -1,0 +1,35 @@
+--  This file was generated automatically: DO NOT MODIFY IT !
+
+--  This file contains a part of the system CONCURRENCY VIEW.
+--  It is an input file for OCARINA.
+
+package process_package
+public
+	with Deployment;
+	with DataView;
+	with interfaceview::IV;
+	with deploymentview::DV;
+	with ocarina_processors_x86;
+	with function1_CV_Thread;
+
+process x86_partition extends deploymentview::DV::node1::x86_partition
+end x86_partition;
+
+process implementation x86_partition.final
+subcomponents
+	function1 : thread function1_CV_Thread::function1_function1.others;
+end x86_partition.final;
+
+system deploymentview
+end deploymentview;
+
+system implementation deploymentview.final
+subcomponents
+  x86_partition: process x86_partition.final;
+  node1_x86_linux32_cv : processor ocarina_processors_x86::x86.linux32;
+properties
+  Actual_Processor_Binding => (reference (node1_x86_linux32_cv)) applies to x86_partition;
+end deploymentview.final;
+end process_package;
+
+-- deploymentview.final
