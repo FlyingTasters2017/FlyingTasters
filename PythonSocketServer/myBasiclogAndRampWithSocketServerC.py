@@ -157,6 +157,7 @@ if __name__ == '__main__':
     HOST = ''  # Symbolic name meaning all available interfaces
     PORT = 50007  # Arbitrary non-privileged port
     mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #Create socket object
+    mySocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) #re-use
     mySocket.bind((HOST, PORT))
     # Initialize the low-level drivers (don't list the debug drivers)
     cflib.crtp.init_drivers(enable_debug_driver=False)
@@ -165,19 +166,14 @@ if __name__ == '__main__':
     #time.sleep(10)
     #Init default thrust
     thrust = 0
-    # Wait for 1 client connection
-    print('mySocket.listen(1)')
-    mySocket.listen(1)
-    print('conn, addr = mySocket.accept()')
-    conn, addr = mySocket.accept()
     try:
         while not mySocket._closed:
-            # # Wait for 1 client connection
-            # print('mySocket.listen(1)')
-            # mySocket.listen(1)
-            # print('conn, addr = mySocket.accept()')
-            # conn, addr = mySocket.accept()
-            # print('if conn:')
+            # Wait for 1 client connection
+            print('mySocket.listen(1)')
+            mySocket.listen(1)
+            print('conn, addr = mySocket.accept()')
+            conn, addr = mySocket.accept()
+            print('if conn:')
             # If client connected to the server
             if conn:
                 print('Connected by', addr)
@@ -190,11 +186,11 @@ if __name__ == '__main__':
             if thrust > 0:
                 le.unlock_thrust_protection()
                 le.ramp_motors(thrust)
-            # conn.close()
+            conn.close()
     except KeyboardInterrupt:
         # connection will be closed here
-        conn.close()
+        # conn.close()
         print('Keyboard Interrupt occurred')
         logging.log(logging.INFO, "Socket server stopped")
-    # sys.exit(2)
-    # print('Im here in the end')
+    sys.exit(2)
+    print('Im here in the end')
