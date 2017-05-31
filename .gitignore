@@ -1,2 +1,2 @@
-# ignore binary.c
-binary.c/**
+# ignore binary.c directory to commit
+binary.c/
