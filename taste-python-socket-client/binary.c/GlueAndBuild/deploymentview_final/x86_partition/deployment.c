@@ -7,16 +7,16 @@
 /*  Do NOT hand-modify this file, as your            */
 /*  changes will be lost when you re-run Ocarina     */
 /*****************************************************/
-__po_hi_protected_protocol_t __po_hi_protected_configuration[__PO_HI_NB_PROTECTED] = {__PO_HI_PROTECTED_REGULAR};
-__po_hi_uint8_t __po_hi_protected_priorities[__PO_HI_NB_PROTECTED] = {0};
-__po_hi_entity_t __po_hi_port_global_to_entity[__PO_HI_NB_PORTS] = {x86_partition_gcs_k_entity,x86_partition_vt_supervisor_takeoff_k_entity};
-char* __po_hi_port_global_names[__PO_HI_NB_PORTS] = {"gcs_global_outport_takeoff","vt_supervisor_takeoff_global_inport_artificial_takeoff"};
-char* __po_hi_port_global_model_names[__PO_HI_NB_PORTS] = {"outport_takeoff","inport_artificial_takeoff"};
-__po_hi_port_kind_t __po_hi_port_global_kind[__PO_HI_NB_PORTS] = {__PO_HI_OUT_EVENT_DATA_INTRA_PROCESS,__PO_HI_IN_EVENT_DATA_INTRA_PROCESS};
-__po_hi_uint32_t __po_hi_port_global_data_size[__PO_HI_NB_PORTS] = {sizeof (dataview__myreal_buffer_impl),sizeof (dataview__myreal_buffer_impl)};
-__po_hi_uint32_t __po_hi_port_global_queue_size[__PO_HI_NB_PORTS] = {1,1};
-__po_hi_local_port_t __po_hi_port_global_to_local[__PO_HI_NB_PORTS] = {gcs_local_outport_takeoff,vt_supervisor_takeoff_local_inport_artificial_takeoff};
-__po_hi_node_t __po_hi_entity_table[__PO_HI_NB_ENTITIES] = {x86_partition_k,x86_partition_k,x86_partition_k};
+__po_hi_protected_protocol_t __po_hi_protected_configuration[__PO_HI_NB_PROTECTED] = {__PO_HI_PROTECTED_REGULAR,__PO_HI_PROTECTED_REGULAR};
+__po_hi_uint8_t __po_hi_protected_priorities[__PO_HI_NB_PROTECTED] = {0,0};
+__po_hi_entity_t __po_hi_port_global_to_entity[__PO_HI_NB_PORTS] = {x86_partition_vt_supervisor_pulse_k_entity,x86_partition_vt_supervisor_takeoff_k_entity,x86_partition_vt_supervisor_takeoff_k_entity,x86_partition_vt_gcs_sensordata_k_entity,x86_partition_vt_gcs_sensordata_k_entity,x86_partition_vt_gcs_gui_polling_gcs_k_entity};
+char* __po_hi_port_global_names[__PO_HI_NB_PORTS] = {"vt_supervisor_pulse_global_outport_sensordata_vt","vt_supervisor_takeoff_global_inport_artificial_takeoff","vt_supervisor_takeoff_global_outport_sensordata_vt","vt_gcs_sensordata_global_inport_artificial_sensordata","vt_gcs_sensordata_global_outport_takeoff_vt","vt_gcs_gui_polling_gcs_global_outport_takeoff_vt"};
+char* __po_hi_port_global_model_names[__PO_HI_NB_PORTS] = {"outport_sensordata_vt","inport_artificial_takeoff","outport_sensordata_vt","inport_artificial_sensordata","outport_takeoff_vt","outport_takeoff_vt"};
+__po_hi_port_kind_t __po_hi_port_global_kind[__PO_HI_NB_PORTS] = {__PO_HI_OUT_EVENT_DATA_INTRA_PROCESS,__PO_HI_IN_EVENT_DATA_INTRA_PROCESS,__PO_HI_OUT_EVENT_DATA_INTRA_PROCESS,__PO_HI_IN_EVENT_DATA_INTRA_PROCESS,__PO_HI_OUT_EVENT_DATA_INTRA_PROCESS,__PO_HI_OUT_EVENT_DATA_INTRA_PROCESS};
+__po_hi_uint32_t __po_hi_port_global_data_size[__PO_HI_NB_PORTS] = {sizeof (dataview__myreal_buffer_impl),sizeof (dataview__myreal_buffer_impl),sizeof (dataview__myreal_buffer_impl),sizeof (dataview__myreal_buffer_impl),sizeof (dataview__myreal_buffer_impl),sizeof (dataview__myreal_buffer_impl)};
+__po_hi_uint32_t __po_hi_port_global_queue_size[__PO_HI_NB_PORTS] = {1,1,1,1,1,1};
+__po_hi_local_port_t __po_hi_port_global_to_local[__PO_HI_NB_PORTS] = {vt_supervisor_pulse_local_outport_sensordata_vt,vt_supervisor_takeoff_local_inport_artificial_takeoff,vt_supervisor_takeoff_local_outport_sensordata_vt,vt_gcs_sensordata_local_inport_artificial_sensordata,vt_gcs_sensordata_local_outport_takeoff_vt,vt_gcs_gui_polling_gcs_local_outport_takeoff_vt};
+__po_hi_node_t __po_hi_entity_table[__PO_HI_NB_ENTITIES] = {x86_partition_k,x86_partition_k,x86_partition_k,x86_partition_k};
 __po_hi_uint8_t __po_hi_deployment_endiannesses[__PO_HI_NB_NODES] = {__PO_HI_LITTLEENDIAN};
-__po_hi_device_id __po_hi_port_to_device[__PO_HI_NB_PORTS] = {0,0};
+__po_hi_device_id __po_hi_port_to_device[__PO_HI_NB_PORTS] = {0,0,0,0,0,0};
 

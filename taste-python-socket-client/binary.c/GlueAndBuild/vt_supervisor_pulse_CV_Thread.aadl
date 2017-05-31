@@ -11,6 +11,7 @@ public
 
 THREAD vt_supervisor_pulse_vt_supervisor_pulse
 features
+	OUTPORT_SensorData_vt : OUT EVENT DATA PORT DataView::MyReal_Buffer.impl;
 	supervisor_protected : requires data access process_package::TASTE_Protected.Object;
 END vt_supervisor_pulse_vt_supervisor_pulse;
 

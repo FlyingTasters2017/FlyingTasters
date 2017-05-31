@@ -1,5 +1,10 @@
 /* CIF PROCESS (250, 150), (150, 75) */
 process supervisor;
+    /* CIF TEXT (1459, 97), (272, 140) */
+    -- Text area for declarations and comments
+    
+    dcl ref_thrust, updated_thrust MyReal;
+    /* CIF ENDTEXT */
     /* CIF START (530, 106), (70, 35) */
     START;
         /* CIF PROCEDURECALL (485, 161), (160, 35) */
@@ -10,12 +15,18 @@ process supervisor;
     state Running;
         /* CIF input (895, 177), (70, 35) */
         input pulse;
-            /* CIF PROCEDURECALL (810, 232), (241, 35) */
-            call readStabilizerSendThrust(ref_thrus);
-        /* CIF input (1021, 177), (139, 35) */
+            /* CIF PROCEDURECALL (806, 232), (247, 35) */
+            call readStabilizerSendThrust(ref_thrust);
+            /* CIF output (866, 287), (127, 35) */
+            output SensorData();
+            /* CIF NEXTSTATE (895, 337), (70, 35) */
+            NEXTSTATE Running;
+        /* CIF input (1064, 177), (139, 35) */
         input takeoff(ref_thrust);
+            /* CIF NEXTSTATE (1098, 232), (70, 35) */
+            NEXTSTATE Wait;
     endstate;
-    /* CIF state (1093, 64), (70, 35) */
+    /* CIF state (570, 36), (70, 35) */
     state Wait;
     endstate;
     /* CIF state (530, 211), (70, 35) */
@@ -26,7 +37,7 @@ process supervisor;
             NEXTSTATE Wait;
         /* CIF input (540, 266), (139, 35) */
         input takeoff(ref_thrust);
-            /* CIF NEXTSTATE (575, 321), (70, 35) */
+            /* CIF NEXTSTATE (574, 321), (70, 35) */
             NEXTSTATE Running;
     endstate;
 endprocess supervisor;

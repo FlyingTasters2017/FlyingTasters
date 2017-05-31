@@ -4,6 +4,7 @@
 #define vt_supervisor_pulse_POLYORB_INTERFACE
 #include <stddef.h>
 
+#include "types.h"
 #include "deployment.h"
 #include "po_hi_transport.h"
 #include "../../supervisor/supervisor_polyorb_interface.h"
@@ -21,7 +22,11 @@ void vm_vt_supervisor_pulse_pulse();
 /* ------------------------------------------------------
 --  Synchronous Required Interface "readStabilizerSendThrust_vt"
 ------------------------------------------------------ */
-void vm_vt_supervisor_pulse_readStabilizerSendThrust_vt(void *ref_thrust, size_t ref_thrust_len);
+void vm_vt_supervisor_pulse_readStabilizerSendThrust_vt(void *ref_thrust, size_t ref_thrust_len, void *, size_t *);
+/* ------------------------------------------------------
+--  Asynchronous Required Interface "SensorData_vt"
+------------------------------------------------------ */
+void vm_async_vt_supervisor_pulse_SensorData_vt(void *updated_thrust, size_t updated_thrust_len);
 /* ------------------------------------------------------
 --  Synchronous Required Interface "check_queue_vt"
 ------------------------------------------------------ */

@@ -5,5 +5,5 @@
 /*  Do NOT hand-modify this file, as your            */
 /*  changes will be lost when you re-run Ocarina     */
 /*****************************************************/
-const char* __po_hi_ports_names[__PO_HI_NB_PORTS] = {"gcs_global_outport_takeoff","vt_supervisor_takeoff_global_inport_artificial_takeoff"};
+const char* __po_hi_ports_names[__PO_HI_NB_PORTS] = {"vt_supervisor_pulse_global_outport_sensordata_vt","vt_supervisor_takeoff_global_inport_artificial_takeoff","vt_supervisor_takeoff_global_outport_sensordata_vt","vt_gcs_sensordata_global_inport_artificial_sensordata","vt_gcs_sensordata_global_outport_takeoff_vt","vt_gcs_gui_polling_gcs_global_outport_takeoff_vt"};
 

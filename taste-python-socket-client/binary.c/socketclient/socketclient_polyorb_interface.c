@@ -10,8 +10,8 @@
 /*----------------------------------------------------
 -- Unprotected Provided Interface "readStabilizerSendThrust"
 ----------------------------------------------------*/
-void sync_socketclient_readStabilizerSendThrust(void *ref_thrust, size_t ref_thrust_len)
+void sync_socketclient_readStabilizerSendThrust(void *ref_thrust, size_t ref_thrust_len, void *updated_thrust, size_t *updated_thrust_len)
 {
-	socketclient_readStabilizerSendThrust(ref_thrust, ref_thrust_len);
+	socketclient_readStabilizerSendThrust(ref_thrust, ref_thrust_len, updated_thrust, updated_thrust_len);
 }
 

@@ -17,7 +17,7 @@ BINARY = x86_partition
 TARGET = linux32
 NEED_TRANSPORT = yes
 RUNTIME_PATH=$(shell echo "/home/taste/tool-inst/include/ocarina/runtime/polyorb-hi-c" | sed 's/ /\\ /g')
-USER_SOURCES_DIRS= "-I/home/taste/test1/binary.c/GlueAndBuild"
+USER_SOURCES_DIRS= "-I/home/taste/GitHub/FlyingTasters/taste-python-socket-client/binary.c/GlueAndBuild"
 ASN_SOURCES=
 include $(RUNTIME_PATH)/make/Makefile.common
 

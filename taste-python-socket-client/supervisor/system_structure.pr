@@ -4,22 +4,28 @@ SYSTEM supervisor;
 
 	SIGNAL pulse;
 
-	PROCEDURE readStabilizerSendThrust COMMENT '#c_predef';
-		FPAR
-			IN ref_thrust MyReal;
- 	EXTERNAL;
-
 	/* CIF Keep Specific Geode PARAMNAMES ref_thrust */
 	SIGNAL takeoff (MyReal);
 
+	PROCEDURE readStabilizerSendThrust COMMENT '#c_predef';
+		FPAR
+			IN ref_thrust MyReal,
+			IN/OUT updated_thrust MyReal;
+ 	EXTERNAL;
+
+	/* CIF Keep Specific Geode PARAMNAMES updated_thrust */
+	SIGNAL SensorData (MyReal);
+
 	CHANNEL c
 		FROM ENV TO supervisor WITH pulse,takeoff;
+		FROM supervisor TO ENV WITH SensorData;
 	ENDCHANNEL;
 
 	BLOCK supervisor;
 
 		SIGNALROUTE r
 			FROM ENV TO supervisor WITH pulse,takeoff;
+			FROM supervisor TO ENV WITH SensorData;
 
 		CONNECT c and r;
 

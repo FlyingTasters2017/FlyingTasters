@@ -1,0 +1,13 @@
+-- Automatically Generated - For use with AADL2GlueC only - Do NOT modify! --
+
+SUBPROGRAM function1_has_pending_msg
+FEATURES
+	res:OUT PARAMETER DataView::T_Boolean {encoding=>NATIVE;};
+END function1_has_pending_msg;
+
+SUBPROGRAM IMPLEMENTATION function1_has_pending_msg.C
+PROPERTIES
+	FV_Name => "x86_partition_taste_api";
+	Source_Language => C;
+END function1_has_pending_msg.C;
+

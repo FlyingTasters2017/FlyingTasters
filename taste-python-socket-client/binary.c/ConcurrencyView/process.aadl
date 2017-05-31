@@ -10,9 +10,10 @@ public
 	with interfaceview::IV;
 	with deploymentview::DV;
 	with ocarina_processors_x86;
-	with gcs_CV_Thread;
 	with vt_supervisor_pulse_CV_Thread;
 	with vt_supervisor_takeoff_CV_Thread;
+	with vt_gcs_sensordata_CV_Thread;
+	with vt_gcs_gui_polling_gcs_CV_Thread;
 
 DATA TASTE_Protected
 PROPERTIES
@@ -31,13 +32,20 @@ end x86_partition;
 process implementation x86_partition.final
 subcomponents
 	supervisor_protected : data TASTE_Protected.Object;
-	gcs : thread gcs_CV_Thread::gcs_gcs.others;
+	gcs_protected : data TASTE_Protected.Object;
 	vt_supervisor_pulse : thread vt_supervisor_pulse_CV_Thread::vt_supervisor_pulse_vt_supervisor_pulse.others;
 	vt_supervisor_takeoff : thread vt_supervisor_takeoff_CV_Thread::vt_supervisor_takeoff_vt_supervisor_takeoff.others;
+	vt_gcs_sensordata : thread vt_gcs_sensordata_CV_Thread::vt_gcs_sensordata_vt_gcs_sensordata.others;
+	vt_gcs_gui_polling_gcs : thread vt_gcs_gui_polling_gcs_CV_Thread::vt_gcs_gui_polling_gcs_vt_gcs_gui_polling_gcs.others;
 connections
-	PORT gcs.OUTPORT_takeoff -> vt_supervisor_takeoff.INPORT_artificial_takeoff;
+	PORT vt_supervisor_pulse.OUTPORT_SensorData_vt -> vt_gcs_sensordata.INPORT_artificial_SensorData;
+	PORT vt_supervisor_takeoff.OUTPORT_SensorData_vt -> vt_gcs_sensordata.INPORT_artificial_SensorData;
+	PORT vt_gcs_sensordata.OUTPORT_takeoff_vt -> vt_supervisor_takeoff.INPORT_artificial_takeoff;
+	PORT vt_gcs_gui_polling_gcs.OUTPORT_takeoff_vt -> vt_supervisor_takeoff.INPORT_artificial_takeoff;
 	vt_supervisor_pulse_supervisor: data access supervisor_protected -> vt_supervisor_pulse.supervisor_protected;
 	vt_supervisor_takeoff_supervisor: data access supervisor_protected -> vt_supervisor_takeoff.supervisor_protected;
+	vt_gcs_sensordata_gcs: data access gcs_protected -> vt_gcs_sensordata.gcs_protected;
+	vt_gcs_gui_polling_gcs_gcs: data access gcs_protected -> vt_gcs_gui_polling_gcs.gcs_protected;
 end x86_partition.final;
 
 system deploymentview

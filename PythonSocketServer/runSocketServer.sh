@@ -2,5 +2,5 @@
 #
 clear
 source activate cfclient
-python3 ./myBasiclogAndRampWithSocketServerC.py
+python3 /home/taste/Documents/FlyingTasters/PythonSocketServer/myBasiclogAndRampWithSocketServerC.py
 echo "end of script"

@@ -3,6 +3,7 @@
 SUBPROGRAM readStabilizerSendThrust
 FEATURES
 	ref_thrust:IN PARAMETER DataView::MyReal {encoding=>NATIVE;};
+	updated_thrust:OUT PARAMETER DataView::MyReal {encoding=>NATIVE;};
 END readStabilizerSendThrust;
 
 SUBPROGRAM IMPLEMENTATION readStabilizerSendThrust.C

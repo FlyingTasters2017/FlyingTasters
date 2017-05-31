@@ -10,15 +10,15 @@ package ada_main is
    pragma Export (C, adafinal, "adafinal");
 
    type Version_32 is mod 2 ** 32;
-   u00001 : constant Version_32 := 16#e5a8ce12#;
+   u00001 : constant Version_32 := 16#4abd78ce#;
    pragma Export (C, u00001, "tasteadaS");
    u00002 : constant Version_32 := 16#b6df930e#;
    pragma Export (C, u00002, "system__standard_libraryB");
    u00003 : constant Version_32 := 16#36a12203#;
    pragma Export (C, u00003, "system__standard_libraryS");
-   u00004 : constant Version_32 := 16#96d8aad7#;
+   u00004 : constant Version_32 := 16#808207d9#;
    pragma Export (C, u00004, "supervisorB");
-   u00005 : constant Version_32 := 16#64cc177e#;
+   u00005 : constant Version_32 := 16#cbd9a1a2#;
    pragma Export (C, u00005, "supervisorS");
    u00006 : constant Version_32 := 16#3ffc8e18#;
    pragma Export (C, u00006, "adaS");
@@ -134,7 +134,7 @@ package ada_main is
    pragma Export (C, u00061, "taste_basictypesB");
    u00062 : constant Version_32 := 16#a8696944#;
    pragma Export (C, u00062, "taste_basictypesS");
-   u00063 : constant Version_32 := 16#af02ec74#;
+   u00063 : constant Version_32 := 16#c801a949#;
    pragma Export (C, u00063, "taste_dataviewB");
    u00064 : constant Version_32 := 16#cfbd75d2#;
    pragma Export (C, u00064, "taste_dataviewS");

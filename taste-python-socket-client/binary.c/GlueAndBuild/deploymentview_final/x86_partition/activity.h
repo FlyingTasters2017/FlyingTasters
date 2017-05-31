@@ -11,10 +11,8 @@
 
 /*****************************************************/
 
-void gcs_deliver 
+void vt_supervisor_pulse_deliver 
     (__po_hi_request_t* request);
-
-void* gcs_job (void);
 
 void* vt_supervisor_pulse_job (void);
 
@@ -22,6 +20,16 @@ void vt_supervisor_takeoff_deliver
     (__po_hi_request_t* request);
 
 void* vt_supervisor_takeoff_job (void);
+
+void vt_gcs_sensordata_deliver 
+    (__po_hi_request_t* request);
+
+void* vt_gcs_sensordata_job (void);
+
+void vt_gcs_gui_polling_gcs_deliver 
+    (__po_hi_request_t* request);
+
+void* vt_gcs_gui_polling_gcs_job (void);
 
 void __po_hi_main_deliver 
     (__po_hi_request_t* request);

@@ -22,7 +22,7 @@ flag asn1SccMyReal_IsConstraintValid(const asn1SccMyReal* pVal, int* pErrCode)
 
 	(void)pVal;
 
-	ret = (0.00000000000000000000E+000 <= *pVal && *pVal <= 1.00000000000000000000E+003);
+	ret = (-1.00000000000000000000E+003 <= *pVal && *pVal <= 1.00000000000000000000E+003);
 	*pErrCode = ret ? 0 : ERR_asn1SccMyReal;
 
 	return ret;

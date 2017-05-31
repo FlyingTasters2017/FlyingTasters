@@ -1,3 +1,4 @@
+#include "po_hi_gqueue.h"
 /* This file was generated automatically: DO NOT MODIFY IT ! */
 
 #include "supervisor_polyorb_interface.h"
@@ -20,14 +21,6 @@ void sync_supervisor_pulse()
 	__po_hi_protected_unlock (supervisor_protected.protected_id);
 }
 
-/* ------------------------------------------------------
---  Synchronous Required Interface "readStabilizerSendThrust"
------------------------------------------------------- */
-void vm_supervisor_readStabilizerSendThrust(void *ref_thrust, size_t ref_thrust_len)
-{
-	sync_socketclient_readStabilizerSendThrust(ref_thrust, ref_thrust_len);
-}
-
 /*----------------------------------------------------
 -- Protected Provided Interface "takeoff"
 ----------------------------------------------------*/
@@ -37,6 +30,26 @@ void sync_supervisor_takeoff(void *ref_thrust, size_t ref_thrust_len)
 	__po_hi_protected_lock (supervisor_protected.protected_id);
 	supervisor_takeoff(ref_thrust, ref_thrust_len);
 	__po_hi_protected_unlock (supervisor_protected.protected_id);
+}
+
+/* ------------------------------------------------------
+--  Synchronous Required Interface "readStabilizerSendThrust"
+------------------------------------------------------ */
+void vm_supervisor_readStabilizerSendThrust(void *ref_thrust, size_t ref_thrust_len, void *updated_thrust, size_t *updated_thrust_len)
+{
+	sync_socketclient_readStabilizerSendThrust(ref_thrust, ref_thrust_len, updated_thrust, updated_thrust_len);
+}
+
+/* ------------------------------------------------------
+--  Asynchronous Required Interface "SensorData"
+------------------------------------------------------ */
+void vm_async_supervisor_SensorData(void *updated_thrust, size_t updated_thrust_len)
+{
+	switch(__po_hi_get_task_id()) {
+		case x86_partition_vt_supervisor_pulse_k: vm_async_vt_supervisor_pulse_SensorData_vt(updated_thrust, updated_thrust_len); break;
+		case x86_partition_vt_supervisor_takeoff_k: vm_async_vt_supervisor_takeoff_SensorData_vt(updated_thrust, updated_thrust_len); break;
+		default: break;
+	}
 }
 
 /* ------------------------------------------------------

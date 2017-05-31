@@ -15,6 +15,8 @@ extern "C" {
 */
 void init_gcs();
 
+void gcs_SensorData (void *pmy_updated_thrust, size_t size_my_updated_thrust);
+extern void gcs_PI_SensorData (const asn1SccMyReal *);
 void gcs_gui_polling_gcs ();
 extern void gcs_PI_gui_polling_gcs ();
 #ifdef __cplusplus

@@ -13,9 +13,13 @@
 
 #define __PO_HI_MY_NODE x86_partition_k
 
-#define __po_hi_gcs_nb_ports 1
+#define __po_hi_vt_supervisor_pulse_nb_ports 1
 
-#define __po_hi_vt_supervisor_takeoff_nb_ports 1
+#define __po_hi_vt_supervisor_takeoff_nb_ports 2
+
+#define __po_hi_vt_gcs_sensordata_nb_ports 2
+
+#define __po_hi_vt_gcs_gui_polling_gcs_nb_ports 1
 
 /*  For each node in the distributed application add an enumerator*/
 
@@ -33,17 +37,19 @@ typedef enum
 
 typedef enum
 {
-  x86_partition_gcs_k_entity = 0,
-  x86_partition_vt_supervisor_pulse_k_entity = 1,
-  x86_partition_vt_supervisor_takeoff_k_entity = 2,
+  x86_partition_vt_supervisor_pulse_k_entity = 0,
+  x86_partition_vt_supervisor_takeoff_k_entity = 1,
+  x86_partition_vt_gcs_sensordata_k_entity = 2,
+  x86_partition_vt_gcs_gui_polling_gcs_k_entity = 3,
   invalid_entity = -1
 } __po_hi_entity_t;
 
 typedef enum
 {
-  x86_partition_gcs_k = 0,
-  x86_partition_vt_supervisor_pulse_k = 1,
-  x86_partition_vt_supervisor_takeoff_k = 2,
+  x86_partition_vt_supervisor_pulse_k = 0,
+  x86_partition_vt_supervisor_takeoff_k = 1,
+  x86_partition_vt_gcs_sensordata_k = 2,
+  x86_partition_vt_gcs_gui_polling_gcs_k = 3,
   invalid_task_id = -1
 } __po_hi_task_id;
 
@@ -57,30 +63,38 @@ typedef enum
   invalid_bus_id = -1
 } __po_hi_bus_id;
 
-#define __PO_HI_NB_TASKS 3
+#define __PO_HI_NB_TASKS 4
 
-#define __PO_HI_TASKS_STACK 150000
+#define __PO_HI_TASKS_STACK 200000
 
-#define __PO_HI_NB_PROTECTED 1
+#define __PO_HI_NB_PROTECTED 2
 
 #define __PO_HI_NB_NODES 1
 
-#define __PO_HI_NB_ENTITIES 3
+#define __PO_HI_NB_ENTITIES 4
 
-#define __PO_HI_NB_PORTS 2
+#define __PO_HI_NB_PORTS 6
 
 typedef enum
 {
-  gcs_global_outport_takeoff = 0,
+  vt_supervisor_pulse_global_outport_sensordata_vt = 0,
   vt_supervisor_takeoff_global_inport_artificial_takeoff = 1,
+  vt_supervisor_takeoff_global_outport_sensordata_vt = 2,
+  vt_gcs_sensordata_global_inport_artificial_sensordata = 3,
+  vt_gcs_sensordata_global_outport_takeoff_vt = 4,
+  vt_gcs_gui_polling_gcs_global_outport_takeoff_vt = 5,
   invalid_port_t = -1,
-  constant_out_identifier = 3
+  constant_out_identifier = 7
 } __po_hi_port_t;
 
 typedef enum
 {
-  gcs_local_outport_takeoff = 0,
+  vt_supervisor_pulse_local_outport_sensordata_vt = 0,
   vt_supervisor_takeoff_local_inport_artificial_takeoff = 0,
+  vt_supervisor_takeoff_local_outport_sensordata_vt = 1,
+  vt_gcs_sensordata_local_inport_artificial_sensordata = 0,
+  vt_gcs_sensordata_local_outport_takeoff_vt = 1,
+  vt_gcs_gui_polling_gcs_local_outport_takeoff_vt = 0,
   invalid_local_port_t = -1
 } __po_hi_local_port_t;
 
@@ -90,6 +104,6 @@ typedef enum
 
 #define __PO_HI_NB_PROTOCOLS 0
 
-#define __PO_HI_PORT_TYPE_CONTENT __po_hi_gcs_nb_ports, __po_hi_vt_supervisor_takeoff_nb_ports
+#define __PO_HI_PORT_TYPE_CONTENT __po_hi_vt_supervisor_pulse_nb_ports, __po_hi_vt_supervisor_takeoff_nb_ports, __po_hi_vt_gcs_sensordata_nb_ports, __po_hi_vt_gcs_gui_polling_gcs_nb_ports
 
 #endif

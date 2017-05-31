@@ -6,4 +6,5 @@
 /*  changes will be lost when you re-run Ocarina     */
 /*****************************************************/
 extern process_package__taste_protected_object supervisor_protected;
+extern process_package__taste_protected_object gcs_protected;
 

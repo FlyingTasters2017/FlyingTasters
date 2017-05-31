@@ -22,7 +22,7 @@ typedef double asn1SccMyReal;
 void asn1SccMyReal_Initialize(asn1SccMyReal* pVal);
 flag asn1SccMyReal_IsConstraintValid(const asn1SccMyReal* val, int* pErrCode);
 #ifndef ERR_asn1SccMyReal 
-#define ERR_asn1SccMyReal		1001  /*(0.00000000000000000000E+000 .. 1.00000000000000000000E+003)*/
+#define ERR_asn1SccMyReal		1001  /*(-1.00000000000000000000E+003 .. 1.00000000000000000000E+003)*/
 #endif
 
 typedef flag asn1SccMyBool;

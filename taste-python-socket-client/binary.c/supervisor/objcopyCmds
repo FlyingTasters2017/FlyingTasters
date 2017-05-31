@@ -1,3 +1,2 @@
 __x86.get_pc_thunk.bx assert_supervisor_renamed___x86.get_pc_thunk.bx
 __x86.get_pc_thunk.ax assert_supervisor_renamed___x86.get_pc_thunk.ax
-init.3599 assert_supervisor_renamed_init.3599

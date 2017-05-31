@@ -6,10 +6,10 @@ use System.IO;
 with Ada.Unchecked_Conversion;
 with Ada.Numerics.Generic_Elementary_Functions;
 
-with TASTE_BasicTypes;
-use TASTE_BasicTypes;
 with TASTE_Dataview;
 use TASTE_Dataview;
+with TASTE_BasicTypes;
+use TASTE_BasicTypes;
 with adaasn1rtl;
 use adaasn1rtl;
 
@@ -22,6 +22,7 @@ package body supervisor is
         record
         state : States;
         initDone : Boolean := False;
+        updated_thrust : aliased asn1SccMyReal;
         ref_thrust : aliased asn1SccMyReal;
     end record;
     ctxt: aliased ctxt_Ty;
@@ -31,9 +32,9 @@ package body supervisor is
         begin
             case ctxt.state is
                 when running =>
-                    runTransition(3);
-                when wait =>
                     runTransition(1);
+                when wait =>
+                    runTransition(3);
                 when others =>
                     runTransition(CS_Only);
             end case;
@@ -45,10 +46,10 @@ package body supervisor is
             case ctxt.state is
                 when running =>
                     ctxt.ref_thrust := ref_thrust.all;
-                    runTransition(4);
+                    runTransition(2);
                 when wait =>
                     ctxt.ref_thrust := ref_thrust.all;
-                    runTransition(2);
+                    runTransition(4);
                 when others =>
                     runTransition(CS_Only);
             end case;
@@ -69,26 +70,28 @@ package body supervisor is
                         ctxt.state := Wait;
                         goto next_transition;
                     when 1 =>
-                        -- NEXT_STATE Wait (22,22) at 460, 321
+                        -- readStabilizerSendThrust(ref_thrust, updated_thrust) (19,17)
+                        RIÜreadStabilizerSendThrust(ctxt.ref_thrust'Access, ctxt.updated_thrust'Access);
+                        -- SensorData(updated_thrust) (21,19)
+                        RIÜSensorData(ctxt.updated_thrust'Access);
+                        -- NEXT_STATE Running (23,22) at 895, 337
                         trId := -1;
-                        ctxt.state := Wait;
+                        ctxt.state := Running;
                         goto next_transition;
                     when 2 =>
-                        -- NEXT_STATE Running (26,22) at 575, 321
-                        trId := -1;
-                        ctxt.state := Running;
-                        goto next_transition;
-                    when 3 =>
-                        -- readStabilizerSendThrust(ref_thrust) (33,17)
-                        RIÜreadStabilizerSendThrust(ctxt.ref_thrust'Access);
-                        -- NEXT_STATE Running (35,22) at 895, 287
-                        trId := -1;
-                        ctxt.state := Running;
-                        goto next_transition;
-                    when 4 =>
-                        -- NEXT_STATE Wait (39,22) at 1098, 232
+                        -- NEXT_STATE Wait (27,22) at 1149, 232
                         trId := -1;
                         ctxt.state := Wait;
+                        goto next_transition;
+                    when 3 =>
+                        -- NEXT_STATE Wait (37,22) at 460, 321
+                        trId := -1;
+                        ctxt.state := Wait;
+                        goto next_transition;
+                    when 4 =>
+                        -- NEXT_STATE Running (41,22) at 574, 321
+                        trId := -1;
+                        ctxt.state := Running;
                         goto next_transition;
                     when CS_Only =>
                         trId := -1;

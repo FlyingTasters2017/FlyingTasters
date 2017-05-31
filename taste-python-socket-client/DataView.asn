@@ -5,7 +5,7 @@ IMPORTS T-Int32, T-UInt32, T-Int8, T-UInt8, T-Boolean FROM TASTE-BasicTypes;
 -- A few simple types to start with ASN.1
 MyInteger   ::= T-UInt8
 
-MyReal      ::= REAL (0.0 .. 1000.0)
+MyReal      ::= REAL (-1000.0 .. 1000.0)
 
 MyBool      ::= BOOLEAN
 

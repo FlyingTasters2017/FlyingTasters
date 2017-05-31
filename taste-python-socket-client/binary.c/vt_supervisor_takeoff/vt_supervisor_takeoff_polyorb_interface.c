@@ -25,9 +25,23 @@ void vm_vt_supervisor_takeoff_takeoff(void *ref_thrust, size_t ref_thrust_len)
 /* ------------------------------------------------------
 --  Synchronous Required Interface "readStabilizerSendThrust_vt"
 ------------------------------------------------------ */
-void vm_vt_supervisor_takeoff_readStabilizerSendThrust_vt(void *ref_thrust, size_t ref_thrust_len)
+void vm_vt_supervisor_takeoff_readStabilizerSendThrust_vt(void *ref_thrust, size_t ref_thrust_len, void *updated_thrust, size_t *updated_thrust_len)
 {
-	sync_socketclient_readStabilizerSendThrust(ref_thrust, ref_thrust_len);
+	sync_socketclient_readStabilizerSendThrust(ref_thrust, ref_thrust_len, updated_thrust, updated_thrust_len);
+}
+
+/* ------------------------------------------------------
+--  Asynchronous Required Interface "SensorData_vt"
+------------------------------------------------------ */
+void vm_async_vt_supervisor_takeoff_SensorData_vt(void *updated_thrust, size_t updated_thrust_len)
+{
+	__po_hi_request_t request;
+
+	__po_hi_copy_array(&(request.vars.vt_supervisor_takeoff_global_outport_sensordata_vt.vt_supervisor_takeoff_global_outport_sensordata_vt.buffer), updated_thrust, updated_thrust_len);
+	request.vars.vt_supervisor_takeoff_global_outport_sensordata_vt.vt_supervisor_takeoff_global_outport_sensordata_vt.length = updated_thrust_len;
+	request.port = vt_supervisor_takeoff_global_outport_sensordata_vt;
+	__po_hi_gqueue_store_out(x86_partition_vt_supervisor_takeoff_k, vt_supervisor_takeoff_local_outport_sensordata_vt, &request);
+	__po_hi_send_output(x86_partition_vt_supervisor_takeoff_k, vt_supervisor_takeoff_global_outport_sensordata_vt);
 }
 
 /* ------------------------------------------------------

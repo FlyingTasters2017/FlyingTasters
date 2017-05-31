@@ -1,0 +1,27 @@
+--  This file was generated automatically: DO NOT MODIFY IT !
+
+--  This file contains a part of the system CONCURRENCY VIEW.
+--  It is an input file for OCARINA.
+
+package function1_CV_Thread
+public
+	with Deployment;
+	with process_package;
+	with Dataview;
+
+THREAD function1_function1
+END function1_function1;
+
+THREAD IMPLEMENTATION function1_function1.others
+PROPERTIES
+	Initialize_Entrypoint_Source_Text => "init_function1";
+	Compute_Entrypoint_Source_Text => "po_hi_c_function1_pulse";
+	Dispatch_Protocol => Periodic;
+	Period            => 1 ms;
+	Dispatch_Offset   => 0 ms;
+	Compute_Execution_Time => 0 ms .. 10 ms;
+	Source_Stack_Size => 50 KByte;
+	Priority => 1;
+END function1_function1.others;
+
+end function1_CV_Thread;

@@ -22,17 +22,24 @@ package supervisor is
 	pragma export(C, pulse, "supervisor_PI_pulse");
 
 	---------------------------------------------------------
-	-- Required interface "readStabilizerSendThrust"
-	---------------------------------------------------------
-	procedure readStabilizerSendThrust(ref_thrust: access asn1sccMyReal);
-	pragma import(C, readStabilizerSendThrust, "supervisor_RI_readStabilizerSendThrust");
-	procedure RIÜreadStabilizerSendThrust(ref_thrust: access asn1sccMyReal) renames readStabilizerSendThrust;
-
-	---------------------------------------------------------
 	-- Provided interface "takeoff"
 	---------------------------------------------------------
 	procedure takeoff(ref_thrust: access asn1sccMyReal);
 	pragma export(C, takeoff, "supervisor_PI_takeoff");
+
+	---------------------------------------------------------
+	-- Required interface "readStabilizerSendThrust"
+	---------------------------------------------------------
+	procedure readStabilizerSendThrust(ref_thrust: access asn1sccMyReal; updated_thrust: access asn1sccMyReal);
+	pragma import(C, readStabilizerSendThrust, "supervisor_RI_readStabilizerSendThrust");
+	procedure RIÜreadStabilizerSendThrust(ref_thrust: access asn1sccMyReal; updated_thrust: access asn1sccMyReal) renames readStabilizerSendThrust;
+
+	---------------------------------------------------------
+	-- Required interface "SensorData"
+	---------------------------------------------------------
+	procedure SensorData(updated_thrust: access asn1sccMyReal);
+	pragma import(C, SensorData, "supervisor_RI_SensorData");
+	procedure RIÜSensorData(updated_thrust: access asn1sccMyReal) renames SensorData;
 
 	-- TASTE API to check if the input queue is empty
 	procedure check_queue(res: access asn1SccT_Boolean);

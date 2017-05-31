@@ -22,15 +22,39 @@ typedef struct
   {
     struct
     {
-      dataview__myreal_buffer_impl gcs_global_outport_takeoff;
+      dataview__myreal_buffer_impl vt_supervisor_pulse_global_outport_sensordata_vt;
 
-    } gcs_global_outport_takeoff;
+    } vt_supervisor_pulse_global_outport_sensordata_vt;
 
     struct
     {
       dataview__myreal_buffer_impl vt_supervisor_takeoff_global_inport_artificial_takeoff;
 
     } vt_supervisor_takeoff_global_inport_artificial_takeoff;
+
+    struct
+    {
+      dataview__myreal_buffer_impl vt_supervisor_takeoff_global_outport_sensordata_vt;
+
+    } vt_supervisor_takeoff_global_outport_sensordata_vt;
+
+    struct
+    {
+      dataview__myreal_buffer_impl vt_gcs_sensordata_global_inport_artificial_sensordata;
+
+    } vt_gcs_sensordata_global_inport_artificial_sensordata;
+
+    struct
+    {
+      dataview__myreal_buffer_impl vt_gcs_sensordata_global_outport_takeoff_vt;
+
+    } vt_gcs_sensordata_global_outport_takeoff_vt;
+
+    struct
+    {
+      dataview__myreal_buffer_impl vt_gcs_gui_polling_gcs_global_outport_takeoff_vt;
+
+    } vt_gcs_gui_polling_gcs_global_outport_takeoff_vt;
 
   } vars;
 

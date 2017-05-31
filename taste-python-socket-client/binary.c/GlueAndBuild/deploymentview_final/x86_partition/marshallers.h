@@ -64,12 +64,12 @@ void __po_hi_unmarshall_type_unsigned_32
     __po_hi_msg_t* message,
     __po_hi_uint32_t* offset);
 
-void __po_hi_marshall_request_gcs_outport_takeoff 
+void __po_hi_marshall_request_vt_supervisor_pulse_outport_sensordata_vt 
     (__po_hi_request_t* request,
     __po_hi_msg_t* message,
     __po_hi_uint32_t* offset);
 
-void __po_hi_unmarshall_request_gcs_outport_takeoff 
+void __po_hi_unmarshall_request_vt_supervisor_pulse_outport_sensordata_vt 
     (__po_hi_request_t* request,
     __po_hi_msg_t* message,
     __po_hi_uint32_t* offset);
@@ -80,6 +80,46 @@ void __po_hi_marshall_request_vt_supervisor_takeoff_inport_artificial_takeoff
     __po_hi_uint32_t* offset);
 
 void __po_hi_unmarshall_request_vt_supervisor_takeoff_inport_artificial_takeoff 
+    (__po_hi_request_t* request,
+    __po_hi_msg_t* message,
+    __po_hi_uint32_t* offset);
+
+void __po_hi_marshall_request_vt_supervisor_takeoff_outport_sensordata_vt 
+    (__po_hi_request_t* request,
+    __po_hi_msg_t* message,
+    __po_hi_uint32_t* offset);
+
+void __po_hi_unmarshall_request_vt_supervisor_takeoff_outport_sensordata_vt 
+    (__po_hi_request_t* request,
+    __po_hi_msg_t* message,
+    __po_hi_uint32_t* offset);
+
+void __po_hi_marshall_request_vt_gcs_sensordata_inport_artificial_sensordata 
+    (__po_hi_request_t* request,
+    __po_hi_msg_t* message,
+    __po_hi_uint32_t* offset);
+
+void __po_hi_unmarshall_request_vt_gcs_sensordata_inport_artificial_sensordata 
+    (__po_hi_request_t* request,
+    __po_hi_msg_t* message,
+    __po_hi_uint32_t* offset);
+
+void __po_hi_marshall_request_vt_gcs_sensordata_outport_takeoff_vt 
+    (__po_hi_request_t* request,
+    __po_hi_msg_t* message,
+    __po_hi_uint32_t* offset);
+
+void __po_hi_unmarshall_request_vt_gcs_sensordata_outport_takeoff_vt 
+    (__po_hi_request_t* request,
+    __po_hi_msg_t* message,
+    __po_hi_uint32_t* offset);
+
+void __po_hi_marshall_request_vt_gcs_gui_polling_gcs_outport_takeoff_vt 
+    (__po_hi_request_t* request,
+    __po_hi_msg_t* message,
+    __po_hi_uint32_t* offset);
+
+void __po_hi_unmarshall_request_vt_gcs_gui_polling_gcs_outport_takeoff_vt 
     (__po_hi_request_t* request,
     __po_hi_msg_t* message,
     __po_hi_uint32_t* offset);

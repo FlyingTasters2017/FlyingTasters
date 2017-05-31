@@ -5,25 +5,9 @@ import DV
 from Stubs import (
     myassert, Clean, DataStream, COMMON)
 
-class MyBool(COMMON):
+class T_Int8(COMMON):
     def __init__(self, ptr=None):
-        super(MyBool, self).__init__("MyBool", ptr)
-
-    def GSER(self):
-        ''' Return the GSER representation of the value '''
-        lines = []
-        lines.append(""+str(self.Get()!=0).upper())
-
-        return ' '.join(lines)
-
-    def PrintAll(self):
-        ''' Display a variable of this type '''
-        print(self.GSER() + '\n')
-
-
-class MyReal(COMMON):
-    def __init__(self, ptr=None):
-        super(MyReal, self).__init__("MyReal", ptr)
+        super(T_Int8, self).__init__("T_Int8", ptr)
 
     def GSER(self):
         ''' Return the GSER representation of the value '''
@@ -55,7 +39,7 @@ class MySeq(COMMON):
         lines.append(" "+str(self.output_data.Get()))
         lines.append(', ')
         lines.append("validity ")
-        lines.append(" "+{'0': 'valid', '1': 'invalid'}[str(self.validity.Get())])
+        lines.append(" "+{'1': 'invalid', '0': 'valid'}[str(self.validity.Get())])
         lines.append("}")
 
         return ' '.join(lines)
@@ -65,9 +49,9 @@ class MySeq(COMMON):
         print(self.GSER() + '\n')
 
 
-class T_UInt32(COMMON):
+class MyReal(COMMON):
     def __init__(self, ptr=None):
-        super(T_UInt32, self).__init__("T_UInt32", ptr)
+        super(MyReal, self).__init__("MyReal", ptr)
 
     def GSER(self):
         ''' Return the GSER representation of the value '''
@@ -81,9 +65,30 @@ class T_UInt32(COMMON):
         print(self.GSER() + '\n')
 
 
-class T_Boolean(COMMON):
+class MyEnum(COMMON):
+    # Allowed enumerants:
+    hello = 0
+    world = 1
+    howareyou = 2
+    allowed = [hello, world, howareyou]
     def __init__(self, ptr=None):
-        super(T_Boolean, self).__init__("T_Boolean", ptr)
+        super(MyEnum, self).__init__("MyEnum", ptr)
+
+    def GSER(self):
+        ''' Return the GSER representation of the value '''
+        lines = []
+        lines.append(""+{'2': 'howareyou', '1': 'world', '0': 'hello'}[str(self.Get())])
+
+        return ' '.join(lines)
+
+    def PrintAll(self):
+        ''' Display a variable of this type '''
+        print(self.GSER() + '\n')
+
+
+class MyBool(COMMON):
+    def __init__(self, ptr=None):
+        super(MyBool, self).__init__("MyBool", ptr)
 
     def GSER(self):
         ''' Return the GSER representation of the value '''
@@ -113,34 +118,6 @@ class MyInteger(COMMON):
         print(self.GSER() + '\n')
 
 
-class MySeqOf(COMMON):
-    def __init__(self, ptr=None):
-        super(MySeqOf, self).__init__("MySeqOf", ptr)
-
-    def GSER(self):
-        ''' Return the GSER representation of the value '''
-        lines = []
-        lines.append("{")
-        def emitElem(path, i):
-            state = self.GetState()
-            if i > 0:
-                lines.append(",")
-            lines.append(" "+{'0': 'hello', '1': 'world', '2': 'howareyou'}[str(path[i].Get())])
-            self.Reset(state)
-        state = self.GetState()
-        length = self.GetLength()
-        self.Reset(state)
-        map(partial(emitElem, self), xrange(length))
-        self.Reset(state)
-        lines.append("}")
-
-        return ' '.join(lines)
-
-    def PrintAll(self):
-        ''' Display a variable of this type '''
-        print(self.GSER() + '\n')
-
-
 class T_Int32(COMMON):
     def __init__(self, ptr=None):
         super(T_Int32, self).__init__("T_Int32", ptr)
@@ -149,6 +126,22 @@ class T_Int32(COMMON):
         ''' Return the GSER representation of the value '''
         lines = []
         lines.append(""+str(self.Get()))
+
+        return ' '.join(lines)
+
+    def PrintAll(self):
+        ''' Display a variable of this type '''
+        print(self.GSER() + '\n')
+
+
+class T_Boolean(COMMON):
+    def __init__(self, ptr=None):
+        super(T_Boolean, self).__init__("T_Boolean", ptr)
+
+    def GSER(self):
+        ''' Return the GSER representation of the value '''
+        lines = []
+        lines.append(""+str(self.Get()!=0).upper())
 
         return ' '.join(lines)
 
@@ -174,9 +167,9 @@ class MyOctStr(COMMON):
         print(self.GSER() + '\n')
 
 
-class T_UInt8(COMMON):
+class T_UInt32(COMMON):
     def __init__(self, ptr=None):
-        super(T_UInt8, self).__init__("T_UInt8", ptr)
+        super(T_UInt32, self).__init__("T_UInt32", ptr)
 
     def GSER(self):
         ''' Return the GSER representation of the value '''
@@ -190,35 +183,26 @@ class T_UInt8(COMMON):
         print(self.GSER() + '\n')
 
 
-class T_Int8(COMMON):
+class MySeqOf(COMMON):
     def __init__(self, ptr=None):
-        super(T_Int8, self).__init__("T_Int8", ptr)
+        super(MySeqOf, self).__init__("MySeqOf", ptr)
 
     def GSER(self):
         ''' Return the GSER representation of the value '''
         lines = []
-        lines.append(""+str(self.Get()))
-
-        return ' '.join(lines)
-
-    def PrintAll(self):
-        ''' Display a variable of this type '''
-        print(self.GSER() + '\n')
-
-
-class MyEnum(COMMON):
-    # Allowed enumerants:
-    hello = 0
-    world = 1
-    howareyou = 2
-    allowed = [hello, world, howareyou]
-    def __init__(self, ptr=None):
-        super(MyEnum, self).__init__("MyEnum", ptr)
-
-    def GSER(self):
-        ''' Return the GSER representation of the value '''
-        lines = []
-        lines.append(""+{'0': 'hello', '1': 'world', '2': 'howareyou'}[str(self.Get())])
+        lines.append("{")
+        def emitElem(path, i):
+            state = self.GetState()
+            if i > 0:
+                lines.append(",")
+            lines.append(" "+{'2': 'howareyou', '1': 'world', '0': 'hello'}[str(path[i].Get())])
+            self.Reset(state)
+        state = self.GetState()
+        length = self.GetLength()
+        self.Reset(state)
+        map(partial(emitElem, self), xrange(length))
+        self.Reset(state)
+        lines.append("}")
 
         return ' '.join(lines)
 
@@ -247,8 +231,24 @@ class MyChoice(COMMON):
          lines.append("  "+str(self.b.output_data.Get()))
          lines.append(', ')
          lines.append(" validity ")
-         lines.append("  "+{'0': 'valid', '1': 'invalid'}[str(self.b.validity.Get())])
+         lines.append("  "+{'1': 'invalid', '0': 'valid'}[str(self.b.validity.Get())])
          lines.append("}")
+
+        return ' '.join(lines)
+
+    def PrintAll(self):
+        ''' Display a variable of this type '''
+        print(self.GSER() + '\n')
+
+
+class T_UInt8(COMMON):
+    def __init__(self, ptr=None):
+        super(T_UInt8, self).__init__("T_UInt8", ptr)
+
+    def GSER(self):
+        ''' Return the GSER representation of the value '''
+        lines = []
+        lines.append(""+str(self.Get()))
 
         return ' '.join(lines)
 
