@@ -187,7 +187,7 @@ if __name__ == '__main__':
                 le.ramp_motors(thrust)
             conn.close()
     except KeyboardInterrupt:
-        conn.close()
+        # conn.close()
         logging.log(logging.INFO, "Socket server stopped")
     # sys.exit(2)
     # print('Im here in the end')
