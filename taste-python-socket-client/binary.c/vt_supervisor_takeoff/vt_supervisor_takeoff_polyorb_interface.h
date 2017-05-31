@@ -22,7 +22,11 @@ void vm_vt_supervisor_takeoff_takeoff(void *ref_thrust, size_t ref_thrust_len);
 /* ------------------------------------------------------
 --  Synchronous Required Interface "readStabilizerSendThrust_vt"
 ------------------------------------------------------ */
-void vm_vt_supervisor_takeoff_readStabilizerSendThrust_vt(void *ref_thrust, size_t ref_thrust_len);
+void vm_vt_supervisor_takeoff_readStabilizerSendThrust_vt(void *ref_thrust, size_t ref_thrust_len, void *, size_t *);
+/* ------------------------------------------------------
+--  Asynchronous Required Interface "SensorData_vt"
+------------------------------------------------------ */
+void vm_async_vt_supervisor_takeoff_SensorData_vt(void *updated_thrust, size_t updated_thrust_len);
 /* ------------------------------------------------------
 --  Synchronous Required Interface "check_queue_vt"
 ------------------------------------------------------ */

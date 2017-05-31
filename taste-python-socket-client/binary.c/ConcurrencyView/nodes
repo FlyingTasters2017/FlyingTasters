@@ -10,3 +10,5 @@ socketclient
 x86_partition_taste_api
 vt_supervisor_pulse
 vt_supervisor_takeoff
+vt_gcs_sensordata
+vt_gcs_gui_polling_gcs

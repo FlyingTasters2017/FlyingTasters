@@ -15,6 +15,7 @@ features
 		{ Compute_Execution_Time => 0 ms .. 0 ms;
 		  Queue_Size => 1;
 		  Compute_Entrypoint_Source_Text => "po_hi_c_vt_supervisor_takeoff_artificial_takeoff"; };
+	OUTPORT_SensorData_vt : OUT EVENT DATA PORT DataView::MyReal_Buffer.impl;
 	supervisor_protected : requires data access process_package::TASTE_Protected.Object;
 END vt_supervisor_takeoff_vt_supervisor_takeoff;
 

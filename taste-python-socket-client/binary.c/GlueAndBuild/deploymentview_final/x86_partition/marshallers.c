@@ -98,22 +98,22 @@ void __po_hi_unmarshall_type_myreal_buffer_impl
   __po_hi_unmarshall_uint32 (&(value->length), message, offset);
 }
 
-void __po_hi_marshall_request_gcs_outport_takeoff 
+void __po_hi_marshall_request_vt_supervisor_pulse_outport_sensordata_vt 
     (__po_hi_request_t* request,
     __po_hi_msg_t* message,
     __po_hi_uint32_t* offset)
 {
 
-  __po_hi_marshall_type_myreal_buffer_impl (request->vars.gcs_global_outport_takeoff.gcs_global_outport_takeoff, message, offset);
+  __po_hi_marshall_type_myreal_buffer_impl (request->vars.vt_supervisor_pulse_global_outport_sensordata_vt.vt_supervisor_pulse_global_outport_sensordata_vt, message, offset);
 }
 
-void __po_hi_unmarshall_request_gcs_outport_takeoff 
+void __po_hi_unmarshall_request_vt_supervisor_pulse_outport_sensordata_vt 
     (__po_hi_request_t* request,
     __po_hi_msg_t* message,
     __po_hi_uint32_t* offset)
 {
 
-  __po_hi_unmarshall_type_myreal_buffer_impl (&(request->vars.gcs_global_outport_takeoff.gcs_global_outport_takeoff), message, offset);
+  __po_hi_unmarshall_type_myreal_buffer_impl (&(request->vars.vt_supervisor_pulse_global_outport_sensordata_vt.vt_supervisor_pulse_global_outport_sensordata_vt), message, offset);
 }
 
 void __po_hi_marshall_request_vt_supervisor_takeoff_inport_artificial_takeoff 
@@ -134,6 +134,78 @@ void __po_hi_unmarshall_request_vt_supervisor_takeoff_inport_artificial_takeoff
   __po_hi_unmarshall_type_myreal_buffer_impl (&(request->vars.vt_supervisor_takeoff_global_inport_artificial_takeoff.vt_supervisor_takeoff_global_inport_artificial_takeoff), message, offset);
 }
 
+void __po_hi_marshall_request_vt_supervisor_takeoff_outport_sensordata_vt 
+    (__po_hi_request_t* request,
+    __po_hi_msg_t* message,
+    __po_hi_uint32_t* offset)
+{
+
+  __po_hi_marshall_type_myreal_buffer_impl (request->vars.vt_supervisor_takeoff_global_outport_sensordata_vt.vt_supervisor_takeoff_global_outport_sensordata_vt, message, offset);
+}
+
+void __po_hi_unmarshall_request_vt_supervisor_takeoff_outport_sensordata_vt 
+    (__po_hi_request_t* request,
+    __po_hi_msg_t* message,
+    __po_hi_uint32_t* offset)
+{
+
+  __po_hi_unmarshall_type_myreal_buffer_impl (&(request->vars.vt_supervisor_takeoff_global_outport_sensordata_vt.vt_supervisor_takeoff_global_outport_sensordata_vt), message, offset);
+}
+
+void __po_hi_marshall_request_vt_gcs_sensordata_inport_artificial_sensordata 
+    (__po_hi_request_t* request,
+    __po_hi_msg_t* message,
+    __po_hi_uint32_t* offset)
+{
+
+  __po_hi_marshall_type_myreal_buffer_impl (request->vars.vt_gcs_sensordata_global_inport_artificial_sensordata.vt_gcs_sensordata_global_inport_artificial_sensordata, message, offset);
+}
+
+void __po_hi_unmarshall_request_vt_gcs_sensordata_inport_artificial_sensordata 
+    (__po_hi_request_t* request,
+    __po_hi_msg_t* message,
+    __po_hi_uint32_t* offset)
+{
+
+  __po_hi_unmarshall_type_myreal_buffer_impl (&(request->vars.vt_gcs_sensordata_global_inport_artificial_sensordata.vt_gcs_sensordata_global_inport_artificial_sensordata), message, offset);
+}
+
+void __po_hi_marshall_request_vt_gcs_sensordata_outport_takeoff_vt 
+    (__po_hi_request_t* request,
+    __po_hi_msg_t* message,
+    __po_hi_uint32_t* offset)
+{
+
+  __po_hi_marshall_type_myreal_buffer_impl (request->vars.vt_gcs_sensordata_global_outport_takeoff_vt.vt_gcs_sensordata_global_outport_takeoff_vt, message, offset);
+}
+
+void __po_hi_unmarshall_request_vt_gcs_sensordata_outport_takeoff_vt 
+    (__po_hi_request_t* request,
+    __po_hi_msg_t* message,
+    __po_hi_uint32_t* offset)
+{
+
+  __po_hi_unmarshall_type_myreal_buffer_impl (&(request->vars.vt_gcs_sensordata_global_outport_takeoff_vt.vt_gcs_sensordata_global_outport_takeoff_vt), message, offset);
+}
+
+void __po_hi_marshall_request_vt_gcs_gui_polling_gcs_outport_takeoff_vt 
+    (__po_hi_request_t* request,
+    __po_hi_msg_t* message,
+    __po_hi_uint32_t* offset)
+{
+
+  __po_hi_marshall_type_myreal_buffer_impl (request->vars.vt_gcs_gui_polling_gcs_global_outport_takeoff_vt.vt_gcs_gui_polling_gcs_global_outport_takeoff_vt, message, offset);
+}
+
+void __po_hi_unmarshall_request_vt_gcs_gui_polling_gcs_outport_takeoff_vt 
+    (__po_hi_request_t* request,
+    __po_hi_msg_t* message,
+    __po_hi_uint32_t* offset)
+{
+
+  __po_hi_unmarshall_type_myreal_buffer_impl (&(request->vars.vt_gcs_gui_polling_gcs_global_outport_takeoff_vt.vt_gcs_gui_polling_gcs_global_outport_takeoff_vt), message, offset);
+}
+
 void __po_hi_marshall_request 
     (__po_hi_request_t* request,
     __po_hi_msg_t* message)
@@ -144,15 +216,39 @@ void __po_hi_marshall_request
   __po_hi_marshall_port (request->port, message);
   switch (request->port)
   {
-    case gcs_global_outport_takeoff:
+    case vt_supervisor_pulse_global_outport_sensordata_vt:
     {
-      __po_hi_marshall_request_gcs_outport_takeoff (request, message, &(offset));
+      __po_hi_marshall_request_vt_supervisor_pulse_outport_sensordata_vt (request, message, &(offset));
 
       break;
     }
     case vt_supervisor_takeoff_global_inport_artificial_takeoff:
     {
       __po_hi_marshall_request_vt_supervisor_takeoff_inport_artificial_takeoff (request, message, &(offset));
+
+      break;
+    }
+    case vt_supervisor_takeoff_global_outport_sensordata_vt:
+    {
+      __po_hi_marshall_request_vt_supervisor_takeoff_outport_sensordata_vt (request, message, &(offset));
+
+      break;
+    }
+    case vt_gcs_sensordata_global_inport_artificial_sensordata:
+    {
+      __po_hi_marshall_request_vt_gcs_sensordata_inport_artificial_sensordata (request, message, &(offset));
+
+      break;
+    }
+    case vt_gcs_sensordata_global_outport_takeoff_vt:
+    {
+      __po_hi_marshall_request_vt_gcs_sensordata_outport_takeoff_vt (request, message, &(offset));
+
+      break;
+    }
+    case vt_gcs_gui_polling_gcs_global_outport_takeoff_vt:
+    {
+      __po_hi_marshall_request_vt_gcs_gui_polling_gcs_outport_takeoff_vt (request, message, &(offset));
 
       break;
     }
@@ -173,15 +269,39 @@ void __po_hi_unmarshall_request
   __po_hi_unmarshall_port (&(request->port), message);
   switch (request->port)
   {
-    case gcs_global_outport_takeoff:
+    case vt_supervisor_pulse_global_outport_sensordata_vt:
     {
-      __po_hi_unmarshall_request_gcs_outport_takeoff (request, message, &(offset));
+      __po_hi_unmarshall_request_vt_supervisor_pulse_outport_sensordata_vt (request, message, &(offset));
 
       break;
     }
     case vt_supervisor_takeoff_global_inport_artificial_takeoff:
     {
       __po_hi_unmarshall_request_vt_supervisor_takeoff_inport_artificial_takeoff (request, message, &(offset));
+
+      break;
+    }
+    case vt_supervisor_takeoff_global_outport_sensordata_vt:
+    {
+      __po_hi_unmarshall_request_vt_supervisor_takeoff_outport_sensordata_vt (request, message, &(offset));
+
+      break;
+    }
+    case vt_gcs_sensordata_global_inport_artificial_sensordata:
+    {
+      __po_hi_unmarshall_request_vt_gcs_sensordata_inport_artificial_sensordata (request, message, &(offset));
+
+      break;
+    }
+    case vt_gcs_sensordata_global_outport_takeoff_vt:
+    {
+      __po_hi_unmarshall_request_vt_gcs_sensordata_outport_takeoff_vt (request, message, &(offset));
+
+      break;
+    }
+    case vt_gcs_gui_polling_gcs_global_outport_takeoff_vt:
+    {
+      __po_hi_unmarshall_request_vt_gcs_gui_polling_gcs_outport_takeoff_vt (request, message, &(offset));
 
       break;
     }

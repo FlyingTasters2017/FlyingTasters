@@ -1,3 +1,4 @@
 __x86.get_pc_thunk.bx assert_socketclient___x86.get_pc_thunk.bx
 __x86.get_pc_thunk.ax assert_socketclient___x86.get_pc_thunk.ax
-init.3599 assert_socketclient_init.3599
+.L26 assert_socketclient_.L26
+.L29 assert_socketclient_.L29

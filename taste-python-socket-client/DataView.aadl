@@ -40,127 +40,10 @@ data Stream_Element_Buffer
 properties
     Data_Model::Data_Representation => Character;
 end Stream_Element_Buffer;
-DATA MyChoice
-PROPERTIES
-    -- name of the ASN.1 source file:
-    Source_Text => ("/home/taste/test1/DataView.asn");
-    TASTE::Ada_Package_Name => "TASTE_Dataview";
-    Deployment::ASN1_Module_Name => "TASTE-Dataview";
-    Source_Language => ASN1;
-    -- Size of a buffer to cover all forms of message representation:
-    -- Real message size is 32; suggested aligned message buffer is...
-    Source_Data_Size => 32 Bytes;
-    -- name of the corresponding data type in the source file:
-    Type_Source_Name => "MyChoice";
-    -- what kind of type is this?
-    TASTE::ASN1_Basic_Type =>aCHOICE;
-END MyChoice;
-
-DATA MyChoice_Buffer_Max
-END MyChoice_Buffer_Max;
-
-DATA IMPLEMENTATION MyChoice_Buffer_Max.impl
-    -- Buffer to hold a marshalled data of type MyChoice
-PROPERTIES
-    Data_Model::Data_Representation => array;
-    Data_Model::Dimension => (32); -- Size of the buffer
-    Data_Model::Base_Type => (classifier (DataView::Stream_Element_Buffer));
-END MyChoice_Buffer_Max.impl;
-
-DATA MyChoice_Buffer
-END MyChoice_Buffer;
-
-DATA IMPLEMENTATION MyChoice_Buffer.impl
-    -- Buffer to hold a marshalled data of type MyChoice
-SUBCOMPONENTS
-    Buffer : data MyChoice_Buffer_Max.impl;
-    Length : data Base_Types::Unsigned_32;
-PROPERTIES
-    Data_Model::Data_Representation => Struct;
-END MyChoice_Buffer.impl;
-
-DATA MyInteger
-PROPERTIES
-    -- name of the ASN.1 source file:
-    Source_Text => ("/home/taste/test1/DataView.asn");
-    TASTE::Ada_Package_Name => "TASTE_Dataview";
-    Deployment::ASN1_Module_Name => "TASTE-Dataview";
-    Source_Language => ASN1;
-    -- Size of a buffer to cover all forms of message representation:
-    -- Real message size is 8; suggested aligned message buffer is...
-    Source_Data_Size => 8 Bytes;
-    -- name of the corresponding data type in the source file:
-    Type_Source_Name => "MyInteger";
-    -- what kind of type is this?
-    TASTE::ASN1_Basic_Type =>aINTEGER;
-END MyInteger;
-
-DATA MyInteger_Buffer_Max
-END MyInteger_Buffer_Max;
-
-DATA IMPLEMENTATION MyInteger_Buffer_Max.impl
-    -- Buffer to hold a marshalled data of type MyInteger
-PROPERTIES
-    Data_Model::Data_Representation => array;
-    Data_Model::Dimension => (8); -- Size of the buffer
-    Data_Model::Base_Type => (classifier (DataView::Stream_Element_Buffer));
-END MyInteger_Buffer_Max.impl;
-
-DATA MyInteger_Buffer
-END MyInteger_Buffer;
-
-DATA IMPLEMENTATION MyInteger_Buffer.impl
-    -- Buffer to hold a marshalled data of type MyInteger
-SUBCOMPONENTS
-    Buffer : data MyInteger_Buffer_Max.impl;
-    Length : data Base_Types::Unsigned_32;
-PROPERTIES
-    Data_Model::Data_Representation => Struct;
-END MyInteger_Buffer.impl;
-
-DATA T_Boolean
-PROPERTIES
-    -- name of the ASN.1 source file:
-    Source_Text => ("/home/taste/tool-inst/share/taste-types/taste-types.asn");
-    TASTE::Ada_Package_Name => "TASTE_BasicTypes";
-    Deployment::ASN1_Module_Name => "TASTE-BasicTypes";
-    Source_Language => ASN1;
-    -- Size of a buffer to cover all forms of message representation:
-    -- Real message size is 1; suggested aligned message buffer is...
-    Source_Data_Size => 8 Bytes;
-    -- name of the corresponding data type in the source file:
-    Type_Source_Name => "T-Boolean";
-    -- what kind of type is this?
-    TASTE::ASN1_Basic_Type =>aBOOLEAN;
-END T_Boolean;
-
-DATA T_Boolean_Buffer_Max
-END T_Boolean_Buffer_Max;
-
-DATA IMPLEMENTATION T_Boolean_Buffer_Max.impl
-    -- Buffer to hold a marshalled data of type T_Boolean
-PROPERTIES
-    Data_Model::Data_Representation => array;
-    Data_Model::Dimension => (8); -- Size of the buffer
-    Data_Model::Base_Type => (classifier (DataView::Stream_Element_Buffer));
-END T_Boolean_Buffer_Max.impl;
-
-DATA T_Boolean_Buffer
-END T_Boolean_Buffer;
-
-DATA IMPLEMENTATION T_Boolean_Buffer.impl
-    -- Buffer to hold a marshalled data of type T_Boolean
-SUBCOMPONENTS
-    Buffer : data T_Boolean_Buffer_Max.impl;
-    Length : data Base_Types::Unsigned_32;
-PROPERTIES
-    Data_Model::Data_Representation => Struct;
-END T_Boolean_Buffer.impl;
-
 DATA MySeqOf
 PROPERTIES
     -- name of the ASN.1 source file:
-    Source_Text => ("/home/taste/test1/DataView.asn");
+    Source_Text => ("/home/taste/GitHub/FlyingTasters/taste-python-socket-client/DataView.asn");
     TASTE::Ada_Package_Name => "TASTE_Dataview";
     Deployment::ASN1_Module_Name => "TASTE-Dataview";
     Source_Language => ASN1;
@@ -196,83 +79,122 @@ PROPERTIES
     Data_Model::Data_Representation => Struct;
 END MySeqOf_Buffer.impl;
 
-DATA T_Int32
+DATA MyEnum
 PROPERTIES
     -- name of the ASN.1 source file:
-    Source_Text => ("/home/taste/tool-inst/share/taste-types/taste-types.asn");
-    TASTE::Ada_Package_Name => "TASTE_BasicTypes";
-    Deployment::ASN1_Module_Name => "TASTE-BasicTypes";
-    Source_Language => ASN1;
-    -- Size of a buffer to cover all forms of message representation:
-    -- Real message size is 8; suggested aligned message buffer is...
-    Source_Data_Size => 8 Bytes;
-    -- name of the corresponding data type in the source file:
-    Type_Source_Name => "T-Int32";
-    -- what kind of type is this?
-    TASTE::ASN1_Basic_Type =>aINTEGER;
-END T_Int32;
-
-DATA T_Int32_Buffer_Max
-END T_Int32_Buffer_Max;
-
-DATA IMPLEMENTATION T_Int32_Buffer_Max.impl
-    -- Buffer to hold a marshalled data of type T_Int32
-PROPERTIES
-    Data_Model::Data_Representation => array;
-    Data_Model::Dimension => (8); -- Size of the buffer
-    Data_Model::Base_Type => (classifier (DataView::Stream_Element_Buffer));
-END T_Int32_Buffer_Max.impl;
-
-DATA T_Int32_Buffer
-END T_Int32_Buffer;
-
-DATA IMPLEMENTATION T_Int32_Buffer.impl
-    -- Buffer to hold a marshalled data of type T_Int32
-SUBCOMPONENTS
-    Buffer : data T_Int32_Buffer_Max.impl;
-    Length : data Base_Types::Unsigned_32;
-PROPERTIES
-    Data_Model::Data_Representation => Struct;
-END T_Int32_Buffer.impl;
-
-DATA MySeq
-PROPERTIES
-    -- name of the ASN.1 source file:
-    Source_Text => ("/home/taste/test1/DataView.asn");
+    Source_Text => ("/home/taste/GitHub/FlyingTasters/taste-python-socket-client/DataView.asn");
     TASTE::Ada_Package_Name => "TASTE_Dataview";
     Deployment::ASN1_Module_Name => "TASTE-Dataview";
     Source_Language => ASN1;
     -- Size of a buffer to cover all forms of message representation:
-    -- Real message size is 24; suggested aligned message buffer is...
-    Source_Data_Size => 24 Bytes;
+    -- Real message size is 4; suggested aligned message buffer is...
+    Source_Data_Size => 8 Bytes;
     -- name of the corresponding data type in the source file:
-    Type_Source_Name => "MySeq";
+    Type_Source_Name => "MyEnum";
     -- what kind of type is this?
-    TASTE::ASN1_Basic_Type =>aSEQUENCE;
-END MySeq;
+    TASTE::ASN1_Basic_Type =>aENUMERATED;
+END MyEnum;
 
-DATA MySeq_Buffer_Max
-END MySeq_Buffer_Max;
+DATA MyEnum_Buffer_Max
+END MyEnum_Buffer_Max;
 
-DATA IMPLEMENTATION MySeq_Buffer_Max.impl
-    -- Buffer to hold a marshalled data of type MySeq
+DATA IMPLEMENTATION MyEnum_Buffer_Max.impl
+    -- Buffer to hold a marshalled data of type MyEnum
 PROPERTIES
     Data_Model::Data_Representation => array;
-    Data_Model::Dimension => (24); -- Size of the buffer
+    Data_Model::Dimension => (8); -- Size of the buffer
     Data_Model::Base_Type => (classifier (DataView::Stream_Element_Buffer));
-END MySeq_Buffer_Max.impl;
+END MyEnum_Buffer_Max.impl;
 
-DATA MySeq_Buffer
-END MySeq_Buffer;
+DATA MyEnum_Buffer
+END MyEnum_Buffer;
 
-DATA IMPLEMENTATION MySeq_Buffer.impl
-    -- Buffer to hold a marshalled data of type MySeq
+DATA IMPLEMENTATION MyEnum_Buffer.impl
+    -- Buffer to hold a marshalled data of type MyEnum
 SUBCOMPONENTS
-    Buffer : data MySeq_Buffer_Max.impl;
+    Buffer : data MyEnum_Buffer_Max.impl;
     Length : data Base_Types::Unsigned_32;
 PROPERTIES
     Data_Model::Data_Representation => Struct;
-END MySeq_Buffer.impl;
+END MyEnum_Buffer.impl;
+
+DATA MyReal
+PROPERTIES
+    -- name of the ASN.1 source file:
+    Source_Text => ("/home/taste/GitHub/FlyingTasters/taste-python-socket-client/DataView.asn");
+    TASTE::Ada_Package_Name => "TASTE_Dataview";
+    Deployment::ASN1_Module_Name => "TASTE-Dataview";
+    Source_Language => ASN1;
+    -- Size of a buffer to cover all forms of message representation:
+    -- Real message size is 13; suggested aligned message buffer is...
+    Source_Data_Size => 16 Bytes;
+    -- name of the corresponding data type in the source file:
+    Type_Source_Name => "MyReal";
+    -- what kind of type is this?
+    TASTE::ASN1_Basic_Type =>aREAL;
+END MyReal;
+
+DATA MyReal_Buffer_Max
+END MyReal_Buffer_Max;
+
+DATA IMPLEMENTATION MyReal_Buffer_Max.impl
+    -- Buffer to hold a marshalled data of type MyReal
+PROPERTIES
+    Data_Model::Data_Representation => array;
+    Data_Model::Dimension => (16); -- Size of the buffer
+    Data_Model::Base_Type => (classifier (DataView::Stream_Element_Buffer));
+END MyReal_Buffer_Max.impl;
+
+DATA MyReal_Buffer
+END MyReal_Buffer;
+
+DATA IMPLEMENTATION MyReal_Buffer.impl
+    -- Buffer to hold a marshalled data of type MyReal
+SUBCOMPONENTS
+    Buffer : data MyReal_Buffer_Max.impl;
+    Length : data Base_Types::Unsigned_32;
+PROPERTIES
+    Data_Model::Data_Representation => Struct;
+END MyReal_Buffer.impl;
+
+DATA MyChoice
+PROPERTIES
+    -- name of the ASN.1 source file:
+    Source_Text => ("/home/taste/GitHub/FlyingTasters/taste-python-socket-client/DataView.asn");
+    TASTE::Ada_Package_Name => "TASTE_Dataview";
+    Deployment::ASN1_Module_Name => "TASTE-Dataview";
+    Source_Language => ASN1;
+    -- Size of a buffer to cover all forms of message representation:
+    -- Real message size is 32; suggested aligned message buffer is...
+    Source_Data_Size => 32 Bytes;
+    -- name of the corresponding data type in the source file:
+    Type_Source_Name => "MyChoice";
+    -- what kind of type is this?
+    TASTE::ASN1_Basic_Type =>aCHOICE;
+END MyChoice;
+
+DATA MyChoice_Buffer_Max
+END MyChoice_Buffer_Max;
+
+DATA IMPLEMENTATION MyChoice_Buffer_Max.impl
+    -- Buffer to hold a marshalled data of type MyChoice
+PROPERTIES
+    Data_Model::Data_Representation => array;
+    Data_Model::Dimension => (32); -- Size of the buffer
+    Data_Model::Base_Type => (classifier (DataView::Stream_Element_Buffer));
+END MyChoice_Buffer_Max.impl;
+
+DATA MyChoice_Buffer
+END MyChoice_Buffer;
+
+DATA IMPLEMENTATION MyChoice_Buffer.impl
+    -- Buffer to hold a marshalled data of type MyChoice
+SUBCOMPONENTS
+    Buffer : data MyChoice_Buffer_Max.impl;
+    Length : data Base_Types::Unsigned_32;
+PROPERTIES
+    Data_Model::Data_Representation => Struct;
+END MyChoice_Buffer.impl;
 
 DATA T_Int8
 PROPERTIES
@@ -313,123 +235,6 @@ PROPERTIES
     Data_Model::Data_Representation => Struct;
 END T_Int8_Buffer.impl;
 
-DATA MyEnum
-PROPERTIES
-    -- name of the ASN.1 source file:
-    Source_Text => ("/home/taste/test1/DataView.asn");
-    TASTE::Ada_Package_Name => "TASTE_Dataview";
-    Deployment::ASN1_Module_Name => "TASTE-Dataview";
-    Source_Language => ASN1;
-    -- Size of a buffer to cover all forms of message representation:
-    -- Real message size is 4; suggested aligned message buffer is...
-    Source_Data_Size => 8 Bytes;
-    -- name of the corresponding data type in the source file:
-    Type_Source_Name => "MyEnum";
-    -- what kind of type is this?
-    TASTE::ASN1_Basic_Type =>aENUMERATED;
-END MyEnum;
-
-DATA MyEnum_Buffer_Max
-END MyEnum_Buffer_Max;
-
-DATA IMPLEMENTATION MyEnum_Buffer_Max.impl
-    -- Buffer to hold a marshalled data of type MyEnum
-PROPERTIES
-    Data_Model::Data_Representation => array;
-    Data_Model::Dimension => (8); -- Size of the buffer
-    Data_Model::Base_Type => (classifier (DataView::Stream_Element_Buffer));
-END MyEnum_Buffer_Max.impl;
-
-DATA MyEnum_Buffer
-END MyEnum_Buffer;
-
-DATA IMPLEMENTATION MyEnum_Buffer.impl
-    -- Buffer to hold a marshalled data of type MyEnum
-SUBCOMPONENTS
-    Buffer : data MyEnum_Buffer_Max.impl;
-    Length : data Base_Types::Unsigned_32;
-PROPERTIES
-    Data_Model::Data_Representation => Struct;
-END MyEnum_Buffer.impl;
-
-DATA MyOctStr
-PROPERTIES
-    -- name of the ASN.1 source file:
-    Source_Text => ("/home/taste/test1/DataView.asn");
-    TASTE::Ada_Package_Name => "TASTE_Dataview";
-    Deployment::ASN1_Module_Name => "TASTE-Dataview";
-    Source_Language => ASN1;
-    -- Size of a buffer to cover all forms of message representation:
-    -- Real message size is 3; suggested aligned message buffer is...
-    Source_Data_Size => 8 Bytes;
-    -- name of the corresponding data type in the source file:
-    Type_Source_Name => "MyOctStr";
-    -- what kind of type is this?
-    TASTE::ASN1_Basic_Type =>aSTRING;
-END MyOctStr;
-
-DATA MyOctStr_Buffer_Max
-END MyOctStr_Buffer_Max;
-
-DATA IMPLEMENTATION MyOctStr_Buffer_Max.impl
-    -- Buffer to hold a marshalled data of type MyOctStr
-PROPERTIES
-    Data_Model::Data_Representation => array;
-    Data_Model::Dimension => (8); -- Size of the buffer
-    Data_Model::Base_Type => (classifier (DataView::Stream_Element_Buffer));
-END MyOctStr_Buffer_Max.impl;
-
-DATA MyOctStr_Buffer
-END MyOctStr_Buffer;
-
-DATA IMPLEMENTATION MyOctStr_Buffer.impl
-    -- Buffer to hold a marshalled data of type MyOctStr
-SUBCOMPONENTS
-    Buffer : data MyOctStr_Buffer_Max.impl;
-    Length : data Base_Types::Unsigned_32;
-PROPERTIES
-    Data_Model::Data_Representation => Struct;
-END MyOctStr_Buffer.impl;
-
-DATA MyBool
-PROPERTIES
-    -- name of the ASN.1 source file:
-    Source_Text => ("/home/taste/test1/DataView.asn");
-    TASTE::Ada_Package_Name => "TASTE_Dataview";
-    Deployment::ASN1_Module_Name => "TASTE-Dataview";
-    Source_Language => ASN1;
-    -- Size of a buffer to cover all forms of message representation:
-    -- Real message size is 1; suggested aligned message buffer is...
-    Source_Data_Size => 8 Bytes;
-    -- name of the corresponding data type in the source file:
-    Type_Source_Name => "MyBool";
-    -- what kind of type is this?
-    TASTE::ASN1_Basic_Type =>aBOOLEAN;
-END MyBool;
-
-DATA MyBool_Buffer_Max
-END MyBool_Buffer_Max;
-
-DATA IMPLEMENTATION MyBool_Buffer_Max.impl
-    -- Buffer to hold a marshalled data of type MyBool
-PROPERTIES
-    Data_Model::Data_Representation => array;
-    Data_Model::Dimension => (8); -- Size of the buffer
-    Data_Model::Base_Type => (classifier (DataView::Stream_Element_Buffer));
-END MyBool_Buffer_Max.impl;
-
-DATA MyBool_Buffer
-END MyBool_Buffer;
-
-DATA IMPLEMENTATION MyBool_Buffer.impl
-    -- Buffer to hold a marshalled data of type MyBool
-SUBCOMPONENTS
-    Buffer : data MyBool_Buffer_Max.impl;
-    Length : data Base_Types::Unsigned_32;
-PROPERTIES
-    Data_Model::Data_Representation => Struct;
-END MyBool_Buffer.impl;
-
 DATA T_UInt32
 PROPERTIES
     -- name of the ASN.1 source file:
@@ -469,44 +274,83 @@ PROPERTIES
     Data_Model::Data_Representation => Struct;
 END T_UInt32_Buffer.impl;
 
-DATA MyReal
+DATA MyOctStr
 PROPERTIES
     -- name of the ASN.1 source file:
-    Source_Text => ("/home/taste/test1/DataView.asn");
+    Source_Text => ("/home/taste/GitHub/FlyingTasters/taste-python-socket-client/DataView.asn");
     TASTE::Ada_Package_Name => "TASTE_Dataview";
     Deployment::ASN1_Module_Name => "TASTE-Dataview";
     Source_Language => ASN1;
     -- Size of a buffer to cover all forms of message representation:
-    -- Real message size is 13; suggested aligned message buffer is...
-    Source_Data_Size => 16 Bytes;
+    -- Real message size is 3; suggested aligned message buffer is...
+    Source_Data_Size => 8 Bytes;
     -- name of the corresponding data type in the source file:
-    Type_Source_Name => "MyReal";
+    Type_Source_Name => "MyOctStr";
     -- what kind of type is this?
-    TASTE::ASN1_Basic_Type =>aREAL;
-END MyReal;
+    TASTE::ASN1_Basic_Type =>aSTRING;
+END MyOctStr;
 
-DATA MyReal_Buffer_Max
-END MyReal_Buffer_Max;
+DATA MyOctStr_Buffer_Max
+END MyOctStr_Buffer_Max;
 
-DATA IMPLEMENTATION MyReal_Buffer_Max.impl
-    -- Buffer to hold a marshalled data of type MyReal
+DATA IMPLEMENTATION MyOctStr_Buffer_Max.impl
+    -- Buffer to hold a marshalled data of type MyOctStr
 PROPERTIES
     Data_Model::Data_Representation => array;
-    Data_Model::Dimension => (16); -- Size of the buffer
+    Data_Model::Dimension => (8); -- Size of the buffer
     Data_Model::Base_Type => (classifier (DataView::Stream_Element_Buffer));
-END MyReal_Buffer_Max.impl;
+END MyOctStr_Buffer_Max.impl;
 
-DATA MyReal_Buffer
-END MyReal_Buffer;
+DATA MyOctStr_Buffer
+END MyOctStr_Buffer;
 
-DATA IMPLEMENTATION MyReal_Buffer.impl
-    -- Buffer to hold a marshalled data of type MyReal
+DATA IMPLEMENTATION MyOctStr_Buffer.impl
+    -- Buffer to hold a marshalled data of type MyOctStr
 SUBCOMPONENTS
-    Buffer : data MyReal_Buffer_Max.impl;
+    Buffer : data MyOctStr_Buffer_Max.impl;
     Length : data Base_Types::Unsigned_32;
 PROPERTIES
     Data_Model::Data_Representation => Struct;
-END MyReal_Buffer.impl;
+END MyOctStr_Buffer.impl;
+
+DATA T_Boolean
+PROPERTIES
+    -- name of the ASN.1 source file:
+    Source_Text => ("/home/taste/tool-inst/share/taste-types/taste-types.asn");
+    TASTE::Ada_Package_Name => "TASTE_BasicTypes";
+    Deployment::ASN1_Module_Name => "TASTE-BasicTypes";
+    Source_Language => ASN1;
+    -- Size of a buffer to cover all forms of message representation:
+    -- Real message size is 1; suggested aligned message buffer is...
+    Source_Data_Size => 8 Bytes;
+    -- name of the corresponding data type in the source file:
+    Type_Source_Name => "T-Boolean";
+    -- what kind of type is this?
+    TASTE::ASN1_Basic_Type =>aBOOLEAN;
+END T_Boolean;
+
+DATA T_Boolean_Buffer_Max
+END T_Boolean_Buffer_Max;
+
+DATA IMPLEMENTATION T_Boolean_Buffer_Max.impl
+    -- Buffer to hold a marshalled data of type T_Boolean
+PROPERTIES
+    Data_Model::Data_Representation => array;
+    Data_Model::Dimension => (8); -- Size of the buffer
+    Data_Model::Base_Type => (classifier (DataView::Stream_Element_Buffer));
+END T_Boolean_Buffer_Max.impl;
+
+DATA T_Boolean_Buffer
+END T_Boolean_Buffer;
+
+DATA IMPLEMENTATION T_Boolean_Buffer.impl
+    -- Buffer to hold a marshalled data of type T_Boolean
+SUBCOMPONENTS
+    Buffer : data T_Boolean_Buffer_Max.impl;
+    Length : data Base_Types::Unsigned_32;
+PROPERTIES
+    Data_Model::Data_Representation => Struct;
+END T_Boolean_Buffer.impl;
 
 DATA T_UInt8
 PROPERTIES
@@ -546,5 +390,161 @@ SUBCOMPONENTS
 PROPERTIES
     Data_Model::Data_Representation => Struct;
 END T_UInt8_Buffer.impl;
+
+DATA MySeq
+PROPERTIES
+    -- name of the ASN.1 source file:
+    Source_Text => ("/home/taste/GitHub/FlyingTasters/taste-python-socket-client/DataView.asn");
+    TASTE::Ada_Package_Name => "TASTE_Dataview";
+    Deployment::ASN1_Module_Name => "TASTE-Dataview";
+    Source_Language => ASN1;
+    -- Size of a buffer to cover all forms of message representation:
+    -- Real message size is 24; suggested aligned message buffer is...
+    Source_Data_Size => 24 Bytes;
+    -- name of the corresponding data type in the source file:
+    Type_Source_Name => "MySeq";
+    -- what kind of type is this?
+    TASTE::ASN1_Basic_Type =>aSEQUENCE;
+END MySeq;
+
+DATA MySeq_Buffer_Max
+END MySeq_Buffer_Max;
+
+DATA IMPLEMENTATION MySeq_Buffer_Max.impl
+    -- Buffer to hold a marshalled data of type MySeq
+PROPERTIES
+    Data_Model::Data_Representation => array;
+    Data_Model::Dimension => (24); -- Size of the buffer
+    Data_Model::Base_Type => (classifier (DataView::Stream_Element_Buffer));
+END MySeq_Buffer_Max.impl;
+
+DATA MySeq_Buffer
+END MySeq_Buffer;
+
+DATA IMPLEMENTATION MySeq_Buffer.impl
+    -- Buffer to hold a marshalled data of type MySeq
+SUBCOMPONENTS
+    Buffer : data MySeq_Buffer_Max.impl;
+    Length : data Base_Types::Unsigned_32;
+PROPERTIES
+    Data_Model::Data_Representation => Struct;
+END MySeq_Buffer.impl;
+
+DATA MyBool
+PROPERTIES
+    -- name of the ASN.1 source file:
+    Source_Text => ("/home/taste/GitHub/FlyingTasters/taste-python-socket-client/DataView.asn");
+    TASTE::Ada_Package_Name => "TASTE_Dataview";
+    Deployment::ASN1_Module_Name => "TASTE-Dataview";
+    Source_Language => ASN1;
+    -- Size of a buffer to cover all forms of message representation:
+    -- Real message size is 1; suggested aligned message buffer is...
+    Source_Data_Size => 8 Bytes;
+    -- name of the corresponding data type in the source file:
+    Type_Source_Name => "MyBool";
+    -- what kind of type is this?
+    TASTE::ASN1_Basic_Type =>aBOOLEAN;
+END MyBool;
+
+DATA MyBool_Buffer_Max
+END MyBool_Buffer_Max;
+
+DATA IMPLEMENTATION MyBool_Buffer_Max.impl
+    -- Buffer to hold a marshalled data of type MyBool
+PROPERTIES
+    Data_Model::Data_Representation => array;
+    Data_Model::Dimension => (8); -- Size of the buffer
+    Data_Model::Base_Type => (classifier (DataView::Stream_Element_Buffer));
+END MyBool_Buffer_Max.impl;
+
+DATA MyBool_Buffer
+END MyBool_Buffer;
+
+DATA IMPLEMENTATION MyBool_Buffer.impl
+    -- Buffer to hold a marshalled data of type MyBool
+SUBCOMPONENTS
+    Buffer : data MyBool_Buffer_Max.impl;
+    Length : data Base_Types::Unsigned_32;
+PROPERTIES
+    Data_Model::Data_Representation => Struct;
+END MyBool_Buffer.impl;
+
+DATA MyInteger
+PROPERTIES
+    -- name of the ASN.1 source file:
+    Source_Text => ("/home/taste/GitHub/FlyingTasters/taste-python-socket-client/DataView.asn");
+    TASTE::Ada_Package_Name => "TASTE_Dataview";
+    Deployment::ASN1_Module_Name => "TASTE-Dataview";
+    Source_Language => ASN1;
+    -- Size of a buffer to cover all forms of message representation:
+    -- Real message size is 8; suggested aligned message buffer is...
+    Source_Data_Size => 8 Bytes;
+    -- name of the corresponding data type in the source file:
+    Type_Source_Name => "MyInteger";
+    -- what kind of type is this?
+    TASTE::ASN1_Basic_Type =>aINTEGER;
+END MyInteger;
+
+DATA MyInteger_Buffer_Max
+END MyInteger_Buffer_Max;
+
+DATA IMPLEMENTATION MyInteger_Buffer_Max.impl
+    -- Buffer to hold a marshalled data of type MyInteger
+PROPERTIES
+    Data_Model::Data_Representation => array;
+    Data_Model::Dimension => (8); -- Size of the buffer
+    Data_Model::Base_Type => (classifier (DataView::Stream_Element_Buffer));
+END MyInteger_Buffer_Max.impl;
+
+DATA MyInteger_Buffer
+END MyInteger_Buffer;
+
+DATA IMPLEMENTATION MyInteger_Buffer.impl
+    -- Buffer to hold a marshalled data of type MyInteger
+SUBCOMPONENTS
+    Buffer : data MyInteger_Buffer_Max.impl;
+    Length : data Base_Types::Unsigned_32;
+PROPERTIES
+    Data_Model::Data_Representation => Struct;
+END MyInteger_Buffer.impl;
+
+DATA T_Int32
+PROPERTIES
+    -- name of the ASN.1 source file:
+    Source_Text => ("/home/taste/tool-inst/share/taste-types/taste-types.asn");
+    TASTE::Ada_Package_Name => "TASTE_BasicTypes";
+    Deployment::ASN1_Module_Name => "TASTE-BasicTypes";
+    Source_Language => ASN1;
+    -- Size of a buffer to cover all forms of message representation:
+    -- Real message size is 8; suggested aligned message buffer is...
+    Source_Data_Size => 8 Bytes;
+    -- name of the corresponding data type in the source file:
+    Type_Source_Name => "T-Int32";
+    -- what kind of type is this?
+    TASTE::ASN1_Basic_Type =>aINTEGER;
+END T_Int32;
+
+DATA T_Int32_Buffer_Max
+END T_Int32_Buffer_Max;
+
+DATA IMPLEMENTATION T_Int32_Buffer_Max.impl
+    -- Buffer to hold a marshalled data of type T_Int32
+PROPERTIES
+    Data_Model::Data_Representation => array;
+    Data_Model::Dimension => (8); -- Size of the buffer
+    Data_Model::Base_Type => (classifier (DataView::Stream_Element_Buffer));
+END T_Int32_Buffer_Max.impl;
+
+DATA T_Int32_Buffer
+END T_Int32_Buffer;
+
+DATA IMPLEMENTATION T_Int32_Buffer.impl
+    -- Buffer to hold a marshalled data of type T_Int32
+SUBCOMPONENTS
+    Buffer : data T_Int32_Buffer_Max.impl;
+    Length : data Base_Types::Unsigned_32;
+PROPERTIES
+    Data_Model::Data_Representation => Struct;
+END T_Int32_Buffer.impl;
 
 end DataView;

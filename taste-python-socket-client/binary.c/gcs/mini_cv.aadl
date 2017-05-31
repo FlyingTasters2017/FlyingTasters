@@ -11,6 +11,17 @@ PROPERTIES
 	Source_Language => GUI_RI;
 END takeoff.GUI_RI;
 
+SUBPROGRAM SensorData
+FEATURES
+	updated_thrust:IN PARAMETER DataView::MyReal {encoding=>UPER;};
+END SensorData;
+
+SUBPROGRAM IMPLEMENTATION SensorData.GUI_PI
+PROPERTIES
+	FV_Name => "gcs";
+	Source_Language => GUI_PI;
+END SensorData.GUI_PI;
+
 SUBPROGRAM gui_polling_gcs
 END gui_polling_gcs;
 

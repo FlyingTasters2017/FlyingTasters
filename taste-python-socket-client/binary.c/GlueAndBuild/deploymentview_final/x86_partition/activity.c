@@ -14,65 +14,20 @@
 /*  changes will be lost when you re-run Ocarina     */
 /*****************************************************/
 extern process_package__taste_protected_object supervisor_protected;
-__po_hi_port_t __po_hi_gcs_outport_takeoff_local_destinations[1] = {vt_supervisor_takeoff_global_inport_artificial_takeoff};
-__po_hi_uint8_t __po_hi_gcs_woffsets[__po_hi_gcs_nb_ports];
-__po_hi_uint8_t __po_hi_gcs_offsets[__po_hi_gcs_nb_ports];
-__po_hi_uint8_t __po_hi_gcs_used_size[__po_hi_gcs_nb_ports];
-__po_hi_uint8_t __po_hi_gcs_empties[__po_hi_gcs_nb_ports];
-__po_hi_uint8_t __po_hi_gcs_first[__po_hi_gcs_nb_ports];
-__po_hi_request_t __po_hi_gcs_recent[__po_hi_gcs_nb_ports];
-__po_hi_port_t __po_hi_gcs_queue[0 * sizeof (__po_hi_request_t)];
-__po_hi_uint16_t __po_hi_gcs_total_fifo_size = 0;
-__po_hi_local_port_t __po_hi_gcs_history[0];
-__po_hi_uint8_t __po_hi_gcs_n_dest[__po_hi_gcs_nb_ports] = {1};
-__po_hi_int8_t __po_hi_gcs_fifo_size[__po_hi_gcs_nb_ports] = {__PO_HI_GQUEUE_FIFO_OUT};
-__po_hi_port_t* __po_hi_gcs_destinations[__po_hi_gcs_nb_ports] = {__po_hi_gcs_outport_takeoff_local_destinations};
-
-/*!
- * \fn void* gcs_job (void)
- * \brief Function executed by the task gcs
- *
- * This function is executed as soon as the task  is created. It performs the 
- * following operations:  Receive incoming data,  Execute tasks subprograms,  
- * Send output data.
- */
-/*  Periodic task : gcs*/
-extern void po_hi_c_gcs_gui_polling_gcs 
-    (__po_hi_task_id self);
-void* gcs_job (void)
-{
-  __po_hi_int32_t error;
-
-  __po_hi_gqueue_init (x86_partition_gcs_k, __po_hi_gcs_nb_ports, __po_hi_gcs_queue, __po_hi_gcs_fifo_size, __po_hi_gcs_first, __po_hi_gcs_offsets, __po_hi_gcs_woffsets, __po_hi_gcs_n_dest, __po_hi_gcs_destinations, __po_hi_gcs_used_size, __po_hi_gcs_history, __po_hi_gcs_recent, __po_hi_gcs_empties, __po_hi_gcs_total_fifo_size);
-  
-/*!
- * Waiting for other tasks initialization
- */
-  __po_hi_wait_initialization ();
-  __po_hi_time_t offset;
-  __po_hi_milliseconds (&(offset), 0);
-  __po_hi_task_wait_offset (&(offset));
-  __po_hi_compute_next_period (x86_partition_gcs_k);
-  
-/*!
- * Waiting for the first dispatch instant
- */
-  __po_hi_wait_for_next_period (x86_partition_gcs_k);
-  
-/*!
- * Task body
- */
-  while (1)
-  {
-    /*  Make_Thread_Compute_Entrypoint*/
-    po_hi_c_gcs_gui_polling_gcs (x86_partition_gcs_k);
-    /*  Send the OUT ports*/
-    error =
-     __po_hi_send_output (x86_partition_gcs_k, gcs_global_outport_takeoff);
-    __po_hi_wait_for_next_period (x86_partition_gcs_k);
-  }
-}
-
+extern process_package__taste_protected_object gcs_protected;
+__po_hi_port_t __po_hi_vt_supervisor_pulse_outport_sensordata_vt_local_destinations[1] = {vt_gcs_sensordata_global_inport_artificial_sensordata};
+__po_hi_uint8_t __po_hi_vt_supervisor_pulse_woffsets[__po_hi_vt_supervisor_pulse_nb_ports];
+__po_hi_uint8_t __po_hi_vt_supervisor_pulse_offsets[__po_hi_vt_supervisor_pulse_nb_ports];
+__po_hi_uint8_t __po_hi_vt_supervisor_pulse_used_size[__po_hi_vt_supervisor_pulse_nb_ports];
+__po_hi_uint8_t __po_hi_vt_supervisor_pulse_empties[__po_hi_vt_supervisor_pulse_nb_ports];
+__po_hi_uint8_t __po_hi_vt_supervisor_pulse_first[__po_hi_vt_supervisor_pulse_nb_ports];
+__po_hi_request_t __po_hi_vt_supervisor_pulse_recent[__po_hi_vt_supervisor_pulse_nb_ports];
+__po_hi_port_t __po_hi_vt_supervisor_pulse_queue[0 * sizeof (__po_hi_request_t)];
+__po_hi_uint16_t __po_hi_vt_supervisor_pulse_total_fifo_size = 0;
+__po_hi_local_port_t __po_hi_vt_supervisor_pulse_history[0];
+__po_hi_uint8_t __po_hi_vt_supervisor_pulse_n_dest[__po_hi_vt_supervisor_pulse_nb_ports] = {1};
+__po_hi_int8_t __po_hi_vt_supervisor_pulse_fifo_size[__po_hi_vt_supervisor_pulse_nb_ports] = {__PO_HI_GQUEUE_FIFO_OUT};
+__po_hi_port_t* __po_hi_vt_supervisor_pulse_destinations[__po_hi_vt_supervisor_pulse_nb_ports] = {__po_hi_vt_supervisor_pulse_outport_sensordata_vt_local_destinations};
 
 /*!
  * \fn void* vt_supervisor_pulse_job (void)
@@ -87,7 +42,9 @@ extern void po_hi_c_vt_supervisor_pulse_artificial_pulse
     (__po_hi_task_id self);
 void* vt_supervisor_pulse_job (void)
 {
+  __po_hi_int32_t error;
 
+  __po_hi_gqueue_init (x86_partition_vt_supervisor_pulse_k, __po_hi_vt_supervisor_pulse_nb_ports, __po_hi_vt_supervisor_pulse_queue, __po_hi_vt_supervisor_pulse_fifo_size, __po_hi_vt_supervisor_pulse_first, __po_hi_vt_supervisor_pulse_offsets, __po_hi_vt_supervisor_pulse_woffsets, __po_hi_vt_supervisor_pulse_n_dest, __po_hi_vt_supervisor_pulse_destinations, __po_hi_vt_supervisor_pulse_used_size, __po_hi_vt_supervisor_pulse_history, __po_hi_vt_supervisor_pulse_recent, __po_hi_vt_supervisor_pulse_empties, __po_hi_vt_supervisor_pulse_total_fifo_size);
   
 /*!
  * Waiting for other tasks initialization
@@ -110,10 +67,14 @@ void* vt_supervisor_pulse_job (void)
   {
     /*  Make_Thread_Compute_Entrypoint*/
     po_hi_c_vt_supervisor_pulse_artificial_pulse (x86_partition_vt_supervisor_pulse_k);
+    /*  Send the OUT ports*/
+    error =
+     __po_hi_send_output (x86_partition_vt_supervisor_pulse_k, vt_supervisor_pulse_global_outport_sensordata_vt);
     __po_hi_wait_for_next_period (x86_partition_vt_supervisor_pulse_k);
   }
 }
 
+__po_hi_port_t __po_hi_vt_supervisor_takeoff_outport_sensordata_vt_local_destinations[1] = {vt_gcs_sensordata_global_inport_artificial_sensordata};
 __po_hi_uint8_t __po_hi_vt_supervisor_takeoff_woffsets[__po_hi_vt_supervisor_takeoff_nb_ports];
 __po_hi_uint8_t __po_hi_vt_supervisor_takeoff_offsets[__po_hi_vt_supervisor_takeoff_nb_ports];
 __po_hi_uint8_t __po_hi_vt_supervisor_takeoff_used_size[__po_hi_vt_supervisor_takeoff_nb_ports];
@@ -123,9 +84,9 @@ __po_hi_request_t __po_hi_vt_supervisor_takeoff_recent[__po_hi_vt_supervisor_tak
 __po_hi_port_t __po_hi_vt_supervisor_takeoff_queue[1 * sizeof (__po_hi_request_t)];
 __po_hi_uint16_t __po_hi_vt_supervisor_takeoff_total_fifo_size = 1;
 __po_hi_local_port_t __po_hi_vt_supervisor_takeoff_history[1];
-__po_hi_uint8_t __po_hi_vt_supervisor_takeoff_n_dest[__po_hi_vt_supervisor_takeoff_nb_ports] = {0};
-__po_hi_int8_t __po_hi_vt_supervisor_takeoff_fifo_size[__po_hi_vt_supervisor_takeoff_nb_ports] = {1};
-__po_hi_port_t* __po_hi_vt_supervisor_takeoff_destinations[__po_hi_vt_supervisor_takeoff_nb_ports] = {NULL};
+__po_hi_uint8_t __po_hi_vt_supervisor_takeoff_n_dest[__po_hi_vt_supervisor_takeoff_nb_ports] = {0,1};
+__po_hi_int8_t __po_hi_vt_supervisor_takeoff_fifo_size[__po_hi_vt_supervisor_takeoff_nb_ports] = {1,__PO_HI_GQUEUE_FIFO_OUT};
+__po_hi_port_t* __po_hi_vt_supervisor_takeoff_destinations[__po_hi_vt_supervisor_takeoff_nb_ports] = {NULL,__po_hi_vt_supervisor_takeoff_outport_sensordata_vt_local_destinations};
 
 /*!
  * \fn void vt_supervisor_takeoff_deliver (__po_hi_request_t* request)
@@ -172,6 +133,7 @@ void* vt_supervisor_takeoff_job (void)
 {
   __po_hi_local_port_t port;
   __po_hi_request_t static inport_artificial_takeoff_request;
+  __po_hi_int32_t error;
 
   __po_hi_gqueue_init (x86_partition_vt_supervisor_takeoff_k, __po_hi_vt_supervisor_takeoff_nb_ports, __po_hi_vt_supervisor_takeoff_queue, __po_hi_vt_supervisor_takeoff_fifo_size, __po_hi_vt_supervisor_takeoff_first, __po_hi_vt_supervisor_takeoff_offsets, __po_hi_vt_supervisor_takeoff_woffsets, __po_hi_vt_supervisor_takeoff_n_dest, __po_hi_vt_supervisor_takeoff_destinations, __po_hi_vt_supervisor_takeoff_used_size, __po_hi_vt_supervisor_takeoff_history, __po_hi_vt_supervisor_takeoff_recent, __po_hi_vt_supervisor_takeoff_empties, __po_hi_vt_supervisor_takeoff_total_fifo_size);
   
@@ -209,7 +171,173 @@ void* vt_supervisor_takeoff_job (void)
         break;
       }
     }
+    /*  Send the OUT ports*/
+    error =
+     __po_hi_send_output (x86_partition_vt_supervisor_takeoff_k, vt_supervisor_takeoff_global_outport_sensordata_vt);
     __po_hi_wait_for_next_period (x86_partition_vt_supervisor_takeoff_k);
+  }
+}
+
+__po_hi_port_t __po_hi_vt_gcs_sensordata_outport_takeoff_vt_local_destinations[1] = {vt_supervisor_takeoff_global_inport_artificial_takeoff};
+__po_hi_uint8_t __po_hi_vt_gcs_sensordata_woffsets[__po_hi_vt_gcs_sensordata_nb_ports];
+__po_hi_uint8_t __po_hi_vt_gcs_sensordata_offsets[__po_hi_vt_gcs_sensordata_nb_ports];
+__po_hi_uint8_t __po_hi_vt_gcs_sensordata_used_size[__po_hi_vt_gcs_sensordata_nb_ports];
+__po_hi_uint8_t __po_hi_vt_gcs_sensordata_empties[__po_hi_vt_gcs_sensordata_nb_ports];
+__po_hi_uint8_t __po_hi_vt_gcs_sensordata_first[__po_hi_vt_gcs_sensordata_nb_ports];
+__po_hi_request_t __po_hi_vt_gcs_sensordata_recent[__po_hi_vt_gcs_sensordata_nb_ports];
+__po_hi_port_t __po_hi_vt_gcs_sensordata_queue[1 * sizeof (__po_hi_request_t)];
+__po_hi_uint16_t __po_hi_vt_gcs_sensordata_total_fifo_size = 1;
+__po_hi_local_port_t __po_hi_vt_gcs_sensordata_history[1];
+__po_hi_uint8_t __po_hi_vt_gcs_sensordata_n_dest[__po_hi_vt_gcs_sensordata_nb_ports] = {0,1};
+__po_hi_int8_t __po_hi_vt_gcs_sensordata_fifo_size[__po_hi_vt_gcs_sensordata_nb_ports] = {1,__PO_HI_GQUEUE_FIFO_OUT};
+__po_hi_port_t* __po_hi_vt_gcs_sensordata_destinations[__po_hi_vt_gcs_sensordata_nb_ports] = {NULL,__po_hi_vt_gcs_sensordata_outport_takeoff_vt_local_destinations};
+
+/*!
+ * \fn void vt_gcs_sensordata_deliver (__po_hi_request_t* request)
+ * \brief Function that delivers requests to the task vt_gcs_sensordata
+ *
+ * When the generated application received a request, it calls a main delivery
+ *  function that redirects to localfunctions for each task. This function 
+ * (vt_gcs_sensordata_deliver) stores the incoming request for the 
+ * taskvt_gcs_sensordata
+ */
+void vt_gcs_sensordata_deliver 
+    (__po_hi_request_t* request)
+{
+
+  switch (request->port)
+  {
+    case vt_gcs_sensordata_global_inport_artificial_sensordata:
+    {
+      __po_hi_gqueue_store_in (x86_partition_vt_gcs_sensordata_k, vt_gcs_sensordata_local_inport_artificial_sensordata, request);
+
+      break;
+    }
+    default:
+    {
+      break;
+    }
+  }
+}
+
+
+/*!
+ * \fn void* vt_gcs_sensordata_job (void)
+ * \brief Function executed by the task vt_gcs_sensordata
+ *
+ * This function is executed as soon as the task  is created. It performs the 
+ * following operations:  Receive incoming data,  Execute tasks subprograms,  
+ * Send output data.
+ */
+/*  Sporadic task : vt_gcs_sensordata*/
+extern void po_hi_c_vt_gcs_sensordata_artificial_sensordata 
+    (__po_hi_task_id self,
+    dataview__myreal_buffer_impl inport_artificial_sensordata);
+void* vt_gcs_sensordata_job (void)
+{
+  __po_hi_local_port_t port;
+  __po_hi_request_t static inport_artificial_sensordata_request;
+  __po_hi_int32_t error;
+
+  __po_hi_gqueue_init (x86_partition_vt_gcs_sensordata_k, __po_hi_vt_gcs_sensordata_nb_ports, __po_hi_vt_gcs_sensordata_queue, __po_hi_vt_gcs_sensordata_fifo_size, __po_hi_vt_gcs_sensordata_first, __po_hi_vt_gcs_sensordata_offsets, __po_hi_vt_gcs_sensordata_woffsets, __po_hi_vt_gcs_sensordata_n_dest, __po_hi_vt_gcs_sensordata_destinations, __po_hi_vt_gcs_sensordata_used_size, __po_hi_vt_gcs_sensordata_history, __po_hi_vt_gcs_sensordata_recent, __po_hi_vt_gcs_sensordata_empties, __po_hi_vt_gcs_sensordata_total_fifo_size);
+  
+/*!
+ * Waiting for other tasks initialization
+ */
+  __po_hi_wait_initialization ();
+  __po_hi_compute_next_period (x86_partition_vt_gcs_sensordata_k);
+  
+/*!
+ * Task body
+ */
+  while (1)
+  {
+    __po_hi_gqueue_wait_for_incoming_event (x86_partition_vt_gcs_sensordata_k, &(port));
+    __po_hi_compute_next_period (x86_partition_vt_gcs_sensordata_k);
+    /*  Make_Ports_Compute_Entrypoint*/
+    switch (port)
+    {
+      case vt_gcs_sensordata_local_inport_artificial_sensordata:
+      {
+        /* :: Yes if commentary :: */if (__po_hi_gqueue_get_count (x86_partition_vt_gcs_sensordata_k, vt_gcs_sensordata_local_inport_artificial_sensordata))
+        {
+                  __po_hi_gqueue_get_value (x86_partition_vt_gcs_sensordata_k, vt_gcs_sensordata_local_inport_artificial_sensordata, &(inport_artificial_sensordata_request));
+          __po_hi_gqueue_next_value (x86_partition_vt_gcs_sensordata_k, vt_gcs_sensordata_local_inport_artificial_sensordata);
+
+        }
+
+        po_hi_c_vt_gcs_sensordata_artificial_sensordata (x86_partition_vt_gcs_sensordata_k, inport_artificial_sensordata_request.vars.vt_gcs_sensordata_global_inport_artificial_sensordata.vt_gcs_sensordata_global_inport_artificial_sensordata);
+
+        break;
+      }
+      default:
+      {
+        break;
+      }
+    }
+    /*  Send the OUT ports*/
+    error =
+     __po_hi_send_output (x86_partition_vt_gcs_sensordata_k, vt_gcs_sensordata_global_outport_takeoff_vt);
+    __po_hi_wait_for_next_period (x86_partition_vt_gcs_sensordata_k);
+  }
+}
+
+__po_hi_port_t __po_hi_vt_gcs_gui_polling_gcs_outport_takeoff_vt_local_destinations[1] = {vt_supervisor_takeoff_global_inport_artificial_takeoff};
+__po_hi_uint8_t __po_hi_vt_gcs_gui_polling_gcs_woffsets[__po_hi_vt_gcs_gui_polling_gcs_nb_ports];
+__po_hi_uint8_t __po_hi_vt_gcs_gui_polling_gcs_offsets[__po_hi_vt_gcs_gui_polling_gcs_nb_ports];
+__po_hi_uint8_t __po_hi_vt_gcs_gui_polling_gcs_used_size[__po_hi_vt_gcs_gui_polling_gcs_nb_ports];
+__po_hi_uint8_t __po_hi_vt_gcs_gui_polling_gcs_empties[__po_hi_vt_gcs_gui_polling_gcs_nb_ports];
+__po_hi_uint8_t __po_hi_vt_gcs_gui_polling_gcs_first[__po_hi_vt_gcs_gui_polling_gcs_nb_ports];
+__po_hi_request_t __po_hi_vt_gcs_gui_polling_gcs_recent[__po_hi_vt_gcs_gui_polling_gcs_nb_ports];
+__po_hi_port_t __po_hi_vt_gcs_gui_polling_gcs_queue[0 * sizeof (__po_hi_request_t)];
+__po_hi_uint16_t __po_hi_vt_gcs_gui_polling_gcs_total_fifo_size = 0;
+__po_hi_local_port_t __po_hi_vt_gcs_gui_polling_gcs_history[0];
+__po_hi_uint8_t __po_hi_vt_gcs_gui_polling_gcs_n_dest[__po_hi_vt_gcs_gui_polling_gcs_nb_ports] = {1};
+__po_hi_int8_t __po_hi_vt_gcs_gui_polling_gcs_fifo_size[__po_hi_vt_gcs_gui_polling_gcs_nb_ports] = {__PO_HI_GQUEUE_FIFO_OUT};
+__po_hi_port_t* __po_hi_vt_gcs_gui_polling_gcs_destinations[__po_hi_vt_gcs_gui_polling_gcs_nb_ports] = {__po_hi_vt_gcs_gui_polling_gcs_outport_takeoff_vt_local_destinations};
+
+/*!
+ * \fn void* vt_gcs_gui_polling_gcs_job (void)
+ * \brief Function executed by the task vt_gcs_gui_polling_gcs
+ *
+ * This function is executed as soon as the task  is created. It performs the 
+ * following operations:  Receive incoming data,  Execute tasks subprograms,  
+ * Send output data.
+ */
+/*  Periodic task : vt_gcs_gui_polling_gcs*/
+extern void po_hi_c_vt_gcs_gui_polling_gcs_artificial_gui_polling_gcs 
+    (__po_hi_task_id self);
+void* vt_gcs_gui_polling_gcs_job (void)
+{
+  __po_hi_int32_t error;
+
+  __po_hi_gqueue_init (x86_partition_vt_gcs_gui_polling_gcs_k, __po_hi_vt_gcs_gui_polling_gcs_nb_ports, __po_hi_vt_gcs_gui_polling_gcs_queue, __po_hi_vt_gcs_gui_polling_gcs_fifo_size, __po_hi_vt_gcs_gui_polling_gcs_first, __po_hi_vt_gcs_gui_polling_gcs_offsets, __po_hi_vt_gcs_gui_polling_gcs_woffsets, __po_hi_vt_gcs_gui_polling_gcs_n_dest, __po_hi_vt_gcs_gui_polling_gcs_destinations, __po_hi_vt_gcs_gui_polling_gcs_used_size, __po_hi_vt_gcs_gui_polling_gcs_history, __po_hi_vt_gcs_gui_polling_gcs_recent, __po_hi_vt_gcs_gui_polling_gcs_empties, __po_hi_vt_gcs_gui_polling_gcs_total_fifo_size);
+  
+/*!
+ * Waiting for other tasks initialization
+ */
+  __po_hi_wait_initialization ();
+  __po_hi_time_t offset;
+  __po_hi_milliseconds (&(offset), 0);
+  __po_hi_task_wait_offset (&(offset));
+  __po_hi_compute_next_period (x86_partition_vt_gcs_gui_polling_gcs_k);
+  
+/*!
+ * Waiting for the first dispatch instant
+ */
+  __po_hi_wait_for_next_period (x86_partition_vt_gcs_gui_polling_gcs_k);
+  
+/*!
+ * Task body
+ */
+  while (1)
+  {
+    /*  Make_Thread_Compute_Entrypoint*/
+    po_hi_c_vt_gcs_gui_polling_gcs_artificial_gui_polling_gcs (x86_partition_vt_gcs_gui_polling_gcs_k);
+    /*  Send the OUT ports*/
+    error =
+     __po_hi_send_output (x86_partition_vt_gcs_gui_polling_gcs_k, vt_gcs_gui_polling_gcs_global_outport_takeoff_vt);
+    __po_hi_wait_for_next_period (x86_partition_vt_gcs_gui_polling_gcs_k);
   }
 }
 
@@ -233,6 +361,12 @@ void __po_hi_main_deliver
     case x86_partition_vt_supervisor_takeoff_k_entity:
     {
       vt_supervisor_takeoff_deliver (request);
+
+      break;
+    }
+    case x86_partition_vt_gcs_sensordata_k_entity:
+    {
+      vt_gcs_sensordata_deliver (request);
 
       break;
     }

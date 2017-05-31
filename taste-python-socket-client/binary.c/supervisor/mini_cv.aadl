@@ -9,17 +9,6 @@ PROPERTIES
 	Source_Language => Ada;
 END pulse.Ada;
 
-SUBPROGRAM readStabilizerSendThrust
-FEATURES
-	ref_thrust:OUT PARAMETER DataView::MyReal {encoding=>NATIVE;};
-END readStabilizerSendThrust;
-
-SUBPROGRAM IMPLEMENTATION readStabilizerSendThrust.Ada
-PROPERTIES
-	FV_Name => "supervisor";
-	Source_Language => Ada;
-END readStabilizerSendThrust.Ada;
-
 SUBPROGRAM takeoff
 FEATURES
 	ref_thrust:IN PARAMETER DataView::MyReal {encoding=>UPER;};
@@ -30,6 +19,29 @@ PROPERTIES
 	FV_Name => "supervisor";
 	Source_Language => Ada;
 END takeoff.Ada;
+
+SUBPROGRAM readStabilizerSendThrust
+FEATURES
+	ref_thrust:OUT PARAMETER DataView::MyReal {encoding=>NATIVE;};
+	updated_thrust:IN PARAMETER DataView::MyReal {encoding=>NATIVE;};
+END readStabilizerSendThrust;
+
+SUBPROGRAM IMPLEMENTATION readStabilizerSendThrust.Ada
+PROPERTIES
+	FV_Name => "supervisor";
+	Source_Language => Ada;
+END readStabilizerSendThrust.Ada;
+
+SUBPROGRAM SensorData
+FEATURES
+	updated_thrust:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+END SensorData;
+
+SUBPROGRAM IMPLEMENTATION SensorData.Ada
+PROPERTIES
+	FV_Name => "supervisor";
+	Source_Language => Ada;
+END SensorData.Ada;
 
 SUBPROGRAM check_queue
 FEATURES

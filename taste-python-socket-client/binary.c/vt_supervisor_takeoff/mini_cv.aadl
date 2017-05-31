@@ -25,6 +25,7 @@ END takeoff.C;
 SUBPROGRAM readStabilizerSendThrust_vt
 FEATURES
 	ref_thrust:OUT PARAMETER DataView::MyReal {encoding=>NATIVE;};
+	updated_thrust:IN PARAMETER DataView::MyReal {encoding=>NATIVE;};
 END readStabilizerSendThrust_vt;
 
 SUBPROGRAM IMPLEMENTATION readStabilizerSendThrust_vt.C
@@ -32,6 +33,17 @@ PROPERTIES
 	FV_Name => "vt_supervisor_takeoff";
 	Source_Language => C;
 END readStabilizerSendThrust_vt.C;
+
+SUBPROGRAM SensorData_vt
+FEATURES
+	updated_thrust:OUT PARAMETER DataView::MyReal {encoding=>UPER;};
+END SensorData_vt;
+
+SUBPROGRAM IMPLEMENTATION SensorData_vt.C
+PROPERTIES
+	FV_Name => "vt_supervisor_takeoff";
+	Source_Language => C;
+END SensorData_vt.C;
 
 SUBPROGRAM check_queue_vt
 FEATURES

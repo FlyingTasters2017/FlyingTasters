@@ -5,7 +5,7 @@
 --  property files of relevance.
 system ASSERT_System
 properties
- Ocarina_Config::AADL_Files => ("InterfaceView.aadl", "DeploymentView.aadl", "vt_supervisor_takeoff_CV_Thread.aadl", "process.aadl", "gcs_CV_Thread.aadl", "vt_supervisor_pulse_CV_Thread.aadl", "D_view.aadl", "ocarina_components.aadl", "TASTE_IV_Properties.aadl", "TASTE_DV_Properties.aadl");
+ Ocarina_Config::AADL_Files => ("InterfaceView.aadl", "DeploymentView.aadl", "vt_supervisor_takeoff_CV_Thread.aadl", "vt_gcs_gui_polling_gcs_CV_Thread.aadl", "process.aadl", "gcs_CV_Thread.aadl", "vt_gcs_sensordata_CV_Thread.aadl", "vt_supervisor_pulse_CV_Thread.aadl", "D_view.aadl", "ocarina_components.aadl", "TASTE_IV_Properties.aadl", "TASTE_DV_Properties.aadl");
  Ocarina_Config::Generator => polyorb_hi_c;
  Ocarina_Config::Generator_Options => ();
  Ocarina_Config::AADL_Version => AADLv2;

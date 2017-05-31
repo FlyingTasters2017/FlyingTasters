@@ -59,3 +59,4 @@ int SendTC_takeoff(void *p_ref_thrust)
     }
     return 0;
 }
+T_gcs_PI_list ii_SensorData = i_SensorData;

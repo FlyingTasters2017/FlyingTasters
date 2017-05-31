@@ -7,13 +7,20 @@
 #include "types.h"
 #include "deployment.h"
 #include "po_hi_transport.h"
+#include "../../vt_gcs_sensordata/vt_gcs_sensordata_polyorb_interface.h"
+#include "../../vt_gcs_gui_polling_gcs/vt_gcs_gui_polling_gcs_polyorb_interface.h"
 /* ------------------------------------------------------
 --  Asynchronous Required Interface "takeoff"
 ------------------------------------------------------ */
 void vm_async_gcs_takeoff(void *ref_thrust, size_t ref_thrust_len);
 /*----------------------------------------------------
--- Asynchronous Provided Interface "gui_polling_gcs"
+-- Protected Provided Interface "SensorData"
 ----------------------------------------------------*/
-void po_hi_c_gcs_gui_polling_gcs(__po_hi_task_id);
+void sync_gcs_SensorData(void *, size_t);
+
+/*----------------------------------------------------
+-- Protected Provided Interface "gui_polling_gcs"
+----------------------------------------------------*/
+void sync_gcs_gui_polling_gcs();
 
 #endif

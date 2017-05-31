@@ -13,7 +13,8 @@ extern "C" {
 
 void socketclient_startup();
 
-void socketclient_PI_readStabilizerSendThrust(const asn1SccMyReal *);
+void socketclient_PI_readStabilizerSendThrust(const asn1SccMyReal *,
+                                              asn1SccMyReal *);
 
 #ifdef __cplusplus
 }

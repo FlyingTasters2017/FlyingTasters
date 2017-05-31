@@ -23,13 +23,17 @@ void init_socketclient()
     }
 }
 
-void socketclient_readStabilizerSendThrust (void *pmy_ref_thrust, size_t size_my_ref_thrust)
+void socketclient_readStabilizerSendThrust (void *pmy_ref_thrust, size_t size_my_ref_thrust, void *pmy_updated_thrust, size_t *psize_my_updated_thrust)
 {
     /* Decoded input variable(s): developer can use them */
     asn1SccMyReal IN_ref_thrust;
 
+    /* Output variable(s): developer has to fill them */
+    asn1SccMyReal OUT_updated_thrust;
+
 #ifdef __unix__
     asn1SccMyReal_Initialize(&IN_ref_thrust);
+    asn1SccMyReal_Initialize(&OUT_updated_thrust);
 #endif
 
     /* Decode each input parameter */
@@ -41,6 +45,9 @@ void socketclient_readStabilizerSendThrust (void *pmy_ref_thrust, size_t size_my
     }
 
     /* Call to User-defined function */
-    socketclient_PI_readStabilizerSendThrust (&IN_ref_thrust);
+    socketclient_PI_readStabilizerSendThrust (&IN_ref_thrust, &OUT_updated_thrust);
 
+    /* Encode each output parameter */
+
+    *psize_my_updated_thrust = Encode_NATIVE_MyReal (pmy_updated_thrust, sizeof (asn1SccMyReal), &OUT_updated_thrust);
 }

@@ -48,198 +48,6 @@ void DestroyStream(BitStream *pBitStrm) {
 }
 
 
-/* BOOLEAN */
-flag MyBool__Get(MyBool* root)
-{
-    return (*root);
-}
-
-/* BOOLEAN */
-void MyBool__Set(MyBool* root, flag value)
-{
-    (*root) = value;
-}
-
-/* REAL */
-double MyReal__Get(MyReal* root)
-{
-    return (*root);
-}
-
-/* REAL */
-void MyReal__Set(MyReal* root, double value)
-{
-    (*root) = value;
-}
-
-/* INTEGER */
-asn1SccSint MySeq__input_data_Get(MySeq* root)
-{
-    return (*root).input_data;
-}
-
-/* INTEGER */
-void MySeq__input_data_Set(MySeq* root, asn1SccSint value)
-{
-    (*root).input_data = value;
-}
-
-/* INTEGER */
-asn1SccSint MySeq__output_data_Get(MySeq* root)
-{
-    return (*root).output_data;
-}
-
-/* INTEGER */
-void MySeq__output_data_Set(MySeq* root, asn1SccSint value)
-{
-    (*root).output_data = value;
-}
-
-/* ENUMERATED */
-int MySeq__validity_Get(MySeq* root)
-{
-    return (*root).validity;
-}
-
-/* ENUMERATED */
-void MySeq__validity_Set(MySeq* root, int value)
-{
-    (*root).validity = value;
-}
-
-/* INTEGER */
-asn1SccSint T_UInt32__Get(T_UInt32* root)
-{
-    return (*root);
-}
-
-/* INTEGER */
-void T_UInt32__Set(T_UInt32* root, asn1SccSint value)
-{
-    (*root) = value;
-}
-
-/* BOOLEAN */
-flag T_Boolean__Get(T_Boolean* root)
-{
-    return (*root);
-}
-
-/* BOOLEAN */
-void T_Boolean__Set(T_Boolean* root, flag value)
-{
-    (*root) = value;
-}
-
-/* INTEGER */
-asn1SccSint MyInteger__Get(MyInteger* root)
-{
-    return (*root);
-}
-
-/* INTEGER */
-void MyInteger__Set(MyInteger* root, asn1SccSint value)
-{
-    (*root) = value;
-}
-
-/* SEQUENCEOF/SETOF */
-long MySeqOf__GetLength(MySeqOf* root)
-{
-    return 2;
-}
-
-/* SEQUENCEOF/SETOF */
-void MySeqOf__SetLength(MySeqOf* root, long value)
-{
-    fprintf(stderr, "WARNING: setting length of fixed-length sequence\n");
-}
-
-/* ENUMERATED */
-int MySeqOf__iDx_Get(MySeqOf* root, int iDx)
-{
-    return (*root).arr[iDx];
-}
-
-/* ENUMERATED */
-void MySeqOf__iDx_Set(MySeqOf* root, int iDx, int value)
-{
-    (*root).arr[iDx] = value;
-}
-
-/* INTEGER */
-asn1SccSint T_Int32__Get(T_Int32* root)
-{
-    return (*root);
-}
-
-/* INTEGER */
-void T_Int32__Set(T_Int32* root, asn1SccSint value)
-{
-    (*root) = value;
-}
-
-/* OCTETSTRING */
-long MyOctStr__GetLength(MyOctStr* root)
-{
-    return 3;
-}
-
-/* OCTETSTRING */
-void MyOctStr__SetLength(MyOctStr* root, long value)
-{
-    fprintf(stderr, "WARNING: setting length of fixed-length sequence\n");
-}
-
-/* OCTETSTRING_bytes */
-byte MyOctStr__iDx_Get(MyOctStr* root, int iDx)
-{
-    return (*root).arr[iDx];
-}
-
-/* OCTETSTRING_bytes */
-void MyOctStr__iDx_Set(MyOctStr* root, int iDx, byte value)
-{
-    (*root).arr[iDx] = value;
-}
-
-/* INTEGER */
-asn1SccSint T_UInt8__Get(T_UInt8* root)
-{
-    return (*root);
-}
-
-/* INTEGER */
-void T_UInt8__Set(T_UInt8* root, asn1SccSint value)
-{
-    (*root) = value;
-}
-
-/* INTEGER */
-asn1SccSint T_Int8__Get(T_Int8* root)
-{
-    return (*root);
-}
-
-/* INTEGER */
-void T_Int8__Set(T_Int8* root, asn1SccSint value)
-{
-    (*root) = value;
-}
-
-/* ENUMERATED */
-int MyEnum__Get(MyEnum* root)
-{
-    return (*root);
-}
-
-/* ENUMERATED */
-void MyEnum__Set(MyEnum* root, int value)
-{
-    (*root) = value;
-}
-
 /* CHOICE selector */
 int MyChoice__kind_Get(MyChoice* root)
 {
@@ -306,85 +114,237 @@ void MyChoice__b_validity_Set(MyChoice* root, int value)
     (*root).u.b.validity = value;
 }
 
+/* INTEGER */
+asn1SccSint T_Int32__Get(T_Int32* root)
+{
+    return (*root);
+}
+
+/* INTEGER */
+void T_Int32__Set(T_Int32* root, asn1SccSint value)
+{
+    (*root) = value;
+}
+
+/* BOOLEAN */
+flag T_Boolean__Get(T_Boolean* root)
+{
+    return (*root);
+}
+
+/* BOOLEAN */
+void T_Boolean__Set(T_Boolean* root, flag value)
+{
+    (*root) = value;
+}
+
+/* INTEGER */
+asn1SccSint T_UInt32__Get(T_UInt32* root)
+{
+    return (*root);
+}
+
+/* INTEGER */
+void T_UInt32__Set(T_UInt32* root, asn1SccSint value)
+{
+    (*root) = value;
+}
+
+/* OCTETSTRING */
+long MyOctStr__GetLength(MyOctStr* root)
+{
+    return 3;
+}
+
+/* OCTETSTRING */
+void MyOctStr__SetLength(MyOctStr* root, long value)
+{
+    fprintf(stderr, "WARNING: setting length of fixed-length sequence\n");
+}
+
+/* OCTETSTRING_bytes */
+byte MyOctStr__iDx_Get(MyOctStr* root, int iDx)
+{
+    return (*root).arr[iDx];
+}
+
+/* OCTETSTRING_bytes */
+void MyOctStr__iDx_Set(MyOctStr* root, int iDx, byte value)
+{
+    (*root).arr[iDx] = value;
+}
+
+/* INTEGER */
+asn1SccSint T_UInt8__Get(T_UInt8* root)
+{
+    return (*root);
+}
+
+/* INTEGER */
+void T_UInt8__Set(T_UInt8* root, asn1SccSint value)
+{
+    (*root) = value;
+}
+
+/* INTEGER */
+asn1SccSint T_Int8__Get(T_Int8* root)
+{
+    return (*root);
+}
+
+/* INTEGER */
+void T_Int8__Set(T_Int8* root, asn1SccSint value)
+{
+    (*root) = value;
+}
+
+/* ENUMERATED */
+int MyEnum__Get(MyEnum* root)
+{
+    return (*root);
+}
+
+/* ENUMERATED */
+void MyEnum__Set(MyEnum* root, int value)
+{
+    (*root) = value;
+}
+
+/* INTEGER */
+asn1SccSint MySeq__input_data_Get(MySeq* root)
+{
+    return (*root).input_data;
+}
+
+/* INTEGER */
+void MySeq__input_data_Set(MySeq* root, asn1SccSint value)
+{
+    (*root).input_data = value;
+}
+
+/* INTEGER */
+asn1SccSint MySeq__output_data_Get(MySeq* root)
+{
+    return (*root).output_data;
+}
+
+/* INTEGER */
+void MySeq__output_data_Set(MySeq* root, asn1SccSint value)
+{
+    (*root).output_data = value;
+}
+
+/* ENUMERATED */
+int MySeq__validity_Get(MySeq* root)
+{
+    return (*root).validity;
+}
+
+/* ENUMERATED */
+void MySeq__validity_Set(MySeq* root, int value)
+{
+    (*root).validity = value;
+}
+
+/* BOOLEAN */
+flag MyBool__Get(MyBool* root)
+{
+    return (*root);
+}
+
+/* BOOLEAN */
+void MyBool__Set(MyBool* root, flag value)
+{
+    (*root) = value;
+}
+
+/* INTEGER */
+asn1SccSint MyInteger__Get(MyInteger* root)
+{
+    return (*root);
+}
+
+/* INTEGER */
+void MyInteger__Set(MyInteger* root, asn1SccSint value)
+{
+    (*root) = value;
+}
+
+/* REAL */
+double MyReal__Get(MyReal* root)
+{
+    return (*root);
+}
+
+/* REAL */
+void MyReal__Set(MyReal* root, double value)
+{
+    (*root) = value;
+}
+
+/* SEQUENCEOF/SETOF */
+long MySeqOf__GetLength(MySeqOf* root)
+{
+    return 2;
+}
+
+/* SEQUENCEOF/SETOF */
+void MySeqOf__SetLength(MySeqOf* root, long value)
+{
+    fprintf(stderr, "WARNING: setting length of fixed-length sequence\n");
+}
+
+/* ENUMERATED */
+int MySeqOf__iDx_Get(MySeqOf* root, int iDx)
+{
+    return (*root).arr[iDx];
+}
+
+/* ENUMERATED */
+void MySeqOf__iDx_Set(MySeqOf* root, int iDx, int value)
+{
+    (*root).arr[iDx] = value;
+}
+
 /* Helper functions for NATIVE encodings */
 
-void SetDataFor_MyBool(void *dest, void *src)
+void SetDataFor_MyChoice(void *dest, void *src)
 {
-    memcpy(dest, src, sizeof(MyBool));
+    memcpy(dest, src, sizeof(MyChoice));
 }
 
-byte* MovePtrBySizeOf_MyBool(byte *pData)
+byte* MovePtrBySizeOf_MyChoice(byte *pData)
 {
-    return pData + sizeof(MyBool);
+    return pData + sizeof(MyChoice);
 }
 
-byte* CreateInstanceOf_MyBool() {
-    MyBool *p = (MyBool*)malloc(sizeof(MyBool));
-    MyBool_Initialize(p);
+byte* CreateInstanceOf_MyChoice() {
+    MyChoice *p = (MyChoice*)malloc(sizeof(MyChoice));
+    MyChoice_Initialize(p);
     return (byte*)p;
 }
 
-void DestroyInstanceOf_MyBool(byte *pData) {
+void DestroyInstanceOf_MyChoice(byte *pData) {
     free(pData);
 }
 
-void SetDataFor_MyReal(void *dest, void *src)
+void SetDataFor_T_Int32(void *dest, void *src)
 {
-    memcpy(dest, src, sizeof(MyReal));
+    memcpy(dest, src, sizeof(T_Int32));
 }
 
-byte* MovePtrBySizeOf_MyReal(byte *pData)
+byte* MovePtrBySizeOf_T_Int32(byte *pData)
 {
-    return pData + sizeof(MyReal);
+    return pData + sizeof(T_Int32);
 }
 
-byte* CreateInstanceOf_MyReal() {
-    MyReal *p = (MyReal*)malloc(sizeof(MyReal));
-    MyReal_Initialize(p);
+byte* CreateInstanceOf_T_Int32() {
+    T_Int32 *p = (T_Int32*)malloc(sizeof(T_Int32));
+    T_Int32_Initialize(p);
     return (byte*)p;
 }
 
-void DestroyInstanceOf_MyReal(byte *pData) {
-    free(pData);
-}
-
-void SetDataFor_MySeq(void *dest, void *src)
-{
-    memcpy(dest, src, sizeof(MySeq));
-}
-
-byte* MovePtrBySizeOf_MySeq(byte *pData)
-{
-    return pData + sizeof(MySeq);
-}
-
-byte* CreateInstanceOf_MySeq() {
-    MySeq *p = (MySeq*)malloc(sizeof(MySeq));
-    MySeq_Initialize(p);
-    return (byte*)p;
-}
-
-void DestroyInstanceOf_MySeq(byte *pData) {
-    free(pData);
-}
-
-void SetDataFor_T_UInt32(void *dest, void *src)
-{
-    memcpy(dest, src, sizeof(T_UInt32));
-}
-
-byte* MovePtrBySizeOf_T_UInt32(byte *pData)
-{
-    return pData + sizeof(T_UInt32);
-}
-
-byte* CreateInstanceOf_T_UInt32() {
-    T_UInt32 *p = (T_UInt32*)malloc(sizeof(T_UInt32));
-    T_UInt32_Initialize(p);
-    return (byte*)p;
-}
-
-void DestroyInstanceOf_T_UInt32(byte *pData) {
+void DestroyInstanceOf_T_Int32(byte *pData) {
     free(pData);
 }
 
@@ -408,63 +368,23 @@ void DestroyInstanceOf_T_Boolean(byte *pData) {
     free(pData);
 }
 
-void SetDataFor_MyInteger(void *dest, void *src)
+void SetDataFor_T_UInt32(void *dest, void *src)
 {
-    memcpy(dest, src, sizeof(MyInteger));
+    memcpy(dest, src, sizeof(T_UInt32));
 }
 
-byte* MovePtrBySizeOf_MyInteger(byte *pData)
+byte* MovePtrBySizeOf_T_UInt32(byte *pData)
 {
-    return pData + sizeof(MyInteger);
+    return pData + sizeof(T_UInt32);
 }
 
-byte* CreateInstanceOf_MyInteger() {
-    MyInteger *p = (MyInteger*)malloc(sizeof(MyInteger));
-    MyInteger_Initialize(p);
+byte* CreateInstanceOf_T_UInt32() {
+    T_UInt32 *p = (T_UInt32*)malloc(sizeof(T_UInt32));
+    T_UInt32_Initialize(p);
     return (byte*)p;
 }
 
-void DestroyInstanceOf_MyInteger(byte *pData) {
-    free(pData);
-}
-
-void SetDataFor_MySeqOf(void *dest, void *src)
-{
-    memcpy(dest, src, sizeof(MySeqOf));
-}
-
-byte* MovePtrBySizeOf_MySeqOf(byte *pData)
-{
-    return pData + sizeof(MySeqOf);
-}
-
-byte* CreateInstanceOf_MySeqOf() {
-    MySeqOf *p = (MySeqOf*)malloc(sizeof(MySeqOf));
-    MySeqOf_Initialize(p);
-    return (byte*)p;
-}
-
-void DestroyInstanceOf_MySeqOf(byte *pData) {
-    free(pData);
-}
-
-void SetDataFor_T_Int32(void *dest, void *src)
-{
-    memcpy(dest, src, sizeof(T_Int32));
-}
-
-byte* MovePtrBySizeOf_T_Int32(byte *pData)
-{
-    return pData + sizeof(T_Int32);
-}
-
-byte* CreateInstanceOf_T_Int32() {
-    T_Int32 *p = (T_Int32*)malloc(sizeof(T_Int32));
-    T_Int32_Initialize(p);
-    return (byte*)p;
-}
-
-void DestroyInstanceOf_T_Int32(byte *pData) {
+void DestroyInstanceOf_T_UInt32(byte *pData) {
     free(pData);
 }
 
@@ -548,23 +468,103 @@ void DestroyInstanceOf_MyEnum(byte *pData) {
     free(pData);
 }
 
-void SetDataFor_MyChoice(void *dest, void *src)
+void SetDataFor_MySeq(void *dest, void *src)
 {
-    memcpy(dest, src, sizeof(MyChoice));
+    memcpy(dest, src, sizeof(MySeq));
 }
 
-byte* MovePtrBySizeOf_MyChoice(byte *pData)
+byte* MovePtrBySizeOf_MySeq(byte *pData)
 {
-    return pData + sizeof(MyChoice);
+    return pData + sizeof(MySeq);
 }
 
-byte* CreateInstanceOf_MyChoice() {
-    MyChoice *p = (MyChoice*)malloc(sizeof(MyChoice));
-    MyChoice_Initialize(p);
+byte* CreateInstanceOf_MySeq() {
+    MySeq *p = (MySeq*)malloc(sizeof(MySeq));
+    MySeq_Initialize(p);
     return (byte*)p;
 }
 
-void DestroyInstanceOf_MyChoice(byte *pData) {
+void DestroyInstanceOf_MySeq(byte *pData) {
+    free(pData);
+}
+
+void SetDataFor_MyBool(void *dest, void *src)
+{
+    memcpy(dest, src, sizeof(MyBool));
+}
+
+byte* MovePtrBySizeOf_MyBool(byte *pData)
+{
+    return pData + sizeof(MyBool);
+}
+
+byte* CreateInstanceOf_MyBool() {
+    MyBool *p = (MyBool*)malloc(sizeof(MyBool));
+    MyBool_Initialize(p);
+    return (byte*)p;
+}
+
+void DestroyInstanceOf_MyBool(byte *pData) {
+    free(pData);
+}
+
+void SetDataFor_MyInteger(void *dest, void *src)
+{
+    memcpy(dest, src, sizeof(MyInteger));
+}
+
+byte* MovePtrBySizeOf_MyInteger(byte *pData)
+{
+    return pData + sizeof(MyInteger);
+}
+
+byte* CreateInstanceOf_MyInteger() {
+    MyInteger *p = (MyInteger*)malloc(sizeof(MyInteger));
+    MyInteger_Initialize(p);
+    return (byte*)p;
+}
+
+void DestroyInstanceOf_MyInteger(byte *pData) {
+    free(pData);
+}
+
+void SetDataFor_MyReal(void *dest, void *src)
+{
+    memcpy(dest, src, sizeof(MyReal));
+}
+
+byte* MovePtrBySizeOf_MyReal(byte *pData)
+{
+    return pData + sizeof(MyReal);
+}
+
+byte* CreateInstanceOf_MyReal() {
+    MyReal *p = (MyReal*)malloc(sizeof(MyReal));
+    MyReal_Initialize(p);
+    return (byte*)p;
+}
+
+void DestroyInstanceOf_MyReal(byte *pData) {
+    free(pData);
+}
+
+void SetDataFor_MySeqOf(void *dest, void *src)
+{
+    memcpy(dest, src, sizeof(MySeqOf));
+}
+
+byte* MovePtrBySizeOf_MySeqOf(byte *pData)
+{
+    return pData + sizeof(MySeqOf);
+}
+
+byte* CreateInstanceOf_MySeqOf() {
+    MySeqOf *p = (MySeqOf*)malloc(sizeof(MySeqOf));
+    MySeqOf_Initialize(p);
+    return (byte*)p;
+}
+
+void DestroyInstanceOf_MySeqOf(byte *pData) {
     free(pData);
 }
 

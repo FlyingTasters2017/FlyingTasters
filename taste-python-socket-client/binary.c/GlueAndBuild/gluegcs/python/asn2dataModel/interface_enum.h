@@ -7,5 +7,6 @@
 
 enum {
     i_gcs_RI_takeoff = 0,
-    i_gcs_PI_gui_polling_gcs = 0
+    i_gcs_PI_SensorData = 0,
+    i_gcs_PI_gui_polling_gcs = 1
 };
