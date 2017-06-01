@@ -941,4 +941,950 @@ end of runSocketServer script
 [127364][Stabilizer]: {'stabilizer.roll': 1.1335448026657104, 'stabilizer.yaw': -5.343740940093994, 'stabilizer.pitch': 0.0356384813785553}
 [128364][Stabilizer]: {'stabilizer.roll': 1.1264034509658813, 'stabilizer.yaw': -5.399445533752441, 'stabilizer.pitch': 0.043029963970184326}
 [129364][Stabilizer]: {'stabilizer.roll': 1.125671625137329, 'stabilizer.yaw': -5.45905876159668, 'stabilizer.pitch': 0.04502325505018234}
-[130364][Stabilizer]: {'stabilizer.roll': 1.120761513710022, 'stabilizer.yaw': -5.530266761779785, 'stabilizer.pitch': 0.04750081151723862}
+[130364][Stabilizer]: {'stabilizer.roll': 1.120761513710022, 'stabilizer.yaw': -5.530266761779785, 'stabilizer.pitch': 0.04750081151723862}/home/taste/Documents/FlyingTasters/PythonSocketServer/runSocketServer.sh: line 3: activate: No such file or directory
+Traceback (most recent call last):
+  File "/home/taste/Documents/FlyingTasters/PythonSocketServer/myBasiclogAndRampWithSocketServerC.py", line 161, in <module>
+    mySocket.bind((HOST, PORT))
+OSError: [Errno 98] Address already in use
+end of runSocketServer script
+
+[131364][Stabilizer]: {'stabilizer.roll': 1.128639817237854, 'stabilizer.yaw': -5.58906888961792, 'stabilizer.pitch': 0.0421874076128006}
+[132364][Stabilizer]: {'stabilizer.roll': 1.1352299451828003, 'stabilizer.yaw': -5.642757892608643, 'stabilizer.pitch': 0.05902814865112305}
+[133364][Stabilizer]: {'stabilizer.roll': 1.1321771144866943, 'stabilizer.yaw': -5.705862998962402, 'stabilizer.pitch': 0.06082232668995857}
+[134364][Stabilizer]: {'stabilizer.roll': 1.1260943412780762, 'stabilizer.yaw': -5.767117500305176, 'stabilizer.pitch': 0.07437575608491898}
+[135364][Stabilizer]: {'stabilizer.roll': 1.1166027784347534, 'stabilizer.yaw': -5.838089942932129, 'stabilizer.pitch': 0.06920257210731506}
+[136364][Stabilizer]: {'stabilizer.roll': 1.1189396381378174, 'stabilizer.yaw': -5.9080939292907715, 'stabilizer.pitch': 0.07609318941831589}
+[137364][Stabilizer]: {'stabilizer.roll': 1.1154210567474365, 'stabilizer.yaw': -5.961358070373535, 'stabilizer.pitch': 0.05554397031664848}
+[138364][Stabilizer]: {'stabilizer.roll': 1.1198556423187256, 'stabilizer.yaw': -6.013232707977295, 'stabilizer.pitch': 0.0647813230752945}
+[139364][Stabilizer]: {'stabilizer.roll': 1.12310791015625, 'stabilizer.yaw': -6.066384315490723, 'stabilizer.pitch': 0.07570187747478485}
+[140364][Stabilizer]: {'stabilizer.roll': 1.1266489028930664, 'stabilizer.yaw': -6.12637186050415, 'stabilizer.pitch': 0.061902884393930435}
+[141364][Stabilizer]: {'stabilizer.roll': 1.120644450187683, 'stabilizer.yaw': -6.184735298156738, 'stabilizer.pitch': 0.05430769547820091}
+[142364][Stabilizer]: {'stabilizer.roll': 1.1281133890151978, 'stabilizer.yaw': -6.244427680969238, 'stabilizer.pitch': 0.044885143637657166}
+[143364][Stabilizer]: {'stabilizer.roll': 1.1330184936523438, 'stabilizer.yaw': -6.308444976806641, 'stabilizer.pitch': 0.048524320125579834}
+[144364][Stabilizer]: {'stabilizer.roll': 1.1329994201660156, 'stabilizer.yaw': -6.368575096130371, 'stabilizer.pitch': 0.0848608985543251}
+[145364][Stabilizer]: {'stabilizer.roll': 1.1279946565628052, 'stabilizer.yaw': -6.427624225616455, 'stabilizer.pitch': 0.0810227021574974}
+[146364][Stabilizer]: {'stabilizer.roll': 1.1251171827316284, 'stabilizer.yaw': -6.4870924949646, 'stabilizer.pitch': 0.07801239937543869}
+[147364][Stabilizer]: {'stabilizer.roll': 1.1288669109344482, 'stabilizer.yaw': -6.546135902404785, 'stabilizer.pitch': 0.07204104959964752}
+[148364][Stabilizer]: {'stabilizer.roll': 1.1313608884811401, 'stabilizer.yaw': -6.618279933929443, 'stabilizer.pitch': 0.0710708424448967}
+[149364][Stabilizer]: {'stabilizer.roll': 1.118411898612976, 'stabilizer.yaw': -6.687653064727783, 'stabilizer.pitch': 0.07647161930799484}
+[150364][Stabilizer]: {'stabilizer.roll': 1.119978427886963, 'stabilizer.yaw': -6.749358177185059, 'stabilizer.pitch': 0.09141615778207779}
+[151364][Stabilizer]: {'stabilizer.roll': 1.115742564201355, 'stabilizer.yaw': -6.80399751663208, 'stabilizer.pitch': 0.07098648697137833}
+[152364][Stabilizer]: {'stabilizer.roll': 1.1185153722763062, 'stabilizer.yaw': -6.863717555999756, 'stabilizer.pitch': 0.08989830315113068}
+[153364][Stabilizer]: {'stabilizer.roll': 1.117870807647705, 'stabilizer.yaw': -6.930815696716309, 'stabilizer.pitch': 0.06891997158527374}
+[154364][Stabilizer]: {'stabilizer.roll': 1.114859938621521, 'stabilizer.yaw': -7.000270843505859, 'stabilizer.pitch': 0.05797060579061508}
+[155364][Stabilizer]: {'stabilizer.roll': 1.105190634727478, 'stabilizer.yaw': -7.0698113441467285, 'stabilizer.pitch': 0.06153624504804611}
+[156364][Stabilizer]: {'stabilizer.roll': 1.10244619846344, 'stabilizer.yaw': -7.143137454986572, 'stabilizer.pitch': 0.06426189839839935}
+[157364][Stabilizer]: {'stabilizer.roll': 1.1083035469055176, 'stabilizer.yaw': -7.212078094482422, 'stabilizer.pitch': 0.05063803121447563}
+[158364][Stabilizer]: {'stabilizer.roll': 1.0977256298065186, 'stabilizer.yaw': -7.28026008605957, 'stabilizer.pitch': 0.05360059440135956}
+[159364][Stabilizer]: {'stabilizer.roll': 1.0977222919464111, 'stabilizer.yaw': -7.350351333618164, 'stabilizer.pitch': 0.07507779449224472}
+[160364][Stabilizer]: {'stabilizer.roll': 1.1066687107086182, 'stabilizer.yaw': -7.409392833709717, 'stabilizer.pitch': 0.048975467681884766}
+[161364][Stabilizer]: {'stabilizer.roll': 1.0981889963150024, 'stabilizer.yaw': -7.466692924499512, 'stabilizer.pitch': 0.04965565353631973}
+[162364][Stabilizer]: {'stabilizer.roll': 1.0921478271484375, 'stabilizer.yaw': -7.536838054656982, 'stabilizer.pitch': 0.06283775717020035}
+[163364][Stabilizer]: {'stabilizer.roll': 1.0950356721878052, 'stabilizer.yaw': -7.59091854095459, 'stabilizer.pitch': 0.06818073987960815}
+[164364][Stabilizer]: {'stabilizer.roll': 1.1033811569213867, 'stabilizer.yaw': -7.646604061126709, 'stabilizer.pitch': 0.07775171101093292}
+[165364][Stabilizer]: {'stabilizer.roll': 1.1062520742416382, 'stabilizer.yaw': -7.702508926391602, 'stabilizer.pitch': 0.06079449877142906}
+[166364][Stabilizer]: {'stabilizer.roll': 1.1062225103378296, 'stabilizer.yaw': -7.765116214752197, 'stabilizer.pitch': 0.06331716477870941}
+[167364][Stabilizer]: {'stabilizer.roll': 1.1091023683547974, 'stabilizer.yaw': -7.828074932098389, 'stabilizer.pitch': 0.05896589532494545}
+[168364][Stabilizer]: {'stabilizer.roll': 1.107297420501709, 'stabilizer.yaw': -7.897820472717285, 'stabilizer.pitch': 0.053117260336875916}
+[169364][Stabilizer]: {'stabilizer.roll': 1.1057392358779907, 'stabilizer.yaw': -7.96784782409668, 'stabilizer.pitch': 0.049265943467617035}
+[170364][Stabilizer]: {'stabilizer.roll': 1.101243019104004, 'stabilizer.yaw': -8.034199714660645, 'stabilizer.pitch': 0.04696991294622421}
+[171364][Stabilizer]: {'stabilizer.roll': 1.0967504978179932, 'stabilizer.yaw': -8.096467971801758, 'stabilizer.pitch': 0.05189507082104683}
+[172364][Stabilizer]: {'stabilizer.roll': 1.0874582529067993, 'stabilizer.yaw': -8.162278175354004, 'stabilizer.pitch': 0.05306950584053993}
+[173364][Stabilizer]: {'stabilizer.roll': 1.095706820487976, 'stabilizer.yaw': -8.224214553833008, 'stabilizer.pitch': 0.06147834658622742}
+[174364][Stabilizer]: {'stabilizer.roll': 1.106218934059143, 'stabilizer.yaw': -8.294055938720703, 'stabilizer.pitch': 0.056743014603853226}
+[175364][Stabilizer]: {'stabilizer.roll': 1.1073050498962402, 'stabilizer.yaw': -8.356545448303223, 'stabilizer.pitch': 0.0519106350839138}
+[176364][Stabilizer]: {'stabilizer.roll': 1.112637996673584, 'stabilizer.yaw': -8.41627025604248, 'stabilizer.pitch': 0.06416139751672745}
+[177364][Stabilizer]: {'stabilizer.roll': 1.1128853559494019, 'stabilizer.yaw': -8.476180076599121, 'stabilizer.pitch': 0.03997352346777916}
+[178364][Stabilizer]: {'stabilizer.roll': 1.120212435722351, 'stabilizer.yaw': -8.546489715576172, 'stabilizer.pitch': 0.03196721151471138}
+[179364][Stabilizer]: {'stabilizer.roll': 1.115962266921997, 'stabilizer.yaw': -8.615262031555176, 'stabilizer.pitch': 0.04228515550494194}
+[180364][Stabilizer]: {'stabilizer.roll': 1.1121909618377686, 'stabilizer.yaw': -8.681144714355469, 'stabilizer.pitch': 0.04076192155480385}
+[181364][Stabilizer]: {'stabilizer.roll': 1.1021184921264648, 'stabilizer.yaw': -8.757458686828613, 'stabilizer.pitch': 0.06270462274551392}
+[182364][Stabilizer]: {'stabilizer.roll': 1.1078596115112305, 'stabilizer.yaw': -8.818343162536621, 'stabilizer.pitch': 0.039070963859558105}
+[183364][Stabilizer]: {'stabilizer.roll': 1.1105070114135742, 'stabilizer.yaw': -8.875482559204102, 'stabilizer.pitch': 0.047498926520347595}
+[184364][Stabilizer]: {'stabilizer.roll': 1.10453462600708, 'stabilizer.yaw': -8.948834419250488, 'stabilizer.pitch': 0.05060196295380592}
+[185364][Stabilizer]: {'stabilizer.roll': 1.1090052127838135, 'stabilizer.yaw': -9.019018173217773, 'stabilizer.pitch': 0.035333242267370224}
+[186364][Stabilizer]: {'stabilizer.roll': 1.115960717201233, 'stabilizer.yaw': -9.096166610717773, 'stabilizer.pitch': 0.04031842201948166}
+[187364][Stabilizer]: {'stabilizer.roll': 1.1229077577590942, 'stabilizer.yaw': -9.166239738464355, 'stabilizer.pitch': 0.04230498895049095}
+[188364][Stabilizer]: {'stabilizer.roll': 1.1145620346069336, 'stabilizer.yaw': -9.241660118103027, 'stabilizer.pitch': 0.04957088828086853}
+[189364][Stabilizer]: {'stabilizer.roll': 1.1103050708770752, 'stabilizer.yaw': -9.311905860900879, 'stabilizer.pitch': 0.078317791223526}ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+/home/taste/Documents/FlyingTasters/PythonSocketServer/runSocketServer.sh: line 3: activate: No such file or directory
+Traceback (most recent call last):
+  File "/home/taste/Documents/FlyingTasters/PythonSocketServer/myBasiclogAndRampWithSocketServerC.py", line 161, in <module>
+    mySocket.bind((HOST, PORT))
+OSError: [Errno 98] Address already in use
+end of runSocketServer script
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+ERROR:cflib.crazyflie:Exception while doing callback on port [5]
+
+Traceback (most recent call last):
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/__init__.py", line 386, in run
+    cb.callback(pk)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 556, in _new_packet_cb
+    block.unpack_log_data(logdata, timestamp)
+  File "/home/taste/.local/lib/python3.5/site-packages/cflib/crazyflie/log.py", line 288, in unpack_log_data
+    unpackstring, log_data[data_index:data_index + size])[0]
+struct.error: unpack requires a bytes object of length 4
+
+/home/taste/Documents/FlyingTasters/PythonSocketServer/runSocketServer.sh: line 3: activate: No such file or directory
+Traceback (most recent call last):
+  File "/home/taste/Documents/FlyingTasters/PythonSocketServer/myBasiclogAndRampWithSocketServerC.py", line 161, in <module>
+    mySocket.bind((HOST, PORT))
+OSError: [Errno 98] Address already in use
+end of runSocketServer script
+/home/taste/Documents/FlyingTasters/PythonSocketServer/runSocketServer.sh: line 3: activate: No such file or directory
+  File "/home/taste/Documents/FlyingTasters/PythonSocketServer/myBasiclogAndRampWithSocketServerC.py", line 160
+    <<<<<<< HEAD
+     ^
+SyntaxError: invalid syntax
+end of runSocketServer script
+/home/taste/Documents/FlyingTasters/PythonSocketServer/runSocketServer.sh: line 3: activate: No such file or directory
+Traceback (most recent call last):
+  File "/home/taste/Documents/FlyingTasters/PythonSocketServer/myBasiclogAndRampWithSocketServerC.py", line 161, in <module>
+    mySocket.bind((HOST, PORT))
+OSError: [Errno 98] Address already in use
+end of runSocketServer script

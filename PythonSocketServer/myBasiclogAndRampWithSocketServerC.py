@@ -166,25 +166,31 @@ if __name__ == '__main__':
     #time.sleep(10)
     #Init default thrust
     thrust = 0
-    while not mySocket._closed:
-        # Wait for 1 client connection
-        print('mySocket.listen(1)')
-        mySocket.listen(1)
-        print('conn, addr = mySocket.accept()')
-        conn, addr = mySocket.accept()
-        print('if conn:')
-        # If client connected to the server
-        if conn:
-            print('Connected by', addr)
-            data = str(le.sensorsData).encode()
-            conn.sendall(data)
-            # Receive up to buffersize = 1024 bytes from the socket and convert it to int
-            thrust = conn.recv(1024)
-            thrust = int.from_bytes(thrust, byteorder='big')
-            # Send commands to crazyflie
-        if thrust > 0:
-            le.unlock_thrust_protection()
-            le.ramp_motors(thrust)
-        conn.close()
+    try:
+        while not mySocket._closed:
+            # Wait for 1 client connection
+            print('mySocket.listen(1)')
+            mySocket.listen(1)
+            print('conn, addr = mySocket.accept()')
+            conn, addr = mySocket.accept()
+            print('if conn:')
+            # If client connected to the server
+            if conn:
+                print('Connected by', addr)
+                data = str(le.sensorsData).encode()
+                conn.sendall(data)
+                # Receive up to buffersize = 1024 bytes from the socket and convert it to int
+                thrust = conn.recv(1024)
+                thrust = int.from_bytes(thrust, byteorder='big')
+                # Send commands to crazyflie
+            if thrust > 0:
+                le.unlock_thrust_protection()
+                le.ramp_motors(thrust)
+            conn.close()
+    except KeyboardInterrupt:
+        # connection will be closed here
+        # conn.close()
+        print('Keyboard Interrupt occurred')
+        logging.log(logging.INFO, "Socket server stopped")
     sys.exit(2)
     print('Im here in the end')
