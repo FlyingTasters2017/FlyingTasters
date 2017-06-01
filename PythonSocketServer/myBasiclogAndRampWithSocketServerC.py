@@ -36,7 +36,7 @@ import time
 import cflib.crtp  # noqa
 from cflib.crazyflie import Crazyflie
 from cflib.crazyflie.log import LogConfig
-
+import ctypes
 # Only output errors from the logging framework
 logging.basicConfig(level=logging.ERROR)
 
@@ -120,10 +120,10 @@ class LoggingExample:
         # Unlock startup thrust protection
         self._cf.commander.send_setpoint(0, 0, 0, 0)
 
-    def ramp_motors(self, thrust=0):
-        pitch = 0
-        roll = 0
-        yawrate = 0
+    def ramp_motors(self, roll=0, pitch=0, yawrate=0, thrust=0):
+        # pitch = 0
+        # roll = 0
+        # yawrate = 0
         self._cf.commander.send_setpoint(roll, pitch, yawrate, thrust)
 
 
@@ -204,14 +204,14 @@ if __name__ == '__main__':
             data = str(le.sensorsData + le.accelData).encode()
             conn.sendall(data)
             # Receive up to buffersize = 1024 bytes from the socket and convert it to int
-            thrust = str(conn.recv(1024))
+            thrust = conn.recv(1024)
             print(type(thrust))
             # print(socket_data)
             # socket_data2 = socket_data.encode()
             # print(socket_data2)
             print(thrust)
 
-            sample_d = thrust.decode("ISO-8859-1")
+            sample_d = thrust.decode()
 
             #sample_d = int.from_bytes(thrust, byteorder='big')
             # # socket_data3 = socket_data.decode()
@@ -219,19 +219,23 @@ if __name__ == '__main__':
             print(sample_d)
 
             # print("raw data", socket_data)
-            # yawrate, pitch, roll, thrust = socket_data.split(';')
+            yawrate, pitch, roll, thrust, garbage = sample_d.split(' ')
+            yawrate = socket.ntohl(int(yawrate) & 0xffffffff)
+            pitch = socket.ntohl(int(pitch) & 0xffffffff)
+            roll = socket.ntohl(int(roll) & 0xffffffff)
+            thrust = socket.ntohl(int(thrust) & 0xffffffff)
             #
-            # print("yawrate data", yawrate)
-            # print("pitch data", pitch)
-            # print("roll data", roll)
-            # print("thrust data", thrust)
+            print("yawrate data", yawrate)
+            print("pitch data", pitch)
+            print("roll data", roll)
+            print("thrust data", thrust)
 
 
 
-            # Send commands to crazyflie
-            # if sample_d > 0:
-            #     le.unlock_thrust_protection()
-            #     le.ramp_motors(sample_d)
+            #Send commands to crazyflie
+            if thrust > 0:
+                le.unlock_thrust_protection()
+                le.ramp_motors(roll, pitch, yawrate, thrust)
 
         conn.close()
     sys.exit(2)

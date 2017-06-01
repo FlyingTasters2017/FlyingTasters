@@ -184,20 +184,21 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
    /* Print received message */
    printf("%s\n",buffer);
 
-   thrust = htonl(IN_droneData->thrustRef);
+   thrust = htonl(IN_droneData->thrustRef - 15000);
    yawrate = htonl(IN_droneData->yawrateRef);
    roll = htonl(IN_droneData->rollRef);
    pitch = htonl(IN_droneData->pitchRef);
    
    
    char droneref[256];
+   bzero(droneref,256);
    
     thrustc = (char*)&thrust;
 //    yawratec = (char*)&yawrate;
 //    rollc = (char*)&roll;
 //    pitchc = (char*)&pitch;
    
-   snprintf(droneref, sizeof( droneref ), "%d;%d;%d;%d", yawrate, pitch, roll, thrust);
+   snprintf(droneref, sizeof( droneref ), "%d %d %d %d ", yawrate, pitch, roll, thrust);
    
    printf("\n");
 //    printf("t %.*s\n", thrustc);
@@ -209,7 +210,7 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
    printf("\n");
 
    /* Send message to the server */
-   n = write(sockfd, thrustc, sizeof(droneref));
+   n = write(sockfd, droneref, sizeof(droneref));
 
    if (n < 0) {
       perror("ERROR writing to socket");

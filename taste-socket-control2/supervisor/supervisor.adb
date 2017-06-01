@@ -70,26 +70,28 @@ package body supervisor is
                         ctxt.state := Wait;
                         goto next_transition;
                     when 1 =>
-                        -- NEXT_STATE Wait (23,22) at 408, 282
+                        -- NEXT_STATE Wait (20,22) at 408, 282
                         trId := -1;
                         ctxt.state := Wait;
                         goto next_transition;
                     when 2 =>
-                        -- NEXT_STATE Running (27,22) at 524, 282
+                        -- NEXT_STATE Running (24,22) at 524, 282
                         trId := -1;
                         ctxt.state := Running;
                         goto next_transition;
                     when 3 =>
-                        -- readStabilizerSendThrust(droneData,sensorData) (34,17)
+                        -- control_Act(sensorData,droneData) (31,17)
+                        RIÜcontrol_Act(ctxt.sensorData'Access, ctxt.droneData'Access);
+                        -- readStabilizerSendThrust(droneData,sensorData) (33,17)
                         RIÜreadStabilizerSendThrust(ctxt.droneData'Access, ctxt.sensorData'Access);
-                        -- displaySensor(sensorData) (36,17)
+                        -- displaySensor(sensorData) (35,17)
                         RIÜdisplaySensor(ctxt.sensorData'Access);
-                        -- NEXT_STATE Running (38,22) at 763, 327
+                        -- NEXT_STATE Running (37,22) at 763, 377
                         trId := -1;
                         ctxt.state := Running;
                         goto next_transition;
                     when 4 =>
-                        -- NEXT_STATE Wait (42,22) at 1005, 217
+                        -- NEXT_STATE Wait (41,22) at 1005, 217
                         trId := -1;
                         ctxt.state := Wait;
                         goto next_transition;
