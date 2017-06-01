@@ -21,4 +21,5 @@
 # 
 # m h  dom mon dow   command
 # new line
-* * * * * /home/taste/Documents/FlyingTasters/PythonSocketServer/runSocketServer.sh > /dev/pts/0 >> /home/taste/Documents/log/logfile 2>&1
+# > /dev/pts/
+* * * * * bash /home/taste/Documents/FlyingTasters/PythonSocketServer/runSocketServer.sh >> /home/taste/Documents/FlyingTasters/PythonSocketServer/SocketServerLog 2>&1
