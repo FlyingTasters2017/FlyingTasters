@@ -38,7 +38,7 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
    char *yawratec;
    char *pitchc;
 
-   portno = 50007;
+   portno = 50008;
 
    /* Create a socket point */
    sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -190,26 +190,26 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
    pitch = htonl(IN_droneData->pitchRef);
    
    
-   char droneref[1024];
+   char droneref[256];
    
-   snprintf(droneref, sizeof( droneref ), "%s;%s;%s;%s", (char*)&yawrate, (char*)&pitch, (char*)&roll, (char*)&thrust);
+    thrustc = (char*)&thrust;
+//    yawratec = (char*)&yawrate;
+//    rollc = (char*)&roll;
+//    pitchc = (char*)&pitch;
    
-   thrustc = (char*)&thrust;
-   yawratec = (char*)&yawrate;
-   rollc = (char*)&roll;
-   pitchc = (char*)&pitch;
+   snprintf(droneref, sizeof( droneref ), "%d;%d;%d;%d", yawrate, pitch, roll, thrust);
    
    printf("\n");
-   printf("t %.*s\n", thrustc);
-   printf("y %.*s\n", yawratec);
-   printf("r %.*s\n",rollc);
-   printf("p %.*s\n",pitchc);
+//    printf("t %.*s\n", thrustc);
+//    printf("y %.*s\n", yawratec);
+//    printf("r %.*s\n",rollc);
+//    printf("p %.*s\n",pitchc);
    printf("dref %s\n",droneref);
    
    printf("\n");
 
    /* Send message to the server */
-   n = write(sockfd, droneref, sizeof(droneref));
+   n = write(sockfd, thrustc, sizeof(droneref));
 
    if (n < 0) {
       perror("ERROR writing to socket");

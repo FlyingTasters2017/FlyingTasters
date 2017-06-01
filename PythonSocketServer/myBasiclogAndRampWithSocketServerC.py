@@ -180,45 +180,13 @@ if __name__ == '__main__':
     Create socket server, example https://docs.python.org/3.4/library/socket.html#socket-objects 
     """
     HOST = ''  # Symbolic name meaning all available interfaces
-    PORT = 50007  # Arbitrary non-privileged port
+    PORT = 50008  # Arbitrary non-privileged port
     mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #Create socket object
     mySocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) #re-use same port
     mySocket.bind((HOST, PORT))
     # Initialize the low-level drivers (don't list the debug drivers)
     cflib.crtp.init_drivers(enable_debug_driver=False)
     #Insert correct Crazyflie URI
-<<<<<<< Updated upstream
-    le = LoggingExample("radio://0/83/250K",socket= mySocket)
-    #time.sleep(10)
-    #Init default thrust
-    thrust = 0
-    try:
-        while not mySocket._closed:
-            # Wait for 1 client connection
-            print('mySocket.listen(1)')
-            mySocket.listen(1)
-            print('conn, addr = mySocket.accept()')
-            conn, addr = mySocket.accept()
-            print('if conn:')
-            # If client connected to the server
-            if conn:
-                print('Connected by', addr)
-                data = str(le.sensorsData).encode()
-                conn.sendall(data)
-                # Receive up to buffersize = 1024 bytes from the socket and convert it to int
-                thrust = conn.recv(1024)
-                thrust = int.from_bytes(thrust, byteorder='big')
-                # Send commands to crazyflie
-            if thrust > 0:
-                le.unlock_thrust_protection()
-                le.ramp_motors(thrust)
-            conn.close()
-    except KeyboardInterrupt:
-        # connection will be closed here
-        # conn.close()
-        print('Keyboard Interrupt occurred')
-        logging.log(logging.INFO, "Socket server stopped")
-=======
     le = LoggingExample("radio://0/82/250K",socket= mySocket)
     #time.sleep(10)
     #Init default thrust
@@ -236,16 +204,35 @@ if __name__ == '__main__':
             data = str(le.sensorsData + le.accelData).encode()
             conn.sendall(data)
             # Receive up to buffersize = 1024 bytes from the socket and convert it to int
-            thrust = conn.recv(1024)
-            print("raw data", thrust.decode())
+            thrust = str(conn.recv(1024))
+            print(type(thrust))
+            # print(socket_data)
+            # socket_data2 = socket_data.encode()
+            # print(socket_data2)
+            print(thrust)
 
-            # thrust = int.from_bytes(thrust, byteorder='big')
-            # print("raw data", thrust)
+            sample_d = thrust.decode("ISO-8859-1")
+
+            #sample_d = int.from_bytes(thrust, byteorder='big')
+            # # socket_data3 = socket_data.decode()
+            # # print(socket_data3)
+            print(sample_d)
+
+            # print("raw data", socket_data)
+            # yawrate, pitch, roll, thrust = socket_data.split(';')
+            #
+            # print("yawrate data", yawrate)
+            # print("pitch data", pitch)
+            # print("roll data", roll)
+            # print("thrust data", thrust)
+
+
+
             # Send commands to crazyflie
-        # if thrust > 0:
-        #     le.unlock_thrust_protection()
-        #     le.ramp_motors(thrust)
+            # if sample_d > 0:
+            #     le.unlock_thrust_protection()
+            #     le.ramp_motors(sample_d)
+
         conn.close()
->>>>>>> Stashed changes
     sys.exit(2)
     print('Im here in the end')
