@@ -1,0 +1,324 @@
+---------------------------------------------------
+-- AADL2.0
+-- TASTE
+-- 
+-- 
+---------------------------------------------------
+
+PACKAGE interfaceview::FV::supervisor
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_pulse
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_pulse;
+
+SUBPROGRAM IMPLEMENTATION PI_pulse.others
+END PI_pulse.others;
+
+SUBPROGRAM PI_takeoff
+FEATURES
+  droneData : IN PARAMETER DataView::MyDroneData {
+    Taste::encoding => UPER;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_takeoff;
+
+SUBPROGRAM IMPLEMENTATION PI_takeoff.others
+END PI_takeoff.others;
+
+SUBPROGRAM RI_readStabilizerSendThrust
+FEATURES
+  droneData : IN PARAMETER DataView::MyDroneData {
+    Taste::encoding => NATIVE;
+  };
+  sensorData : OUT PARAMETER DataView::MySensorData {
+    Taste::encoding => NATIVE;
+  };
+END RI_readStabilizerSendThrust;
+
+SUBPROGRAM IMPLEMENTATION RI_readStabilizerSendThrust.others
+END RI_readStabilizerSendThrust.others;
+
+SUBPROGRAM RI_displaySensor
+FEATURES
+  sensorData : IN PARAMETER DataView::MySensorData {
+    Taste::encoding => UPER;
+  };
+END RI_displaySensor;
+
+SUBPROGRAM IMPLEMENTATION RI_displaySensor.others
+END RI_displaySensor.others;
+
+SUBPROGRAM RI_control_Act
+FEATURES
+  sensorData : IN PARAMETER DataView::MySensorData {
+    Taste::encoding => NATIVE;
+  };
+  droneData : OUT PARAMETER DataView::MyDroneData {
+    Taste::encoding => NATIVE;
+  };
+END RI_control_Act;
+
+SUBPROGRAM IMPLEMENTATION RI_control_Act.others
+END RI_control_Act.others;
+
+END interfaceview::FV::supervisor;
+
+PACKAGE interfaceview::FV::socketClient
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_readStabilizerSendThrust
+FEATURES
+  droneData : IN PARAMETER DataView::MyDroneData {
+    Taste::encoding => NATIVE;
+  };
+  sensorData : OUT PARAMETER DataView::MySensorData {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_readStabilizerSendThrust;
+
+SUBPROGRAM IMPLEMENTATION PI_readStabilizerSendThrust.others
+END PI_readStabilizerSendThrust.others;
+
+END interfaceview::FV::socketClient;
+
+PACKAGE interfaceview::FV::gcs
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_displaySensor
+FEATURES
+  sensorData : IN PARAMETER DataView::MySensorData {
+    Taste::encoding => UPER;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_displaySensor;
+
+SUBPROGRAM IMPLEMENTATION PI_displaySensor.others
+END PI_displaySensor.others;
+
+SUBPROGRAM RI_takeoff
+FEATURES
+  droneData : IN PARAMETER DataView::MyDroneData {
+    Taste::encoding => UPER;
+  };
+END RI_takeoff;
+
+SUBPROGRAM IMPLEMENTATION RI_takeoff.others
+END RI_takeoff.others;
+
+END interfaceview::FV::gcs;
+
+PACKAGE interfaceview::FV::control
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_control_Act
+FEATURES
+  sensorData : IN PARAMETER DataView::MySensorData {
+    Taste::encoding => NATIVE;
+  };
+  droneData : OUT PARAMETER DataView::MyDroneData {
+    Taste::encoding => NATIVE;
+  };
+END PI_control_Act;
+
+SUBPROGRAM IMPLEMENTATION PI_control_Act.others
+END PI_control_Act.others;
+
+END interfaceview::FV::control;
+
+PACKAGE interfaceview::IV
+PUBLIC
+
+WITH interfaceview::FV::supervisor;
+WITH interfaceview::FV::socketClient;
+WITH interfaceview::FV::gcs;
+WITH interfaceview::FV::control;
+WITH interfaceview::FV;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SYSTEM supervisor
+FEATURES
+  PI_pulse : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::supervisor::PI_pulse.others {
+    Taste::coordinates => "369 221";
+    Taste::RCMoperationKind => cyclic;
+    Taste::RCMperiod => 1000 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "pulse";
+  };
+  PI_takeoff : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::supervisor::PI_takeoff.others {
+    Taste::coordinates => "405 728";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "takeoff";
+  };
+  RI_readStabilizerSendThrust : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::socketClient::PI_readStabilizerSendThrust.others {
+    Taste::coordinates => "1323 292";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "readStabilizerSendThrust";
+    Taste::labelInheritance => "true";
+  };
+  RI_displaySensor : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::gcs::PI_displaySensor.others {
+    Taste::coordinates => "795 728";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "displaySensor";
+    Taste::labelInheritance => "true";
+  };
+  RI_control_Act : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::control::PI_control_Act.others {
+    Taste::coordinates => "1216 728";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "control_Act";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (SDL);
+END supervisor;
+
+SYSTEM IMPLEMENTATION supervisor.others
+SUBCOMPONENTS
+  pulse_impl : SUBPROGRAM interfaceview::FV::supervisor::PI_pulse.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+  takeoff_impl : SUBPROGRAM interfaceview::FV::supervisor::PI_takeoff.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_pulse_impl : SUBPROGRAM ACCESS pulse_impl -> PI_pulse;
+  OpToPICnx_takeoff_impl : SUBPROGRAM ACCESS takeoff_impl -> PI_takeoff;
+END supervisor.others;
+
+SYSTEM socketClient
+FEATURES
+  PI_readStabilizerSendThrust : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::socketClient::PI_readStabilizerSendThrust.others {
+    Taste::coordinates => "2164 528";
+    Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "readStabilizerSendThrust";
+  };
+PROPERTIES
+  Source_Language => (C);
+END socketClient;
+
+SYSTEM IMPLEMENTATION socketClient.others
+SUBCOMPONENTS
+  readStabilizerSendThrust_impl : SUBPROGRAM interfaceview::FV::socketClient::PI_readStabilizerSendThrust.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_readStabilizerSendThrust_impl : SUBPROGRAM ACCESS readStabilizerSendThrust_impl -> PI_readStabilizerSendThrust;
+END socketClient.others;
+
+SYSTEM gcs
+FEATURES
+  PI_displaySensor : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::gcs::PI_displaySensor.others {
+    Taste::coordinates => "780 1272";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "displaySensor";
+  };
+  RI_takeoff : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::supervisor::PI_takeoff.others {
+    Taste::coordinates => "451 1272";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "takeoff";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (GUI);
+END gcs;
+
+SYSTEM IMPLEMENTATION gcs.others
+SUBCOMPONENTS
+  displaySensor_impl : SUBPROGRAM interfaceview::FV::gcs::PI_displaySensor.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_displaySensor_impl : SUBPROGRAM ACCESS displaySensor_impl -> PI_displaySensor;
+END gcs.others;
+
+SYSTEM control
+FEATURES
+  PI_control_Act : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::control::PI_control_Act.others {
+    Taste::coordinates => "1621 1190";
+    Taste::RCMoperationKind => unprotected;
+    Taste::InterfaceName => "control_Act";
+  };
+PROPERTIES
+  Source_Language => (Simulink);
+END control;
+
+SYSTEM IMPLEMENTATION control.others
+SUBCOMPONENTS
+  control_Act_impl : SUBPROGRAM interfaceview::FV::control::PI_control_Act.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_control_Act_impl : SUBPROGRAM ACCESS control_Act_impl -> PI_control_Act;
+END control.others;
+
+SYSTEM interfaceview
+END interfaceview;
+
+SYSTEM IMPLEMENTATION interfaceview.others
+SUBCOMPONENTS
+  supervisor : SYSTEM interfaceview::IV::supervisor.others {
+    Taste::coordinates => "194 221 1323 728";
+  };
+  socketClient : SYSTEM interfaceview::IV::socketClient.others {
+    Taste::coordinates => "2036 528 2713 1026";
+  };
+  gcs : SYSTEM interfaceview::IV::gcs.others {
+    Taste::coordinates => "287 1272 918 1795";
+  };
+  control : SYSTEM interfaceview::IV::control.others {
+    Taste::coordinates => "1482 1190 2190 1734";
+  };
+CONNECTIONS
+  supervisor_takeoff_gcs_takeoff : SUBPROGRAM ACCESS supervisor.PI_takeoff -> gcs.RI_takeoff {
+    Taste::coordinates => "451 1272 451 1000 405 1000 405 728";
+  };
+  socketClient_readStabilizerSendThrust_supervisor_readStabilizerSendThrust : SUBPROGRAM ACCESS socketClient.PI_readStabilizerSendThrust -> supervisor.RI_readStabilizerSendThrust {
+    Taste::coordinates => "1323 292 1657 292 1657 299 2164 299 2164 528";
+  };
+  gcs_displaySensor_supervisor_displaySensor : SUBPROGRAM ACCESS gcs.PI_displaySensor -> supervisor.RI_displaySensor {
+    Taste::coordinates => "795 728 795 1000 780 1000 780 1272";
+  };
+  control_control_Act_supervisor_control_Act : SUBPROGRAM ACCESS control.PI_control_Act -> supervisor.RI_control_Act {
+    Taste::coordinates => "1216 728 1216 959 1621 959 1621 1190";
+  };
+END interfaceview.others;
+
+PROPERTIES
+  Taste::dataView => ("DataView");
+  Taste::dataViewPath => ("DataView.aadl");
+  Taste::coordinates => "0 0 2970 2100";
+  Taste::version => "1.3.19";
+END interfaceview::IV;
+
+PACKAGE interfaceview::FV
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+END interfaceview::FV;
+

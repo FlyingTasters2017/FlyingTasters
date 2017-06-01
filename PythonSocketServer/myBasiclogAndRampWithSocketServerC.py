@@ -80,6 +80,12 @@ class LoggingExample:
         self._lg_stab.add_variable('stabilizer.pitch', 'float')
         self._lg_stab.add_variable('stabilizer.yaw', 'float')
 
+        self._lg_acc = LogConfig(name='Accelerometer', period_in_ms=1000)
+        self._lg_acc.add_variable('acc.x', 'float')
+        self._lg_acc.add_variable('acc.y', 'float')
+        self._lg_acc.add_variable('acc.z', 'float')
+        self._lg_acc.add_variable('baro.pressure', 'float')
+
         # Adding the configuration cannot be done until a Crazyflie is
         # connected, since we need to check that the variables we
         # would like to log are in the TOC.
@@ -91,6 +97,15 @@ class LoggingExample:
             self._lg_stab.error_cb.add_callback(self._stab_log_error)
             # Start the logging
             self._lg_stab.start()
+
+            self._cf.log.add_config(self._lg_acc)
+            # This callback will receive the data
+            self._lg_acc.data_received_cb.add_callback(self._acc_log_data)
+            # This callback will be called on errors
+            self._lg_acc.error_cb.add_callback(self._acc_log_error)
+            # Start the logging
+            self._lg_acc.start()
+
         except KeyError as e:
             print('Could not start log configuration,'
                   '{} not found in TOC'.format(str(e)))
@@ -98,6 +113,7 @@ class LoggingExample:
             print('Could not add Stabilizer log config, bad configuration.')
         # Data that we want to send via socket
         self.sensorsData = {}
+        self.accelData = {}
 
 
     def unlock_thrust_protection(self):
@@ -115,10 +131,19 @@ class LoggingExample:
         """Callback from the log API when an error occurs"""
         print('Error when logging %s: %s' % (logconf.name, msg))
 
+    def _acc_log_error(self, logconf, msg):
+        """Callback from the log API when an error occurs"""
+        print('Error when logging %s: %s' % (logconf.name, msg))
+
     def _stab_log_data(self, timestamp, data, logconf):
         """Callback froma the log API when data arrives"""
         print('[%d][%s]: %s' % (timestamp, logconf.name, data))
         self.sensorsData = json.dumps(data)
+
+    def _acc_log_data(self, timestamp, data, logconf):
+        """Callback froma the log API when data arrives"""
+        print('[%d][%s]: %s' % (timestamp, logconf.name, data))
+        self.accelData = json.dumps(data)
 
     def _connection_failed(self, link_uri, msg):
         """Callback when connection initial connection fails (i.e no Crazyflie
@@ -162,6 +187,7 @@ if __name__ == '__main__':
     # Initialize the low-level drivers (don't list the debug drivers)
     cflib.crtp.init_drivers(enable_debug_driver=False)
     #Insert correct Crazyflie URI
+<<<<<<< Updated upstream
     le = LoggingExample("radio://0/83/250K",socket= mySocket)
     #time.sleep(10)
     #Init default thrust
@@ -192,5 +218,34 @@ if __name__ == '__main__':
         # conn.close()
         print('Keyboard Interrupt occurred')
         logging.log(logging.INFO, "Socket server stopped")
+=======
+    le = LoggingExample("radio://0/82/250K",socket= mySocket)
+    #time.sleep(10)
+    #Init default thrust
+    thrust = 0
+    while not mySocket._closed:
+        # Wait for 1 client connection
+        print('mySocket.listen(1)')
+        mySocket.listen(1)
+        print('conn, addr = mySocket.accept()')
+        conn, addr = mySocket.accept()
+        print('if conn:')
+        # If client connected to the server
+        if conn:
+            print('Connected by', addr)
+            data = str(le.sensorsData + le.accelData).encode()
+            conn.sendall(data)
+            # Receive up to buffersize = 1024 bytes from the socket and convert it to int
+            thrust = conn.recv(1024)
+            print("raw data", thrust.decode())
+
+            # thrust = int.from_bytes(thrust, byteorder='big')
+            # print("raw data", thrust)
+            # Send commands to crazyflie
+        # if thrust > 0:
+        #     le.unlock_thrust_protection()
+        #     le.ramp_motors(thrust)
+        conn.close()
+>>>>>>> Stashed changes
     sys.exit(2)
     print('Im here in the end')
