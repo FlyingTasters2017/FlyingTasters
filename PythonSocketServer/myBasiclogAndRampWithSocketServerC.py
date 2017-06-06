@@ -75,36 +75,25 @@ class LoggingExample:
         self.is_connected = True
         print("socket", self._socket)
         # The definition of the logconfig can be made before connecting
-        self._lg_stab = LogConfig(name='Stabilizer', period_in_ms=1000)
-        self._lg_stab.add_variable('stabilizer.roll', 'float')
-        self._lg_stab.add_variable('stabilizer.pitch', 'float')
-        self._lg_stab.add_variable('stabilizer.yaw', 'float')
-
-        self._lg_acc = LogConfig(name='Accelerometer', period_in_ms=1000)
-        self._lg_acc.add_variable('acc.x', 'float')
-        self._lg_acc.add_variable('acc.y', 'float')
-        self._lg_acc.add_variable('acc.z', 'float')
-        self._lg_acc.add_variable('baro.pressure', 'float')
+        self._lg_sensorData = LogConfig(name='Data', period_in_ms=10)
+        self._lg_sensorData.add_variable('stabilizer.roll', 'float')
+        self._lg_sensorData.add_variable('stabilizer.pitch', 'float')
+        self._lg_sensorData.add_variable('stabilizer.yaw', 'float')
+        self._lg_sensorData.add_variable('acc.x', 'float')
+        self._lg_sensorData.add_variable('acc.y', 'float')
+        self._lg_sensorData.add_variable('acc.z', 'float')
 
         # Adding the configuration cannot be done until a Crazyflie is
         # connected, since we need to check that the variables we
         # would like to log are in the TOC.
         try:
-            self._cf.log.add_config(self._lg_stab)
+            self._cf.log.add_config(self._lg_sensorData)
             # This callback will receive the data
-            self._lg_stab.data_received_cb.add_callback(self._stab_log_data)
+            self._lg_sensorData.data_received_cb.add_callback(self._sensorData_log_data)
             # This callback will be called on errors
-            self._lg_stab.error_cb.add_callback(self._stab_log_error)
+            self._lg_sensorData.error_cb.add_callback(self._sensorData_log_error)
             # Start the logging
-            self._lg_stab.start()
-
-            self._cf.log.add_config(self._lg_acc)
-            # This callback will receive the data
-            self._lg_acc.data_received_cb.add_callback(self._acc_log_data)
-            # This callback will be called on errors
-            self._lg_acc.error_cb.add_callback(self._acc_log_error)
-            # Start the logging
-            self._lg_acc.start()
+            self._lg_sensorData.start()
 
         except KeyError as e:
             print('Could not start log configuration,'
@@ -112,9 +101,7 @@ class LoggingExample:
         except AttributeError:
             print('Could not add Stabilizer log config, bad configuration.')
         # Data that we want to send via socket
-        self.sensorsData = {}
-        self.accelData = {}
-
+        # self.sensorsData = {}
 
     def unlock_thrust_protection(self):
         # Unlock startup thrust protection
@@ -127,23 +114,14 @@ class LoggingExample:
         self._cf.commander.send_setpoint(roll, pitch, yawrate, thrust)
 
 
-    def _stab_log_error(self, logconf, msg):
+    def _sensorData_log_error(self, logconf, msg):
         """Callback from the log API when an error occurs"""
         print('Error when logging %s: %s' % (logconf.name, msg))
 
-    def _acc_log_error(self, logconf, msg):
-        """Callback from the log API when an error occurs"""
-        print('Error when logging %s: %s' % (logconf.name, msg))
-
-    def _stab_log_data(self, timestamp, data, logconf):
+    def _sensorData_log_data(self, timestamp, data, logconf):
         """Callback froma the log API when data arrives"""
         print('[%d][%s]: %s' % (timestamp, logconf.name, data))
         self.sensorsData = json.dumps(data)
-
-    def _acc_log_data(self, timestamp, data, logconf):
-        """Callback froma the log API when data arrives"""
-        print('[%d][%s]: %s' % (timestamp, logconf.name, data))
-        self.accelData = json.dumps(data)
 
     def _connection_failed(self, link_uri, msg):
         """Callback when connection initial connection fails (i.e no Crazyflie
@@ -187,7 +165,10 @@ if __name__ == '__main__':
     # Initialize the low-level drivers (don't list the debug drivers)
     cflib.crtp.init_drivers(enable_debug_driver=False)
     #Insert correct Crazyflie URI
-    le = LoggingExample("radio://0/82/250K",socket= mySocket)
+    le1 = LoggingExample("radio://0/83/2M",socket= mySocket)
+    le2 = LoggingExample("radio://0/84/2M",socket= mySocket)
+    #le3 = LoggingExample("radio://0/85/2M",socket = mySocket)
+    list = [le1, le2] #,le3]
     #time.sleep(10)
     #Init default thrust
     thrust = 0
@@ -201,8 +182,9 @@ if __name__ == '__main__':
         # If client connected to the server
         if conn:
             print('Connected by', addr)
-            data = str(le.sensorsData + le.accelData).encode()
-            conn.sendall(data)
+            for le in list:
+                data = str(le.sensorsData).encode()
+                conn.sendall(data)
             # Receive up to buffersize = 1024 bytes from the socket and convert it to int
             thrust = conn.recv(1024)
             print(type(thrust))
@@ -230,12 +212,11 @@ if __name__ == '__main__':
             print("roll data", roll)
             print("thrust data", thrust)
 
-
-
-            #Send commands to crazyflie
+            #Send commands to all crazyflies
             if thrust > 0:
-                le.unlock_thrust_protection()
-                le.ramp_motors(roll, pitch, yawrate, thrust)
+                for le in list:
+                    le.unlock_thrust_protection()
+                    le.ramp_motors(roll, pitch, yawrate, thrust)
 
         conn.close()
     sys.exit(2)

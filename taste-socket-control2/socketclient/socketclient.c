@@ -164,8 +164,9 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
             OUT_sensorData->acczAct = strtod(temp, &ptr);
 			i++;
 		}
+		/*
 		else if (jsoneq(buffer, &t[i], "baro.pressure") == 0) {
-			/* We may want to do strtol() here to get numeric value */
+			// We may want to do strtol() here to get numeric value
 			printf("baro.pressure: %.*s\n", t[i+1].end-t[i+1].start,
 					buffer + t[i+1].start);
             strncpy(temp, buffer + t[i+1].start, t[i+1].end-t[i+1].start);
@@ -174,7 +175,7 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
             OUT_sensorData->baropAct = strtod(temp, &ptr);
 			i++;
 		}
-		
+		*/
 		else {
 			printf("Unexpected key: %.*s\n", t[i].end-t[i].start,
 					buffer + t[i].start);
