@@ -65,6 +65,12 @@ END PI_mission_safety_events;
 SUBPROGRAM IMPLEMENTATION PI_mission_safety_events.others
 END PI_mission_safety_events.others;
 
+SUBPROGRAM RI_trajectory_data
+END RI_trajectory_data;
+
+SUBPROGRAM IMPLEMENTATION RI_trajectory_data.others
+END RI_trajectory_data.others;
+
 END interfaceview::FV::Coordinator;
 
 PACKAGE interfaceview::FV::AgentControl
@@ -189,6 +195,20 @@ END RI_mission_safety_events.others;
 
 END interfaceview::FV::MissionSafety;
 
+PACKAGE interfaceview::FV::TrajectoryGenerator
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_trajectory_data
+END PI_trajectory_data;
+
+SUBPROGRAM IMPLEMENTATION PI_trajectory_data.others
+END PI_trajectory_data.others;
+
+END interfaceview::FV::TrajectoryGenerator;
+
 PACKAGE interfaceview::IV
 PUBLIC
 
@@ -199,6 +219,7 @@ WITH interfaceview::FV::MS_processing;
 WITH interfaceview::FV::AgentControl;
 WITH interfaceview::FV::Houston;
 WITH interfaceview::FV::WorldModel;
+WITH interfaceview::FV::TrajectoryGenerator;
 WITH interfaceview::FV::MissionSafety;
 WITH interfaceview::FV;
 WITH Taste;
@@ -218,7 +239,7 @@ FEATURES
     Taste::labelInheritance => "true";
   };
   RI_raw_MSD : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::MS_comm::PI_raw_MSD.others {
-    Taste::coordinates => "1972 979";
+    Taste::coordinates => "1972 999";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "raw_MSD";
     Taste::labelInheritance => "true";
@@ -242,13 +263,13 @@ FEATURES
     Taste::labelInheritance => "true";
   };
   RI_world_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::WorldModel::PI_world_data.others {
-    Taste::coordinates => "1024 1317";
+    Taste::coordinates => "1024 1107";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "world_data";
     Taste::labelInheritance => "true";
   };
   PI_clock1 : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Coordinator::PI_clock1.others {
-    Taste::coordinates => "1024 1102";
+    Taste::coordinates => "1024 781";
     Taste::RCMoperationKind => cyclic;
     Taste::RCMperiod => 1000 ms;
     Taste::InterfaceName => "clock1";
@@ -257,6 +278,12 @@ FEATURES
     Taste::coordinates => "1024 905";
     Taste::RCMoperationKind => unprotected;
     Taste::InterfaceName => "mission_safety_events";
+  };
+  RI_trajectory_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::TrajectoryGenerator::PI_trajectory_data.others {
+    Taste::coordinates => "1024 1296";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "trajectory_data";
+    Taste::labelInheritance => "true";
   };
 PROPERTIES
   Source_Language => (C);
@@ -302,7 +329,7 @@ END AgentControl.others;
 SYSTEM MS_comm
 FEATURES
   PI_raw_MSD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MS_comm::PI_raw_MSD.others {
-    Taste::coordinates => "2322 979";
+    Taste::coordinates => "2322 999";
     Taste::RCMoperationKind => unprotected;
     Taste::InterfaceName => "raw_MSD";
   };
@@ -388,13 +415,13 @@ END MS_processing.others;
 SYSTEM WorldModel
 FEATURES
   RI_mission_safety_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::MissionSafety::PI_mission_safety_data.others {
-    Taste::coordinates => "418 1334";
+    Taste::coordinates => "423 773";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "mission_safety_data";
     Taste::labelInheritance => "true";
   };
   PI_world_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::WorldModel::PI_world_data.others {
-    Taste::coordinates => "709 1663";
+    Taste::coordinates => "717 1102";
     Taste::RCMoperationKind => unprotected;
     Taste::InterfaceName => "world_data";
   };
@@ -414,18 +441,18 @@ END WorldModel.others;
 SYSTEM MissionSafety
 FEATURES
   PI_clock2 : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MissionSafety::PI_clock2.others {
-    Taste::coordinates => "162 781";
+    Taste::coordinates => "162 406";
     Taste::RCMoperationKind => cyclic;
     Taste::RCMperiod => 1000 ms;
     Taste::InterfaceName => "clock2";
   };
   PI_mission_safety_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MissionSafety::PI_mission_safety_data.others {
-    Taste::coordinates => "422 912";
+    Taste::coordinates => "422 537";
     Taste::RCMoperationKind => unprotected;
     Taste::InterfaceName => "mission_safety_data";
   };
   RI_mission_safety_events : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Coordinator::PI_mission_safety_events.others {
-    Taste::coordinates => "695 567";
+    Taste::coordinates => "695 192";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "mission_safety_events";
     Taste::labelInheritance => "true";
@@ -447,6 +474,26 @@ CONNECTIONS
   OpToPICnx_mission_safety_data_impl : SUBPROGRAM ACCESS mission_safety_data_impl -> PI_mission_safety_data;
 END MissionSafety.others;
 
+SYSTEM TrajectoryGenerator
+FEATURES
+  PI_trajectory_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::TrajectoryGenerator::PI_trajectory_data.others {
+    Taste::coordinates => "426 1593";
+    Taste::RCMoperationKind => unprotected;
+    Taste::InterfaceName => "trajectory_data";
+  };
+PROPERTIES
+  Source_Language => (C);
+END TrajectoryGenerator;
+
+SYSTEM IMPLEMENTATION TrajectoryGenerator.others
+SUBCOMPONENTS
+  trajectory_data_impl : SUBPROGRAM interfaceview::FV::TrajectoryGenerator::PI_trajectory_data.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_trajectory_data_impl : SUBPROGRAM ACCESS trajectory_data_impl -> PI_trajectory_data;
+END TrajectoryGenerator.others;
+
 SYSTEM interfaceview
 END interfaceview;
 
@@ -459,7 +506,7 @@ SUBCOMPONENTS
     Taste::coordinates => "1585 1819 2054 2100";
   };
   MS_comm : SYSTEM interfaceview::IV::MS_comm.others {
-    Taste::coordinates => "2322 711 2858 1061";
+    Taste::coordinates => "2322 789 2858 1061";
   };
   Houston : SYSTEM interfaceview::IV::Houston.others {
     Taste::coordinates => "970 1816 1424 2100";
@@ -471,10 +518,13 @@ SUBCOMPONENTS
     Taste::coordinates => "2331 1222 2862 1494";
   };
   WorldModel : SYSTEM interfaceview::IV::WorldModel.others {
-    Taste::coordinates => "147 1334 709 1746";
+    Taste::coordinates => "155 773 717 1185";
   };
   MissionSafety : SYSTEM interfaceview::IV::MissionSafety.others {
-    Taste::coordinates => "162 493 695 913";
+    Taste::coordinates => "162 118 695 538";
+  };
+  TrajectoryGenerator : SYSTEM interfaceview::IV::TrajectoryGenerator.others {
+    Taste::coordinates => "126 1593 739 1910";
   };
 CONNECTIONS
   Coordinator_user_input_GUI_user_input : SUBPROGRAM ACCESS Coordinator.PI_user_input -> GUI.RI_user_input {
@@ -484,7 +534,7 @@ CONNECTIONS
     Taste::coordinates => "1671 723 1671 526 1671 526 1671 330";
   };
   MS_comm_raw_MSD_Coordinator_raw_MSD : SUBPROGRAM ACCESS MS_comm.PI_raw_MSD -> Coordinator.RI_raw_MSD {
-    Taste::coordinates => "1972 979 2159 979 2159 979 2322 979";
+    Taste::coordinates => "1972 999 2159 999 2159 999 2322 999";
   };
   MS_processing_processed_MSD_Coordinator_processed_MSD : SUBPROGRAM ACCESS MS_processing.PI_processed_MSD -> Coordinator.RI_processed_MSD {
     Taste::coordinates => "1972 1267 2174 1267 2174 1263 2331 1263";
@@ -496,13 +546,16 @@ CONNECTIONS
     Taste::coordinates => "1230 1473 1230 1644 1230 1644 1230 1816";
   };
   WorldModel_world_data_Coordinator_world_data : SUBPROGRAM ACCESS WorldModel.PI_world_data -> Coordinator.RI_world_data {
-    Taste::coordinates => "1024 1317 856 1317 856 1663 709 1663";
+    Taste::coordinates => "1024 1107 856 1107 856 1102 717 1102";
   };
   Coordinator_mission_safety_events_MissionSafety_mission_safety_events : SUBPROGRAM ACCESS Coordinator.PI_mission_safety_events -> MissionSafety.RI_mission_safety_events {
-    Taste::coordinates => "695 567 853 567 853 905 1024 905";
+    Taste::coordinates => "695 192 853 192 853 905 1024 905";
+  };
+  TrajectoryGenerator_trajectory_data_Coordinator_trajectory_data : SUBPROGRAM ACCESS TrajectoryGenerator.PI_trajectory_data -> Coordinator.RI_trajectory_data {
+    Taste::coordinates => "1024 1296 426 1296 426 1593";
   };
   MissionSafety_mission_safety_data_WorldModel_mission_safety_data : SUBPROGRAM ACCESS MissionSafety.PI_mission_safety_data -> WorldModel.RI_mission_safety_data {
-    Taste::coordinates => "418 1334 418 877 422 877 422 912";
+    Taste::coordinates => "423 773 423 678 422 678 422 537";
   };
 END interfaceview.others;
 
