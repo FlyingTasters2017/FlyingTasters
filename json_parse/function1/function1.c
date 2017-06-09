@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "pixy.h"
 
 static const char *JSON_STRING =
         "{\"row\": 25.363683654542, \"pitch\": 35.234324231231, \"yaw\": 2.56456425454}";
@@ -46,23 +46,47 @@ void function1_PI_pulse()
         for (i = 1; i < r; i++) {
                 if (jsoneq(JSON_STRING, &t[i], "row") == 0) {
                         /* We may use strndup() to fetch string value */
-                        printf("- row: %.*s\n", t[i+1].end-t[i+1].start,
-                                        JSON_STRING + t[i+1].start);
+                        //printf("- row: %.*s\n", t[i+1].end-t[i+1].start,
+                        //                JSON_STRING + t[i+1].start);
                         i++;
                 } else if (jsoneq(JSON_STRING, &t[i], "pitch") == 0) {
                         /* We may additionally check if the value is either "true" or "false" */
-                        printf("- pitch: %.*s\n", t[i+1].end-t[i+1].start,
-                                        JSON_STRING + t[i+1].start);
+                        //printf("- pitch: %.*s\n", t[i+1].end-t[i+1].start,
+                        //                JSON_STRING + t[i+1].start);
                         i++;
                 } else if (jsoneq(JSON_STRING, &t[i], "yaw") == 0) {
                         /* We may want to do strtol() here to get numeric value */
-                        printf("- yaw: %.*s\n", t[i+1].end-t[i+1].start,
-                                        JSON_STRING + t[i+1].start);
+                        //printf("- yaw: %.*s\n", t[i+1].end-t[i+1].start,
+                        //                JSON_STRING + t[i+1].start);
                         i++;
                 } else {
-                        printf("Unexpected key: %.*s\n", t[i].end-t[i].start,
-                                        JSON_STRING + t[i].start);
+                        //printf("Unexpected key: %.*s\n", t[i].end-t[i].start,
+                        //                JSON_STRING + t[i].start);
                 }
         }
+        
+  int      index;
+  int      blocks_copied;
+  int      pixy_init_status;
+  char     buf[128];
+
+  // Catch CTRL+C (SIGINT) signals //
+  //signal(SIGINT, handle_SIGINT);
+
+  //printf("Hello Pixy:\n libpixyusb Version: %s\n", __LIBPIXY_VERSION__);
+
+  // Connect to Pixy //
+  pixy_init_status = pixy_init();
+  printf("pixy_init(): ");
+
+  // Was there an error initializing pixy? //
+  if(!pixy_init_status == 0)
+  {
+    // Error initializing Pixy //
+    printf("pixy_init(): ");
+    pixy_error(pixy_init_status);
+
+    //return pixy_init_status;
+  }
 }
 
