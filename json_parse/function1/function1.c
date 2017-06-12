@@ -6,9 +6,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "pixy.h"
+#include <stdbool.h>
 
 static const char *JSON_STRING =
         "{\"row\": 25.363683654542, \"pitch\": 35.234324231231, \"yaw\": 2.56456425454}";
+
 
 static int jsoneq(const char *json, jsmntok_t *tok, const char *s) {
         if (tok->type == JSMN_STRING && (int) strlen(s) == tok->end - tok->start &&
@@ -24,10 +26,10 @@ void function1_startup()
        but do not make any call to a required interface. */
 }
 
-void function1_PI_pulse()
+void function1_PI_getPixyData(asn1SccT_UInt32 *OUT_x, asn1SccT_UInt32 *OUT_y)
 {
-    int i;
-    int r;
+        int i;
+        int r;
         jsmn_parser p;
         jsmntok_t t[128]; /* We expect no more than 128 tokens */
 
@@ -64,29 +66,118 @@ void function1_PI_pulse()
                         //                JSON_STRING + t[i].start);
                 }
         }
+
+        #define BLOCK_BUFFER_SIZE    25
+
+
+
+        // Pixy Block buffer // 
+
+        /*
+        struct Block blocks[BLOCK_BUFFER_SIZE];
+
+
+
+        static bool run_flag = true;
+                
+        int      index;
+        int      blocks_copied;
+        int      pixy_init_status;
+        char     buf[128];
+
+        // Catch CTRL+C (SIGINT) signals //
+        //signal(SIGINT, handle_SIGINT);
+
+        //printf("Hello Pixy:\n libpixyusb Version: %s\n", __LIBPIXY_VERSION__);
+
+        // Connect to Pixy //
+        pixy_init_status = pixy_init();
+        printf("pixy_init(): ");
+
+        // Was there an error initializing pixy? //
+        if(!pixy_init_status == 0)
+        {
+            // Error initializing Pixy //
+            printf("pixy_init(): ");
+            pixy_error(pixy_init_status);
+
+            //return pixy_init_status;
+        }
         
-  int      index;
-  int      blocks_copied;
-  int      pixy_init_status;
-  char     buf[128];
+        // Request Pixy firmware version //
+        {
+            uint16_t major;
+            uint16_t minor;
+            uint16_t build;
+            int      return_value;
 
-  // Catch CTRL+C (SIGINT) signals //
-  //signal(SIGINT, handle_SIGINT);
+            return_value = pixy_get_firmware_version(&major, &minor, &build);
 
-  //printf("Hello Pixy:\n libpixyusb Version: %s\n", __LIBPIXY_VERSION__);
+            if (return_value) {
+            // Error //
+            printf("Failed to retrieve Pixy firmware version. ");
+            pixy_error(return_value);
 
-  // Connect to Pixy //
-  pixy_init_status = pixy_init();
-  printf("pixy_init(): ");
+            //return return_value;
+            } else {
+            // Success //
+            printf(" Pixy Firmware Version: %d.%d.%d\n", major, minor, build);
+            }
+        }
+        printf("Detecting blocks...\n");
 
-  // Was there an error initializing pixy? //
-  if(!pixy_init_status == 0)
-  {
-    // Error initializing Pixy //
-    printf("pixy_init(): ");
-    pixy_error(pixy_init_status);
+        while(run_flag)
 
-    //return pixy_init_status;
-  }
+        {
+
+            // Wait for new blocks to be available //
+
+            while(!pixy_blocks_are_new() && run_flag); 
+
+
+
+            // Get blocks from Pixy //
+
+            blocks_copied = pixy_get_blocks(BLOCK_BUFFER_SIZE, &blocks[0]);
+
+
+
+            if(blocks_copied < 0) {
+
+            // Error: pixy_get_blocks //
+
+            printf("pixy_get_blocks(): ");
+
+            pixy_error(blocks_copied);
+
+            }
+
+
+
+            // Display received blocks //
+
+            printf("frame %d:\n", i);
+
+            for(index = 0; index != blocks_copied; ++index) {    
+
+            //blocks[index].print(buf);
+
+                sprintf(buf, "CC block! (%d decimal) x: %d y: %d width: %d height: %d angle %d", blocks[index].signature, blocks[index].x, blocks[index].y, blocks[index].width, blocks[index].height, blocks[index].angle);
+                printf("  %s\n", buf);
+                //printf(&blocks[index].x);
+                //GUI_RI_sendPixyData(blocks[index].x);
+                //function1_RI_sendPixyData((decimal)blocks[index].x);
+                //function1_RI_sendPixyData(12);
+                *OUT_x = blocks[index].x;
+                *OUT_y = blocks[index].y;
+            }
+
+            i++;
+
+        }
+
+        pixy_close();*/
+        *OUT_x=2121;
+        *OUT_y=534;
 }
 

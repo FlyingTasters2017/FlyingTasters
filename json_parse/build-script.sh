@@ -56,13 +56,24 @@ SKELS="./"
 # Update the data view with local paths
 taste-update-data-view
 
+# Generate code for OpenGEODE function sdl
+cd "$SKELS"/sdl && opengeode --toAda sdl.pr system_structure.pr && cd $OLDPWD
+
 cd "$SKELS" && rm -f function1.zip && zip function1 function1/* && cd $OLDPWD
+
+cd "$SKELS" && rm -f sdl.zip && zip sdl sdl/* && cd $OLDPWD
 
 [ ! -z "$CLEANUP" ] && rm -rf binary*
 
 if [ -f ConcurrencyView.pro ]
 then
     ORCHESTRATOR_OPTIONS+=" -w ConcurrencyView.pro "
+fi
+
+if [ -f user_init_post.sh ]
+then
+    echo -e "${INFO} Executing user-defined post-init script"
+    source user_init_post.sh
 fi
 
 if [ ! -z "$USE_POHIC" ]
@@ -76,12 +87,6 @@ else
     OUTPUTDIR=binary
 fi
 
-if [ -f user_init_post.sh ]
-then
-    echo -e "${INFO} Executing user-defined init script"
-    source user_init_post.sh
-fi
-
 cd "$CWD" && assert-builder-ocarina.py \
 	--fast \
 	--debug \
@@ -91,4 +96,12 @@ cd "$CWD" && assert-builder-ocarina.py \
 	--deploymentView "$DEPLOYMENTVIEW" \
 	-o "$OUTPUTDIR" \
 	--subC function1:"$SKELS"/function1.zip \
+	--subAda sdl:"$SKELS"/sdl.zip \
 	$ORCHESTRATOR_OPTIONS
+
+if [ -f user_init_last.sh ]
+then
+    echo -e "${INFO} Executing user-defined post-build script"
+    source user_init_last.sh
+fi
+

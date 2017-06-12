@@ -34,8 +34,16 @@ END Node1;
 SYSTEM IMPLEMENTATION Node1.others
 SUBCOMPONENTS
   IV_Function1 : SYSTEM interfaceview::IV::Function1.others {
-    Taste::coordinates => "1164 1128 1503 1308";
+    Taste::coordinates => "1067 1154 1128 1288";
     Taste::FunctionName => "Function1";
+  };
+  IV_GUI : SYSTEM interfaceview::IV::GUI.others {
+    Taste::coordinates => "1303 1216 1426 1313";
+    Taste::FunctionName => "GUI";
+  };
+  IV_SDL : SYSTEM interfaceview::IV::SDL.others {
+    Taste::coordinates => "1570 1216 1621 1318";
+    Taste::FunctionName => "SDL";
   };
   x86_partition : PROCESS deploymentview::DV::Node1::x86_partition.others {
     Taste::coordinates => "967 1024 1762 1399";
@@ -46,6 +54,8 @@ SUBCOMPONENTS
   };
 PROPERTIES
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Function1;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_GUI;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_SDL;
   Actual_Processor_Binding => (reference (x86_linux32)) APPLIES TO x86_partition;
 END Node1.others;
 
@@ -64,6 +74,6 @@ PROPERTIES
   Taste::coordinates => "0 0 2970 2100";
   Taste::version => "1.3.19";
   Taste::interfaceView => "InterfaceView.aadl";
-  Taste::HWLibraries => ("../../../tool-inst/share/ocarina/AADLv2/ocarina_components.aadl");
+  Taste::HWLibraries => ("../../tool-inst/share/ocarina/AADLv2/ocarina_components.aadl");
 END deploymentview::DV;
 

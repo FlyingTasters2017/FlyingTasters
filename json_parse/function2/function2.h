@@ -2,8 +2,8 @@
 
 /* Declaration of the functions that have to be provided by the user */
 
-#ifndef __USER_CODE_H_function1__
-#define __USER_CODE_H_function1__
+#ifndef __USER_CODE_H_function2__
+#define __USER_CODE_H_function2__
 
 #include "C_ASN1_Types.h"
 
@@ -11,10 +11,9 @@
 extern "C" {
 #endif
 
-void function1_startup();
+void function2_startup();
 
-void function1_PI_getPixyData(asn1SccT_UInt32 *,
-                              asn1SccT_UInt32 *);
+void function2_PI_PI1(const asn1SccT_UInt32 *);
 
 #ifdef __cplusplus
 }
