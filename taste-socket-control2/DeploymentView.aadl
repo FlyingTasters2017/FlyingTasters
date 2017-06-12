@@ -49,6 +49,10 @@ SUBCOMPONENTS
     Taste::coordinates => "1477 1426 1898 1647";
     Taste::FunctionName => "control";
   };
+  IV_Operation : SYSTEM interfaceview::IV::Operation.others {
+    Taste::coordinates => "1990 1190 2247 1354";
+    Taste::FunctionName => "Operation";
+  };
   x86_partition : PROCESS deploymentview::DV::Node1::x86_partition.others {
     Taste::coordinates => "675 821 2367 1708";
     Deployment::Port_Number => 0;
@@ -61,6 +65,7 @@ PROPERTIES
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_gcs;
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_socketClient;
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_control;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Operation;
   Actual_Processor_Binding => (reference (x86_linux32)) APPLIES TO x86_partition;
 END Node1.others;
 

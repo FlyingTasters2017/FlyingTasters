@@ -38,7 +38,7 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
    char *yawratec;
    char *pitchc;
 
-   portno = 50008;
+   portno = 50007;
 
    /* Create a socket point */
    sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -164,9 +164,9 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
             OUT_sensorData->acczAct = strtod(temp, &ptr);
 			i++;
 		}
-		else if (jsoneq(buffer, &t[i], "baro.pressure") == 0) {
+		else if (jsoneq(buffer, &t[i], "range.zrange") == 0) {
 			/* We may want to do strtol() here to get numeric value */
-			printf("baro.pressure: %.*s\n", t[i+1].end-t[i+1].start,
+			printf("range.zrange: %.*s\n", t[i+1].end-t[i+1].start,
 					buffer + t[i+1].start);
             strncpy(temp, buffer + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
@@ -184,7 +184,7 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
    /* Print received message */
    printf("%s\n",buffer);
 
-   thrust = htonl(IN_droneData->thrustRef - 15000);
+   thrust = htonl(IN_droneData->thrustRef);
    yawrate = htonl(IN_droneData->yawrateRef);
    roll = htonl(IN_droneData->rollRef);
    pitch = htonl(IN_droneData->pitchRef);

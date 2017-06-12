@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control_Act'.
  *
- * Model version                  : 1.2
+ * Model version                  : 1.14
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Thu Jun 01 21:55:05 2017
+ * C/C++ source code generated on : Fri Jun 09 11:16:05 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -37,22 +37,10 @@
 # define rtmSetErrorStatus(rtm, val)   ((rtm)->errorStatus = (val))
 #endif
 
-/* Block states (auto storage) for system '<Root>' */
-typedef struct {
-  dsp_private_SlidingWindowAver_T gobj_0;/* '<Root>/Moving Average1' */
-  dsp_private_SlidingWindowAver_T gobj_1;/* '<Root>/Moving Average1' */
-  dsp_MovingAverage_control_Act_T obj; /* '<Root>/Moving Average1' */
-  real_T DiscreteTimeIntegrator2_DSTATE;/* '<Root>/Discrete-Time Integrator2' */
-  real_T UD_DSTATE;                    /* '<S1>/UD' */
-  real_T DiscreteTimeIntegrator_DSTATE;/* '<Root>/Discrete-Time Integrator' */
-  real_T DiscreteTimeIntegrator1_DSTATE;/* '<Root>/Discrete-Time Integrator1' */
-  void *MovingAverage1_PWORK;          /* '<Root>/Moving Average1' */
-  boolean_T objisempty;                /* '<Root>/Moving Average1' */
-} DW_control_Act_T;
-
 /* External inputs (root inport signals with auto storage) */
 typedef struct {
   MySensorData sensorData;             /* '<Root>/sensorData' */
+  MyDroneData Ref;                     /* '<Root>/Ref' */
 } ExtU_control_Act_T;
 
 /* External outputs (root outports fed by signals with auto storage) */
@@ -65,9 +53,6 @@ struct tag_RTM_control_Act_T {
   const char_T * volatile errorStatus;
 };
 
-/* Block states (auto storage) */
-extern DW_control_Act_T control_Act_DW;
-
 /* External inputs (root inport signals with auto storage) */
 extern ExtU_control_Act_T control_Act_U;
 
@@ -75,7 +60,6 @@ extern ExtU_control_Act_T control_Act_U;
 extern ExtY_control_Act_T control_Act_Y;
 
 /* External data declarations for dependent source files */
-extern const MySensorData control_Act_rtZMySensorData;/* MySensorData ground */
 extern const MyDroneData control_Act_rtZMyDroneData;/* MyDroneData ground */
 
 /* Model entry point functions */
@@ -89,7 +73,20 @@ extern RT_MODEL_control_Act_T *const control_Act_M;
 /*-
  * These blocks were eliminated from the model due to optimizations:
  *
- * Block '<S1>/Data Type Duplicate' : Unused code path elimination
+ * Block '<S1>/Derivative Gain' : Unused code path elimination
+ * Block '<S1>/Filter' : Unused code path elimination
+ * Block '<S1>/Filter Coefficient' : Unused code path elimination
+ * Block '<S1>/Integral Gain' : Unused code path elimination
+ * Block '<S1>/Integrator' : Unused code path elimination
+ * Block '<S1>/Proportional Gain' : Unused code path elimination
+ * Block '<S1>/Sum' : Unused code path elimination
+ * Block '<S1>/SumD' : Unused code path elimination
+ * Block '<Root>/Gain' : Unused code path elimination
+ * Block '<Root>/Min_thrust ' : Unused code path elimination
+ * Block '<Root>/Saturation' : Unused code path elimination
+ * Block '<Root>/Saturation1' : Unused code path elimination
+ * Block '<Root>/Sum3' : Unused code path elimination
+ * Block '<Root>/Sum6' : Unused code path elimination
  */
 
 /*-
@@ -107,7 +104,7 @@ extern RT_MODEL_control_Act_T *const control_Act_M;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'control_Act'
- * '<S1>'   : 'control_Act/Discrete Derivative'
+ * '<S1>'   : 'control_Act/Discrete PID Controller1'
  */
 #endif                                 /* RTW_HEADER_control_Act_h_ */
 

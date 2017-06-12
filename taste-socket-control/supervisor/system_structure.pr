@@ -4,14 +4,14 @@ SYSTEM supervisor;
 
 	SIGNAL pulse;
 
+	/* CIF Keep Specific Geode PARAMNAMES droneData */
+	SIGNAL takeoff (MyDroneData);
+
 	PROCEDURE readStabilizerSendThrust COMMENT '#c_predef';
 		FPAR
 			IN droneData MyDroneData,
 			IN/OUT sensorData MySensorData;
  	EXTERNAL;
-
-	/* CIF Keep Specific Geode PARAMNAMES droneData */
-	SIGNAL takeoff (MyDroneData);
 
 	/* CIF Keep Specific Geode PARAMNAMES sensorData */
 	SIGNAL displaySensor (MySensorData);

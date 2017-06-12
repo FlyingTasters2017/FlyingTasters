@@ -3,13 +3,13 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * File: control_Act_private.h
+ * File: rtGetNaN.h
  *
  * Code generated for Simulink model 'control_Act'.
  *
- * Model version                  : 1.14
+ * Model version                  : 1.6
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Fri Jun 09 11:16:05 2017
+ * C/C++ source code generated on : Thu Jun 08 17:52:43 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -17,10 +17,16 @@
  * Validation result: Not run
  */
 
-#ifndef RTW_HEADER_control_Act_private_h_
-#define RTW_HEADER_control_Act_private_h_
+#ifndef RTW_HEADER_rtGetNaN_h_
+#define RTW_HEADER_rtGetNaN_h_
+#include <stddef.h>
 #include "rtwtypes.h"
-#endif                                 /* RTW_HEADER_control_Act_private_h_ */
+#include "rt_nonfinite.h"
+
+extern real_T rtGetNaN(void);
+extern real32_T rtGetNaNF(void);
+
+#endif                                 /* RTW_HEADER_rtGetNaN_h_ */
 
 /*
  * File trailer for generated code.

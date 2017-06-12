@@ -75,16 +75,16 @@ class LoggingExample:
         self.is_connected = True
         print("socket", self._socket)
         # The definition of the logconfig can be made before connecting
-        self._lg_stab = LogConfig(name='Stabilizer', period_in_ms=1000)
+        self._lg_stab = LogConfig(name='Stabilizer', period_in_ms=100)
         self._lg_stab.add_variable('stabilizer.roll', 'float')
         self._lg_stab.add_variable('stabilizer.pitch', 'float')
         self._lg_stab.add_variable('stabilizer.yaw', 'float')
+        self._lg_stab.add_variable('range.zrange', 'float')
 
-        self._lg_acc = LogConfig(name='Accelerometer', period_in_ms=1000)
+        self._lg_acc = LogConfig(name='Accelerometer', period_in_ms=100)
         self._lg_acc.add_variable('acc.x', 'float')
         self._lg_acc.add_variable('acc.y', 'float')
         self._lg_acc.add_variable('acc.z', 'float')
-        self._lg_acc.add_variable('baro.pressure', 'float')
 
         # Adding the configuration cannot be done until a Crazyflie is
         # connected, since we need to check that the variables we
@@ -125,6 +125,12 @@ class LoggingExample:
         # roll = 0
         # yawrate = 0
         self._cf.commander.send_setpoint(roll, pitch, yawrate, thrust)
+
+    def send_zrange_setpoint(self, roll=0, pitch=0, yawrate=0, zdistance=0):
+        # pitch = 0
+        # roll = 0
+        # yawrate = 0
+        self._cf.commander.send_zdistance_setpoint(roll, pitch, yawrate, zdistance)
 
 
     def _stab_log_error(self, logconf, msg):
@@ -180,17 +186,18 @@ if __name__ == '__main__':
     Create socket server, example https://docs.python.org/3.4/library/socket.html#socket-objects 
     """
     HOST = ''  # Symbolic name meaning all available interfaces
-    PORT = 50008  # Arbitrary non-privileged port
+    PORT = 50007  # Arbitrary non-privileged port
     mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #Create socket object
     mySocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) #re-use same port
     mySocket.bind((HOST, PORT))
     # Initialize the low-level drivers (don't list the debug drivers)
     cflib.crtp.init_drivers(enable_debug_driver=False)
     #Insert correct Crazyflie URI
-    le = LoggingExample("radio://0/82/250K",socket= mySocket)
+    le = LoggingExample("radio://0/84/2M",socket= mySocket)
     #time.sleep(10)
     #Init default thrust
-    thrust = 0
+    thurst =0
+
     while not mySocket._closed:
         # Wait for 1 client connection
         print('mySocket.listen(1)')
@@ -199,6 +206,8 @@ if __name__ == '__main__':
         conn, addr = mySocket.accept()
         print('if conn:')
         # If client connected to the server
+        # file = open("log_actuation.txt", "w")
+
         if conn:
             print('Connected by', addr)
             data = str(le.sensorsData + le.accelData).encode()
@@ -229,14 +238,19 @@ if __name__ == '__main__':
             print("pitch data", pitch)
             print("roll data", roll)
             print("thrust data", thrust)
+            height = 0.2
 
 
+            with open("log_actuation.txt", "a") as myfile:
+                # myfile.write("appended text")
+                myfile.writelines("yawrate:" + str(yawrate) + "; pitch:" + str(pitch) + "; roll:" + str(roll) + "; thrust:" + str(thrust) + "\n")
 
             #Send commands to crazyflie
             if thrust > 0:
                 le.unlock_thrust_protection()
-                le.ramp_motors(roll, pitch, yawrate, thrust)
+                le.send_zrange_setpoint(roll, pitch, yawrate, height)
 
         conn.close()
+        #file.close()
     sys.exit(2)
     print('Im here in the end')

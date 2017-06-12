@@ -5,11 +5,11 @@
  *
  * File: ert_main.c
  *
- * Code generated for Simulink model 'control_Act'.
+ * Code generated for Simulink model 'DataOperation'.
  *
- * Model version                  : 1.14
+ * Model version                  : 1.12
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Fri Jun 09 11:16:05 2017
+ * C/C++ source code generated on : Mon Jun 12 12:15:26 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -19,7 +19,7 @@
 
 #include <stddef.h>
 #include <stdio.h>                     /* This ert_main.c example uses printf/fflush */
-#include "control_Act.h"               /* Model's header file */
+#include "DataOperation.h"             /* Model's header file */
 #include "rtwtypes.h"
 
 /*
@@ -42,7 +42,7 @@ void rt_OneStep(void)
 
   /* Check for overrun */
   if (OverrunFlag) {
-    rtmSetErrorStatus(control_Act_M, "Overrun");
+    rtmSetErrorStatus(DataOperation_M, "Overrun");
     return;
   }
 
@@ -53,7 +53,7 @@ void rt_OneStep(void)
   /* Set model inputs here */
 
   /* Step the model */
-  control_Act_step();
+  DataOperation_step();
 
   /* Get model outputs here */
 
@@ -78,10 +78,10 @@ int_T main(int_T argc, const char *argv[])
   (void)(argv);
 
   /* Initialize model */
-  control_Act_initialize();
+  DataOperation_initialize();
 
   /* Attach rt_OneStep to a timer or interrupt service routine with
-   * period 0.01 seconds (the model's base sample time) here.  The
+   * period 0.2 seconds (the model's base sample time) here.  The
    * call syntax for rt_OneStep is
    *
    *  rt_OneStep();
@@ -90,14 +90,14 @@ int_T main(int_T argc, const char *argv[])
          "Generated ERT main won't simulate model step behavior. "
          "To change this behavior select the 'MAT-file logging' option.\n");
   fflush((NULL));
-  while (rtmGetErrorStatus(control_Act_M) == (NULL)) {
+  while (rtmGetErrorStatus(DataOperation_M) == (NULL)) {
     /*  Perform other application tasks here */
   }
 
   /* Disable rt_OneStep() here */
 
   /* Terminate model */
-  control_Act_terminate();
+  DataOperation_terminate();
   return 0;
 }
 

@@ -5,11 +5,11 @@
  *
  * File: rtwtypes.h
  *
- * Code generated for Simulink model 'control_Act'.
+ * Code generated for Simulink model 'DataOperation'.
  *
- * Model version                  : 1.14
+ * Model version                  : 1.12
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Fri Jun 09 11:16:05 2017
+ * C/C++ source code generated on : Mon Jun 12 12:15:26 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)

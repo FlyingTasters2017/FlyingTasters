@@ -23,6 +23,7 @@ package body supervisor is
         state : States;
         initDone : Boolean := False;
         sensordata : aliased asn1SccMySensorData;
+        ref : aliased asn1SccMyDroneData;
         dronedata : aliased asn1SccMyDroneData;
     end record;
     ctxt: aliased ctxt_Ty;
@@ -32,24 +33,24 @@ package body supervisor is
         begin
             case ctxt.state is
                 when running =>
-                    runTransition(3);
-                when wait =>
                     runTransition(1);
+                when wait =>
+                    runTransition(3);
                 when others =>
                     runTransition(CS_Only);
             end case;
         end pulse;
         
 
-    procedure takeoff(droneData: access asn1SccMyDroneData) is
+    procedure takeoff(Ref: access asn1SccMyDroneData) is
         begin
             case ctxt.state is
                 when running =>
-                    ctxt.dronedata := droneData.all;
-                    runTransition(4);
-                when wait =>
-                    ctxt.dronedata := droneData.all;
+                    ctxt.ref := Ref.all;
                     runTransition(2);
+                when wait =>
+                    ctxt.ref := Ref.all;
+                    runTransition(4);
                 when others =>
                     runTransition(CS_Only);
             end case;
@@ -62,38 +63,40 @@ package body supervisor is
             while (trId /= -1) loop
                 case trId is
                     when 0 =>
-                        -- writeln('SDL Startup') (12,13)
+                        -- writeln('SDL Startup') (13,13)
                         Put("SDL Startup");
                         New_Line;
-                        -- NEXT_STATE Wait (14,18) at 479, 172
+                        -- NEXT_STATE Wait (15,18) at 479, 172
                         trId := -1;
                         ctxt.state := Wait;
                         goto next_transition;
                     when 1 =>
-                        -- NEXT_STATE Wait (20,22) at 408, 282
+                        -- control_Act(sensordata,ref,dronedata) (21,17)
+                        RIÜcontrol_Act(ctxt.sensordata'Access, ctxt.ref'Access, ctxt.dronedata'Access);
+                        -- readStabilizerSendThrust(dronedata,sensorData) (23,17)
+                        RIÜreadStabilizerSendThrust(ctxt.dronedata'Access, ctxt.sensorData'Access);
+                        -- dataOperation(sensorData,sensordata) (25,17)
+                        RIÜdataOperation(ctxt.sensorData'Access, ctxt.sensordata'Access);
+                        -- displaySensor(sensorData) (27,17)
+                        RIÜdisplaySensor(ctxt.sensorData'Access);
+                        -- NEXT_STATE Running (29,22) at 760, 424
                         trId := -1;
-                        ctxt.state := Wait;
+                        ctxt.state := Running;
                         goto next_transition;
                     when 2 =>
-                        -- NEXT_STATE Running (24,22) at 524, 282
-                        trId := -1;
-                        ctxt.state := Running;
-                        goto next_transition;
-                    when 3 =>
-                        -- control_Act(sensorData,droneData) (31,17)
-                        RIÜcontrol_Act(ctxt.sensorData'Access, ctxt.droneData'Access);
-                        -- readStabilizerSendThrust(droneData,sensorData) (33,17)
-                        RIÜreadStabilizerSendThrust(ctxt.droneData'Access, ctxt.sensorData'Access);
-                        -- displaySensor(sensorData) (35,17)
-                        RIÜdisplaySensor(ctxt.sensorData'Access);
-                        -- NEXT_STATE Running (37,22) at 763, 377
-                        trId := -1;
-                        ctxt.state := Running;
-                        goto next_transition;
-                    when 4 =>
-                        -- NEXT_STATE Wait (41,22) at 1005, 217
+                        -- NEXT_STATE Wait (33,22) at 1005, 217
                         trId := -1;
                         ctxt.state := Wait;
+                        goto next_transition;
+                    when 3 =>
+                        -- NEXT_STATE Wait (43,22) at 408, 282
+                        trId := -1;
+                        ctxt.state := Wait;
+                        goto next_transition;
+                    when 4 =>
+                        -- NEXT_STATE Running (47,22) at 521, 282
+                        trId := -1;
+                        ctxt.state := Running;
                         goto next_transition;
                     when CS_Only =>
                         trId := -1;

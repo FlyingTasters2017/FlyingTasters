@@ -3,13 +3,13 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * File: control_Act_types.h
+ * File: DataOperation_types.h
  *
- * Code generated for Simulink model 'control_Act'.
+ * Code generated for Simulink model 'DataOperation'.
  *
- * Model version                  : 1.14
+ * Model version                  : 1.12
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Fri Jun 09 11:16:05 2017
+ * C/C++ source code generated on : Mon Jun 12 12:15:26 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -17,8 +17,8 @@
  * Validation result: Not run
  */
 
-#ifndef RTW_HEADER_control_Act_types_h_
-#define RTW_HEADER_control_Act_types_h_
+#ifndef RTW_HEADER_DataOperation_types_h_
+#define RTW_HEADER_DataOperation_types_h_
 #include "rtwtypes.h"
 #ifndef DEFINED_TYPEDEF_FOR_MySensorData_
 #define DEFINED_TYPEDEF_FOR_MySensorData_
@@ -35,22 +35,10 @@ typedef struct {
 
 #endif
 
-#ifndef DEFINED_TYPEDEF_FOR_MyDroneData_
-#define DEFINED_TYPEDEF_FOR_MyDroneData_
-
-typedef struct {
-  real_T yawrateRef;
-  real_T pitchRef;
-  real_T rollRef;
-  real_T thrustRef;
-} MyDroneData;
-
-#endif
-
 /* Forward declaration for rtModel */
-typedef struct tag_RTM_control_Act_T RT_MODEL_control_Act_T;
+typedef struct tag_RTM_DataOperation_T RT_MODEL_DataOperation_T;
 
-#endif                                 /* RTW_HEADER_control_Act_types_h_ */
+#endif                                 /* RTW_HEADER_DataOperation_types_h_ */
 
 /*
  * File trailer for generated code.
