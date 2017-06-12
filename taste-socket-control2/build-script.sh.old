@@ -65,11 +65,8 @@ cd "$SKELS" && rm -f socketclient.zip && zip socketclient socketclient/* && cd $
 
 cd "$SKELS" && rm -f control.zip && zip control control/* && cd $OLDPWD
 
-<<<<<<< HEAD
 cd "$SKELS" && rm -f operation.zip && zip operation operation/* && cd $OLDPWD
 
-=======
->>>>>>> 3cf3119afea2e65b27afbe928b8490804e16e90c
 [ ! -z "$CLEANUP" ] && rm -rf binary*
 
 if [ -f ConcurrencyView.pro ]
@@ -105,8 +102,5 @@ cd "$CWD" && assert-builder-ocarina.py \
 	--subAda supervisor:"$SKELS"/supervisor.zip \
 	--subC socketclient:"$SKELS"/socketclient.zip \
 	--subSIMULINK control:"$SKELS"/control.zip \
-<<<<<<< HEAD
 	--subSIMULINK operation:"$SKELS"/operation.zip \
-=======
->>>>>>> 3cf3119afea2e65b27afbe928b8490804e16e90c
 	$ORCHESTRATOR_OPTIONS
