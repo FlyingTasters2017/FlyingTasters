@@ -352,6 +352,8 @@ FEATURES
   agent_trajector_error_dummy : IN PARAMETER DataView::MyInteger {
     Taste::encoding => NATIVE;
   };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_agent_trajector_error;
 
 SUBPROGRAM IMPLEMENTATION PI_agent_trajector_error.others
@@ -411,12 +413,6 @@ END RI_raw_AS_data;
 SUBPROGRAM IMPLEMENTATION RI_raw_AS_data.others
 END RI_raw_AS_data.others;
 
-SUBPROGRAM PI_clock_drone
-END PI_clock_drone;
-
-SUBPROGRAM IMPLEMENTATION PI_clock_drone.others
-END PI_clock_drone.others;
-
 END interfaceview::FV::DroneDummy;
 
 PACKAGE interfaceview::IV
@@ -460,7 +456,7 @@ FEATURES
     Taste::labelInheritance => "true";
   };
 PROPERTIES
-  Source_Language => (SDL);
+  Source_Language => (C);
 END Houston;
 
 SYSTEM IMPLEMENTATION Houston.others
@@ -492,7 +488,7 @@ FEATURES
     Taste::labelInheritance => "true";
   };
 PROPERTIES
-  Source_Language => (SDL);
+  Source_Language => (C);
 END MS_Comm;
 
 SYSTEM IMPLEMENTATION MS_Comm.others
@@ -507,20 +503,20 @@ END MS_Comm.others;
 SYSTEM ASD_Processing
 FEATURES
   PI_raw_ASD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::ASD_Processing::PI_raw_ASD.others {
-    Taste::coordinates => "747 1335";
+    Taste::coordinates => "740 1335";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "raw_ASD";
   };
   RI_processed_ASD : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::WorldModel::PI_processed_ASD.others {
-    Taste::coordinates => "926 1192";
+    Taste::coordinates => "919 1192";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "processed_ASD";
     Taste::labelInheritance => "true";
   };
 PROPERTIES
-  Source_Language => (SDL);
+  Source_Language => (C);
 END ASD_Processing;
 
 SYSTEM IMPLEMENTATION ASD_Processing.others
@@ -535,20 +531,20 @@ END ASD_Processing.others;
 SYSTEM MSD_Processing
 FEATURES
   PI_raw_MSD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MSD_Processing::PI_raw_MSD.others {
-    Taste::coordinates => "1475 1331";
+    Taste::coordinates => "1473 1331";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "raw_MSD";
   };
   RI_processed_MSD : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::WorldModel::PI_processed_MSD.others {
-    Taste::coordinates => "1317 1190";
+    Taste::coordinates => "1315 1190";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "processed_MSD";
     Taste::labelInheritance => "true";
   };
 PROPERTIES
-  Source_Language => (SDL);
+  Source_Language => (C);
 END MSD_Processing;
 
 SYSTEM IMPLEMENTATION MSD_Processing.others
@@ -685,7 +681,7 @@ FEATURES
     Taste::labelInheritance => "true";
   };
 PROPERTIES
-  Source_Language => (SDL);
+  Source_Language => (C);
 END WorldModel;
 
 SYSTEM IMPLEMENTATION WorldModel.others
@@ -754,19 +750,20 @@ END AgentTrajectoryGenerator.others;
 SYSTEM Agent_HLC
 FEATURES
   PI_agent_trajector_error : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Agent_HLC::PI_agent_trajector_error.others {
-    Taste::coordinates => "390 919";
+    Taste::coordinates => "395 918";
     Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "agent_trajector_error";
   };
   RI_reference_input_LLC : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Houston::PI_reference_input_LLC.others {
-    Taste::coordinates => "402 1084";
+    Taste::coordinates => "407 1083";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "reference_input_LLC";
     Taste::labelInheritance => "true";
   };
 PROPERTIES
-  Source_Language => (SDL);
+  Source_Language => (C);
 END Agent_HLC;
 
 SYSTEM IMPLEMENTATION Agent_HLC.others
@@ -814,23 +811,11 @@ FEATURES
     Taste::InterfaceName => "raw_AS_data";
     Taste::labelInheritance => "true";
   };
-  PI_clock_drone : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::DroneDummy::PI_clock_drone.others {
-    Taste::coordinates => "601 1863";
-    Taste::RCMoperationKind => cyclic;
-    Taste::RCMperiod => 1000 ms;
-    Taste::InterfaceName => "clock_drone";
-  };
 PROPERTIES
-  Source_Language => (SDL);
+  Source_Language => (Simulink);
 END DroneDummy;
 
 SYSTEM IMPLEMENTATION DroneDummy.others
-SUBCOMPONENTS
-  clock_drone_impl : SUBPROGRAM interfaceview::FV::DroneDummy::PI_clock_drone.others {
-    Compute_Execution_Time => 0 ms .. 0 ms;
-  };
-CONNECTIONS
-  OpToPICnx_clock_drone_impl : SUBPROGRAM ACCESS clock_drone_impl -> PI_clock_drone;
 END DroneDummy.others;
 
 SYSTEM interfaceview
@@ -845,10 +830,10 @@ SUBCOMPONENTS
     Taste::coordinates => "1711 1377 1989 1619";
   };
   ASD_Processing : SYSTEM interfaceview::IV::ASD_Processing.others {
-    Taste::coordinates => "747 1192 1070 1356";
+    Taste::coordinates => "740 1192 1063 1356";
   };
   MSD_Processing : SYSTEM interfaceview::IV::MSD_Processing.others {
-    Taste::coordinates => "1152 1190 1475 1355";
+    Taste::coordinates => "1150 1190 1473 1355";
   };
   GUI : SYSTEM interfaceview::IV::GUI.others {
     Taste::coordinates => "442 7 899 306";
@@ -863,7 +848,7 @@ SUBCOMPONENTS
     Taste::coordinates => "204 661 577 817";
   };
   Agent_HLC : SYSTEM interfaceview::IV::Agent_HLC.others {
-    Taste::coordinates => "213 919 587 1084";
+    Taste::coordinates => "218 918 592 1083";
   };
   MS_Dummy : SYSTEM interfaceview::IV::MS_Dummy.others {
     Taste::coordinates => "1669 1749 2032 2008";
@@ -873,25 +858,25 @@ SUBCOMPONENTS
   };
 CONNECTIONS
   Houston_reference_input_LLC_Agent_HLC_reference_input_LLC : SUBPROGRAM ACCESS Houston.PI_reference_input_LLC -> Agent_HLC.RI_reference_input_LLC {
-    Taste::coordinates => "402 1084 402 1235 407 1235 407 1378";
+    Taste::coordinates => "407 1083 407 1235 407 1235 407 1378";
   };
   Houston_raw_AS_data_DroneDummy_raw_AS_data : SUBPROGRAM ACCESS Houston.PI_raw_AS_data -> DroneDummy.RI_raw_AS_data {
     Taste::coordinates => "416 1753 416 1689 408 1689 408 1625";
   };
   ASD_Processing_raw_ASD_Houston_raw_ASD : SUBPROGRAM ACCESS ASD_Processing.PI_raw_ASD -> Houston.RI_raw_ASD {
-    Taste::coordinates => "553 1488 658 1488 658 1335 747 1335";
+    Taste::coordinates => "553 1488 658 1488 658 1335 740 1335";
   };
   MS_Comm_raw_MS_data_MS_Dummy_raw_MS_data : SUBPROGRAM ACCESS MS_Comm.PI_raw_MS_data -> MS_Dummy.RI_raw_MS_data {
     Taste::coordinates => "1848 1750 1848 1687 1848 1687 1848 1619";
   };
   MSD_Processing_raw_MSD_MS_Comm_raw_MSD : SUBPROGRAM ACCESS MSD_Processing.PI_raw_MSD -> MS_Comm.RI_raw_MSD {
-    Taste::coordinates => "1711 1474 1566 1474 1566 1331 1475 1331";
+    Taste::coordinates => "1711 1474 1566 1474 1566 1331 1473 1331";
   };
   WorldModel_processed_ASD_ASD_Processing_processed_ASD : SUBPROGRAM ACCESS WorldModel.PI_processed_ASD -> ASD_Processing.RI_processed_ASD {
-    Taste::coordinates => "926 1192 926 968 1023 968 1023 745";
+    Taste::coordinates => "919 1192 919 968 1023 968 1023 745";
   };
   WorldModel_processed_MSD_MSD_Processing_processed_MSD : SUBPROGRAM ACCESS WorldModel.PI_processed_MSD -> MSD_Processing.RI_processed_MSD {
-    Taste::coordinates => "1317 1190 1317 967 1232 967 1232 745";
+    Taste::coordinates => "1315 1190 1315 967 1232 967 1232 745";
   };
   GUI_world_events_GUI_WorldModel_world_events_GUI : SUBPROGRAM ACCESS GUI.PI_world_events_GUI -> WorldModel.RI_world_events_GUI {
     Taste::coordinates => "1216 424 1216 78 900 78";
@@ -915,7 +900,7 @@ CONNECTIONS
     Taste::coordinates => "905 664 739 664 739 710 578 710";
   };
   Agent_HLC_agent_trajector_error_AgentTrajectoryGenerator_agent_trajector_error : SUBPROGRAM ACCESS Agent_HLC.PI_agent_trajector_error -> AgentTrajectoryGenerator.RI_agent_trajector_error {
-    Taste::coordinates => "391 817 391 867 390 867 390 919";
+    Taste::coordinates => "391 817 391 867 395 867 395 918";
   };
 END interfaceview.others;
 

@@ -21,7 +21,7 @@ END PI_pulse.others;
 
 SUBPROGRAM PI_takeoff
 FEATURES
-  droneData : IN PARAMETER DataView::MyDroneData {
+  Ref : IN PARAMETER DataView::MyDroneData {
     Taste::encoding => UPER;
   };
 PROPERTIES
@@ -62,10 +62,26 @@ FEATURES
   droneData : OUT PARAMETER DataView::MyDroneData {
     Taste::encoding => NATIVE;
   };
+  Ref : IN PARAMETER DataView::MyDroneData {
+    Taste::encoding => NATIVE;
+  };
 END RI_control_Act;
 
 SUBPROGRAM IMPLEMENTATION RI_control_Act.others
 END RI_control_Act.others;
+
+SUBPROGRAM RI_DataOperation
+FEATURES
+  Sensordata_in : IN PARAMETER DataView::MySensorData {
+    Taste::encoding => NATIVE;
+  };
+  Sensordata_out : OUT PARAMETER DataView::MySensorData {
+    Taste::encoding => NATIVE;
+  };
+END RI_DataOperation;
+
+SUBPROGRAM IMPLEMENTATION RI_DataOperation.others
+END RI_DataOperation.others;
 
 END interfaceview::FV::supervisor;
 
@@ -112,7 +128,7 @@ END PI_displaySensor.others;
 
 SUBPROGRAM RI_takeoff
 FEATURES
-  droneData : IN PARAMETER DataView::MyDroneData {
+  Ref : IN PARAMETER DataView::MyDroneData {
     Taste::encoding => UPER;
   };
 END RI_takeoff;
@@ -136,12 +152,38 @@ FEATURES
   droneData : OUT PARAMETER DataView::MyDroneData {
     Taste::encoding => NATIVE;
   };
+  Ref : IN PARAMETER DataView::MyDroneData {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_control_Act;
 
 SUBPROGRAM IMPLEMENTATION PI_control_Act.others
 END PI_control_Act.others;
 
 END interfaceview::FV::control;
+
+PACKAGE interfaceview::FV::Operation
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_DataOperation
+FEATURES
+  Sensordata_in : IN PARAMETER DataView::MySensorData {
+    Taste::encoding => NATIVE;
+  };
+  Sensordata_out : OUT PARAMETER DataView::MySensorData {
+    Taste::encoding => NATIVE;
+  };
+END PI_DataOperation;
+
+SUBPROGRAM IMPLEMENTATION PI_DataOperation.others
+END PI_DataOperation.others;
+
+END interfaceview::FV::Operation;
 
 PACKAGE interfaceview::IV
 PUBLIC
@@ -150,6 +192,7 @@ WITH interfaceview::FV::supervisor;
 WITH interfaceview::FV::socketClient;
 WITH interfaceview::FV::gcs;
 WITH interfaceview::FV::control;
+WITH interfaceview::FV::Operation;
 WITH interfaceview::FV;
 WITH Taste;
 WITH DataView;
@@ -157,35 +200,41 @@ WITH TASTE_IV_Properties;
 SYSTEM supervisor
 FEATURES
   PI_pulse : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::supervisor::PI_pulse.others {
-    Taste::coordinates => "369 221";
+    Taste::coordinates => "372 221";
     Taste::RCMoperationKind => cyclic;
-    Taste::RCMperiod => 1000 ms;
+    Taste::RCMperiod => 10 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "pulse";
   };
   PI_takeoff : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::supervisor::PI_takeoff.others {
-    Taste::coordinates => "405 728";
+    Taste::coordinates => "408 728";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "takeoff";
   };
   RI_readStabilizerSendThrust : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::socketClient::PI_readStabilizerSendThrust.others {
-    Taste::coordinates => "1323 292";
+    Taste::coordinates => "1326 292";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "readStabilizerSendThrust";
     Taste::labelInheritance => "true";
   };
   RI_displaySensor : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::gcs::PI_displaySensor.others {
-    Taste::coordinates => "795 728";
+    Taste::coordinates => "705 728";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "displaySensor";
     Taste::labelInheritance => "true";
   };
   RI_control_Act : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::control::PI_control_Act.others {
-    Taste::coordinates => "1216 728";
+    Taste::coordinates => "1327 608";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "control_Act";
+    Taste::labelInheritance => "true";
+  };
+  RI_DataOperation : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Operation::PI_DataOperation.others {
+    Taste::coordinates => "1113 728";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "DataOperation";
     Taste::labelInheritance => "true";
   };
 PROPERTIES
@@ -208,7 +257,7 @@ END supervisor.others;
 SYSTEM socketClient
 FEATURES
   PI_readStabilizerSendThrust : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::socketClient::PI_readStabilizerSendThrust.others {
-    Taste::coordinates => "2164 528";
+    Taste::coordinates => "2026 292";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -230,14 +279,14 @@ END socketClient.others;
 SYSTEM gcs
 FEATURES
   PI_displaySensor : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::gcs::PI_displaySensor.others {
-    Taste::coordinates => "780 1272";
+    Taste::coordinates => "706 1301";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "displaySensor";
   };
   RI_takeoff : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::supervisor::PI_takeoff.others {
-    Taste::coordinates => "451 1272";
+    Taste::coordinates => "406 1301";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "takeoff";
     Taste::labelInheritance => "true";
@@ -258,8 +307,10 @@ END gcs.others;
 SYSTEM control
 FEATURES
   PI_control_Act : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::control::PI_control_Act.others {
-    Taste::coordinates => "1621 1190";
+    Taste::coordinates => "2024 730";
     Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
     Taste::InterfaceName => "control_Act";
   };
 PROPERTIES
@@ -275,35 +326,61 @@ CONNECTIONS
   OpToPICnx_control_Act_impl : SUBPROGRAM ACCESS control_Act_impl -> PI_control_Act;
 END control.others;
 
+SYSTEM Operation
+FEATURES
+  PI_DataOperation : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Operation::PI_DataOperation.others {
+    Taste::coordinates => "2067 1116";
+    Taste::RCMoperationKind => unprotected;
+    Taste::InterfaceName => "DataOperation";
+  };
+PROPERTIES
+  Source_Language => (Simulink);
+END Operation;
+
+SYSTEM IMPLEMENTATION Operation.others
+SUBCOMPONENTS
+  DataOperation_impl : SUBPROGRAM interfaceview::FV::Operation::PI_DataOperation.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_DataOperation_impl : SUBPROGRAM ACCESS DataOperation_impl -> PI_DataOperation;
+END Operation.others;
+
 SYSTEM interfaceview
 END interfaceview;
 
 SYSTEM IMPLEMENTATION interfaceview.others
 SUBCOMPONENTS
   supervisor : SYSTEM interfaceview::IV::supervisor.others {
-    Taste::coordinates => "194 221 1323 728";
+    Taste::coordinates => "197 221 1326 728";
   };
   socketClient : SYSTEM interfaceview::IV::socketClient.others {
-    Taste::coordinates => "2036 528 2713 1026";
+    Taste::coordinates => "2027 196 2680 529";
   };
   gcs : SYSTEM interfaceview::IV::gcs.others {
-    Taste::coordinates => "287 1272 918 1795";
+    Taste::coordinates => "12 1301 1222 1824";
   };
   control : SYSTEM interfaceview::IV::control.others {
-    Taste::coordinates => "1482 1190 2190 1734";
+    Taste::coordinates => "2023 627 2712 917";
+  };
+  Operation : SYSTEM interfaceview::IV::Operation.others {
+    Taste::coordinates => "2068 1004 2625 1490";
   };
 CONNECTIONS
   supervisor_takeoff_gcs_takeoff : SUBPROGRAM ACCESS supervisor.PI_takeoff -> gcs.RI_takeoff {
-    Taste::coordinates => "451 1272 451 1000 405 1000 405 728";
+    Taste::coordinates => "406 1301 406 1000 408 1000 408 728";
   };
   socketClient_readStabilizerSendThrust_supervisor_readStabilizerSendThrust : SUBPROGRAM ACCESS socketClient.PI_readStabilizerSendThrust -> supervisor.RI_readStabilizerSendThrust {
-    Taste::coordinates => "1323 292 1657 292 1657 299 2164 299 2164 528";
+    Taste::coordinates => "1326 292 1719 292 1719 292 2026 292";
   };
   gcs_displaySensor_supervisor_displaySensor : SUBPROGRAM ACCESS gcs.PI_displaySensor -> supervisor.RI_displaySensor {
-    Taste::coordinates => "795 728 795 1000 780 1000 780 1272";
+    Taste::coordinates => "705 728 705 1000 706 1000 706 1301";
   };
   control_control_Act_supervisor_control_Act : SUBPROGRAM ACCESS control.PI_control_Act -> supervisor.RI_control_Act {
-    Taste::coordinates => "1216 728 1216 959 1621 959 1621 1190";
+    Taste::coordinates => "1327 608 1737 608 1737 730 2024 730";
+  };
+  Operation_DataOperation_supervisor_DataOperation : SUBPROGRAM ACCESS Operation.PI_DataOperation -> supervisor.RI_DataOperation {
+    Taste::coordinates => "1113 728 1113 1116 2067 1116";
   };
 END interfaceview.others;
 

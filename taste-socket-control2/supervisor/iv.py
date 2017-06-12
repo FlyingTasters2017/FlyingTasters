@@ -27,7 +27,7 @@ functions['supervisor']['interfaces']['pulse'] = {
     'out': {},
     'synchronism': asynch,
     'rcm': cyclic,
-    'period': 1000,
+    'period': 10,
     'wcet_low': 0,
     'wcet_low_unit': 'ms',
     'wcet_high': 0,
@@ -61,11 +61,11 @@ functions['supervisor']['interfaces']['takeoff'] = {
     'queue_size': 1
 }
 
-functions['supervisor']['interfaces']['takeoff']['paramsInOrdered'] = ['droneData']
+functions['supervisor']['interfaces']['takeoff']['paramsInOrdered'] = ['Ref']
 
 functions['supervisor']['interfaces']['takeoff']['paramsOutOrdered'] = []
 
-functions['supervisor']['interfaces']['takeoff']['in']['droneData'] = {
+functions['supervisor']['interfaces']['takeoff']['in']['Ref'] = {
     'type': 'MyDroneData',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
@@ -170,12 +170,22 @@ functions['supervisor']['interfaces']['control_Act'] = {
     'queue_size': 1
 }
 
-functions['supervisor']['interfaces']['control_Act']['paramsInOrdered'] = ['sensorData']
+functions['supervisor']['interfaces']['control_Act']['paramsInOrdered'] = ['sensorData', 'Ref']
 
 functions['supervisor']['interfaces']['control_Act']['paramsOutOrdered'] = ['droneData']
 
 functions['supervisor']['interfaces']['control_Act']['in']['sensorData'] = {
     'type': 'MySensorData',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': sequence,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': NATIVE,
+    'interface': 'control_Act',
+    'param_direction': param_in
+}
+
+functions['supervisor']['interfaces']['control_Act']['in']['Ref'] = {
+    'type': 'MyDroneData',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -191,6 +201,49 @@ functions['supervisor']['interfaces']['control_Act']['out']['droneData'] = {
     'asn1_filename': './dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'control_Act',
+    'param_direction': param_out
+}
+
+functions['supervisor']['interfaces']['DataOperation'] = {
+    'port_name': 'DataOperation',
+    'parent_fv': 'supervisor',
+    'direction': RI,
+    'in': {},
+    'out': {},
+    'synchronism': synch,
+    'rcm': unprotected,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': '',
+    'wcet_high': 0,
+    'wcet_high_unit': '',
+    'distant_fv': 'operation',
+    'calling_threads': {},
+    'distant_name': 'DataOperation',
+    'queue_size': 1
+}
+
+functions['supervisor']['interfaces']['DataOperation']['paramsInOrdered'] = ['Sensordata_in']
+
+functions['supervisor']['interfaces']['DataOperation']['paramsOutOrdered'] = ['Sensordata_out']
+
+functions['supervisor']['interfaces']['DataOperation']['in']['Sensordata_in'] = {
+    'type': 'MySensorData',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': sequence,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': NATIVE,
+    'interface': 'DataOperation',
+    'param_direction': param_in
+}
+
+functions['supervisor']['interfaces']['DataOperation']['out']['Sensordata_out'] = {
+    'type': 'MySensorData',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': sequence,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': NATIVE,
+    'interface': 'DataOperation',
     'param_direction': param_out
 }
 
@@ -307,11 +360,11 @@ functions['gcs']['interfaces']['takeoff'] = {
     'queue_size': 1
 }
 
-functions['gcs']['interfaces']['takeoff']['paramsInOrdered'] = ['droneData']
+functions['gcs']['interfaces']['takeoff']['paramsInOrdered'] = ['Ref']
 
 functions['gcs']['interfaces']['takeoff']['paramsOutOrdered'] = []
 
-functions['gcs']['interfaces']['takeoff']['in']['droneData'] = {
+functions['gcs']['interfaces']['takeoff']['in']['Ref'] = {
     'type': 'MyDroneData',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
@@ -349,12 +402,22 @@ functions['control']['interfaces']['control_Act'] = {
     'queue_size': 1
 }
 
-functions['control']['interfaces']['control_Act']['paramsInOrdered'] = ['sensorData']
+functions['control']['interfaces']['control_Act']['paramsInOrdered'] = ['sensorData', 'Ref']
 
 functions['control']['interfaces']['control_Act']['paramsOutOrdered'] = ['droneData']
 
 functions['control']['interfaces']['control_Act']['in']['sensorData'] = {
     'type': 'MySensorData',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': sequence,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': NATIVE,
+    'interface': 'control_Act',
+    'param_direction': param_in
+}
+
+functions['control']['interfaces']['control_Act']['in']['Ref'] = {
+    'type': 'MyDroneData',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -370,5 +433,57 @@ functions['control']['interfaces']['control_Act']['out']['droneData'] = {
     'asn1_filename': './dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'control_Act',
+    'param_direction': param_out
+}
+
+functions['operation'] = {
+    'name_with_case' : 'Operation',
+    'runtime_nature': passive,
+    'language': SIMULINK,
+    'zipfile': '',
+    'interfaces': {},
+    'functional_states' : {}
+}
+
+functions['operation']['interfaces']['DataOperation'] = {
+    'port_name': 'DataOperation',
+    'parent_fv': 'operation',
+    'direction': PI,
+    'in': {},
+    'out': {},
+    'synchronism': synch,
+    'rcm': unprotected,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': 'ms',
+    'wcet_high': 0,
+    'wcet_high_unit': 'ms',
+    'distant_fv': '',
+    'calling_threads': {},
+    'distant_name': '',
+    'queue_size': 1
+}
+
+functions['operation']['interfaces']['DataOperation']['paramsInOrdered'] = ['Sensordata_in']
+
+functions['operation']['interfaces']['DataOperation']['paramsOutOrdered'] = ['Sensordata_out']
+
+functions['operation']['interfaces']['DataOperation']['in']['Sensordata_in'] = {
+    'type': 'MySensorData',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': sequence,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': NATIVE,
+    'interface': 'DataOperation',
+    'param_direction': param_in
+}
+
+functions['operation']['interfaces']['DataOperation']['out']['Sensordata_out'] = {
+    'type': 'MySensorData',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': sequence,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': NATIVE,
+    'interface': 'DataOperation',
     'param_direction': param_out
 }

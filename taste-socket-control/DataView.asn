@@ -26,7 +26,6 @@ MySensorData ::= SEQUENCE {
     accyAct MyReal,
     acczAct MyReal
 }
-
 MyDroneData ::= SEQUENCE {
     yawrateRef MyReal,
     pitchRef MyReal,
