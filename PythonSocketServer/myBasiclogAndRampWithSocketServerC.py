@@ -32,11 +32,11 @@ import socket
 import logging
 import sys
 import time
-
 import cflib.crtp  # noqa
 from cflib.crazyflie import Crazyflie
 from cflib.crazyflie.log import LogConfig
 import ctypes
+
 # Only output errors from the logging framework
 logging.basicConfig(level=logging.ERROR)
 
@@ -78,7 +78,7 @@ class LoggingExample:
         self._lg_sensorData.add_variable('stabilizer.roll', 'float')
         self._lg_sensorData.add_variable('stabilizer.pitch', 'float')
         self._lg_sensorData.add_variable('stabilizer.yaw', 'float')
-        self._lg_sensorData.add_variable('range.zrange', 'float')
+        # self._lg_sensorData.add_variable('range.zrange', 'float')
         #
         # self._lg_acc = LogConfig(name='Accelerometer', period_in_ms=20)
         # self._lg_acc.add_variable('acc.x', 'float')
@@ -129,7 +129,7 @@ class LoggingExample:
 
     def _sensorData_log_data(self, timestamp, data, logconf):
         """Callback froma the log API when data arrives"""
-        print('[%d][%s]: %s' % (timestamp, logconf.name, data))
+        # print('[%d][%s]: %s' % (timestamp, logconf.name, data))
         self.sensorsData = json.dumps(data)
 
     def _connection_failed(self, link_uri, msg):
@@ -194,31 +194,29 @@ if __name__ == '__main__':
 # le.unlock_thrust_protection()
 
     thrust = 0
+    unlock_drones = True
     while not mySocket._closed:
         # Wait for 1 client connection
-
-        # If client connected to the server
-        # file = open("log_actuation.txt", "w")
-
         if conn:
             print('Connected by', addr)
             for le in list:
+                print(le.sensorsData)
                 data = str(le.sensorsData).encode()
                 conn.sendall(data)
             # Receive up to buffersize = 1024 bytes from the socket and convert it to int
             thrust = conn.recv(256)
-            print(type(thrust))
+            # print(type(thrust))
             # print(socket_data)
             # socket_data2 = socket_data.encode()
             # print(socket_data2)
-            print(thrust)
+            # print(thrust)
 
             sample_d = thrust.decode()
 
             #sample_d = int.from_bytes(thrust, byteorder='big')
             # # socket_data3 = socket_data.decode()
             # # print(socket_data3)
-            print(sample_d)
+            # print(sample_d)
 
             # print("raw data", socket_data)
             yawrate, pitch, roll, thrust, garbage = sample_d.split(' ')
@@ -232,10 +230,16 @@ if __name__ == '__main__':
             print("roll data", roll)
             print("thrust data", thrust)
 
-            #Send commands to all crazyflies
+            #Unlock all the drones.
+            if unlock_drones:
+                for le in list:
+                    le.send_setpoint(0, 0, 0, 0)
+                unlock_drones = False
+
+
             if thrust > 0:
                 for le in list:
-                    le.send_setpoint(roll, pitch, yawrate, thrust)
+                    le.send_setpoint(roll, pitch, yawrate, 2000)
     conn.close()
         # file.close()
     sys.exit(2)

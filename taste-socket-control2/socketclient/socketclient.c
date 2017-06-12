@@ -25,11 +25,11 @@ char droneref[256];
 
 //global variables end*/
 static int jsoneq(const char *json, jsmntok_t *tok, const char *s) {
-	if (tok->type == JSMN_STRING && (int) strlen(s) == tok->end - tok->start &&
-			strncmp(json + tok->start, s, tok->end - tok->start) == 0) {
-		return 0;
-	}
-	return -1;
+  if (tok->type == JSMN_STRING && (int) strlen(s) == tok->end - tok->start &&
+      strncmp(json + tok->start, s, tok->end - tok->start) == 0) {
+    return 0;
+  }
+  return -1;
 }
 /* A sort-of graceful error handler */
 void error(char *msg){
@@ -60,7 +60,7 @@ int initializeTCPSocketToServer( int port){
      /* Create a socket */
      sockfd = socket(AF_INET, SOCK_STREAM, 0);
      if (sockfd < 0)
-     	  error("ERROR opening socket");
+        error("ERROR opening socket");
      
      // to reuse the port number start
      int optval = 1;
@@ -71,13 +71,13 @@ int initializeTCPSocketToServer( int port){
      server = gethostbyname("127.0.0.1");
      if (server == NULL) {
          fprintf(stderr,"ERROR, no such host\n");
-	  exit(0);
+    exit(0);
      }
 
      /* Set up the address structure to tell the socket what to connect to. */
      bzero((char *) &serv_addr, sizeof(serv_addr));
      serv_addr.sin_family = AF_INET;
-     bcopy((char *)server->h_addr,	   (char *)&serv_addr.sin_addr.s_addr,	   server->h_length);
+     bcopy((char *)server->h_addr,     (char *)&serv_addr.sin_addr.s_addr,     server->h_length);
 
      /* htons() converts the port number to network byte order */
      serv_addr.sin_port = htons(port);
@@ -148,109 +148,96 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
    int i, r;
     char temp[512];
     char *ptr;
-	jsmn_parser p;
-	jsmntok_t t[128]; /* We expect no more than 128 tokens */
+  jsmn_parser p;
+  jsmntok_t t[128]; /* We expect no more than 128 tokens */
 
-	jsmn_init(&p);
+  jsmn_init(&p);
     printf("Came here: %d\n", 1);
 
-	r = jsmn_parse(&p, buf, strlen(buf), t, sizeof(t)/sizeof(t[0]));
+  r = jsmn_parse(&p, buf, strlen(buf), t, sizeof(t)/sizeof(t[0]));
     printf("Came here: %d\n", 2);
 
-	if (r < 0) {
-		printf("Failed to parse JSON: %d\n", r);
-		
-	}
-	printf("Came here: %d\n", 3);
+  if (r < 0) {
+    printf("Failed to parse JSON: %d\n", r);
+    
+  }
+  printf("Came here: %d\n", 3);
 
 
-	/* Assume the top-level element is an object */
-	if (r < 1 || t[0].type != JSMN_OBJECT) {
-		printf("Object expected\n");
-		
-	}
-	printf("Came here: %d\n", 4);
+  /* Assume the top-level element is an object */
+  if (r < 1 || t[0].type != JSMN_OBJECT) {
+    printf("Object expected\n");
+    
+  }
+  printf("Came here: %d\n", 4);
 
-	/* Loop over all keys of the root object */
-	for (i = 1; i < r; i++) {
-				if (jsoneq(buf, &t[i], "stabilizer.yaw") == 0) {
-			/* We may use strndup() to fetch string value socketShutdownError*/
-			printf("stabilizer.yaw: %.*s\n", t[i+1].end-t[i+1].start,
-					buf + t[i+1].start);
+  /* Loop over all keys of the root object */
+  for (i = 1; i < r; i++) {
+        if (jsoneq(buf, &t[i], "stabilizer.yaw") == 0) {
+      /* We may use strndup() to fetch string value socketShutdownError*/
+      printf("stabilizer.yaw: %.*s\n", t[i+1].end-t[i+1].start,buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
-            printf("yaw is %f \n", strtod(temp, &ptr));
-            OUT_sensorData->yawAct = strtod(temp, &ptr);
-            
-            //*OUT_updated_thrust = strtod(temp, &sockfdptr);
+            OUT_sensorData->yawAct = strtod(temp, &ptr);            
             i++;
-
-            //printf("stabilizer.yaw is float %.f\n", atof(temp));
-		} 
-        
-		else if (jsoneq(buf, &t[i], "stabilizer.pitch") == 0) {
-			/* We may additionally check if the value is either "true" or "false" */
-			printf("stabilizer.pitch: %.*s\n", t[i+1].end-t[i+1].start,
-					buf + t[i+1].start);
+    }         
+    else if (jsoneq(buf, &t[i], "stabilizer.pitch") == 0) {
+      /* We may additionally check if the value is either "true" or "false" */
+      printf("stabilizer.pitch: %.*s\n", t[i+1].end-t[i+1].start,buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
             OUT_sensorData->pitchAct = strtod(temp, &ptr);
-			i++;
-		}
-		else if (jsoneq(buf, &t[i], "stabilizer.roll") == 0) {
-			/* We may want to do strtol() here to get numeric value */
-			printf("stabilizer.roll: %.*s\n", t[i+1].end-t[i+1].start,
-					buf + t[i+1].start);
+      i++;
+    }
+    else if (jsoneq(buf, &t[i], "stabilizer.roll") == 0) {
+      /* We may want to do strtol() here to get numeric value */
+      printf("stabilizer.roll: %.*s\n", t[i+1].end-t[i+1].start,buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
             OUT_sensorData->rollAct = strtod(temp, &ptr);
-			i++;
-		}
-		
-		else if (jsoneq(buf, &t[i], "acc.x") == 0) {
-			/* We may additionally check if the value is either "true" or "false" */
-			printf("acc.x: %.*s\n", t[i+1].end-t[i+1].start,
-					buf + t[i+1].start);
+      i++;
+    }   
+    else if (jsoneq(buf, &t[i], "acc.x") == 0) {
+      /* We may additionally check if the value is either "true" or "false" */
+      printf("acc.x: %.*s\n", t[i+1].end-t[i+1].start,
+          buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
             OUT_sensorData->accxAct = strtod(temp, &ptr);
-			i++;
-		}
-		else if (jsoneq(buf, &t[i], "acc.y") == 0) {
-			/* We may want to do strtol() here to get numeric value */
-			printf("acc.y: %.*s\n", t[i+1].end-t[i+1].start,
-					buf + t[i+1].start);
+      i++;
+    }
+    else if (jsoneq(buf, &t[i], "acc.y") == 0) {
+      /* We may want to do strtol() here to get numeric value */
+      printf("acc.y: %.*s\n", t[i+1].end-t[i+1].start,
+          buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
             OUT_sensorData->accyAct = strtod(temp, &ptr);
-			i++;
-		}
-		else if (jsoneq(buf, &t[i], "acc.z") == 0) {
-			/* We may additionally check if the value is either "true" or "false" */
-			printf("acc.z: %.*s\n", t[i+1].end-t[i+1].start,
-					buf + t[i+1].start);
+      i++;
+    }
+    else if (jsoneq(buf, &t[i], "acc.z") == 0) {
+      /* We may additionally check if the value is either "true" or "false" */
+      printf("acc.z: %.*s\n", t[i+1].end-t[i+1].start, buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
             OUT_sensorData->acczAct = strtod(temp, &ptr);
-			i++;
-		}
-		else if (jsoneq(buf, &t[i], "range.zrange") == 0) {
-			/* We may want to do strtol() here to get numeric value */
-			printf("range.zrange: %.*s\n", t[i+1].end-t[i+1].start,
-					buf + t[i+1].start);
+      i++;
+    }
+    else if (jsoneq(buf, &t[i], "range.zrange") == 0) {
+      /* We may want to do strtol() here to get numeric value */
+      printf("range.zrange: %.*s\n", t[i+1].end-t[i+1].start, buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
         }
-		else {
-			printf("Unexpected key: %.*s\n", t[i].end-t[i].start,
-					buf + t[i].start);
-		}
-	}
-	printf("Time to parse : %d \n", (clock() - time_count)* 1000 / CLOCKS_PER_SEC);
+    else {
+      printf("Unexpected key: %.*s\n", t[i].end-t[i].start,buf + t[i].start);
+    }
+  }
+  printf("Time to parse : %d \n", (clock() - time_count)* 1000 / CLOCKS_PER_SEC);
 
 
    printf("Sending to server\n");
