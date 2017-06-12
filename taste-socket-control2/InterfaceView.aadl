@@ -136,6 +136,8 @@ FEATURES
   droneData : OUT PARAMETER DataView::MyDroneData {
     Taste::encoding => NATIVE;
   };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_control_Act;
 
 SUBPROGRAM IMPLEMENTATION PI_control_Act.others
@@ -258,8 +260,10 @@ END gcs.others;
 SYSTEM control
 FEATURES
   PI_control_Act : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::control::PI_control_Act.others {
-    Taste::coordinates => "1621 1190";
+    Taste::coordinates => "1616 1190";
     Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
     Taste::InterfaceName => "control_Act";
   };
 PROPERTIES
@@ -290,7 +294,7 @@ SUBCOMPONENTS
     Taste::coordinates => "287 1272 918 1795";
   };
   control : SYSTEM interfaceview::IV::control.others {
-    Taste::coordinates => "1482 1190 2190 1734";
+    Taste::coordinates => "1477 1190 2185 1734";
   };
 CONNECTIONS
   supervisor_takeoff_gcs_takeoff : SUBPROGRAM ACCESS supervisor.PI_takeoff -> gcs.RI_takeoff {
@@ -303,7 +307,7 @@ CONNECTIONS
     Taste::coordinates => "795 728 795 1000 780 1000 780 1272";
   };
   control_control_Act_supervisor_control_Act : SUBPROGRAM ACCESS control.PI_control_Act -> supervisor.RI_control_Act {
-    Taste::coordinates => "1216 728 1216 959 1621 959 1621 1190";
+    Taste::coordinates => "1216 728 1216 959 1616 959 1616 1190";
   };
 END interfaceview.others;
 
