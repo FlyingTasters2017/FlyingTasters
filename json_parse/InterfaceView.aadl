@@ -30,8 +30,10 @@ WITH TASTE_IV_Properties;
 SYSTEM Function1
 FEATURES
   PI_pulse : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Function1::PI_pulse.others {
-    Taste::coordinates => "975 364";
+    Taste::coordinates => "970 364";
     Taste::RCMoperationKind => cyclic;
+    Taste::RCMperiod => 1000 ms;
+    Taste::Deadline => 0 ms;
     Taste::InterfaceName => "pulse";
   };
 PROPERTIES
@@ -40,6 +42,9 @@ END Function1;
 
 SYSTEM IMPLEMENTATION Function1.others
 SUBCOMPONENTS
+  flagsToLinkWith : DATA DataView::Taste_directive {
+    Taste::FS_Default_Value => "linker-option:""-L /usr/local/lib/ -lpixyusb -lboost_system -lboost_chrono -lusb-1.0 -lboost_thread -lstdc++""";
+  };
   pulse_impl : SUBPROGRAM interfaceview::FV::Function1::PI_pulse.others {
     Compute_Execution_Time => 0 ms .. 0 ms;
   };
@@ -53,7 +58,7 @@ END interfaceview;
 SYSTEM IMPLEMENTATION interfaceview.others
 SUBCOMPONENTS
   Function1 : SYSTEM interfaceview::IV::Function1.others {
-    Taste::coordinates => "764 364 1647 1128";
+    Taste::coordinates => "759 364 1642 1128";
   };
 END interfaceview.others;
 

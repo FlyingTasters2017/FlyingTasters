@@ -1,0 +1,576 @@
+---------------------------------------------------
+-- AADL2.0
+-- TASTE
+-- 
+-- 
+---------------------------------------------------
+
+PACKAGE interfaceview::FV::Coordinator
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_user_input
+END PI_user_input;
+
+SUBPROGRAM IMPLEMENTATION PI_user_input.others
+END PI_user_input.others;
+
+SUBPROGRAM RI_display_data
+END RI_display_data;
+
+SUBPROGRAM IMPLEMENTATION RI_display_data.others
+END RI_display_data.others;
+
+SUBPROGRAM RI_raw_MSD
+END RI_raw_MSD;
+
+SUBPROGRAM IMPLEMENTATION RI_raw_MSD.others
+END RI_raw_MSD.others;
+
+SUBPROGRAM RI_processed_MSD
+END RI_processed_MSD;
+
+SUBPROGRAM IMPLEMENTATION RI_processed_MSD.others
+END RI_processed_MSD.others;
+
+SUBPROGRAM RI_agent_control
+END RI_agent_control;
+
+SUBPROGRAM IMPLEMENTATION RI_agent_control.others
+END RI_agent_control.others;
+
+SUBPROGRAM RI_agent_data
+END RI_agent_data;
+
+SUBPROGRAM IMPLEMENTATION RI_agent_data.others
+END RI_agent_data.others;
+
+SUBPROGRAM RI_world_data
+END RI_world_data;
+
+SUBPROGRAM IMPLEMENTATION RI_world_data.others
+END RI_world_data.others;
+
+SUBPROGRAM PI_clock1
+END PI_clock1;
+
+SUBPROGRAM IMPLEMENTATION PI_clock1.others
+END PI_clock1.others;
+
+SUBPROGRAM PI_mission_safety_events
+END PI_mission_safety_events;
+
+SUBPROGRAM IMPLEMENTATION PI_mission_safety_events.others
+END PI_mission_safety_events.others;
+
+SUBPROGRAM RI_trajectory_data
+END RI_trajectory_data;
+
+SUBPROGRAM IMPLEMENTATION RI_trajectory_data.others
+END RI_trajectory_data.others;
+
+END interfaceview::FV::Coordinator;
+
+PACKAGE interfaceview::FV::AgentControl
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_agent_control
+END PI_agent_control;
+
+SUBPROGRAM IMPLEMENTATION PI_agent_control.others
+END PI_agent_control.others;
+
+END interfaceview::FV::AgentControl;
+
+PACKAGE interfaceview::FV::MS_comm
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_raw_MSD
+END PI_raw_MSD;
+
+SUBPROGRAM IMPLEMENTATION PI_raw_MSD.others
+END PI_raw_MSD.others;
+
+END interfaceview::FV::MS_comm;
+
+PACKAGE interfaceview::FV::Houston
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_agent_data
+END PI_agent_data;
+
+SUBPROGRAM IMPLEMENTATION PI_agent_data.others
+END PI_agent_data.others;
+
+END interfaceview::FV::Houston;
+
+PACKAGE interfaceview::FV::GUI
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM RI_user_input
+END RI_user_input;
+
+SUBPROGRAM IMPLEMENTATION RI_user_input.others
+END RI_user_input.others;
+
+SUBPROGRAM PI_display_data
+END PI_display_data;
+
+SUBPROGRAM IMPLEMENTATION PI_display_data.others
+END PI_display_data.others;
+
+END interfaceview::FV::GUI;
+
+PACKAGE interfaceview::FV::MS_processing
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_processed_MSD
+END PI_processed_MSD;
+
+SUBPROGRAM IMPLEMENTATION PI_processed_MSD.others
+END PI_processed_MSD.others;
+
+END interfaceview::FV::MS_processing;
+
+PACKAGE interfaceview::FV::WorldModel
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM RI_mission_safety_data
+END RI_mission_safety_data;
+
+SUBPROGRAM IMPLEMENTATION RI_mission_safety_data.others
+END RI_mission_safety_data.others;
+
+SUBPROGRAM PI_world_data
+END PI_world_data;
+
+SUBPROGRAM IMPLEMENTATION PI_world_data.others
+END PI_world_data.others;
+
+END interfaceview::FV::WorldModel;
+
+PACKAGE interfaceview::FV::MissionSafety
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_clock2
+END PI_clock2;
+
+SUBPROGRAM IMPLEMENTATION PI_clock2.others
+END PI_clock2.others;
+
+SUBPROGRAM PI_mission_safety_data
+END PI_mission_safety_data;
+
+SUBPROGRAM IMPLEMENTATION PI_mission_safety_data.others
+END PI_mission_safety_data.others;
+
+SUBPROGRAM RI_mission_safety_events
+END RI_mission_safety_events;
+
+SUBPROGRAM IMPLEMENTATION RI_mission_safety_events.others
+END RI_mission_safety_events.others;
+
+END interfaceview::FV::MissionSafety;
+
+PACKAGE interfaceview::FV::TrajectoryGenerator
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_trajectory_data
+END PI_trajectory_data;
+
+SUBPROGRAM IMPLEMENTATION PI_trajectory_data.others
+END PI_trajectory_data.others;
+
+END interfaceview::FV::TrajectoryGenerator;
+
+PACKAGE interfaceview::IV
+PUBLIC
+
+WITH interfaceview::FV::Coordinator;
+WITH interfaceview::FV::GUI;
+WITH interfaceview::FV::MS_comm;
+WITH interfaceview::FV::MS_processing;
+WITH interfaceview::FV::AgentControl;
+WITH interfaceview::FV::Houston;
+WITH interfaceview::FV::WorldModel;
+WITH interfaceview::FV::TrajectoryGenerator;
+WITH interfaceview::FV::MissionSafety;
+WITH interfaceview::FV;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SYSTEM Coordinator
+FEATURES
+  PI_user_input : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Coordinator::PI_user_input.others {
+    Taste::coordinates => "1329 721";
+    Taste::RCMoperationKind => unprotected;
+    Taste::InterfaceName => "user_input";
+  };
+  RI_display_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::GUI::PI_display_data.others {
+    Taste::coordinates => "1671 723";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "display_data";
+    Taste::labelInheritance => "true";
+  };
+  RI_raw_MSD : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::MS_comm::PI_raw_MSD.others {
+    Taste::coordinates => "1972 999";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "raw_MSD";
+    Taste::labelInheritance => "true";
+  };
+  RI_processed_MSD : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::MS_processing::PI_processed_MSD.others {
+    Taste::coordinates => "1972 1267";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "processed_MSD";
+    Taste::labelInheritance => "true";
+  };
+  RI_agent_control : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::AgentControl::PI_agent_control.others {
+    Taste::coordinates => "1803 1473";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "agent_control";
+    Taste::labelInheritance => "true";
+  };
+  RI_agent_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Houston::PI_agent_data.others {
+    Taste::coordinates => "1230 1473";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "agent_data";
+    Taste::labelInheritance => "true";
+  };
+  RI_world_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::WorldModel::PI_world_data.others {
+    Taste::coordinates => "1024 1107";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "world_data";
+    Taste::labelInheritance => "true";
+  };
+  PI_clock1 : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Coordinator::PI_clock1.others {
+    Taste::coordinates => "1024 781";
+    Taste::RCMoperationKind => cyclic;
+    Taste::RCMperiod => 1000 ms;
+    Taste::InterfaceName => "clock1";
+  };
+  PI_mission_safety_events : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Coordinator::PI_mission_safety_events.others {
+    Taste::coordinates => "1024 905";
+    Taste::RCMoperationKind => unprotected;
+    Taste::InterfaceName => "mission_safety_events";
+  };
+  RI_trajectory_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::TrajectoryGenerator::PI_trajectory_data.others {
+    Taste::coordinates => "1024 1296";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "trajectory_data";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (C);
+END Coordinator;
+
+SYSTEM IMPLEMENTATION Coordinator.others
+SUBCOMPONENTS
+  user_input_impl : SUBPROGRAM interfaceview::FV::Coordinator::PI_user_input.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+  clock1_impl : SUBPROGRAM interfaceview::FV::Coordinator::PI_clock1.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+  mission_safety_events_impl : SUBPROGRAM interfaceview::FV::Coordinator::PI_mission_safety_events.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_user_input_impl : SUBPROGRAM ACCESS user_input_impl -> PI_user_input;
+  OpToPICnx_clock1_impl : SUBPROGRAM ACCESS clock1_impl -> PI_clock1;
+  OpToPICnx_mission_safety_events_impl : SUBPROGRAM ACCESS mission_safety_events_impl -> PI_mission_safety_events;
+END Coordinator.others;
+
+SYSTEM AgentControl
+FEATURES
+  PI_agent_control : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::AgentControl::PI_agent_control.others {
+    Taste::coordinates => "1799 1819";
+    Taste::RCMoperationKind => unprotected;
+    Taste::InterfaceName => "agent_control";
+  };
+PROPERTIES
+  Source_Language => (C);
+END AgentControl;
+
+SYSTEM IMPLEMENTATION AgentControl.others
+SUBCOMPONENTS
+  agent_control_impl : SUBPROGRAM interfaceview::FV::AgentControl::PI_agent_control.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_agent_control_impl : SUBPROGRAM ACCESS agent_control_impl -> PI_agent_control;
+END AgentControl.others;
+
+SYSTEM MS_comm
+FEATURES
+  PI_raw_MSD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MS_comm::PI_raw_MSD.others {
+    Taste::coordinates => "2322 999";
+    Taste::RCMoperationKind => unprotected;
+    Taste::InterfaceName => "raw_MSD";
+  };
+PROPERTIES
+  Source_Language => (C);
+END MS_comm;
+
+SYSTEM IMPLEMENTATION MS_comm.others
+SUBCOMPONENTS
+  raw_MSD_impl : SUBPROGRAM interfaceview::FV::MS_comm::PI_raw_MSD.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_raw_MSD_impl : SUBPROGRAM ACCESS raw_MSD_impl -> PI_raw_MSD;
+END MS_comm.others;
+
+SYSTEM Houston
+FEATURES
+  PI_agent_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Houston::PI_agent_data.others {
+    Taste::coordinates => "1230 1816";
+    Taste::RCMoperationKind => unprotected;
+    Taste::InterfaceName => "agent_data";
+  };
+PROPERTIES
+  Source_Language => (C);
+END Houston;
+
+SYSTEM IMPLEMENTATION Houston.others
+SUBCOMPONENTS
+  agent_data_impl : SUBPROGRAM interfaceview::FV::Houston::PI_agent_data.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_agent_data_impl : SUBPROGRAM ACCESS agent_data_impl -> PI_agent_data;
+END Houston.others;
+
+SYSTEM GUI
+FEATURES
+  RI_user_input : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Coordinator::PI_user_input.others {
+    Taste::coordinates => "1324 330";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "user_input";
+    Taste::labelInheritance => "true";
+  };
+  PI_display_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::GUI::PI_display_data.others {
+    Taste::coordinates => "1671 330";
+    Taste::RCMoperationKind => unprotected;
+    Taste::InterfaceName => "display_data";
+  };
+PROPERTIES
+  Source_Language => (C);
+END GUI;
+
+SYSTEM IMPLEMENTATION GUI.others
+SUBCOMPONENTS
+  display_data_impl : SUBPROGRAM interfaceview::FV::GUI::PI_display_data.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_display_data_impl : SUBPROGRAM ACCESS display_data_impl -> PI_display_data;
+END GUI.others;
+
+SYSTEM MS_processing
+FEATURES
+  PI_processed_MSD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MS_processing::PI_processed_MSD.others {
+    Taste::coordinates => "2331 1263";
+    Taste::RCMoperationKind => unprotected;
+    Taste::InterfaceName => "processed_MSD";
+  };
+PROPERTIES
+  Source_Language => (C);
+END MS_processing;
+
+SYSTEM IMPLEMENTATION MS_processing.others
+SUBCOMPONENTS
+  processed_MSD_impl : SUBPROGRAM interfaceview::FV::MS_processing::PI_processed_MSD.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_processed_MSD_impl : SUBPROGRAM ACCESS processed_MSD_impl -> PI_processed_MSD;
+END MS_processing.others;
+
+SYSTEM WorldModel
+FEATURES
+  RI_mission_safety_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::MissionSafety::PI_mission_safety_data.others {
+    Taste::coordinates => "423 773";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "mission_safety_data";
+    Taste::labelInheritance => "true";
+  };
+  PI_world_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::WorldModel::PI_world_data.others {
+    Taste::coordinates => "717 1102";
+    Taste::RCMoperationKind => unprotected;
+    Taste::InterfaceName => "world_data";
+  };
+PROPERTIES
+  Source_Language => (C);
+END WorldModel;
+
+SYSTEM IMPLEMENTATION WorldModel.others
+SUBCOMPONENTS
+  world_data_impl : SUBPROGRAM interfaceview::FV::WorldModel::PI_world_data.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_world_data_impl : SUBPROGRAM ACCESS world_data_impl -> PI_world_data;
+END WorldModel.others;
+
+SYSTEM MissionSafety
+FEATURES
+  PI_clock2 : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MissionSafety::PI_clock2.others {
+    Taste::coordinates => "162 406";
+    Taste::RCMoperationKind => cyclic;
+    Taste::RCMperiod => 1000 ms;
+    Taste::InterfaceName => "clock2";
+  };
+  PI_mission_safety_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MissionSafety::PI_mission_safety_data.others {
+    Taste::coordinates => "422 537";
+    Taste::RCMoperationKind => unprotected;
+    Taste::InterfaceName => "mission_safety_data";
+  };
+  RI_mission_safety_events : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Coordinator::PI_mission_safety_events.others {
+    Taste::coordinates => "695 192";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "mission_safety_events";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (C);
+END MissionSafety;
+
+SYSTEM IMPLEMENTATION MissionSafety.others
+SUBCOMPONENTS
+  clock2_impl : SUBPROGRAM interfaceview::FV::MissionSafety::PI_clock2.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+  mission_safety_data_impl : SUBPROGRAM interfaceview::FV::MissionSafety::PI_mission_safety_data.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_clock2_impl : SUBPROGRAM ACCESS clock2_impl -> PI_clock2;
+  OpToPICnx_mission_safety_data_impl : SUBPROGRAM ACCESS mission_safety_data_impl -> PI_mission_safety_data;
+END MissionSafety.others;
+
+SYSTEM TrajectoryGenerator
+FEATURES
+  PI_trajectory_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::TrajectoryGenerator::PI_trajectory_data.others {
+    Taste::coordinates => "426 1593";
+    Taste::RCMoperationKind => unprotected;
+    Taste::InterfaceName => "trajectory_data";
+  };
+PROPERTIES
+  Source_Language => (C);
+END TrajectoryGenerator;
+
+SYSTEM IMPLEMENTATION TrajectoryGenerator.others
+SUBCOMPONENTS
+  trajectory_data_impl : SUBPROGRAM interfaceview::FV::TrajectoryGenerator::PI_trajectory_data.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_trajectory_data_impl : SUBPROGRAM ACCESS trajectory_data_impl -> PI_trajectory_data;
+END TrajectoryGenerator.others;
+
+SYSTEM interfaceview
+END interfaceview;
+
+SYSTEM IMPLEMENTATION interfaceview.others
+SUBCOMPONENTS
+  Coordinator : SYSTEM interfaceview::IV::Coordinator.others {
+    Taste::coordinates => "1024 723 1972 1473";
+  };
+  AgentControl : SYSTEM interfaceview::IV::AgentControl.others {
+    Taste::coordinates => "1585 1819 2054 2100";
+  };
+  MS_comm : SYSTEM interfaceview::IV::MS_comm.others {
+    Taste::coordinates => "2322 789 2858 1061";
+  };
+  Houston : SYSTEM interfaceview::IV::Houston.others {
+    Taste::coordinates => "970 1816 1424 2100";
+  };
+  GUI : SYSTEM interfaceview::IV::GUI.others {
+    Taste::coordinates => "1127 52 1861 330";
+  };
+  MS_processing : SYSTEM interfaceview::IV::MS_processing.others {
+    Taste::coordinates => "2331 1222 2862 1494";
+  };
+  WorldModel : SYSTEM interfaceview::IV::WorldModel.others {
+    Taste::coordinates => "155 773 717 1185";
+  };
+  MissionSafety : SYSTEM interfaceview::IV::MissionSafety.others {
+    Taste::coordinates => "162 118 695 538";
+  };
+  TrajectoryGenerator : SYSTEM interfaceview::IV::TrajectoryGenerator.others {
+    Taste::coordinates => "126 1593 739 1910";
+  };
+CONNECTIONS
+  Coordinator_user_input_GUI_user_input : SUBPROGRAM ACCESS Coordinator.PI_user_input -> GUI.RI_user_input {
+    Taste::coordinates => "1324 330 1324 645 1329 645 1329 721";
+  };
+  GUI_display_data_Coordinator_display_data : SUBPROGRAM ACCESS GUI.PI_display_data -> Coordinator.RI_display_data {
+    Taste::coordinates => "1671 723 1671 526 1671 526 1671 330";
+  };
+  MS_comm_raw_MSD_Coordinator_raw_MSD : SUBPROGRAM ACCESS MS_comm.PI_raw_MSD -> Coordinator.RI_raw_MSD {
+    Taste::coordinates => "1972 999 2159 999 2159 999 2322 999";
+  };
+  MS_processing_processed_MSD_Coordinator_processed_MSD : SUBPROGRAM ACCESS MS_processing.PI_processed_MSD -> Coordinator.RI_processed_MSD {
+    Taste::coordinates => "1972 1267 2174 1267 2174 1263 2331 1263";
+  };
+  AgentControl_agent_control_Coordinator_agent_control : SUBPROGRAM ACCESS AgentControl.PI_agent_control -> Coordinator.RI_agent_control {
+    Taste::coordinates => "1803 1473 1803 1646 1799 1646 1799 1819";
+  };
+  Houston_agent_data_Coordinator_agent_data : SUBPROGRAM ACCESS Houston.PI_agent_data -> Coordinator.RI_agent_data {
+    Taste::coordinates => "1230 1473 1230 1644 1230 1644 1230 1816";
+  };
+  WorldModel_world_data_Coordinator_world_data : SUBPROGRAM ACCESS WorldModel.PI_world_data -> Coordinator.RI_world_data {
+    Taste::coordinates => "1024 1107 856 1107 856 1102 717 1102";
+  };
+  Coordinator_mission_safety_events_MissionSafety_mission_safety_events : SUBPROGRAM ACCESS Coordinator.PI_mission_safety_events -> MissionSafety.RI_mission_safety_events {
+    Taste::coordinates => "695 192 853 192 853 905 1024 905";
+  };
+  TrajectoryGenerator_trajectory_data_Coordinator_trajectory_data : SUBPROGRAM ACCESS TrajectoryGenerator.PI_trajectory_data -> Coordinator.RI_trajectory_data {
+    Taste::coordinates => "1024 1296 426 1296 426 1593";
+  };
+  MissionSafety_mission_safety_data_WorldModel_mission_safety_data : SUBPROGRAM ACCESS MissionSafety.PI_mission_safety_data -> WorldModel.RI_mission_safety_data {
+    Taste::coordinates => "423 773 423 678 422 678 422 537";
+  };
+END interfaceview.others;
+
+PROPERTIES
+  Taste::dataView => ("DataView");
+  Taste::dataViewPath => ("DataView.aadl");
+  Taste::coordinates => "0 0 2970 2100";
+  Taste::version => "1.3.19";
+END interfaceview::IV;
+
+PACKAGE interfaceview::FV
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+END interfaceview::FV;
+
