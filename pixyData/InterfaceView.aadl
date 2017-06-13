@@ -100,7 +100,7 @@ END Function1.others;
 SYSTEM Function3
 FEATURES
   PI_getdata : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Function3::PI_getdata.others {
-    Taste::coordinates => "2051 1293";
+    Taste::coordinates => "1856 1319";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -128,11 +128,11 @@ SUBCOMPONENTS
     Taste::coordinates => "1551 143 2434 683";
   };
   Function3 : SYSTEM interfaceview::IV::Function3.others {
-    Taste::coordinates => "1800 1293 2539 1744";
+    Taste::coordinates => "1605 1319 2344 1770";
   };
 CONNECTIONS
   Function3_getdata_Function1_getdata : SUBPROGRAM ACCESS Function3.PI_getdata -> Function1.RI_getdata {
-    Taste::coordinates => "2052 683 2052 873 2051 873 2051 1293";
+    Taste::coordinates => "2052 683 2052 873 1856 873 1856 1319";
   };
 END interfaceview.others;
 
