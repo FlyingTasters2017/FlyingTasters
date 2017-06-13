@@ -4,7 +4,9 @@
 
 #define __NEED_T_UInt32_NATIVE
 #define __NEED_T_UInt32_NATIVE
+#define __NEED_T_UInt32_UPER
+#define __NEED_MyInteger_UPER
+#define __NEED_MyInteger_UPER
 #define __NEED_T_UInt32_NATIVE
 #define __NEED_T_UInt32_NATIVE
-#define __NEED_T_UInt32_NATIVE
-#define __NEED_T_UInt32_NATIVE
+#define __NEED_T_UInt32_UPER

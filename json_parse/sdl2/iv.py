@@ -99,13 +99,46 @@ functions['gui']['interfaces']['sendX']['in']['x'] = {
     'asn1_module': 'TASTE_BasicTypes',
     'basic_type': integer,
     'asn1_filename': './dataview-uniq.asn',
-    'encoding': NATIVE,
+    'encoding': UPER,
     'interface': 'sendX',
     'param_direction': param_in
 }
 
-functions['sdl'] = {
-    'name_with_case' : 'SDL',
+functions['gui']['interfaces']['test'] = {
+    'port_name': 'test',
+    'parent_fv': 'gui',
+    'direction': RI,
+    'in': {},
+    'out': {},
+    'synchronism': asynch,
+    'rcm': sporadic,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': '',
+    'wcet_high': 0,
+    'wcet_high_unit': '',
+    'distant_fv': 'sdl2',
+    'calling_threads': {},
+    'distant_name': 'test',
+    'queue_size': 1
+}
+
+functions['gui']['interfaces']['test']['paramsInOrdered'] = ['a']
+
+functions['gui']['interfaces']['test']['paramsOutOrdered'] = []
+
+functions['gui']['interfaces']['test']['in']['a'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'test',
+    'param_direction': param_in
+}
+
+functions['sdl2'] = {
+    'name_with_case' : 'SDL2',
     'runtime_nature': thread,
     'language': OG,
     'zipfile': '',
@@ -113,14 +146,14 @@ functions['sdl'] = {
     'functional_states' : {}
 }
 
-functions['sdl']['interfaces']['pulse'] = {
-    'port_name': 'pulse',
-    'parent_fv': 'sdl',
+functions['sdl2']['interfaces']['test'] = {
+    'port_name': 'test',
+    'parent_fv': 'sdl2',
     'direction': PI,
     'in': {},
     'out': {},
     'synchronism': asynch,
-    'rcm': cyclic,
+    'rcm': sporadic,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': 'ms',
@@ -132,13 +165,46 @@ functions['sdl']['interfaces']['pulse'] = {
     'queue_size': 1
 }
 
-functions['sdl']['interfaces']['pulse']['paramsInOrdered'] = []
+functions['sdl2']['interfaces']['test']['paramsInOrdered'] = ['a']
 
-functions['sdl']['interfaces']['pulse']['paramsOutOrdered'] = []
+functions['sdl2']['interfaces']['test']['paramsOutOrdered'] = []
 
-functions['sdl']['interfaces']['getPixyData'] = {
+functions['sdl2']['interfaces']['test']['in']['a'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'test',
+    'param_direction': param_in
+}
+
+functions['sdl2']['interfaces']['pulse'] = {
+    'port_name': 'pulse',
+    'parent_fv': 'sdl2',
+    'direction': PI,
+    'in': {},
+    'out': {},
+    'synchronism': asynch,
+    'rcm': cyclic,
+    'period': 10,
+    'wcet_low': 0,
+    'wcet_low_unit': 'ms',
+    'wcet_high': 0,
+    'wcet_high_unit': 'ms',
+    'distant_fv': '',
+    'calling_threads': {},
+    'distant_name': '',
+    'queue_size': 1
+}
+
+functions['sdl2']['interfaces']['pulse']['paramsInOrdered'] = []
+
+functions['sdl2']['interfaces']['pulse']['paramsOutOrdered'] = []
+
+functions['sdl2']['interfaces']['getPixyData'] = {
     'port_name': 'getPixyData',
-    'parent_fv': 'sdl',
+    'parent_fv': 'sdl2',
     'direction': RI,
     'in': {},
     'out': {},
@@ -155,11 +221,11 @@ functions['sdl']['interfaces']['getPixyData'] = {
     'queue_size': 1
 }
 
-functions['sdl']['interfaces']['getPixyData']['paramsInOrdered'] = []
+functions['sdl2']['interfaces']['getPixyData']['paramsInOrdered'] = []
 
-functions['sdl']['interfaces']['getPixyData']['paramsOutOrdered'] = ['x', 'y']
+functions['sdl2']['interfaces']['getPixyData']['paramsOutOrdered'] = ['x', 'y']
 
-functions['sdl']['interfaces']['getPixyData']['out']['x'] = {
+functions['sdl2']['interfaces']['getPixyData']['out']['x'] = {
     'type': 'T_UInt32',
     'asn1_module': 'TASTE_BasicTypes',
     'basic_type': integer,
@@ -169,7 +235,7 @@ functions['sdl']['interfaces']['getPixyData']['out']['x'] = {
     'param_direction': param_out
 }
 
-functions['sdl']['interfaces']['getPixyData']['out']['y'] = {
+functions['sdl2']['interfaces']['getPixyData']['out']['y'] = {
     'type': 'T_UInt32',
     'asn1_module': 'TASTE_BasicTypes',
     'basic_type': integer,
@@ -179,9 +245,9 @@ functions['sdl']['interfaces']['getPixyData']['out']['y'] = {
     'param_direction': param_out
 }
 
-functions['sdl']['interfaces']['sendX'] = {
+functions['sdl2']['interfaces']['sendX'] = {
     'port_name': 'sendX',
-    'parent_fv': 'sdl',
+    'parent_fv': 'sdl2',
     'direction': RI,
     'in': {},
     'out': {},
@@ -198,16 +264,16 @@ functions['sdl']['interfaces']['sendX'] = {
     'queue_size': 1
 }
 
-functions['sdl']['interfaces']['sendX']['paramsInOrdered'] = ['x']
+functions['sdl2']['interfaces']['sendX']['paramsInOrdered'] = ['x']
 
-functions['sdl']['interfaces']['sendX']['paramsOutOrdered'] = []
+functions['sdl2']['interfaces']['sendX']['paramsOutOrdered'] = []
 
-functions['sdl']['interfaces']['sendX']['in']['x'] = {
+functions['sdl2']['interfaces']['sendX']['in']['x'] = {
     'type': 'T_UInt32',
     'asn1_module': 'TASTE_BasicTypes',
     'basic_type': integer,
     'asn1_filename': './dataview-uniq.asn',
-    'encoding': NATIVE,
+    'encoding': UPER,
     'interface': 'sendX',
     'param_direction': param_in
 }

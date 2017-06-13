@@ -1,6 +1,9 @@
 /* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
 USE Datamodel;
-SYSTEM sdl;
+SYSTEM sdl2;
+
+	/* CIF Keep Specific Geode PARAMNAMES a */
+	SIGNAL test (MyInteger);
 
 	SIGNAL pulse;
 
@@ -14,19 +17,19 @@ SYSTEM sdl;
 	SIGNAL sendX (T_UInt32);
 
 	CHANNEL c
-		FROM ENV TO sdl WITH pulse;
-		FROM sdl TO ENV WITH sendX;
+		FROM ENV TO sdl2 WITH test,pulse;
+		FROM sdl2 TO ENV WITH sendX;
 	ENDCHANNEL;
 
-	BLOCK sdl;
+	BLOCK sdl2;
 
 		SIGNALROUTE r
-			FROM ENV TO sdl WITH pulse;
-			FROM sdl TO ENV WITH sendX;
+			FROM ENV TO sdl2 WITH test,pulse;
+			FROM sdl2 TO ENV WITH sendX;
 
 		CONNECT c and r;
 
-		PROCESS sdl REFERENCED;
+		PROCESS sdl2 REFERENCED;
 
 	ENDBLOCK;
 

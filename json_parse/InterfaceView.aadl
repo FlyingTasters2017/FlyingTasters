@@ -46,14 +46,36 @@ END PI_sendX;
 SUBPROGRAM IMPLEMENTATION PI_sendX.others
 END PI_sendX.others;
 
+SUBPROGRAM RI_test
+FEATURES
+  a : IN PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+END RI_test;
+
+SUBPROGRAM IMPLEMENTATION RI_test.others
+END RI_test.others;
+
 END interfaceview::FV::GUI;
 
-PACKAGE interfaceview::FV::SDL
+PACKAGE interfaceview::FV::SDL2
 PUBLIC
 
 WITH Taste;
 WITH DataView;
 WITH TASTE_IV_Properties;
+SUBPROGRAM PI_test
+FEATURES
+  a : IN PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_test;
+
+SUBPROGRAM IMPLEMENTATION PI_test.others
+END PI_test.others;
+
 SUBPROGRAM PI_pulse
 PROPERTIES
   Taste::Associated_Queue_Size => 1;
@@ -85,33 +107,26 @@ END RI_sendX;
 SUBPROGRAM IMPLEMENTATION RI_sendX.others
 END RI_sendX.others;
 
-END interfaceview::FV::SDL;
+END interfaceview::FV::SDL2;
 
 PACKAGE interfaceview::IV
 PUBLIC
 
 WITH interfaceview::FV::Function1;
 WITH interfaceview::FV::GUI;
-WITH interfaceview::FV::SDL;
+WITH interfaceview::FV::SDL2;
 WITH interfaceview::FV;
 WITH Taste;
 WITH DataView;
 WITH TASTE_IV_Properties;
 SYSTEM Function1
 FEATURES
-<<<<<<< HEAD
   PI_getPixyData : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Function1::PI_getPixyData.others {
-    Taste::coordinates => "1787 365";
+    Taste::coordinates => "1787 355";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "getPixyData";
-=======
-  PI_pulse : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Function1::PI_pulse.others {
-    Taste::coordinates => "975 364";
-    Taste::RCMoperationKind => cyclic;
-    Taste::InterfaceName => "pulse";
->>>>>>> ecfe69906a330add2131667a352b5e39c3b23831
   };
 PROPERTIES
   Source_Language => (C);
@@ -119,14 +134,10 @@ END Function1;
 
 SYSTEM IMPLEMENTATION Function1.others
 SUBCOMPONENTS
-<<<<<<< HEAD
   flagsToLinkWith : DATA DataView::Taste_directive {
     Taste::FS_Default_Value => "linker-option:""-L /usr/local/lib/ -lpixyusb -lboost_system -lboost_chrono -lusb-1.0 -lboost_thread -lstdc++""";
   };
   getPixyData_impl : SUBPROGRAM interfaceview::FV::Function1::PI_getPixyData.others {
-=======
-  pulse_impl : SUBPROGRAM interfaceview::FV::Function1::PI_pulse.others {
->>>>>>> ecfe69906a330add2131667a352b5e39c3b23831
     Compute_Execution_Time => 0 ms .. 0 ms;
   };
 CONNECTIONS
@@ -136,11 +147,17 @@ END Function1.others;
 SYSTEM GUI
 FEATURES
   PI_sendX : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::GUI::PI_sendX.others {
-    Taste::coordinates => "622 1183";
+    Taste::coordinates => "678 1183";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "sendX";
+  };
+  RI_test : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::SDL2::PI_test.others {
+    Taste::coordinates => "390 1183";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "test";
+    Taste::labelInheritance => "true";
   };
 PROPERTIES
   Source_Language => (GUI);
@@ -155,39 +172,50 @@ CONNECTIONS
   OpToPICnx_sendX_impl : SUBPROGRAM ACCESS sendX_impl -> PI_sendX;
 END GUI.others;
 
-SYSTEM SDL
+SYSTEM SDL2
 FEATURES
-  PI_pulse : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::SDL::PI_pulse.others {
-    Taste::coordinates => "240 365";
-    Taste::RCMoperationKind => cyclic;
+  PI_test : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::SDL2::PI_test.others {
+    Taste::coordinates => "390 708";
+    Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "test";
+  };
+  PI_pulse : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::SDL2::PI_pulse.others {
+    Taste::coordinates => "174 400";
+    Taste::RCMoperationKind => cyclic;
+    Taste::RCMperiod => 10 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "pulse";
   };
   RI_getPixyData : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Function1::PI_getPixyData.others {
-    Taste::coordinates => "938 365";
+    Taste::coordinates => "903 354";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "getPixyData";
     Taste::labelInheritance => "true";
   };
   RI_sendX : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::GUI::PI_sendX.others {
-    Taste::coordinates => "631 660";
+    Taste::coordinates => "677 708";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "sendX";
     Taste::labelInheritance => "true";
   };
 PROPERTIES
   Source_Language => (SDL);
-END SDL;
+END SDL2;
 
-SYSTEM IMPLEMENTATION SDL.others
+SYSTEM IMPLEMENTATION SDL2.others
 SUBCOMPONENTS
-  pulse_impl : SUBPROGRAM interfaceview::FV::SDL::PI_pulse.others {
+  test_impl : SUBPROGRAM interfaceview::FV::SDL2::PI_test.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+  pulse_impl : SUBPROGRAM interfaceview::FV::SDL2::PI_pulse.others {
     Compute_Execution_Time => 0 ms .. 0 ms;
   };
 CONNECTIONS
+  OpToPICnx_test_impl : SUBPROGRAM ACCESS test_impl -> PI_test;
   OpToPICnx_pulse_impl : SUBPROGRAM ACCESS pulse_impl -> PI_pulse;
-END SDL.others;
+END SDL2.others;
 
 SYSTEM interfaceview
 END interfaceview;
@@ -195,24 +223,23 @@ END interfaceview;
 SYSTEM IMPLEMENTATION interfaceview.others
 SUBCOMPONENTS
   Function1 : SYSTEM interfaceview::IV::Function1.others {
-<<<<<<< HEAD
     Taste::coordinates => "1787 174 2670 714";
   };
   GUI : SYSTEM interfaceview::IV::GUI.others {
     Taste::coordinates => "169 1183 1027 1683";
   };
-  SDL : SYSTEM interfaceview::IV::SDL.others {
-    Taste::coordinates => "240 215 938 660";
+  SDL2 : SYSTEM interfaceview::IV::SDL2.others {
+    Taste::coordinates => "174 210 903 708";
   };
 CONNECTIONS
-  Function1_getPixyData_SDL_getPixyData : SUBPROGRAM ACCESS Function1.PI_getPixyData -> SDL.RI_getPixyData {
-    Taste::coordinates => "938 365 1361 365 1361 365 1785 365";
+  Function1_getPixyData_SDL2_getPixyData : SUBPROGRAM ACCESS Function1.PI_getPixyData -> SDL2.RI_getPixyData {
+    Taste::coordinates => "903 354 1345 354 1345 355 1787 355";
   };
-  GUI_sendX_SDL_sendX : SUBPROGRAM ACCESS GUI.PI_sendX -> SDL.RI_sendX {
-    Taste::coordinates => "631 660 631 1031 622 1031 622 1183";
-=======
-    Taste::coordinates => "764 364 1647 1128";
->>>>>>> ecfe69906a330add2131667a352b5e39c3b23831
+  GUI_sendX_SDL2_sendX : SUBPROGRAM ACCESS GUI.PI_sendX -> SDL2.RI_sendX {
+    Taste::coordinates => "677 708 677 945 678 945 678 1183";
+  };
+  SDL2_test_GUI_test : SUBPROGRAM ACCESS SDL2.PI_test -> GUI.RI_test {
+    Taste::coordinates => "390 1185 390 946 390 946 390 708";
   };
 END interfaceview.others;
 
