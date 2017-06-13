@@ -19,6 +19,8 @@ FEATURES
   y : OUT PARAMETER DataView::MyReal {
     Taste::encoding => NATIVE;
   };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_getPixyData;
 
 SUBPROGRAM IMPLEMENTATION PI_getPixyData.others
@@ -44,16 +46,6 @@ END PI_sendX;
 SUBPROGRAM IMPLEMENTATION PI_sendX.others
 END PI_sendX.others;
 
-SUBPROGRAM RI_test
-FEATURES
-  a : IN PARAMETER DataView::MyInteger {
-    Taste::encoding => UPER;
-  };
-END RI_test;
-
-SUBPROGRAM IMPLEMENTATION RI_test.others
-END RI_test.others;
-
 SUBPROGRAM PI_sendY
 FEATURES
   y : IN PARAMETER DataView::MyReal {
@@ -65,6 +57,16 @@ END PI_sendY;
 
 SUBPROGRAM IMPLEMENTATION PI_sendY.others
 END PI_sendY.others;
+
+SUBPROGRAM RI_test
+FEATURES
+  a : IN PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+END RI_test;
+
+SUBPROGRAM IMPLEMENTATION RI_test.others
+END RI_test.others;
 
 END interfaceview::FV::visuallizer;
 
@@ -144,6 +146,7 @@ FEATURES
   PI_getPixyData : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Function1::PI_getPixyData.others {
     Taste::coordinates => "1787 355";
     Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "getPixyData";
   };
@@ -172,16 +175,18 @@ FEATURES
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "sendX";
   };
+  PI_sendY : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::visuallizer::PI_sendY.others {
+    Taste::coordinates => "789 1183";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "sendY";
+  };
   RI_test : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::SDL2::PI_test.others {
     Taste::coordinates => "380 1183";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "test";
     Taste::labelInheritance => "true";
-  };
-  PI_sendY : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::visuallizer::PI_sendY.others {
-    Taste::coordinates => "789 1183";
-    Taste::RCMoperationKind => sporadic;
-    Taste::InterfaceName => "sendY";
   };
 PROPERTIES
   Source_Language => (GUI);
@@ -272,11 +277,11 @@ CONNECTIONS
   visuallizer_sendX_SDL2_sendX : SUBPROGRAM ACCESS visuallizer.PI_sendX -> SDL2.RI_sendX {
     Taste::coordinates => "580 708 580 945 581 945 581 1183";
   };
-  SDL2_test_visuallizer_test : SUBPROGRAM ACCESS SDL2.PI_test -> visuallizer.RI_test {
-    Taste::coordinates => "380 1183 380 946 385 946 385 708";
-  };
   visuallizer_sendY_SDL2_sendY : SUBPROGRAM ACCESS visuallizer.PI_sendY -> SDL2.RI_sendY {
     Taste::coordinates => "790 708 790 945 789 945 789 1183";
+  };
+  SDL2_test_visuallizer_test : SUBPROGRAM ACCESS SDL2.PI_test -> visuallizer.RI_test {
+    Taste::coordinates => "380 1183 380 946 385 946 385 708";
   };
 END interfaceview.others;
 

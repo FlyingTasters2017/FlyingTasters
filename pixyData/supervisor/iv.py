@@ -43,9 +43,9 @@ functions['function1']['interfaces']['getPixyData']['paramsInOrdered'] = []
 functions['function1']['interfaces']['getPixyData']['paramsOutOrdered'] = ['x', 'y']
 
 functions['function1']['interfaces']['getPixyData']['out']['x'] = {
-    'type': 'MyReal',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': real,
+    'type': 'T_UInt32',
+    'asn1_module': 'TASTE_BasicTypes',
+    'basic_type': integer,
     'asn1_filename': './dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'getPixyData',
@@ -53,17 +53,17 @@ functions['function1']['interfaces']['getPixyData']['out']['x'] = {
 }
 
 functions['function1']['interfaces']['getPixyData']['out']['y'] = {
-    'type': 'MyReal',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': real,
+    'type': 'T_UInt32',
+    'asn1_module': 'TASTE_BasicTypes',
+    'basic_type': integer,
     'asn1_filename': './dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'getPixyData',
     'param_direction': param_out
 }
 
-functions['visuallizer'] = {
-    'name_with_case' : 'visuallizer',
+functions['visualizer'] = {
+    'name_with_case' : 'visualizer',
     'runtime_nature': thread,
     'language': GUI,
     'zipfile': '',
@@ -71,9 +71,9 @@ functions['visuallizer'] = {
     'functional_states' : {}
 }
 
-functions['visuallizer']['interfaces']['sendX'] = {
+functions['visualizer']['interfaces']['sendX'] = {
     'port_name': 'sendX',
-    'parent_fv': 'visuallizer',
+    'parent_fv': 'visualizer',
     'direction': PI,
     'in': {},
     'out': {},
@@ -90,56 +90,23 @@ functions['visuallizer']['interfaces']['sendX'] = {
     'queue_size': 1
 }
 
-functions['visuallizer']['interfaces']['sendX']['paramsInOrdered'] = ['x']
+functions['visualizer']['interfaces']['sendX']['paramsInOrdered'] = ['x']
 
-functions['visuallizer']['interfaces']['sendX']['paramsOutOrdered'] = []
+functions['visualizer']['interfaces']['sendX']['paramsOutOrdered'] = []
 
-functions['visuallizer']['interfaces']['sendX']['in']['x'] = {
-    'type': 'MyReal',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': real,
+functions['visualizer']['interfaces']['sendX']['in']['x'] = {
+    'type': 'T_UInt32',
+    'asn1_module': 'TASTE_BasicTypes',
+    'basic_type': integer,
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'sendX',
     'param_direction': param_in
 }
 
-functions['visuallizer']['interfaces']['sendY'] = {
-    'port_name': 'sendY',
-    'parent_fv': 'visuallizer',
-    'direction': PI,
-    'in': {},
-    'out': {},
-    'synchronism': asynch,
-    'rcm': variator,
-    'period': 0,
-    'wcet_low': 0,
-    'wcet_low_unit': 'ms',
-    'wcet_high': 0,
-    'wcet_high_unit': 'ms',
-    'distant_fv': '',
-    'calling_threads': {},
-    'distant_name': '',
-    'queue_size': 1
-}
-
-functions['visuallizer']['interfaces']['sendY']['paramsInOrdered'] = ['y']
-
-functions['visuallizer']['interfaces']['sendY']['paramsOutOrdered'] = []
-
-functions['visuallizer']['interfaces']['sendY']['in']['y'] = {
-    'type': 'MyReal',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': real,
-    'asn1_filename': './dataview-uniq.asn',
-    'encoding': UPER,
-    'interface': 'sendY',
-    'param_direction': param_in
-}
-
-functions['visuallizer']['interfaces']['test'] = {
+functions['visualizer']['interfaces']['test'] = {
     'port_name': 'test',
-    'parent_fv': 'visuallizer',
+    'parent_fv': 'visualizer',
     'direction': RI,
     'in': {},
     'out': {},
@@ -150,17 +117,17 @@ functions['visuallizer']['interfaces']['test'] = {
     'wcet_low_unit': '',
     'wcet_high': 0,
     'wcet_high_unit': '',
-    'distant_fv': 'sdl2',
+    'distant_fv': 'supervisor',
     'calling_threads': {},
     'distant_name': 'test',
     'queue_size': 1
 }
 
-functions['visuallizer']['interfaces']['test']['paramsInOrdered'] = ['a']
+functions['visualizer']['interfaces']['test']['paramsInOrdered'] = ['a']
 
-functions['visuallizer']['interfaces']['test']['paramsOutOrdered'] = []
+functions['visualizer']['interfaces']['test']['paramsOutOrdered'] = []
 
-functions['visuallizer']['interfaces']['test']['in']['a'] = {
+functions['visualizer']['interfaces']['test']['in']['a'] = {
     'type': 'MyInteger',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': integer,
@@ -170,8 +137,8 @@ functions['visuallizer']['interfaces']['test']['in']['a'] = {
     'param_direction': param_in
 }
 
-functions['sdl2'] = {
-    'name_with_case' : 'SDL2',
+functions['supervisor'] = {
+    'name_with_case' : 'supervisor',
     'runtime_nature': thread,
     'language': OG,
     'zipfile': '',
@@ -179,9 +146,9 @@ functions['sdl2'] = {
     'functional_states' : {}
 }
 
-functions['sdl2']['interfaces']['test'] = {
+functions['supervisor']['interfaces']['test'] = {
     'port_name': 'test',
-    'parent_fv': 'sdl2',
+    'parent_fv': 'supervisor',
     'direction': PI,
     'in': {},
     'out': {},
@@ -198,11 +165,11 @@ functions['sdl2']['interfaces']['test'] = {
     'queue_size': 1
 }
 
-functions['sdl2']['interfaces']['test']['paramsInOrdered'] = ['a']
+functions['supervisor']['interfaces']['test']['paramsInOrdered'] = ['a']
 
-functions['sdl2']['interfaces']['test']['paramsOutOrdered'] = []
+functions['supervisor']['interfaces']['test']['paramsOutOrdered'] = []
 
-functions['sdl2']['interfaces']['test']['in']['a'] = {
+functions['supervisor']['interfaces']['test']['in']['a'] = {
     'type': 'MyInteger',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': integer,
@@ -212,9 +179,9 @@ functions['sdl2']['interfaces']['test']['in']['a'] = {
     'param_direction': param_in
 }
 
-functions['sdl2']['interfaces']['pulse'] = {
+functions['supervisor']['interfaces']['pulse'] = {
     'port_name': 'pulse',
-    'parent_fv': 'sdl2',
+    'parent_fv': 'supervisor',
     'direction': PI,
     'in': {},
     'out': {},
@@ -231,13 +198,13 @@ functions['sdl2']['interfaces']['pulse'] = {
     'queue_size': 1
 }
 
-functions['sdl2']['interfaces']['pulse']['paramsInOrdered'] = []
+functions['supervisor']['interfaces']['pulse']['paramsInOrdered'] = []
 
-functions['sdl2']['interfaces']['pulse']['paramsOutOrdered'] = []
+functions['supervisor']['interfaces']['pulse']['paramsOutOrdered'] = []
 
-functions['sdl2']['interfaces']['getPixyData'] = {
+functions['supervisor']['interfaces']['getPixyData'] = {
     'port_name': 'getPixyData',
-    'parent_fv': 'sdl2',
+    'parent_fv': 'supervisor',
     'direction': RI,
     'in': {},
     'out': {},
@@ -254,33 +221,33 @@ functions['sdl2']['interfaces']['getPixyData'] = {
     'queue_size': 1
 }
 
-functions['sdl2']['interfaces']['getPixyData']['paramsInOrdered'] = []
+functions['supervisor']['interfaces']['getPixyData']['paramsInOrdered'] = []
 
-functions['sdl2']['interfaces']['getPixyData']['paramsOutOrdered'] = ['x', 'y']
+functions['supervisor']['interfaces']['getPixyData']['paramsOutOrdered'] = ['x', 'y']
 
-functions['sdl2']['interfaces']['getPixyData']['out']['x'] = {
-    'type': 'MyReal',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': real,
+functions['supervisor']['interfaces']['getPixyData']['out']['x'] = {
+    'type': 'T_UInt32',
+    'asn1_module': 'TASTE_BasicTypes',
+    'basic_type': integer,
     'asn1_filename': './dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'getPixyData',
     'param_direction': param_out
 }
 
-functions['sdl2']['interfaces']['getPixyData']['out']['y'] = {
-    'type': 'MyReal',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': real,
+functions['supervisor']['interfaces']['getPixyData']['out']['y'] = {
+    'type': 'T_UInt32',
+    'asn1_module': 'TASTE_BasicTypes',
+    'basic_type': integer,
     'asn1_filename': './dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'getPixyData',
     'param_direction': param_out
 }
 
-functions['sdl2']['interfaces']['sendX'] = {
+functions['supervisor']['interfaces']['sendX'] = {
     'port_name': 'sendX',
-    'parent_fv': 'sdl2',
+    'parent_fv': 'supervisor',
     'direction': RI,
     'in': {},
     'out': {},
@@ -291,55 +258,22 @@ functions['sdl2']['interfaces']['sendX'] = {
     'wcet_low_unit': '',
     'wcet_high': 0,
     'wcet_high_unit': '',
-    'distant_fv': 'visuallizer',
+    'distant_fv': 'visualizer',
     'calling_threads': {},
     'distant_name': 'sendX',
     'queue_size': 1
 }
 
-functions['sdl2']['interfaces']['sendX']['paramsInOrdered'] = ['x']
+functions['supervisor']['interfaces']['sendX']['paramsInOrdered'] = ['x']
 
-functions['sdl2']['interfaces']['sendX']['paramsOutOrdered'] = []
+functions['supervisor']['interfaces']['sendX']['paramsOutOrdered'] = []
 
-functions['sdl2']['interfaces']['sendX']['in']['x'] = {
-    'type': 'MyReal',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': real,
+functions['supervisor']['interfaces']['sendX']['in']['x'] = {
+    'type': 'T_UInt32',
+    'asn1_module': 'TASTE_BasicTypes',
+    'basic_type': integer,
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'sendX',
-    'param_direction': param_in
-}
-
-functions['sdl2']['interfaces']['sendY'] = {
-    'port_name': 'sendY',
-    'parent_fv': 'sdl2',
-    'direction': RI,
-    'in': {},
-    'out': {},
-    'synchronism': asynch,
-    'rcm': sporadic,
-    'period': 0,
-    'wcet_low': 0,
-    'wcet_low_unit': '',
-    'wcet_high': 0,
-    'wcet_high_unit': '',
-    'distant_fv': 'visuallizer',
-    'calling_threads': {},
-    'distant_name': 'sendY',
-    'queue_size': 1
-}
-
-functions['sdl2']['interfaces']['sendY']['paramsInOrdered'] = ['y']
-
-functions['sdl2']['interfaces']['sendY']['paramsOutOrdered'] = []
-
-functions['sdl2']['interfaces']['sendY']['in']['y'] = {
-    'type': 'MyReal',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': real,
-    'asn1_filename': './dataview-uniq.asn',
-    'encoding': UPER,
-    'interface': 'sendY',
     'param_direction': param_in
 }

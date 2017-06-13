@@ -26,46 +26,8 @@ void function1_startup()
        but do not make any call to a required interface. */
 }
 
-void function1_PI_getPixyData(asn1SccMyReal *OUT_x, asn1SccMyReal *OUT_y)
+void function1_PI_pulse()
 {
-        int i;
-        int r;
-        jsmn_parser p;
-        jsmntok_t t[128]; /* We expect no more than 128 tokens */
-
-        jsmn_init(&p);
-        r = jsmn_parse(&p, JSON_STRING, strlen(JSON_STRING), t, sizeof(t)/sizeof(t[0]));
-        if (r < 0) {
-                printf("Failed to parse JSON: %d\n", r);
-        }
-
-        /* Assume the top-level element is an object */
-        if (r < 1 || t[0].type != JSMN_OBJECT) {
-                printf("Object expected\n");
-        }
-
-        /* Loop over all keys of the root object */
-        for (i = 1; i < r; i++) {
-                if (jsoneq(JSON_STRING, &t[i], "row") == 0) {
-                        /* We may use strndup() to fetch string value */
-                        //printf("- row: %.*s\n", t[i+1].end-t[i+1].start,
-                        //                JSON_STRING + t[i+1].start);
-                        i++;
-                } else if (jsoneq(JSON_STRING, &t[i], "pitch") == 0) {
-                        /* We may additionally check if the value is either "true" or "false" */
-                        //printf("- pitch: %.*s\n", t[i+1].end-t[i+1].start,
-                        //                JSON_STRING + t[i+1].start);
-                        i++;
-                } else if (jsoneq(JSON_STRING, &t[i], "yaw") == 0) {
-                        /* We may want to do strtol() here to get numeric value */
-                        //printf("- yaw: %.*s\n", t[i+1].end-t[i+1].start,
-                        //                JSON_STRING + t[i+1].start);
-                        i++;
-                } else {
-                        //printf("Unexpected key: %.*s\n", t[i].end-t[i].start,
-                        //                JSON_STRING + t[i].start);
-                }
-        }
 
         #define BLOCK_BUFFER_SIZE    25
 
@@ -79,6 +41,7 @@ void function1_PI_getPixyData(asn1SccMyReal *OUT_x, asn1SccMyReal *OUT_y)
 
 
         static bool run_flag = true;
+        int i;
                 
         int      index;
         int      blocks_copied;
@@ -125,7 +88,10 @@ void function1_PI_getPixyData(asn1SccMyReal *OUT_x, asn1SccMyReal *OUT_y)
             }
         }
         printf("Detecting blocks...\n");
-
+        
+        asn1SccT_UInt32 x;
+        asn1SccT_UInt32 y;
+        
         while(run_flag)
 
         {
@@ -164,21 +130,13 @@ void function1_PI_getPixyData(asn1SccMyReal *OUT_x, asn1SccMyReal *OUT_y)
 
                 sprintf(buf, "CC block! (%d decimal) x: %d y: %d width: %d height: %d angle %d", blocks[index].signature, blocks[index].x, blocks[index].y, blocks[index].width, blocks[index].height, blocks[index].angle);
                 printf("  %s\n", buf);
-                //printf(&blocks[index].x);
-                //GUI_RI_sendPixyData(blocks[index].x);
-                //function1_RI_sendPixyData((decimal)blocks[index].x);
-                //function1_RI_sendPixyData(12);
-                //*OUT_x = blocks[index].x;
-                //*OUT_y = blocks[index].y;
+                x=blocks[index].x;
+                y=blocks[index].y;
+                function1_RI_getdata(&x, &y);
             }
-        *OUT_x=212;
-        *OUT_y=534;
             i++;
 
         }
 
         pixy_close();
-        
-        //printf(OUT_x);
-        //printf(OUT_y);
 }

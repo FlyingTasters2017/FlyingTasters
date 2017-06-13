@@ -56,12 +56,9 @@ SKELS="./"
 # Update the data view with local paths
 taste-update-data-view
 
-# Generate code for OpenGEODE function sdl2
-cd "$SKELS"/sdl2 && opengeode --toAda sdl2.pr system_structure.pr && cd $OLDPWD
-
 cd "$SKELS" && rm -f function1.zip && zip function1 function1/* && cd $OLDPWD
 
-cd "$SKELS" && rm -f sdl2.zip && zip sdl2 sdl2/* && cd $OLDPWD
+cd "$SKELS" && rm -f function3.zip && zip function3 function3/* && cd $OLDPWD
 
 [ ! -z "$CLEANUP" ] && rm -rf binary*
 
@@ -96,7 +93,7 @@ cd "$CWD" && assert-builder-ocarina.py \
 	--deploymentView "$DEPLOYMENTVIEW" \
 	-o "$OUTPUTDIR" \
 	--subC function1:"$SKELS"/function1.zip \
-	--subAda sdl2:"$SKELS"/sdl2.zip \
+	--subC function3:"$SKELS"/function3.zip \
 	$ORCHESTRATOR_OPTIONS
 
 if [ -f user_init_last.sh ]
