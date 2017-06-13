@@ -13,6 +13,9 @@ process supervisor;
         call writeln('SDL Startup');
         /* CIF NEXTSTATE (479, 172), (70, 35) */
         NEXTSTATE Wait;
+    /* CIF state (1059, 47), (70, 35) */
+    state Wait;
+    endstate;
     /* CIF state (831, 107), (75, 35) */
     state Running;
         /* CIF input (763, 162), (70, 35) */
@@ -31,9 +34,6 @@ process supervisor;
         input takeoff(Ref);
             /* CIF NEXTSTATE (1005, 217), (70, 35) */
             NEXTSTATE Wait;
-    endstate;
-    /* CIF state (1059, 47), (70, 35) */
-    state Wait;
     endstate;
     /* CIF state (479, 172), (70, 35) */
     state Wait;
