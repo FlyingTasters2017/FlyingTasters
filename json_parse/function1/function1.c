@@ -26,7 +26,7 @@ void function1_startup()
        but do not make any call to a required interface. */
 }
 
-void function1_PI_getPixyData(asn1SccT_UInt32 *OUT_x, asn1SccT_UInt32 *OUT_y)
+void function1_PI_getPixyData(asn1SccMyReal *OUT_x, asn1SccMyReal *OUT_y)
 {
         int i;
         int r;
@@ -73,7 +73,7 @@ void function1_PI_getPixyData(asn1SccT_UInt32 *OUT_x, asn1SccT_UInt32 *OUT_y)
 
         // Pixy Block buffer // 
 
-        /*
+        
         struct Block blocks[BLOCK_BUFFER_SIZE];
 
 
@@ -176,9 +176,9 @@ void function1_PI_getPixyData(asn1SccT_UInt32 *OUT_x, asn1SccT_UInt32 *OUT_y)
 
         }
 
-        pixy_close();*/
-        *OUT_x=2121;
-        *OUT_y=534;
+        pixy_close();
+        //*OUT_x=212;
+        //*OUT_y=534;
         //printf(OUT_x);
         //printf(OUT_y);
 }

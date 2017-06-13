@@ -17,9 +17,12 @@ package sdl2 is
     procedure pulse;
     pragma Export(C, pulse, "sdl2_pulse");
     --  Required interface "sendX"
-    procedure RIÜsendX(x: access asn1SccT_UInt32);
+    procedure RIÜsendX(x: access asn1SccMyReal);
     pragma import(C, RIÜsendX, "sdl2_RI_sendX");
+    --  Required interface "sendY"
+    procedure RIÜsendY(y: access asn1SccMyReal);
+    pragma import(C, RIÜsendY, "sdl2_RI_sendY");
     --  Sync required interface "getPixyData"
-    procedure RIÜgetPixyData(x: access asn1SccT_UInt32; y: access asn1SccT_UInt32);
+    procedure RIÜgetPixyData(x: access asn1SccMyReal; y: access asn1SccMyReal);
     pragma import(C, RIÜgetPixyData, "sdl2_RI_getPixyData");
 end sdl2;

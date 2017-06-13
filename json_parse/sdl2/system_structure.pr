@@ -9,23 +9,26 @@ SYSTEM sdl2;
 
 	PROCEDURE getPixyData COMMENT '#c_predef';
 		FPAR
-			IN/OUT x T_UInt32,
-			IN/OUT y T_UInt32;
+			IN/OUT x MyReal,
+			IN/OUT y MyReal;
  	EXTERNAL;
 
 	/* CIF Keep Specific Geode PARAMNAMES x */
-	SIGNAL sendX (T_UInt32);
+	SIGNAL sendX (MyReal);
+
+	/* CIF Keep Specific Geode PARAMNAMES y */
+	SIGNAL sendY (MyReal);
 
 	CHANNEL c
 		FROM ENV TO sdl2 WITH test,pulse;
-		FROM sdl2 TO ENV WITH sendX;
+		FROM sdl2 TO ENV WITH sendX,sendY;
 	ENDCHANNEL;
 
 	BLOCK sdl2;
 
 		SIGNALROUTE r
 			FROM ENV TO sdl2 WITH test,pulse;
-			FROM sdl2 TO ENV WITH sendX;
+			FROM sdl2 TO ENV WITH sendX,sendY;
 
 		CONNECT c and r;
 

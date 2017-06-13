@@ -33,17 +33,17 @@ END Node1;
 
 SYSTEM IMPLEMENTATION Node1.others
 SUBCOMPONENTS
-  IV_GUI : SYSTEM interfaceview::IV::GUI.others {
-    Taste::coordinates => "1031 1405 1241 1641";
-    Taste::FunctionName => "GUI";
-  };
   IV_SDL2 : SYSTEM interfaceview::IV::SDL2.others {
-    Taste::coordinates => "1015 1165 1200 1318";
+    Taste::coordinates => "1015 1165 1298 1318";
     Taste::FunctionName => "SDL2";
   };
   IV_Function1 : SYSTEM interfaceview::IV::Function1.others {
     Taste::coordinates => "1380 1236 1780 1431";
     Taste::FunctionName => "Function1";
+  };
+  IV_visuallizer : SYSTEM interfaceview::IV::visuallizer.others {
+    Taste::coordinates => "1231 1498 1472 1677";
+    Taste::FunctionName => "visuallizer";
   };
   x86_partition : PROCESS deploymentview::DV::Node1::x86_partition.others {
     Taste::coordinates => "967 1024 1913 1790";
@@ -53,9 +53,9 @@ SUBCOMPONENTS
     Taste::coordinates => "868 917 2042 1867";
   };
 PROPERTIES
-  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_GUI;
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_SDL2;
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Function1;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_visuallizer;
   Actual_Processor_Binding => (reference (x86_linux32)) APPLIES TO x86_partition;
 END Node1.others;
 

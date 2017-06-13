@@ -13,8 +13,8 @@ extern "C" {
 
 void function1_startup();
 
-void function1_PI_getPixyData(asn1SccT_UInt32 *,
-                              asn1SccT_UInt32 *);
+void function1_PI_getPixyData(asn1SccMyInteger *,
+                              asn1SccMyInteger *);
 
 #ifdef __cplusplus
 }

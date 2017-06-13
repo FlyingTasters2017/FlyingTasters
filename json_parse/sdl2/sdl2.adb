@@ -22,8 +22,8 @@ package body sdl2 is
         record
         state : States;
         initDone : Boolean := False;
-        y : aliased asn1SccT_UInt32;
-        x : aliased asn1SccT_UInt32;
+        y : aliased asn1SccMyReal;
+        x : aliased asn1SccMyReal;
         a : aliased asn1SccMyInteger;
     end record;
     ctxt: aliased ctxt_Ty;
@@ -34,10 +34,10 @@ package body sdl2 is
             case ctxt.state is
                 when running =>
                     ctxt.a := a.all;
-                    runTransition(4);
+                    runTransition(2);
                 when wait =>
                     ctxt.a := a.all;
-                    runTransition(2);
+                    runTransition(4);
                 when others =>
                     runTransition(CS_Only);
             end case;
@@ -48,9 +48,9 @@ package body sdl2 is
         begin
             case ctxt.state is
                 when running =>
-                    runTransition(3);
-                when wait =>
                     runTransition(1);
+                when wait =>
+                    runTransition(3);
                 when others =>
                     runTransition(CS_Only);
             end case;
@@ -68,28 +68,30 @@ package body sdl2 is
                         ctxt.state := Wait;
                         goto next_transition;
                     when 1 =>
-                        -- NEXT_STATE Wait (18,22) at 275, 170
+                        -- getPixyData(x,y) (18,17)
+                        RIÜgetPixyData(ctxt.x'Access, ctxt.y'Access);
+                        -- sendY(y) (20,19)
+                        RIÜsendY(ctxt.y'Access);
+                        -- sendX(x) (22,19)
+                        RIÜsendX(ctxt.x'Access);
+                        -- NEXT_STATE Running (24,22) at 479, 294
                         trId := -1;
-                        ctxt.state := Wait;
+                        ctxt.state := Running;
                         goto next_transition;
                     when 2 =>
-                        -- NEXT_STATE Running (22,22) at 365, 170
-                        trId := -1;
-                        ctxt.state := Running;
-                        goto next_transition;
-                    when 3 =>
-                        -- getPixyData(x,y) (29,17)
-                        RIÜgetPixyData(ctxt.x'Access, ctxt.y'Access);
-                        -- sendX(x) (31,19)
-                        RIÜsendX(ctxt.x'Access);
-                        -- NEXT_STATE Running (33,22) at 479, 244
-                        trId := -1;
-                        ctxt.state := Running;
-                        goto next_transition;
-                    when 4 =>
-                        -- NEXT_STATE Wait (37,22) at 586, 134
+                        -- NEXT_STATE Wait (28,22) at 586, 134
                         trId := -1;
                         ctxt.state := Wait;
+                        goto next_transition;
+                    when 3 =>
+                        -- NEXT_STATE Wait (35,22) at 275, 170
+                        trId := -1;
+                        ctxt.state := Wait;
+                        goto next_transition;
+                    when 4 =>
+                        -- NEXT_STATE Running (39,22) at 365, 170
+                        trId := -1;
+                        ctxt.state := Running;
                         goto next_transition;
                     when CS_Only =>
                         trId := -1;
