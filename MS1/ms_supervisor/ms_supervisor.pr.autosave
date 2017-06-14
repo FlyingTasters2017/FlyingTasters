@@ -1,0 +1,31 @@
+/* CIF PROCESS (250, 150), (150, 75) */
+process ms_supervisor;
+    /* CIF START (320, 10), (70, 35) */
+    START;
+        /* CIF PROCEDURECALL (275, 65), (159, 35) */
+        call writeln('SDL startup');
+        /* CIF NEXTSTATE (320, 115), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (320, 115), (70, 35) */
+    state Wait;
+        /* CIF input (260, 170), (70, 35) */
+        input pulse;
+            /* CIF NEXTSTATE (260, 225), (70, 35) */
+            NEXTSTATE Wait;
+        /* CIF input (340, 170), (119, 35) */
+        input talk_with_MSSV;
+            /* CIF NEXTSTATE (365, 225), (70, 35) */
+            NEXTSTATE Running;
+    endstate;
+    /* CIF state (693, 13), (70, 35) */
+    state Running;
+        /* CIF input (633, 68), (70, 35) */
+        input pulse;
+            /* CIF NEXTSTATE (633, 123), (70, 35) */
+            NEXTSTATE Running;
+        /* CIF input (713, 68), (119, 35) */
+        input talk_with_MSSV;
+            /* CIF NEXTSTATE (738, 123), (70, 35) */
+            NEXTSTATE Wait;
+    endstate;
+endprocess ms_supervisor;
