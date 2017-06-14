@@ -1,0 +1,8 @@
+PROCESS as_supervisor;
+/* CIF START (320, 10), (70, 35) */
+START;
+NEXTSTATE Wait;
+/* CIF STATE (450, 10), (70, 35) */
+STATE Wait;
+ENDSTATE;
+ENDPROCESS;
