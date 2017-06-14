@@ -69,22 +69,24 @@ package body ms_supervisor is
                         ctxt.state := Wait;
                         goto next_transition;
                     when 1 =>
-                        -- NEXT_STATE Running (19,22) at 633, 123
+                        -- get_raw_MSD (19,17)
+                        RIÜget_raw_MSD;
+                        -- NEXT_STATE Running (21,22) at 633, 173
                         trId := -1;
                         ctxt.state := Running;
                         goto next_transition;
                     when 2 =>
-                        -- NEXT_STATE Wait (23,22) at 737, 123
+                        -- NEXT_STATE Wait (25,22) at 783, 123
                         trId := -1;
                         ctxt.state := Wait;
                         goto next_transition;
                     when 3 =>
-                        -- NEXT_STATE Wait (30,22) at 260, 225
+                        -- NEXT_STATE Wait (32,22) at 260, 225
                         trId := -1;
                         ctxt.state := Wait;
                         goto next_transition;
                     when 4 =>
-                        -- NEXT_STATE Running (34,22) at 364, 225
+                        -- NEXT_STATE Running (36,22) at 364, 225
                         trId := -1;
                         ctxt.state := Running;
                         goto next_transition;

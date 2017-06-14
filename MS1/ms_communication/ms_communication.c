@@ -127,5 +127,9 @@ void ms_communication_PI_get_raw_MSD()
         }
 
         pixy_close();
+    /*asn1SccT_UInt32 x=5;
+    asn1SccT_UInt32 y=2;
+    asn1SccMyInteger sig=1;
+    ms_communication_RI_process_MSD(&x, &y, &sig);*/
 }
 

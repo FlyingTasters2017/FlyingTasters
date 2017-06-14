@@ -118,6 +118,8 @@ FEATURES
   x : IN PARAMETER DataView::MyReal {
     Taste::encoding => UPER;
   };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_display;
 
 SUBPROGRAM IMPLEMENTATION PI_display.others
@@ -187,7 +189,7 @@ FEATURES
     Taste::InterfaceName => "pulse";
   };
   PI_talk_with_MSSV : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MS_Supervisor::PI_talk_with_MSSV.others {
-    Taste::coordinates => "1980 805";
+    Taste::coordinates => "1975 805";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -247,13 +249,14 @@ END MSD_Processing.others;
 SYSTEM Visualizer
 FEATURES
   PI_display : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Visualizer::PI_display.others {
-    Taste::coordinates => "1390 1262";
+    Taste::coordinates => "1385 1262";
     Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "display";
   };
   RI_talk_with_MSSV : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::MS_Supervisor::PI_talk_with_MSSV.others {
-    Taste::coordinates => "1980 1072";
+    Taste::coordinates => "1975 1072";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "talk_with_MSSV";
     Taste::labelInheritance => "true";
@@ -286,7 +289,7 @@ SUBCOMPONENTS
     Taste::coordinates => "144 1088 882 1657";
   };
   Visualizer : SYSTEM interfaceview::IV::Visualizer.others {
-    Taste::coordinates => "1390 1072 2324 1616";
+    Taste::coordinates => "1385 1072 2319 1616";
   };
 CONNECTIONS
   MS_Communication_get_raw_MSD_MS_Supervisor_get_raw_MSD : SUBPROGRAM ACCESS MS_Communication.PI_get_raw_MSD -> MS_Supervisor.RI_get_raw_MSD {
@@ -296,10 +299,10 @@ CONNECTIONS
     Taste::coordinates => "482 821 482 954 482 954 482 1088";
   };
   MS_Supervisor_talk_with_MSSV_Visualizer_talk_with_MSSV : SUBPROGRAM ACCESS MS_Supervisor.PI_talk_with_MSSV -> Visualizer.RI_talk_with_MSSV {
-    Taste::coordinates => "1980 1072 1980 938 1980 938 1980 805";
+    Taste::coordinates => "1975 1072 1975 938 1975 938 1975 805";
   };
   Visualizer_display_MSD_Processing_display : SUBPROGRAM ACCESS Visualizer.PI_display -> MSD_Processing.RI_display {
-    Taste::coordinates => "882 1262 1136 1262 1136 1262 1390 1262";
+    Taste::coordinates => "882 1262 1136 1262 1136 1262 1385 1262";
   };
 END interfaceview.others;
 

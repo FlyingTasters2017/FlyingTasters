@@ -15,11 +15,13 @@ process ms_supervisor;
     state Running;
         /* CIF input (633, 68), (70, 35) */
         input pulse;
-            /* CIF NEXTSTATE (633, 123), (70, 35) */
+            /* CIF PROCEDURECALL (611, 123), (114, 35) */
+            call get_raw_MSD;
+            /* CIF NEXTSTATE (633, 173), (70, 35) */
             NEXTSTATE Running;
-        /* CIF input (705, 68), (134, 35) */
+        /* CIF input (751, 68), (134, 35) */
         input talk_with_MSSV(a);
-            /* CIF NEXTSTATE (737, 123), (70, 35) */
+            /* CIF NEXTSTATE (783, 123), (70, 35) */
             NEXTSTATE Wait;
     endstate;
     /* CIF state (320, 115), (70, 35) */
