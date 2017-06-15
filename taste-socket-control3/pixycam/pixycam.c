@@ -15,8 +15,12 @@ void pixycam_startup()
     /* Write your initialization code here,
        but do not make any call to a required interface. */
     // Connect to Pixy //
-    pixy_init_status = pixy_init();
-    printf("pixy_init(): ");
+    pixy_close();
+    {
+        pixy_init_status = pixy_init();
+        printf("pixy_init(): ");
+        pixy_error(pixy_init_status);
+    }
     
     // Request Pixy firmware version //
     {
@@ -51,7 +55,7 @@ void pixycam_PI_rawdata()
         struct Block blocks[BLOCK_BUFFER_SIZE];
 
 
-        //static bool run_flag = true;
+        static bool run_flag = true;
         
         //int      i;        
         int      index;
@@ -86,7 +90,7 @@ void pixycam_PI_rawdata()
 
             // Wait for new blocks to be available //
 
-            while(!pixy_blocks_are_new()/* && run_flag*/); 
+            while(!pixy_blocks_are_new() /*&& run_flag*/); 
 
 
 
@@ -108,8 +112,8 @@ void pixycam_PI_rawdata()
 
             // Display received blocks //
 
-            //printf("frame %d:\n", i);
-
+            printf("frame :\n");
+            
             for(index = 0; index != blocks_copied; ++index) 
             {    
                 //blocks[index].print(buf);

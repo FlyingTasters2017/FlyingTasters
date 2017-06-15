@@ -67,6 +67,8 @@ cd "$SKELS" && rm -f pixyprocess.zip && zip pixyprocess pixyprocess/* && cd $OLD
 
 cd "$SKELS" && rm -f supervisor.zip && zip supervisor supervisor/* && cd $OLDPWD
 
+cd "$SKELS" && rm -f cclient.zip && zip cclient cclient/* && cd $OLDPWD
+
 [ ! -z "$CLEANUP" ] && rm -rf binary*
 
 if [ -f ConcurrencyView.pro ]
@@ -103,6 +105,7 @@ cd "$CWD" && assert-builder-ocarina.py \
 	--subC pixycam:"$SKELS"/pixycam.zip \
 	--subC pixyprocess:"$SKELS"/pixyprocess.zip \
 	--subAda supervisor:"$SKELS"/supervisor.zip \
+	--subC cclient:"$SKELS"/cclient.zip \
 	$ORCHESTRATOR_OPTIONS
 
 if [ -f user_init_last.sh ]

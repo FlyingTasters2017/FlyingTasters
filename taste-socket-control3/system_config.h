@@ -5,12 +5,12 @@
 #define __NEED_MyDroneData_NATIVE
 #define __NEED_MySensorData_NATIVE
 #define __NEED_MySensorData_UPER
-#define __NEED_MyDroneData_UPER
 #define __NEED_T_UInt32_NATIVE
 #define __NEED_T_UInt32_NATIVE
 #define __NEED_T_UInt32_NATIVE
 #define __NEED_T_UInt32_NATIVE
-#define __NEED_MyDroneData_UPER
 #define __NEED_MyDroneData_NATIVE
 #define __NEED_MySensorData_NATIVE
 #define __NEED_MySensorData_UPER
+#define __NEED_MyDroneData_NATIVE
+#define __NEED_MyDroneData_NATIVE

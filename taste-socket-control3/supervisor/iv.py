@@ -104,39 +104,6 @@ functions['gcs']['interfaces']['displaySensor']['in']['sensorData'] = {
     'param_direction': param_in
 }
 
-functions['gcs']['interfaces']['takeoff'] = {
-    'port_name': 'takeoff',
-    'parent_fv': 'gcs',
-    'direction': RI,
-    'in': {},
-    'out': {},
-    'synchronism': asynch,
-    'rcm': sporadic,
-    'period': 0,
-    'wcet_low': 0,
-    'wcet_low_unit': '',
-    'wcet_high': 0,
-    'wcet_high_unit': '',
-    'distant_fv': 'supervisor',
-    'calling_threads': {},
-    'distant_name': 'takeoff',
-    'queue_size': 1
-}
-
-functions['gcs']['interfaces']['takeoff']['paramsInOrdered'] = ['droneData']
-
-functions['gcs']['interfaces']['takeoff']['paramsOutOrdered'] = []
-
-functions['gcs']['interfaces']['takeoff']['in']['droneData'] = {
-    'type': 'MyDroneData',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': sequence,
-    'asn1_filename': './dataview-uniq.asn',
-    'encoding': UPER,
-    'interface': 'takeoff',
-    'param_direction': param_in
-}
-
 functions['pixycam'] = {
     'name_with_case' : 'Pixycam',
     'runtime_nature': passive,
@@ -153,7 +120,7 @@ functions['pixycam']['interfaces']['rawdata'] = {
     'in': {},
     'out': {},
     'synchronism': synch,
-    'rcm': unprotected,
+    'rcm': protected,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': 'ms',
@@ -281,7 +248,7 @@ functions['supervisor']['interfaces']['pulse'] = {
     'out': {},
     'synchronism': asynch,
     'rcm': cyclic,
-    'period': 1000,
+    'period': 1,
     'wcet_low': 0,
     'wcet_low_unit': 'ms',
     'wcet_high': 0,
@@ -295,39 +262,6 @@ functions['supervisor']['interfaces']['pulse'] = {
 functions['supervisor']['interfaces']['pulse']['paramsInOrdered'] = []
 
 functions['supervisor']['interfaces']['pulse']['paramsOutOrdered'] = []
-
-functions['supervisor']['interfaces']['takeoff'] = {
-    'port_name': 'takeoff',
-    'parent_fv': 'supervisor',
-    'direction': PI,
-    'in': {},
-    'out': {},
-    'synchronism': asynch,
-    'rcm': variator,
-    'period': 0,
-    'wcet_low': 0,
-    'wcet_low_unit': 'ms',
-    'wcet_high': 0,
-    'wcet_high_unit': 'ms',
-    'distant_fv': '',
-    'calling_threads': {},
-    'distant_name': '',
-    'queue_size': 1
-}
-
-functions['supervisor']['interfaces']['takeoff']['paramsInOrdered'] = ['droneData']
-
-functions['supervisor']['interfaces']['takeoff']['paramsOutOrdered'] = []
-
-functions['supervisor']['interfaces']['takeoff']['in']['droneData'] = {
-    'type': 'MyDroneData',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': sequence,
-    'asn1_filename': './dataview-uniq.asn',
-    'encoding': UPER,
-    'interface': 'takeoff',
-    'param_direction': param_in
-}
 
 functions['supervisor']['interfaces']['readStabilizerSendThrust'] = {
     'port_name': 'readStabilizerSendThrust',
@@ -412,7 +346,7 @@ functions['supervisor']['interfaces']['rawdata'] = {
     'in': {},
     'out': {},
     'synchronism': synch,
-    'rcm': unprotected,
+    'rcm': protected,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': '',
@@ -427,3 +361,101 @@ functions['supervisor']['interfaces']['rawdata'] = {
 functions['supervisor']['interfaces']['rawdata']['paramsInOrdered'] = []
 
 functions['supervisor']['interfaces']['rawdata']['paramsOutOrdered'] = []
+
+functions['supervisor']['interfaces']['pixyPulse'] = {
+    'port_name': 'pixyPulse',
+    'parent_fv': 'supervisor',
+    'direction': PI,
+    'in': {},
+    'out': {},
+    'synchronism': asynch,
+    'rcm': cyclic,
+    'period': 10,
+    'wcet_low': 0,
+    'wcet_low_unit': 'ms',
+    'wcet_high': 0,
+    'wcet_high_unit': 'ms',
+    'distant_fv': '',
+    'calling_threads': {},
+    'distant_name': '',
+    'queue_size': 1
+}
+
+functions['supervisor']['interfaces']['pixyPulse']['paramsInOrdered'] = []
+
+functions['supervisor']['interfaces']['pixyPulse']['paramsOutOrdered'] = []
+
+functions['supervisor']['interfaces']['takeoff'] = {
+    'port_name': 'takeoff',
+    'parent_fv': 'supervisor',
+    'direction': RI,
+    'in': {},
+    'out': {},
+    'synchronism': synch,
+    'rcm': unprotected,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': '',
+    'wcet_high': 0,
+    'wcet_high_unit': '',
+    'distant_fv': 'cclient',
+    'calling_threads': {},
+    'distant_name': 'takeoff',
+    'queue_size': 1
+}
+
+functions['supervisor']['interfaces']['takeoff']['paramsInOrdered'] = []
+
+functions['supervisor']['interfaces']['takeoff']['paramsOutOrdered'] = ['droneData']
+
+functions['supervisor']['interfaces']['takeoff']['out']['droneData'] = {
+    'type': 'MyDroneData',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': sequence,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': NATIVE,
+    'interface': 'takeoff',
+    'param_direction': param_out
+}
+
+functions['cclient'] = {
+    'name_with_case' : 'cClient',
+    'runtime_nature': passive,
+    'language': C,
+    'zipfile': '',
+    'interfaces': {},
+    'functional_states' : {}
+}
+
+functions['cclient']['interfaces']['takeoff'] = {
+    'port_name': 'takeoff',
+    'parent_fv': 'cclient',
+    'direction': PI,
+    'in': {},
+    'out': {},
+    'synchronism': synch,
+    'rcm': unprotected,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': 'ms',
+    'wcet_high': 0,
+    'wcet_high_unit': 'ms',
+    'distant_fv': '',
+    'calling_threads': {},
+    'distant_name': '',
+    'queue_size': 1
+}
+
+functions['cclient']['interfaces']['takeoff']['paramsInOrdered'] = []
+
+functions['cclient']['interfaces']['takeoff']['paramsOutOrdered'] = ['droneData']
+
+functions['cclient']['interfaces']['takeoff']['out']['droneData'] = {
+    'type': 'MyDroneData',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': sequence,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': NATIVE,
+    'interface': 'takeoff',
+    'param_direction': param_out
+}

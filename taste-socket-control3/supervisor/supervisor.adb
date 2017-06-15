@@ -6,10 +6,10 @@ use System.IO;
 with Ada.Unchecked_Conversion;
 with Ada.Numerics.Generic_Elementary_Functions;
 
-with TASTE_BasicTypes;
-use TASTE_BasicTypes;
 with TASTE_Dataview;
 use TASTE_Dataview;
+with TASTE_BasicTypes;
+use TASTE_BasicTypes;
 with adaasn1rtl;
 use adaasn1rtl;
 
@@ -27,34 +27,32 @@ package body supervisor is
         dronedata : aliased asn1SccMyDroneData;
     end record;
     ctxt: aliased ctxt_Ty;
-    CS_Only  : constant Integer := 5;
+    CS_Only  : constant Integer := 4;
     procedure runTransition(Id: Integer);
     procedure pulse is
         begin
             case ctxt.state is
                 when running =>
-                    runTransition(1);
+                    runTransition(2);
                 when wait =>
-                    runTransition(3);
+                    runTransition(1);
                 when others =>
                     runTransition(CS_Only);
             end case;
         end pulse;
         
 
-    procedure takeoff(droneData: access asn1SccMyDroneData) is
+    procedure pixyPulse is
         begin
             case ctxt.state is
                 when running =>
-                    ctxt.dronedata := droneData.all;
-                    runTransition(2);
+                    runTransition(3);
                 when wait =>
-                    ctxt.dronedata := droneData.all;
-                    runTransition(4);
+                    runTransition(CS_Only);
                 when others =>
                     runTransition(CS_Only);
             end case;
-        end takeoff;
+        end pixyPulse;
         
 
     procedure runTransition(Id: Integer) is
@@ -66,55 +64,46 @@ package body supervisor is
                         -- writeln('SDL Startup') (13,13)
                         Put("SDL Startup");
                         New_Line;
-                        -- NEXT_STATE Wait (15,18) at 426, 172
+                        -- NEXT_STATE Wait (15,18) at 349, 182
                         trId := -1;
                         ctxt.state := Wait;
                         goto next_transition;
                     when 1 =>
-                        -- writeln('I am Pixycam') (21,17)
-                        Put("I am Pixycam");
+                        -- writeln('Stuck Here_ Tag1 ') (21,17)
+                        Put("Stuck Here_ Tag1 ");
                         New_Line;
-                        -- rawdata (23,17)
-                        RIÜrawdata;
-                        -- n :=n+1 (25,17)
-                        ctxt.n := Asn1Int((ctxt.n + 1));
-                        -- write('n=',n) (27,17)
-                        Put("n=");
-                        Put(Asn1Int'Image(ctxt.n));
-                        -- readStabilizerSendThrust(droneData,sensorData) (29,17)
-                        RIÜreadStabilizerSendThrust(ctxt.droneData'Access, ctxt.sensorData'Access);
-                        -- writeln('read done') (31,17)
-                        Put("read done");
-                        New_Line;
-                        -- displaySensor(sensorData) (33,17)
-                        RIÜdisplaySensor(ctxt.sensorData'Access);
-                        -- writeln('display done') (35,17)
-                        Put("display done");
-                        New_Line;
-                        -- NEXT_STATE Running (37,22) at 699, 644
+                        -- n:=0 (23,17)
+                        ctxt.n := Asn1Int(0);
+                        -- NEXT_STATE Running (25,22) at 91, 397
                         trId := -1;
                         ctxt.state := Running;
                         goto next_transition;
                     when 2 =>
-                        -- NEXT_STATE Wait (41,22) at 942, 219
+                        -- n :=n+1 (32,17)
+                        ctxt.n := Asn1Int((ctxt.n + 1));
+                        -- write('n=',n) (34,17)
+                        Put("n=");
+                        Put(Asn1Int'Image(ctxt.n));
+                        -- takeoff(droneData) (36,17)
+                        RIÜtakeoff(ctxt.droneData'Access);
+                        -- readStabilizerSendThrust(droneData,sensorData) (38,17)
+                        RIÜreadStabilizerSendThrust(ctxt.droneData'Access, ctxt.sensorData'Access);
+                        -- writeln('read done') (40,17)
+                        Put("read done");
+                        New_Line;
+                        -- displaySensor(sensorData) (42,17)
+                        RIÜdisplaySensor(ctxt.sensorData'Access);
+                        -- writeln('display done') (44,17)
+                        Put("display done");
+                        New_Line;
+                        -- NEXT_STATE Running (46,22) at 654, 594
                         trId := -1;
-                        ctxt.state := Wait;
+                        ctxt.state := Running;
                         goto next_transition;
                     when 3 =>
-                        -- writeln('Stuck Here_ Tag1 ') (48,17)
-                        Put("Stuck Here_ Tag1 ");
-                        New_Line;
-                        -- NEXT_STATE Wait (50,22) at 267, 332
-                        trId := -1;
-                        ctxt.state := Wait;
-                        goto next_transition;
-                    when 4 =>
-                        -- writeln('I have sent sth') (54,17)
-                        Put("I have sent sth");
-                        New_Line;
-                        -- n:=0 (56,17)
-                        ctxt.n := Asn1Int(0);
-                        -- NEXT_STATE Running (58,22) at 467, 386
+                        -- rawdata (50,17)
+                        RIÜrawdata;
+                        -- NEXT_STATE Running (52,22) at 1018, 272
                         trId := -1;
                         ctxt.state := Running;
                         goto next_transition;

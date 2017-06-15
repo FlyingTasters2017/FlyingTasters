@@ -78,7 +78,7 @@ class LoggingExample:
         self._lg_sensorData.add_variable('stabilizer.roll', 'float')
         self._lg_sensorData.add_variable('stabilizer.pitch', 'float')
         self._lg_sensorData.add_variable('stabilizer.yaw', 'float')
-        # self._lg_sensorData.add_variable('range.zrange', 'float')
+        self._lg_sensorData.add_variable('range.zrange', 'float')
         #
         # self._lg_acc = LogConfig(name='Accelerometer', period_in_ms=20)
         # self._lg_acc.add_variable('acc.x', 'float')
@@ -239,7 +239,7 @@ if __name__ == '__main__':
 
             if thrust > 0:
                 for le in list:
-                    le.send_setpoint(roll, pitch, yawrate, 2000)
+                    le.send_zrange_setpoint(roll, pitch, yawrate, 2000)
     conn.close()
         # file.close()
     sys.exit(2)
