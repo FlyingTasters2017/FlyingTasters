@@ -13,7 +13,7 @@ package as_supervisor is
     --  Provided interface "put_raw_ASD"
     procedure put_raw_ASD(raw_ASD: access asn1SccMyInteger);
     pragma Export(C, put_raw_ASD, "as_supervisor_put_raw_ASD");
-    --  Required interface "store_ASD"
+    --  Sync required interface "store_ASD"
     procedure RIÜstore_ASD(raw_MSD: access asn1SccMyInteger);
     pragma import(C, RIÜstore_ASD, "as_supervisor_RI_store_ASD");
 end as_supervisor;

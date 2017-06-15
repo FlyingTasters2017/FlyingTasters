@@ -1,6 +1,7 @@
 /* User code: This file will not be overwritten by TASTE. */
 
 #include "msd_storage.h"
+#include <stdio.h>
 
 asn1SccMyInteger internalData;
 

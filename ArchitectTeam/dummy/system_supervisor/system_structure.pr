@@ -17,7 +17,7 @@ SYSTEM system_supervisor;
 
 	PROCEDURE get_ASD_storage COMMENT '#c_predef';
 		FPAR
-			IN asd_storage_data MyInteger;
+			IN/OUT asd_storage_data MyInteger;
  	EXTERNAL;
 
 	CHANNEL c

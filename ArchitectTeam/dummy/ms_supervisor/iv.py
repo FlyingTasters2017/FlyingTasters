@@ -115,7 +115,7 @@ functions['system_supervisor']['interfaces']['get_MSD_storage'] = {
     'in': {},
     'out': {},
     'synchronism': synch,
-    'rcm': unprotected,
+    'rcm': protected,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': '',
@@ -148,7 +148,7 @@ functions['system_supervisor']['interfaces']['get_ASD_storage'] = {
     'in': {},
     'out': {},
     'synchronism': synch,
-    'rcm': unprotected,
+    'rcm': protected,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': '',
@@ -160,18 +160,18 @@ functions['system_supervisor']['interfaces']['get_ASD_storage'] = {
     'queue_size': 1
 }
 
-functions['system_supervisor']['interfaces']['get_ASD_storage']['paramsInOrdered'] = ['asd_storage_data']
+functions['system_supervisor']['interfaces']['get_ASD_storage']['paramsInOrdered'] = []
 
-functions['system_supervisor']['interfaces']['get_ASD_storage']['paramsOutOrdered'] = []
+functions['system_supervisor']['interfaces']['get_ASD_storage']['paramsOutOrdered'] = ['asd_storage_data']
 
-functions['system_supervisor']['interfaces']['get_ASD_storage']['in']['asd_storage_data'] = {
+functions['system_supervisor']['interfaces']['get_ASD_storage']['out']['asd_storage_data'] = {
     'type': 'MyInteger',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': integer,
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'get_ASD_storage',
-    'param_direction': param_in
+    'param_direction': param_out
 }
 
 functions['gui'] = {
@@ -265,7 +265,7 @@ functions['msd_storage']['interfaces']['get_MSD_storage'] = {
     'in': {},
     'out': {},
     'synchronism': synch,
-    'rcm': unprotected,
+    'rcm': protected,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': 'ms',
@@ -298,7 +298,7 @@ functions['msd_storage']['interfaces']['store_MSD'] = {
     'in': {},
     'out': {},
     'synchronism': synch,
-    'rcm': unprotected,
+    'rcm': protected,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': 'ms',
@@ -373,7 +373,7 @@ functions['ms_supervisor']['interfaces']['store_MSD'] = {
     'in': {},
     'out': {},
     'synchronism': synch,
-    'rcm': unprotected,
+    'rcm': protected,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': '',
@@ -541,7 +541,7 @@ functions['camera_dummy']['interfaces']['put_camera_data']['in']['camera_data'] 
 
 functions['asd_storage'] = {
     'name_with_case' : 'ASD_Storage',
-    'runtime_nature': thread,
+    'runtime_nature': passive,
     'language': C,
     'zipfile': '',
     'interfaces': {},
@@ -554,8 +554,8 @@ functions['asd_storage']['interfaces']['store_ASD'] = {
     'direction': PI,
     'in': {},
     'out': {},
-    'synchronism': asynch,
-    'rcm': sporadic,
+    'synchronism': synch,
+    'rcm': protected,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': 'ms',
@@ -588,7 +588,7 @@ functions['asd_storage']['interfaces']['get_ASD_storage'] = {
     'in': {},
     'out': {},
     'synchronism': synch,
-    'rcm': unprotected,
+    'rcm': protected,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': 'ms',
@@ -600,18 +600,18 @@ functions['asd_storage']['interfaces']['get_ASD_storage'] = {
     'queue_size': 1
 }
 
-functions['asd_storage']['interfaces']['get_ASD_storage']['paramsInOrdered'] = ['asd_storage_data']
+functions['asd_storage']['interfaces']['get_ASD_storage']['paramsInOrdered'] = []
 
-functions['asd_storage']['interfaces']['get_ASD_storage']['paramsOutOrdered'] = []
+functions['asd_storage']['interfaces']['get_ASD_storage']['paramsOutOrdered'] = ['asd_storage_data']
 
-functions['asd_storage']['interfaces']['get_ASD_storage']['in']['asd_storage_data'] = {
+functions['asd_storage']['interfaces']['get_ASD_storage']['out']['asd_storage_data'] = {
     'type': 'MyInteger',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': integer,
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'get_ASD_storage',
-    'param_direction': param_in
+    'param_direction': param_out
 }
 
 functions['as_supervisor'] = {
@@ -662,8 +662,8 @@ functions['as_supervisor']['interfaces']['store_ASD'] = {
     'direction': RI,
     'in': {},
     'out': {},
-    'synchronism': asynch,
-    'rcm': sporadic,
+    'synchronism': synch,
+    'rcm': protected,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': '',

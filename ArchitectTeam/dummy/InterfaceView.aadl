@@ -53,7 +53,7 @@ END RI_get_MSD_storage.others;
 
 SUBPROGRAM RI_get_ASD_storage
 FEATURES
-  asd_storage_data : IN PARAMETER DataView::MyInteger {
+  asd_storage_data : OUT PARAMETER DataView::MyInteger {
     Taste::encoding => UPER;
   };
 END RI_get_ASD_storage;
@@ -104,6 +104,8 @@ FEATURES
   msd_storage_data : OUT PARAMETER DataView::MyInteger {
     Taste::encoding => NATIVE;
   };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_get_MSD_storage;
 
 SUBPROGRAM IMPLEMENTATION PI_get_MSD_storage.others
@@ -114,6 +116,8 @@ FEATURES
   raw_MSD : IN PARAMETER DataView::MyInteger {
     Taste::encoding => UPER;
   };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_store_MSD;
 
 SUBPROGRAM IMPLEMENTATION PI_store_MSD.others
@@ -218,8 +222,6 @@ FEATURES
   raw_MSD : IN PARAMETER DataView::MyInteger {
     Taste::encoding => UPER;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
 END PI_store_ASD;
 
 SUBPROGRAM IMPLEMENTATION PI_store_ASD.others
@@ -227,9 +229,11 @@ END PI_store_ASD.others;
 
 SUBPROGRAM PI_get_ASD_storage
 FEATURES
-  asd_storage_data : IN PARAMETER DataView::MyInteger {
+  asd_storage_data : OUT PARAMETER DataView::MyInteger {
     Taste::encoding => UPER;
   };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_get_ASD_storage;
 
 SUBPROGRAM IMPLEMENTATION PI_get_ASD_storage.others
@@ -423,13 +427,15 @@ SYSTEM MSD_Storage
 FEATURES
   PI_get_MSD_storage : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MSD_Storage::PI_get_MSD_storage.others {
     Taste::coordinates => "950 968";
-    Taste::RCMoperationKind => unprotected;
+    Taste::RCMoperationKind => protected;
+    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "get_MSD_storage";
   };
   PI_store_MSD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MSD_Storage::PI_store_MSD.others {
     Taste::coordinates => "929 1174";
-    Taste::RCMoperationKind => unprotected;
+    Taste::RCMoperationKind => protected;
+    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "store_MSD";
   };
@@ -537,15 +543,15 @@ END Camera_Dummy.others;
 SYSTEM ASD_Storage
 FEATURES
   PI_store_ASD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::ASD_Storage::PI_store_ASD.others {
-    Taste::coordinates => "1443 1174";
-    Taste::RCMoperationKind => sporadic;
-    Taste::RCMperiod => 0 ms;
+    Taste::coordinates => "1441 1174";
+    Taste::RCMoperationKind => protected;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "store_ASD";
   };
   PI_get_ASD_storage : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::ASD_Storage::PI_get_ASD_storage.others {
-    Taste::coordinates => "1375 985";
-    Taste::RCMoperationKind => unprotected;
+    Taste::coordinates => "1373 985";
+    Taste::RCMoperationKind => protected;
+    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "get_ASD_storage";
   };
@@ -597,14 +603,14 @@ END AS_Supervisor.others;
 SYSTEM Houston
 FEATURES
   PI_put_drone_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Houston::PI_put_drone_data.others {
-    Taste::coordinates => "2105 1124";
+    Taste::coordinates => "2105 1122";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "put_drone_data";
   };
   RI_put_raw_ASD : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::AS_Supervisor::PI_put_raw_ASD.others {
-    Taste::coordinates => "1916 1218";
+    Taste::coordinates => "1916 1216";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "put_raw_ASD";
     Taste::labelInheritance => "true";
@@ -674,13 +680,13 @@ SUBCOMPONENTS
     Taste::coordinates => "151 1060 414 1201";
   };
   ASD_Storage : SYSTEM interfaceview::IV::ASD_Storage.others {
-    Taste::coordinates => "1227 985 1533 1174";
+    Taste::coordinates => "1225 985 1531 1174";
   };
   AS_Supervisor : SYSTEM interfaceview::IV::AS_Supervisor.others {
     Taste::coordinates => "1282 1428 1643 1698";
   };
   Houston : SYSTEM interfaceview::IV::Houston.others {
-    Taste::coordinates => "1790 946 2105 1218";
+    Taste::coordinates => "1790 944 2105 1216";
   };
   Drone_Dummy : SYSTEM interfaceview::IV::Drone_Dummy.others {
     Taste::coordinates => "2368 869 2627 1174";
@@ -696,7 +702,7 @@ CONNECTIONS
     Taste::coordinates => "960 832 960 884 950 884 950 968";
   };
   ASD_Storage_get_ASD_storage_System_Supervisor_get_ASD_storage : SUBPROGRAM ACCESS ASD_Storage.PI_get_ASD_storage -> System_Supervisor.RI_get_ASD_storage {
-    Taste::coordinates => "1253 832 1253 908 1375 908 1375 985";
+    Taste::coordinates => "1253 832 1253 908 1373 908 1373 985";
   };
   MSD_Storage_store_MSD_MS_Supervisor_store_MSD : SUBPROGRAM ACCESS MSD_Storage.PI_store_MSD -> MS_Supervisor.RI_store_MSD {
     Taste::coordinates => "931 1382 931 1220 929 1220 929 1174";
@@ -708,13 +714,13 @@ CONNECTIONS
     Taste::coordinates => "287 1201 287 1319 287 1319 287 1437";
   };
   ASD_Storage_store_ASD_AS_Supervisor_store_ASD : SUBPROGRAM ACCESS ASD_Storage.PI_store_ASD -> AS_Supervisor.RI_store_ASD {
-    Taste::coordinates => "1444 1427 1444 1247 1443 1247 1443 1174";
+    Taste::coordinates => "1444 1427 1444 1247 1441 1247 1441 1174";
   };
   AS_Supervisor_put_raw_ASD_Houston_put_raw_ASD : SUBPROGRAM ACCESS AS_Supervisor.PI_put_raw_ASD -> Houston.RI_put_raw_ASD {
-    Taste::coordinates => "1916 1219 1916 1500 1643 1500";
+    Taste::coordinates => "1916 1216 1916 1500 1643 1500";
   };
   Houston_put_drone_data_Drone_Dummy_put_drone_data : SUBPROGRAM ACCESS Houston.PI_put_drone_data -> Drone_Dummy.RI_put_drone_data {
-    Taste::coordinates => "2368 1121 2150 1121 2150 1124 2105 1124";
+    Taste::coordinates => "2368 1121 2150 1121 2150 1122 2105 1122";
   };
 END interfaceview.others;
 

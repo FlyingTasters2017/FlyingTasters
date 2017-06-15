@@ -24,6 +24,7 @@ package body system_supervisor is
         initDone : Boolean := False;
         msd_storage : aliased asn1SccMyInteger;
         user_input : aliased asn1SccMyInteger;
+        asd_storage : aliased asn1SccMyInteger;
     end record;
     ctxt: aliased ctxt_Ty;
     CS_Only  : constant Integer := 5;
@@ -58,35 +59,39 @@ package body system_supervisor is
 
     procedure runTransition(Id: Integer) is
         trId : Integer := Id;
+        tmp7 : aliased asn1SccMyInteger;
         begin
             while (trId /= -1) loop
                 case trId is
                     when 0 =>
-                        -- NEXT_STATE Wait (12,18) at 320, 60
+                        -- NEXT_STATE Wait (13,18) at 320, 60
                         trId := -1;
                         ctxt.state := Wait;
                         goto next_transition;
                     when 1 =>
-                        -- NEXT_STATE wait (18,22) at 590, 164
+                        -- NEXT_STATE wait (19,22) at 568, 164
                         trId := -1;
                         ctxt.state := wait;
                         goto next_transition;
                     when 2 =>
-                        -- get_MSD_storage(msd_storage) (22,17)
+                        -- get_MSD_storage(msd_storage) (23,17)
                         RIÜget_MSD_storage(ctxt.msd_storage'Access);
-                        -- update_GUI(msd_storage) (24,19)
-                        RIÜupdate_GUI(ctxt.msd_storage'Access);
-                        -- NEXT_STATE running (26,22) at 801, 274
+                        -- get_ASD_storage(asd_storage) (25,17)
+                        RIÜget_ASD_storage(ctxt.asd_storage'Access);
+                        -- update_GUI(msd_storage+asd_storage) (27,19)
+                        tmp7 := Asn1Int((ctxt.msd_storage + ctxt.asd_storage));
+                        RIÜupdate_GUI(tmp7'Access);
+                        -- NEXT_STATE running (29,22) at 801, 324
                         trId := -1;
                         ctxt.state := running;
                         goto next_transition;
                     when 3 =>
-                        -- NEXT_STATE wait (33,22) at 248, 170
+                        -- NEXT_STATE wait (36,22) at 248, 170
                         trId := -1;
                         ctxt.state := wait;
                         goto next_transition;
                     when 4 =>
-                        -- NEXT_STATE running (37,22) at 385, 171
+                        -- NEXT_STATE running (40,22) at 384, 171
                         trId := -1;
                         ctxt.state := running;
                         goto next_transition;

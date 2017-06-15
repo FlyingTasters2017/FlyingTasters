@@ -22,15 +22,17 @@ package body as_supervisor is
         record
         state : States;
         initDone : Boolean := False;
+        raw_asd : aliased asn1SccMyInteger;
     end record;
     ctxt: aliased ctxt_Ty;
-    CS_Only  : constant Integer := 1;
+    CS_Only  : constant Integer := 2;
     procedure runTransition(Id: Integer);
     procedure put_raw_ASD(raw_ASD: access asn1SccMyInteger) is
         begin
             case ctxt.state is
                 when wait =>
-                    runTransition(CS_Only);
+                    ctxt.raw_asd := raw_ASD.all;
+                    runTransition(1);
                 when others =>
                     runTransition(CS_Only);
             end case;
@@ -43,9 +45,16 @@ package body as_supervisor is
             while (trId /= -1) loop
                 case trId is
                     when 0 =>
-                        -- NEXT_STATE Wait (4,10) at None, None
+                        -- NEXT_STATE Wait (11,18) at 320, 60
                         trId := -1;
                         ctxt.state := Wait;
+                        goto next_transition;
+                    when 1 =>
+                        -- store_ASD(raw_asd) (17,17)
+                        RIÜstore_ASD(ctxt.raw_asd'Access);
+                        -- NEXT_STATE wait (19,22) at 320, 228
+                        trId := -1;
+                        ctxt.state := wait;
                         goto next_transition;
                     when CS_Only =>
                         trId := -1;

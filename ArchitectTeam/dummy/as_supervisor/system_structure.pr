@@ -5,19 +5,19 @@ SYSTEM as_supervisor;
 	/* CIF Keep Specific Geode PARAMNAMES raw_ASD */
 	SIGNAL put_raw_ASD (MyInteger);
 
-	/* CIF Keep Specific Geode PARAMNAMES raw_MSD */
-	SIGNAL store_ASD (MyInteger);
+	PROCEDURE store_ASD COMMENT '#c_predef';
+		FPAR
+			IN raw_MSD MyInteger;
+ 	EXTERNAL;
 
 	CHANNEL c
 		FROM ENV TO as_supervisor WITH put_raw_ASD;
-		FROM as_supervisor TO ENV WITH store_ASD;
 	ENDCHANNEL;
 
 	BLOCK as_supervisor;
 
 		SIGNALROUTE r
 			FROM ENV TO as_supervisor WITH put_raw_ASD;
-			FROM as_supervisor TO ENV WITH store_ASD;
 
 		CONNECT c and r;
 
