@@ -1,9 +1,9 @@
 -- This file was generated automatically: DO NOT MODIFY IT !
 
-with TASTE_Dataview;
-use TASTE_Dataview;
 with TASTE_BasicTypes;
 use TASTE_BasicTypes;
+with TASTE_Dataview;
+use TASTE_Dataview;
 with adaasn1rtl;
 use adaasn1rtl;
 
@@ -22,4 +22,7 @@ package system_supervisor is
     --  Sync required interface "get_MSD_storage"
     procedure RIÜget_MSD_storage(msd_storage_data: access asn1SccMyInteger);
     pragma import(C, RIÜget_MSD_storage, "system_supervisor_RI_get_MSD_storage");
+    --  Sync required interface "get_ASD_storage"
+    procedure RIÜget_ASD_storage(asd_storage_data: access asn1SccMyInteger);
+    pragma import(C, RIÜget_ASD_storage, "system_supervisor_RI_get_ASD_storage");
 end system_supervisor;
