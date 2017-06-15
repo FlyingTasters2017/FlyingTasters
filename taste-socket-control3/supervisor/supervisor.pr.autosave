@@ -13,13 +13,13 @@ process supervisor;
         call writeln('SDL Startup');
         /* CIF NEXTSTATE (426, 172), (70, 35) */
         NEXTSTATE Wait;
-    /* CIF state (823, 107), (71, 35) */
+    /* CIF state (824, 107), (71, 35) */
     state Running;
         /* CIF input (700, 166), (70, 35) */
         input pulse;
             /* CIF PROCEDURECALL (640, 221), (190, 35) */
             call writeln('I am Pixycam');
-            /* CIF PROCEDURECALL (699, 271), (71, 35) */
+            /* CIF PROCEDURECALL (699, 271), (72, 35) */
             call rawdata;
             /* CIF task (665, 326), (140, 38) */
             task n :=n+1;

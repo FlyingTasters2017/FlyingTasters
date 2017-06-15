@@ -13,30 +13,13 @@ process supervisor;
         call writeln('SDL Startup');
         /* CIF NEXTSTATE (426, 172), (70, 35) */
         NEXTSTATE Wait;
-    /* CIF state (426, 172), (70, 35) */
-    state Wait;
-        /* CIF input (289, 227), (70, 35) */
-        input pulse;
-            /* CIF PROCEDURECALL (226, 282), (195, 35) */
-            call writeln('Stuck Here_ Tag1 ');
-            /* CIF NEXTSTATE (289, 332), (70, 35) */
-            NEXTSTATE Wait;
-        /* CIF input (432, 236), (142, 35) */
-        input takeoff(droneData);
-            /* CIF PROCEDURECALL (410, 291), (186, 35) */
-            call writeln('I have sent sth');
-            /* CIF task (468, 341), (70, 35) */
-            task n:=0;
-            /* CIF NEXTSTATE (467, 391), (71, 35) */
-            NEXTSTATE Running;
-    endstate;
     /* CIF state (824, 107), (71, 35) */
     state Running;
         /* CIF input (700, 166), (70, 35) */
         input pulse;
             /* CIF PROCEDURECALL (640, 221), (190, 35) */
             call writeln('I am Pixycam');
-            /* CIF PROCEDURECALL (699, 271), (71, 35) */
+            /* CIF PROCEDURECALL (699, 271), (72, 35) */
             call rawdata;
             /* CIF task (665, 326), (140, 38) */
             task n :=n+1;
@@ -56,5 +39,22 @@ process supervisor;
         input takeoff(droneData);
             /* CIF NEXTSTATE (942, 219), (70, 35) */
             NEXTSTATE Wait;
+    endstate;
+    /* CIF state (426, 172), (70, 35) */
+    state Wait;
+        /* CIF input (267, 227), (70, 35) */
+        input pulse;
+            /* CIF PROCEDURECALL (205, 282), (195, 35) */
+            call writeln('Stuck Here_ Tag1 ');
+            /* CIF NEXTSTATE (267, 332), (70, 35) */
+            NEXTSTATE Wait;
+        /* CIF input (432, 236), (142, 35) */
+        input takeoff(droneData);
+            /* CIF PROCEDURECALL (410, 286), (186, 35) */
+            call writeln('I have sent sth');
+            /* CIF task (468, 336), (70, 35) */
+            task n:=0;
+            /* CIF NEXTSTATE (467, 386), (71, 35) */
+            NEXTSTATE Running;
     endstate;
 endprocess supervisor;

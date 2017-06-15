@@ -117,6 +117,8 @@ WITH Taste;
 WITH DataView;
 WITH TASTE_IV_Properties;
 SUBPROGRAM PI_pulse
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_pulse;
 
 SUBPROGRAM IMPLEMENTATION PI_pulse.others
@@ -237,7 +239,7 @@ FEATURES
     Taste::InterfaceName => "rawdata";
   };
   RI_processData : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::PixyProcess::PI_processData.others {
-    Taste::coordinates => "1895 1333";
+    Taste::coordinates => "1992 1333";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "processData";
     Taste::labelInheritance => "true";
@@ -261,7 +263,7 @@ END Pixycam.others;
 SYSTEM PixyProcess
 FEATURES
   PI_processData : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::PixyProcess::PI_processData.others {
-    Taste::coordinates => "2316 941";
+    Taste::coordinates => "2290 864";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -343,10 +345,10 @@ SUBCOMPONENTS
     Taste::coordinates => "210 1282 1195 1795";
   };
   Pixycam : SYSTEM interfaceview::IV::Pixycam.others {
-    Taste::coordinates => "1401 1333 2165 1708";
+    Taste::coordinates => "1401 1333 2262 1708";
   };
   PixyProcess : SYSTEM interfaceview::IV::PixyProcess.others {
-    Taste::coordinates => "2316 825 2920 1403";
+    Taste::coordinates => "2290 748 2894 1326";
   };
   supervisor : SYSTEM interfaceview::IV::supervisor.others {
     Taste::coordinates => "190 221 1149 908";
@@ -365,7 +367,7 @@ CONNECTIONS
     Taste::coordinates => "1149 641 1611 641 1611 1333";
   };
   PixyProcess_processData_Pixycam_processData : SUBPROGRAM ACCESS PixyProcess.PI_processData -> Pixycam.RI_processData {
-    Taste::coordinates => "1895 1333 1895 941 2316 941";
+    Taste::coordinates => "1992 1333 1992 864 2290 864";
   };
 END interfaceview.others;
 
