@@ -1,0 +1,44 @@
+/* CIF PROCESS (250, 150), (150, 75) */
+process supervisor;
+    /* CIF TEXT (1209, 139), (272, 140) */
+    -- Text area for declarations and comments
+    
+    dcl droneData MyDroneData;
+    dcl sensorData MySensorData;
+    /* CIF ENDTEXT */
+    /* CIF START (492, 138), (70, 35) */
+    START;
+        /* CIF PROCEDURECALL (449, 193), (156, 35) */
+        call writeln('SDL Startup');
+        /* CIF NEXTSTATE (492, 243), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (878, 149), (70, 35) */
+    state Running;
+        /* CIF input (805, 204), (70, 35) */
+        input pulse;
+            /* CIF PROCEDURECALL (679, 259), (322, 35) */
+            call readStabilizerSendThrust(droneData,sensorData);
+            /* CIF PROCEDURECALL (748, 314), (184, 35) */
+            call displaySensor(sensorData);
+            /* CIF NEXTSTATE (805, 369), (70, 35) */
+            NEXTSTATE Running;
+        /* CIF input (1011, 204), (145, 35) */
+        input takeoff(droneData);
+            /* CIF NEXTSTATE (1048, 259), (70, 35) */
+            NEXTSTATE Wait;
+    endstate;
+    /* CIF state (796, 58), (70, 35) */
+    state Wait;
+    endstate;
+    /* CIF state (492, 243), (70, 35) */
+    state Wait;
+        /* CIF input (421, 298), (70, 35) */
+        input pulse;
+            /* CIF NEXTSTATE (421, 353), (70, 35) */
+            NEXTSTATE Wait;
+        /* CIF input (501, 298), (142, 35) */
+        input takeoff(droneData);
+            /* CIF NEXTSTATE (537, 353), (70, 35) */
+            NEXTSTATE Running;
+    endstate;
+endprocess supervisor;

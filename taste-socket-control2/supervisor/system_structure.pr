@@ -1,0 +1,49 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM supervisor;
+
+	SIGNAL pulse;
+
+	/* CIF Keep Specific Geode PARAMNAMES Ref */
+	SIGNAL takeoff (MyDroneData);
+
+	PROCEDURE readStabilizerSendThrust COMMENT '#c_predef';
+		FPAR
+			IN droneData MyDroneData,
+			IN/OUT sensorData MySensorData;
+ 	EXTERNAL;
+
+	/* CIF Keep Specific Geode PARAMNAMES sensorData */
+	SIGNAL displaySensor (MySensorData);
+
+	PROCEDURE control_Act COMMENT '#c_predef';
+		FPAR
+			IN sensorData MySensorData,
+			IN Ref MyDroneData,
+			IN/OUT droneData MyDroneData;
+ 	EXTERNAL;
+
+	PROCEDURE DataOperation COMMENT '#c_predef';
+		FPAR
+			IN Sensordata_in MySensorData,
+			IN/OUT Sensordata_out MySensorData;
+ 	EXTERNAL;
+
+	CHANNEL c
+		FROM ENV TO supervisor WITH pulse,takeoff;
+		FROM supervisor TO ENV WITH displaySensor;
+	ENDCHANNEL;
+
+	BLOCK supervisor;
+
+		SIGNALROUTE r
+			FROM ENV TO supervisor WITH pulse,takeoff;
+			FROM supervisor TO ENV WITH displaySensor;
+
+		CONNECT c and r;
+
+		PROCESS supervisor REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;

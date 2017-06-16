@@ -1,0 +1,54 @@
+/* CIF PROCESS (318, 133), (150, 75) */
+process supervisor;
+    /* CIF TEXT (1261, 111), (272, 140) */
+    -- Text area for declarations and comments
+    
+    dcl droneData MyDroneData;
+    dcl sensorData MySensorData;
+    dcl n myInteger;
+    /* CIF ENDTEXT */
+    /* CIF START (349, 67), (70, 35) */
+    START;
+        /* CIF PROCEDURECALL (306, 122), (156, 35) */
+        call writeln('SDL Startup');
+        /* CIF NEXTSTATE (349, 182), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (349, 182), (70, 35) */
+    state Wait;
+        /* CIF input (92, 237), (70, 35) */
+        input pulse;
+            /* CIF PROCEDURECALL (29, 292), (195, 35) */
+            call writeln('Stuck Here_ Tag1 ');
+            /* CIF task (92, 347), (70, 35) */
+            task n:=0;
+            /* CIF NEXTSTATE (91, 397), (71, 35) */
+            NEXTSTATE Running;
+    endstate;
+    /* CIF state (817, 107), (71, 35) */
+    state Running;
+        /* CIF input (655, 166), (70, 35) */
+        input pulse;
+            /* CIF task (620, 221), (140, 38) */
+            task n :=n+1;
+            /* CIF PROCEDURECALL (638, 279), (104, 35) */
+            call write('n=',n);
+            /* CIF PROCEDURECALL (620, 334), (139, 35) */
+            call takeoff(droneData);
+            /* CIF PROCEDURECALL (529, 384), (322, 35) */
+            call readStabilizerSendThrust(droneData,sensorData);
+            /* CIF PROCEDURECALL (617, 439), (146, 35) */
+            call writeln('read done');
+            /* CIF PROCEDURECALL (598, 489), (184, 35) */
+            call displaySensor(sensorData);
+            /* CIF PROCEDURECALL (609, 539), (161, 35) */
+            call writeln('display done');
+            /* CIF NEXTSTATE (654, 594), (71, 35) */
+            NEXTSTATE Running;
+        /* CIF input (1014, 162), (79, 35) */
+        input pixyPulse;
+            /* CIF PROCEDURECALL (1018, 217), (71, 35) */
+            call rawdata;
+            /* CIF NEXTSTATE (1018, 272), (71, 35) */
+            NEXTSTATE Running;
+    endstate;
+endprocess supervisor;

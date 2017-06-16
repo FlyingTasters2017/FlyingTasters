@@ -1,0 +1,59 @@
+Datamodel DEFINITIONS ::= BEGIN
+
+-- ./dataview-uniq.asn
+T_Int32 ::= INTEGER (-2147483648 .. 2147483647)
+
+-- ./dataview-uniq.asn
+T_UInt32 ::= INTEGER (0 .. 4294967295)
+
+-- ./dataview-uniq.asn
+T_Int8 ::= INTEGER (-128 .. 127)
+
+-- ./dataview-uniq.asn
+T_UInt8 ::= INTEGER (0 .. 255)
+
+-- ./dataview-uniq.asn
+T_Boolean ::= BOOLEAN
+
+-- ./dataview-uniq.asn
+MyInteger ::= T_UInt8
+
+-- ./dataview-uniq.asn
+MyReal ::= REAL (0.00000000000000000000E+000 .. 1.00000000000000000000E+003)
+
+-- ./dataview-uniq.asn
+MyBool ::= BOOLEAN
+
+-- ./dataview-uniq.asn
+MyEnum ::= ENUMERATED {
+    hello(0),
+    world(1),
+    howareyou(2)
+}
+
+-- ./dataview-uniq.asn
+MySeq ::= SEQUENCE {
+    input_data	MyInteger,
+    output_data	MyInteger,
+    validity	MySeq_validity
+}
+
+-- ./dataview-uniq.asn
+MyChoice ::= CHOICE {
+    a	BOOLEAN,
+    b	MySeq
+}
+
+-- ./dataview-uniq.asn
+MySeqOf ::= SEQUENCE (SIZE (2 .. 2)) OF MyEnum
+
+-- ./dataview-uniq.asn
+MyOctStr ::= OCTET STRING (SIZE (3 .. 3))
+
+-- ./dataview-uniq.asn
+MySeq_validity ::= ENUMERATED {
+    valid(0),
+    invalid(1)
+}
+
+END

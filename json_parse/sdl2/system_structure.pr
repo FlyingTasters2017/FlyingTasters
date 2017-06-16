@@ -1,0 +1,39 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM sdl2;
+
+	/* CIF Keep Specific Geode PARAMNAMES a */
+	SIGNAL test (MyInteger);
+
+	SIGNAL pulse;
+
+	PROCEDURE getPixyData COMMENT '#c_predef';
+		FPAR
+			IN/OUT x MyReal,
+			IN/OUT y MyReal;
+ 	EXTERNAL;
+
+	/* CIF Keep Specific Geode PARAMNAMES x */
+	SIGNAL sendX (MyReal);
+
+	/* CIF Keep Specific Geode PARAMNAMES y */
+	SIGNAL sendY (MyReal);
+
+	CHANNEL c
+		FROM ENV TO sdl2 WITH test,pulse;
+		FROM sdl2 TO ENV WITH sendX,sendY;
+	ENDCHANNEL;
+
+	BLOCK sdl2;
+
+		SIGNALROUTE r
+			FROM ENV TO sdl2 WITH test,pulse;
+			FROM sdl2 TO ENV WITH sendX,sendY;
+
+		CONNECT c and r;
+
+		PROCESS sdl2 REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;

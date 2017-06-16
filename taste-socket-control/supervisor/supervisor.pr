@@ -1,0 +1,55 @@
+/* CIF PROCESS (0, 152), (150, 75) */
+process supervisor;
+    /* CIF TEXT (1261, 111), (272, 140) */
+    -- Text area for declarations and comments
+    
+    dcl droneData MyDroneData;
+    dcl sensorData MySensorData;
+    dcl n myInteger;
+    /* CIF ENDTEXT */
+    /* CIF START (479, 67), (70, 35) */
+    START;
+        /* CIF PROCEDURECALL (436, 122), (156, 35) */
+        call writeln('SDL Startup');
+        /* CIF NEXTSTATE (479, 172), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (834, 107), (70, 35) */
+    state Running;
+        /* CIF input (758, 166), (70, 35) */
+        input pulse;
+            /* CIF task (723, 221), (140, 38) */
+            task n :=n+1;
+            /* CIF PROCEDURECALL (741, 279), (104, 35) */
+            call write('n=',n);
+            /* CIF PROCEDURECALL (632, 329), (322, 35) */
+            call readStabilizerSendThrust(droneData,sensorData);
+            /* CIF PROCEDURECALL (720, 384), (146, 35) */
+            call writeln('read done');
+            /* CIF PROCEDURECALL (701, 434), (184, 35) */
+            call displaySensor(sensorData);
+            /* CIF PROCEDURECALL (712, 484), (161, 35) */
+            call writeln('display done');
+            /* CIF NEXTSTATE (758, 547), (70, 35) */
+            NEXTSTATE Running;
+        /* CIF input (969, 162), (142, 35) */
+        input takeoff(droneData);
+            /* CIF NEXTSTATE (1005, 217), (70, 35) */
+            NEXTSTATE Wait;
+    endstate;
+    /* CIF state (512, 379), (70, 35) */
+    state Wait;
+    endstate;
+    /* CIF state (479, 172), (70, 35) */
+    state Wait;
+        /* CIF input (408, 227), (70, 35) */
+        input pulse;
+            /* CIF NEXTSTATE (408, 282), (70, 35) */
+            NEXTSTATE Wait;
+        /* CIF input (488, 227), (142, 35) */
+        input takeoff(droneData);
+            /* CIF task (524, 282), (70, 35) */
+            task n:=0;
+            /* CIF NEXTSTATE (524, 332), (70, 35) */
+            NEXTSTATE Running;
+    endstate;
+endprocess supervisor;
