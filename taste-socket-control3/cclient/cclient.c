@@ -33,10 +33,19 @@ void cclient_PI_takeoff(asn1SccMyDroneData *OUT_droneData)
     OUT_droneData->yawrateRef = yaw;
     OUT_droneData->rollRef = roll;
     OUT_droneData->pitchRef = pitch;*/
+    
+    
+    asn1SccMyDroneData droneData;
+    droneData.thrustRef=30;
+    droneData.yawrateRef=0.25;
+    droneData.rollRef=0.25;
+    droneData.pitchRef=0;
+    
+    OUT_droneData=&droneData;
 
-    OUT_droneData->thrustRef = 30;
+    /*OUT_droneData->thrustRef = 30;
     OUT_droneData->yawrateRef = 0.25;
     OUT_droneData->rollRef = 0.25;
-    OUT_droneData->pitchRef = 0;
+    OUT_droneData->pitchRef = 0;*/
 }
 

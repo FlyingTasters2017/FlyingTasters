@@ -263,6 +263,29 @@ functions['supervisor']['interfaces']['pulse']['paramsInOrdered'] = []
 
 functions['supervisor']['interfaces']['pulse']['paramsOutOrdered'] = []
 
+functions['supervisor']['interfaces']['pixyPulse'] = {
+    'port_name': 'pixyPulse',
+    'parent_fv': 'supervisor',
+    'direction': PI,
+    'in': {},
+    'out': {},
+    'synchronism': asynch,
+    'rcm': cyclic,
+    'period': 10,
+    'wcet_low': 0,
+    'wcet_low_unit': 'ms',
+    'wcet_high': 0,
+    'wcet_high_unit': 'ms',
+    'distant_fv': '',
+    'calling_threads': {},
+    'distant_name': '',
+    'queue_size': 1
+}
+
+functions['supervisor']['interfaces']['pixyPulse']['paramsInOrdered'] = []
+
+functions['supervisor']['interfaces']['pixyPulse']['paramsOutOrdered'] = []
+
 functions['supervisor']['interfaces']['readStabilizerSendThrust'] = {
     'port_name': 'readStabilizerSendThrust',
     'parent_fv': 'supervisor',
@@ -361,29 +384,6 @@ functions['supervisor']['interfaces']['rawdata'] = {
 functions['supervisor']['interfaces']['rawdata']['paramsInOrdered'] = []
 
 functions['supervisor']['interfaces']['rawdata']['paramsOutOrdered'] = []
-
-functions['supervisor']['interfaces']['pixyPulse'] = {
-    'port_name': 'pixyPulse',
-    'parent_fv': 'supervisor',
-    'direction': PI,
-    'in': {},
-    'out': {},
-    'synchronism': asynch,
-    'rcm': cyclic,
-    'period': 10,
-    'wcet_low': 0,
-    'wcet_low_unit': 'ms',
-    'wcet_high': 0,
-    'wcet_high_unit': 'ms',
-    'distant_fv': '',
-    'calling_threads': {},
-    'distant_name': '',
-    'queue_size': 1
-}
-
-functions['supervisor']['interfaces']['pixyPulse']['paramsInOrdered'] = []
-
-functions['supervisor']['interfaces']['pixyPulse']['paramsOutOrdered'] = []
 
 functions['supervisor']['interfaces']['takeoff'] = {
     'port_name': 'takeoff',

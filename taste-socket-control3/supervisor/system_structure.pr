@@ -4,6 +4,8 @@ SYSTEM supervisor;
 
 	SIGNAL pulse;
 
+	SIGNAL pixyPulse;
+
 	PROCEDURE readStabilizerSendThrust COMMENT '#c_predef';
 		FPAR
 			IN droneData MyDroneData,
@@ -15,8 +17,6 @@ SYSTEM supervisor;
 
 	PROCEDURE rawdata COMMENT '#c_predef';
  	EXTERNAL;
-
-	SIGNAL pixyPulse;
 
 	PROCEDURE takeoff COMMENT '#c_predef';
 		FPAR
