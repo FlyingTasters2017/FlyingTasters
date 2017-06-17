@@ -8,6 +8,10 @@ In this repository you will find detailed description of:
 * the process to build your own FlyingTasters,
 * the steps required in order to make changes and extend the FlyingTasters system.
 
-#Useful command
+# Where is the information?
+
+Please access our [wiki](https://github.com/FlyingTasters2017/FlyingTasters/wiki)
+
+# Useful command
 
 ```taste-python-socket-client - example how to connect from TASTE to the drone using Python socket server```
