@@ -1,0 +1,431 @@
+Connecting to radio://0/81/2M
+Connection to radio://0/81/2M failed: Couldn't load link driver: Cannot find a Crazyradio Dongle
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 119, in __init__
+    device = _find_devices()[devid]
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crazyflie/__init__.py", line 218, in open_link
+    link_uri, self._link_quality_cb, self._link_error_cb)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/__init__.py", line 91, in get_link_driver
+    instance.connect(uri, link_quality_callback, link_error_callback)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 188, in connect
+    address)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 98, in __init__
+    _RadioManager._radios[self._devid] = _SharedRadio(self._devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 67, in __init__
+    self.radio = Crazyradio(devid=devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 121, in __init__
+    raise Exception('Cannot find a Crazyradio Dongle')
+Exception: Cannot find a Crazyradio Dongle
+
+disconnected 1
+Connecting to radio://0/81/2M
+Connection to radio://0/81/2M failed: Couldn't load link driver: Cannot find a Crazyradio Dongle
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 119, in __init__
+    device = _find_devices()[devid]
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crazyflie/__init__.py", line 218, in open_link
+    link_uri, self._link_quality_cb, self._link_error_cb)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/__init__.py", line 91, in get_link_driver
+    instance.connect(uri, link_quality_callback, link_error_callback)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 188, in connect
+    address)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 98, in __init__
+    _RadioManager._radios[self._devid] = _SharedRadio(self._devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 67, in __init__
+    self.radio = Crazyradio(devid=devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 121, in __init__
+    raise Exception('Cannot find a Crazyradio Dongle')
+Exception: Cannot find a Crazyradio Dongle
+
+disconnected 1
+Connecting to radio://0/81/2M
+Connection to radio://0/81/2M failed: Couldn't load link driver: Cannot find a Crazyradio Dongle
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 119, in __init__
+    device = _find_devices()[devid]
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crazyflie/__init__.py", line 218, in open_link
+    link_uri, self._link_quality_cb, self._link_error_cb)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/__init__.py", line 91, in get_link_driver
+    instance.connect(uri, link_quality_callback, link_error_callback)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 188, in connect
+    address)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 98, in __init__
+    _RadioManager._radios[self._devid] = _SharedRadio(self._devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 67, in __init__
+    self.radio = Crazyradio(devid=devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 121, in __init__
+    raise Exception('Cannot find a Crazyradio Dongle')
+Exception: Cannot find a Crazyradio Dongle
+
+disconnected 1
+Connecting to radio://0/81/2M
+Connection to radio://0/81/2M failed: Couldn't load link driver: Cannot find a Crazyradio Dongle
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 119, in __init__
+    device = _find_devices()[devid]
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crazyflie/__init__.py", line 218, in open_link
+    link_uri, self._link_quality_cb, self._link_error_cb)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/__init__.py", line 91, in get_link_driver
+    instance.connect(uri, link_quality_callback, link_error_callback)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 188, in connect
+    address)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 98, in __init__
+    _RadioManager._radios[self._devid] = _SharedRadio(self._devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 67, in __init__
+    self.radio = Crazyradio(devid=devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 121, in __init__
+    raise Exception('Cannot find a Crazyradio Dongle')
+Exception: Cannot find a Crazyradio Dongle
+
+disconnected 1
+Connecting to radio://0/81/2M
+Connection to radio://0/81/2M failed: Couldn't load link driver: Cannot find a Crazyradio Dongle
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 119, in __init__
+    device = _find_devices()[devid]
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crazyflie/__init__.py", line 218, in open_link
+    link_uri, self._link_quality_cb, self._link_error_cb)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/__init__.py", line 91, in get_link_driver
+    instance.connect(uri, link_quality_callback, link_error_callback)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 188, in connect
+    address)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 98, in __init__
+    _RadioManager._radios[self._devid] = _SharedRadio(self._devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 67, in __init__
+    self.radio = Crazyradio(devid=devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 121, in __init__
+    raise Exception('Cannot find a Crazyradio Dongle')
+Exception: Cannot find a Crazyradio Dongle
+
+disconnected 1
+Connecting to radio://0/81/2M
+Connection to radio://0/81/2M failed: Couldn't load link driver: Cannot find a Crazyradio Dongle
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 119, in __init__
+    device = _find_devices()[devid]
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crazyflie/__init__.py", line 218, in open_link
+    link_uri, self._link_quality_cb, self._link_error_cb)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/__init__.py", line 91, in get_link_driver
+    instance.connect(uri, link_quality_callback, link_error_callback)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 188, in connect
+    address)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 98, in __init__
+    _RadioManager._radios[self._devid] = _SharedRadio(self._devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 67, in __init__
+    self.radio = Crazyradio(devid=devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 121, in __init__
+    raise Exception('Cannot find a Crazyradio Dongle')
+Exception: Cannot find a Crazyradio Dongle
+
+disconnected 1
+Connecting to radio://0/81/2M
+Connection to radio://0/81/2M failed: Couldn't load link driver: Cannot find a Crazyradio Dongle
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 119, in __init__
+    device = _find_devices()[devid]
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crazyflie/__init__.py", line 218, in open_link
+    link_uri, self._link_quality_cb, self._link_error_cb)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/__init__.py", line 91, in get_link_driver
+    instance.connect(uri, link_quality_callback, link_error_callback)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 188, in connect
+    address)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 98, in __init__
+    _RadioManager._radios[self._devid] = _SharedRadio(self._devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 67, in __init__
+    self.radio = Crazyradio(devid=devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 121, in __init__
+    raise Exception('Cannot find a Crazyradio Dongle')
+Exception: Cannot find a Crazyradio Dongle
+
+disconnected 1
+Connecting to radio://0/81/2M
+Connection to radio://0/81/2M failed: Couldn't load link driver: Cannot find a Crazyradio Dongle
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 119, in __init__
+    device = _find_devices()[devid]
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crazyflie/__init__.py", line 218, in open_link
+    link_uri, self._link_quality_cb, self._link_error_cb)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/__init__.py", line 91, in get_link_driver
+    instance.connect(uri, link_quality_callback, link_error_callback)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 188, in connect
+    address)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 98, in __init__
+    _RadioManager._radios[self._devid] = _SharedRadio(self._devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 67, in __init__
+    self.radio = Crazyradio(devid=devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 121, in __init__
+    raise Exception('Cannot find a Crazyradio Dongle')
+Exception: Cannot find a Crazyradio Dongle
+
+disconnected 1
+Connecting to radio://0/82/2M
+mySocket.listen(1)
+conn, addr = mySocket.accept()
+Connected to radio://0/82/2M
+socket <socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('0.0.0.0', 50007)>
+[8352320][Stabilizer]: {'stabilizer.yaw': -6.792314052581787, 'stabilizer.roll': 0.5603106617927551, 'stabilizer.pitch': 0.1552642583847046}
+[8353320][Stabilizer]: {'stabilizer.yaw': -6.8668036460876465, 'stabilizer.roll': 0.5603691935539246, 'stabilizer.pitch': 0.15349310636520386}
+[8354320][Stabilizer]: {'stabilizer.yaw': -6.933286666870117, 'stabilizer.roll': 0.5610076785087585, 'stabilizer.pitch': 0.1536986380815506}
+[8355320][Stabilizer]: {'stabilizer.yaw': -7.0053629875183105, 'stabilizer.roll': 0.5526732802391052, 'stabilizer.pitch': 0.15625479817390442}
+[8356320][Stabilizer]: {'stabilizer.yaw': -7.075074195861816, 'stabilizer.roll': 0.5615438222885132, 'stabilizer.pitch': 0.1631339192390442}
+[8357320][Stabilizer]: {'stabilizer.yaw': -7.1551737785339355, 'stabilizer.roll': 0.5664193034172058, 'stabilizer.pitch': 0.15579335391521454}
+[8358320][Stabilizer]: {'stabilizer.yaw': -7.221919059753418, 'stabilizer.roll': 0.5682880878448486, 'stabilizer.pitch': 0.15440918505191803}
+[8359320][Stabilizer]: {'stabilizer.yaw': -7.292165756225586, 'stabilizer.roll': 0.5830475687980652, 'stabilizer.pitch': 0.14581163227558136}
+[8360320][Stabilizer]: {'stabilizer.yaw': -7.357815742492676, 'stabilizer.roll': 0.5824694037437439, 'stabilizer.pitch': 0.14596763253211975}
+[8361320][Stabilizer]: {'stabilizer.yaw': -7.4347615242004395, 'stabilizer.roll': 0.5899249315261841, 'stabilizer.pitch': 0.1468251645565033}
+[8362320][Stabilizer]: {'stabilizer.yaw': -7.5062575340271, 'stabilizer.roll': 0.5895348787307739, 'stabilizer.pitch': 0.14552243053913116}
+[8363320][Stabilizer]: {'stabilizer.yaw': -7.587874889373779, 'stabilizer.roll': 0.587602972984314, 'stabilizer.pitch': 0.15226304531097412}
+[8364320][Stabilizer]: {'stabilizer.yaw': -7.653589725494385, 'stabilizer.roll': 0.5830461978912354, 'stabilizer.pitch': 0.1572110801935196}
+[8365320][Stabilizer]: {'stabilizer.yaw': -7.7248992919921875, 'stabilizer.roll': 0.5721503496170044, 'stabilizer.pitch': 0.15580590069293976}
+[8366320][Stabilizer]: {'stabilizer.yaw': -7.804532527923584, 'stabilizer.roll': 0.5733004212379456, 'stabilizer.pitch': 0.15605437755584717}
+[8367320][Stabilizer]: {'stabilizer.yaw': -7.863362789154053, 'stabilizer.roll': 0.5731874704360962, 'stabilizer.pitch': 0.1533592790365219}
+[8368320][Stabilizer]: {'stabilizer.yaw': -7.938279151916504, 'stabilizer.roll': 0.5675377249717712, 'stabilizer.pitch': 0.14773616194725037}
+[8369320][Stabilizer]: {'stabilizer.yaw': -8.009608268737793, 'stabilizer.roll': 0.5683419108390808, 'stabilizer.pitch': 0.15133170783519745}
+[8370320][Stabilizer]: {'stabilizer.yaw': -8.080438613891602, 'stabilizer.roll': 0.572654128074646, 'stabilizer.pitch': 0.1523595005273819}
+[8371320][Stabilizer]: {'stabilizer.yaw': -8.152495384216309, 'stabilizer.roll': 0.5695363283157349, 'stabilizer.pitch': 0.15342892706394196}
+[8372320][Stabilizer]: {'stabilizer.yaw': -8.22719955444336, 'stabilizer.roll': 0.5640305280685425, 'stabilizer.pitch': 0.15636089444160461}
+[8373320][Stabilizer]: {'stabilizer.yaw': -8.29090404510498, 'stabilizer.roll': 0.5759233832359314, 'stabilizer.pitch': 0.15379877388477325}
+[8374320][Stabilizer]: {'stabilizer.yaw': -8.368998527526855, 'stabilizer.roll': 0.5675868391990662, 'stabilizer.pitch': 0.14880529046058655}
+[8375320][Stabilizer]: {'stabilizer.yaw': -8.439632415771484, 'stabilizer.roll': 0.5668207406997681, 'stabilizer.pitch': 0.15797212719917297}
+[8376320][Stabilizer]: {'stabilizer.yaw': -8.508050918579102, 'stabilizer.roll': 0.5655813813209534, 'stabilizer.pitch': 0.16401618719100952}
+[8377320][Stabilizer]: {'stabilizer.yaw': -8.585226058959961, 'stabilizer.roll': 0.5679570436477661, 'stabilizer.pitch': 0.16675496101379395}
+[8378320][Stabilizer]: {'stabilizer.yaw': -8.639265060424805, 'stabilizer.roll': 0.5555819869041443, 'stabilizer.pitch': 0.17130538821220398}
+[8379320][Stabilizer]: {'stabilizer.yaw': -8.699197769165039, 'stabilizer.roll': 0.5562028288841248, 'stabilizer.pitch': 0.17708975076675415}
+[8380320][Stabilizer]: {'stabilizer.yaw': -8.770313262939453, 'stabilizer.roll': 0.5676919221878052, 'stabilizer.pitch': 0.17129415273666382}
+[8381320][Stabilizer]: {'stabilizer.yaw': -8.841602325439453, 'stabilizer.roll': 0.5623461008071899, 'stabilizer.pitch': 0.1613440215587616}
+[8382320][Stabilizer]: {'stabilizer.yaw': -8.905502319335938, 'stabilizer.roll': 0.5715073943138123, 'stabilizer.pitch': 0.15472206473350525}
+[8383320][Stabilizer]: {'stabilizer.yaw': -8.971165657043457, 'stabilizer.roll': 0.5743274688720703, 'stabilizer.pitch': 0.14865505695343018}
+[8384320][Stabilizer]: {'stabilizer.yaw': -9.030426025390625, 'stabilizer.roll': 0.5678251385688782, 'stabilizer.pitch': 0.1387540102005005}
+[8385320][Stabilizer]: {'stabilizer.yaw': -9.098976135253906, 'stabilizer.roll': 0.5643744468688965, 'stabilizer.pitch': 0.13918139040470123}
+[8386320][Stabilizer]: {'stabilizer.yaw': -9.165020942687988, 'stabilizer.roll': 0.5715186595916748, 'stabilizer.pitch': 0.13009227812290192}
+[8387320][Stabilizer]: {'stabilizer.yaw': -9.230148315429688, 'stabilizer.roll': 0.5720158219337463, 'stabilizer.pitch': 0.12881016731262207}
+[8388320][Stabilizer]: {'stabilizer.yaw': -9.28676986694336, 'stabilizer.roll': 0.5793692469596863, 'stabilizer.pitch': 0.133138969540596}
+[8389320][Stabilizer]: {'stabilizer.yaw': -9.343042373657227, 'stabilizer.roll': 0.5623302459716797, 'stabilizer.pitch': 0.12987396121025085}
+[8390320][Stabilizer]: {'stabilizer.yaw': -9.410379409790039, 'stabilizer.roll': 0.5551618337631226, 'stabilizer.pitch': 0.13330096006393433}
+[8391320][Stabilizer]: {'stabilizer.yaw': -9.468531608581543, 'stabilizer.roll': 0.5685375928878784, 'stabilizer.pitch': 0.14001815021038055}
+[8392320][Stabilizer]: {'stabilizer.yaw': -9.529448509216309, 'stabilizer.roll': 0.5695369243621826, 'stabilizer.pitch': 0.13390162587165833}
+[8393320][Stabilizer]: {'stabilizer.yaw': -9.592684745788574, 'stabilizer.roll': 0.5687220692634583, 'stabilizer.pitch': 0.1335938721895218}
+[8394320][Stabilizer]: {'stabilizer.yaw': -9.658409118652344, 'stabilizer.roll': 0.572388768196106, 'stabilizer.pitch': 0.14016516506671906}
+[8395320][Stabilizer]: {'stabilizer.yaw': -9.717503547668457, 'stabilizer.roll': 0.5708242058753967, 'stabilizer.pitch': 0.14347612857818604}
+[8396320][Stabilizer]: {'stabilizer.yaw': -9.78156852722168, 'stabilizer.roll': 0.5601896047592163, 'stabilizer.pitch': 0.15174119174480438}
+[8397320][Stabilizer]: {'stabilizer.yaw': -9.842401504516602, 'stabilizer.roll': 0.5562489032745361, 'stabilizer.pitch': 0.1529240906238556}
+[8398320][Stabilizer]: {'stabilizer.yaw': -9.906245231628418, 'stabilizer.roll': 0.5594378113746643, 'stabilizer.pitch': 0.1604853868484497}
+[8399320][Stabilizer]: {'stabilizer.yaw': -9.958531379699707, 'stabilizer.roll': 0.5624000430107117, 'stabilizer.pitch': 0.1585616171360016}
+[8400320][Stabilizer]: {'stabilizer.yaw': -10.009143829345703, 'stabilizer.roll': 0.5650236010551453, 'stabilizer.pitch': 0.15597975254058838}
+[8401320][Stabilizer]: {'stabilizer.yaw': -10.068039894104004, 'stabilizer.roll': 0.5672318339347839, 'stabilizer.pitch': 0.15726342797279358}
+[8402320][Stabilizer]: {'stabilizer.yaw': -10.118086814880371, 'stabilizer.roll': 0.5699557662010193, 'stabilizer.pitch': 0.15048019587993622}
+[8403320][Stabilizer]: {'stabilizer.yaw': -10.170280456542969, 'stabilizer.roll': 0.5651645660400391, 'stabilizer.pitch': 0.16610097885131836}
+[8404320][Stabilizer]: {'stabilizer.yaw': -10.224061965942383, 'stabilizer.roll': 0.5676421523094177, 'stabilizer.pitch': 0.15977422893047333}
+[8405320][Stabilizer]: {'stabilizer.yaw': -10.268157958984375, 'stabilizer.roll': 0.5760127902030945, 'stabilizer.pitch': 0.16253091394901276}
+[8406320][Stabilizer]: {'stabilizer.yaw': -10.319263458251953, 'stabilizer.roll': 0.5899649262428284, 'stabilizer.pitch': 0.16328376531600952}
+[8407320][Stabilizer]: {'stabilizer.yaw': -10.375832557678223, 'stabilizer.roll': 0.5974485278129578, 'stabilizer.pitch': 0.17275407910346985}
+[8408320][Stabilizer]: {'stabilizer.yaw': -10.425985336303711, 'stabilizer.roll': 0.6048730611801147, 'stabilizer.pitch': 0.17382994294166565}
+[8409320][Stabilizer]: {'stabilizer.yaw': -10.482128143310547, 'stabilizer.roll': 0.6016272306442261, 'stabilizer.pitch': 0.16714830696582794}
+[8410320][Stabilizer]: {'stabilizer.yaw': -10.534523963928223, 'stabilizer.roll': 0.6038370728492737, 'stabilizer.pitch': 0.17439542710781097}
+[8411320][Stabilizer]: {'stabilizer.yaw': -10.598546028137207, 'stabilizer.roll': 0.5990334749221802, 'stabilizer.pitch': 0.1739262491464615}
+[8412320][Stabilizer]: {'stabilizer.yaw': -10.656272888183594, 'stabilizer.roll': 0.5930747389793396, 'stabilizer.pitch': 0.17819844186306}
+[8413320][Stabilizer]: {'stabilizer.yaw': -10.708734512329102, 'stabilizer.roll': 0.6057206392288208, 'stabilizer.pitch': 0.16514992713928223}
+[8414320][Stabilizer]: {'stabilizer.yaw': -10.762494087219238, 'stabilizer.roll': 0.6021486520767212, 'stabilizer.pitch': 0.16316860914230347}
+[8415320][Stabilizer]: {'stabilizer.yaw': -10.822999954223633, 'stabilizer.roll': 0.607811450958252, 'stabilizer.pitch': 0.17179441452026367}
+[8416320][Stabilizer]: {'stabilizer.yaw': -10.879006385803223, 'stabilizer.roll': 0.6162115931510925, 'stabilizer.pitch': 0.17126129567623138}
+[8417320][Stabilizer]: {'stabilizer.yaw': -10.934950828552246, 'stabilizer.roll': 0.6094493269920349, 'stabilizer.pitch': 0.16436174511909485}
+[8418320][Stabilizer]: {'stabilizer.yaw': -10.985054016113281, 'stabilizer.roll': 0.609466552734375, 'stabilizer.pitch': 0.1668228954076767}
+[8419320][Stabilizer]: {'stabilizer.yaw': -11.033997535705566, 'stabilizer.roll': 0.596651017665863, 'stabilizer.pitch': 0.16961467266082764}
+[8420320][Stabilizer]: {'stabilizer.yaw': -11.095846176147461, 'stabilizer.roll': 0.5830949544906616, 'stabilizer.pitch': 0.16851267218589783}
+[8421320][Stabilizer]: {'stabilizer.yaw': -11.153029441833496, 'stabilizer.roll': 0.5832907557487488, 'stabilizer.pitch': 0.16415126621723175}
+[8422320][Stabilizer]: {'stabilizer.yaw': -11.213260650634766, 'stabilizer.roll': 0.5840526223182678, 'stabilizer.pitch': 0.17139272391796112}
+[8423320][Stabilizer]: {'stabilizer.yaw': -11.277775764465332, 'stabilizer.roll': 0.584105908870697, 'stabilizer.pitch': 0.1661347597837448}
+[8424320][Stabilizer]: {'stabilizer.yaw': -11.337246894836426, 'stabilizer.roll': 0.5822303891181946, 'stabilizer.pitch': 0.17159625887870789}
+[8425320][Stabilizer]: {'stabilizer.yaw': -11.394933700561523, 'stabilizer.roll': 0.5855692028999329, 'stabilizer.pitch': 0.1684422492980957}
+[8426320][Stabilizer]: {'stabilizer.yaw': -11.438785552978516, 'stabilizer.roll': 0.5878732800483704, 'stabilizer.pitch': 0.16762657463550568}
+[8427320][Stabilizer]: {'stabilizer.yaw': -11.49798583984375, 'stabilizer.roll': 0.58128821849823, 'stabilizer.pitch': 0.16946935653686523}
+[8428320][Stabilizer]: {'stabilizer.yaw': -11.551849365234375, 'stabilizer.roll': 0.5918853282928467, 'stabilizer.pitch': 0.17811834812164307}
+[8429320][Stabilizer]: {'stabilizer.yaw': -7.061983108520508, 'stabilizer.roll': 0.8401080369949341, 'stabilizer.pitch': 0.18191662430763245}
+[8430320][Stabilizer]: {'stabilizer.yaw': 70.7957992553711, 'stabilizer.roll': -147.88619995117188, 'stabilizer.pitch': 68.582763671875}
+[8431320][Stabilizer]: {'stabilizer.yaw': -22.945146560668945, 'stabilizer.roll': -68.20989990234375, 'stabilizer.pitch': 21.620359420776367}
+[8432320][Stabilizer]: {'stabilizer.yaw': -4.697490215301514, 'stabilizer.roll': -39.41675567626953, 'stabilizer.pitch': -8.804142951965332}
+[8433320][Stabilizer]: {'stabilizer.yaw': -3.150529623031616, 'stabilizer.roll': -27.278179168701172, 'stabilizer.pitch': -7.351639747619629}
+[8434320][Stabilizer]: {'stabilizer.yaw': -21.172348022460938, 'stabilizer.roll': -25.672496795654297, 'stabilizer.pitch': 15.234881401062012}
+[8435320][Stabilizer]: {'stabilizer.yaw': -53.30934143066406, 'stabilizer.roll': -29.671483993530273, 'stabilizer.pitch': 30.38613510131836}
+[8436320][Stabilizer]: {'stabilizer.yaw': -52.19585418701172, 'stabilizer.roll': 16.621761322021484, 'stabilizer.pitch': 23.305561065673828}
+[8437320][Stabilizer]: {'stabilizer.yaw': -52.739097595214844, 'stabilizer.roll': 18.426790237426758, 'stabilizer.pitch': 21.816364288330078}
+[8438320][Stabilizer]: {'stabilizer.yaw': -24.591594696044922, 'stabilizer.roll': 0.5408955216407776, 'stabilizer.pitch': 0.04403245821595192}
+[8439320][Stabilizer]: {'stabilizer.yaw': -24.652435302734375, 'stabilizer.roll': 0.5346872806549072, 'stabilizer.pitch': 0.08159274607896805}
+[8440320][Stabilizer]: {'stabilizer.yaw': -24.719057083129883, 'stabilizer.roll': 0.5275523662567139, 'stabilizer.pitch': 0.10339401662349701}
+[8441320][Stabilizer]: {'stabilizer.yaw': -24.788406372070312, 'stabilizer.roll': 0.5204268097877502, 'stabilizer.pitch': 0.12321233749389648}
+[8442320][Stabilizer]: {'stabilizer.yaw': -24.862228393554688, 'stabilizer.roll': 0.5220383405685425, 'stabilizer.pitch': 0.1442355364561081}
+[8443320][Stabilizer]: {'stabilizer.yaw': -24.94335174560547, 'stabilizer.roll': 0.5271651148796082, 'stabilizer.pitch': 0.15264126658439636}
+[8444320][Stabilizer]: {'stabilizer.yaw': -25.018463134765625, 'stabilizer.roll': 0.5294381976127625, 'stabilizer.pitch': 0.14760351181030273}
+[8445320][Stabilizer]: {'stabilizer.yaw': -25.084388732910156, 'stabilizer.roll': 0.5068451762199402, 'stabilizer.pitch': 0.15027283132076263}
+[8446320][Stabilizer]: {'stabilizer.yaw': -25.16228675842285, 'stabilizer.roll': 0.5011315941810608, 'stabilizer.pitch': 0.15591709315776825}
+[8447320][Stabilizer]: {'stabilizer.yaw': -25.225814819335938, 'stabilizer.roll': 0.5020062923431396, 'stabilizer.pitch': 0.16166457533836365}
+[8448320][Stabilizer]: {'stabilizer.yaw': -25.293012619018555, 'stabilizer.roll': 0.4966682195663452, 'stabilizer.pitch': 0.17118678987026215}
+[8449320][Stabilizer]: {'stabilizer.yaw': -25.365985870361328, 'stabilizer.roll': 0.5062812566757202, 'stabilizer.pitch': 0.16376009583473206}
+[8450320][Stabilizer]: {'stabilizer.yaw': -25.43856430053711, 'stabilizer.roll': 0.48575931787490845, 'stabilizer.pitch': 0.16887930035591125}
+[8451320][Stabilizer]: {'stabilizer.yaw': -26.574508666992188, 'stabilizer.roll': -18.360570907592773, 'stabilizer.pitch': -0.07747995108366013}
+[8452320][Stabilizer]: {'stabilizer.yaw': -5.010934829711914, 'stabilizer.roll': 0.383716344833374, 'stabilizer.pitch': 0.0009141817572526634}
+[8453320][Stabilizer]: {'stabilizer.yaw': -4.814204216003418, 'stabilizer.roll': 0.5429612398147583, 'stabilizer.pitch': 0.19081871211528778}
+[8454320][Stabilizer]: {'stabilizer.yaw': -6.021658420562744, 'stabilizer.roll': 0.006433527916669846, 'stabilizer.pitch': -0.7731739282608032}
+[8455320][Stabilizer]: {'stabilizer.yaw': -27.468151092529297, 'stabilizer.roll': 0.5888305306434631, 'stabilizer.pitch': 0.09522883594036102}
+[8456320][Stabilizer]: {'stabilizer.yaw': -27.536773681640625, 'stabilizer.roll': 0.702206552028656, 'stabilizer.pitch': 0.09874293208122253}
+[8457320][Stabilizer]: {'stabilizer.yaw': -27.60765838623047, 'stabilizer.roll': 0.6899950504302979, 'stabilizer.pitch': 0.11324679851531982}
+[8458320][Stabilizer]: {'stabilizer.yaw': -27.664703369140625, 'stabilizer.roll': 0.6389760375022888, 'stabilizer.pitch': 0.1492595076560974}
+[8459320][Stabilizer]: {'stabilizer.yaw': -27.730546951293945, 'stabilizer.roll': 0.6282042860984802, 'stabilizer.pitch': 0.16182436048984528}
+[8460320][Stabilizer]: {'stabilizer.yaw': -27.81020736694336, 'stabilizer.roll': 0.639203667640686, 'stabilizer.pitch': 0.1552322804927826}
+[8461320][Stabilizer]: {'stabilizer.yaw': -27.880001068115234, 'stabilizer.roll': 0.6329530477523804, 'stabilizer.pitch': 0.16178306937217712}
+[8462320][Stabilizer]: {'stabilizer.yaw': -27.946117401123047, 'stabilizer.roll': 0.6261598467826843, 'stabilizer.pitch': 0.16969884932041168}
+[8463320][Stabilizer]: {'stabilizer.yaw': -28.023849487304688, 'stabilizer.roll': 0.6259040832519531, 'stabilizer.pitch': 0.16587458550930023}
+[8464320][Stabilizer]: {'stabilizer.yaw': -28.083820343017578, 'stabilizer.roll': 0.6143268942832947, 'stabilizer.pitch': 0.16991230845451355}
+[8465320][Stabilizer]: {'stabilizer.yaw': -28.124853134155273, 'stabilizer.roll': 0.6073094010353088, 'stabilizer.pitch': 0.17703285813331604}
+[8466320][Stabilizer]: {'stabilizer.yaw': -28.170934677124023, 'stabilizer.roll': 0.6102365255355835, 'stabilizer.pitch': 0.1764630675315857}Connecting to radio://0/82/2M
+Connection to radio://0/82/2M failed: Couldn't load link driver: Cannot find a Crazyradio Dongle
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 119, in __init__
+    device = _find_devices()[devid]
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crazyflie/__init__.py", line 218, in open_link
+    link_uri, self._link_quality_cb, self._link_error_cb)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/__init__.py", line 91, in get_link_driver
+    instance.connect(uri, link_quality_callback, link_error_callback)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 188, in connect
+    address)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 98, in __init__
+    _RadioManager._radios[self._devid] = _SharedRadio(self._devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 67, in __init__
+    self.radio = Crazyradio(devid=devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 121, in __init__
+    raise Exception('Cannot find a Crazyradio Dongle')
+Exception: Cannot find a Crazyradio Dongle
+
+disconnected 1
+Connecting to radio://0/82/2M
+Connection to radio://0/82/2M failed: Couldn't load link driver: Cannot find a Crazyradio Dongle
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 119, in __init__
+    device = _find_devices()[devid]
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crazyflie/__init__.py", line 218, in open_link
+    link_uri, self._link_quality_cb, self._link_error_cb)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/__init__.py", line 91, in get_link_driver
+    instance.connect(uri, link_quality_callback, link_error_callback)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 188, in connect
+    address)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 98, in __init__
+    _RadioManager._radios[self._devid] = _SharedRadio(self._devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 67, in __init__
+    self.radio = Crazyradio(devid=devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 121, in __init__
+    raise Exception('Cannot find a Crazyradio Dongle')
+Exception: Cannot find a Crazyradio Dongle
+
+disconnected 1
+Connecting to radio://0/82/2M
+Connection to radio://0/82/2M failed: Couldn't load link driver: Cannot find a Crazyradio Dongle
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 119, in __init__
+    device = _find_devices()[devid]
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crazyflie/__init__.py", line 218, in open_link
+    link_uri, self._link_quality_cb, self._link_error_cb)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/__init__.py", line 91, in get_link_driver
+    instance.connect(uri, link_quality_callback, link_error_callback)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 188, in connect
+    address)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 98, in __init__
+    _RadioManager._radios[self._devid] = _SharedRadio(self._devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 67, in __init__
+    self.radio = Crazyradio(devid=devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 121, in __init__
+    raise Exception('Cannot find a Crazyradio Dongle')
+Exception: Cannot find a Crazyradio Dongle
+
+disconnected 1
+Connecting to radio://0/82/2M
+Connection to radio://0/82/2M failed: Couldn't load link driver: Cannot find a Crazyradio Dongle
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 119, in __init__
+    device = _find_devices()[devid]
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crazyflie/__init__.py", line 218, in open_link
+    link_uri, self._link_quality_cb, self._link_error_cb)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/__init__.py", line 91, in get_link_driver
+    instance.connect(uri, link_quality_callback, link_error_callback)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 188, in connect
+    address)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 98, in __init__
+    _RadioManager._radios[self._devid] = _SharedRadio(self._devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/crtp/radiodriver.py", line 67, in __init__
+    self.radio = Crazyradio(devid=devid)
+  File "/home/taste/miniconda3/envs/cfclient/lib/python3.4/site-packages/cflib/drivers/crazyradio.py", line 121, in __init__
+    raise Exception('Cannot find a Crazyradio Dongle')
+Exception: Cannot find a Crazyradio Dongle
+
+disconnected 1
