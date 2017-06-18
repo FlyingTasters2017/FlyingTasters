@@ -74,7 +74,7 @@ class LoggingExample:
         self.is_connected = True
         print("socket", self._socket)
         # The definition of the logconfig can be made before connecting
-        self._lg_sensorData = LogConfig(name='Stabilizer', period_in_ms=20)
+        self._lg_sensorData = LogConfig(name='Stabilizer', period_in_ms=50)
         self._lg_sensorData.add_variable('stabilizer.roll', 'float')
         self._lg_sensorData.add_variable('stabilizer.pitch', 'float')
         self._lg_sensorData.add_variable('stabilizer.yaw', 'float')

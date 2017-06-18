@@ -23,6 +23,8 @@ int n;
 int time_count;
 char droneref[256];
 
+int yawOld,pitchOld,rollOld,zrangeOld;
+
 //global variables end*/
 static int jsoneq(const char *json, jsmntok_t *tok, const char *s) {
   if (tok->type == JSMN_STRING && (int) strlen(s) == tok->end - tok->start &&
@@ -145,8 +147,7 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
     
   }
 
-  int yaw, pitch, roll, zrange;
-  int yawOld, pitchOld, rollOld, zrangeOld;
+  int receivedYaw, receivedPitch, receivedRoll, receivedZrange;
   
   /* Loop over all keys of the root object */
   for (i = 1; i < r; i++) {
@@ -156,7 +157,7 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             OUT_sensorData->yawAct = strtod(temp, &ptr);
-            yaw = strtod(temp, &ptr) * 1000;
+            receivedYaw = strtod(temp, &ptr) * 1000; //Convert to int having 3 zeros after comma xx.xxx
             i++;
     }         
     else if (jsoneq(buf, &t[i], "stabilizer.pitch") == 0) {
@@ -218,16 +219,17 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
       printf("Unexpected key: %.*s\n", t[i].end-t[i].start,buf + t[i].start);
     }
   }
-
-    if (yaw != yawOld) {
-        yawOld = yaw;
-        printf("yawOld is %d \n", yawOld);
-    }
-    else {
-        printf("yawOld is the same \n");
+/* //New sensor data came check
+    if (receivedYaw != yawOld) {
+        yawOld = receivedYaw;
         
     }
-  
+    else {
+        printf("No new sensor data \n");
+        //send old controller command
+        
+    }
+*/
   //TODO: Controller for the drone. Put here
   
    printf("Sending to Python server: \n");
