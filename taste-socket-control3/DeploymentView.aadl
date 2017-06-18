@@ -42,7 +42,7 @@ SUBCOMPONENTS
     Taste::FunctionName => "gcs";
   };
   IV_socketClient : SYSTEM interfaceview::IV::socketClient.others {
-    Taste::coordinates => "1452 1031 1811 1257";
+    Taste::coordinates => "1298 1036 1482 1262";
     Taste::FunctionName => "socketClient";
   };
   IV_Pixycam : SYSTEM interfaceview::IV::Pixycam.others {
@@ -54,8 +54,16 @@ SUBCOMPONENTS
     Taste::FunctionName => "PixyProcess";
   };
   IV_cClient : SYSTEM interfaceview::IV::cClient.others {
-    Taste::coordinates => "2057 1067 2206 1252";
+    Taste::coordinates => "2057 918 2206 1103";
     Taste::FunctionName => "cClient";
+  };
+  IV_Timer : SYSTEM interfaceview::IV::Timer.others {
+    Taste::coordinates => "2170 1231 2288 1544";
+    Taste::FunctionName => "Timer";
+  };
+  IV_camSupervisor : SYSTEM interfaceview::IV::camSupervisor.others {
+    Taste::coordinates => "1636 980 1806 1257";
+    Taste::FunctionName => "camSupervisor";
   };
   x86_partition : PROCESS deploymentview::DV::Node1::x86_partition.others {
     Taste::coordinates => "675 821 2367 1708";
@@ -71,6 +79,8 @@ PROPERTIES
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Pixycam;
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_PixyProcess;
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_cClient;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Timer;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_camSupervisor;
   Actual_Processor_Binding => (reference (x86_linux32)) APPLIES TO x86_partition;
 END Node1.others;
 
@@ -92,4 +102,3 @@ PROPERTIES
   Taste::HWLibraries => ("../../tool-inst/share/ocarina/AADLv2/ocarina_components.aadl");
 END deploymentview::DV;
 
--- copied aadl libraries

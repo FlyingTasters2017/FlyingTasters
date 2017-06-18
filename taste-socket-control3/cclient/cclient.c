@@ -3,6 +3,7 @@
 #include "cclient.h"
 #include <stdio.h>
 
+asn1SccMyDroneData droneData;
 void cclient_startup()
 {
     /* Write your initialization code here,
@@ -35,17 +36,19 @@ void cclient_PI_takeoff(asn1SccMyDroneData *OUT_droneData)
     OUT_droneData->pitchRef = pitch;*/
     
     
-    asn1SccMyDroneData droneData;
-    droneData.thrustRef=30;
+    
+    droneData.thrustRef=15000;
     droneData.yawrateRef=0.25;
     droneData.rollRef=0.25;
     droneData.pitchRef=0;
     
-    OUT_droneData=&droneData;
-
-    /*OUT_droneData->thrustRef = 30;
-    OUT_droneData->yawrateRef = 0.25;
-    OUT_droneData->rollRef = 0.25;
+    OUT_droneData = &droneData;
+    
+    /*float thrust=30;
+        
+    OUT_droneData->thrustRef = thrust;
+    OUT_droneData->yawrateRef = 0;
+    OUT_droneData->rollRef = 0;
     OUT_droneData->pitchRef = 0;*/
 }
 

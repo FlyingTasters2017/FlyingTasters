@@ -7,6 +7,13 @@
 #include "pixy.h"
 #include <stdbool.h>
 
+#include <inttypes.h>
+#include <math.h>
+#include <time.h>
+
+#define _POSIX_C_SOURCE 200809L
+
+
 #define BLOCK_BUFFER_SIZE    25
 int pixy_init_status;
 
@@ -14,6 +21,26 @@ void pixycam_startup()
 {
     /* Write your initialization code here,
        but do not make any call to a required interface. */
+    pixy_taste_init();
+    
+}
+
+void printTime() {
+    long            ms; // Milliseconds
+    time_t          s;  // Seconds
+    struct timespec spec;
+
+    clock_gettime(CLOCK_REALTIME, &spec);
+
+    s  = spec.tv_sec;
+    ms = round(spec.tv_nsec / 1.0e6); // Convert nanoseconds to milliseconds
+
+    printf( " Current time from pixycam function: % " PRIdMAX ".%03ld seconds since the Epoch\n ",
+           (intmax_t)s, ms);
+}
+
+void pixy_taste_init()
+{
     // Connect to Pixy //
     pixy_close();
     {
@@ -44,13 +71,10 @@ void pixycam_startup()
         }
     }
 }
-void pixy_cam_close()
-{
-    pixy_close();
-}
 void pixycam_PI_rawdata()
 {
-        
+    printf("starting pixycam_PI_rawdata()\n");
+    printTime();    
     // Pixy Block buffer // 
         struct Block blocks[BLOCK_BUFFER_SIZE];
 
@@ -84,12 +108,13 @@ void pixycam_PI_rawdata()
         asn1SccT_UInt32 x;
         asn1SccT_UInt32 y;
         
-        //while(run_flag)
+//         while(run_flag)
 
-        {
+        //{
 
             // Wait for new blocks to be available //
-
+            
+            
             while(!pixy_blocks_are_new() /*&& run_flag*/); 
 
 
@@ -125,5 +150,9 @@ void pixycam_PI_rawdata()
                 pixycam_RI_processData(&x, &y);
             }
             //i++;
-        }
+            //run_flag = FALSE;
+        //}
+        
+        printf("end of pixycam_PI_rawdata()\n");
+        printTime();
 }

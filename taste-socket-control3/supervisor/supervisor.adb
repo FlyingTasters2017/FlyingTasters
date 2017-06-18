@@ -27,32 +27,19 @@ package body supervisor is
         dronedata : aliased asn1SccMyDroneData;
     end record;
     ctxt: aliased ctxt_Ty;
-    CS_Only  : constant Integer := 4;
+    CS_Only  : constant Integer := 3;
     procedure runTransition(Id: Integer);
     procedure pulse is
         begin
             case ctxt.state is
                 when running =>
-                    runTransition(2);
-                when wait =>
                     runTransition(1);
+                when wait =>
+                    runTransition(2);
                 when others =>
                     runTransition(CS_Only);
             end case;
         end pulse;
-        
-
-    procedure pixyPulse is
-        begin
-            case ctxt.state is
-                when running =>
-                    runTransition(3);
-                when wait =>
-                    runTransition(CS_Only);
-                when others =>
-                    runTransition(CS_Only);
-            end case;
-        end pixyPulse;
         
 
     procedure runTransition(Id: Integer) is
@@ -64,46 +51,44 @@ package body supervisor is
                         -- writeln('SDL Startup') (13,13)
                         Put("SDL Startup");
                         New_Line;
-                        -- NEXT_STATE Wait (15,18) at 349, 182
+                        -- NEXT_STATE Wait (15,18) at 319, 177
                         trId := -1;
                         ctxt.state := Wait;
                         goto next_transition;
                     when 1 =>
-                        -- writeln('Stuck Here_ Tag1 ') (21,17)
-                        Put("Stuck Here_ Tag1 ");
+                        -- writeln('Starting cycle') (21,17)
+                        Put("Starting cycle");
                         New_Line;
-                        -- n:=0 (23,17)
-                        ctxt.n := Asn1Int(0);
-                        -- NEXT_STATE Running (25,22) at 91, 397
+                        -- printTime (23,17)
+                        RIÜprintTime;
+                        -- n :=n+1 (25,17)
+                        ctxt.n := Asn1Int((ctxt.n + 1));
+                        -- write('Cycle number= ',n) (27,17)
+                        Put("Cycle number= ");
+                        Put(Asn1Int'Image(ctxt.n));
+                        -- takeoff(droneData) (29,17)
+                        RIÜtakeoff(ctxt.droneData'Access);
+                        -- readStabilizerSendThrust(droneData,sensorData) (31,17)
+                        RIÜreadStabilizerSendThrust(ctxt.droneData'Access, ctxt.sensorData'Access);
+                        -- writeln('Drone data read/send done') (33,17)
+                        Put("Drone data read/send done");
+                        New_Line;
+                        -- printTime (35,17)
+                        RIÜprintTime;
+                        -- writeln('Waiting for the next pulse') (37,17)
+                        Put("Waiting for the next pulse");
+                        New_Line;
+                        -- NEXT_STATE Running (39,22) at 663, 708
                         trId := -1;
                         ctxt.state := Running;
                         goto next_transition;
                     when 2 =>
-                        -- n :=n+1 (32,17)
-                        ctxt.n := Asn1Int((ctxt.n + 1));
-                        -- write('n=',n) (34,17)
-                        Put("n=");
-                        Put(Asn1Int'Image(ctxt.n));
-                        -- takeoff(droneData) (36,17)
-                        RIÜtakeoff(ctxt.droneData'Access);
-                        -- readStabilizerSendThrust(droneData,sensorData) (38,17)
-                        RIÜreadStabilizerSendThrust(ctxt.droneData'Access, ctxt.sensorData'Access);
-                        -- writeln('read done') (40,17)
-                        Put("read done");
+                        -- writeln('Stuck Here_ Tag1 ') (46,17)
+                        Put("Stuck Here_ Tag1 ");
                         New_Line;
-                        -- displaySensor(sensorData) (42,17)
-                        RIÜdisplaySensor(ctxt.sensorData'Access);
-                        -- writeln('display done') (44,17)
-                        Put("display done");
-                        New_Line;
-                        -- NEXT_STATE Running (46,22) at 654, 594
-                        trId := -1;
-                        ctxt.state := Running;
-                        goto next_transition;
-                    when 3 =>
-                        -- rawdata (50,17)
-                        RIÜrawdata;
-                        -- NEXT_STATE Running (52,22) at 1018, 272
+                        -- n:=0 (48,17)
+                        ctxt.n := Asn1Int(0);
+                        -- NEXT_STATE Running (50,22) at 61, 392
                         trId := -1;
                         ctxt.state := Running;
                         goto next_transition;

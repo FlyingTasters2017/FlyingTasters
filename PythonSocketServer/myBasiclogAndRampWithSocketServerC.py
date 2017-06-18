@@ -129,7 +129,7 @@ class LoggingExample:
 
     def _sensorData_log_data(self, timestamp, data, logconf):
         """Callback froma the log API when data arrives"""
-        # print('[%d][%s]: %s' % (timestamp, logconf.name, data))
+        print('[%d][%s]: %s' % (timestamp, logconf.name, data))
         self.sensorsData = json.dumps(data)
 
     def _connection_failed(self, link_uri, msg):
@@ -239,7 +239,7 @@ if __name__ == '__main__':
 
             if thrust > 0:
                 for le in list:
-                    le.send_zrange_setpoint(roll, pitch, yawrate, 2000)
+                    le.send_zrange_setpoint(roll, pitch, yawrate, thrust)
     conn.close()
         # file.close()
     sys.exit(2)

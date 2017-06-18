@@ -59,6 +59,9 @@ taste-update-data-view
 # Generate code for OpenGEODE function supervisor
 cd "$SKELS"/supervisor && opengeode --toAda supervisor.pr system_structure.pr && cd $OLDPWD
 
+# Generate code for OpenGEODE function camsupervisor
+cd "$SKELS"/camsupervisor && opengeode --toAda camsupervisor.pr system_structure.pr && cd $OLDPWD
+
 cd "$SKELS" && rm -f socketclient.zip && zip socketclient socketclient/* && cd $OLDPWD
 
 cd "$SKELS" && rm -f pixycam.zip && zip pixycam pixycam/* && cd $OLDPWD
@@ -69,11 +72,21 @@ cd "$SKELS" && rm -f supervisor.zip && zip supervisor supervisor/* && cd $OLDPWD
 
 cd "$SKELS" && rm -f cclient.zip && zip cclient cclient/* && cd $OLDPWD
 
+cd "$SKELS" && rm -f timer.zip && zip timer timer/* && cd $OLDPWD
+
+cd "$SKELS" && rm -f camsupervisor.zip && zip camsupervisor camsupervisor/* && cd $OLDPWD
+
 [ ! -z "$CLEANUP" ] && rm -rf binary*
 
 if [ -f ConcurrencyView.pro ]
 then
     ORCHESTRATOR_OPTIONS+=" -w ConcurrencyView.pro "
+fi
+
+if [ -f user_init_post.sh ]
+then
+    echo -e "${INFO} Executing user-defined post-init script"
+    source user_init_post.sh
 fi
 
 if [ ! -z "$USE_POHIC" ]
@@ -85,12 +98,6 @@ then
     OUTPUTDIR=binary.ada
 else
     OUTPUTDIR=binary
-fi
-
-if [ -f user_init_post.sh ]
-then
-    echo -e "${INFO} Executing user-defined init script"
-    source user_init_post.sh
 fi
 
 cd "$CWD" && assert-builder-ocarina.py \
@@ -106,4 +113,13 @@ cd "$CWD" && assert-builder-ocarina.py \
 	--subC pixyprocess:"$SKELS"/pixyprocess.zip \
 	--subAda supervisor:"$SKELS"/supervisor.zip \
 	--subC cclient:"$SKELS"/cclient.zip \
+	--subC timer:"$SKELS"/timer.zip \
+	--subAda camsupervisor:"$SKELS"/camsupervisor.zip \
 	$ORCHESTRATOR_OPTIONS
+
+if [ -f user_init_last.sh ]
+then
+    echo -e "${INFO} Executing user-defined post-build script"
+    source user_init_last.sh
+fi
+

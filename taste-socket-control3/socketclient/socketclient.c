@@ -152,16 +152,16 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
   jsmntok_t t[128]; /* We expect no more than 128 tokens */
 
   jsmn_init(&p);
-    printf("Came here: %d\n", 1);
+//     printf("Came here: %d\n", 1);
 
   r = jsmn_parse(&p, buf, strlen(buf), t, sizeof(t)/sizeof(t[0]));
-    printf("Came here: %d\n", 2);
+//     printf("Came here: %d\n", 2);
 
   if (r < 0) {
     printf("Failed to parse JSON: %d\n", r);
     
   }
-  printf("Came here: %d\n", 3);
+//   printf("Came here: %d\n", 3);
 
 
   /* Assume the top-level element is an object */
@@ -169,13 +169,13 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
     printf("Object expected\n");
     
   }
-  printf("Came here: %d\n", 4);
+//   printf("Came here: %d\n", 4);
 
   /* Loop over all keys of the root object */
   for (i = 1; i < r; i++) {
         if (jsoneq(buf, &t[i], "stabilizer.yaw") == 0) {
       /* We may use strndup() to fetch string value socketShutdownError*/
-      printf("stabilizer.yaw: %.*s\n", t[i+1].end-t[i+1].start,buf + t[i+1].start);
+//       printf("stabilizer.yaw: %.*s\n", t[i+1].end-t[i+1].start,buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             OUT_sensorData->yawAct = strtod(temp, &ptr);            
@@ -183,7 +183,7 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
     }         
     else if (jsoneq(buf, &t[i], "stabilizer.pitch") == 0) {
       /* We may additionally check if the value is either "true" or "false" */
-      printf("stabilizer.pitch: %.*s\n", t[i+1].end-t[i+1].start,buf + t[i+1].start);
+//       printf("stabilizer.pitch: %.*s\n", t[i+1].end-t[i+1].start,buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
@@ -192,7 +192,7 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
     }
     else if (jsoneq(buf, &t[i], "stabilizer.roll") == 0) {
       /* We may want to do strtol() here to get numeric value */
-      printf("stabilizer.roll: %.*s\n", t[i+1].end-t[i+1].start,buf + t[i+1].start);
+//       printf("stabilizer.roll: %.*s\n", t[i+1].end-t[i+1].start,buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
@@ -201,8 +201,8 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
     }   
     else if (jsoneq(buf, &t[i], "acc.x") == 0) {
       /* We may additionally check if the value is either "true" or "false" */
-      printf("acc.x: %.*s\n", t[i+1].end-t[i+1].start,
-          buf + t[i+1].start);
+//       printf("acc.x: %.*s\n", t[i+1].end-t[i+1].start,
+//           buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
@@ -211,8 +211,8 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
     }
     else if (jsoneq(buf, &t[i], "acc.y") == 0) {
       /* We may want to do strtol() here to get numeric value */
-      printf("acc.y: %.*s\n", t[i+1].end-t[i+1].start,
-          buf + t[i+1].start);
+//       printf("acc.y: %.*s\n", t[i+1].end-t[i+1].start,
+//           buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
@@ -221,7 +221,7 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
     }
     else if (jsoneq(buf, &t[i], "acc.z") == 0) {
       /* We may additionally check if the value is either "true" or "false" */
-      printf("acc.z: %.*s\n", t[i+1].end-t[i+1].start, buf + t[i+1].start);
+//       printf("acc.z: %.*s\n", t[i+1].end-t[i+1].start, buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
@@ -230,7 +230,7 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
     }
     else if (jsoneq(buf, &t[i], "range.zrange") == 0) {
       /* We may want to do strtol() here to get numeric value */
-      printf("range.zrange: %.*s\n", t[i+1].end-t[i+1].start, buf + t[i+1].start);
+//       printf("range.zrange: %.*s\n", t[i+1].end-t[i+1].start, buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
@@ -240,7 +240,7 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
       printf("Unexpected key: %.*s\n", t[i].end-t[i].start,buf + t[i].start);
     }
   }
-  printf("Time to parse : %d \n", (clock() - time_count)* 1000 / CLOCKS_PER_SEC);
+//   printf("Time to parse : %d \n", (clock() - time_count)* 1000 / CLOCKS_PER_SEC);
 
 
    printf("Sending to server\n");
@@ -258,7 +258,7 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
    
    
    
-   bzero(droneref,256);
+//    bzero(droneref,256);
    
    
    snprintf(droneref, sizeof( droneref ), "%d %d %d %d ", yawrate, pitch, roll, thrust);
@@ -266,11 +266,11 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
    printf("\n");
    printf("dref %s\n",droneref);
    
-   printf("preparing to send to server : %s\n",droneref);  
+//    printf("preparing to send to server : %s\n",droneref);  
    //n = write(sockfd,droneref,sizeof(droneref));
    sendRequest(sockfd, droneref);     
-   printf("sending to server : %s\n",droneref);  
-   printf("Time to send : %d \n", (clock() - time_count)* 1000 / CLOCKS_PER_SEC);
+//    printf("sending to server : %s\n",droneref);  
+//    printf("Time to send : %d \n", (clock() - time_count)* 1000 / CLOCKS_PER_SEC);
 
    
 
