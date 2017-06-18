@@ -124,7 +124,7 @@ void socketclient_startup()
 
 void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_droneData, asn1SccMySensorData *OUT_sensorData)
 {
-   time_count = clock(); 
+    time_count = clock(); 
    char buf[256]; 
    int n;
    awaitResponse(sockfd, buf, 255);
@@ -145,6 +145,9 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
     
   }
 
+  int yaw, pitch, roll, zrange;
+  int yawOld, pitchOld, rollOld, zrangeOld;
+  
   /* Loop over all keys of the root object */
   for (i = 1; i < r; i++) {
         if (jsoneq(buf, &t[i], "stabilizer.yaw") == 0) {
@@ -152,7 +155,8 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
 //       printf("stabilizer.yaw: %.*s\n", t[i+1].end-t[i+1].start,buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
-            OUT_sensorData->yawAct = strtod(temp, &ptr);            
+            OUT_sensorData->yawAct = strtod(temp, &ptr);
+            yaw = strtod(temp, &ptr) * 1000;
             i++;
     }         
     else if (jsoneq(buf, &t[i], "stabilizer.pitch") == 0) {
@@ -215,6 +219,15 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
     }
   }
 
+    if (yaw != yawOld) {
+        yawOld = yaw;
+        printf("yawOld is %d \n", yawOld);
+    }
+    else {
+        printf("yawOld is the same \n");
+        
+    }
+  
   //TODO: Controller for the drone. Put here
   
    printf("Sending to Python server: \n");
