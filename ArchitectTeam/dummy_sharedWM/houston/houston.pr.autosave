@@ -15,7 +15,7 @@ process houston;
     state running;
         /* CIF input (414, 108), (207, 35) */
         input talk_with_Houston(user_input);
-            /* CIF decision (475, 163), (86, 50) */
+            /* CIF decision (474, 163), (86, 50) */
             decision user_input;
                 /* CIF ANSWER (438, 233), (70, 23) */
                 (/=1):
@@ -28,7 +28,7 @@ process houston;
             enddecision;
         /* CIF input (713, 108), (99, 35) */
         input comm_clock;
-            /* CIF PROCEDURECALL (653, 163), (220, 35) */
+            /* CIF PROCEDURECALL (652, 163), (220, 35) */
             call get_control_data(control_input);
             /* CIF PROCEDURECALL (631, 218), (263, 35) */
             call talk_to_socket(control_input,asd_data);
@@ -36,18 +36,18 @@ process houston;
             call store_control_data(control_input);
             /* CIF output (680, 328), (165, 35) */
             output put_raw_ASD(asd_data);
-            /* CIF NEXTSTATE (728, 383), (70, 35) */
+            /* CIF NEXTSTATE (727, 383), (70, 35) */
             NEXTSTATE running;
     endstate;
     /* CIF state (221, 60), (70, 35) */
     state Wait;
         /* CIF input (88, 115), (99, 35) */
         input comm_clock;
-            /* CIF NEXTSTATE (103, 170), (70, 35) */
+            /* CIF NEXTSTATE (102, 170), (70, 35) */
             NEXTSTATE wait;
         /* CIF input (197, 115), (207, 35) */
         input talk_with_Houston(user_input);
-            /* CIF decision (258, 170), (86, 50) */
+            /* CIF decision (257, 170), (86, 50) */
             decision user_input;
                 /* CIF ANSWER (221, 240), (70, 23) */
                 (/=1):

@@ -29,10 +29,6 @@
 #define __NEED_MyInteger_UPER
 #define __NEED_MyInteger_UPER
 #define __NEED_MyInteger_UPER
-#define __NEED_MyInteger_UPER
-#define __NEED_MyInteger_UPER
-#define __NEED_MyInteger_UPER
-#define __NEED_MyInteger_UPER
 #define __NEED_MyInteger_NATIVE
 #define __NEED_MyInteger_UPER
 #define __NEED_MyInteger_UPER
@@ -47,6 +43,12 @@
 #define __NEED_MyInteger_UPER
 #define __NEED_MyInteger_UPER
 #define __NEED_MyInteger_NATIVE
+#define __NEED_MyInteger_UPER
+#define __NEED_MyInteger_UPER
+#define __NEED_MyInteger_UPER
+#define __NEED_MyInteger_UPER
+#define __NEED_MyInteger_UPER
+#define __NEED_MyInteger_UPER
 #define __NEED_MyInteger_UPER
 #define __NEED_MyInteger_UPER
 #define __NEED_MyInteger_UPER
