@@ -73,12 +73,6 @@ then
     ORCHESTRATOR_OPTIONS+=" -w ConcurrencyView.pro "
 fi
 
-if [ -f user_init_post.sh ]
-then
-    echo -e "${INFO} Executing user-defined post-init script"
-    source user_init_post.sh
-fi
-
 if [ ! -z "$USE_POHIC" ]
 then
     OUTPUTDIR=binary.c
@@ -88,6 +82,12 @@ then
     OUTPUTDIR=binary.ada
 else
     OUTPUTDIR=binary
+fi
+
+if [ -f user_init_post.sh ]
+then
+    echo -e "${INFO} Executing user-defined init script"
+    source user_init_post.sh
 fi
 
 cd "$CWD" && assert-builder-ocarina.py \
@@ -104,10 +104,3 @@ cd "$CWD" && assert-builder-ocarina.py \
 	--subC timer:"$SKELS"/timer.zip \
 	--subC pixycam:"$SKELS"/pixycam.zip \
 	$ORCHESTRATOR_OPTIONS
-
-if [ -f user_init_last.sh ]
-then
-    echo -e "${INFO} Executing user-defined post-build script"
-    source user_init_last.sh
-fi
-
