@@ -29,20 +29,6 @@ package body as_supervisor is
     ctxt: aliased ctxt_Ty;
     CS_Only  : constant Integer := 4;
     procedure runTransition(Id: Integer);
-    procedure put_raw_ASD(raw_ASD: access asn1SccMyInteger) is
-        begin
-            case ctxt.state is
-                when running =>
-                    ctxt.raw_asd_data := raw_ASD.all;
-                    runTransition(2);
-                when wait =>
-                    runTransition(CS_Only);
-                when others =>
-                    runTransition(CS_Only);
-            end case;
-        end put_raw_ASD;
-        
-
     procedure talk_with_ASSV(sysSV_to_ASSV_events: access asn1SccMyInteger) is
         begin
             case ctxt.state is
@@ -56,6 +42,20 @@ package body as_supervisor is
                     runTransition(CS_Only);
             end case;
         end talk_with_ASSV;
+        
+
+    procedure put_raw_asd(raw_asd: access asn1SccMyInteger) is
+        begin
+            case ctxt.state is
+                when running =>
+                    ctxt.raw_asd_data := raw_asd.all;
+                    runTransition(2);
+                when wait =>
+                    runTransition(CS_Only);
+                when others =>
+                    runTransition(CS_Only);
+            end case;
+        end put_raw_asd;
         
 
     procedure runTransition(Id: Integer) is

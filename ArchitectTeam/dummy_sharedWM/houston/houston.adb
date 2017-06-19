@@ -85,32 +85,30 @@ package body houston is
                     when 2 =>
                         -- get_control_data(control_input) (32,17)
                         RIÜget_control_data(ctxt.control_input'Access);
-                        -- talk_to_socket(control_input,asd_data) (34,17)
-                        RIÜtalk_to_socket(ctxt.control_input'Access, ctxt.asd_data'Access);
+                        -- send_control_data(control_input) (34,19)
+                        RIÜsend_control_data(ctxt.control_input'Access);
                         -- store_control_data(control_input) (36,17)
                         RIÜstore_control_data(ctxt.control_input'Access);
-                        -- put_raw_ASD(asd_data) (38,19)
-                        RIÜput_raw_ASD(ctxt.asd_data'Access);
-                        -- NEXT_STATE running (40,22) at 728, 383
+                        -- NEXT_STATE running (38,22) at 727, 323
                         trId := -1;
                         ctxt.state := running;
                         goto next_transition;
                     when 3 =>
-                        -- NEXT_STATE wait (47,22) at 103, 170
+                        -- NEXT_STATE wait (45,22) at 102, 170
                         trId := -1;
                         ctxt.state := wait;
                         goto next_transition;
                     when 4 =>
                         -- DECISION user_input (-1,-1)
-                        -- ANSWER /=1 (53,17)
+                        -- ANSWER /=1 (51,17)
                         if (ctxt.user_input) /= 1 then
-                            -- NEXT_STATE wait (55,30) at 221, 283
+                            -- NEXT_STATE wait (53,30) at 221, 283
                             trId := -1;
                             ctxt.state := wait;
                             goto next_transition;
-                            -- ANSWER =1 (57,17)
+                            -- ANSWER =1 (55,17)
                         elsif (ctxt.user_input) = 1 then
-                            -- NEXT_STATE running (59,30) at 311, 283
+                            -- NEXT_STATE running (57,30) at 311, 283
                             trId := -1;
                             ctxt.state := running;
                             goto next_transition;
