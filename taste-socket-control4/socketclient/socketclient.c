@@ -22,8 +22,10 @@ int sockfd;
 int n;
 int time_count;
 char droneref[256];
+float x_pos, y_pos;
 
 int yawOld,pitchOld,rollOld,zrangeOld;
+asn1SccMyPositionData currPosition;
 
 //global variables end*/
 static int jsoneq(const char *json, jsmntok_t *tok, const char *s) {
@@ -231,6 +233,15 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
     }
 */
   //TODO: Controller for the drone. Put here
+    socketclient_RI_getPosition(&currPosition);
+    
+    
+    
+    x_pos = currPosition.xAct;
+    y_pos = currPosition.yAct;
+    
+    printf("x position: %f y position: %f \n", x_pos, y_pos);
+  
   
    printf("Sending to Python server: \n");
    int thrust, roll, pitch, yawrate;

@@ -17,6 +17,11 @@ MySeq       ::= SEQUENCE {
     validity    ENUMERATED { valid, invalid }
 }
 
+MyPositionData ::= SEQUENCE {
+    xAct MyReal,
+    yAct MyReal
+}
+
 MySensorData ::= SEQUENCE {
     yawAct MyReal,
     pitchAct MyReal,
