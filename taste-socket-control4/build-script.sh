@@ -1,11 +1,13 @@
-#!/bin/bash
+#!/bin/bash -e
 
-# This script will build your TASTE system (by default with the C runtime).
+# This script will build your TASTE system.
 
 # You should not change this file as it was automatically generated.
 
-# If you need additional preprocessing, create a file named 'user_init_pre.sh'
-# and/or 'user_init_post.sh - They will never get overwritten.'
+# If you need additional preprocessing, there are three hook files
+# that you can provide and that are called dring the build:
+# user_init_pre.sh, user_init_post.sh and user_init_last.sh
+# These files will never get overwritten by TASTE.'
 
 # Inside these files you may set some environment variables:
 #    C_INCLUDE_PATH=/usr/include/xenomai/analogy/:${C_INCLUDE_PATH}
@@ -53,8 +55,8 @@ grep "version => \"2" "$DEPLOYMENTVIEW" >/dev/null && {
 
 SKELS="./"
 
-# Update the data view with local paths
-taste-update-data-view
+# Check if Dataview references existing files 
+taste-extract-asn-from-design.exe -i "$INTERFACEVIEW" -j /tmp/dv.asn
 
 cd "$SKELS" && rm -f socketclient.zip && zip socketclient socketclient/* && cd $OLDPWD
 
@@ -65,6 +67,8 @@ cd "$SKELS" && rm -f cclient.zip && zip cclient cclient/* && cd $OLDPWD
 cd "$SKELS" && rm -f timer.zip && zip timer timer/* && cd $OLDPWD
 
 cd "$SKELS" && rm -f pixycam.zip && zip pixycam pixycam/* && cd $OLDPWD
+
+cd "$SKELS" && rm -f controller.zip && zip controller controller/* && cd $OLDPWD
 
 [ ! -z "$CLEANUP" ] && rm -rf binary*
 
@@ -103,4 +107,5 @@ cd "$CWD" && assert-builder-ocarina.py \
 	--subC cclient:"$SKELS"/cclient.zip \
 	--subC timer:"$SKELS"/timer.zip \
 	--subC pixycam:"$SKELS"/pixycam.zip \
+	--subSIMULINK controller:"$SKELS"/controller.zip \
 	$ORCHESTRATOR_OPTIONS

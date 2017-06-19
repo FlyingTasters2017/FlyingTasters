@@ -16,6 +16,8 @@ void pixyprocess_startup();
 void pixyprocess_PI_processData(const asn1SccT_UInt32 *,
                                 const asn1SccT_UInt32 *);
 
+void pixyprocess_PI_getPosition(asn1SccMyPositionData *);
+
 #ifdef __cplusplus
 }
 #endif

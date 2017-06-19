@@ -85,8 +85,12 @@ SUBCOMPONENTS
     Taste::coordinates => "223 1473 634 1688";
     Taste::FunctionName => "MS_Communication";
   };
+  IV_Socket_Client : SYSTEM interfaceview::IV::Socket_Client.others {
+    Taste::coordinates => "2288 1303 2544 1477";
+    Taste::FunctionName => "Socket_Client";
+  };
   IV_Drone_Dummy : SYSTEM interfaceview::IV::Drone_Dummy.others {
-    Taste::coordinates => "2329 1313 2590 1616";
+    Taste::coordinates => "2319 1523 2585 1662";
     Taste::FunctionName => "Drone_Dummy";
   };
   x86_partition : PROCESS deploymentview::DV::Node1::x86_partition.others {
@@ -110,6 +114,7 @@ PROPERTIES
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_AS_Supervisor;
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Camera_Dummy;
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_MS_Communication;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Socket_Client;
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Drone_Dummy;
   Actual_Processor_Binding => (reference (x86_linux32)) APPLIES TO x86_partition;
 END Node1.others;

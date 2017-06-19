@@ -50,3 +50,7 @@
 #define __NEED_MyInteger_UPER
 #define __NEED_MyInteger_UPER
 #define __NEED_MyInteger_UPER
+#define __NEED_MyInteger_UPER
+#define __NEED_MyInteger_UPER
+#define __NEED_MyInteger_UPER
+#define __NEED_MyInteger_UPER

@@ -10,6 +10,10 @@
 
 
 #define MAXSIZE 20
+
+float x_current;
+float y_current;
+
 struct MyStack
 {
     int stk[MAXSIZE][3];
@@ -88,6 +92,8 @@ void pixyprocess_startup()
        but do not make any call to a required interface. */
     s.top = -1;
     printf ("stack initialized \n");
+    x_current = 0.0;
+    y_current = 0.0;
 
 }
 
@@ -138,9 +144,20 @@ void pixyprocess_PI_processData(const asn1SccT_UInt32 *IN_x,
 
     printf("\n x: %f; y: %f; \n", xreal, yreal);
     
+    x_current = xreal;
+    y_current = yreal;
+    
     int id=1;
     MyStack_pop();
     MyStack_push(xreal,yreal,id);
 
 }
 
+void pixyprocess_PI_getPosition(asn1SccMyPositionData *OUT_currentPosition)
+{
+//     asn1SccMyPositionData pos;
+//     pos.xAct =  x_current;
+//     pos.yAct =  y_current;
+    OUT_currentPosition->xAct = x_current;
+    OUT_currentPosition->yAct = y_current;
+}

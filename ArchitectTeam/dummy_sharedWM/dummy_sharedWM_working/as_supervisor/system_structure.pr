@@ -5,6 +5,9 @@ SYSTEM as_supervisor;
 	/* CIF Keep Specific Geode PARAMNAMES sysSV_to_ASSV_events */
 	SIGNAL talk_with_ASSV (MyInteger);
 
+	/* CIF Keep Specific Geode PARAMNAMES raw_asd */
+	SIGNAL put_raw_asd (MyInteger);
+
 	PROCEDURE store_ASD COMMENT '#c_predef';
 		FPAR
 			IN processed_asd MyInteger;
@@ -15,9 +18,6 @@ SYSTEM as_supervisor;
 			IN raw_ASD MyInteger,
 			IN/OUT processed_ASD MyInteger;
  	EXTERNAL;
-
-	/* CIF Keep Specific Geode PARAMNAMES raw_asd */
-	SIGNAL put_raw_asd (MyInteger);
 
 	CHANNEL c
 		FROM ENV TO as_supervisor WITH talk_with_ASSV,put_raw_asd;

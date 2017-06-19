@@ -226,6 +226,18 @@ END PI_talk_with_ASSV;
 SUBPROGRAM IMPLEMENTATION PI_talk_with_ASSV.others
 END PI_talk_with_ASSV.others;
 
+SUBPROGRAM PI_put_raw_asd
+FEATURES
+  raw_asd : IN PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_put_raw_asd;
+
+SUBPROGRAM IMPLEMENTATION PI_put_raw_asd.others
+END PI_put_raw_asd.others;
+
 SUBPROGRAM RI_store_ASD
 FEATURES
   processed_asd : IN PARAMETER DataView::MyInteger {
@@ -248,18 +260,6 @@ END RI_process_ASD;
 
 SUBPROGRAM IMPLEMENTATION RI_process_ASD.others
 END RI_process_ASD.others;
-
-SUBPROGRAM PI_put_raw_asd
-FEATURES
-  raw_asd : IN PARAMETER DataView::MyInteger {
-    Taste::encoding => UPER;
-  };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
-END PI_put_raw_asd;
-
-SUBPROGRAM IMPLEMENTATION PI_put_raw_asd.others
-END PI_put_raw_asd.others;
 
 END interfaceview::FV::AS_Supervisor;
 
@@ -433,8 +433,6 @@ FEATURES
   processed_world_data : OUT PARAMETER DataView::MyInteger {
     Taste::encoding => UPER;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
 END PI_update_world_data;
 
 SUBPROGRAM IMPLEMENTATION PI_update_world_data.others
@@ -445,8 +443,6 @@ FEATURES
   processed_msd : IN PARAMETER DataView::MyInteger {
     Taste::encoding => UPER;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
 END PI_store_MSD;
 
 SUBPROGRAM IMPLEMENTATION PI_store_MSD.others
@@ -457,8 +453,6 @@ FEATURES
   processed_asd : IN PARAMETER DataView::MyInteger {
     Taste::encoding => UPER;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
 END PI_store_ASD;
 
 SUBPROGRAM IMPLEMENTATION PI_store_ASD.others
@@ -469,8 +463,6 @@ FEATURES
   control_input : IN PARAMETER DataView::MyInteger {
     Taste::encoding => UPER;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
 END PI_store_control_data;
 
 SUBPROGRAM IMPLEMENTATION PI_store_control_data.others
@@ -538,8 +530,6 @@ FEATURES
   control_error : IN PARAMETER DataView::MyInteger {
     Taste::encoding => UPER;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
 END PI_calculate_control_input;
 
 SUBPROGRAM IMPLEMENTATION PI_calculate_control_input.others
@@ -559,7 +549,7 @@ END PI_get_control_data.others;
 
 END interfaceview::FV::Drone_Control;
 
-PACKAGE interfaceview::FV::Drone_Dummy
+PACKAGE interfaceview::FV::Socket_Client
 PUBLIC
 
 WITH Taste;
@@ -587,6 +577,40 @@ END RI_put_raw_asd;
 SUBPROGRAM IMPLEMENTATION RI_put_raw_asd.others
 END RI_put_raw_asd.others;
 
+SUBPROGRAM RI_talk_with_drone
+FEATURES
+  control_data : IN PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+  raw_asd : OUT PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+END RI_talk_with_drone;
+
+SUBPROGRAM IMPLEMENTATION RI_talk_with_drone.others
+END RI_talk_with_drone.others;
+
+END interfaceview::FV::Socket_Client;
+
+PACKAGE interfaceview::FV::Drone_Dummy
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_talk_with_drone
+FEATURES
+  control_data : IN PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+  raw_asd : OUT PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+END PI_talk_with_drone;
+
+SUBPROGRAM IMPLEMENTATION PI_talk_with_drone.others
+END PI_talk_with_drone.others;
+
 END interfaceview::FV::Drone_Dummy;
 
 PACKAGE interfaceview::IV
@@ -604,8 +628,9 @@ WITH interfaceview::FV::Houston;
 WITH interfaceview::FV::MS_Communication;
 WITH interfaceview::FV::Camera_Dummy;
 WITH interfaceview::FV::ASD_Processing;
-WITH interfaceview::FV::Drone_Dummy;
+WITH interfaceview::FV::Socket_Client;
 WITH interfaceview::FV::MSD_Processing;
+WITH interfaceview::FV::Drone_Dummy;
 WITH interfaceview::FV;
 WITH Taste;
 WITH DataView;
@@ -784,6 +809,13 @@ FEATURES
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "talk_with_ASSV";
   };
+  PI_put_raw_asd : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::AS_Supervisor::PI_put_raw_asd.others {
+    Taste::coordinates => "1586 1195";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "put_raw_asd";
+  };
   RI_store_ASD : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::World_Model::PI_store_ASD.others {
     Taste::coordinates => "1273 1109";
     Taste::RCMoperationKind => any;
@@ -795,11 +827,6 @@ FEATURES
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "process_ASD";
     Taste::labelInheritance => "true";
-  };
-  PI_put_raw_asd : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::AS_Supervisor::PI_put_raw_asd.others {
-    Taste::coordinates => "1586 1195";
-    Taste::RCMoperationKind => sporadic;
-    Taste::InterfaceName => "put_raw_asd";
   };
 PROPERTIES
   Source_Language => (SDL);
@@ -846,7 +873,7 @@ FEATURES
     Taste::InterfaceName => "store_control_data";
     Taste::labelInheritance => "true";
   };
-  RI_send_control_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Drone_Dummy::PI_send_control_data.others {
+  RI_send_control_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Socket_Client::PI_send_control_data.others {
     Taste::coordinates => "1950 784";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "send_control_data";
@@ -963,28 +990,24 @@ FEATURES
   PI_update_world_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::World_Model::PI_update_world_data.others {
     Taste::coordinates => "1082 698";
     Taste::RCMoperationKind => protected;
-    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "update_world_data";
   };
   PI_store_MSD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::World_Model::PI_store_MSD.others {
     Taste::coordinates => "920 994";
     Taste::RCMoperationKind => protected;
-    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "store_MSD";
   };
   PI_store_ASD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::World_Model::PI_store_ASD.others {
     Taste::coordinates => "1273 994";
     Taste::RCMoperationKind => protected;
-    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "store_ASD";
   };
   PI_store_control_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::World_Model::PI_store_control_data.others {
     Taste::coordinates => "1417 824";
     Taste::RCMoperationKind => protected;
-    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "store_control_data";
   };
@@ -1062,7 +1085,6 @@ FEATURES
   PI_calculate_control_input : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Drone_Control::PI_calculate_control_input.others {
     Taste::coordinates => "1693 379";
     Taste::RCMoperationKind => protected;
-    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "calculate_control_input";
   };
@@ -1090,11 +1112,13 @@ CONNECTIONS
   OpToPICnx_get_control_data_impl : SUBPROGRAM ACCESS get_control_data_impl -> PI_get_control_data;
 END Drone_Control.others;
 
-SYSTEM Drone_Dummy
+SYSTEM Socket_Client
 FEATURES
-  PI_send_control_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Drone_Dummy::PI_send_control_data.others {
+  PI_send_control_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Socket_Client::PI_send_control_data.others {
     Taste::coordinates => "2183 785";
     Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
     Taste::InterfaceName => "send_control_data";
   };
   RI_put_raw_asd : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::AS_Supervisor::PI_put_raw_asd.others {
@@ -1103,17 +1127,43 @@ FEATURES
     Taste::InterfaceName => "put_raw_asd";
     Taste::labelInheritance => "true";
   };
+  RI_talk_with_drone : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Drone_Dummy::PI_talk_with_drone.others {
+    Taste::coordinates => "2468 863";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "talk_with_drone";
+    Taste::labelInheritance => "true";
+  };
 PROPERTIES
   Source_Language => (SDL);
-END Drone_Dummy;
+END Socket_Client;
 
-SYSTEM IMPLEMENTATION Drone_Dummy.others
+SYSTEM IMPLEMENTATION Socket_Client.others
 SUBCOMPONENTS
-  send_control_data_impl : SUBPROGRAM interfaceview::FV::Drone_Dummy::PI_send_control_data.others {
+  send_control_data_impl : SUBPROGRAM interfaceview::FV::Socket_Client::PI_send_control_data.others {
     Compute_Execution_Time => 0 ms .. 0 ms;
   };
 CONNECTIONS
   OpToPICnx_send_control_data_impl : SUBPROGRAM ACCESS send_control_data_impl -> PI_send_control_data;
+END Socket_Client.others;
+
+SYSTEM Drone_Dummy
+FEATURES
+  PI_talk_with_drone : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Drone_Dummy::PI_talk_with_drone.others {
+    Taste::coordinates => "2636 860";
+    Taste::RCMoperationKind => protected;
+    Taste::InterfaceName => "talk_with_drone";
+  };
+PROPERTIES
+  Source_Language => (C);
+END Drone_Dummy;
+
+SYSTEM IMPLEMENTATION Drone_Dummy.others
+SUBCOMPONENTS
+  talk_with_drone_impl : SUBPROGRAM interfaceview::FV::Drone_Dummy::PI_talk_with_drone.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_talk_with_drone_impl : SUBPROGRAM ACCESS talk_with_drone_impl -> PI_talk_with_drone;
 END Drone_Dummy.others;
 
 SYSTEM interfaceview
@@ -1160,8 +1210,11 @@ SUBCOMPONENTS
   Drone_Control : SYSTEM interfaceview::IV::Drone_Control.others {
     Taste::coordinates => "1693 345 1968 476";
   };
-  Drone_Dummy : SYSTEM interfaceview::IV::Drone_Dummy.others {
+  Socket_Client : SYSTEM interfaceview::IV::Socket_Client.others {
     Taste::coordinates => "2183 739 2468 929";
+  };
+  Drone_Dummy : SYSTEM interfaceview::IV::Drone_Dummy.others {
+    Taste::coordinates => "2636 748 2959 934";
   };
 CONNECTIONS
   System_Supervisor_set_user_input_GUI_set_user_input : SUBPROGRAM ACCESS System_Supervisor.PI_set_user_input -> GUI.RI_set_user_input {
@@ -1197,14 +1250,14 @@ CONNECTIONS
   MS_Supervisor_put_raw_MSD_MS_Communication_put_raw_MSD : SUBPROGRAM ACCESS MS_Supervisor.PI_put_raw_MSD -> MS_Communication.RI_put_raw_MSD {
     Taste::coordinates => "399 1210 479 1210 479 1210 620 1210";
   };
+  AS_Supervisor_put_raw_asd_Socket_Client_put_raw_asd : SUBPROGRAM ACCESS AS_Supervisor.PI_put_raw_asd -> Socket_Client.RI_put_raw_asd {
+    Taste::coordinates => "2183 895 2075 895 2075 1195 1586 1195";
+  };
   World_Model_store_ASD_AS_Supervisor_store_ASD : SUBPROGRAM ACCESS World_Model.PI_store_ASD -> AS_Supervisor.RI_store_ASD {
     Taste::coordinates => "1273 1109 1273 1053 1273 1053 1273 995";
   };
   ASD_Processing_process_ASD_AS_Supervisor_process_ASD : SUBPROGRAM ACCESS ASD_Processing.PI_process_ASD -> AS_Supervisor.RI_process_ASD {
     Taste::coordinates => "1586 1405 1653 1405 1653 1402 1721 1402";
-  };
-  AS_Supervisor_put_raw_asd_Drone_Dummy_put_raw_asd : SUBPROGRAM ACCESS AS_Supervisor.PI_put_raw_asd -> Drone_Dummy.RI_put_raw_asd {
-    Taste::coordinates => "2183 895 2075 895 2075 1195 1586 1195";
   };
   Drone_Control_get_control_data_Houston_get_control_data : SUBPROGRAM ACCESS Drone_Control.PI_get_control_data -> Houston.RI_get_control_data {
     Taste::coordinates => "1820 692 1820 584 1823 584 1823 476";
@@ -1212,7 +1265,7 @@ CONNECTIONS
   World_Model_store_control_data_Houston_store_control_data : SUBPROGRAM ACCESS World_Model.PI_store_control_data -> Houston.RI_store_control_data {
     Taste::coordinates => "1696 823 1559 823 1559 824 1416 824";
   };
-  Drone_Dummy_send_control_data_Houston_send_control_data : SUBPROGRAM ACCESS Drone_Dummy.PI_send_control_data -> Houston.RI_send_control_data {
+  Socket_Client_send_control_data_Houston_send_control_data : SUBPROGRAM ACCESS Socket_Client.PI_send_control_data -> Houston.RI_send_control_data {
     Taste::coordinates => "1950 784 2066 784 2066 785 2183 785";
   };
   MSD_Processing_process_MSD_MS_Supervisor_process_MSD : SUBPROGRAM ACCESS MSD_Processing.PI_process_MSD -> MS_Supervisor.RI_process_MSD {
@@ -1220,6 +1273,9 @@ CONNECTIONS
   };
   World_Model_store_MSD_MS_Supervisor_store_MSD : SUBPROGRAM ACCESS World_Model.PI_store_MSD -> MS_Supervisor.RI_store_MSD {
     Taste::coordinates => "919 1107 919 1052 920 1052 920 995";
+  };
+  Drone_Dummy_talk_with_drone_Socket_Client_talk_with_drone : SUBPROGRAM ACCESS Drone_Dummy.PI_talk_with_drone -> Socket_Client.RI_talk_with_drone {
+    Taste::coordinates => "2468 863 2552 863 2552 860 2636 860";
   };
 END interfaceview.others;
 

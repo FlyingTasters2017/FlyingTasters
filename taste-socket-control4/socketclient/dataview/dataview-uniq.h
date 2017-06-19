@@ -26,6 +26,21 @@ flag asn1SccMyReal_IsConstraintValid(const asn1SccMyReal* val, int* pErrCode);
 #endif
 
 typedef struct {
+    asn1SccMyReal xAct;
+    asn1SccMyReal yAct;
+} asn1SccMyPositionData;
+
+#define asn1SccMyPositionData_REQUIRED_BYTES_FOR_ENCODING       26 
+#define asn1SccMyPositionData_REQUIRED_BITS_FOR_ENCODING        208
+#define asn1SccMyPositionData_REQUIRED_BYTES_FOR_ACN_ENCODING   26 
+#define asn1SccMyPositionData_REQUIRED_BITS_FOR_ACN_ENCODING    208
+#define asn1SccMyPositionData_REQUIRED_BYTES_FOR_XER_ENCODING   159
+
+void asn1SccMyPositionData_Initialize(asn1SccMyPositionData* pVal);
+flag asn1SccMyPositionData_IsConstraintValid(const asn1SccMyPositionData* val, int* pErrCode);
+
+
+typedef struct {
     asn1SccMyReal yawAct;
     asn1SccMyReal pitchAct;
     asn1SccMyReal rollAct;
@@ -276,6 +291,8 @@ extern const asn1SccMySeqOf myVar;
 
 flag asn1SccMyReal_Encode(const asn1SccMyReal* val, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
 flag asn1SccMyReal_Decode(asn1SccMyReal* pVal, BitStream* pBitStrm, int* pErrCode);
+flag asn1SccMyPositionData_Encode(const asn1SccMyPositionData* val, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
+flag asn1SccMyPositionData_Decode(asn1SccMyPositionData* pVal, BitStream* pBitStrm, int* pErrCode);
 flag asn1SccMySensorData_Encode(const asn1SccMySensorData* val, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
 flag asn1SccMySensorData_Decode(asn1SccMySensorData* pVal, BitStream* pBitStrm, int* pErrCode);
 flag asn1SccMyDroneData_Encode(const asn1SccMyDroneData* val, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
