@@ -15,3 +15,10 @@ Please access our [wiki](https://github.com/FlyingTasters2017/FlyingTasters/wiki
 # Useful command
 
 ```taste-python-socket-client - example how to connect from TASTE to the drone using Python socket server```
+
+
+# LICENSE
+
+Licensed under the NU GENERAL PUBLIC LICENSE, Version 3; you may not use this file except in compliance with the License. You may obtain a copy of the License at:
+
+<https://www.gnu.org/licenses/licenses.html>
