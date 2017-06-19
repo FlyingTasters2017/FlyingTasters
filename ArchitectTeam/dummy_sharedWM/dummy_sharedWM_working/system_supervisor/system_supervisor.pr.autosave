@@ -1,0 +1,89 @@
+/* CIF PROCESS (250, 150), (150, 75) */
+process system_supervisor;
+    /* CIF TEXT (1343, 72), (347, 179) */
+    -- Text area for declarations and comments
+    
+    dcl user_input MyInteger;
+    dcl msd_storage MyInteger;
+    dcl asd_storage MyInteger;
+    dcl raw_world_data MyInteger;
+    dcl proc_world_data MyInteger;
+    dcl world_safety_events MyInteger;
+    dcl control_error MyInteger;
+    dcl control_input MyInteger;
+    /* CIF ENDTEXT */
+    /* CIF START (215, 10), (70, 35) */
+    START;
+        /* CIF NEXTSTATE (215, 60), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (825, 36), (77, 35) */
+    state running;
+        /* CIF input (542, 91), (183, 35) */
+        input set_user_input(user_input);
+            /* CIF decision (590, 146), (86, 50) */
+            decision user_input;
+                /* CIF ANSWER (554, 216), (70, 23) */
+                (/=1):
+                    /* CIF output (485, 259), (207, 35) */
+                    output talk_with_Houston(user_input);
+                    /* CIF output (494, 309), (190, 35) */
+                    output talk_with_MSSV(user_input);
+                    /* CIF output (495, 364), (188, 35) */
+                    output talk_with_ASSV(user_input);
+                    /* CIF NEXTSTATE (554, 414), (70, 35) */
+                    NEXTSTATE wait;
+                /* CIF ANSWER (693, 216), (70, 23) */
+                (=1):
+                    /* CIF NEXTSTATE (693, 259), (70, 35) */
+                    NEXTSTATE running;
+            enddecision;
+        /* CIF input (951, 91), (106, 35) */
+        input update_clock;
+            /* CIF PROCEDURECALL (794, 146), (419, 31) */
+            call update_world_data(proc_world_data);
+            /* CIF PROCEDURECALL (806, 197), (395, 35) */
+            call check_mission_safety(proc_world_data,world_safety_events);
+            /* CIF PROCEDURECALL (907, 252), (194, 35) */
+            call writeln('choose trajectory');
+            /* CIF PROCEDURECALL (773, 302), (461, 35) */
+            call choose_trajectory(proc_world_data,world_safety_events,control_error);
+            /* CIF PROCEDURECALL (907, 357), (194, 35) */
+            call writeln('calc control_input');
+            /* CIF PROCEDURECALL (833, 407), (342, 35) */
+            call calculate_control_input(control_error,control_input);
+            /* CIF PROCEDURECALL (930, 462), (148, 35) */
+            call writeln('updata GU');
+            /* CIF output (870, 512), (267, 35) */
+            output update_GUI(msd_storage+asd_storage);
+            /* CIF PROCEDURECALL (912, 567), (183, 35) */
+            call writeln('end sysSV');
+            /* CIF NEXTSTATE (969, 617), (70, 38) */
+            NEXTSTATE running;
+    endstate;
+    /* CIF state (215, 60), (70, 35) */
+    state Wait;
+        /* CIF input (91, 115), (106, 35) */
+        input update_clock;
+            /* CIF NEXTSTATE (109, 170), (70, 35) */
+            NEXTSTATE wait;
+        /* CIF input (246, 116), (183, 35) */
+        input set_user_input(user_input);
+            /* CIF decision (294, 171), (86, 50) */
+            decision user_input;
+                /* CIF ANSWER (207, 246), (70, 23) */
+                (/=1):
+                    /* CIF NEXTSTATE (207, 289), (70, 35) */
+                    NEXTSTATE wait;
+                /* CIF ANSWER (350, 241), (70, 23) */
+                (=1):
+                    /* CIF output (281, 284), (207, 35) */
+                    output talk_with_Houston(user_input);
+                    /* CIF output (287, 334), (196, 35) */
+                    output talk_with_MSSV(user_input);
+                    /* CIF output (291, 389), (188, 38) */
+                    output talk_with_ASSV(user_input);
+                    /* CIF NEXTSTATE (350, 445), (70, 35) */
+                    NEXTSTATE running;
+            enddecision;
+    endstate;
+endprocess system_supervisor;
