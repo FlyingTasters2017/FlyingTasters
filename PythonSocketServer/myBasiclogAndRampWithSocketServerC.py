@@ -78,12 +78,13 @@ class LoggingExample:
         self._lg_sensorData.add_variable('stabilizer.roll', 'float')
         self._lg_sensorData.add_variable('stabilizer.pitch', 'float')
         self._lg_sensorData.add_variable('stabilizer.yaw', 'float')
+        self._lg_sensorData.add_variable('stabilizer.thrust', 'float')
         self._lg_sensorData.add_variable('range.zrange', 'float')
         #
-        # self._lg_acc = LogConfig(name='Accelerometer', period_in_ms=20)
-        # self._lg_acc.add_variable('acc.x', 'float')
-        # self._lg_acc.add_variable('acc.y', 'float')
-        # self._lg_acc.add_variable('acc.z', 'float')
+        self._lg_acc = LogConfig(name='Accelerometer', period_in_ms=20)
+        self._lg_acc.add_variable('acc.x', 'float')
+        self._lg_acc.add_variable('acc.y', 'float')
+        self._lg_acc.add_variable('acc.z', 'float')
 
 
         # Adding the configuration cannot be done until a Crazyflie is
@@ -97,6 +98,14 @@ class LoggingExample:
             self._lg_sensorData.error_cb.add_callback(self._sensorData_log_error)
             # Start the logging
             self._lg_sensorData.start()
+
+            self._cf.log.add_config(self._lg_acc)
+            # This callback will receive the data
+            self._lg_acc.data_received_cb.add_callback(self._acc_log_data)
+            # This callback will be called on errors
+            self._lg_acc.error_cb.add_callback(self._acc_log_error)
+            # Start the logging
+            self._lg_acc.start()
 
         except KeyError as e:
             print('Could not start log configuration,'
@@ -114,13 +123,19 @@ class LoggingExample:
         # pitch = 0
         # roll = 0
         # yawrate = 0
-        self._cf.commander.send_zdistance_setpoint(0, 0, 0, 1)
+        self._cf.commander.send_zdistance_setpoint(roll, pitch, yawrate, zdistance)
 
     def send_setpoint(self, roll=0, pitch=0, yawrate=0, thrust=0):
         # pitch = 0
         # roll = 0
         # yawrate = 0
         self._cf.commander.send_setpoint(roll, pitch, yawrate, thrust)
+
+    def send_hover_setpoint(self, vx, vy, yawrate, zdistance):
+        # pitch = 0
+        # roll = 0
+        # yawrate = 0
+        self._cf.commander.send_hover_setpoint(vx, vy, yawrate, zdistance)
 
 
     def _sensorData_log_error(self, logconf, msg):
@@ -129,8 +144,17 @@ class LoggingExample:
 
     def _sensorData_log_data(self, timestamp, data, logconf):
         """Callback froma the log API when data arrives"""
-        print('[%d][%s]: %s' % (timestamp, logconf.name, data))
+        # print('[%d][%s]: %s' % (timestamp, logconf.name, data))
         self.sensorsData = json.dumps(data)
+
+    def _acc_log_error(self, logconf, msg):
+        """Callback from the log API when an error occurs"""
+        print('Error when logging %s: %s' % (logconf.name, msg))
+
+    def _acc_log_data(self, timestamp, data, logconf):
+        """Callback froma the log API when data arrives"""
+        # print('[%d][%s]: %s' % (timestamp, logconf.name, data))
+        self.accelData = json.dumps(data)
 
     def _connection_failed(self, link_uri, msg):
         """Callback when connection initial connection fails (i.e no Crazyflie
@@ -177,11 +201,12 @@ if __name__ == '__main__':
     # Initialize the low-level drivers (don't list the debug drivers)
     cflib.crtp.init_drivers(enable_debug_driver=False)
     #Insert correct Crazyflie URI
-    le1 = LoggingExample("radio://0/81/2M",socket= mySocket)
+    le1 = LoggingExample("radio://0/84/2M",socket= mySocket)
     #le2 = LoggingExample("radio://0/85/2M",socket = mySocket)
     list = [le1] #, le2] #,le3]
     #time.sleep(10)
     #Init default thrust
+    # le1.send_zrange_setpoint(zdistance=1)
 
     # le.send_zrange_setpoint(0, 0, 0, 1)
     # le.altHold()
@@ -194,48 +219,87 @@ if __name__ == '__main__':
 # le.unlock_thrust_protection()
 
     thrust = 0
+    unlock_drones = True
+    # before recording data erse the previous one
+    f1 = open('log_actuation.txt', 'r+')
+    f1.truncate()
+    f2 = open('log_sensor.txt', 'r+')
+    f2.truncate()
+    i = 1
+
     while not mySocket._closed:
         # Wait for 1 client connection
-
-        # If client connected to the server
-        # file = open("log_actuation.txt", "w")
-
         if conn:
             print('Connected by', addr)
             for le in list:
-                data = str(le.sensorsData).encode()
+                # print(le.sensorsData)
+                data = str(le.sensorsData+ le.accelData).encode()
                 conn.sendall(data)
             # Receive up to buffersize = 1024 bytes from the socket and convert it to int
             thrust = conn.recv(256)
-            print(type(thrust))
+            # print(type(thrust))
             # print(socket_data)
             # socket_data2 = socket_data.encode()
             # print(socket_data2)
-            print(thrust)
+            # print(thrust)
 
             sample_d = thrust.decode()
 
             #sample_d = int.from_bytes(thrust, byteorder='big')
             # # socket_data3 = socket_data.decode()
             # # print(socket_data3)
-            print(sample_d)
+            # print(sample_d)
 
             # print("raw data", socket_data)
             yawrate, pitch, roll, thrust, garbage = sample_d.split(' ')
-            yawrate = socket.ntohl(int(yawrate) & 0xffffffff)
-            pitch = socket.ntohl(int(pitch) & 0xffffffff)
-            roll = socket.ntohl(int(roll) & 0xffffffff)
-            thrust = socket.ntohl(int(thrust) & 0xffffffff)
+            yawrate = (socket.ntohl(int(yawrate) & 0xffffffff))/1000
+            pitch = (socket.ntohl(int(pitch) & 0xffffffff))/1000
+            roll = (socket.ntohl(int(roll) & 0xffffffff))/1000
+            thrust = (socket.ntohl(int(thrust) & 0xffffffff))/1000
             #
             print("yawrate data", yawrate)
             print("pitch data", pitch)
             print("roll data", roll)
             print("thrust data", thrust)
 
-            #Send commands to all crazyflies
+
+            json_data = json.loads(le1.sensorsData)
+            json_data1 = json.loads(le1.accelData)
+
+            with open("log_actuation.txt", "a") as myfile:
+                # myfile.write("appended text")
+                myfile.writelines("yawrate(" + str(i) + ")=" + str(yawrate) +";\n")
+                myfile.writelines("pitch(" + str(i) + ")=" + str(pitch) + ";\n")
+                myfile.writelines("roll(" + str(i) + ")=" + str(roll) + ";\n")
+                myfile.writelines("thrust(" + str(i) + ")=" + str(thrust) + ";\n")
+
+
+            with open("log_sensor.txt", "a") as myfile:
+                # myfile.write("appended text")
+                myfile.writelines("yawAct(" + str(i) + ")=" + str(json_data['stabilizer.yaw']) + ";\n")
+                myfile.writelines("pitchAct(" + str(i) + ")=" + str(json_data['stabilizer.pitch']) + ";\n")
+                myfile.writelines("rollAct(" + str(i) + ")=" + str(json_data['stabilizer.roll']) + ";\n")
+                myfile.writelines("thrustAct(" + str(i) + ")=" + str(json_data['stabilizer.thrust']) + ";\n")
+                myfile.writelines("zrangeAct(" + str(i) + ")=" + str(json_data['range.zrange']) + ";\n")
+                myfile.writelines("AccX(" + str(i) + ")=" + str(json_data1['acc.x']) + ";\n")
+                myfile.writelines("AccY(" + str(i) + ")=" + str(json_data1['acc.y']) + ";\n")
+                myfile.writelines("AccZ(" + str(i) + ")=" + str(json_data1['acc.z']) + ";\n")
+
+
+
+            i = i+1;
+
+            #Unlock all the drones.
+            if unlock_drones:
+                for le in list:
+                    le.send_setpoint(0, 0, 0, 0)
+                unlock_drones = False
+
             if thrust > 0:
                 for le in list:
-                    le.send_setpoint(roll, pitch, yawrate, thrust)
+                   le.send_zrange_setpoint(roll, pitch, yawrate,thrust)
+                   le.altHold()
+                    # le.send_setpoint(roll, pitch, yawrate, thrust)
     conn.close()
         # file.close()
     sys.exit(2)

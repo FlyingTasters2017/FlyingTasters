@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control_Act'.
  *
- * Model version                  : 1.14
+ * Model version                  : 1.26
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Fri Jun 09 11:16:05 2017
+ * C/C++ source code generated on : Wed Jun 14 10:11:45 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)

@@ -1,4 +1,4 @@
-/* CIF PROCESS (250, 149), (153, 83) */
+/* CIF PROCESS (174, 152), (153, 83) */
 process supervisor;
     /* CIF TEXT (1261, 111), (290, 140) */
     -- Text area for declarations and comments
@@ -21,10 +21,10 @@ process supervisor;
             call control_Act(sensordata,ref,dronedata);
             /* CIF PROCEDURECALL (633, 272), (329, 32) */
             call readStabilizerSendThrust(dronedata,sensorData);
-            /* CIF PROCEDURECALL (664, 319), (268, 35) */
-            call dataOperation(sensorData,sensordata);
-            /* CIF PROCEDURECALL (703, 372), (189, 35) */
-            call displaySensor(sensorData);
+            /* CIF PROCEDURECALL (667, 324), (262, 35) */
+            call dataOperation(sensorData,sensorData);
+            /* CIF output (702, 374), (191, 35) */
+            output displaySensor(sensorData);
             /* CIF NEXTSTATE (760, 424), (75, 35) */
             NEXTSTATE Running;
         /* CIF input (969, 162), (142, 35) */

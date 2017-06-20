@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control_Act'.
  *
- * Model version                  : 1.14
+ * Model version                  : 1.26
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Fri Jun 09 11:16:05 2017
+ * C/C++ source code generated on : Wed Jun 14 10:11:45 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -20,6 +20,17 @@
 #ifndef RTW_HEADER_control_Act_private_h_
 #define RTW_HEADER_control_Act_private_h_
 #include "rtwtypes.h"
+#include "control_Act.h"
+
+extern void control_Act_MovingAverage1_Init(DW_MovingAverage1_control_Act_T
+  *localDW);
+extern void control_Ac_MovingAverage1_Start(DW_MovingAverage1_control_Act_T
+  *localDW);
+extern void control_Act_MovingAverage1(real_T rtu_0,
+  DW_MovingAverage1_control_Act_T *localDW);
+extern void control_Act_MovingAverage1_Term(DW_MovingAverage1_control_Act_T
+  *localDW);
+
 #endif                                 /* RTW_HEADER_control_Act_private_h_ */
 
 /*
