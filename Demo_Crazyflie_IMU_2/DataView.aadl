@@ -43,11 +43,7 @@ end Stream_Element_Buffer;
 DATA MyBool
 PROPERTIES
     -- name of the ASN.1 source file:
-<<<<<<< HEAD
-    Source_Text => ("/home/taste/tool-src/testSuites/Demo_Crazyflie_IMU_2/DataView.asn");
-=======
     Source_Text => ("/home/taste/FlyingTasters/Demo_Crazyflie_IMU_2/DataView.asn");
->>>>>>> 56d3020560cf86611f40c1fecdde1bb293d1f8df
     TASTE::Ada_Package_Name => "TASTE_Dataview";
     Deployment::ASN1_Module_Name => "TASTE-Dataview";
     Source_Language => ASN1;
@@ -86,11 +82,8 @@ END MyBool_Buffer.impl;
 DATA MyReal
 PROPERTIES
     -- name of the ASN.1 source file:
-<<<<<<< HEAD
-    Source_Text => ("/home/taste/tool-src/testSuites/Demo_Crazyflie_IMU_2/DataView.asn");
-=======
+
     Source_Text => ("/home/taste/FlyingTasters/Demo_Crazyflie_IMU_2/DataView.asn");
->>>>>>> 56d3020560cf86611f40c1fecdde1bb293d1f8df
     TASTE::Ada_Package_Name => "TASTE_Dataview";
     Deployment::ASN1_Module_Name => "TASTE-Dataview";
     Source_Language => ASN1;
@@ -129,11 +122,7 @@ END MyReal_Buffer.impl;
 DATA MySeqOf
 PROPERTIES
     -- name of the ASN.1 source file:
-<<<<<<< HEAD
-    Source_Text => ("/home/taste/tool-src/testSuites/Demo_Crazyflie_IMU_2/DataView.asn");
-=======
     Source_Text => ("/home/taste/FlyingTasters/Demo_Crazyflie_IMU_2/DataView.asn");
->>>>>>> 56d3020560cf86611f40c1fecdde1bb293d1f8df
     TASTE::Ada_Package_Name => "TASTE_Dataview";
     Deployment::ASN1_Module_Name => "TASTE-Dataview";
     Source_Language => ASN1;
@@ -172,11 +161,8 @@ END MySeqOf_Buffer.impl;
 DATA T_Int32
 PROPERTIES
     -- name of the ASN.1 source file:
-<<<<<<< HEAD
-    Source_Text => ("/home/taste/tool-inst/share/taste-types/taste-types.asn");
-=======
+
     Source_Text => ("/home/taste/FlyingTasters/Demo_Crazyflie_IMU_2/DataView.asn");
->>>>>>> 56d3020560cf86611f40c1fecdde1bb293d1f8df
     TASTE::Ada_Package_Name => "TASTE_BasicTypes";
     Deployment::ASN1_Module_Name => "TASTE-BasicTypes";
     Source_Language => ASN1;
@@ -215,11 +201,7 @@ END T_Int32_Buffer.impl;
 DATA T_UInt32
 PROPERTIES
     -- name of the ASN.1 source file:
-<<<<<<< HEAD
-    Source_Text => ("/home/taste/tool-inst/share/taste-types/taste-types.asn");
-=======
     Source_Text => ("/home/taste/FlyingTasters/Demo_Crazyflie_IMU_2/DataView.asn");
->>>>>>> 56d3020560cf86611f40c1fecdde1bb293d1f8df
     TASTE::Ada_Package_Name => "TASTE_BasicTypes";
     Deployment::ASN1_Module_Name => "TASTE-BasicTypes";
     Source_Language => ASN1;
@@ -258,11 +240,8 @@ END T_UInt32_Buffer.impl;
 DATA MyChoice
 PROPERTIES
     -- name of the ASN.1 source file:
-<<<<<<< HEAD
-    Source_Text => ("/home/taste/tool-src/testSuites/Demo_Crazyflie_IMU_2/DataView.asn");
-=======
+
     Source_Text => ("/home/taste/FlyingTasters/Demo_Crazyflie_IMU_2/DataView.asn");
->>>>>>> 56d3020560cf86611f40c1fecdde1bb293d1f8df
     TASTE::Ada_Package_Name => "TASTE_Dataview";
     Deployment::ASN1_Module_Name => "TASTE-Dataview";
     Source_Language => ASN1;
@@ -301,11 +280,7 @@ END MyChoice_Buffer.impl;
 DATA MyEnum
 PROPERTIES
     -- name of the ASN.1 source file:
-<<<<<<< HEAD
-    Source_Text => ("/home/taste/tool-src/testSuites/Demo_Crazyflie_IMU_2/DataView.asn");
-=======
     Source_Text => ("/home/taste/FlyingTasters/Demo_Crazyflie_IMU_2/DataView.asn");
->>>>>>> 56d3020560cf86611f40c1fecdde1bb293d1f8df
     TASTE::Ada_Package_Name => "TASTE_Dataview";
     Deployment::ASN1_Module_Name => "TASTE-Dataview";
     Source_Language => ASN1;
@@ -383,11 +358,7 @@ END T_UInt8_Buffer.impl;
 DATA MyOctStr
 PROPERTIES
     -- name of the ASN.1 source file:
-<<<<<<< HEAD
-    Source_Text => ("/home/taste/tool-src/testSuites/Demo_Crazyflie_IMU_2/DataView.asn");
-=======
     Source_Text => ("/home/taste/FlyingTasters/Demo_Crazyflie_IMU_2/DataView.asn");
->>>>>>> 56d3020560cf86611f40c1fecdde1bb293d1f8df
     TASTE::Ada_Package_Name => "TASTE_Dataview";
     Deployment::ASN1_Module_Name => "TASTE-Dataview";
     Source_Language => ASN1;
@@ -426,11 +397,7 @@ END MyOctStr_Buffer.impl;
 DATA T_Boolean
 PROPERTIES
     -- name of the ASN.1 source file:
-<<<<<<< HEAD
-    Source_Text => ("/home/taste/tool-inst/share/taste-types/taste-types.asn");
-=======
     Source_Text => ("/home/taste/FlyingTasters/Demo_Crazyflie_IMU_2/DataView.asn");
->>>>>>> 56d3020560cf86611f40c1fecdde1bb293d1f8df
     TASTE::Ada_Package_Name => "TASTE_BasicTypes";
     Deployment::ASN1_Module_Name => "TASTE-BasicTypes";
     Source_Language => ASN1;
@@ -469,11 +436,8 @@ END T_Boolean_Buffer.impl;
 DATA MyInteger
 PROPERTIES
     -- name of the ASN.1 source file:
-<<<<<<< HEAD
-    Source_Text => ("/home/taste/tool-src/testSuites/Demo_Crazyflie_IMU_2/DataView.asn");
-=======
+
     Source_Text => ("/home/taste/FlyingTasters/Demo_Crazyflie_IMU_2/DataView.asn");
->>>>>>> 56d3020560cf86611f40c1fecdde1bb293d1f8df
     TASTE::Ada_Package_Name => "TASTE_Dataview";
     Deployment::ASN1_Module_Name => "TASTE-Dataview";
     Source_Language => ASN1;
