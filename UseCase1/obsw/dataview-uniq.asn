@@ -17,6 +17,8 @@ MySeq       ::= SEQUENCE {
     validity    ENUMERATED { valid, invalid }
 }
 
+
+
 MyChoice    ::= CHOICE {
     a BOOLEAN,
     b MySeq

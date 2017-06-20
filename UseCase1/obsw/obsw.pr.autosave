@@ -1,17 +1,11 @@
 /* CIF PROCESS (122, 150), (406, 219) */
 process obsw;
-    /* CIF TEXT (641, 477), (302, 140) */
-    -- Text area for declarations and comments
-    
-    -- h is height of drone 
-    -- dh is the velocit of drone in height  direction
-    -- F is the force acted on the drone 
-    -- Ref_h is the reference height 
-    /* CIF ENDTEXT */
     /* CIF TEXT (263, 61), (395, 140) */
     -- Text area for declarations and comments
     
     dcl ReferenceHeight, Height, HeightVelocity, Force Myreal;
+    dcl i myinteger;
+    dcl a myinteger;
     /* CIF ENDTEXT */
     /* CIF START (763, 66), (70, 35) */
     START;
@@ -19,27 +13,35 @@ process obsw;
         call writeln('SDL startup');
         /* CIF NEXTSTATE (763, 171), (70, 35) */
         NEXTSTATE Wait;
+    /* CIF state (949, 42), (70, 35) */
+    state Wait;
+    endstate;
     /* CIF state (1213, 93), (70, 35) */
     state Runing;
         /* CIF input (1121, 148), (70, 35) */
         input pulse;
-            /* CIF PROCEDURECALL (943, 203), (425, 35) */
-            call Compute_Input(ReferenceHeight,HeightVelocity,Height,Force);
-            /* CIF PROCEDURECALL (1019, 265), (273, 35) */
+            /* CIF PROCEDURECALL (1016, 203), (279, 35) */
+            call GetTrajectory(i,Height,ReferenceHeight);
+            /* CIF PROCEDURECALL (942, 253), (428, 35) */
+            call Compute_Force(ReferenceHeight,HeightVelocity,Height,Force);
+            /* CIF PROCEDURECALL (1019, 308), (273, 35) */
             call Response(Force,HeightVelocity,Height);
-            /* CIF output (1104, 325), (103, 35) */
-            output Height(h);
-            /* CIF output (1106, 380), (100, 35) */
-            output dHeight(dh);
-            /* CIF NEXTSTATE (1121, 430), (70, 35) */
+            /* CIF output (1085, 368), (142, 35) */
+            output GetHeight(Height);
+            /* CIF output (1062, 423), (187, 35) */
+            output GetRef(ReferenceHeight);
+            /* CIF task (1121, 478), (70, 35) */
+            task a= 1;
+            /* CIF task (1065, 528), (181, 35) */
+            task writeln('a=',a );
+            /* CIF task (1083, 578), (145, 35) */
+            task i := (i+1) mod 255;
+            /* CIF NEXTSTATE (1121, 628), (70, 35) */
             NEXTSTATE Runing;
         /* CIF input (1374, 148), (189, 35) */
         input Takeoff(ReferenceHeight);
-            /* CIF NEXTSTATE (1434, 203), (70, 35) */
+            /* CIF NEXTSTATE (1433, 203), (70, 35) */
             NEXTSTATE Wait;
-    endstate;
-    /* CIF state (949, 42), (70, 35) */
-    state Wait;
     endstate;
     /* CIF state (763, 171), (70, 35) */
     state Wait;
@@ -49,7 +51,9 @@ process obsw;
             NEXTSTATE Wait;
         /* CIF input (748, 226), (189, 35) */
         input Takeoff(ReferenceHeight);
-            /* CIF NEXTSTATE (808, 281), (70, 35) */
+            /* CIF task (807, 281), (70, 35) */
+            task i :=0;
+            /* CIF NEXTSTATE (807, 331), (70, 35) */
             NEXTSTATE Runing;
     endstate;
 endprocess obsw;

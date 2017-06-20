@@ -25,16 +25,26 @@ SYSTEM obsw;
 			IN/OUT Height MyReal;
  	EXTERNAL;
 
+	PROCEDURE GetTrajectory COMMENT '#c_predef';
+		FPAR
+			IN Num MyInteger,
+			IN Height MyReal,
+			IN/OUT Ref MyReal;
+ 	EXTERNAL;
+
+	/* CIF Keep Specific Geode PARAMNAMES RefHeight */
+	SIGNAL GetRef (MyReal);
+
 	CHANNEL c
 		FROM ENV TO obsw WITH Pulse,Takeoff;
-		FROM obsw TO ENV WITH GetHeight;
+		FROM obsw TO ENV WITH GetHeight,GetRef;
 	ENDCHANNEL;
 
 	BLOCK obsw;
 
 		SIGNALROUTE r
 			FROM ENV TO obsw WITH Pulse,Takeoff;
-			FROM obsw TO ENV WITH GetHeight;
+			FROM obsw TO ENV WITH GetHeight,GetRef;
 
 		CONNECT c and r;
 

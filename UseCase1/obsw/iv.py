@@ -224,6 +224,92 @@ functions['obsw']['interfaces']['Response']['out']['Height'] = {
     'param_direction': param_out
 }
 
+functions['obsw']['interfaces']['GetTrajectory'] = {
+    'port_name': 'GetTrajectory',
+    'parent_fv': 'obsw',
+    'direction': RI,
+    'in': {},
+    'out': {},
+    'synchronism': synch,
+    'rcm': unprotected,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': '',
+    'wcet_high': 0,
+    'wcet_high_unit': '',
+    'distant_fv': 'trajectorygenerator',
+    'calling_threads': {},
+    'distant_name': 'GetTrajectory',
+    'queue_size': 1
+}
+
+functions['obsw']['interfaces']['GetTrajectory']['paramsInOrdered'] = ['Num', 'Height']
+
+functions['obsw']['interfaces']['GetTrajectory']['paramsOutOrdered'] = ['Ref']
+
+functions['obsw']['interfaces']['GetTrajectory']['in']['Num'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': NATIVE,
+    'interface': 'GetTrajectory',
+    'param_direction': param_in
+}
+
+functions['obsw']['interfaces']['GetTrajectory']['in']['Height'] = {
+    'type': 'MyReal',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': real,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': NATIVE,
+    'interface': 'GetTrajectory',
+    'param_direction': param_in
+}
+
+functions['obsw']['interfaces']['GetTrajectory']['out']['Ref'] = {
+    'type': 'MyReal',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': real,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': NATIVE,
+    'interface': 'GetTrajectory',
+    'param_direction': param_out
+}
+
+functions['obsw']['interfaces']['GetRef'] = {
+    'port_name': 'GetRef',
+    'parent_fv': 'obsw',
+    'direction': RI,
+    'in': {},
+    'out': {},
+    'synchronism': asynch,
+    'rcm': sporadic,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': '',
+    'wcet_high': 0,
+    'wcet_high_unit': '',
+    'distant_fv': 'ground',
+    'calling_threads': {},
+    'distant_name': 'GetRef',
+    'queue_size': 1
+}
+
+functions['obsw']['interfaces']['GetRef']['paramsInOrdered'] = ['RefHeight']
+
+functions['obsw']['interfaces']['GetRef']['paramsOutOrdered'] = []
+
+functions['obsw']['interfaces']['GetRef']['in']['RefHeight'] = {
+    'type': 'MyReal',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': real,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': NATIVE,
+    'interface': 'GetRef',
+    'param_direction': param_in
+}
+
 functions['ground'] = {
     'name_with_case' : 'Ground',
     'runtime_nature': thread,
@@ -263,6 +349,39 @@ functions['ground']['interfaces']['GetHeight']['in']['Height'] = {
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'GetHeight',
+    'param_direction': param_in
+}
+
+functions['ground']['interfaces']['GetRef'] = {
+    'port_name': 'GetRef',
+    'parent_fv': 'ground',
+    'direction': PI,
+    'in': {},
+    'out': {},
+    'synchronism': asynch,
+    'rcm': variator,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': 'ms',
+    'wcet_high': 0,
+    'wcet_high_unit': 'ms',
+    'distant_fv': '',
+    'calling_threads': {},
+    'distant_name': '',
+    'queue_size': 1
+}
+
+functions['ground']['interfaces']['GetRef']['paramsInOrdered'] = ['RefHeight']
+
+functions['ground']['interfaces']['GetRef']['paramsOutOrdered'] = []
+
+functions['ground']['interfaces']['GetRef']['in']['RefHeight'] = {
+    'type': 'MyReal',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': real,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': NATIVE,
+    'interface': 'GetRef',
     'param_direction': param_in
 }
 
@@ -430,5 +549,67 @@ functions['controller']['interfaces']['Compute_Force']['out']['Force'] = {
     'asn1_filename': './dataview-uniq.asn',
     'encoding': NATIVE,
     'interface': 'Compute_Force',
+    'param_direction': param_out
+}
+
+functions['trajectorygenerator'] = {
+    'name_with_case' : 'TrajectoryGenerator',
+    'runtime_nature': passive,
+    'language': C,
+    'zipfile': '',
+    'interfaces': {},
+    'functional_states' : {}
+}
+
+functions['trajectorygenerator']['interfaces']['GetTrajectory'] = {
+    'port_name': 'GetTrajectory',
+    'parent_fv': 'trajectorygenerator',
+    'direction': PI,
+    'in': {},
+    'out': {},
+    'synchronism': synch,
+    'rcm': unprotected,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': 'ms',
+    'wcet_high': 0,
+    'wcet_high_unit': 'ms',
+    'distant_fv': '',
+    'calling_threads': {},
+    'distant_name': '',
+    'queue_size': 1
+}
+
+functions['trajectorygenerator']['interfaces']['GetTrajectory']['paramsInOrdered'] = ['Num', 'Height']
+
+functions['trajectorygenerator']['interfaces']['GetTrajectory']['paramsOutOrdered'] = ['Ref']
+
+functions['trajectorygenerator']['interfaces']['GetTrajectory']['in']['Num'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': NATIVE,
+    'interface': 'GetTrajectory',
+    'param_direction': param_in
+}
+
+functions['trajectorygenerator']['interfaces']['GetTrajectory']['in']['Height'] = {
+    'type': 'MyReal',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': real,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': NATIVE,
+    'interface': 'GetTrajectory',
+    'param_direction': param_in
+}
+
+functions['trajectorygenerator']['interfaces']['GetTrajectory']['out']['Ref'] = {
+    'type': 'MyReal',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': real,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': NATIVE,
+    'interface': 'GetTrajectory',
     'param_direction': param_out
 }

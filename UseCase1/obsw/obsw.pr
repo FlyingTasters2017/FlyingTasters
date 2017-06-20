@@ -4,6 +4,7 @@ process obsw;
     -- Text area for declarations and comments
     
     dcl ReferenceHeight, Height, HeightVelocity, Force Myreal;
+    dcl i myinteger;
     /* CIF ENDTEXT */
     /* CIF START (763, 66), (70, 35) */
     START;
@@ -11,25 +12,31 @@ process obsw;
         call writeln('SDL startup');
         /* CIF NEXTSTATE (763, 171), (70, 35) */
         NEXTSTATE Wait;
+    /* CIF state (949, 42), (70, 35) */
+    state Wait;
+    endstate;
     /* CIF state (1213, 93), (70, 35) */
     state Runing;
         /* CIF input (1121, 148), (70, 35) */
         input pulse;
-            /* CIF PROCEDURECALL (942, 203), (428, 35) */
+            /* CIF PROCEDURECALL (1016, 203), (279, 35) */
+            call GetTrajectory(i,Height,ReferenceHeight);
+            /* CIF PROCEDURECALL (942, 253), (428, 35) */
             call Compute_Force(ReferenceHeight,HeightVelocity,Height,Force);
-            /* CIF PROCEDURECALL (1019, 265), (273, 35) */
+            /* CIF PROCEDURECALL (1019, 308), (273, 35) */
             call Response(Force,HeightVelocity,Height);
-            /* CIF output (1085, 325), (142, 35) */
+            /* CIF output (1085, 368), (142, 35) */
             output GetHeight(Height);
-            /* CIF NEXTSTATE (1121, 380), (70, 35) */
+            /* CIF output (1062, 423), (187, 35) */
+            output GetRef(ReferenceHeight);
+            /* CIF task (1083, 478), (145, 35) */
+            task i := (i+1) mod 255;
+            /* CIF NEXTSTATE (1121, 528), (70, 35) */
             NEXTSTATE Runing;
         /* CIF input (1374, 148), (189, 35) */
         input Takeoff(ReferenceHeight);
             /* CIF NEXTSTATE (1433, 203), (70, 35) */
             NEXTSTATE Wait;
-    endstate;
-    /* CIF state (949, 42), (70, 35) */
-    state Wait;
     endstate;
     /* CIF state (763, 171), (70, 35) */
     state Wait;
@@ -39,7 +46,9 @@ process obsw;
             NEXTSTATE Wait;
         /* CIF input (748, 226), (189, 35) */
         input Takeoff(ReferenceHeight);
-            /* CIF NEXTSTATE (807, 281), (70, 35) */
+            /* CIF task (807, 281), (70, 35) */
+            task i :=0;
+            /* CIF NEXTSTATE (807, 331), (70, 35) */
             NEXTSTATE Runing;
     endstate;
 endprocess obsw;

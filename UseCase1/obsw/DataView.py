@@ -70,16 +70,16 @@ types["MySeq"] = type("MySeq", (object,), {
 })
 
 types["MyChoice"] = type("MyChoice", (object,), {
-    "Line": 20, "CharPositionInLine": 0, "type": type("MyChoice_type", (object,), {
-        "Line": 20, "CharPositionInLine": 16, "kind": "ChoiceType", "Children": {
+    "Line": 22, "CharPositionInLine": 0, "type": type("MyChoice_type", (object,), {
+        "Line": 22, "CharPositionInLine": 16, "kind": "ChoiceType", "Children": {
             "a": type("a_PRESENT", (object,), {
-                "Line": 21, "CharPositionInLine": 4, "EnumID": "a_PRESENT", "type": type("a_PRESENT_type", (object,), {
-                    "Line": 21, "CharPositionInLine": 6, "kind": "BooleanType"
+                "Line": 23, "CharPositionInLine": 4, "EnumID": "a_PRESENT", "type": type("a_PRESENT_type", (object,), {
+                    "Line": 23, "CharPositionInLine": 6, "kind": "BooleanType"
                 })
             }),
             "b": type("b_PRESENT", (object,), {
-                "Line": 22, "CharPositionInLine": 4, "EnumID": "b_PRESENT", "type": type("b_PRESENT_type", (object,), {
-                    "Line": 22, "CharPositionInLine": 6, "kind": "ReferenceType", "ReferencedTypeName": "MySeq"
+                "Line": 24, "CharPositionInLine": 4, "EnumID": "b_PRESENT", "type": type("b_PRESENT_type", (object,), {
+                    "Line": 24, "CharPositionInLine": 6, "kind": "ReferenceType", "ReferencedTypeName": "MySeq"
                 })
             })
         }
@@ -87,16 +87,16 @@ types["MyChoice"] = type("MyChoice", (object,), {
 })
 
 types["MySeqOf"] = type("MySeqOf", (object,), {
-    "Line": 25, "CharPositionInLine": 0, "type": type("MySeqOf_type", (object,), {
-        "Line": 25, "CharPositionInLine": 16, "kind": "SequenceOfType", "Min": "2", "Max": "2", "type": type("SeqOf_type", (object,), {
-            "Line": 25, "CharPositionInLine": 39, "kind": "ReferenceType", "ReferencedTypeName": "MyEnum"
+    "Line": 27, "CharPositionInLine": 0, "type": type("MySeqOf_type", (object,), {
+        "Line": 27, "CharPositionInLine": 16, "kind": "SequenceOfType", "Min": "2", "Max": "2", "type": type("SeqOf_type", (object,), {
+            "Line": 27, "CharPositionInLine": 39, "kind": "ReferenceType", "ReferencedTypeName": "MyEnum"
         })
     })
 })
 
 types["MyOctStr"] = type("MyOctStr", (object,), {
-    "Line": 27, "CharPositionInLine": 0, "type": type("MyOctStr_type", (object,), {
-        "Line": 27, "CharPositionInLine": 16, "kind": "OctetStringType", "Min": "3", "Max": "3"
+    "Line": 29, "CharPositionInLine": 0, "type": type("MyOctStr_type", (object,), {
+        "Line": 29, "CharPositionInLine": 16, "kind": "OctetStringType", "Min": "3", "Max": "3"
     })
 })
 
@@ -115,11 +115,11 @@ types["MySeq-validity"] = type("MySeq-validity", (object,), {
 
 
 variables["myVar"] = type("myVar", (object,), {
-    "Line": 30,
+    "Line": 32,
     "CharPositionInLine": 0,
     "varName": "myVar",
     "type": type("myVar_type", (object,), {
-        "Line": 30, "CharPositionInLine": 12, "kind": "ReferenceType", "ReferencedTypeName": "MySeqOf", "Min": "2", "Max": "2"
+        "Line": 32, "CharPositionInLine": 12, "kind": "ReferenceType", "ReferencedTypeName": "MySeqOf", "Min": "2", "Max": "2"
     }),
     "value": {"hello", "world"}
 })
@@ -130,32 +130,32 @@ exportedVariables["TASTE-BasicTypes"] = []
 importedModules["TASTE-BasicTypes"] = []
 
 types["T-Int32"] = type("T-Int32", (object,), {
-    "Line": 39, "CharPositionInLine": 0, "type": type("T-Int32_type", (object,), {
-        "Line": 39, "CharPositionInLine": 13, "kind": "IntegerType", "Min": "-2147483648", "Max": "2147483647"
+    "Line": 41, "CharPositionInLine": 0, "type": type("T-Int32_type", (object,), {
+        "Line": 41, "CharPositionInLine": 13, "kind": "IntegerType", "Min": "-2147483648", "Max": "2147483647"
     })
 })
 
 types["T-UInt32"] = type("T-UInt32", (object,), {
-    "Line": 41, "CharPositionInLine": 0, "type": type("T-UInt32_type", (object,), {
-        "Line": 41, "CharPositionInLine": 13, "kind": "IntegerType", "Min": "0", "Max": "4294967295"
+    "Line": 43, "CharPositionInLine": 0, "type": type("T-UInt32_type", (object,), {
+        "Line": 43, "CharPositionInLine": 13, "kind": "IntegerType", "Min": "0", "Max": "4294967295"
     })
 })
 
 types["T-Int8"] = type("T-Int8", (object,), {
-    "Line": 43, "CharPositionInLine": 0, "type": type("T-Int8_type", (object,), {
-        "Line": 43, "CharPositionInLine": 11, "kind": "IntegerType", "Min": "-128", "Max": "127"
+    "Line": 45, "CharPositionInLine": 0, "type": type("T-Int8_type", (object,), {
+        "Line": 45, "CharPositionInLine": 11, "kind": "IntegerType", "Min": "-128", "Max": "127"
     })
 })
 
 types["T-UInt8"] = type("T-UInt8", (object,), {
-    "Line": 45, "CharPositionInLine": 0, "type": type("T-UInt8_type", (object,), {
-        "Line": 45, "CharPositionInLine": 12, "kind": "IntegerType", "Min": "0", "Max": "255"
+    "Line": 47, "CharPositionInLine": 0, "type": type("T-UInt8_type", (object,), {
+        "Line": 47, "CharPositionInLine": 12, "kind": "IntegerType", "Min": "0", "Max": "255"
     })
 })
 
 types["T-Boolean"] = type("T-Boolean", (object,), {
-    "Line": 47, "CharPositionInLine": 0, "type": type("T-Boolean_type", (object,), {
-        "Line": 47, "CharPositionInLine": 14, "kind": "BooleanType"
+    "Line": 49, "CharPositionInLine": 0, "type": type("T-Boolean_type", (object,), {
+        "Line": 49, "CharPositionInLine": 14, "kind": "BooleanType"
     })
 })
 
