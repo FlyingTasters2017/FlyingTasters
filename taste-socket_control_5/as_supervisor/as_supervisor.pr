@@ -1,0 +1,29 @@
+/* CIF PROCESS (250, 150), (150, 75) */
+process as_supervisor;
+    /* CIF TEXT (876, 75), (272, 140) */
+    -- Text area for declarations and comments
+    
+    dcl droneData MyDroneData;
+    dcl sensorData MySensorData;
+    dcl n myInteger;
+    /* CIF ENDTEXT */
+    /* CIF START (320, 10), (70, 35) */
+    START;
+        /* CIF NEXTSTATE (320, 60), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (320, 60), (70, 35) */
+    state Wait;
+        /* CIF input (296, 115), (117, 35) */
+        input talk_with_ASSV;
+            /* CIF PROCEDURECALL (277, 170), (156, 35) */
+            call writeln('hello drone');
+            /* CIF PROCEDURECALL (284, 220), (142, 35) */
+            call takeoff(droneData);
+            /* CIF PROCEDURECALL (192, 275), (325, 35) */
+            call readStabilizerSendThrust(droneData, sensorData);
+            /* CIF PROCEDURECALL (275, 330), (160, 35) */
+            call writeln('after socket');
+            /* CIF NEXTSTATE (320, 380), (70, 35) */
+            NEXTSTATE -;
+    endstate;
+endprocess as_supervisor;

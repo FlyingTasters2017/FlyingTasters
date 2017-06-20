@@ -1,0 +1,21 @@
+/* CIF PROCESS (250, 150), (150, 75) */
+process supervisor;
+    /* CIF START (320, 10), (70, 35) */
+    START;
+        /* CIF NEXTSTATE (320, 60), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (320, 60), (70, 35) */
+    state Wait;
+        /* CIF input (230, 115), (70, 35) */
+        input pulse1;
+            /* CIF output (205, 170), (119, 35) */
+            output talk_with_MSSV;
+        /* CIF input (334, 115), (70, 35) */
+        input pulse2;
+        /* CIF input (424, 115), (70, 35) */
+        input ;
+    endstate;
+    /* CIF state (450, 10), (70, 35) */
+    state Wait;
+    endstate;
+endprocess supervisor;
