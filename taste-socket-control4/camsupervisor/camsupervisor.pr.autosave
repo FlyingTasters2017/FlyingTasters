@@ -1,0 +1,19 @@
+/* CIF PROCESS (250, 150), (150, 75) */
+process camsupervisor;
+    /* CIF START (512, 100), (70, 35) */
+    START;
+        /* CIF PROCEDURECALL (447, 155), (198, 35) */
+        call writeln('SDL camera startup');
+        /* CIF NEXTSTATE (512, 205), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (512, 205), (70, 35) */
+    state Wait;
+        /* CIF input (507, 260), (79, 35) */
+        input campulse;
+            /* CIF PROCEDURECALL (511, 315), (71, 35) */
+            call rawdata;
+    endstate;
+    /* CIF state (450, 10), (70, 35) */
+    state Wait;
+    endstate;
+endprocess camsupervisor;

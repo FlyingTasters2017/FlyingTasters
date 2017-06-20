@@ -2,6 +2,15 @@ T_UInt8 = Simulink.AliasType;
 T_UInt8.BaseType = 'uint8';
 T_UInt8.Description = 'range is (0, 255)';
 
+% Values for MyEnum:
+MyEnum_value_hello = 0;
+MyEnum_value_world = 1;
+MyEnum_value_howareyou = 2;
+MyEnum = Simulink.AliasType;
+MyEnum.BaseType = 'int32';
+MyEnum.Description = 'values of ENUMERATED MyEnum';
+
+
 MyInteger = Simulink.AliasType;
 MyInteger.BaseType = 'uint8';
 MyInteger.Description = 'range is (0, 255)';
@@ -119,6 +128,7 @@ MyDroneData_elem04.dimensions=1;
 MyDroneData = Simulink.Bus;
 MyDroneData.Elements = [MyDroneData_elem01 MyDroneData_elem02 MyDroneData_elem03 MyDroneData_elem04 ];
 
+<<<<<<< HEAD
 T_UInt32 = Simulink.AliasType;
 T_UInt32.BaseType = 'uint32';
 T_UInt32.Description = 'range is (0, 4294967295)';
@@ -150,7 +160,15 @@ MyEnum_value_howareyou = 2;
 MyEnum = Simulink.AliasType;
 MyEnum.BaseType = 'int32';
 MyEnum.Description = 'values of ENUMERATED MyEnum';
+=======
+T_Int8 = Simulink.AliasType;
+T_Int8.BaseType = 'int8';
+T_Int8.Description = 'range is (-128, 127)';
+>>>>>>> 715c55a64ced1d7f9afab43765b56a0beda75fde
 
+T_UInt32 = Simulink.AliasType;
+T_UInt32.BaseType = 'uint32';
+T_UInt32.Description = 'range is (0, 4294967295)';
 
 MySeqOf_member_data=Simulink.BusElement;
 MySeqOf_member_data.name='element_data';
@@ -160,3 +178,26 @@ MySeqOf_member_data.dimensions=2;
 MySeqOf=Simulink.Bus;
 MySeqOf.Elements = [MySeqOf_member_data ];
 
+<<<<<<< HEAD
+=======
+T_Int32 = Simulink.AliasType;
+T_Int32.BaseType = 'int32';
+T_Int32.Description = 'range is (-2147483648, 2147483647)';
+
+MyBool = Simulink.AliasType;
+MyBool.BaseType = 'boolean';
+MyBool.Description = 'A simple BOOLEAN';
+
+MyOctStr_member_data=Simulink.BusElement;
+MyOctStr_member_data.name='element_data';
+MyOctStr_member_data.DataType='uint8';
+MyOctStr_member_data.dimensions=3;
+
+MyOctStr=Simulink.Bus;
+MyOctStr.Elements = [MyOctStr_member_data ];
+
+T_Boolean = Simulink.AliasType;
+T_Boolean.BaseType = 'boolean';
+T_Boolean.Description = 'A simple BOOLEAN';
+
+>>>>>>> 715c55a64ced1d7f9afab43765b56a0beda75fde

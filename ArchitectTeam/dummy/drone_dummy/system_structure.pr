@@ -1,0 +1,27 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM drone_dummy;
+
+	SIGNAL drone_clock;
+
+	/* CIF Keep Specific Geode PARAMNAMES drone_data */
+	SIGNAL put_drone_data (MyInteger);
+
+	CHANNEL c
+		FROM ENV TO drone_dummy WITH drone_clock;
+		FROM drone_dummy TO ENV WITH put_drone_data;
+	ENDCHANNEL;
+
+	BLOCK drone_dummy;
+
+		SIGNALROUTE r
+			FROM ENV TO drone_dummy WITH drone_clock;
+			FROM drone_dummy TO ENV WITH put_drone_data;
+
+		CONNECT c and r;
+
+		PROCESS drone_dummy REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;

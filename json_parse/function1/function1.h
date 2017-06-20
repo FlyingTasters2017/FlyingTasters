@@ -5,13 +5,16 @@
 #ifndef __USER_CODE_H_function1__
 #define __USER_CODE_H_function1__
 
+#include "C_ASN1_Types.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 void function1_startup();
 
-void function1_PI_pulse();
+void function1_PI_getPixyData(asn1SccMyReal *,
+                              asn1SccMyReal *);
 
 #ifdef __cplusplus
 }
