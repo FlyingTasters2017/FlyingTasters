@@ -1,6 +1,6 @@
 # FlyingTasters
 
-Welcome to **FlyingTasters **-the open source solution for [CrazyFlie](https://www.bitcraze.io/crazyflie-2/)formation flight developed by [TU-Eindhoven](https://www.tue.nl/) and [ESA](http://www.esa.int/ESA). This project is powered by the [TASTE](http://taste.tuxfamily.org/) tool chain.
+Welcome to **FlyingTasters** -the open source solution for [CrazyFlie](https://www.bitcraze.io/crazyflie-2/)formation flight developed by [TU-Eindhoven](https://www.tue.nl/) and [ESA](http://www.esa.int/ESA). This project is powered by the [TASTE](http://taste.tuxfamily.org/) tool chain.
 
 This wiki is the mains source to documentation for developers working with (or contributing to) FlyingTasters project. If it is the first time you learn about FlyingTasters we recommend you check our Facebook [page](https://www.facebook.com/flyingtasters/).
 
