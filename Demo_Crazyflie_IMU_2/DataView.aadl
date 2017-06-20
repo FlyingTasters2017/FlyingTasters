@@ -476,11 +476,8 @@ END MyInteger_Buffer.impl;
 DATA MyGyroVal
 PROPERTIES
     -- name of the ASN.1 source file:
-<<<<<<< HEAD
-    Source_Text => ("/home/taste/tool-src/testSuites/Demo_Crazyflie_IMU_2/DataView.asn");
-=======
+
     Source_Text => ("/home/taste/FlyingTasters/Demo_Crazyflie_IMU_2/DataView.asn");
->>>>>>> 56d3020560cf86611f40c1fecdde1bb293d1f8df
     TASTE::Ada_Package_Name => "TASTE_Dataview";
     Deployment::ASN1_Module_Name => "TASTE-Dataview";
     Source_Language => ASN1;
@@ -519,11 +516,7 @@ END MyGyroVal_Buffer.impl;
 DATA MySeq
 PROPERTIES
     -- name of the ASN.1 source file:
-<<<<<<< HEAD
-    Source_Text => ("/home/taste/tool-src/testSuites/Demo_Crazyflie_IMU_2/DataView.asn");
-=======
     Source_Text => ("/home/taste/FlyingTasters/Demo_Crazyflie_IMU_2/DataView.asn");
->>>>>>> 56d3020560cf86611f40c1fecdde1bb293d1f8df
     TASTE::Ada_Package_Name => "TASTE_Dataview";
     Deployment::ASN1_Module_Name => "TASTE-Dataview";
     Source_Language => ASN1;
@@ -601,11 +594,7 @@ END T_Int8_Buffer.impl;
 DATA MyAccVal
 PROPERTIES
     -- name of the ASN.1 source file:
-<<<<<<< HEAD
-    Source_Text => ("/home/taste/tool-src/testSuites/Demo_Crazyflie_IMU_2/DataView.asn");
-=======
     Source_Text => ("/home/taste/FlyingTasters/Demo_Crazyflie_IMU_2/DataView.asn");
->>>>>>> 56d3020560cf86611f40c1fecdde1bb293d1f8df
     TASTE::Ada_Package_Name => "TASTE_Dataview";
     Deployment::ASN1_Module_Name => "TASTE-Dataview";
     Source_Language => ASN1;
