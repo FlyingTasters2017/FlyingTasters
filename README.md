@@ -1,8 +1,10 @@
 # FlyingTasters
 
-FlyingTasters is a solution that provides formation flight capabilities to a set of CrazyFlie drones [link]. It started as a colaboration between PDEng trainees from TU-Eindhoven and ESA developers. The goal of such collaboration was to use the TASTE toolchain [link] during the process and result in a demo [link] presented to the public at the ESA open days.
+Welcome to **FlyingTasters **-the open source solution for [CrazyFlie](https://www.bitcraze.io/crazyflie-2/)formation flight developed by [TU-Eindhoven](https://www.tue.nl/) and [ESA](http://www.esa.int/ESA). This project is powered by the [TASTE](http://taste.tuxfamily.org/) tool chain.
 
-In this repository you will find detailed description of:
+This wiki is the mains source to documentation for developers working with (or contributing to) FlyingTasters project. If it is the first time you learn about FlyingTasters we recommend you check our Facebook [page](https://www.facebook.com/flyingtasters/).
+
+Here you will find detailed description of:
 
 * The rationale and design decisions used,
 * the process to build your own FlyingTasters,
