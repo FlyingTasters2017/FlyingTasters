@@ -1,0 +1,184 @@
+---------------------------------------------------
+-- AADL2.0
+-- TASTE
+-- 
+-- 
+---------------------------------------------------
+
+PACKAGE interfaceview::FV::Function1
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_tick
+END PI_tick;
+
+SUBPROGRAM IMPLEMENTATION PI_tick.others
+END PI_tick.others;
+
+SUBPROGRAM PI_TM_from_CF
+FEATURES
+  tm_data : IN PARAMETER DataView::TM_T {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_TM_from_CF;
+
+SUBPROGRAM IMPLEMENTATION PI_TM_from_CF.others
+END PI_TM_from_CF.others;
+
+SUBPROGRAM RI_TC_from_TASTE
+FEATURES
+  tc_data : IN PARAMETER DataView::TC_T {
+    Taste::encoding => NATIVE;
+  };
+END RI_TC_from_TASTE;
+
+SUBPROGRAM IMPLEMENTATION RI_TC_from_TASTE.others
+END RI_TC_from_TASTE.others;
+
+END interfaceview::FV::Function1;
+
+PACKAGE interfaceview::FV::Function2
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_TC_from_TASTE
+FEATURES
+  tc_data : IN PARAMETER DataView::TC_T {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_TC_from_TASTE;
+
+SUBPROGRAM IMPLEMENTATION PI_TC_from_TASTE.others
+END PI_TC_from_TASTE.others;
+
+SUBPROGRAM RI_TM_from_CF
+FEATURES
+  tm_data : IN PARAMETER DataView::TM_T {
+    Taste::encoding => NATIVE;
+  };
+END RI_TM_from_CF;
+
+SUBPROGRAM IMPLEMENTATION RI_TM_from_CF.others
+END RI_TM_from_CF.others;
+
+END interfaceview::FV::Function2;
+
+PACKAGE interfaceview::IV
+PUBLIC
+
+WITH interfaceview::FV::Function1;
+WITH interfaceview::FV::Function2;
+WITH interfaceview::FV;
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SYSTEM Function1
+FEATURES
+  PI_tick : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Function1::PI_tick.others {
+    Taste::coordinates => "939 344";
+    Taste::RCMoperationKind => cyclic;
+    Taste::RCMperiod => 1000 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "tick";
+  };
+  PI_TM_from_CF : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Function1::PI_TM_from_CF.others {
+    Taste::coordinates => "1390 1185";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 999 ms;
+    Taste::InterfaceName => "TM_from_CF";
+  };
+  RI_TC_from_TASTE : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Function2::PI_TC_from_TASTE.others {
+    Taste::coordinates => "1390 657";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "TC_from_TASTE";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (C);
+END Function1;
+
+SYSTEM IMPLEMENTATION Function1.others
+SUBCOMPONENTS
+  tick_impl : SUBPROGRAM interfaceview::FV::Function1::PI_tick.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+  TM_from_CF_impl : SUBPROGRAM interfaceview::FV::Function1::PI_TM_from_CF.others {
+    Compute_Execution_Time => 0 ms .. 999 ms;
+  };
+CONNECTIONS
+  OpToPICnx_tick_impl : SUBPROGRAM ACCESS tick_impl -> PI_tick;
+  OpToPICnx_TM_from_CF_impl : SUBPROGRAM ACCESS TM_from_CF_impl -> PI_TM_from_CF;
+END Function1.others;
+
+SYSTEM Function2
+FEATURES
+  PI_TC_from_TASTE : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Function2::PI_TC_from_TASTE.others {
+    Taste::coordinates => "1888 687";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "TC_from_TASTE";
+  };
+  RI_TM_from_CF : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Function1::PI_TM_from_CF.others {
+    Taste::coordinates => "1888 1149";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "TM_from_CF";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (GUI);
+END Function2;
+
+SYSTEM IMPLEMENTATION Function2.others
+SUBCOMPONENTS
+  TC_from_TASTE_impl : SUBPROGRAM interfaceview::FV::Function2::PI_TC_from_TASTE.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_TC_from_TASTE_impl : SUBPROGRAM ACCESS TC_from_TASTE_impl -> PI_TC_from_TASTE;
+END Function2.others;
+
+SYSTEM interfaceview
+END interfaceview;
+
+SYSTEM IMPLEMENTATION interfaceview.others
+SUBCOMPONENTS
+  Function1 : SYSTEM interfaceview::IV::Function1.others {
+    Taste::coordinates => "441 344 1390 1580";
+  };
+  Function2 : SYSTEM interfaceview::IV::Function2.others {
+    Taste::coordinates => "1888 364 2698 1585";
+  };
+CONNECTIONS
+  Function1_TM_from_CF_Function2_TM_from_CF : SUBPROGRAM ACCESS Function1.PI_TM_from_CF -> Function2.RI_TM_from_CF {
+    Taste::coordinates => "1888 1149 1636 1149 1636 1185 1390 1185";
+  };
+  Function2_TC_from_TASTE_Function1_TC_from_TASTE : SUBPROGRAM ACCESS Function2.PI_TC_from_TASTE -> Function1.RI_TC_from_TASTE {
+    Taste::coordinates => "1390 657 1636 657 1636 687 1888 687";
+  };
+END interfaceview.others;
+
+PROPERTIES
+  Taste::dataView => ("DataView");
+  Taste::dataViewPath => ("DataView.aadl");
+  Taste::coordinates => "0 0 2970 2100";
+  Taste::version => "1.3.19";
+END interfaceview::IV;
+
+PACKAGE interfaceview::FV
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+END interfaceview::FV;
+
