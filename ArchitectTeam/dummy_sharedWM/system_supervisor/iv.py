@@ -593,39 +593,6 @@ functions['as_supervisor'] = {
     'functional_states' : {}
 }
 
-functions['as_supervisor']['interfaces']['put_raw_ASD'] = {
-    'port_name': 'put_raw_ASD',
-    'parent_fv': 'as_supervisor',
-    'direction': PI,
-    'in': {},
-    'out': {},
-    'synchronism': asynch,
-    'rcm': sporadic,
-    'period': 0,
-    'wcet_low': 0,
-    'wcet_low_unit': 'ms',
-    'wcet_high': 0,
-    'wcet_high_unit': 'ms',
-    'distant_fv': '',
-    'calling_threads': {},
-    'distant_name': '',
-    'queue_size': 1
-}
-
-functions['as_supervisor']['interfaces']['put_raw_ASD']['paramsInOrdered'] = ['raw_ASD']
-
-functions['as_supervisor']['interfaces']['put_raw_ASD']['paramsOutOrdered'] = []
-
-functions['as_supervisor']['interfaces']['put_raw_ASD']['in']['raw_ASD'] = {
-    'type': 'MyInteger',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': integer,
-    'asn1_filename': './dataview-uniq.asn',
-    'encoding': UPER,
-    'interface': 'put_raw_ASD',
-    'param_direction': param_in
-}
-
 functions['as_supervisor']['interfaces']['talk_with_ASSV'] = {
     'port_name': 'talk_with_ASSV',
     'parent_fv': 'as_supervisor',
@@ -633,7 +600,7 @@ functions['as_supervisor']['interfaces']['talk_with_ASSV'] = {
     'in': {},
     'out': {},
     'synchronism': asynch,
-    'rcm': variator,
+    'rcm': sporadic,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': 'ms',
@@ -656,6 +623,39 @@ functions['as_supervisor']['interfaces']['talk_with_ASSV']['in']['sysSV_to_ASSV_
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'talk_with_ASSV',
+    'param_direction': param_in
+}
+
+functions['as_supervisor']['interfaces']['put_raw_asd'] = {
+    'port_name': 'put_raw_asd',
+    'parent_fv': 'as_supervisor',
+    'direction': PI,
+    'in': {},
+    'out': {},
+    'synchronism': asynch,
+    'rcm': variator,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': 'ms',
+    'wcet_high': 0,
+    'wcet_high_unit': 'ms',
+    'distant_fv': '',
+    'calling_threads': {},
+    'distant_name': '',
+    'queue_size': 1
+}
+
+functions['as_supervisor']['interfaces']['put_raw_asd']['paramsInOrdered'] = ['raw_asd']
+
+functions['as_supervisor']['interfaces']['put_raw_asd']['paramsOutOrdered'] = []
+
+functions['as_supervisor']['interfaces']['put_raw_asd']['in']['raw_asd'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'put_raw_asd',
     'param_direction': param_in
 }
 
@@ -800,39 +800,6 @@ functions['houston']['interfaces']['talk_with_Houston']['in']['sysSV_to_Houston_
     'param_direction': param_in
 }
 
-functions['houston']['interfaces']['put_raw_ASD'] = {
-    'port_name': 'put_raw_ASD',
-    'parent_fv': 'houston',
-    'direction': RI,
-    'in': {},
-    'out': {},
-    'synchronism': asynch,
-    'rcm': sporadic,
-    'period': 0,
-    'wcet_low': 0,
-    'wcet_low_unit': '',
-    'wcet_high': 0,
-    'wcet_high_unit': '',
-    'distant_fv': 'as_supervisor',
-    'calling_threads': {},
-    'distant_name': 'put_raw_ASD',
-    'queue_size': 1
-}
-
-functions['houston']['interfaces']['put_raw_ASD']['paramsInOrdered'] = ['raw_ASD']
-
-functions['houston']['interfaces']['put_raw_ASD']['paramsOutOrdered'] = []
-
-functions['houston']['interfaces']['put_raw_ASD']['in']['raw_ASD'] = {
-    'type': 'MyInteger',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': integer,
-    'asn1_filename': './dataview-uniq.asn',
-    'encoding': UPER,
-    'interface': 'put_raw_ASD',
-    'param_direction': param_in
-}
-
 functions['houston']['interfaces']['get_control_data'] = {
     'port_name': 'get_control_data',
     'parent_fv': 'houston',
@@ -899,14 +866,14 @@ functions['houston']['interfaces']['store_control_data']['in']['control_input'] 
     'param_direction': param_in
 }
 
-functions['houston']['interfaces']['talk_to_socket'] = {
-    'port_name': 'talk_to_socket',
+functions['houston']['interfaces']['send_control_data'] = {
+    'port_name': 'send_control_data',
     'parent_fv': 'houston',
     'direction': RI,
     'in': {},
     'out': {},
-    'synchronism': synch,
-    'rcm': protected,
+    'synchronism': asynch,
+    'rcm': sporadic,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': '',
@@ -914,84 +881,22 @@ functions['houston']['interfaces']['talk_to_socket'] = {
     'wcet_high_unit': '',
     'distant_fv': 'socket_client',
     'calling_threads': {},
-    'distant_name': 'talk_to_socket',
+    'distant_name': 'send_control_data',
     'queue_size': 1
 }
 
-functions['houston']['interfaces']['talk_to_socket']['paramsInOrdered'] = ['control_input']
+functions['houston']['interfaces']['send_control_data']['paramsInOrdered'] = ['control_input']
 
-functions['houston']['interfaces']['talk_to_socket']['paramsOutOrdered'] = ['asd_data']
+functions['houston']['interfaces']['send_control_data']['paramsOutOrdered'] = []
 
-functions['houston']['interfaces']['talk_to_socket']['in']['control_input'] = {
+functions['houston']['interfaces']['send_control_data']['in']['control_input'] = {
     'type': 'MyInteger',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': integer,
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
-    'interface': 'talk_to_socket',
+    'interface': 'send_control_data',
     'param_direction': param_in
-}
-
-functions['houston']['interfaces']['talk_to_socket']['out']['asd_data'] = {
-    'type': 'MyInteger',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': integer,
-    'asn1_filename': './dataview-uniq.asn',
-    'encoding': UPER,
-    'interface': 'talk_to_socket',
-    'param_direction': param_out
-}
-
-functions['socket_client'] = {
-    'name_with_case' : 'Socket_Client',
-    'runtime_nature': passive,
-    'language': C,
-    'zipfile': '',
-    'interfaces': {},
-    'functional_states' : {}
-}
-
-functions['socket_client']['interfaces']['talk_to_socket'] = {
-    'port_name': 'talk_to_socket',
-    'parent_fv': 'socket_client',
-    'direction': PI,
-    'in': {},
-    'out': {},
-    'synchronism': synch,
-    'rcm': protected,
-    'period': 0,
-    'wcet_low': 0,
-    'wcet_low_unit': 'ms',
-    'wcet_high': 0,
-    'wcet_high_unit': 'ms',
-    'distant_fv': '',
-    'calling_threads': {},
-    'distant_name': '',
-    'queue_size': 1
-}
-
-functions['socket_client']['interfaces']['talk_to_socket']['paramsInOrdered'] = ['control_input']
-
-functions['socket_client']['interfaces']['talk_to_socket']['paramsOutOrdered'] = ['asd_data']
-
-functions['socket_client']['interfaces']['talk_to_socket']['in']['control_input'] = {
-    'type': 'MyInteger',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': integer,
-    'asn1_filename': './dataview-uniq.asn',
-    'encoding': UPER,
-    'interface': 'talk_to_socket',
-    'param_direction': param_in
-}
-
-functions['socket_client']['interfaces']['talk_to_socket']['out']['asd_data'] = {
-    'type': 'MyInteger',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': integer,
-    'asn1_filename': './dataview-uniq.asn',
-    'encoding': UPER,
-    'interface': 'talk_to_socket',
-    'param_direction': param_out
 }
 
 functions['msd_processing'] = {
@@ -1576,5 +1481,175 @@ functions['drone_control']['interfaces']['get_control_data']['out']['control_inp
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'get_control_data',
+    'param_direction': param_out
+}
+
+functions['socket_client'] = {
+    'name_with_case' : 'Socket_Client',
+    'runtime_nature': thread,
+    'language': OG,
+    'zipfile': '',
+    'interfaces': {},
+    'functional_states' : {}
+}
+
+functions['socket_client']['interfaces']['send_control_data'] = {
+    'port_name': 'send_control_data',
+    'parent_fv': 'socket_client',
+    'direction': PI,
+    'in': {},
+    'out': {},
+    'synchronism': asynch,
+    'rcm': sporadic,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': 'ms',
+    'wcet_high': 0,
+    'wcet_high_unit': 'ms',
+    'distant_fv': '',
+    'calling_threads': {},
+    'distant_name': '',
+    'queue_size': 1
+}
+
+functions['socket_client']['interfaces']['send_control_data']['paramsInOrdered'] = ['control_input']
+
+functions['socket_client']['interfaces']['send_control_data']['paramsOutOrdered'] = []
+
+functions['socket_client']['interfaces']['send_control_data']['in']['control_input'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'send_control_data',
+    'param_direction': param_in
+}
+
+functions['socket_client']['interfaces']['put_raw_asd'] = {
+    'port_name': 'put_raw_asd',
+    'parent_fv': 'socket_client',
+    'direction': RI,
+    'in': {},
+    'out': {},
+    'synchronism': asynch,
+    'rcm': sporadic,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': '',
+    'wcet_high': 0,
+    'wcet_high_unit': '',
+    'distant_fv': 'as_supervisor',
+    'calling_threads': {},
+    'distant_name': 'put_raw_asd',
+    'queue_size': 1
+}
+
+functions['socket_client']['interfaces']['put_raw_asd']['paramsInOrdered'] = ['raw_asd']
+
+functions['socket_client']['interfaces']['put_raw_asd']['paramsOutOrdered'] = []
+
+functions['socket_client']['interfaces']['put_raw_asd']['in']['raw_asd'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'put_raw_asd',
+    'param_direction': param_in
+}
+
+functions['socket_client']['interfaces']['talk_with_drone'] = {
+    'port_name': 'talk_with_drone',
+    'parent_fv': 'socket_client',
+    'direction': RI,
+    'in': {},
+    'out': {},
+    'synchronism': synch,
+    'rcm': protected,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': '',
+    'wcet_high': 0,
+    'wcet_high_unit': '',
+    'distant_fv': 'drone_dummy',
+    'calling_threads': {},
+    'distant_name': 'talk_with_drone',
+    'queue_size': 1
+}
+
+functions['socket_client']['interfaces']['talk_with_drone']['paramsInOrdered'] = ['control_data']
+
+functions['socket_client']['interfaces']['talk_with_drone']['paramsOutOrdered'] = ['raw_asd']
+
+functions['socket_client']['interfaces']['talk_with_drone']['in']['control_data'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'talk_with_drone',
+    'param_direction': param_in
+}
+
+functions['socket_client']['interfaces']['talk_with_drone']['out']['raw_asd'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'talk_with_drone',
+    'param_direction': param_out
+}
+
+functions['drone_dummy'] = {
+    'name_with_case' : 'Drone_Dummy',
+    'runtime_nature': passive,
+    'language': C,
+    'zipfile': '',
+    'interfaces': {},
+    'functional_states' : {}
+}
+
+functions['drone_dummy']['interfaces']['talk_with_drone'] = {
+    'port_name': 'talk_with_drone',
+    'parent_fv': 'drone_dummy',
+    'direction': PI,
+    'in': {},
+    'out': {},
+    'synchronism': synch,
+    'rcm': protected,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': 'ms',
+    'wcet_high': 0,
+    'wcet_high_unit': 'ms',
+    'distant_fv': '',
+    'calling_threads': {},
+    'distant_name': '',
+    'queue_size': 1
+}
+
+functions['drone_dummy']['interfaces']['talk_with_drone']['paramsInOrdered'] = ['control_data']
+
+functions['drone_dummy']['interfaces']['talk_with_drone']['paramsOutOrdered'] = ['raw_asd']
+
+functions['drone_dummy']['interfaces']['talk_with_drone']['in']['control_data'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'talk_with_drone',
+    'param_direction': param_in
+}
+
+functions['drone_dummy']['interfaces']['talk_with_drone']['out']['raw_asd'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'talk_with_drone',
     'param_direction': param_out
 }

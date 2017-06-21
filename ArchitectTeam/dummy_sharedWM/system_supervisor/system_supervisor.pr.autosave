@@ -50,7 +50,7 @@ process system_supervisor;
             /* CIF PROCEDURECALL (907, 357), (194, 35) */
             call writeln('calc control_input');
             /* CIF PROCEDURECALL (833, 407), (342, 35) */
-            call calculate_control_input(control_error,control_input);
+            call calculate_control_input(control_error);
             /* CIF PROCEDURECALL (930, 462), (148, 35) */
             call writeln('updata GU');
             /* CIF output (870, 512), (267, 35) */

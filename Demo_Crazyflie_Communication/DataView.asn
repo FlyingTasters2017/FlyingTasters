@@ -1,0 +1,71 @@
+TASTE-Dataview DEFINITIONS ::=
+BEGIN
+IMPORTS T-Int32, T-UInt32, T-Int8, T-UInt8, T-Boolean FROM TASTE-BasicTypes;
+
+-- A few simple types to start with ASN.1
+MyInteger   ::= T-UInt8
+
+MyReal      ::= REAL (0.0 .. 1000.0)
+
+MyBool      ::= BOOLEAN
+
+MyEnum      ::= ENUMERATED { hello, world, howareyou }
+
+MySeq       ::= SEQUENCE {
+    input-data  MyInteger,
+    output-data MyInteger,
+    validity    ENUMERATED { valid, invalid }
+}
+
+MyChoice    ::= CHOICE {
+    a BOOLEAN,
+    b MySeq
+}
+
+MySeqOf     ::= SEQUENCE (SIZE (2)) OF MyEnum
+
+MyOctStr    ::= OCTET STRING (SIZE (3))
+
+-- You can also declare constants
+myVar       MySeqOf     ::= { hello, world }
+
+-- Packet structure
+ANGLE         ::= REAL(-360.0 .. 360.0)
+RATE          ::= REAL(-100000.0 .. 100000.0)
+T-UInt16      ::= INTEGER (0 .. 65535)
+
+GYROSCOPE     ::= REAL(-100000.0 .. 100000.0)
+ACCELERATION  ::= REAL(-16.0 .. 16.0)
+HEIGHT        ::= INTEGER (0 .. 8191)
+
+GYRO-SEQ ::= SEQUENCE {
+       x GYROSCOPE,
+       y GYROSCOPE,
+       z GYROSCOPE
+}
+
+ACC-SEQ ::= SEQUENCE {
+       x ACCELERATION,
+       y ACCELERATION,
+       z ACCELERATION
+}
+
+TM-T ::= SEQUENCE {
+    gyro  GYRO-SEQ,
+    acc   ACC-SEQ,
+    z     HEIGHT
+}
+
+TC-T ::= SEQUENCE {
+    roll   ANGLE,
+    pitch  ANGLE,
+    yaw    RATE,
+    thrust T-UInt16
+}
+
+sampleMeasurement TM-T ::= { gyro { x 0.0, y 0.0, z 0.0 }, acc { x 0.0, y 0.0, z 1.0 }, z 0 }
+
+sampleCommand TC-T ::= { roll 0.0, pitch 0.0, yaw 0.0, thrust 0 }
+
+END
+

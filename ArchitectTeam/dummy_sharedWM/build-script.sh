@@ -71,6 +71,9 @@ cd "$SKELS"/houston && opengeode --toAda houston.pr system_structure.pr && cd $O
 # Generate code for OpenGEODE function ms_supervisor
 cd "$SKELS"/ms_supervisor && opengeode --toAda ms_supervisor.pr system_structure.pr && cd $OLDPWD
 
+# Generate code for OpenGEODE function socket_client
+cd "$SKELS"/socket_client && opengeode --toAda socket_client.pr system_structure.pr && cd $OLDPWD
+
 cd "$SKELS" && rm -f system_supervisor.zip && zip system_supervisor system_supervisor/* && cd $OLDPWD
 
 cd "$SKELS" && rm -f ms_communication.zip && zip ms_communication ms_communication/* && cd $OLDPWD
@@ -80,8 +83,6 @@ cd "$SKELS" && rm -f camera_dummy.zip && zip camera_dummy camera_dummy/* && cd $
 cd "$SKELS" && rm -f as_supervisor.zip && zip as_supervisor as_supervisor/* && cd $OLDPWD
 
 cd "$SKELS" && rm -f houston.zip && zip houston houston/* && cd $OLDPWD
-
-cd "$SKELS" && rm -f socket_client.zip && zip socket_client socket_client/* && cd $OLDPWD
 
 cd "$SKELS" && rm -f msd_processing.zip && zip msd_processing msd_processing/* && cd $OLDPWD
 
@@ -96,6 +97,10 @@ cd "$SKELS" && rm -f mission_safety.zip && zip mission_safety mission_safety/* &
 cd "$SKELS" && rm -f trajectory_generator.zip && zip trajectory_generator trajectory_generator/* && cd $OLDPWD
 
 cd "$SKELS" && rm -f drone_control.zip && zip drone_control drone_control/* && cd $OLDPWD
+
+cd "$SKELS" && rm -f socket_client.zip && zip socket_client socket_client/* && cd $OLDPWD
+
+cd "$SKELS" && rm -f drone_dummy.zip && zip drone_dummy drone_dummy/* && cd $OLDPWD
 
 [ ! -z "$CLEANUP" ] && rm -rf binary*
 
@@ -134,7 +139,6 @@ cd "$CWD" && assert-builder-ocarina.py \
 	--subAda camera_dummy:"$SKELS"/camera_dummy.zip \
 	--subAda as_supervisor:"$SKELS"/as_supervisor.zip \
 	--subAda houston:"$SKELS"/houston.zip \
-	--subC socket_client:"$SKELS"/socket_client.zip \
 	--subC msd_processing:"$SKELS"/msd_processing.zip \
 	--subC asd_processing:"$SKELS"/asd_processing.zip \
 	--subAda ms_supervisor:"$SKELS"/ms_supervisor.zip \
@@ -142,4 +146,6 @@ cd "$CWD" && assert-builder-ocarina.py \
 	--subC mission_safety:"$SKELS"/mission_safety.zip \
 	--subC trajectory_generator:"$SKELS"/trajectory_generator.zip \
 	--subC drone_control:"$SKELS"/drone_control.zip \
+	--subAda socket_client:"$SKELS"/socket_client.zip \
+	--subC drone_dummy:"$SKELS"/drone_dummy.zip \
 	$ORCHESTRATOR_OPTIONS

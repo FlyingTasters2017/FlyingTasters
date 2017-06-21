@@ -1,4 +1,3 @@
-
 /* User code: This file will not be overwritten by TASTE. */
 #include "socketclient.h"
 #include <stdio.h>
@@ -232,6 +231,10 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
       /* We may want to do strtol() here to get numeric value */
       printf("range.zrange: %.*s\n", t[i+1].end-t[i+1].start, buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
+            temp[t[i+1].end-t[i+1].start] = '\0';
+            //printf("yaw is %f \n", strtod(temp, &ptr));
+            OUT_sensorData->baropAct = strtod(temp, &ptr);
+			i++;
         }
     else {
       printf("Unexpected key: %.*s\n", t[i].end-t[i].start,buf + t[i].start);
@@ -248,10 +251,10 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
    char *yawratec;
    char *pitchc;
    
-   thrust = htonl(IN_droneData->thrustRef);
-   yawrate = htonl(IN_droneData->yawrateRef);
-   roll = htonl(IN_droneData->rollRef);
-   pitch = htonl(IN_droneData->pitchRef);
+   thrust = htonl(IN_droneData->thrustRef*1000);
+   yawrate = htonl(IN_droneData->yawrateRef*1000);
+   roll = htonl(IN_droneData->rollRef*1000);
+   pitch = htonl(IN_droneData->pitchRef*1000);
    
    
    
@@ -272,4 +275,3 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
    
 
 }
-

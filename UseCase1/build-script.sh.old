@@ -65,6 +65,8 @@ cd "$SKELS" && rm -f drone_model.zip && zip drone_model drone_model/* && cd $OLD
 
 cd "$SKELS" && rm -f controller.zip && zip controller controller/* && cd $OLDPWD
 
+cd "$SKELS" && rm -f trajectorygenerator.zip && zip trajectorygenerator trajectorygenerator/* && cd $OLDPWD
+
 [ ! -z "$CLEANUP" ] && rm -rf binary*
 
 if [ -f ConcurrencyView.pro ]
@@ -100,4 +102,5 @@ cd "$CWD" && assert-builder-ocarina.py \
 	--subAda obsw:"$SKELS"/obsw.zip \
 	--subC drone_model:"$SKELS"/drone_model.zip \
 	--subC controller:"$SKELS"/controller.zip \
+	--subC trajectorygenerator:"$SKELS"/trajectorygenerator.zip \
 	$ORCHESTRATOR_OPTIONS

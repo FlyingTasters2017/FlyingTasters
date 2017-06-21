@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control_Act'.
  *
- * Model version                  : 1.14
+ * Model version                  : 1.26
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Fri Jun 09 11:16:05 2017
+ * C/C++ source code generated on : Wed Jun 14 10:11:45 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -37,6 +37,21 @@
 # define rtmSetErrorStatus(rtm, val)   ((rtm)->errorStatus = (val))
 #endif
 
+/* Block states (auto storage) for system '<Root>/Moving Average1' */
+typedef struct {
+  dsp_private_SlidingWindowAver_T gobj_0;/* '<Root>/Moving Average1' */
+  dsp_private_SlidingWindowAver_T gobj_1;/* '<Root>/Moving Average1' */
+  dsp_MovingAverage_control_Act_T obj; /* '<Root>/Moving Average1' */
+  void *MovingAverage1_PWORK;          /* '<Root>/Moving Average1' */
+  boolean_T objisempty;                /* '<Root>/Moving Average1' */
+} DW_MovingAverage1_control_Act_T;
+
+/* Block states (auto storage) for system '<Root>' */
+typedef struct {
+  DW_MovingAverage1_control_Act_T MovingAverage;/* '<Root>/Moving Average' */
+  DW_MovingAverage1_control_Act_T MovingAverage1;/* '<Root>/Moving Average1' */
+} DW_control_Act_T;
+
 /* External inputs (root inport signals with auto storage) */
 typedef struct {
   MySensorData sensorData;             /* '<Root>/sensorData' */
@@ -52,6 +67,9 @@ typedef struct {
 struct tag_RTM_control_Act_T {
   const char_T * volatile errorStatus;
 };
+
+/* Block states (auto storage) */
+extern DW_control_Act_T control_Act_DW;
 
 /* External inputs (root inport signals with auto storage) */
 extern ExtU_control_Act_T control_Act_U;
@@ -73,20 +91,54 @@ extern RT_MODEL_control_Act_T *const control_Act_M;
 /*-
  * These blocks were eliminated from the model due to optimizations:
  *
- * Block '<S1>/Derivative Gain' : Unused code path elimination
- * Block '<S1>/Filter' : Unused code path elimination
- * Block '<S1>/Filter Coefficient' : Unused code path elimination
- * Block '<S1>/Integral Gain' : Unused code path elimination
- * Block '<S1>/Integrator' : Unused code path elimination
- * Block '<S1>/Proportional Gain' : Unused code path elimination
- * Block '<S1>/Sum' : Unused code path elimination
- * Block '<S1>/SumD' : Unused code path elimination
- * Block '<Root>/Gain' : Unused code path elimination
- * Block '<Root>/Min_thrust ' : Unused code path elimination
- * Block '<Root>/Saturation' : Unused code path elimination
- * Block '<Root>/Saturation1' : Unused code path elimination
- * Block '<Root>/Sum3' : Unused code path elimination
- * Block '<Root>/Sum6' : Unused code path elimination
+ * Block '<Root>/Dead Zone' : Unused code path elimination
+ * Block '<Root>/Dead Zone1' : Unused code path elimination
+ * Block '<Root>/Discrete-Time Integrator' : Unused code path elimination
+ * Block '<Root>/Discrete-Time Integrator1' : Unused code path elimination
+ * Block '<S3>/Discrete-Time Integrator' : Unused code path elimination
+ * Block '<S3>/Ki' : Unused code path elimination
+ * Block '<S3>/Kp' : Unused code path elimination
+ * Block '<S3>/Scope' : Unused code path elimination
+ * Block '<S3>/Sum5' : Unused code path elimination
+ * Block '<S3>/Sum6' : Unused code path elimination
+ * Block '<S4>/Discrete-Time Integrator' : Unused code path elimination
+ * Block '<S4>/Ki' : Unused code path elimination
+ * Block '<S4>/Kp' : Unused code path elimination
+ * Block '<S4>/Scope' : Unused code path elimination
+ * Block '<S4>/Sum5' : Unused code path elimination
+ * Block '<S4>/Sum6' : Unused code path elimination
+ * Block '<S5>/1//dt' : Unused code path elimination
+ * Block '<S5>/Kd' : Unused code path elimination
+ * Block '<S5>/Ki' : Unused code path elimination
+ * Block '<S5>/Kp' : Unused code path elimination
+ * Block '<S5>/Memory' : Unused code path elimination
+ * Block '<S5>/Memory1' : Unused code path elimination
+ * Block '<S5>/Saturation' : Unused code path elimination
+ * Block '<S5>/Scope1' : Unused code path elimination
+ * Block '<S5>/Scope2' : Unused code path elimination
+ * Block '<S5>/Sum1' : Unused code path elimination
+ * Block '<S5>/Sum2' : Unused code path elimination
+ * Block '<S5>/Sum5' : Unused code path elimination
+ * Block '<S5>/Sum6' : Unused code path elimination
+ * Block '<S5>/dt' : Unused code path elimination
+ * Block '<S6>/1//dt' : Unused code path elimination
+ * Block '<S6>/Kd' : Unused code path elimination
+ * Block '<S6>/Ki' : Unused code path elimination
+ * Block '<S6>/Kp' : Unused code path elimination
+ * Block '<S6>/Memory' : Unused code path elimination
+ * Block '<S6>/Memory1' : Unused code path elimination
+ * Block '<S6>/Saturation' : Unused code path elimination
+ * Block '<S6>/Scope1' : Unused code path elimination
+ * Block '<S6>/Scope2' : Unused code path elimination
+ * Block '<S6>/Sum1' : Unused code path elimination
+ * Block '<S6>/Sum2' : Unused code path elimination
+ * Block '<S6>/Sum5' : Unused code path elimination
+ * Block '<S6>/Sum6' : Unused code path elimination
+ * Block '<S6>/dt' : Unused code path elimination
+ * Block '<S2>/Saturation' : Unused code path elimination
+ * Block '<S2>/Saturation1' : Unused code path elimination
+ * Block '<S2>/Scope1' : Unused code path elimination
+ * Block '<S2>/Scope2' : Unused code path elimination
  */
 
 /*-
@@ -105,6 +157,11 @@ extern RT_MODEL_control_Act_T *const control_Act_M;
  *
  * '<Root>' : 'control_Act'
  * '<S1>'   : 'control_Act/Discrete PID Controller1'
+ * '<S2>'   : 'control_Act/Position_controller'
+ * '<S3>'   : 'control_Act/Position_controller/PID_Roll_Rate2'
+ * '<S4>'   : 'control_Act/Position_controller/PID_Roll_Rate3'
+ * '<S5>'   : 'control_Act/Position_controller/PID_X2'
+ * '<S6>'   : 'control_Act/Position_controller/PID_Y2'
  */
 #endif                                 /* RTW_HEADER_control_Act_h_ */
 

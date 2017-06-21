@@ -1,0 +1,33 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM as_supervisor;
+
+	SIGNAL talk_with_ASSV;
+
+	PROCEDURE takeoff COMMENT '#c_predef';
+		FPAR
+			IN/OUT droneData MyDroneData;
+ 	EXTERNAL;
+
+	PROCEDURE readStabilizerSendThrust COMMENT '#c_predef';
+		FPAR
+			IN droneData MyDroneData,
+			IN/OUT sensorData MySensorData;
+ 	EXTERNAL;
+
+	CHANNEL c
+		FROM ENV TO as_supervisor WITH talk_with_ASSV;
+	ENDCHANNEL;
+
+	BLOCK as_supervisor;
+
+		SIGNALROUTE r
+			FROM ENV TO as_supervisor WITH talk_with_ASSV;
+
+		CONNECT c and r;
+
+		PROCESS as_supervisor REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;

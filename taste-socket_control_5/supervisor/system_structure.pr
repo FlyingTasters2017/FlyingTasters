@@ -1,0 +1,30 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM supervisor;
+
+	SIGNAL pulse1;
+
+	SIGNAL pulse2;
+
+	SIGNAL talk_with_ASSV;
+
+	SIGNAL talk_with_MSSV;
+
+	CHANNEL c
+		FROM ENV TO supervisor WITH pulse1,pulse2;
+		FROM supervisor TO ENV WITH talk_with_ASSV,talk_with_MSSV;
+	ENDCHANNEL;
+
+	BLOCK supervisor;
+
+		SIGNALROUTE r
+			FROM ENV TO supervisor WITH pulse1,pulse2;
+			FROM supervisor TO ENV WITH talk_with_ASSV,talk_with_MSSV;
+
+		CONNECT c and r;
+
+		PROCESS supervisor REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;

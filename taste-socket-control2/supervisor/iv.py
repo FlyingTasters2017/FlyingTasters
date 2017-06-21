@@ -27,7 +27,7 @@ functions['supervisor']['interfaces']['pulse'] = {
     'out': {},
     'synchronism': asynch,
     'rcm': cyclic,
-    'period': 10,
+    'period': 20,
     'wcet_low': 0,
     'wcet_low_unit': 'ms',
     'wcet_high': 0,

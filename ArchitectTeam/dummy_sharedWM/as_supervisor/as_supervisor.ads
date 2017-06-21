@@ -10,12 +10,12 @@ use adaasn1rtl;
 
 
 package as_supervisor is
-    --  Provided interface "put_raw_ASD"
-    procedure put_raw_ASD(raw_ASD: access asn1SccMyInteger);
-    pragma Export(C, put_raw_ASD, "as_supervisor_put_raw_ASD");
     --  Provided interface "talk_with_ASSV"
     procedure talk_with_ASSV(sysSV_to_ASSV_events: access asn1SccMyInteger);
     pragma Export(C, talk_with_ASSV, "as_supervisor_talk_with_ASSV");
+    --  Provided interface "put_raw_asd"
+    procedure put_raw_asd(raw_asd: access asn1SccMyInteger);
+    pragma Export(C, put_raw_asd, "as_supervisor_put_raw_asd");
     --  Sync required interface "store_ASD"
     procedure RIÜstore_ASD(processed_asd: access asn1SccMyInteger);
     pragma import(C, RIÜstore_ASD, "as_supervisor_RI_store_ASD");

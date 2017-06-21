@@ -1,0 +1,26 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM ms_supervisor;
+
+	SIGNAL talk_with_MSSV;
+
+	SIGNAL get_raw_MSD;
+
+	CHANNEL c
+		FROM ENV TO ms_supervisor WITH talk_with_MSSV;
+		FROM ms_supervisor TO ENV WITH get_raw_MSD;
+	ENDCHANNEL;
+
+	BLOCK ms_supervisor;
+
+		SIGNALROUTE r
+			FROM ENV TO ms_supervisor WITH talk_with_MSSV;
+			FROM ms_supervisor TO ENV WITH get_raw_MSD;
+
+		CONNECT c and r;
+
+		PROCESS ms_supervisor REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;

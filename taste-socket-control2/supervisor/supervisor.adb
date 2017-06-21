@@ -75,9 +75,9 @@ package body supervisor is
                         RIÜcontrol_Act(ctxt.sensordata'Access, ctxt.ref'Access, ctxt.dronedata'Access);
                         -- readStabilizerSendThrust(dronedata,sensorData) (23,17)
                         RIÜreadStabilizerSendThrust(ctxt.dronedata'Access, ctxt.sensorData'Access);
-                        -- dataOperation(sensorData,sensordata) (25,17)
-                        RIÜdataOperation(ctxt.sensorData'Access, ctxt.sensordata'Access);
-                        -- displaySensor(sensorData) (27,17)
+                        -- dataOperation(sensorData,sensorData) (25,17)
+                        RIÜdataOperation(ctxt.sensorData'Access, ctxt.sensorData'Access);
+                        -- displaySensor(sensorData) (27,19)
                         RIÜdisplaySensor(ctxt.sensorData'Access);
                         -- NEXT_STATE Running (29,22) at 760, 424
                         trId := -1;
