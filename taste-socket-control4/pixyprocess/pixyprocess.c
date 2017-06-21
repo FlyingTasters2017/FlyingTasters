@@ -105,6 +105,8 @@ void pixyprocess_PI_processData(const asn1SccT_UInt32 *IN_x,
     //printf("\n function 3 \n");
     int x = *IN_x;
     int y = *IN_y;   
+    
+    printf("x: %d and y: %d \n", x,y);
    
     
     int xp=x; 
@@ -113,7 +115,7 @@ void pixyprocess_PI_processData(const asn1SccT_UInt32 *IN_x,
     int yp=y; 
     // pixy center y ,  pixels
     
-    int hdrone=1;   
+    int hdrone=0.3;   
     //drone height from laser sensor, m
     
     int ResX=320;   
@@ -123,10 +125,10 @@ void pixyprocess_PI_processData(const asn1SccT_UInt32 *IN_x,
     
     //FovY=47*pi/180; %narrow side FOV angle of camera
     
-    int hcam=2.57;   
+    int hcam= 1.7;   
     //camera haight from the ground
     
-    float ppg=10.64/1000;  
+    float ppg=7.4/1000;  
     //%per pixel real distance on the ground, m- ENTER THE FORMULA HERE
 
     float perpix = ppg*(hcam-hdrone)/hcam;  
@@ -140,7 +142,7 @@ void pixyprocess_PI_processData(const asn1SccT_UInt32 *IN_x,
     
     
     float xreal=xtr_p*perpix;
-    float yreal=ytr_p*perpix;
+    float yreal=-ytr_p*perpix;
 
     printf("\n x: %f; y: %f; \n", xreal, yreal);
     
@@ -153,7 +155,7 @@ void pixyprocess_PI_processData(const asn1SccT_UInt32 *IN_x,
 
 }
 
-void pixyprocess_PI_getPosition(asn1SccMyPositionData *OUT_currentPosition)
+void pixyprocess_PI_getPosition(const asn1SccMyReal *IN_currHeight, asn1SccMyPositionData *OUT_currentPosition)
 {
 //     asn1SccMyPositionData pos;
 //     pos.xAct =  x_current;

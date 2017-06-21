@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'controlAction'.
  *
- * Model version                  : 1.1
+ * Model version                  : 1.5
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Mon Jun 19 14:09:58 2017
+ * C/C++ source code generated on : Tue Jun 20 19:40:21 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -40,10 +40,8 @@
 
 /* Block states (auto storage) for system '<Root>' */
 typedef struct {
-  real_T Integrator_DSTATE;            /* '<S4>/Integrator' */
-  real_T Filter_DSTATE;                /* '<S4>/Filter' */
-  real_T Integrator_DSTATE_p;          /* '<S5>/Integrator' */
-  real_T Filter_DSTATE_p;              /* '<S5>/Filter' */
+  real_T UD_DSTATE;                    /* '<S4>/UD' */
+  real_T UD_DSTATE_e;                  /* '<S5>/UD' */
 } DW_controlAction_T;
 
 /* External inputs (root inport signals with auto storage) */
@@ -83,6 +81,13 @@ extern void controlAction_terminate(void);
 extern RT_MODEL_controlAction_T *const controlAction_M;
 
 /*-
+ * These blocks were eliminated from the model due to optimizations:
+ *
+ * Block '<S4>/Data Type Duplicate' : Unused code path elimination
+ * Block '<S5>/Data Type Duplicate' : Unused code path elimination
+ */
+
+/*-
  * The generated code includes comments that allow you to trace directly
  * back to the appropriate location in the model.  The basic format
  * is <system>/block_name, where system is the system number (uniquely
@@ -100,8 +105,8 @@ extern RT_MODEL_controlAction_T *const controlAction_M;
  * '<S1>'   : 'controlAction/MATLAB Function'
  * '<S2>'   : 'controlAction/Position Control'
  * '<S3>'   : 'controlAction/yaw control'
- * '<S4>'   : 'controlAction/Position Control/Discrete PID Controller'
- * '<S5>'   : 'controlAction/Position Control/Discrete PID Controller1'
+ * '<S4>'   : 'controlAction/Position Control/Discrete Derivative'
+ * '<S5>'   : 'controlAction/Position Control/Discrete Derivative1'
  */
 #endif                                 /* RTW_HEADER_controlAction_h_ */
 

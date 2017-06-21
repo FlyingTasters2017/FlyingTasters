@@ -26,6 +26,9 @@ float x_pos, y_pos;
 
 int yawOld,pitchOld,rollOld,zrangeOld;
 asn1SccMyPositionData currPosition;
+asn1SccMyDroneData currDroneRef;
+asn1SccMySensorData currSensor;
+asn1SccMyReal currHeight;
 
 //global variables end*/
 static int jsoneq(const char *json, jsmntok_t *tok, const char *s) {
@@ -233,7 +236,15 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
     }
 */
   //TODO: Controller for the drone. Put here
-    socketclient_RI_getPosition(&currPosition);
+    currHeight = OUT_sensorData->baropAct;
+    currSensor.yawAct = OUT_sensorData->yawAct;
+    currSensor.pitchAct = OUT_sensorData->yawAct;
+    currSensor.rollAct = OUT_sensorData->yawAct;
+    currSensor.accxAct = OUT_sensorData->accxAct;
+    currSensor.accyAct = OUT_sensorData->accyAct;
+    currSensor.acczAct = OUT_sensorData->acczAct;
+    currSensor.baropAct = OUT_sensorData->baropAct;
+    socketclient_RI_getPosition(&currHeight,&currPosition);
     
     
     
@@ -241,6 +252,45 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
     y_pos = currPosition.yAct;
     
     printf("x position: %f y position: %f \n", x_pos, y_pos);
+    
+    socketclient_RI_controlAction(&currPosition,&currSensor,&currDroneRef);
+    printf("yawrate Ref: %f", currDroneRef.yawrateRef);
+    printf("pitch Ref: %f", currDroneRef.pitchRef);
+    printf("roll Ref: %f", currDroneRef.rollRef);
+    printf("z Ref: %f", currDroneRef.thrustRef);
+    
+    
+//     if(currDroneRef.yawrateRef < 0)
+//     {
+//         yrsign = 1;
+//         currDroneRef.yawrateRef = -currDroneRef.yawrateRef;
+//     }
+//     else{
+//         yrsign = 0;
+//         
+//     }
+//     
+//     if(currDroneRef.pitchRef < 0)
+//     {
+//         psign = 1;
+//         currDroneRef.pitchRef = -currDroneRef.pitchRef;
+//     }
+//     else{
+//         psign = 0;
+//         
+//     }
+//     
+//     if(currDroneRef.rollRef < 0)
+//     {
+//         rsign = 1;
+//         currDroneRef.rollRef = -currDroneRef.rollRef;
+//     }
+//     else{
+//         rsign = 0;
+//         
+//     }
+    
+  
   
   
    printf("Sending to Python server: \n");
@@ -250,10 +300,12 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
    char *yawratec;
    char *pitchc;
    
-   thrust = htonl(IN_droneData->thrustRef);
-   yawrate = htonl(IN_droneData->yawrateRef);
-   roll = htonl(IN_droneData->rollRef);
-   pitch = htonl(IN_droneData->pitchRef);
+   thrust = htonl(1000*currDroneRef.thrustRef);
+   yawrate = htonl(1000*currDroneRef.yawrateRef);
+   roll = htonl(1000*currDroneRef.rollRef);
+   pitch = htonl(1000*currDroneRef.pitchRef);
+   
+//    yrsign = htonl(yrsign)
    
    bzero(droneref,256);   
    snprintf(droneref, sizeof( droneref ), "%d %d %d %d ", yawrate, pitch, roll, thrust);

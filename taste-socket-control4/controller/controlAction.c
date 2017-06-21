@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'controlAction'.
  *
- * Model version                  : 1.1
+ * Model version                  : 1.5
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Mon Jun 19 14:09:58 2017
+ * C/C++ source code generated on : Tue Jun 20 19:40:21 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -43,27 +43,39 @@ RT_MODEL_controlAction_T *const controlAction_M = &controlAction_M_;
 /* Model step function */
 void controlAction_step(void)
 {
-  real_T phi;
+  real_T rtb_sinpsi;
   real_T rtb_cospsi;
-  real_T rtb_XError;
-  real_T rtb_Filter;
-  real_T rtb_YError;
-  real_T rtb_XerrcospsiYerrsinpsi;
-  real_T rtb_FilterCoefficient;
-  real_T tmp[9];
-  real_T tmp_0[3];
-  int32_T i;
-  real_T u0;
+  real_T rtb_Sum5;
+  real_T rtb_TSamp;
 
-  /* Fcn: '<S2>/Fcn1' incorporates:
+  /* Gain: '<S3>/Gain' incorporates:
+   *  Constant: '<S3>/Constant2'
+   *  Inport: '<Root>/sensorData'
+   *  Sum: '<S3>/Sum'
+   */
+  rtb_Sum5 = (0.0 - controlAction_U.sensorData.yawAct) * -0.5;
+
+  /* Saturate: '<S3>/Saturation' */
+  if (rtb_Sum5 > 30.0) {
+    controlAction_Y.droneData.yawrateRef = 30.0;
+  } else if (rtb_Sum5 < -30.0) {
+    controlAction_Y.droneData.yawrateRef = -30.0;
+  } else {
+    controlAction_Y.droneData.yawrateRef = rtb_Sum5;
+  }
+
+  /* End of Saturate: '<S3>/Saturation' */
+
+  /* Gain: '<S2>/Gain' incorporates:
    *  Inport: '<Root>/sensorData'
    */
-  rtb_cospsi = cos(controlAction_U.sensorData.yawAct);
+  rtb_sinpsi = 0.017453292519943295 * controlAction_U.sensorData.yawAct;
 
-  /* Fcn: '<S2>/Fcn' incorporates:
-   *  Inport: '<Root>/sensorData'
-   */
-  rtb_Filter = sin(controlAction_U.sensorData.yawAct);
+  /* Fcn: '<S2>/Fcn1' */
+  rtb_cospsi = cos(rtb_sinpsi);
+
+  /* Fcn: '<S2>/Fcn' */
+  rtb_sinpsi = sin(rtb_sinpsi);
 
   /* Sum: '<S2>/Sum2' incorporates:
    *  Constant: '<Root>/Constant'
@@ -74,16 +86,41 @@ void controlAction_step(void)
    *  Sum: '<S2>/Sum'
    *  Sum: '<S2>/Sum1'
    */
-  rtb_XerrcospsiYerrsinpsi = (0.0 - controlAction_U.posData.xAct) * rtb_cospsi +
-    (0.0 - controlAction_U.posData.yAct) * rtb_Filter;
+  rtb_Sum5 = (0.0 - controlAction_U.posData.xAct) * rtb_cospsi + (0.0 -
+    controlAction_U.posData.yAct) * rtb_sinpsi;
 
-  /* Gain: '<S4>/Filter Coefficient' incorporates:
-   *  DiscreteIntegrator: '<S4>/Filter'
-   *  Gain: '<S4>/Derivative Gain'
-   *  Sum: '<S4>/SumD'
+  /* SampleTimeMath: '<S4>/TSamp'
+   *
+   * About '<S4>/TSamp':
+   *  y = u * K where K = 1 / ( w * Ts )
    */
-  rtb_FilterCoefficient = (-20.0 * rtb_XerrcospsiYerrsinpsi -
-    controlAction_DW.Filter_DSTATE) * 100.0;
+  rtb_TSamp = rtb_Sum5 * -2000.0;
+
+  /* Sum: '<S2>/Sum3' incorporates:
+   *  Gain: '<S2>/Gain1'
+   *  Sum: '<S4>/Diff'
+   *  UnitDelay: '<S4>/UD'
+   *
+   * Block description for '<S4>/Diff':
+   *
+   *  Add in CPU
+   *
+   * Block description for '<S4>/UD':
+   *
+   *  Store in Global RAM
+   */
+  rtb_Sum5 = -5.0 * rtb_Sum5 + (rtb_TSamp - controlAction_DW.UD_DSTATE);
+
+  /* Saturate: '<S2>/Saturation' */
+  if (rtb_Sum5 > 10.0) {
+    controlAction_Y.droneData.pitchRef = 10.0;
+  } else if (rtb_Sum5 < -10.0) {
+    controlAction_Y.droneData.pitchRef = -10.0;
+  } else {
+    controlAction_Y.droneData.pitchRef = rtb_Sum5;
+  }
+
+  /* End of Saturate: '<S2>/Saturation' */
 
   /* Sum: '<S2>/Sum4' incorporates:
    *  Constant: '<Root>/Constant'
@@ -94,35 +131,57 @@ void controlAction_step(void)
    *  Sum: '<S2>/Sum'
    *  Sum: '<S2>/Sum1'
    */
-  rtb_XError = (0.0 - controlAction_U.posData.yAct) * rtb_cospsi - (0.0 -
-    controlAction_U.posData.xAct) * rtb_Filter;
+  rtb_Sum5 = (0.0 - controlAction_U.posData.yAct) * rtb_cospsi - (0.0 -
+    controlAction_U.posData.xAct) * rtb_sinpsi;
 
-  /* Gain: '<S5>/Filter Coefficient' incorporates:
-   *  DiscreteIntegrator: '<S5>/Filter'
-   *  Gain: '<S5>/Derivative Gain'
-   *  Sum: '<S5>/SumD'
+  /* SampleTimeMath: '<S5>/TSamp'
+   *
+   * About '<S5>/TSamp':
+   *  y = u * K where K = 1 / ( w * Ts )
    */
-  rtb_cospsi = (-20.0 * rtb_XError - controlAction_DW.Filter_DSTATE_p) * 100.0;
+  rtb_sinpsi = rtb_Sum5 * -2000.0;
 
-  /* MATLAB Function: '<Root>/MATLAB Function' incorporates:
-   *  Inport: '<Root>/sensorData'
+  /* Sum: '<S2>/Sum5' incorporates:
+   *  Gain: '<S2>/Gain2'
+   *  Sum: '<S5>/Diff'
+   *  UnitDelay: '<S5>/UD'
+   *
+   * Block description for '<S5>/Diff':
+   *
+   *  Add in CPU
+   *
+   * Block description for '<S5>/UD':
+   *
+   *  Store in Global RAM
+   */
+  rtb_Sum5 = -5.0 * rtb_Sum5 + (rtb_sinpsi - controlAction_DW.UD_DSTATE_e);
+
+  /* Saturate: '<S2>/Saturation1' */
+  if (rtb_Sum5 > 10.0) {
+    controlAction_Y.droneData.rollRef = 10.0;
+  } else if (rtb_Sum5 < -10.0) {
+    controlAction_Y.droneData.rollRef = -10.0;
+  } else {
+    controlAction_Y.droneData.rollRef = rtb_Sum5;
+  }
+
+  /* End of Saturate: '<S2>/Saturation1' */
+
+  /* BusCreator: '<Root>/droneData_MyDroneData_BusCre' incorporates:
+   *  Constant: '<Root>/Constant2'
+   */
+  controlAction_Y.droneData.thrustRef = 0.3;
+
+  /* Update for UnitDelay: '<S4>/UD'
+   *
+   * Block description for '<S4>/UD':
+   *
+   *  Store in Global RAM
    */
   /* MATLAB Function 'MATLAB Function': '<S1>:1' */
   /* '<S1>:1:2' psi = yaw*pi/180; */
-  rtb_YError = controlAction_U.sensorData.yawAct * 3.1415926535897931 / 180.0;
-
   /* '<S1>:1:3' theta = pitch*pi/180; */
-  rtb_Filter = controlAction_U.sensorData.pitchAct * 3.1415926535897931 / 180.0;
-
   /* '<S1>:1:4' phi = roll*pi/180; */
-  phi = controlAction_U.sensorData.rollAct * 3.1415926535897931 / 180.0;
-
-  /* Outport: '<Root>/droneData' incorporates:
-   *  Constant: '<S3>/Constant2'
-   *  Gain: '<S3>/Gain'
-   *  Inport: '<Root>/sensorData'
-   *  Sum: '<S3>/Sum'
-   */
   /* BBF > Inertial rotation matrix */
   /* '<S1>:1:6' Rb_o = [cos(theta)*cos(psi)                                cos(theta)*sin(psi)                             -sin(theta)  ;   %BBF > Inertial rotation matrix */
   /* '<S1>:1:7'         sin(phi)*sin(theta)*cos(psi)-cos(phi)*sin(psi)    sin(phi)*sin(theta)*sin(psi)+cos(phi)*cos(psi)  sin(phi)*cos(theta) ; */
@@ -130,91 +189,15 @@ void controlAction_step(void)
   /* '<S1>:1:9' Ro_b = Rb_o'; */
   /* '<S1>:1:11' cordi_g = Ro_b * [0 0 zrange_raw]'; */
   /* '<S1>:1:12' zrange = cordi_g(3,1) */
-  controlAction_Y.droneData.yawrateRef = (0.0 -
-    controlAction_U.sensorData.yawAct) * 0.5;
+  controlAction_DW.UD_DSTATE = rtb_TSamp;
 
-  /* Sum: '<S4>/Sum' incorporates:
-   *  DiscreteIntegrator: '<S4>/Integrator'
-   *  Gain: '<S4>/Proportional Gain'
+  /* Update for UnitDelay: '<S5>/UD'
+   *
+   * Block description for '<S5>/UD':
+   *
+   *  Store in Global RAM
    */
-  u0 = (-5.0 * rtb_XerrcospsiYerrsinpsi + controlAction_DW.Integrator_DSTATE) +
-    rtb_FilterCoefficient;
-
-  /* Saturate: '<S2>/Saturation' */
-  if (u0 > 30.0) {
-    /* Outport: '<Root>/droneData' */
-    controlAction_Y.droneData.pitchRef = 30.0;
-  } else if (u0 < -30.0) {
-    /* Outport: '<Root>/droneData' */
-    controlAction_Y.droneData.pitchRef = -30.0;
-  } else {
-    /* Outport: '<Root>/droneData' */
-    controlAction_Y.droneData.pitchRef = u0;
-  }
-
-  /* End of Saturate: '<S2>/Saturation' */
-
-  /* Sum: '<S5>/Sum' incorporates:
-   *  DiscreteIntegrator: '<S5>/Integrator'
-   *  Gain: '<S5>/Proportional Gain'
-   */
-  u0 = (-5.0 * rtb_XError + controlAction_DW.Integrator_DSTATE_p) + rtb_cospsi;
-
-  /* Saturate: '<S2>/Saturation1' */
-  if (u0 > 30.0) {
-    /* Outport: '<Root>/droneData' */
-    controlAction_Y.droneData.rollRef = 30.0;
-  } else if (u0 < -30.0) {
-    /* Outport: '<Root>/droneData' */
-    controlAction_Y.droneData.rollRef = -30.0;
-  } else {
-    /* Outport: '<Root>/droneData' */
-    controlAction_Y.droneData.rollRef = u0;
-  }
-
-  /* End of Saturate: '<S2>/Saturation1' */
-
-  /* MATLAB Function: '<Root>/MATLAB Function' incorporates:
-   *  Inport: '<Root>/sensorData'
-   */
-  tmp[0] = cos(rtb_Filter) * cos(rtb_YError);
-  tmp[1] = cos(rtb_Filter) * sin(rtb_YError);
-  tmp[2] = -sin(rtb_Filter);
-  tmp[3] = sin(phi) * sin(rtb_Filter) * cos(rtb_YError) - cos(phi) * sin
-    (rtb_YError);
-  tmp[4] = sin(phi) * sin(rtb_Filter) * sin(rtb_YError) + cos(phi) * cos
-    (rtb_YError);
-  tmp[5] = sin(phi) * cos(rtb_Filter);
-  tmp[6] = cos(phi) * sin(rtb_Filter) * cos(rtb_YError) + sin(phi) * sin
-    (rtb_YError);
-  tmp[7] = cos(phi) * sin(rtb_Filter) * sin(rtb_YError) - sin(phi) * cos
-    (rtb_YError);
-  tmp[8] = cos(phi) * cos(rtb_Filter);
-  for (i = 0; i < 3; i++) {
-    tmp_0[i] = tmp[i + 6] * controlAction_U.sensorData.baropAct + (tmp[i + 3] *
-      0.0 + tmp[i] * 0.0);
-  }
-
-  /* Outport: '<Root>/droneData' incorporates:
-   *  MATLAB Function: '<Root>/MATLAB Function'
-   */
-  controlAction_Y.droneData.thrustRef = tmp_0[2];
-
-  /* Update for DiscreteIntegrator: '<S4>/Integrator' incorporates:
-   *  Gain: '<S4>/Integral Gain'
-   */
-  controlAction_DW.Integrator_DSTATE += 0.0 * rtb_XerrcospsiYerrsinpsi * 0.01;
-
-  /* Update for DiscreteIntegrator: '<S4>/Filter' */
-  controlAction_DW.Filter_DSTATE += 0.01 * rtb_FilterCoefficient;
-
-  /* Update for DiscreteIntegrator: '<S5>/Integrator' incorporates:
-   *  Gain: '<S5>/Integral Gain'
-   */
-  controlAction_DW.Integrator_DSTATE_p += 0.0 * rtb_XError * 0.01;
-
-  /* Update for DiscreteIntegrator: '<S5>/Filter' */
-  controlAction_DW.Filter_DSTATE_p += 0.01 * rtb_cospsi;
+  controlAction_DW.UD_DSTATE_e = rtb_sinpsi;
 }
 
 /* Model initialize function */

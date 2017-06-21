@@ -126,13 +126,17 @@ void pixycam_PI_pulse()
 
             // Display received blocks //
             printf("Frame :\n");
+            printf("Number of detections: %d\n", blocks_copied);
             for(index = 0; index != blocks_copied; ++index) 
             {    
                 sprintf(buf, "CC block! (%d decimal) x: %d y: %d width: %d height: %d angle %d", blocks[index].signature, blocks[index].x, blocks[index].y, blocks[index].width, blocks[index].height, blocks[index].angle);
                 printf("  %s\n", buf);
                 x=blocks[index].x;
                 y=blocks[index].y;
-                pixycam_RI_processData(&x, &y);
+                if(blocks_copied<2)
+                {
+                    pixycam_RI_processData(&x, &y);
+                }
             }
             printf("starting drone comm:\n");
             printTime();

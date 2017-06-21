@@ -20,7 +20,8 @@ extern void socketclient_RI_controlAction(const asn1SccMyPositionData *,
                                           const asn1SccMySensorData *,
                                           asn1SccMyDroneData *);
 
-extern void socketclient_RI_getPosition(asn1SccMyPositionData *);
+extern void socketclient_RI_getPosition(const asn1SccMyReal *,
+                                        asn1SccMyPositionData *);
 
 #ifdef __cplusplus
 }

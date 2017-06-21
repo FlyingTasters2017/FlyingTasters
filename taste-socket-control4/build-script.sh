@@ -1,13 +1,11 @@
-#!/bin/bash -e
+#!/bin/bash
 
-# This script will build your TASTE system.
+# This script will build your TASTE system (by default with the C runtime).
 
 # You should not change this file as it was automatically generated.
 
-# If you need additional preprocessing, there are three hook files
-# that you can provide and that are called dring the build:
-# user_init_pre.sh, user_init_post.sh and user_init_last.sh
-# These files will never get overwritten by TASTE.'
+# If you need additional preprocessing, create a file named 'user_init_pre.sh'
+# and/or 'user_init_post.sh - They will never get overwritten.'
 
 # Inside these files you may set some environment variables:
 #    C_INCLUDE_PATH=/usr/include/xenomai/analogy/:${C_INCLUDE_PATH}
@@ -55,8 +53,8 @@ grep "version => \"2" "$DEPLOYMENTVIEW" >/dev/null && {
 
 SKELS="./"
 
-# Check if Dataview references existing files 
-taste-extract-asn-from-design.exe -i "$INTERFACEVIEW" -j /tmp/dv.asn
+# Update the data view with local paths
+taste-update-data-view
 
 cd "$SKELS" && rm -f socketclient.zip && zip socketclient socketclient/* && cd $OLDPWD
 
@@ -77,6 +75,12 @@ then
     ORCHESTRATOR_OPTIONS+=" -w ConcurrencyView.pro "
 fi
 
+if [ -f user_init_post.sh ]
+then
+    echo -e "${INFO} Executing user-defined post-init script"
+    source user_init_post.sh
+fi
+
 if [ ! -z "$USE_POHIC" ]
 then
     OUTPUTDIR=binary.c
@@ -86,12 +90,6 @@ then
     OUTPUTDIR=binary.ada
 else
     OUTPUTDIR=binary
-fi
-
-if [ -f user_init_post.sh ]
-then
-    echo -e "${INFO} Executing user-defined init script"
-    source user_init_post.sh
 fi
 
 cd "$CWD" && assert-builder-ocarina.py \
@@ -109,3 +107,10 @@ cd "$CWD" && assert-builder-ocarina.py \
 	--subC pixycam:"$SKELS"/pixycam.zip \
 	--subSIMULINK controller:"$SKELS"/controller.zip \
 	$ORCHESTRATOR_OPTIONS
+
+if [ -f user_init_last.sh ]
+then
+    echo -e "${INFO} Executing user-defined post-build script"
+    source user_init_last.sh
+fi
+

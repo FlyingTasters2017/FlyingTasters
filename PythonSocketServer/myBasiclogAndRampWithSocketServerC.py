@@ -114,13 +114,19 @@ class LoggingExample:
         # pitch = 0
         # roll = 0
         # yawrate = 0
-        self._cf.commander.send_zdistance_setpoint(0, 0, 0, 1)
+        self._cf.commander.send_zdistance_setpoint(roll, pitch, yawrate, thrust)
 
     def send_setpoint(self, roll=0, pitch=0, yawrate=0, thrust=0):
         # pitch = 0
         # roll = 0
         # yawrate = 0
         self._cf.commander.send_setpoint(roll, pitch, yawrate, thrust)
+
+    def send_hover_setpoint(self, vx =0, vy= 0, yawrate=0, zdistance=0):
+        # pitch = 0
+        # roll = 0
+        # yawrate = 0
+        self._cf.commander.send_hover_setpoint(vx, vy, yawrate, zdistance)
 
 
     def _sensorData_log_error(self, logconf, msg):
@@ -161,12 +167,31 @@ class LoggingExample:
         print("socket", self._socket)
         #sys.exit(3)
 
+
+
+
+
+
+
     def altHold(self):
         self._cf.param.set_value("flightmode.althold","1")
+
+def int32(x):
+    if x>0xFFFFFFFF:
+        #raise OverflowError
+        return 0xFFFFFFFF
+    if x>0x7FFFFFFF:
+        x=int(0x100000000-x)
+        if x<2147483648:
+            return -x
+        else:
+            return -2147483648
+    return x
 
 
 if __name__ == '__main__':
     """
+
     Create socket server, example https://docs.python.org/3.4/library/socket.html#socket-objects 
     """
     HOST = ''  # Symbolic name meaning all available interfaces
@@ -177,7 +202,7 @@ if __name__ == '__main__':
     # Initialize the low-level drivers (don't list the debug drivers)
     cflib.crtp.init_drivers(enable_debug_driver=False)
     #Insert correct Crazyflie URI
-    le1 = LoggingExample("radio://0/81/2M",socket= mySocket)
+    le1 = LoggingExample("radio://0/84/2M",socket= mySocket)
     #le2 = LoggingExample("radio://0/85/2M",socket = mySocket)
     list = [le1] #, le2] #,le3]
     #time.sleep(10)
@@ -221,9 +246,23 @@ if __name__ == '__main__':
             # print("raw data", socket_data)
             yawrate, pitch, roll, thrust, garbage = sample_d.split(' ')
             yawrate = socket.ntohl(int(yawrate) & 0xffffffff)
+            yawrate = int32(yawrate)
+            yawrate = float(yawrate)/1000
+
             pitch = socket.ntohl(int(pitch) & 0xffffffff)
+            pitch = int32(pitch)
+            pitch = float(pitch)/1000
+
             roll = socket.ntohl(int(roll) & 0xffffffff)
+            roll = int32(roll)
+            roll = float(roll)/1000
+
             thrust = socket.ntohl(int(thrust) & 0xffffffff)
+            thrust = float(thrust)/1000
+
+            vx = 0.17*pitch
+            vy = 0.17*roll
+            zref = thrust
             #
             print("yawrate data", yawrate)
             print("pitch data", pitch)
@@ -239,7 +278,8 @@ if __name__ == '__main__':
 
             if thrust > 0:
                 for le in list:
-                    le.send_zrange_setpoint(roll, pitch, yawrate, thrust)
+                     # le.send_hover_setpoint(vx,vy,yawrate,zref)
+                    le.send_zrange_setpoint(roll,pitch,yawrate,zref)
     conn.close()
         # file.close()
     sys.exit(2)

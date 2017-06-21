@@ -19,6 +19,8 @@ FEATURES
   sensorData : OUT PARAMETER DataView::MySensorData {
     Taste::encoding => NATIVE;
   };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_readStabilizerSendThrust;
 
 SUBPROGRAM IMPLEMENTATION PI_readStabilizerSendThrust.others
@@ -45,6 +47,9 @@ FEATURES
   currentPosition : OUT PARAMETER DataView::MyPositionData {
     Taste::encoding => NATIVE;
   };
+  currentHeight : IN PARAMETER DataView::MyReal {
+    Taste::encoding => NATIVE;
+  };
 END RI_getPosition;
 
 SUBPROGRAM IMPLEMENTATION RI_getPosition.others
@@ -66,6 +71,8 @@ FEATURES
   y : IN PARAMETER DataView::T_UInt32 {
     Taste::encoding => NATIVE;
   };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_processData;
 
 SUBPROGRAM IMPLEMENTATION PI_processData.others
@@ -74,6 +81,9 @@ END PI_processData.others;
 SUBPROGRAM PI_getPosition
 FEATURES
   currentPosition : OUT PARAMETER DataView::MyPositionData {
+    Taste::encoding => NATIVE;
+  };
+  currentHeight : IN PARAMETER DataView::MyReal {
     Taste::encoding => NATIVE;
   };
 END PI_getPosition;
@@ -194,6 +204,8 @@ FEATURES
   droneData : OUT PARAMETER DataView::MyDroneData {
     Taste::encoding => NATIVE;
   };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_controlAction;
 
 SUBPROGRAM IMPLEMENTATION PI_controlAction.others
@@ -219,6 +231,7 @@ FEATURES
   PI_readStabilizerSendThrust : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::socketClient::PI_readStabilizerSendThrust.others {
     Taste::coordinates => "1858 254";
     Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "readStabilizerSendThrust";
   };
@@ -252,12 +265,14 @@ FEATURES
   PI_processData : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::PixyProcess::PI_processData.others {
     Taste::coordinates => "1865 1663";
     Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "processData";
   };
   PI_getPosition : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::PixyProcess::PI_getPosition.others {
     Taste::coordinates => "2083 1502";
     Taste::RCMoperationKind => unprotected;
+    Taste::Deadline => 0 ms;
     Taste::InterfaceName => "getPosition";
   };
 PROPERTIES
@@ -375,6 +390,8 @@ FEATURES
   PI_controlAction : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::controller::PI_controlAction.others {
     Taste::coordinates => "2508 903";
     Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
     Taste::InterfaceName => "controlAction";
   };
 PROPERTIES
