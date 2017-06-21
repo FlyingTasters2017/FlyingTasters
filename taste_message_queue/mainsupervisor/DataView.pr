@@ -1,0 +1,106 @@
+Datamodel DEFINITIONS ::= BEGIN
+
+-- ./dataview-uniq.asn
+MyInteger ::= T_UInt8
+
+-- ./dataview-uniq.asn
+MyReal ::= REAL (0.00000000000000000000E+000 .. 1.00000000000000000000E+003)
+
+-- ./dataview-uniq.asn
+MyBool ::= BOOLEAN
+
+-- ./dataview-uniq.asn
+MyEnum ::= ENUMERATED {
+    hello(0),
+    world(1),
+    howareyou(2)
+}
+
+-- ./dataview-uniq.asn
+MySeq ::= SEQUENCE {
+    input_data	MyInteger,
+    output_data	MyInteger,
+    validity	MySeq_validity
+}
+
+-- ./dataview-uniq.asn
+MyChoice ::= CHOICE {
+    a	BOOLEAN,
+    b	MySeq
+}
+
+-- ./dataview-uniq.asn
+MySeqOf ::= SEQUENCE (SIZE (2 .. 2)) OF MyEnum
+
+-- ./dataview-uniq.asn
+MyOctStr ::= OCTET STRING (SIZE (3 .. 3))
+
+-- ./dataview-uniq.asn
+ANGLE ::= REAL (-3.60000000000000000000E+002 .. 3.60000000000000000000E+002)
+
+-- ./dataview-uniq.asn
+RATE ::= REAL (-1.00000000000000000000E+005 .. 1.00000000000000000000E+005)
+
+-- ./dataview-uniq.asn
+T_UInt16 ::= INTEGER (0 .. 65535)
+
+-- ./dataview-uniq.asn
+GYROSCOPE ::= REAL (-1.00000000000000000000E+005 .. 1.00000000000000000000E+005)
+
+-- ./dataview-uniq.asn
+ACCELERATION ::= REAL (-1.60000000000000000000E+001 .. 1.60000000000000000000E+001)
+
+-- ./dataview-uniq.asn
+HEIGHT ::= INTEGER (0 .. 8191)
+
+-- ./dataview-uniq.asn
+GYRO_SEQ ::= SEQUENCE {
+    x	GYROSCOPE,
+    y	GYROSCOPE,
+    z	GYROSCOPE
+}
+
+-- ./dataview-uniq.asn
+ACC_SEQ ::= SEQUENCE {
+    x	ACCELERATION,
+    y	ACCELERATION,
+    z	ACCELERATION
+}
+
+-- ./dataview-uniq.asn
+TM_T ::= SEQUENCE {
+    gyro	GYRO_SEQ,
+    acc	ACC_SEQ,
+    z	HEIGHT
+}
+
+-- ./dataview-uniq.asn
+TC_T ::= SEQUENCE {
+    roll	ANGLE,
+    pitch	ANGLE,
+    yaw	RATE,
+    thrust	T_UInt16
+}
+
+-- ./dataview-uniq.asn
+MySeq_validity ::= ENUMERATED {
+    valid(0),
+    invalid(1)
+}
+
+-- ./dataview-uniq.asn
+T_Int32 ::= INTEGER (-2147483648 .. 2147483647)
+
+-- ./dataview-uniq.asn
+T_UInt32 ::= INTEGER (0 .. 4294967295)
+
+-- ./dataview-uniq.asn
+T_Int8 ::= INTEGER (-128 .. 127)
+
+-- ./dataview-uniq.asn
+T_UInt8 ::= INTEGER (0 .. 255)
+
+-- ./dataview-uniq.asn
+T_Boolean ::= BOOLEAN
+
+END

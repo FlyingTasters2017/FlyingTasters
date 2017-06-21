@@ -1,0 +1,56 @@
+/* CIF PROCESS (302, 134), (150, 75) */
+process mainsupervisor;
+    /* CIF TEXT (1234, 36), (272, 140) */
+    -- Text area for declarations and comments
+    
+    dcl tc_data TC_T;
+    dcl tm_data TM_T;
+    /* CIF ENDTEXT */
+    /* CIF START (120, 56), (194, 35) */
+    START;
+        /* CIF PROCEDURECALL (139, 111), (156, 35) */
+        call writeln('SDL started');
+        /* CIF NEXTSTATE (183, 161), (67, 28) */
+        NEXTSTATE Wait;
+    /* CIF state (0, 0), (70, 35) */
+    state Wait;
+    endstate;
+    /* CIF state (661, 86), (197, 35) */
+    state Running;
+        /* CIF input (488, 164), (124, 35) */
+        input takeoff(tc_data);
+            /* CIF PROCEDURECALL (464, 219), (171, 35) */
+            call TC_from_TASTE(tc_data);
+            /* CIF NEXTSTATE (515, 274), (70, 35) */
+            NEXTSTATE Running;
+        /* CIF input (921, 165), (70, 35) */
+        input pulse;
+            /* CIF PROCEDURECALL (870, 222), (171, 35) */
+            call TC_from_TASTE(tc_data);
+            /* CIF NEXTSTATE (921, 277), (70, 35) */
+            NEXTSTATE Running;
+        /* CIF input (675, 164), (157, 35) */
+        input TM_from_CF(tm_data);
+            /* CIF output (676, 219), (154, 35) */
+            output displayData(tm_data);
+            /* CIF NEXTSTATE (718, 274), (70, 35) */
+            NEXTSTATE Running;
+    endstate;
+    /* CIF state (183, 161), (67, 28) */
+    state Wait;
+        /* CIF input (85, 209), (70, 35) */
+        input pulse;
+            /* CIF PROCEDURECALL (24, 264), (191, 35) */
+            call writeln('waithingg a signal');
+            /* CIF NEXTSTATE (85, 314), (70, 35) */
+            NEXTSTATE Wait;
+        /* CIF input (260, 209), (124, 35) */
+        input takeoff(tc_data);
+            /* CIF PROCEDURECALL (236, 264), (171, 35) */
+            call TC_from_TASTE(tc_data);
+            /* CIF PROCEDURECALL (225, 314), (193, 35) */
+            call writeln('Takeoff data send');
+            /* CIF NEXTSTATE (287, 364), (70, 35) */
+            NEXTSTATE Running;
+    endstate;
+endprocess mainsupervisor;
