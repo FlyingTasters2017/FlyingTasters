@@ -195,14 +195,14 @@ if __name__ == '__main__':
     Create socket server, example https://docs.python.org/3.4/library/socket.html#socket-objects 
     """
     HOST = ''  # Symbolic name meaning all available interfaces
-    PORT = 50007  # Arbitrary non-privileged port
+    PORT = 50012  # Arbitrary non-privileged port
     mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #Create socket object
     mySocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) #re-use same port
     mySocket.bind((HOST, PORT))
     # Initialize the low-level drivers (don't list the debug drivers)
     cflib.crtp.init_drivers(enable_debug_driver=False)
     #Insert correct Crazyflie URI
-    le1 = LoggingExample("radio://0/84/2M",socket= mySocket)
+    le1 = LoggingExample("radio://0/82/2M",socket= mySocket)
     #le2 = LoggingExample("radio://0/85/2M",socket = mySocket)
     list = [le1] #, le2] #,le3]
     #time.sleep(10)
@@ -279,7 +279,7 @@ if __name__ == '__main__':
             if thrust > 0:
                 for le in list:
                      # le.send_hover_setpoint(vx,vy,yawrate,zref)
-                    le.send_zrange_setpoint(roll,pitch,yawrate,zref)
+                    le.send_setpoint(roll,pitch,yawrate,thrust)
     conn.close()
         # file.close()
     sys.exit(2)
