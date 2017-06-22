@@ -142,12 +142,20 @@ FEATURES
   startvalue : IN PARAMETER DataView::MyInteger {
     Taste::encoding => UPER;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
 END PI_pulse;
 
 SUBPROGRAM IMPLEMENTATION PI_pulse.others
 END PI_pulse.others;
+
+SUBPROGRAM PI_startStop
+FEATURES
+  ssvalue : IN PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+END PI_startStop;
+
+SUBPROGRAM IMPLEMENTATION PI_startStop.others
+END PI_startStop.others;
 
 SUBPROGRAM RI_readStabilizerSendThrust
 FEATURES
@@ -191,16 +199,6 @@ END RI_processData;
 SUBPROGRAM IMPLEMENTATION RI_processData.others
 END RI_processData.others;
 
-SUBPROGRAM PI_startStop
-FEATURES
-  ssvalue : IN PARAMETER DataView::MyInteger {
-    Taste::encoding => UPER;
-  };
-END PI_startStop;
-
-SUBPROGRAM IMPLEMENTATION PI_startStop.others
-END PI_startStop.others;
-
 END interfaceview::FV::Pixycam;
 
 PACKAGE interfaceview::FV::controller
@@ -235,16 +233,6 @@ PUBLIC
 WITH Taste;
 WITH DataView;
 WITH TASTE_IV_Properties;
-SUBPROGRAM RI_pulse
-FEATURES
-  startvalue : IN PARAMETER DataView::MyInteger {
-    Taste::encoding => UPER;
-  };
-END RI_pulse;
-
-SUBPROGRAM IMPLEMENTATION RI_pulse.others
-END RI_pulse.others;
-
 SUBPROGRAM RI_onOff
 FEATURES
   onoffvalue : IN PARAMETER DataView::MyInteger {
@@ -255,6 +243,16 @@ END RI_onOff;
 SUBPROGRAM IMPLEMENTATION RI_onOff.others
 END RI_onOff.others;
 
+SUBPROGRAM RI_dopulse
+FEATURES
+  dopulsevalue : IN PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+END RI_dopulse;
+
+SUBPROGRAM IMPLEMENTATION RI_dopulse.others
+END RI_dopulse.others;
+
 END interfaceview::FV::GUI;
 
 PACKAGE interfaceview::FV::Interruptor
@@ -263,16 +261,6 @@ PUBLIC
 WITH Taste;
 WITH DataView;
 WITH TASTE_IV_Properties;
-SUBPROGRAM RI_startStop
-FEATURES
-  ssvalue : IN PARAMETER DataView::MyInteger {
-    Taste::encoding => UPER;
-  };
-END RI_startStop;
-
-SUBPROGRAM IMPLEMENTATION RI_startStop.others
-END RI_startStop.others;
-
 SUBPROGRAM PI_onOff
 FEATURES
   onoffvalue : IN PARAMETER DataView::MyInteger {
@@ -284,6 +272,38 @@ END PI_onOff;
 
 SUBPROGRAM IMPLEMENTATION PI_onOff.others
 END PI_onOff.others;
+
+SUBPROGRAM RI_startStop
+FEATURES
+  ssvalue : IN PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+END RI_startStop;
+
+SUBPROGRAM IMPLEMENTATION RI_startStop.others
+END RI_startStop.others;
+
+SUBPROGRAM RI_pulse
+FEATURES
+  startvalue : IN PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+END RI_pulse;
+
+SUBPROGRAM IMPLEMENTATION RI_pulse.others
+END RI_pulse.others;
+
+SUBPROGRAM PI_dopulse
+FEATURES
+  dopulsevalue : IN PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_dopulse;
+
+SUBPROGRAM IMPLEMENTATION PI_dopulse.others
+END PI_dopulse.others;
 
 END interfaceview::FV::Interruptor;
 
@@ -346,7 +366,7 @@ FEATURES
     Taste::InterfaceName => "processData";
   };
   PI_getPosition : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::PixyProcess::PI_getPosition.others {
-    Taste::coordinates => "1577 1693";
+    Taste::coordinates => "1577 1696";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -372,7 +392,7 @@ END PixyProcess.others;
 SYSTEM cClient
 FEATURES
   PI_takeoff : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::cClient::PI_takeoff.others {
-    Taste::coordinates => "267 1730";
+    Taste::coordinates => "267 1729";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -394,7 +414,7 @@ END cClient.others;
 SYSTEM Timer
 FEATURES
   PI_printTime : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Timer::PI_printTime.others {
-    Taste::coordinates => "641 1733";
+    Taste::coordinates => "641 1734";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -416,14 +436,19 @@ END Timer.others;
 SYSTEM Pixycam
 FEATURES
   PI_pulse : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Pixycam::PI_pulse.others {
-    Taste::coordinates => "280 1084";
-    Taste::RCMoperationKind => sporadic;
-    Taste::RCMperiod => 60000 ms;
+    Taste::coordinates => "280 1085";
+    Taste::RCMoperationKind => protected;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "pulse";
   };
+  PI_startStop : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Pixycam::PI_startStop.others {
+    Taste::coordinates => "729 1085";
+    Taste::RCMoperationKind => protected;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "startStop";
+  };
   RI_readStabilizerSendThrust : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::socketClient::PI_readStabilizerSendThrust.others {
-    Taste::coordinates => "937 1145";
+    Taste::coordinates => "938 1145";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "readStabilizerSendThrust";
     Taste::labelInheritance => "true";
@@ -441,15 +466,10 @@ FEATURES
     Taste::labelInheritance => "true";
   };
   RI_processData : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::PixyProcess::PI_processData.others {
-    Taste::coordinates => "937 1361";
+    Taste::coordinates => "938 1361";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "processData";
     Taste::labelInheritance => "true";
-  };
-  PI_startStop : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Pixycam::PI_startStop.others {
-    Taste::coordinates => "729 1084";
-    Taste::RCMoperationKind => protected;
-    Taste::InterfaceName => "startStop";
   };
 PROPERTIES
   Source_Language => (C);
@@ -495,16 +515,16 @@ END controller.others;
 
 SYSTEM GUI
 FEATURES
-  RI_pulse : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Pixycam::PI_pulse.others {
-    Taste::coordinates => "322 576";
-    Taste::RCMoperationKind => any;
-    Taste::InterfaceName => "pulse";
-    Taste::labelInheritance => "true";
-  };
   RI_onOff : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Interruptor::PI_onOff.others {
-    Taste::coordinates => "447 576";
+    Taste::coordinates => "449 576";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "onOff";
+    Taste::labelInheritance => "true";
+  };
+  RI_dopulse : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Interruptor::PI_dopulse.others {
+    Taste::coordinates => "351 576";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "dopulse";
     Taste::labelInheritance => "true";
   };
 PROPERTIES
@@ -516,16 +536,29 @@ END GUI.others;
 
 SYSTEM Interruptor
 FEATURES
+  PI_onOff : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Interruptor::PI_onOff.others {
+    Taste::coordinates => "499 756";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "onOff";
+  };
   RI_startStop : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Pixycam::PI_startStop.others {
-    Taste::coordinates => "547 884";
+    Taste::coordinates => "527 912";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "startStop";
     Taste::labelInheritance => "true";
   };
-  PI_onOff : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Interruptor::PI_onOff.others {
-    Taste::coordinates => "615 729";
+  RI_pulse : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Pixycam::PI_pulse.others {
+    Taste::coordinates => "355 912";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "pulse";
+    Taste::labelInheritance => "true";
+  };
+  PI_dopulse : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Interruptor::PI_dopulse.others {
+    Taste::coordinates => "351 756";
     Taste::RCMoperationKind => sporadic;
-    Taste::InterfaceName => "onOff";
+    Taste::InterfaceName => "dopulse";
   };
 PROPERTIES
   Source_Language => (SDL);
@@ -536,8 +569,12 @@ SUBCOMPONENTS
   onOff_impl : SUBPROGRAM interfaceview::FV::Interruptor::PI_onOff.others {
     Compute_Execution_Time => 0 ms .. 0 ms;
   };
+  dopulse_impl : SUBPROGRAM interfaceview::FV::Interruptor::PI_dopulse.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
 CONNECTIONS
   OpToPICnx_onOff_impl : SUBPROGRAM ACCESS onOff_impl -> PI_onOff;
+  OpToPICnx_dopulse_impl : SUBPROGRAM ACCESS dopulse_impl -> PI_dopulse;
 END Interruptor.others;
 
 SYSTEM interfaceview
@@ -564,10 +601,10 @@ SUBCOMPONENTS
     Taste::coordinates => "2353 1650 2809 2065";
   };
   GUI : SYSTEM interfaceview::IV::GUI.others {
-    Taste::coordinates => "147 280 599 576";
+    Taste::coordinates => "149 280 601 576";
   };
   Interruptor : SYSTEM interfaceview::IV::Interruptor.others {
-    Taste::coordinates => "477 729 712 885";
+    Taste::coordinates => "271 756 596 912";
   };
 CONNECTIONS
   socketClient_readStabilizerSendThrust_Pixycam_readStabilizerSendThrust : SUBPROGRAM ACCESS socketClient.PI_readStabilizerSendThrust -> Pixycam.RI_readStabilizerSendThrust {
@@ -588,14 +625,17 @@ CONNECTIONS
   Timer_printTime_Pixycam_printTime : SUBPROGRAM ACCESS Timer.PI_printTime -> Pixycam.RI_printTime {
     Taste::coordinates => "625 1462 625 1570 641 1570 641 1733";
   };
-  Pixycam_pulse_GUI_pulse : SUBPROGRAM ACCESS Pixycam.PI_pulse -> GUI.RI_pulse {
-    Taste::coordinates => "322 576 322 773 280 773 280 1084";
+  Pixycam_pulse_Interruptor_pulse : SUBPROGRAM ACCESS Pixycam.PI_pulse -> Interruptor.RI_pulse {
+    Taste::coordinates => "355 912 355 985 280 985 280 1085";
   };
   Pixycam_startStop_Interruptor_startStop : SUBPROGRAM ACCESS Pixycam.PI_startStop -> Interruptor.RI_startStop {
-    Taste::coordinates => "547 884 547 932 729 932 729 1084";
+    Taste::coordinates => "527 912 527 986 729 986 729 1084";
   };
   Interruptor_onOff_GUI_onOff : SUBPROGRAM ACCESS Interruptor.PI_onOff -> GUI.RI_onOff {
-    Taste::coordinates => "447 576 447 664 615 664 615 729";
+    Taste::coordinates => "449 576 449 664 499 664 499 756";
+  };
+  Interruptor_dopulse_GUI_dopulse : SUBPROGRAM ACCESS Interruptor.PI_dopulse -> GUI.RI_dopulse {
+    Taste::coordinates => "351 576 351 666 351 666 351 756";
   };
 END interfaceview.others;
 

@@ -4,6 +4,7 @@ process interruptor;
     -- Text area for declarations and comments
     
     dcl onoffvalue MyInteger;
+    dcl pulsevalue MyInteger;
     /* CIF ENDTEXT */
     /* CIF START (320, 10), (70, 35) */
     START;
@@ -14,11 +15,17 @@ process interruptor;
     endstate;
     /* CIF state (320, 60), (70, 35) */
     state Wait;
-        /* CIF input (289, 115), (132, 35) */
+        /* CIF input (216, 115), (132, 35) */
         input onOff(onoffvalue);
-            /* CIF PROCEDURECALL (306, 170), (97, 35) */
+            /* CIF PROCEDURECALL (233, 170), (97, 35) */
             call startStop(0);
-            /* CIF NEXTSTATE (320, 220), (70, 35) */
+            /* CIF NEXTSTATE (247, 220), (70, 35) */
+            NEXTSTATE wait;
+        /* CIF input (358, 115), (146, 35) */
+        input dopulse(pulsevalue);
+            /* CIF PROCEDURECALL (366, 170), (130, 35) */
+            call pulse(pulsevalue);
+            /* CIF NEXTSTATE (396, 225), (70, 35) */
             NEXTSTATE wait;
     endstate;
 endprocess interruptor;

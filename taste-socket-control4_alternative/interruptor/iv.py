@@ -329,7 +329,7 @@ functions['timer']['interfaces']['printTime']['paramsOutOrdered'] = []
 
 functions['pixycam'] = {
     'name_with_case' : 'Pixycam',
-    'runtime_nature': thread,
+    'runtime_nature': passive,
     'language': C,
     'zipfile': '',
     'interfaces': {},
@@ -342,9 +342,9 @@ functions['pixycam']['interfaces']['pulse'] = {
     'direction': PI,
     'in': {},
     'out': {},
-    'synchronism': asynch,
-    'rcm': sporadic,
-    'period': 60000,
+    'synchronism': synch,
+    'rcm': protected,
+    'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': 'ms',
     'wcet_high': 0,
@@ -366,6 +366,39 @@ functions['pixycam']['interfaces']['pulse']['in']['startvalue'] = {
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'pulse',
+    'param_direction': param_in
+}
+
+functions['pixycam']['interfaces']['startStop'] = {
+    'port_name': 'startStop',
+    'parent_fv': 'pixycam',
+    'direction': PI,
+    'in': {},
+    'out': {},
+    'synchronism': synch,
+    'rcm': protected,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': 'ms',
+    'wcet_high': 0,
+    'wcet_high_unit': 'ms',
+    'distant_fv': '',
+    'calling_threads': {},
+    'distant_name': '',
+    'queue_size': 1
+}
+
+functions['pixycam']['interfaces']['startStop']['paramsInOrdered'] = ['ssvalue']
+
+functions['pixycam']['interfaces']['startStop']['paramsOutOrdered'] = []
+
+functions['pixycam']['interfaces']['startStop']['in']['ssvalue'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'startStop',
     'param_direction': param_in
 }
 
@@ -511,39 +544,6 @@ functions['pixycam']['interfaces']['processData']['in']['y'] = {
     'param_direction': param_in
 }
 
-functions['pixycam']['interfaces']['startStop'] = {
-    'port_name': 'startStop',
-    'parent_fv': 'pixycam',
-    'direction': PI,
-    'in': {},
-    'out': {},
-    'synchronism': synch,
-    'rcm': protected,
-    'period': 0,
-    'wcet_low': 0,
-    'wcet_low_unit': 'ms',
-    'wcet_high': 0,
-    'wcet_high_unit': 'ms',
-    'distant_fv': '',
-    'calling_threads': {},
-    'distant_name': '',
-    'queue_size': 1
-}
-
-functions['pixycam']['interfaces']['startStop']['paramsInOrdered'] = ['ssvalue']
-
-functions['pixycam']['interfaces']['startStop']['paramsOutOrdered'] = []
-
-functions['pixycam']['interfaces']['startStop']['in']['ssvalue'] = {
-    'type': 'MyInteger',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': integer,
-    'asn1_filename': './dataview-uniq.asn',
-    'encoding': UPER,
-    'interface': 'startStop',
-    'param_direction': param_in
-}
-
 functions['controller'] = {
     'name_with_case' : 'controller',
     'runtime_nature': passive,
@@ -615,39 +615,6 @@ functions['gui'] = {
     'functional_states' : {}
 }
 
-functions['gui']['interfaces']['pulse'] = {
-    'port_name': 'pulse',
-    'parent_fv': 'gui',
-    'direction': RI,
-    'in': {},
-    'out': {},
-    'synchronism': asynch,
-    'rcm': sporadic,
-    'period': 0,
-    'wcet_low': 0,
-    'wcet_low_unit': '',
-    'wcet_high': 0,
-    'wcet_high_unit': '',
-    'distant_fv': 'pixycam',
-    'calling_threads': {},
-    'distant_name': 'pulse',
-    'queue_size': 1
-}
-
-functions['gui']['interfaces']['pulse']['paramsInOrdered'] = ['startvalue']
-
-functions['gui']['interfaces']['pulse']['paramsOutOrdered'] = []
-
-functions['gui']['interfaces']['pulse']['in']['startvalue'] = {
-    'type': 'MyInteger',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': integer,
-    'asn1_filename': './dataview-uniq.asn',
-    'encoding': UPER,
-    'interface': 'pulse',
-    'param_direction': param_in
-}
-
 functions['gui']['interfaces']['onOff'] = {
     'port_name': 'onOff',
     'parent_fv': 'gui',
@@ -681,6 +648,39 @@ functions['gui']['interfaces']['onOff']['in']['onoffvalue'] = {
     'param_direction': param_in
 }
 
+functions['gui']['interfaces']['dopulse'] = {
+    'port_name': 'dopulse',
+    'parent_fv': 'gui',
+    'direction': RI,
+    'in': {},
+    'out': {},
+    'synchronism': asynch,
+    'rcm': sporadic,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': '',
+    'wcet_high': 0,
+    'wcet_high_unit': '',
+    'distant_fv': 'interruptor',
+    'calling_threads': {},
+    'distant_name': 'dopulse',
+    'queue_size': 1
+}
+
+functions['gui']['interfaces']['dopulse']['paramsInOrdered'] = ['dopulsevalue']
+
+functions['gui']['interfaces']['dopulse']['paramsOutOrdered'] = []
+
+functions['gui']['interfaces']['dopulse']['in']['dopulsevalue'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'dopulse',
+    'param_direction': param_in
+}
+
 functions['interruptor'] = {
     'name_with_case' : 'Interruptor',
     'runtime_nature': thread,
@@ -688,6 +688,39 @@ functions['interruptor'] = {
     'zipfile': '',
     'interfaces': {},
     'functional_states' : {}
+}
+
+functions['interruptor']['interfaces']['onOff'] = {
+    'port_name': 'onOff',
+    'parent_fv': 'interruptor',
+    'direction': PI,
+    'in': {},
+    'out': {},
+    'synchronism': asynch,
+    'rcm': sporadic,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': 'ms',
+    'wcet_high': 0,
+    'wcet_high_unit': 'ms',
+    'distant_fv': '',
+    'calling_threads': {},
+    'distant_name': '',
+    'queue_size': 1
+}
+
+functions['interruptor']['interfaces']['onOff']['paramsInOrdered'] = ['onoffvalue']
+
+functions['interruptor']['interfaces']['onOff']['paramsOutOrdered'] = []
+
+functions['interruptor']['interfaces']['onOff']['in']['onoffvalue'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'onOff',
+    'param_direction': param_in
 }
 
 functions['interruptor']['interfaces']['startStop'] = {
@@ -723,8 +756,41 @@ functions['interruptor']['interfaces']['startStop']['in']['ssvalue'] = {
     'param_direction': param_in
 }
 
-functions['interruptor']['interfaces']['onOff'] = {
-    'port_name': 'onOff',
+functions['interruptor']['interfaces']['pulse'] = {
+    'port_name': 'pulse',
+    'parent_fv': 'interruptor',
+    'direction': RI,
+    'in': {},
+    'out': {},
+    'synchronism': synch,
+    'rcm': protected,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': '',
+    'wcet_high': 0,
+    'wcet_high_unit': '',
+    'distant_fv': 'pixycam',
+    'calling_threads': {},
+    'distant_name': 'pulse',
+    'queue_size': 1
+}
+
+functions['interruptor']['interfaces']['pulse']['paramsInOrdered'] = ['startvalue']
+
+functions['interruptor']['interfaces']['pulse']['paramsOutOrdered'] = []
+
+functions['interruptor']['interfaces']['pulse']['in']['startvalue'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'pulse',
+    'param_direction': param_in
+}
+
+functions['interruptor']['interfaces']['dopulse'] = {
+    'port_name': 'dopulse',
     'parent_fv': 'interruptor',
     'direction': PI,
     'in': {},
@@ -742,16 +808,16 @@ functions['interruptor']['interfaces']['onOff'] = {
     'queue_size': 1
 }
 
-functions['interruptor']['interfaces']['onOff']['paramsInOrdered'] = ['onoffvalue']
+functions['interruptor']['interfaces']['dopulse']['paramsInOrdered'] = ['dopulsevalue']
 
-functions['interruptor']['interfaces']['onOff']['paramsOutOrdered'] = []
+functions['interruptor']['interfaces']['dopulse']['paramsOutOrdered'] = []
 
-functions['interruptor']['interfaces']['onOff']['in']['onoffvalue'] = {
+functions['interruptor']['interfaces']['dopulse']['in']['dopulsevalue'] = {
     'type': 'MyInteger',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': integer,
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
-    'interface': 'onOff',
+    'interface': 'dopulse',
     'param_direction': param_in
 }

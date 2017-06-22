@@ -15,6 +15,8 @@ void pixycam_startup();
 
 void pixycam_PI_pulse(const asn1SccMyInteger *);
 
+void pixycam_PI_startStop(const asn1SccMyInteger *);
+
 extern void pixycam_RI_readStabilizerSendThrust(const asn1SccMyDroneData *,
                                                 asn1SccMySensorData *);
 
@@ -24,8 +26,6 @@ extern void pixycam_RI_printTime();
 
 extern void pixycam_RI_processData(const asn1SccT_UInt32 *,
                                    const asn1SccT_UInt32 *);
-
-void pixycam_PI_startStop(const asn1SccMyInteger *);
 
 #ifdef __cplusplus
 }
