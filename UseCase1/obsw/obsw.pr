@@ -1,4 +1,4 @@
-/* CIF PROCESS (122, 150), (406, 219) */
+/* CIF PROCESS (122, 149), (406, 219) */
 process obsw;
     /* CIF TEXT (263, 61), (395, 140) */
     -- Text area for declarations and comments
@@ -19,19 +19,19 @@ process obsw;
     state Runing;
         /* CIF input (1121, 148), (70, 35) */
         input pulse;
-            /* CIF PROCEDURECALL (1016, 203), (279, 35) */
+            /* CIF PROCEDURECALL (1019, 203), (273, 38) */
             call GetTrajectory(i,Height,ReferenceHeight);
-            /* CIF PROCEDURECALL (942, 253), (428, 35) */
+            /* CIF PROCEDURECALL (942, 259), (428, 35) */
             call Compute_Force(ReferenceHeight,HeightVelocity,Height,Force);
-            /* CIF PROCEDURECALL (1019, 308), (273, 35) */
+            /* CIF PROCEDURECALL (1019, 314), (273, 35) */
             call Response(Force,HeightVelocity,Height);
-            /* CIF output (1085, 368), (142, 35) */
+            /* CIF output (1085, 374), (142, 35) */
             output GetHeight(Height);
-            /* CIF output (1062, 423), (187, 35) */
+            /* CIF output (1062, 429), (187, 35) */
             output GetRef(ReferenceHeight);
-            /* CIF task (1083, 478), (145, 35) */
+            /* CIF task (1083, 484), (145, 35) */
             task i := (i+1) mod 255;
-            /* CIF NEXTSTATE (1121, 528), (70, 35) */
+            /* CIF NEXTSTATE (1121, 534), (70, 35) */
             NEXTSTATE Runing;
         /* CIF input (1374, 148), (189, 35) */
         input Takeoff(ReferenceHeight);
