@@ -1,0 +1,21 @@
+/* CIF PROCESS (250, 150), (150, 75) */
+process interruptor;
+    /* CIF START (320, 10), (70, 35) */
+    START;
+        /* CIF NEXTSTATE (320, 60), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (450, 10), (70, 35) */
+    state Wait;
+    endstate;
+    /* CIF state (320, 60), (70, 35) */
+    state Wait;
+        /* CIF input (320, 115), (70, 35) */
+        input onOff;
+            /* CIF output (320, 170), (70, 35) */
+            output ;
+            /* CIF task (320, 225), (70, 35) */
+            task star;
+            /* CIF NEXTSTATE (320, 275), (70, 35) */
+            NEXTSTATE wait;
+    endstate;
+endprocess interruptor;

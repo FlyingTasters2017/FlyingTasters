@@ -1,0 +1,28 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM interruptor;
+
+	PROCEDURE startStop COMMENT '#c_predef';
+		FPAR
+			IN ssvalue MyInteger;
+ 	EXTERNAL;
+
+	/* CIF Keep Specific Geode PARAMNAMES onoffvalue */
+	SIGNAL onOff (MyInteger);
+
+	CHANNEL c
+		FROM ENV TO interruptor WITH onOff;
+	ENDCHANNEL;
+
+	BLOCK interruptor;
+
+		SIGNALROUTE r
+			FROM ENV TO interruptor WITH onOff;
+
+		CONNECT c and r;
+
+		PROCESS interruptor REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;
