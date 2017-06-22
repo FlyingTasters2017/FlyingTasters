@@ -57,6 +57,10 @@ SUBCOMPONENTS
     Taste::coordinates => "1928 1267 2267 1472";
     Taste::FunctionName => "controller";
   };
+  IV_trajectoryGen : SYSTEM interfaceview::IV::trajectoryGen.others {
+    Taste::coordinates => "2088 1000 2272 1195";
+    Taste::FunctionName => "trajectoryGen";
+  };
   x86_partition : PROCESS deploymentview::DV::Node1::x86_partition.others {
     Taste::coordinates => "675 821 2367 1708";
     Deployment::Port_Number => 0;
@@ -71,6 +75,7 @@ PROPERTIES
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_cClient;
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Timer;
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_controller;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_trajectoryGen;
   Actual_Processor_Binding => (reference (x86_linux32)) APPLIES TO x86_partition;
 END Node1.others;
 
@@ -92,4 +97,3 @@ PROPERTIES
   Taste::HWLibraries => ("../../tool-inst/share/ocarina/AADLv2/ocarina_components.aadl");
 END deploymentview::DV;
 
--- copied aadl libraries

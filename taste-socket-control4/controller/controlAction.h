@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'controlAction'.
  *
- * Model version                  : 1.5
+ * Model version                  : 1.4
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Tue Jun 20 19:40:21 2017
+ * C/C++ source code generated on : Wed Jun 21 19:53:10 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -38,16 +38,28 @@
 # define rtmSetErrorStatus(rtm, val)   ((rtm)->errorStatus = (val))
 #endif
 
+/* Block signals for system '<S2>/Dead Zone' */
+typedef struct {
+  real_T error_dz;                     /* '<S2>/Dead Zone' */
+} B_DeadZone_controlAction_T;
+
+/* Block signals (auto storage) */
+typedef struct {
+  B_DeadZone_controlAction_T sf_DeadZone1;/* '<S2>/Dead Zone1' */
+  B_DeadZone_controlAction_T sf_DeadZone;/* '<S2>/Dead Zone' */
+} B_controlAction_T;
+
 /* Block states (auto storage) for system '<Root>' */
 typedef struct {
-  real_T UD_DSTATE;                    /* '<S4>/UD' */
-  real_T UD_DSTATE_e;                  /* '<S5>/UD' */
+  real_T UD_DSTATE;                    /* '<S6>/UD' */
+  real_T UD_DSTATE_g;                  /* '<S7>/UD' */
 } DW_controlAction_T;
 
 /* External inputs (root inport signals with auto storage) */
 typedef struct {
   MyPositionData posData;              /* '<Root>/posData' */
   MySensorData sensorData;             /* '<Root>/sensorData' */
+  MyPositionData refData;              /* '<Root>/refData' */
 } ExtU_controlAction_T;
 
 /* External outputs (root outports fed by signals with auto storage) */
@@ -59,6 +71,9 @@ typedef struct {
 struct tag_RTM_controlAction_T {
   const char_T * volatile errorStatus;
 };
+
+/* Block signals (auto storage) */
+extern B_controlAction_T controlAction_B;
 
 /* Block states (auto storage) */
 extern DW_controlAction_T controlAction_DW;
@@ -83,8 +98,8 @@ extern RT_MODEL_controlAction_T *const controlAction_M;
 /*-
  * These blocks were eliminated from the model due to optimizations:
  *
- * Block '<S4>/Data Type Duplicate' : Unused code path elimination
- * Block '<S5>/Data Type Duplicate' : Unused code path elimination
+ * Block '<S6>/Data Type Duplicate' : Unused code path elimination
+ * Block '<S7>/Data Type Duplicate' : Unused code path elimination
  */
 
 /*-
@@ -105,8 +120,10 @@ extern RT_MODEL_controlAction_T *const controlAction_M;
  * '<S1>'   : 'controlAction/MATLAB Function'
  * '<S2>'   : 'controlAction/Position Control'
  * '<S3>'   : 'controlAction/yaw control'
- * '<S4>'   : 'controlAction/Position Control/Discrete Derivative'
- * '<S5>'   : 'controlAction/Position Control/Discrete Derivative1'
+ * '<S4>'   : 'controlAction/Position Control/Dead Zone'
+ * '<S5>'   : 'controlAction/Position Control/Dead Zone1'
+ * '<S6>'   : 'controlAction/Position Control/Discrete Derivative'
+ * '<S7>'   : 'controlAction/Position Control/Discrete Derivative1'
  */
 #endif                                 /* RTW_HEADER_controlAction_h_ */
 

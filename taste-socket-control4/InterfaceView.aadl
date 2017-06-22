@@ -37,6 +37,9 @@ FEATURES
   droneData : OUT PARAMETER DataView::MyDroneData {
     Taste::encoding => NATIVE;
   };
+  refData : IN PARAMETER DataView::MyPositionData {
+    Taste::encoding => NATIVE;
+  };
 END RI_controlAction;
 
 SUBPROGRAM IMPLEMENTATION RI_controlAction.others
@@ -54,6 +57,19 @@ END RI_getPosition;
 
 SUBPROGRAM IMPLEMENTATION RI_getPosition.others
 END RI_getPosition.others;
+
+SUBPROGRAM RI_getReference
+FEATURES
+  currentPos : IN PARAMETER DataView::MyPositionData {
+    Taste::encoding => NATIVE;
+  };
+  refPos : OUT PARAMETER DataView::MyPositionData {
+    Taste::encoding => NATIVE;
+  };
+END RI_getReference;
+
+SUBPROGRAM IMPLEMENTATION RI_getReference.others
+END RI_getReference.others;
 
 END interfaceview::FV::socketClient;
 
@@ -86,6 +102,8 @@ FEATURES
   currentHeight : IN PARAMETER DataView::MyReal {
     Taste::encoding => NATIVE;
   };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_getPosition;
 
 SUBPROGRAM IMPLEMENTATION PI_getPosition.others
@@ -204,8 +222,9 @@ FEATURES
   droneData : OUT PARAMETER DataView::MyDroneData {
     Taste::encoding => NATIVE;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
+  refData : IN PARAMETER DataView::MyPositionData {
+    Taste::encoding => NATIVE;
+  };
 END PI_controlAction;
 
 SUBPROGRAM IMPLEMENTATION PI_controlAction.others
@@ -213,12 +232,36 @@ END PI_controlAction.others;
 
 END interfaceview::FV::controller;
 
+PACKAGE interfaceview::FV::trajectoryGen
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_getReference
+FEATURES
+  currentPos : IN PARAMETER DataView::MyPositionData {
+    Taste::encoding => NATIVE;
+  };
+  refPos : OUT PARAMETER DataView::MyPositionData {
+    Taste::encoding => NATIVE;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_getReference;
+
+SUBPROGRAM IMPLEMENTATION PI_getReference.others
+END PI_getReference.others;
+
+END interfaceview::FV::trajectoryGen;
+
 PACKAGE interfaceview::IV
 PUBLIC
 
 WITH interfaceview::FV::socketClient;
 WITH interfaceview::FV::controller;
 WITH interfaceview::FV::PixyProcess;
+WITH interfaceview::FV::trajectoryGen;
 WITH interfaceview::FV::cClient;
 WITH interfaceview::FV::Timer;
 WITH interfaceview::FV::Pixycam;
@@ -229,7 +272,7 @@ WITH TASTE_IV_Properties;
 SYSTEM socketClient
 FEATURES
   PI_readStabilizerSendThrust : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::socketClient::PI_readStabilizerSendThrust.others {
-    Taste::coordinates => "1858 254";
+    Taste::coordinates => "1744 254";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -242,9 +285,15 @@ FEATURES
     Taste::labelInheritance => "true";
   };
   RI_getPosition : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::PixyProcess::PI_getPosition.others {
-    Taste::coordinates => "2083 611";
+    Taste::coordinates => "1928 611";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "getPosition";
+    Taste::labelInheritance => "true";
+  };
+  RI_getReference : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::trajectoryGen::PI_getReference.others {
+    Taste::coordinates => "2235 611";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "getReference";
     Taste::labelInheritance => "true";
   };
 PROPERTIES
@@ -263,15 +312,16 @@ END socketClient.others;
 SYSTEM PixyProcess
 FEATURES
   PI_processData : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::PixyProcess::PI_processData.others {
-    Taste::coordinates => "1865 1663";
+    Taste::coordinates => "1601 1483";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "processData";
   };
   PI_getPosition : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::PixyProcess::PI_getPosition.others {
-    Taste::coordinates => "2083 1502";
+    Taste::coordinates => "1819 1391";
     Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "getPosition";
   };
@@ -388,9 +438,8 @@ END Pixycam.others;
 SYSTEM controller
 FEATURES
   PI_controlAction : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::controller::PI_controlAction.others {
-    Taste::coordinates => "2508 903";
+    Taste::coordinates => "2620 820";
     Taste::RCMoperationKind => unprotected;
-    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "controlAction";
   };
@@ -407,16 +456,38 @@ CONNECTIONS
   OpToPICnx_controlAction_impl : SUBPROGRAM ACCESS controlAction_impl -> PI_controlAction;
 END controller.others;
 
+SYSTEM trajectoryGen
+FEATURES
+  PI_getReference : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::trajectoryGen::PI_getReference.others {
+    Taste::coordinates => "2443 1192";
+    Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "getReference";
+  };
+PROPERTIES
+  Source_Language => (C);
+END trajectoryGen;
+
+SYSTEM IMPLEMENTATION trajectoryGen.others
+SUBCOMPONENTS
+  getReference_impl : SUBPROGRAM interfaceview::FV::trajectoryGen::PI_getReference.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_getReference_impl : SUBPROGRAM ACCESS getReference_impl -> PI_getReference;
+END trajectoryGen.others;
+
 SYSTEM interfaceview
 END interfaceview;
 
 SYSTEM IMPLEMENTATION interfaceview.others
 SUBCOMPONENTS
   socketClient : SYSTEM interfaceview::IV::socketClient.others {
-    Taste::coordinates => "1858 113 2822 611";
+    Taste::coordinates => "1744 113 2822 611";
   };
   PixyProcess : SYSTEM interfaceview::IV::PixyProcess.others {
-    Taste::coordinates => "1865 1502 2616 2001";
+    Taste::coordinates => "1601 1391 2167 1821";
   };
   cClient : SYSTEM interfaceview::IV::cClient.others {
     Taste::coordinates => "82 1463 580 1787";
@@ -428,20 +499,26 @@ SUBCOMPONENTS
     Taste::coordinates => "145 328 1298 794";
   };
   controller : SYSTEM interfaceview::IV::controller.others {
-    Taste::coordinates => "2340 903 2796 1318";
+    Taste::coordinates => "2452 820 2933 1052";
+  };
+  trajectoryGen : SYSTEM interfaceview::IV::trajectoryGen.others {
+    Taste::coordinates => "2264 1192 2602 1432";
   };
 CONNECTIONS
   socketClient_readStabilizerSendThrust_Pixycam_readStabilizerSendThrust : SUBPROGRAM ACCESS socketClient.PI_readStabilizerSendThrust -> Pixycam.RI_readStabilizerSendThrust {
-    Taste::coordinates => "1298 477 1498 477 1498 254 1858 254";
+    Taste::coordinates => "1298 477 1498 477 1498 254 1744 254";
   };
   controller_controlAction_socketClient_controlAction : SUBPROGRAM ACCESS controller.PI_controlAction -> socketClient.RI_controlAction {
-    Taste::coordinates => "2508 611 2508 736 2508 736 2508 903";
+    Taste::coordinates => "2508 611 2508 736 2620 736 2620 820";
   };
   PixyProcess_getPosition_socketClient_getPosition : SUBPROGRAM ACCESS PixyProcess.PI_getPosition -> socketClient.RI_getPosition {
-    Taste::coordinates => "2083 611 2083 1056 2083 1056 2083 1502";
+    Taste::coordinates => "1928 611 1928 1056 1819 1056 1819 1390";
+  };
+  trajectoryGen_getReference_socketClient_getReference : SUBPROGRAM ACCESS trajectoryGen.PI_getReference -> socketClient.RI_getReference {
+    Taste::coordinates => "2235 611 2235 1074 2443 1074 2443 1192";
   };
   PixyProcess_processData_Pixycam_processData : SUBPROGRAM ACCESS PixyProcess.PI_processData -> Pixycam.RI_processData {
-    Taste::coordinates => "1298 693 1599 693 1599 1663 1865 1663";
+    Taste::coordinates => "1298 693 1436 693 1436 1483 1601 1483";
   };
   cClient_takeoff_Pixycam_takeoff : SUBPROGRAM ACCESS cClient.PI_takeoff -> Pixycam.RI_takeoff {
     Taste::coordinates => "282 794 282 1128 252 1128 252 1463";

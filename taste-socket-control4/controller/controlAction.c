@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'controlAction'.
  *
- * Model version                  : 1.5
+ * Model version                  : 1.4
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Tue Jun 20 19:40:21 2017
+ * C/C++ source code generated on : Wed Jun 21 19:53:10 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -27,6 +27,9 @@ const MyDroneData controlAction_rtZMyDroneData = {
   0.0                                  /* thrustRef */
 } ;                                    /* MyDroneData ground */
 
+/* Block signals (auto storage) */
+B_controlAction_T controlAction_B;
+
 /* Block states (auto storage) */
 DW_controlAction_T controlAction_DW;
 
@@ -40,31 +43,58 @@ ExtY_controlAction_T controlAction_Y;
 RT_MODEL_controlAction_T controlAction_M_;
 RT_MODEL_controlAction_T *const controlAction_M = &controlAction_M_;
 
+/*
+ * Output and update for atomic system:
+ *    '<S2>/Dead Zone'
+ *    '<S2>/Dead Zone1'
+ */
+void controlAction_DeadZone(real_T rtu_error, B_DeadZone_controlAction_T *localB)
+{
+  /* MATLAB Function 'Position Control/Dead Zone': '<S4>:1' */
+  /* '<S4>:1:2' if abs(error)<.03 */
+  if (fabs(rtu_error) < 0.03) {
+    /* '<S4>:1:3' error_dz=0.0; */
+    localB->error_dz = 0.0;
+  } else {
+    /* '<S4>:1:4' else */
+    /* '<S4>:1:5' error_dz=error; */
+    localB->error_dz = rtu_error;
+  }
+}
+
 /* Model step function */
 void controlAction_step(void)
 {
+  real_T rtb_XError;
   real_T rtb_sinpsi;
   real_T rtb_cospsi;
-  real_T rtb_Sum5;
+  real_T rtb_YError;
   real_T rtb_TSamp;
+  real_T u0;
 
   /* Gain: '<S3>/Gain' incorporates:
    *  Constant: '<S3>/Constant2'
    *  Inport: '<Root>/sensorData'
    *  Sum: '<S3>/Sum'
    */
-  rtb_Sum5 = (0.0 - controlAction_U.sensorData.yawAct) * -0.5;
+  u0 = (0.0 - controlAction_U.sensorData.yawAct) * -0.5;
 
   /* Saturate: '<S3>/Saturation' */
-  if (rtb_Sum5 > 30.0) {
+  if (u0 > 30.0) {
     controlAction_Y.droneData.yawrateRef = 30.0;
-  } else if (rtb_Sum5 < -30.0) {
+  } else if (u0 < -30.0) {
     controlAction_Y.droneData.yawrateRef = -30.0;
   } else {
-    controlAction_Y.droneData.yawrateRef = rtb_Sum5;
+    controlAction_Y.droneData.yawrateRef = u0;
   }
 
   /* End of Saturate: '<S3>/Saturation' */
+
+  /* Sum: '<S2>/Sum' incorporates:
+   *  Inport: '<Root>/posData'
+   *  Inport: '<Root>/refData'
+   */
+  rtb_XError = controlAction_U.refData.xAct - controlAction_U.posData.xAct;
 
   /* Gain: '<S2>/Gain' incorporates:
    *  Inport: '<Root>/sensorData'
@@ -74,95 +104,95 @@ void controlAction_step(void)
   /* Fcn: '<S2>/Fcn1' */
   rtb_cospsi = cos(rtb_sinpsi);
 
+  /* Sum: '<S2>/Sum1' incorporates:
+   *  Inport: '<Root>/posData'
+   *  Inport: '<Root>/refData'
+   */
+  rtb_YError = controlAction_U.refData.yAct - controlAction_U.posData.yAct;
+
   /* Fcn: '<S2>/Fcn' */
   rtb_sinpsi = sin(rtb_sinpsi);
 
-  /* Sum: '<S2>/Sum2' incorporates:
-   *  Constant: '<Root>/Constant'
-   *  Constant: '<Root>/Constant1'
-   *  Inport: '<Root>/posData'
+  /* MATLAB Function: '<S2>/Dead Zone' incorporates:
    *  Product: '<S2>/Product'
    *  Product: '<S2>/Product2'
-   *  Sum: '<S2>/Sum'
-   *  Sum: '<S2>/Sum1'
+   *  Sum: '<S2>/Sum2'
    */
-  rtb_Sum5 = (0.0 - controlAction_U.posData.xAct) * rtb_cospsi + (0.0 -
-    controlAction_U.posData.yAct) * rtb_sinpsi;
+  controlAction_DeadZone(rtb_XError * rtb_cospsi + rtb_YError * rtb_sinpsi,
+    &controlAction_B.sf_DeadZone);
 
-  /* SampleTimeMath: '<S4>/TSamp'
+  /* SampleTimeMath: '<S6>/TSamp'
    *
-   * About '<S4>/TSamp':
+   * About '<S6>/TSamp':
    *  y = u * K where K = 1 / ( w * Ts )
    */
-  rtb_TSamp = rtb_Sum5 * -2000.0;
+  rtb_TSamp = controlAction_B.sf_DeadZone.error_dz * -1100.0;
 
   /* Sum: '<S2>/Sum3' incorporates:
    *  Gain: '<S2>/Gain1'
-   *  Sum: '<S4>/Diff'
-   *  UnitDelay: '<S4>/UD'
+   *  Sum: '<S6>/Diff'
+   *  UnitDelay: '<S6>/UD'
    *
-   * Block description for '<S4>/Diff':
+   * Block description for '<S6>/Diff':
    *
    *  Add in CPU
    *
-   * Block description for '<S4>/UD':
+   * Block description for '<S6>/UD':
    *
    *  Store in Global RAM
    */
-  rtb_Sum5 = -5.0 * rtb_Sum5 + (rtb_TSamp - controlAction_DW.UD_DSTATE);
+  u0 = -20.0 * controlAction_B.sf_DeadZone.error_dz + (rtb_TSamp -
+    controlAction_DW.UD_DSTATE);
 
   /* Saturate: '<S2>/Saturation' */
-  if (rtb_Sum5 > 10.0) {
+  if (u0 > 10.0) {
     controlAction_Y.droneData.pitchRef = 10.0;
-  } else if (rtb_Sum5 < -10.0) {
+  } else if (u0 < -10.0) {
     controlAction_Y.droneData.pitchRef = -10.0;
   } else {
-    controlAction_Y.droneData.pitchRef = rtb_Sum5;
+    controlAction_Y.droneData.pitchRef = u0;
   }
 
   /* End of Saturate: '<S2>/Saturation' */
 
-  /* Sum: '<S2>/Sum4' incorporates:
-   *  Constant: '<Root>/Constant'
-   *  Constant: '<Root>/Constant1'
-   *  Inport: '<Root>/posData'
+  /* MATLAB Function: '<S2>/Dead Zone1' incorporates:
    *  Product: '<S2>/Product1'
    *  Product: '<S2>/Product3'
-   *  Sum: '<S2>/Sum'
-   *  Sum: '<S2>/Sum1'
+   *  Sum: '<S2>/Sum4'
    */
-  rtb_Sum5 = (0.0 - controlAction_U.posData.yAct) * rtb_cospsi - (0.0 -
-    controlAction_U.posData.xAct) * rtb_sinpsi;
+  controlAction_DeadZone(rtb_YError * rtb_cospsi - rtb_XError * rtb_sinpsi,
+    &controlAction_B.sf_DeadZone1);
 
-  /* SampleTimeMath: '<S5>/TSamp'
+  /* SampleTimeMath: '<S7>/TSamp'
    *
-   * About '<S5>/TSamp':
+   * About '<S7>/TSamp':
    *  y = u * K where K = 1 / ( w * Ts )
    */
-  rtb_sinpsi = rtb_Sum5 * -2000.0;
+  rtb_XError = controlAction_B.sf_DeadZone1.error_dz * -1100.0;
 
   /* Sum: '<S2>/Sum5' incorporates:
    *  Gain: '<S2>/Gain2'
-   *  Sum: '<S5>/Diff'
-   *  UnitDelay: '<S5>/UD'
+   *  Sum: '<S7>/Diff'
+   *  UnitDelay: '<S7>/UD'
    *
-   * Block description for '<S5>/Diff':
+   * Block description for '<S7>/Diff':
    *
    *  Add in CPU
    *
-   * Block description for '<S5>/UD':
+   * Block description for '<S7>/UD':
    *
    *  Store in Global RAM
    */
-  rtb_Sum5 = -5.0 * rtb_Sum5 + (rtb_sinpsi - controlAction_DW.UD_DSTATE_e);
+  u0 = -20.0 * controlAction_B.sf_DeadZone1.error_dz + (rtb_XError -
+    controlAction_DW.UD_DSTATE_g);
 
   /* Saturate: '<S2>/Saturation1' */
-  if (rtb_Sum5 > 10.0) {
+  if (u0 > 10.0) {
     controlAction_Y.droneData.rollRef = 10.0;
-  } else if (rtb_Sum5 < -10.0) {
+  } else if (u0 < -10.0) {
     controlAction_Y.droneData.rollRef = -10.0;
   } else {
-    controlAction_Y.droneData.rollRef = rtb_Sum5;
+    controlAction_Y.droneData.rollRef = u0;
   }
 
   /* End of Saturate: '<S2>/Saturation1' */
@@ -172,9 +202,9 @@ void controlAction_step(void)
    */
   controlAction_Y.droneData.thrustRef = 0.3;
 
-  /* Update for UnitDelay: '<S4>/UD'
+  /* Update for UnitDelay: '<S6>/UD'
    *
-   * Block description for '<S4>/UD':
+   * Block description for '<S6>/UD':
    *
    *  Store in Global RAM
    */
@@ -191,13 +221,13 @@ void controlAction_step(void)
   /* '<S1>:1:12' zrange = cordi_g(3,1) */
   controlAction_DW.UD_DSTATE = rtb_TSamp;
 
-  /* Update for UnitDelay: '<S5>/UD'
+  /* Update for UnitDelay: '<S7>/UD'
    *
-   * Block description for '<S5>/UD':
+   * Block description for '<S7>/UD':
    *
    *  Store in Global RAM
    */
-  controlAction_DW.UD_DSTATE_e = rtb_sinpsi;
+  controlAction_DW.UD_DSTATE_g = rtb_XError;
 }
 
 /* Model initialize function */
@@ -207,6 +237,10 @@ void controlAction_initialize(void)
 
   /* initialize error status */
   rtmSetErrorStatus(controlAction_M, (NULL));
+
+  /* block I/O */
+  (void) memset(((void *) &controlAction_B), 0,
+                sizeof(B_controlAction_T));
 
   /* states (dwork) */
   (void) memset((void *)&controlAction_DW, 0,

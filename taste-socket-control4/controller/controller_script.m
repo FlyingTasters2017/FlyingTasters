@@ -1,7 +1,7 @@
 run Simulink_DataView_asn;
 
-inports_positions = zeros(2, 4);
-bussel_positions = zeros(2, 4);
+inports_positions = zeros(3, 4);
+bussel_positions = zeros(3, 4);
 outports_positions = zeros(1, 4);
 buscre_positions = zeros(1, 4);
 
@@ -96,6 +96,23 @@ if bussel_positions(2)>0
 	set_param('controlAction/sensorData_MySensorData_BusSel','Position', bussel_positions(2,:));
 else
 	set_param('controlAction/sensorData_MySensorData_BusSel','Position',[95 106 100 144]);
+end
+add_block('simulink/Sources/In1','controlAction/refData');
+if inports_positions(3)>0
+	set_param('controlAction/refData','Position', inports_positions(3,:));
+else
+	set_param('controlAction/refData','Position',[25 225 55 239]);
+end
+set_param('controlAction/refData','BusOutputAsStruct','on');
+set_param('controlAction/refData','UseBusObject','on');
+set_param('controlAction/refData','BusObject','MyPositionData');
+add_block('simulink/Commonly Used Blocks/Bus Selector','controlAction/refData_MyPositionData_BusSel');
+add_line('controlAction','refData/1','refData_MyPositionData_BusSel/1');
+setOutputsBusSelector(MyPositionData, 'controlAction/refData_MyPositionData_BusSel');
+if bussel_positions(3)>0
+	set_param('controlAction/refData_MyPositionData_BusSel','Position', bussel_positions(3,:));
+else
+	set_param('controlAction/refData_MyPositionData_BusSel','Position',[95 206 100 244]);
 end
 add_block('simulink/Sinks/Out1','controlAction/droneData');
 if outports_positions(1)>0

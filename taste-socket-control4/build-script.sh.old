@@ -68,6 +68,8 @@ cd "$SKELS" && rm -f pixycam.zip && zip pixycam pixycam/* && cd $OLDPWD
 
 cd "$SKELS" && rm -f controller.zip && zip controller controller/* && cd $OLDPWD
 
+cd "$SKELS" && rm -f trajectorygen.zip && zip trajectorygen trajectorygen/* && cd $OLDPWD
+
 [ ! -z "$CLEANUP" ] && rm -rf binary*
 
 if [ -f ConcurrencyView.pro ]
@@ -106,6 +108,7 @@ cd "$CWD" && assert-builder-ocarina.py \
 	--subC timer:"$SKELS"/timer.zip \
 	--subC pixycam:"$SKELS"/pixycam.zip \
 	--subSIMULINK controller:"$SKELS"/controller.zip \
+	--subC trajectorygen:"$SKELS"/trajectorygen.zip \
 	$ORCHESTRATOR_OPTIONS
 
 if [ -f user_init_last.sh ]

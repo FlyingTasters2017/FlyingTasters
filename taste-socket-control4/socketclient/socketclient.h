@@ -18,10 +18,14 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *,
 
 extern void socketclient_RI_controlAction(const asn1SccMyPositionData *,
                                           const asn1SccMySensorData *,
+                                          const asn1SccMyPositionData *,
                                           asn1SccMyDroneData *);
 
 extern void socketclient_RI_getPosition(const asn1SccMyReal *,
                                         asn1SccMyPositionData *);
+
+extern void socketclient_RI_getReference(const asn1SccMyPositionData *,
+                                         asn1SccMyPositionData *);
 
 #ifdef __cplusplus
 }

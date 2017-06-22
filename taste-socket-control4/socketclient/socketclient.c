@@ -22,10 +22,10 @@ int sockfd;
 int n;
 int time_count;
 char droneref[256];
-float x_pos, y_pos;
+float x_pos, y_pos, x_ref, y_ref;
 
 int yawOld,pitchOld,rollOld,zrangeOld;
-asn1SccMyPositionData currPosition;
+asn1SccMyPositionData currPosition, refPosition;
 asn1SccMyDroneData currDroneRef;
 asn1SccMySensorData currSensor;
 asn1SccMyReal currHeight;
@@ -253,7 +253,20 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
     
     printf("x position: %f y position: %f \n", x_pos, y_pos);
     
-    socketclient_RI_controlAction(&currPosition,&currSensor,&currDroneRef);
+    
+    
+//     x_ref = refPosition.xAct;
+//     y_ref = refPosition.yAct;
+//     printf("x reference position: %f y reference position: %f \n", x_ref, y_ref);
+    
+    socketclient_RI_getReference(&currPosition,&refPosition);
+    
+    
+    printf("x reference position: %f y reference position: %f \n", refPosition.xAct, refPosition.yAct);
+//     refPosition.xAct = 0.3;
+//     refPosition.yAct = 0.3;
+    
+    socketclient_RI_controlAction(&currPosition,&currSensor,&refPosition,&currDroneRef);
     printf("yawrate Ref: %f", currDroneRef.yawrateRef);
     printf("pitch Ref: %f", currDroneRef.pitchRef);
     printf("roll Ref: %f", currDroneRef.rollRef);
