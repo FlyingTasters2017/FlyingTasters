@@ -75,6 +75,9 @@ void pixy_taste_init()
 }
 void pixycam_PI_pulse(const asn1SccMyInteger *IN_flagsToLinkWith)
 {
+    run_flag = true;
+    printf("FLAG SET TO FLASE");
+
     printf("Start pixycam_PI_rawdata()\n");
     printTime();    
     // Pixy Block buffer // 
@@ -149,6 +152,7 @@ void pixycam_PI_pulse(const asn1SccMyInteger *IN_flagsToLinkWith)
 }
 
 void pixycam_PI_startStop(const asn1SccMyInteger *IN_ssvalue){
+    printf("FLAG SET TO FLASE");
     run_flag = false;
 }
 
