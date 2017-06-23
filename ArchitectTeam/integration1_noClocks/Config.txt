@@ -1,0 +1,8 @@
+formation=myTriangle
+members=1
+drones=c_BLUE, 0, 0
+flightPlan=flight1
+takeoff=100
+loop=2 
+locations=1.0,0.7,1,0,30,1.1,0.8,1,30,40,0.6,0.5,1,30,20
+nlocations=3

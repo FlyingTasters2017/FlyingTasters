@@ -1,9 +1,9 @@
 -- This file was generated automatically: DO NOT MODIFY IT !
 
-with TASTE_BasicTypes;
-use TASTE_BasicTypes;
 with TASTE_Dataview;
 use TASTE_Dataview;
+with TASTE_BasicTypes;
+use TASTE_BasicTypes;
 with adaasn1rtl;
 use adaasn1rtl;
 

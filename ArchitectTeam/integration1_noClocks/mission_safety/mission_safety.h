@@ -14,7 +14,7 @@ extern "C" {
 void mission_safety_startup();
 
 void mission_safety_PI_check_mission_safety(const asn1SccWorldData *,
-                                            asn1SccSafetyEvent *);
+                                            asn1SccSafetyInterupt *);
 
 #ifdef __cplusplus
 }

@@ -1,10 +1,12 @@
 /* User code: This file will not be overwritten by TASTE. */
 
 #include "trajectory_generator.h"
+#include "configurationDefinition.h"
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
 #define PI 3.14159265
+
 
 long            ms_0; // Milliseconds
 time_t          s_0;
@@ -22,20 +24,30 @@ void trajectory_generator_startup()
 {
     /* Write your initialization code here,
        but do not make any call to a required interface. */
-
+    struct FormationConfig  myFormation;
     
-    myFlightPlan.locations.arr[0].x=0.1;
-    myFlightPlan.locations.arr[0].y=0.1;
-    myFlightPlan.locations.arr[0].z=0.1;
-    myFlightPlan.actions.arr[0].yaw_rate=30;
-    myFlightPlan.actions.arr[0].duration=50;
+    myFormation=get_configFile("../../Config");
     
-    
-    myFlightPlan.locations.arr[1].x=0.2;
-    myFlightPlan.locations.arr[1].y=0.2;
-    myFlightPlan.locations.arr[1].z=0.1;
-    myFlightPlan.actions.arr[1].yaw_rate=30;
-    myFlightPlan.actions.arr[1].duration=50;    
+    int locationNumber= myFormation.flightPlan.nlocations;
+    char** loc;
+    loc = str_split(myFormation.flightPlan.configLocations, ',');
+    myFlightPlan.nlocations=locationNumber;
+    if (loc)
+    {
+        int n=0; 
+        int j=0;
+        while(*(loc + n) && j<locationNumber)
+        {
+            myFlightPlan.locations.arr[j].x = atof(*(loc + n));
+            myFlightPlan.locations.arr[j].y=atof(*(loc + n+1));
+            myFlightPlan.locations.arr[j].z=atof(*(loc + n+2));
+            myFlightPlan.actions.arr[j].yaw_rate=atof(*(loc + n+3));
+            myFlightPlan.actions.arr[j].duration=atof(*(loc + n+4));
+            j=j+1;
+            n=n+5;
+        }
+          
+    }
     
     clock_gettime(CLOCK_MONOTONIC_RAW, &spec);
   
@@ -45,7 +57,7 @@ void trajectory_generator_startup()
 }
 
 void trajectory_generator_PI_choose_trajectory(const asn1SccWorldData *IN_processed_world_data,
-                                              const asn1SccSafetyEvent *IN_world_safety_events,
+                                              const asn1SccSafetyInterupt *IN_world_safety_events,
                                               asn1SccTrajectory *OUT_control_error)
 {
       printf("i = %d\n",i);
@@ -83,4 +95,3 @@ void trajectory_generator_PI_choose_trajectory(const asn1SccWorldData *IN_proces
       OUT_control_error->y = error_y*cos(psi) - error_x*sin(psi);
       
 }
-

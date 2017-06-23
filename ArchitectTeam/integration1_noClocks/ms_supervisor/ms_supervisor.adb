@@ -6,10 +6,10 @@ use System.IO;
 with Ada.Unchecked_Conversion;
 with Ada.Numerics.Generic_Elementary_Functions;
 
-with TASTE_BasicTypes;
-use TASTE_BasicTypes;
 with TASTE_Dataview;
 use TASTE_Dataview;
+with TASTE_BasicTypes;
+use TASTE_BasicTypes;
 with adaasn1rtl;
 use adaasn1rtl;
 

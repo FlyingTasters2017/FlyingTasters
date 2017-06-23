@@ -23,6 +23,18 @@ END PI_set_user_input;
 SUBPROGRAM IMPLEMENTATION PI_set_user_input.others
 END PI_set_user_input.others;
 
+SUBPROGRAM PI_update_world_data
+FEATURES
+  processed_world_data : IN PARAMETER DataView::WorldData {
+    Taste::encoding => UPER;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_update_world_data;
+
+SUBPROGRAM IMPLEMENTATION PI_update_world_data.others
+END PI_update_world_data.others;
+
 SUBPROGRAM RI_update_GUI
 FEATURES
   world_data : IN PARAMETER DataView::WorldData {
@@ -58,7 +70,7 @@ FEATURES
   processed_world_data : IN PARAMETER DataView::WorldData {
     Taste::encoding => UPER;
   };
-  world_safety_events : OUT PARAMETER DataView::SafetyEvent {
+  world_safety_interupt : OUT PARAMETER DataView::SafetyInterupt {
     Taste::encoding => UPER;
   };
 END RI_check_mission_safety;
@@ -71,7 +83,7 @@ FEATURES
   processed_world_data : IN PARAMETER DataView::WorldData {
     Taste::encoding => UPER;
   };
-  world_safety_events : IN PARAMETER DataView::SafetyEvent {
+  world_safety_interupt : IN PARAMETER DataView::SafetyInterupt {
     Taste::encoding => UPER;
   };
   control_error : OUT PARAMETER DataView::Trajectory {
@@ -104,18 +116,6 @@ END RI_talk_with_Houston;
 
 SUBPROGRAM IMPLEMENTATION RI_talk_with_Houston.others
 END RI_talk_with_Houston.others;
-
-SUBPROGRAM PI_update_world_data
-FEATURES
-  processed_world_data : IN PARAMETER DataView::WorldData {
-    Taste::encoding => UPER;
-  };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
-END PI_update_world_data;
-
-SUBPROGRAM IMPLEMENTATION PI_update_world_data.others
-END PI_update_world_data.others;
 
 END interfaceview::FV::System_Supervisor;
 
@@ -252,6 +252,18 @@ END PI_talk_with_Houston;
 SUBPROGRAM IMPLEMENTATION PI_talk_with_Houston.others
 END PI_talk_with_Houston.others;
 
+SUBPROGRAM PI_put_control_data
+FEATURES
+  control_data : IN PARAMETER DataView::DroneControllerInput {
+    Taste::encoding => UPER;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_put_control_data;
+
+SUBPROGRAM IMPLEMENTATION PI_put_control_data.others
+END PI_put_control_data.others;
+
 SUBPROGRAM RI_store_control_data
 FEATURES
   control_input : IN PARAMETER DataView::DroneControllerInput {
@@ -271,18 +283,6 @@ END RI_send_control_data;
 
 SUBPROGRAM IMPLEMENTATION RI_send_control_data.others
 END RI_send_control_data.others;
-
-SUBPROGRAM PI_put_control_data
-FEATURES
-  control_data : IN PARAMETER DataView::DroneControllerInput {
-    Taste::encoding => UPER;
-  };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
-END PI_put_control_data;
-
-SUBPROGRAM IMPLEMENTATION PI_put_control_data.others
-END PI_put_control_data.others;
 
 END interfaceview::FV::Houston;
 
@@ -408,7 +408,7 @@ FEATURES
   processed_world_data : IN PARAMETER DataView::WorldData {
     Taste::encoding => UPER;
   };
-  world_safety_events : OUT PARAMETER DataView::SafetyEvent {
+  world_safety_interupt : OUT PARAMETER DataView::SafetyInterupt {
     Taste::encoding => UPER;
   };
 PROPERTIES
@@ -431,7 +431,7 @@ FEATURES
   processed_world_data : IN PARAMETER DataView::WorldData {
     Taste::encoding => UPER;
   };
-  world_safety_events : IN PARAMETER DataView::SafetyEvent {
+  world_safety_interupt : IN PARAMETER DataView::SafetyInterupt {
     Taste::encoding => UPER;
   };
   control_error : OUT PARAMETER DataView::Trajectory {
@@ -629,58 +629,60 @@ WITH TASTE_IV_Properties;
 SYSTEM System_Supervisor
 FEATURES
   PI_set_user_input : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::System_Supervisor::PI_set_user_input.others {
-    Taste::coordinates => "635 380";
+    Taste::coordinates => "633 380";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "set_user_input";
   };
+  PI_update_world_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::System_Supervisor::PI_update_world_data.others {
+    Taste::coordinates => "1067 600";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "update_world_data";
+  };
   RI_update_GUI : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::GUI::PI_update_GUI.others {
-    Taste::coordinates => "754 230";
+    Taste::coordinates => "752 230";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "update_GUI";
     Taste::labelInheritance => "true";
   };
   RI_talk_with_MSSV : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::MS_Supervisor::PI_talk_with_MSSV.others {
-    Taste::coordinates => "731 600";
+    Taste::coordinates => "729 600";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "talk_with_MSSV";
     Taste::labelInheritance => "true";
   };
   RI_talk_with_ASSV : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::AS_Supervisor::PI_talk_with_ASSV.others {
-    Taste::coordinates => "1465 600";
+    Taste::coordinates => "1463 600";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "talk_with_ASSV";
     Taste::labelInheritance => "true";
   };
   RI_check_mission_safety : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Mission_Safety::PI_check_mission_safety.others {
-    Taste::coordinates => "1423 230";
+    Taste::coordinates => "1421 230";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "check_mission_safety";
     Taste::labelInheritance => "true";
   };
   RI_choose_trajectory : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Trajectory_Generator::PI_choose_trajectory.others {
-    Taste::coordinates => "1565 308";
+    Taste::coordinates => "1563 308";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "choose_trajectory";
     Taste::labelInheritance => "true";
   };
   RI_calculate_control_input : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Control_Data_Storage::PI_calculate_control_input.others {
-    Taste::coordinates => "1565 380";
+    Taste::coordinates => "1563 380";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "calculate_control_input";
     Taste::labelInheritance => "true";
   };
   RI_talk_with_Houston : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Houston::PI_talk_with_Houston.others {
-    Taste::coordinates => "1565 486";
+    Taste::coordinates => "1563 486";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "talk_with_Houston";
     Taste::labelInheritance => "true";
-  };
-  PI_update_world_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::System_Supervisor::PI_update_world_data.others {
-    Taste::coordinates => "1069 600";
-    Taste::RCMoperationKind => sporadic;
-    Taste::InterfaceName => "update_world_data";
   };
 PROPERTIES
   Source_Language => (SDL);
@@ -812,6 +814,13 @@ FEATURES
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "talk_with_Houston";
   };
+  PI_put_control_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Houston::PI_put_control_data.others {
+    Taste::coordinates => "1805 693";
+    Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "put_control_data";
+  };
   RI_store_control_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::World_Model::PI_store_control_data.others {
     Taste::coordinates => "1697 824";
     Taste::RCMoperationKind => any;
@@ -823,11 +832,6 @@ FEATURES
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "send_control_data";
     Taste::labelInheritance => "true";
-  };
-  PI_put_control_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Houston::PI_put_control_data.others {
-    Taste::coordinates => "1805 693";
-    Taste::RCMoperationKind => sporadic;
-    Taste::InterfaceName => "put_control_data";
   };
 PROPERTIES
   Source_Language => (SDL);
@@ -966,7 +970,7 @@ END Mission_Safety.others;
 SYSTEM Trajectory_Generator
 FEATURES
   PI_choose_trajectory : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Trajectory_Generator::PI_choose_trajectory.others {
-    Taste::coordinates => "1670 150";
+    Taste::coordinates => "1673 150";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -1023,7 +1027,7 @@ FEATURES
     Taste::labelInheritance => "true";
   };
   RI_put_control_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Houston::PI_put_control_data.others {
-    Taste::coordinates => "1807 494";
+    Taste::coordinates => "1807 493";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "put_control_data";
     Taste::labelInheritance => "true";
@@ -1045,14 +1049,14 @@ SYSTEM World_Model
 FEATURES
   PI_store_MSD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::World_Model::PI_store_MSD.others {
     Taste::coordinates => "920 994";
-    Taste::RCMoperationKind => unprotected;
+    Taste::RCMoperationKind => protected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "store_MSD";
   };
   PI_store_ASD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::World_Model::PI_store_ASD.others {
     Taste::coordinates => "1273 994";
-    Taste::RCMoperationKind => unprotected;
+    Taste::RCMoperationKind => protected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "store_ASD";
@@ -1125,7 +1129,7 @@ END interfaceview;
 SYSTEM IMPLEMENTATION interfaceview.others
 SUBCOMPONENTS
   System_Supervisor : SYSTEM interfaceview::IV::System_Supervisor.others {
-    Taste::coordinates => "635 230 1565 600";
+    Taste::coordinates => "633 230 1563 600";
   };
   GUI : SYSTEM interfaceview::IV::GUI.others {
     Taste::coordinates => "257 30 599 210";
@@ -1152,7 +1156,7 @@ SUBCOMPONENTS
     Taste::coordinates => "1289 7 1564 138";
   };
   Trajectory_Generator : SYSTEM interfaceview::IV::Trajectory_Generator.others {
-    Taste::coordinates => "1670 44 1945 175";
+    Taste::coordinates => "1673 44 1948 175";
   };
   Drone_Control : SYSTEM interfaceview::IV::Drone_Control.others {
     Taste::coordinates => "2048 332 2323 463";
@@ -1168,31 +1172,31 @@ SUBCOMPONENTS
   };
 CONNECTIONS
   System_Supervisor_set_user_input_GUI_set_user_input : SUBPROGRAM ACCESS System_Supervisor.PI_set_user_input -> GUI.RI_set_user_input {
-    Taste::coordinates => "477 209 477 380 635 380";
-  };
-  GUI_update_GUI_System_Supervisor_update_GUI : SUBPROGRAM ACCESS GUI.PI_update_GUI -> System_Supervisor.RI_update_GUI {
-    Taste::coordinates => "754 230 754 152 600 152";
-  };
-  MS_Supervisor_talk_with_MSSV_System_Supervisor_talk_with_MSSV : SUBPROGRAM ACCESS MS_Supervisor.PI_talk_with_MSSV -> System_Supervisor.RI_talk_with_MSSV {
-    Taste::coordinates => "731 600 731 854 732 854 732 1107";
-  };
-  AS_Supervisor_talk_with_ASSV_System_Supervisor_talk_with_ASSV : SUBPROGRAM ACCESS AS_Supervisor.PI_talk_with_ASSV -> System_Supervisor.RI_talk_with_ASSV {
-    Taste::coordinates => "1465 600 1465 855 1467 855 1467 1109";
-  };
-  Mission_Safety_check_mission_safety_System_Supervisor_check_mission_safety : SUBPROGRAM ACCESS Mission_Safety.PI_check_mission_safety -> System_Supervisor.RI_check_mission_safety {
-    Taste::coordinates => "1423 230 1423 185 1420 185 1420 138";
-  };
-  Trajectory_Generator_choose_trajectory_System_Supervisor_choose_trajectory : SUBPROGRAM ACCESS Trajectory_Generator.PI_choose_trajectory -> System_Supervisor.RI_choose_trajectory {
-    Taste::coordinates => "1565 308 1618 308 1618 150 1670 150";
-  };
-  Control_Data_Storage_calculate_control_input_System_Supervisor_calculate_control_input : SUBPROGRAM ACCESS Control_Data_Storage.PI_calculate_control_input -> System_Supervisor.RI_calculate_control_input {
-    Taste::coordinates => "1565 380 1609 380 1609 356 1704 356";
-  };
-  Houston_talk_with_Houston_System_Supervisor_talk_with_Houston : SUBPROGRAM ACCESS Houston.PI_talk_with_Houston -> System_Supervisor.RI_talk_with_Houston {
-    Taste::coordinates => "1565 486 1634 486 1634 750 1697 750";
+    Taste::coordinates => "477 209 477 380 633 380";
   };
   System_Supervisor_update_world_data_World_Model_update_world_data : SUBPROGRAM ACCESS System_Supervisor.PI_update_world_data -> World_Model.RI_update_world_data {
-    Taste::coordinates => "1069 698 1069 649 1069 649 1069 600";
+    Taste::coordinates => "1069 698 1069 649 1067 649 1067 600";
+  };
+  GUI_update_GUI_System_Supervisor_update_GUI : SUBPROGRAM ACCESS GUI.PI_update_GUI -> System_Supervisor.RI_update_GUI {
+    Taste::coordinates => "752 230 752 152 600 152";
+  };
+  MS_Supervisor_talk_with_MSSV_System_Supervisor_talk_with_MSSV : SUBPROGRAM ACCESS MS_Supervisor.PI_talk_with_MSSV -> System_Supervisor.RI_talk_with_MSSV {
+    Taste::coordinates => "729 600 729 854 732 854 732 1107";
+  };
+  AS_Supervisor_talk_with_ASSV_System_Supervisor_talk_with_ASSV : SUBPROGRAM ACCESS AS_Supervisor.PI_talk_with_ASSV -> System_Supervisor.RI_talk_with_ASSV {
+    Taste::coordinates => "1463 600 1463 855 1467 855 1467 1109";
+  };
+  Mission_Safety_check_mission_safety_System_Supervisor_check_mission_safety : SUBPROGRAM ACCESS Mission_Safety.PI_check_mission_safety -> System_Supervisor.RI_check_mission_safety {
+    Taste::coordinates => "1421 230 1421 185 1420 185 1420 138";
+  };
+  Trajectory_Generator_choose_trajectory_System_Supervisor_choose_trajectory : SUBPROGRAM ACCESS Trajectory_Generator.PI_choose_trajectory -> System_Supervisor.RI_choose_trajectory {
+    Taste::coordinates => "1563 308 1618 308 1618 150 1673 150";
+  };
+  Control_Data_Storage_calculate_control_input_System_Supervisor_calculate_control_input : SUBPROGRAM ACCESS Control_Data_Storage.PI_calculate_control_input -> System_Supervisor.RI_calculate_control_input {
+    Taste::coordinates => "1563 380 1609 380 1609 356 1704 356";
+  };
+  Houston_talk_with_Houston_System_Supervisor_talk_with_Houston : SUBPROGRAM ACCESS Houston.PI_talk_with_Houston -> System_Supervisor.RI_talk_with_Houston {
+    Taste::coordinates => "1563 486 1634 486 1634 750 1697 750";
   };
   MS_Communication_enable_pixycam_MS_Supervisor_enable_pixycam : SUBPROGRAM ACCESS MS_Communication.PI_enable_pixycam -> MS_Supervisor.RI_enable_pixycam {
     Taste::coordinates => "620 1162 509 1162 509 1145 399 1145";
@@ -1209,14 +1213,14 @@ CONNECTIONS
   ASD_Processing_process_ASD_AS_Supervisor_process_ASD : SUBPROGRAM ACCESS ASD_Processing.PI_process_ASD -> AS_Supervisor.RI_process_ASD {
     Taste::coordinates => "1586 1405 1653 1405 1653 1402 1721 1402";
   };
+  Houston_put_control_data_Control_Data_Storage_put_control_data : SUBPROGRAM ACCESS Houston.PI_put_control_data -> Control_Data_Storage.RI_put_control_data {
+    Taste::coordinates => "1807 494 1807 593 1805 593 1805 693";
+  };
   World_Model_store_control_data_Houston_store_control_data : SUBPROGRAM ACCESS World_Model.PI_store_control_data -> Houston.RI_store_control_data {
     Taste::coordinates => "1697 824 1559 824 1559 824 1416 824";
   };
   Socket_Client_send_control_data_Houston_send_control_data : SUBPROGRAM ACCESS Socket_Client.PI_send_control_data -> Houston.RI_send_control_data {
     Taste::coordinates => "1951 785 2066 785 2066 782 2203 782";
-  };
-  Houston_put_control_data_Control_Data_Storage_put_control_data : SUBPROGRAM ACCESS Houston.PI_put_control_data -> Control_Data_Storage.RI_put_control_data {
-    Taste::coordinates => "1807 494 1807 593 1805 593 1805 693";
   };
   MSD_Processing_process_MSD_MS_Supervisor_process_MSD : SUBPROGRAM ACCESS MSD_Processing.PI_process_MSD -> MS_Supervisor.RI_process_MSD {
     Taste::coordinates => "620 1409 508 1409 508 1409 401 1409";
