@@ -81,7 +81,8 @@ DroneSensorData ::= SEQUENCE {
 -- ./dataview-uniq.asn
 FeedbackToGUI ::= SEQUENCE {
     flight	WorldData,
-    notification	SystemState
+    notification	SystemState,
+    safety	SafetyInterupt
 }
 
 -- ./dataview-uniq.asn
@@ -112,8 +113,8 @@ Position ::= SEQUENCE {
 
 -- ./dataview-uniq.asn
 PositionSystemData ::= SEQUENCE {
-    xAct	MyReal,
-    yAct	MyReal
+    xAct	PositionSystemData_xAct,
+    yAct	PositionSystemData_yAct
 }
 
 -- ./dataview-uniq.asn
@@ -132,13 +133,13 @@ ReferencePath ::= SEQUENCE {
 
 -- ./dataview-uniq.asn
 PixyData ::= SEQUENCE {
-    xPix	T_UInt32,
-    yPix	T_UInt32
+    xPix	PixyData_xPix,
+    yPix	PixyData_yPix
 }
 
 -- ./dataview-uniq.asn
 SafetyAction ::= SEQUENCE {
-    sPosition	Position
+    sPosition	SafetyAction_sPosition
 }
 
 -- ./dataview-uniq.asn
@@ -191,7 +192,10 @@ Velocity ::= SEQUENCE {
 
 -- ./dataview-uniq.asn
 WorldData ::= SEQUENCE {
-    agentData	Agent
+    myArea	Area,
+    refPath	ReferencePath,
+    refFormation	ReferenceFormation,
+    agents	WorldData_agents
 }
 
 -- ./dataview-uniq.asn
@@ -201,13 +205,31 @@ MySeqOf ::= SEQUENCE (SIZE (2 .. 2)) OF MyEnum
 MyOctStr ::= OCTET STRING (SIZE (3 .. 3))
 
 -- ./dataview-uniq.asn
-ReferencePath_actions ::= SEQUENCE (SIZE (3 .. 3)) OF HoverAction
+WorldData_agents ::= SEQUENCE (SIZE (5 .. 5)) OF Agent
 
 -- ./dataview-uniq.asn
-ReferencePath_locations ::= SEQUENCE (SIZE (3 .. 3)) OF Position
+SafetyAction_sPosition ::= SEQUENCE (SIZE (5 .. 5)) OF Position
+
+-- ./dataview-uniq.asn
+PixyData_yPix ::= SEQUENCE (SIZE (5 .. 5)) OF T_UInt32
+
+-- ./dataview-uniq.asn
+PixyData_xPix ::= SEQUENCE (SIZE (5 .. 5)) OF T_UInt32
+
+-- ./dataview-uniq.asn
+ReferencePath_actions ::= SEQUENCE (SIZE (5 .. 5)) OF HoverAction
+
+-- ./dataview-uniq.asn
+ReferencePath_locations ::= SEQUENCE (SIZE (5 .. 5)) OF Position
 
 -- ./dataview-uniq.asn
 ReferenceFormation_nodes ::= SEQUENCE (SIZE (5 .. 5)) OF T_Int8
+
+-- ./dataview-uniq.asn
+PositionSystemData_yAct ::= SEQUENCE (SIZE (5 .. 5)) OF MyReal
+
+-- ./dataview-uniq.asn
+PositionSystemData_xAct ::= SEQUENCE (SIZE (5 .. 5)) OF MyReal
 
 -- ./dataview-uniq.asn
 MySeq_validity ::= ENUMERATED {

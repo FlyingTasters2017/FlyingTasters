@@ -411,8 +411,6 @@ FEATURES
   world_safety_interupt : OUT PARAMETER DataView::SafetyInterupt {
     Taste::encoding => UPER;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
 END PI_check_mission_safety;
 
 SUBPROGRAM IMPLEMENTATION PI_check_mission_safety.others
@@ -732,14 +730,14 @@ END GUI.others;
 SYSTEM MS_Communication
 FEATURES
   PI_enable_pixycam : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MS_Communication::PI_enable_pixycam.others {
-    Taste::coordinates => "399 1145";
+    Taste::coordinates => "399 1147";
     Taste::RCMoperationKind => protected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "enable_pixycam";
   };
   RI_put_raw_MSD : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::MS_Supervisor::PI_put_raw_MSD.others {
-    Taste::coordinates => "399 1212";
+    Taste::coordinates => "399 1214";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "put_raw_MSD";
     Taste::labelInheritance => "true";
@@ -950,7 +948,6 @@ FEATURES
   PI_check_mission_safety : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Mission_Safety::PI_check_mission_safety.others {
     Taste::coordinates => "1420 138";
     Taste::RCMoperationKind => unprotected;
-    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "check_mission_safety";
   };
@@ -1135,7 +1132,7 @@ SUBCOMPONENTS
     Taste::coordinates => "257 30 599 210";
   };
   MS_Communication : SYSTEM interfaceview::IV::MS_Communication.others {
-    Taste::coordinates => "124 1106 399 1237";
+    Taste::coordinates => "124 1108 399 1239";
   };
   AS_Supervisor : SYSTEM interfaceview::IV::AS_Supervisor.others {
     Taste::coordinates => "1180 1109 1586 1442";
@@ -1199,10 +1196,10 @@ CONNECTIONS
     Taste::coordinates => "1563 486 1634 486 1634 750 1697 750";
   };
   MS_Communication_enable_pixycam_MS_Supervisor_enable_pixycam : SUBPROGRAM ACCESS MS_Communication.PI_enable_pixycam -> MS_Supervisor.RI_enable_pixycam {
-    Taste::coordinates => "620 1162 509 1162 509 1145 399 1145";
+    Taste::coordinates => "620 1162 509 1162 509 1147 399 1147";
   };
   MS_Supervisor_put_raw_MSD_MS_Communication_put_raw_MSD : SUBPROGRAM ACCESS MS_Supervisor.PI_put_raw_MSD -> MS_Communication.RI_put_raw_MSD {
-    Taste::coordinates => "399 1212 479 1212 479 1210 620 1210";
+    Taste::coordinates => "399 1214 479 1214 479 1210 620 1210";
   };
   AS_Supervisor_put_raw_asd_Socket_Client_put_raw_asd : SUBPROGRAM ACCESS AS_Supervisor.PI_put_raw_asd -> Socket_Client.RI_put_raw_asd {
     Taste::coordinates => "2203 892 2075 892 2075 1195 1586 1195";

@@ -73,7 +73,8 @@ DroneSensorData ::= SEQUENCE {
 
 FeedbackToGUI ::= SEQUENCE {
     flight WorldData,
-    notification SystemState
+    notification SystemState,
+    safety SafetyInterupt
 }
 
 HoverAction ::= SEQUENCE {
@@ -99,8 +100,8 @@ Position ::= SEQUENCE {
 }
 
 PositionSystemData ::= SEQUENCE {
-    xAct MyReal,
-    yAct MyReal
+    xAct SEQUENCE (SIZE (5)) OF MyReal,
+    yAct SEQUENCE (SIZE (5)) OF MyReal
 }
 
 ReferenceFormation ::= SEQUENCE {
@@ -112,17 +113,17 @@ ReferenceFormation ::= SEQUENCE {
 
 ReferencePath ::= SEQUENCE {
     nlocations  T-Int32,
-    locations SEQUENCE (SIZE (3)) OF Position,
-    actions SEQUENCE (SIZE (3)) OF HoverAction
+    locations SEQUENCE (SIZE (5)) OF Position,
+    actions SEQUENCE (SIZE (5)) OF HoverAction
 }
 
 PixyData ::= SEQUENCE{
-    xPix T-UInt32,
-    yPix T-UInt32
+    xPix SEQUENCE (SIZE (5)) OF T-UInt32,
+    yPix SEQUENCE (SIZE (5)) OF T-UInt32
 }
 
 SafetyAction::= SEQUENCE {
-    sPosition Position
+    sPosition SEQUENCE (SIZE (5)) OF Position
 }
 
 SafetyEvent::= ENUMERATED {safe,collision,wallColl,ceilColl}
@@ -152,15 +153,13 @@ Velocity ::= SEQUENCE {
     vYaw MyReal
 }
 
-WorldData ::= SEQUENCE{
-    agentData Agent
+
+WorldData ::= SEQUENCE {
+    myArea Area,
+    refPath ReferencePath,
+    refFormation ReferenceFormation,
+    agents SEQUENCE (SIZE (5)) OF Agent
 }
---WorldData ::= SEQUENCE {
---    myArea Area,
---    refPath ReferencePath,
-    --refFormation ReferenceFormation,
-    --agents SEQUENCE (SIZE (3)) OF Agent
---}
 
 
 
