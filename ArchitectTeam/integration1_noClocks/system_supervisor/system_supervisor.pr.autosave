@@ -7,7 +7,7 @@ process system_supervisor;
     
     dcl raw_world_data WorldData;
     dcl proc_world_data WorldData;
-    dcl world_safety_events SafetyEvent;
+    dcl world_safety_interupts SafetyInterupt;
     dcl control_error Trajectory;
     /* CIF ENDTEXT */
     /* CIF START (215, 10), (70, 35) */
@@ -37,23 +37,23 @@ process system_supervisor;
             enddecision;
         /* CIF input (891, 91), (251, 35) */
         input update_world_data(proc_world_data);
-            /* CIF PROCEDURECALL (819, 146), (395, 35) */
-            call check_mission_safety(proc_world_data,world_safety_events);
-            /* CIF PROCEDURECALL (920, 201), (194, 35) */
+            /* CIF PROCEDURECALL (812, 146), (409, 35) */
+            call check_mission_safety(proc_world_data,world_safety_interupts);
+            /* CIF PROCEDURECALL (919, 201), (194, 35) */
             call writeln('choose trajectory');
-            /* CIF PROCEDURECALL (786, 251), (461, 35) */
-            call choose_trajectory(proc_world_data,world_safety_events,control_error);
-            /* CIF PROCEDURECALL (920, 306), (194, 35) */
+            /* CIF PROCEDURECALL (779, 251), (475, 35) */
+            call choose_trajectory(proc_world_data,world_safety_interupts,control_error);
+            /* CIF PROCEDURECALL (919, 306), (194, 35) */
             call writeln('calc control_input');
-            /* CIF PROCEDURECALL (836, 356), (362, 35) */
+            /* CIF PROCEDURECALL (835, 356), (362, 35) */
             call calculate_control_input(control_error,proc_world_data);
-            /* CIF PROCEDURECALL (941, 411), (152, 35) */
+            /* CIF PROCEDURECALL (940, 411), (152, 35) */
             call writeln('update GUI');
             /* CIF output (883, 461), (267, 35) */
             output update_GUI(proc_world_data);
             /* CIF PROCEDURECALL (925, 516), (183, 35) */
             call writeln('end sysSV');
-            /* CIF NEXTSTATE (982, 566), (70, 38) */
+            /* CIF NEXTSTATE (981, 566), (70, 38) */
             NEXTSTATE running;
     endstate;
     /* CIF state (215, 60), (70, 35) */

@@ -14,7 +14,7 @@ extern "C" {
 void trajectory_generator_startup();
 
 void trajectory_generator_PI_choose_trajectory(const asn1SccWorldData *,
-                                               const asn1SccSafetyEvent *,
+                                               const asn1SccSafetyInterupt *,
                                                asn1SccTrajectory *);
 
 #ifdef __cplusplus

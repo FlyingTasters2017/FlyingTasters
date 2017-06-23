@@ -52,6 +52,39 @@ functions['system_supervisor']['interfaces']['set_user_input']['in']['user_input
     'param_direction': param_in
 }
 
+functions['system_supervisor']['interfaces']['update_world_data'] = {
+    'port_name': 'update_world_data',
+    'parent_fv': 'system_supervisor',
+    'direction': PI,
+    'in': {},
+    'out': {},
+    'synchronism': asynch,
+    'rcm': variator,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': 'ms',
+    'wcet_high': 0,
+    'wcet_high_unit': 'ms',
+    'distant_fv': '',
+    'calling_threads': {},
+    'distant_name': '',
+    'queue_size': 1
+}
+
+functions['system_supervisor']['interfaces']['update_world_data']['paramsInOrdered'] = ['processed_world_data']
+
+functions['system_supervisor']['interfaces']['update_world_data']['paramsOutOrdered'] = []
+
+functions['system_supervisor']['interfaces']['update_world_data']['in']['processed_world_data'] = {
+    'type': 'WorldData',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': sequence,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'update_world_data',
+    'param_direction': param_in
+}
+
 functions['system_supervisor']['interfaces']['update_GUI'] = {
     'port_name': 'update_GUI',
     'parent_fv': 'system_supervisor',
@@ -172,7 +205,7 @@ functions['system_supervisor']['interfaces']['check_mission_safety'] = {
 
 functions['system_supervisor']['interfaces']['check_mission_safety']['paramsInOrdered'] = ['processed_world_data']
 
-functions['system_supervisor']['interfaces']['check_mission_safety']['paramsOutOrdered'] = ['world_safety_events']
+functions['system_supervisor']['interfaces']['check_mission_safety']['paramsOutOrdered'] = ['world_safety_interupt']
 
 functions['system_supervisor']['interfaces']['check_mission_safety']['in']['processed_world_data'] = {
     'type': 'WorldData',
@@ -184,10 +217,10 @@ functions['system_supervisor']['interfaces']['check_mission_safety']['in']['proc
     'param_direction': param_in
 }
 
-functions['system_supervisor']['interfaces']['check_mission_safety']['out']['world_safety_events'] = {
-    'type': 'SafetyEvent',
+functions['system_supervisor']['interfaces']['check_mission_safety']['out']['world_safety_interupt'] = {
+    'type': 'SafetyInterupt',
     'asn1_module': 'TASTE_Dataview',
-    'basic_type': enumerated,
+    'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'check_mission_safety',
@@ -213,7 +246,7 @@ functions['system_supervisor']['interfaces']['choose_trajectory'] = {
     'queue_size': 1
 }
 
-functions['system_supervisor']['interfaces']['choose_trajectory']['paramsInOrdered'] = ['processed_world_data', 'world_safety_events']
+functions['system_supervisor']['interfaces']['choose_trajectory']['paramsInOrdered'] = ['processed_world_data', 'world_safety_interupt']
 
 functions['system_supervisor']['interfaces']['choose_trajectory']['paramsOutOrdered'] = ['control_error']
 
@@ -227,10 +260,10 @@ functions['system_supervisor']['interfaces']['choose_trajectory']['in']['process
     'param_direction': param_in
 }
 
-functions['system_supervisor']['interfaces']['choose_trajectory']['in']['world_safety_events'] = {
-    'type': 'SafetyEvent',
+functions['system_supervisor']['interfaces']['choose_trajectory']['in']['world_safety_interupt'] = {
+    'type': 'SafetyInterupt',
     'asn1_module': 'TASTE_Dataview',
-    'basic_type': enumerated,
+    'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'choose_trajectory',
@@ -320,39 +353,6 @@ functions['system_supervisor']['interfaces']['talk_with_Houston']['in']['sysSV_t
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'talk_with_Houston',
-    'param_direction': param_in
-}
-
-functions['system_supervisor']['interfaces']['update_world_data'] = {
-    'port_name': 'update_world_data',
-    'parent_fv': 'system_supervisor',
-    'direction': PI,
-    'in': {},
-    'out': {},
-    'synchronism': asynch,
-    'rcm': variator,
-    'period': 0,
-    'wcet_low': 0,
-    'wcet_low_unit': 'ms',
-    'wcet_high': 0,
-    'wcet_high_unit': 'ms',
-    'distant_fv': '',
-    'calling_threads': {},
-    'distant_name': '',
-    'queue_size': 1
-}
-
-functions['system_supervisor']['interfaces']['update_world_data']['paramsInOrdered'] = ['processed_world_data']
-
-functions['system_supervisor']['interfaces']['update_world_data']['paramsOutOrdered'] = []
-
-functions['system_supervisor']['interfaces']['update_world_data']['in']['processed_world_data'] = {
-    'type': 'WorldData',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': sequence,
-    'asn1_filename': './dataview-uniq.asn',
-    'encoding': UPER,
-    'interface': 'update_world_data',
     'param_direction': param_in
 }
 
@@ -588,7 +588,7 @@ functions['as_supervisor']['interfaces']['store_ASD'] = {
     'in': {},
     'out': {},
     'synchronism': synch,
-    'rcm': unprotected,
+    'rcm': protected,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': '',
@@ -699,6 +699,39 @@ functions['houston']['interfaces']['talk_with_Houston']['in']['sysSV_to_Houston_
     'param_direction': param_in
 }
 
+functions['houston']['interfaces']['put_control_data'] = {
+    'port_name': 'put_control_data',
+    'parent_fv': 'houston',
+    'direction': PI,
+    'in': {},
+    'out': {},
+    'synchronism': asynch,
+    'rcm': variator,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': 'ms',
+    'wcet_high': 0,
+    'wcet_high_unit': 'ms',
+    'distant_fv': '',
+    'calling_threads': {},
+    'distant_name': '',
+    'queue_size': 1
+}
+
+functions['houston']['interfaces']['put_control_data']['paramsInOrdered'] = ['control_data']
+
+functions['houston']['interfaces']['put_control_data']['paramsOutOrdered'] = []
+
+functions['houston']['interfaces']['put_control_data']['in']['control_data'] = {
+    'type': 'DroneControllerInput',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': sequence,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'put_control_data',
+    'param_direction': param_in
+}
+
 functions['houston']['interfaces']['store_control_data'] = {
     'port_name': 'store_control_data',
     'parent_fv': 'houston',
@@ -762,39 +795,6 @@ functions['houston']['interfaces']['send_control_data']['in']['control_input'] =
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'send_control_data',
-    'param_direction': param_in
-}
-
-functions['houston']['interfaces']['put_control_data'] = {
-    'port_name': 'put_control_data',
-    'parent_fv': 'houston',
-    'direction': PI,
-    'in': {},
-    'out': {},
-    'synchronism': asynch,
-    'rcm': variator,
-    'period': 0,
-    'wcet_low': 0,
-    'wcet_low_unit': 'ms',
-    'wcet_high': 0,
-    'wcet_high_unit': 'ms',
-    'distant_fv': '',
-    'calling_threads': {},
-    'distant_name': '',
-    'queue_size': 1
-}
-
-functions['houston']['interfaces']['put_control_data']['paramsInOrdered'] = ['control_data']
-
-functions['houston']['interfaces']['put_control_data']['paramsOutOrdered'] = []
-
-functions['houston']['interfaces']['put_control_data']['in']['control_data'] = {
-    'type': 'DroneControllerInput',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': sequence,
-    'asn1_filename': './dataview-uniq.asn',
-    'encoding': UPER,
-    'interface': 'put_control_data',
     'param_direction': param_in
 }
 
@@ -984,7 +984,7 @@ functions['ms_supervisor']['interfaces']['store_MSD'] = {
     'in': {},
     'out': {},
     'synchronism': synch,
-    'rcm': unprotected,
+    'rcm': protected,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': '',
@@ -1116,7 +1116,7 @@ functions['mission_safety']['interfaces']['check_mission_safety'] = {
 
 functions['mission_safety']['interfaces']['check_mission_safety']['paramsInOrdered'] = ['processed_world_data']
 
-functions['mission_safety']['interfaces']['check_mission_safety']['paramsOutOrdered'] = ['world_safety_events']
+functions['mission_safety']['interfaces']['check_mission_safety']['paramsOutOrdered'] = ['world_safety_interupt']
 
 functions['mission_safety']['interfaces']['check_mission_safety']['in']['processed_world_data'] = {
     'type': 'WorldData',
@@ -1128,10 +1128,10 @@ functions['mission_safety']['interfaces']['check_mission_safety']['in']['process
     'param_direction': param_in
 }
 
-functions['mission_safety']['interfaces']['check_mission_safety']['out']['world_safety_events'] = {
-    'type': 'SafetyEvent',
+functions['mission_safety']['interfaces']['check_mission_safety']['out']['world_safety_interupt'] = {
+    'type': 'SafetyInterupt',
     'asn1_module': 'TASTE_Dataview',
-    'basic_type': enumerated,
+    'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'check_mission_safety',
@@ -1166,7 +1166,7 @@ functions['trajectory_generator']['interfaces']['choose_trajectory'] = {
     'queue_size': 1
 }
 
-functions['trajectory_generator']['interfaces']['choose_trajectory']['paramsInOrdered'] = ['processed_world_data', 'world_safety_events']
+functions['trajectory_generator']['interfaces']['choose_trajectory']['paramsInOrdered'] = ['processed_world_data', 'world_safety_interupt']
 
 functions['trajectory_generator']['interfaces']['choose_trajectory']['paramsOutOrdered'] = ['control_error']
 
@@ -1180,10 +1180,10 @@ functions['trajectory_generator']['interfaces']['choose_trajectory']['in']['proc
     'param_direction': param_in
 }
 
-functions['trajectory_generator']['interfaces']['choose_trajectory']['in']['world_safety_events'] = {
-    'type': 'SafetyEvent',
+functions['trajectory_generator']['interfaces']['choose_trajectory']['in']['world_safety_interupt'] = {
+    'type': 'SafetyInterupt',
     'asn1_module': 'TASTE_Dataview',
-    'basic_type': enumerated,
+    'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'choose_trajectory',
@@ -1416,7 +1416,7 @@ functions['world_model']['interfaces']['store_MSD'] = {
     'in': {},
     'out': {},
     'synchronism': synch,
-    'rcm': unprotected,
+    'rcm': protected,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': 'ms',
@@ -1449,7 +1449,7 @@ functions['world_model']['interfaces']['store_ASD'] = {
     'in': {},
     'out': {},
     'synchronism': synch,
-    'rcm': unprotected,
+    'rcm': protected,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': 'ms',

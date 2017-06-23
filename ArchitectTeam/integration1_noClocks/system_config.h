@@ -3,18 +3,18 @@
 /* Configuration file used by C_ASN1_Types.h */
 
 #define __NEED_MyInteger_NATIVE
+#define __NEED_WorldData_UPER
 #define __NEED_WorldData_NATIVE
 #define __NEED_MyInteger_UPER
 #define __NEED_MyInteger_UPER
 #define __NEED_WorldData_UPER
-#define __NEED_SafetyEvent_UPER
+#define __NEED_SafetyInterupt_UPER
 #define __NEED_WorldData_UPER
-#define __NEED_SafetyEvent_UPER
+#define __NEED_SafetyInterupt_UPER
 #define __NEED_Trajectory_UPER
 #define __NEED_Trajectory_UPER
 #define __NEED_WorldData_UPER
 #define __NEED_MyInteger_UPER
-#define __NEED_WorldData_UPER
 #define __NEED_WorldData_NATIVE
 #define __NEED_MyInteger_NATIVE
 #define __NEED_MyInteger_UPER
@@ -39,9 +39,9 @@
 #define __NEED_Agent_UPER
 #define __NEED_MyInteger_UPER
 #define __NEED_WorldData_UPER
-#define __NEED_SafetyEvent_UPER
+#define __NEED_SafetyInterupt_UPER
 #define __NEED_WorldData_UPER
-#define __NEED_SafetyEvent_UPER
+#define __NEED_SafetyInterupt_UPER
 #define __NEED_Trajectory_UPER
 #define __NEED_Trajectory_UPER
 #define __NEED_WorldData_UPER

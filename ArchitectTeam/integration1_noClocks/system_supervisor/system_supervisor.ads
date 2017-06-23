@@ -1,9 +1,9 @@
 -- This file was generated automatically: DO NOT MODIFY IT !
 
-with TASTE_BasicTypes;
-use TASTE_BasicTypes;
 with TASTE_Dataview;
 use TASTE_Dataview;
+with TASTE_BasicTypes;
+use TASTE_BasicTypes;
 with adaasn1rtl;
 use adaasn1rtl;
 
@@ -29,10 +29,10 @@ package system_supervisor is
     procedure RIÜtalk_with_Houston(sysSV_to_Houston_events: access asn1SccMyInteger);
     pragma import(C, RIÜtalk_with_Houston, "system_supervisor_RI_talk_with_Houston");
     --  Sync required interface "check_mission_safety"
-    procedure RIÜcheck_mission_safety(processed_world_data: access asn1SccWorldData; world_safety_events: access asn1SccSafetyEvent);
+    procedure RIÜcheck_mission_safety(processed_world_data: access asn1SccWorldData; world_safety_interupt: access asn1SccSafetyInterupt);
     pragma import(C, RIÜcheck_mission_safety, "system_supervisor_RI_check_mission_safety");
     --  Sync required interface "choose_trajectory"
-    procedure RIÜchoose_trajectory(processed_world_data: access asn1SccWorldData; world_safety_events: access asn1SccSafetyEvent; control_error: access asn1SccTrajectory);
+    procedure RIÜchoose_trajectory(processed_world_data: access asn1SccWorldData; world_safety_interupt: access asn1SccSafetyInterupt; control_error: access asn1SccTrajectory);
     pragma import(C, RIÜchoose_trajectory, "system_supervisor_RI_choose_trajectory");
     --  Sync required interface "calculate_control_input"
     procedure RIÜcalculate_control_input(control_error: access asn1SccTrajectory; processed_world_data: access asn1SccWorldData);

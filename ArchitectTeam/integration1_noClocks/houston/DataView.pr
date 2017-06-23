@@ -1,21 +1,6 @@
 Datamodel DEFINITIONS ::= BEGIN
 
 -- ./dataview-uniq.asn
-T_Int32 ::= INTEGER (-2147483648 .. 2147483647)
-
--- ./dataview-uniq.asn
-T_UInt32 ::= INTEGER (0 .. 4294967295)
-
--- ./dataview-uniq.asn
-T_Int8 ::= INTEGER (-128 .. 127)
-
--- ./dataview-uniq.asn
-T_UInt8 ::= INTEGER (0 .. 255)
-
--- ./dataview-uniq.asn
-T_Boolean ::= BOOLEAN
-
--- ./dataview-uniq.asn
 MyInteger ::= T_UInt8
 
 -- ./dataview-uniq.asn
@@ -140,6 +125,7 @@ ReferenceFormation ::= SEQUENCE {
 
 -- ./dataview-uniq.asn
 ReferencePath ::= SEQUENCE {
+    nlocations	T_UInt32,
     locations	ReferencePath_locations,
     actions	ReferencePath_actions
 }
@@ -151,11 +137,22 @@ PixyData ::= SEQUENCE {
 }
 
 -- ./dataview-uniq.asn
+SafetyAction ::= SEQUENCE {
+    sPosition	Position
+}
+
+-- ./dataview-uniq.asn
 SafetyEvent ::= ENUMERATED {
     safe(0),
     collision(1),
     wallColl(2),
     ceilColl(3)
+}
+
+-- ./dataview-uniq.asn
+SafetyInterupt ::= SEQUENCE {
+    sEvent	SafetyEvent,
+    sAction	SafetyAction
 }
 
 -- ./dataview-uniq.asn
@@ -217,5 +214,20 @@ MySeq_validity ::= ENUMERATED {
     valid(0),
     invalid(1)
 }
+
+-- ./dataview-uniq.asn
+T_Int32 ::= INTEGER (-2147483648 .. 2147483647)
+
+-- ./dataview-uniq.asn
+T_UInt32 ::= INTEGER (0 .. 4294967295)
+
+-- ./dataview-uniq.asn
+T_Int8 ::= INTEGER (-128 .. 127)
+
+-- ./dataview-uniq.asn
+T_UInt8 ::= INTEGER (0 .. 255)
+
+-- ./dataview-uniq.asn
+T_Boolean ::= BOOLEAN
 
 END

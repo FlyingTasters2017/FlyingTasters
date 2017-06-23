@@ -6,10 +6,10 @@ use System.IO;
 with Ada.Unchecked_Conversion;
 with Ada.Numerics.Generic_Elementary_Functions;
 
-with TASTE_BasicTypes;
-use TASTE_BasicTypes;
 with TASTE_Dataview;
 use TASTE_Dataview;
+with TASTE_BasicTypes;
+use TASTE_BasicTypes;
 with adaasn1rtl;
 use adaasn1rtl;
 
@@ -23,9 +23,9 @@ package body system_supervisor is
         state : States;
         initDone : Boolean := False;
         raw_world_data : aliased asn1SccWorldData;
+        world_safety_interupts : aliased asn1SccSafetyInterupt;
         user_input : aliased asn1SccMyInteger;
         proc_world_data : aliased asn1SccWorldData;
-        world_safety_events : aliased asn1SccSafetyEvent;
         control_error : aliased asn1SccTrajectory;
     end record;
     ctxt: aliased ctxt_Ty;
@@ -92,13 +92,13 @@ package body system_supervisor is
                             goto next_transition;
                         end if;
                     when 2 =>
-                        -- check_mission_safety(proc_world_data,world_safety_events) (41,17)
-                        RIÜcheck_mission_safety(ctxt.proc_world_data'Access, ctxt.world_safety_events'Access);
+                        -- check_mission_safety(proc_world_data,world_safety_interupts) (41,17)
+                        RIÜcheck_mission_safety(ctxt.proc_world_data'Access, ctxt.world_safety_interupts'Access);
                         -- writeln('choose trajectory') (43,17)
                         Put("choose trajectory");
                         New_Line;
-                        -- choose_trajectory(proc_world_data,world_safety_events,control_error) (45,17)
-                        RIÜchoose_trajectory(ctxt.proc_world_data'Access, ctxt.world_safety_events'Access, ctxt.control_error'Access);
+                        -- choose_trajectory(proc_world_data,world_safety_interupts,control_error) (45,17)
+                        RIÜchoose_trajectory(ctxt.proc_world_data'Access, ctxt.world_safety_interupts'Access, ctxt.control_error'Access);
                         -- writeln('calc control_input') (47,17)
                         Put("calc control_input");
                         New_Line;
@@ -112,7 +112,7 @@ package body system_supervisor is
                         -- writeln('end sysSV') (55,17)
                         Put("end sysSV");
                         New_Line;
-                        -- NEXT_STATE running (57,22) at 982, 566
+                        -- NEXT_STATE running (57,22) at 981, 566
                         trId := -1;
                         ctxt.state := running;
                         goto next_transition;
