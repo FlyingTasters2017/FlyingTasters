@@ -111,7 +111,7 @@ ReferenceFormation ::= SEQUENCE {
 }
 
 ReferencePath ::= SEQUENCE {
-    nlocations  T-UInt32,
+    nlocations  T-Int32,
     locations SEQUENCE (SIZE (3)) OF Position,
     actions SEQUENCE (SIZE (3)) OF HoverAction
 }

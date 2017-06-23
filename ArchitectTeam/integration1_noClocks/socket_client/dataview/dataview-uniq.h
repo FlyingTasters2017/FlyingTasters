@@ -427,22 +427,8 @@ flag asn1SccT_Int32_IsConstraintValid(const asn1SccT_Int32* val, int* pErrCode);
 #define ERR_asn1SccT_Int32		1018  /*(-2147483648 .. 2147483647)*/
 #endif
 
-typedef asn1SccUint asn1SccT_UInt32;
-
-#define asn1SccT_UInt32_REQUIRED_BYTES_FOR_ENCODING       4 
-#define asn1SccT_UInt32_REQUIRED_BITS_FOR_ENCODING        32
-#define asn1SccT_UInt32_REQUIRED_BYTES_FOR_ACN_ENCODING   4 
-#define asn1SccT_UInt32_REQUIRED_BITS_FOR_ACN_ENCODING    32
-#define asn1SccT_UInt32_REQUIRED_BYTES_FOR_XER_ENCODING   41
-
-void asn1SccT_UInt32_Initialize(asn1SccT_UInt32* pVal);
-flag asn1SccT_UInt32_IsConstraintValid(const asn1SccT_UInt32* val, int* pErrCode);
-#ifndef ERR_asn1SccT_UInt32 
-#define ERR_asn1SccT_UInt32		1019  /*(0 .. 4294967295)*/
-#endif
-
 typedef struct {
-    asn1SccT_UInt32 nlocations;
+    asn1SccT_Int32 nlocations;
     asn1SccReferencePath_locations locations;
     asn1SccReferencePath_actions actions;
 } asn1SccReferencePath;
@@ -456,6 +442,20 @@ typedef struct {
 void asn1SccReferencePath_Initialize(asn1SccReferencePath* pVal);
 flag asn1SccReferencePath_IsConstraintValid(const asn1SccReferencePath* val, int* pErrCode);
 
+
+typedef asn1SccUint asn1SccT_UInt32;
+
+#define asn1SccT_UInt32_REQUIRED_BYTES_FOR_ENCODING       4 
+#define asn1SccT_UInt32_REQUIRED_BITS_FOR_ENCODING        32
+#define asn1SccT_UInt32_REQUIRED_BYTES_FOR_ACN_ENCODING   4 
+#define asn1SccT_UInt32_REQUIRED_BITS_FOR_ACN_ENCODING    32
+#define asn1SccT_UInt32_REQUIRED_BYTES_FOR_XER_ENCODING   41
+
+void asn1SccT_UInt32_Initialize(asn1SccT_UInt32* pVal);
+flag asn1SccT_UInt32_IsConstraintValid(const asn1SccT_UInt32* val, int* pErrCode);
+#ifndef ERR_asn1SccT_UInt32 
+#define ERR_asn1SccT_UInt32		1019  /*(0 .. 4294967295)*/
+#endif
 
 typedef struct {
     asn1SccT_UInt32 xPix;
@@ -716,10 +716,10 @@ flag asn1SccMySeq_validity_Encode(const asn1SccMySeq_validity* val, BitStream* p
 flag asn1SccMySeq_validity_Decode(asn1SccMySeq_validity* pVal, BitStream* pBitStrm, int* pErrCode);
 flag asn1SccT_Int32_Encode(const asn1SccT_Int32* val, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
 flag asn1SccT_Int32_Decode(asn1SccT_Int32* pVal, BitStream* pBitStrm, int* pErrCode);
-flag asn1SccT_UInt32_Encode(const asn1SccT_UInt32* val, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
-flag asn1SccT_UInt32_Decode(asn1SccT_UInt32* pVal, BitStream* pBitStrm, int* pErrCode);
 flag asn1SccReferencePath_Encode(const asn1SccReferencePath* val, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
 flag asn1SccReferencePath_Decode(asn1SccReferencePath* pVal, BitStream* pBitStrm, int* pErrCode);
+flag asn1SccT_UInt32_Encode(const asn1SccT_UInt32* val, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
+flag asn1SccT_UInt32_Decode(asn1SccT_UInt32* pVal, BitStream* pBitStrm, int* pErrCode);
 flag asn1SccPixyData_Encode(const asn1SccPixyData* val, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);
 flag asn1SccPixyData_Decode(asn1SccPixyData* pVal, BitStream* pBitStrm, int* pErrCode);
 flag asn1SccT_Int8_Encode(const asn1SccT_Int8* val, BitStream* pBitStrm, int* pErrCode, flag bCheckConstraints);

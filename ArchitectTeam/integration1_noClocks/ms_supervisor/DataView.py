@@ -399,7 +399,7 @@ types["ReferencePath"] = type("ReferencePath", (object,), {
         "Line": 113, "CharPositionInLine": 18, "kind": "SequenceType", "Children": {
             "nlocations": type("nlocations", (object,), {
                 "Optional": "False", "Line": 114, "CharPositionInLine": 4, "type": type("nlocations_type", (object,), {
-                    "Line": 114, "CharPositionInLine": 16, "kind": "ReferenceType", "ReferencedTypeName": "T-UInt32", "Min": "0", "Max": "4294967295", "ReferencedModName": "TASTE-BasicTypes"
+                    "Line": 114, "CharPositionInLine": 16, "kind": "ReferenceType", "ReferencedTypeName": "T-Int32", "Min": "-2147483648", "Max": "2147483647", "ReferencedModName": "TASTE-BasicTypes"
                 })
             }),
             "locations": type("locations", (object,), {

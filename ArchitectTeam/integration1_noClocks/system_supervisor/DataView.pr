@@ -125,7 +125,7 @@ ReferenceFormation ::= SEQUENCE {
 
 -- ./dataview-uniq.asn
 ReferencePath ::= SEQUENCE {
-    nlocations	T_UInt32,
+    nlocations	T_Int32,
     locations	ReferencePath_locations,
     actions	ReferencePath_actions
 }

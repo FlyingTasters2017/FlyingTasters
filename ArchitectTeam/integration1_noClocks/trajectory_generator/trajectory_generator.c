@@ -1,10 +1,12 @@
 /* User code: This file will not be overwritten by TASTE. */
 
 #include "trajectory_generator.h"
+#include "configurationDefinition.h"
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
 #define PI 3.14159265
+
 
 long            ms_0; // Milliseconds
 time_t          s_0;
@@ -23,7 +25,9 @@ void trajectory_generator_startup()
     /* Write your initialization code here,
        but do not make any call to a required interface. */
     struct FormationConfig  myFormation;
+    
     myFormation=get_configFile("../../Config");
+    
     int locationNumber= myFormation.flightPlan.nlocations;
     char** loc;
     loc = str_split(myFormation.flightPlan.configLocations, ',');
@@ -53,7 +57,7 @@ void trajectory_generator_startup()
 }
 
 void trajectory_generator_PI_choose_trajectory(const asn1SccWorldData *IN_processed_world_data,
-                                              const asn1SccSafetyEvent *IN_world_safety_events,
+                                              const asn1SccSafetyInterupt *IN_world_safety_events,
                                               asn1SccTrajectory *OUT_control_error)
 {
       printf("i = %d\n",i);

@@ -411,6 +411,8 @@ FEATURES
   world_safety_interupt : OUT PARAMETER DataView::SafetyInterupt {
     Taste::encoding => UPER;
   };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_check_mission_safety;
 
 SUBPROGRAM IMPLEMENTATION PI_check_mission_safety.others
@@ -435,6 +437,8 @@ FEATURES
   control_error : OUT PARAMETER DataView::Trajectory {
     Taste::encoding => UPER;
   };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_choose_trajectory;
 
 SUBPROGRAM IMPLEMENTATION PI_choose_trajectory.others
@@ -946,6 +950,7 @@ FEATURES
   PI_check_mission_safety : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Mission_Safety::PI_check_mission_safety.others {
     Taste::coordinates => "1420 138";
     Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "check_mission_safety";
   };
@@ -965,8 +970,9 @@ END Mission_Safety.others;
 SYSTEM Trajectory_Generator
 FEATURES
   PI_choose_trajectory : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Trajectory_Generator::PI_choose_trajectory.others {
-    Taste::coordinates => "1670 150";
+    Taste::coordinates => "1673 150";
     Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "choose_trajectory";
   };
@@ -1150,7 +1156,7 @@ SUBCOMPONENTS
     Taste::coordinates => "1289 7 1564 138";
   };
   Trajectory_Generator : SYSTEM interfaceview::IV::Trajectory_Generator.others {
-    Taste::coordinates => "1670 44 1945 175";
+    Taste::coordinates => "1673 44 1948 175";
   };
   Drone_Control : SYSTEM interfaceview::IV::Drone_Control.others {
     Taste::coordinates => "2048 332 2323 463";
@@ -1184,7 +1190,7 @@ CONNECTIONS
     Taste::coordinates => "1421 230 1421 185 1420 185 1420 138";
   };
   Trajectory_Generator_choose_trajectory_System_Supervisor_choose_trajectory : SUBPROGRAM ACCESS Trajectory_Generator.PI_choose_trajectory -> System_Supervisor.RI_choose_trajectory {
-    Taste::coordinates => "1563 308 1618 308 1618 150 1670 150";
+    Taste::coordinates => "1563 308 1618 308 1618 150 1673 150";
   };
   Control_Data_Storage_calculate_control_input_System_Supervisor_calculate_control_input : SUBPROGRAM ACCESS Control_Data_Storage.PI_calculate_control_input -> System_Supervisor.RI_calculate_control_input {
     Taste::coordinates => "1563 380 1609 380 1609 356 1704 356";
