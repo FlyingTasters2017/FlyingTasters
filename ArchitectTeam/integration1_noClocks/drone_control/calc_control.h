@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'calc_control'.
  *
- * Model version                  : 1.3
+ * Model version                  : 1.1
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Thu Jun 22 17:47:16 2017
+ * C/C++ source code generated on : Mon Jun 26 15:21:23 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -19,8 +19,8 @@
 
 #ifndef RTW_HEADER_calc_control_h_
 #define RTW_HEADER_calc_control_h_
-#include <string.h>
 #include <stddef.h>
+#include <string.h>
 #ifndef calc_control_COMMON_INCLUDES_
 # define calc_control_COMMON_INCLUDES_
 #include "rtwtypes.h"
@@ -39,19 +39,22 @@
 
 /* Block states (auto storage) for system '<Root>' */
 typedef struct {
-  real_T UD_DSTATE;                    /* '<S1>/UD' */
-  real_T UD_DSTATE_o;                  /* '<S2>/UD' */
+  real_T UD_DSTATE;                    /* '<S4>/UD' */
+  real_T UD_DSTATE_e;                  /* '<S5>/UD' */
+  real_T UD_DSTATE_m;                  /* '<S6>/UD' */
+  real_T UD_DSTATE_d;                  /* '<S7>/UD' */
+  real_T UD_DSTATE_f;                  /* '<S8>/UD' */
+  real_T UD_DSTATE_p;                  /* '<S9>/UD' */
 } DW_calc_control_T;
 
 /* External inputs (root inport signals with auto storage) */
 typedef struct {
-  Trajectory control_error;            /* '<Root>/control_error' */
-  WorldData processed_world_data;      /* '<Root>/processed_world_data' */
+  MultiControlError control_error;     /* '<Root>/control_error' */
 } ExtU_calc_control_T;
 
 /* External outputs (root outports fed by signals with auto storage) */
 typedef struct {
-  DroneControllerInput control_data;   /* '<Root>/control_data' */
+  MultiDroneControllerInput control_data;/* '<Root>/control_data' */
 } ExtY_calc_control_T;
 
 /* Real-time Model Data Structure */
@@ -69,7 +72,8 @@ extern ExtU_calc_control_T calc_control_U;
 extern ExtY_calc_control_T calc_control_Y;
 
 /* External data declarations for dependent source files */
-extern const DroneControllerInput calc_control_rtZDroneControllerInput;/* DroneControllerInput ground */
+extern const MultiControlError calc_control_rtZMultiControlError;/* MultiControlError ground */
+extern const MultiDroneControllerInput calc_control_rtZMultiDroneControllerInput;/* MultiDroneControllerInput ground */
 
 /* Model entry point functions */
 extern void calc_control_initialize(void);
@@ -82,8 +86,12 @@ extern RT_MODEL_calc_control_T *const calc_control_M;
 /*-
  * These blocks were eliminated from the model due to optimizations:
  *
- * Block '<S1>/Data Type Duplicate' : Unused code path elimination
- * Block '<S2>/Data Type Duplicate' : Unused code path elimination
+ * Block '<S4>/Data Type Duplicate' : Unused code path elimination
+ * Block '<S5>/Data Type Duplicate' : Unused code path elimination
+ * Block '<S6>/Data Type Duplicate' : Unused code path elimination
+ * Block '<S7>/Data Type Duplicate' : Unused code path elimination
+ * Block '<S8>/Data Type Duplicate' : Unused code path elimination
+ * Block '<S9>/Data Type Duplicate' : Unused code path elimination
  */
 
 /*-
@@ -101,9 +109,15 @@ extern RT_MODEL_calc_control_T *const calc_control_M;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'calc_control'
- * '<S1>'   : 'calc_control/Discrete Derivative'
- * '<S2>'   : 'calc_control/Discrete Derivative1'
- * '<S3>'   : 'calc_control/yaw control'
+ * '<S1>'   : 'calc_control/droneController'
+ * '<S2>'   : 'calc_control/droneController1'
+ * '<S3>'   : 'calc_control/droneController2'
+ * '<S4>'   : 'calc_control/droneController/Discrete Derivative'
+ * '<S5>'   : 'calc_control/droneController/Discrete Derivative1'
+ * '<S6>'   : 'calc_control/droneController1/Discrete Derivative'
+ * '<S7>'   : 'calc_control/droneController1/Discrete Derivative1'
+ * '<S8>'   : 'calc_control/droneController2/Discrete Derivative'
+ * '<S9>'   : 'calc_control/droneController2/Discrete Derivative1'
  */
 #endif                                 /* RTW_HEADER_calc_control_h_ */
 

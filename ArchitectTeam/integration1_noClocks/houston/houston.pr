@@ -1,10 +1,10 @@
 /* CIF PROCESS (250, 150), (150, 75) */
 process houston;
-    /* CIF TEXT (1199, 90), (294, 203) */
+    /* CIF TEXT (1199, 90), (296, 203) */
     -- Text area for declarations and comments
     
     dcl user_input MyInteger;
-    dcl control_input DroneControllerInput;
+    dcl control_input MultiDroneControllerInput;
     /* CIF ENDTEXT */
     /* CIF START (184, 10), (70, 35) */
     START;
@@ -27,19 +27,15 @@ process houston;
             enddecision;
         /* CIF input (751, 118), (219, 38) */
         input put_control_data(control_input);
-            /* CIF PROCEDURECALL (606, 176), (509, 35) */
-            call writeln('GOT control data',control_input.yawrateRef,control_input.thrustRef);
-            /* CIF PROCEDURECALL (762, 226), (196, 35) */
+            /* CIF PROCEDURECALL (762, 175), (196, 35) */
             call writeln('Got control data');
-            /* CIF output (747, 276), (227, 35) */
+            /* CIF output (747, 225), (227, 35) */
             output send_control_data(control_input);
-            /* CIF PROCEDURECALL (765, 331), (190, 35) */
+            /* CIF PROCEDURECALL (765, 280), (190, 35) */
             call writeln('sent control data');
-            /* CIF PROCEDURECALL (745, 381), (231, 35) */
+            /* CIF PROCEDURECALL (745, 330), (231, 35) */
             call store_control_data(control_input);
-            /* CIF PROCEDURECALL (606, 436), (509, 35) */
-            call writeln('stored control data',control_input.yawrateRef,control_input.thrustRef);
-            /* CIF NEXTSTATE (825, 486), (70, 35) */
+            /* CIF NEXTSTATE (825, 385), (70, 35) */
             NEXTSTATE running;
     endstate;
     /* CIF state (184, 60), (70, 35) */

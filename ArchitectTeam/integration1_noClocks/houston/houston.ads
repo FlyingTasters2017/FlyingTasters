@@ -14,12 +14,12 @@ package houston is
     procedure talk_with_Houston(sysSV_to_Houston_events: access asn1SccMyInteger);
     pragma Export(C, talk_with_Houston, "houston_talk_with_Houston");
     --  Provided interface "put_control_data"
-    procedure put_control_data(control_data: access asn1SccDroneControllerInput);
+    procedure put_control_data(control_data: access asn1SccMultiDroneControllerInput);
     pragma Export(C, put_control_data, "houston_put_control_data");
     --  Sync required interface "store_control_data"
-    procedure RIÜstore_control_data(control_input: access asn1SccDroneControllerInput);
+    procedure RIÜstore_control_data(control_input: access asn1SccMultiDroneControllerInput);
     pragma import(C, RIÜstore_control_data, "houston_RI_store_control_data");
     --  Sync required interface "send_control_data"
-    procedure RIÜsend_control_data(control_input: access asn1SccDroneControllerInput);
+    procedure RIÜsend_control_data(control_input: access asn1SccMultiDroneControllerInput);
     pragma import(C, RIÜsend_control_data, "houston_RI_send_control_data");
 end houston;

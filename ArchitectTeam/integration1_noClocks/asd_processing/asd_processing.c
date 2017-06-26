@@ -2,21 +2,26 @@
 
 #include "asd_processing.h"
 
+int NR_OF_DRONES=3;
+
 void asd_processing_startup()
 {
     /* Write your initialization code here,
        but do not make any call to a required interface. */
 }
 
-void asd_processing_PI_process_ASD(const asn1SccDroneSensorData *IN_raw_ASD,
-                                   asn1SccAgent *OUT_processed_ASD)
+void asd_processing_PI_process_ASD(const asn1SccMultiDroneSensorData *IN_raw_ASD,
+                                   asn1SccMultiAgents *OUT_processed_ASD)
 {
-    (*OUT_processed_ASD).currentAcceleration.aX     =   (*IN_raw_ASD).accxAct;
-    (*OUT_processed_ASD).currentAcceleration.aY     =   (*IN_raw_ASD).accyAct;
-    (*OUT_processed_ASD).currentAcceleration.aZ     =   (*IN_raw_ASD).acczAct;
-    (*OUT_processed_ASD).currentOrientation.roll    =   (*IN_raw_ASD).rollAct;
-    (*OUT_processed_ASD).currentOrientation.pitch   =   (*IN_raw_ASD).pitchAct;
-    (*OUT_processed_ASD).currentOrientation.yaw     =   (*IN_raw_ASD).yawAct;
+    for (int i=0;i<NR_OF_DRONES;i++)
+    {
+        (*OUT_processed_ASD).agents.arr[i].currentAcceleration.aX     =   (*IN_raw_ASD).data.arr[i].accxAct;
+        (*OUT_processed_ASD).agents.arr[i].currentAcceleration.aY     =   (*IN_raw_ASD).data.arr[i].accyAct;
+        (*OUT_processed_ASD).agents.arr[i].currentAcceleration.aZ     =   (*IN_raw_ASD).data.arr[i].acczAct;
+        (*OUT_processed_ASD).agents.arr[i].currentOrientation.roll    =   (*IN_raw_ASD).data.arr[i].rollAct;
+        (*OUT_processed_ASD).agents.arr[i].currentOrientation.pitch   =   (*IN_raw_ASD).data.arr[i].pitchAct;
+        (*OUT_processed_ASD).agents.arr[i].currentOrientation.yaw     =   (*IN_raw_ASD).data.arr[i].yawAct;
+    }
 
 }
 

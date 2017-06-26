@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'calc_control'.
  *
- * Model version                  : 1.3
+ * Model version                  : 1.1
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Thu Jun 22 17:47:16 2017
+ * C/C++ source code generated on : Mon Jun 26 15:21:23 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -20,88 +20,38 @@
 #ifndef RTW_HEADER_calc_control_types_h_
 #define RTW_HEADER_calc_control_types_h_
 #include "rtwtypes.h"
-#ifndef DEFINED_TYPEDEF_FOR_Trajectory_
-#define DEFINED_TYPEDEF_FOR_Trajectory_
+#ifndef DEFINED_TYPEDEF_FOR_ControlError_
+#define DEFINED_TYPEDEF_FOR_ControlError_
 
 typedef struct {
   real_T x;
   real_T y;
   real_T z;
   real_T yaw;
-} Trajectory;
+} ControlError;
 
 #endif
 
-#ifndef DEFINED_TYPEDEF_FOR_Position_
-#define DEFINED_TYPEDEF_FOR_Position_
+#ifndef DEFINED_TYPEDEF_FOR_MultiControlError_bodyFrameError_
+#define DEFINED_TYPEDEF_FOR_MultiControlError_bodyFrameError_
 
 typedef struct {
-  real_T x;
-  real_T y;
-  real_T z;
-} Position;
+  ControlError element_00;
+  ControlError element_01;
+  ControlError element_02;
+  ControlError element_03;
+  ControlError element_04;
+  int32_T length;
+} MultiControlError_bodyFrameError;
 
 #endif
 
-#ifndef DEFINED_TYPEDEF_FOR_Orientation_
-#define DEFINED_TYPEDEF_FOR_Orientation_
+#ifndef DEFINED_TYPEDEF_FOR_MultiControlError_
+#define DEFINED_TYPEDEF_FOR_MultiControlError_
 
 typedef struct {
-  real_T roll;
-  real_T pitch;
-  real_T yaw;
-} Orientation;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_Velocity_
-#define DEFINED_TYPEDEF_FOR_Velocity_
-
-typedef struct {
-  real_T vX;
-  real_T vY;
-  real_T vZ;
-  real_T vRoll;
-  real_T vPitch;
-  real_T vYaw;
-} Velocity;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_Acceleration_
-#define DEFINED_TYPEDEF_FOR_Acceleration_
-
-typedef struct {
-  real_T aX;
-  real_T aY;
-  real_T aZ;
-  real_T aRoll;
-  real_T aPitch;
-  real_T aYaw;
-} Acceleration;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_Agent_
-#define DEFINED_TYPEDEF_FOR_Agent_
-
-typedef struct {
-  int8_T agentID;
-  int32_T agentColor;
-  Position currentPosition;
-  Orientation currentOrientation;
-  Velocity currentVelocity;
-  Acceleration currentAcceleration;
-} Agent;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_WorldData_
-#define DEFINED_TYPEDEF_FOR_WorldData_
-
-typedef struct {
-  Agent agentData;
-} WorldData;
+  MultiControlError_bodyFrameError bodyFrameError;
+} MultiControlError;
 
 #endif
 
@@ -115,6 +65,29 @@ typedef struct {
   real_T heightRef;
   real_T thrustRef;
 } DroneControllerInput;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_MultiDroneControllerInput_controllerInput_
+#define DEFINED_TYPEDEF_FOR_MultiDroneControllerInput_controllerInput_
+
+typedef struct {
+  DroneControllerInput element_00;
+  DroneControllerInput element_01;
+  DroneControllerInput element_02;
+  DroneControllerInput element_03;
+  DroneControllerInput element_04;
+  int32_T length;
+} MultiDroneControllerInput_controllerInput;
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_MultiDroneControllerInput_
+#define DEFINED_TYPEDEF_FOR_MultiDroneControllerInput_
+
+typedef struct {
+  MultiDroneControllerInput_controllerInput controllerInput;
+} MultiDroneControllerInput;
 
 #endif
 

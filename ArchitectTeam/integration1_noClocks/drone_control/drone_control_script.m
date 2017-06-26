@@ -1,7 +1,7 @@
 run Simulink_DataView_asn;
 
-inports_positions = zeros(2, 4);
-bussel_positions = zeros(2, 4);
+inports_positions = zeros(1, 4);
+bussel_positions = zeros(1, 4);
 outports_positions = zeros(1, 4);
 buscre_positions = zeros(1, 4);
 
@@ -71,31 +71,14 @@ else
 end
 set_param('calc_control/control_error','BusOutputAsStruct','on');
 set_param('calc_control/control_error','UseBusObject','on');
-set_param('calc_control/control_error','BusObject','Trajectory');
-add_block('simulink/Commonly Used Blocks/Bus Selector','calc_control/control_error_Trajectory_BusSel');
-add_line('calc_control','control_error/1','control_error_Trajectory_BusSel/1');
-setOutputsBusSelector(Trajectory, 'calc_control/control_error_Trajectory_BusSel');
+set_param('calc_control/control_error','BusObject','MultiControlError');
+add_block('simulink/Commonly Used Blocks/Bus Selector','calc_control/control_error_MultiControlError_BusSel');
+add_line('calc_control','control_error/1','control_error_MultiControlError_BusSel/1');
+setOutputsBusSelector(MultiControlError, 'calc_control/control_error_MultiControlError_BusSel');
 if bussel_positions(1)>0
-	set_param('calc_control/control_error_Trajectory_BusSel','Position', bussel_positions(1,:));
+	set_param('calc_control/control_error_MultiControlError_BusSel','Position', bussel_positions(1,:));
 else
-	set_param('calc_control/control_error_Trajectory_BusSel','Position',[95 6 100 44]);
-end
-add_block('simulink/Sources/In1','calc_control/processed_world_data');
-if inports_positions(2)>0
-	set_param('calc_control/processed_world_data','Position', inports_positions(2,:));
-else
-	set_param('calc_control/processed_world_data','Position',[25 125 55 139]);
-end
-set_param('calc_control/processed_world_data','BusOutputAsStruct','on');
-set_param('calc_control/processed_world_data','UseBusObject','on');
-set_param('calc_control/processed_world_data','BusObject','WorldData');
-add_block('simulink/Commonly Used Blocks/Bus Selector','calc_control/processed_world_data_WorldData_BusSel');
-add_line('calc_control','processed_world_data/1','processed_world_data_WorldData_BusSel/1');
-setOutputsBusSelector(WorldData, 'calc_control/processed_world_data_WorldData_BusSel');
-if bussel_positions(2)>0
-	set_param('calc_control/processed_world_data_WorldData_BusSel','Position', bussel_positions(2,:));
-else
-	set_param('calc_control/processed_world_data_WorldData_BusSel','Position',[95 106 100 144]);
+	set_param('calc_control/control_error_MultiControlError_BusSel','Position',[95 6 100 44]);
 end
 add_block('simulink/Sinks/Out1','calc_control/control_data');
 if outports_positions(1)>0
@@ -104,20 +87,20 @@ else
 	set_param('calc_control/control_data','Position',[430 25 460 39]);
 end
 set_param('calc_control/control_data','UseBusObject','on');
-set_param('calc_control/control_data','BusObject','DroneControllerInput');
-add_block('simulink/Commonly Used Blocks/Bus Creator','calc_control/control_data_DroneControllerInput_BusCre');
-add_line('calc_control','control_data_DroneControllerInput_BusCre/1','control_data/1');
-setInputsBusCreator(DroneControllerInput,'calc_control/control_data_DroneControllerInput_BusCre');
+set_param('calc_control/control_data','BusObject','MultiDroneControllerInput');
+add_block('simulink/Commonly Used Blocks/Bus Creator','calc_control/control_data_MultiDroneControllerInput_BusCre');
+add_line('calc_control','control_data_MultiDroneControllerInput_BusCre/1','control_data/1');
+setInputsBusCreator(MultiDroneControllerInput,'calc_control/control_data_MultiDroneControllerInput_BusCre');
 set_param('calc_control/control_data','UseBusObject','on');
 set_param('calc_control/control_data','BusOutputAsStruct','on');
-set_param('calc_control/control_data_DroneControllerInput_BusCre','BusObject','DroneControllerInput');
+set_param('calc_control/control_data_MultiDroneControllerInput_BusCre','BusObject','MultiDroneControllerInput');
 if buscre_positions(1)>0
-	set_param('calc_control/control_data_DroneControllerInput_BusCre','Position', buscre_positions(1,:));
+	set_param('calc_control/control_data_MultiDroneControllerInput_BusCre','Position', buscre_positions(1,:));
 else
-	set_param('calc_control/control_data_DroneControllerInput_BusCre','Position',[360 6 365 44]);
+	set_param('calc_control/control_data_MultiDroneControllerInput_BusCre','Position',[360 6 365 44]);
 end
-set_param('calc_control/control_data_DroneControllerInput_BusCre','UseBusObject','on');
-set_param('calc_control/control_data_DroneControllerInput_BusCre','NonVirtualBus','on');
+set_param('calc_control/control_data_MultiDroneControllerInput_BusCre','UseBusObject','on');
+set_param('calc_control/control_data_MultiDroneControllerInput_BusCre','NonVirtualBus','on');
 set_param('calc_control','SaveOutput','off');
 set_param('calc_control','SignalLogging','off');
 set_param('calc_control','SaveTime','off')

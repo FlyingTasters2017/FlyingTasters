@@ -13,8 +13,8 @@ extern "C" {
 
 void asd_processing_startup();
 
-void asd_processing_PI_process_ASD(const asn1SccDroneSensorData *,
-                                   asn1SccAgent *);
+void asd_processing_PI_process_ASD(const asn1SccMultiDroneSensorData *,
+                                   asn1SccMultiAgents *);
 
 #ifdef __cplusplus
 }

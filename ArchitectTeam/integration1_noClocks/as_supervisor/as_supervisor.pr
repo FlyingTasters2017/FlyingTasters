@@ -1,10 +1,10 @@
 /* CIF PROCESS (252, 150), (150, 75) */
 process as_supervisor;
-    /* CIF TEXT (1007, 117), (272, 140) */
+    /* CIF TEXT (1007, 117), (275, 140) */
     -- Text area for declarations and comments
     
-    dcl raw_ASD_data DroneSensorData;
-    dcl proc_ASD_data Agent;
+    dcl raw_ASD_data MultiDroneSensorData;
+    dcl proc_ASD_data MultiAgents;
     dcl user_input MyInteger;
     /* CIF ENDTEXT */
     /* CIF START (320, 10), (70, 35) */

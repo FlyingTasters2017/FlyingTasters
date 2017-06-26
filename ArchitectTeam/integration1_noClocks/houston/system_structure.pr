@@ -6,16 +6,16 @@ SYSTEM houston;
 	SIGNAL talk_with_Houston (MyInteger);
 
 	/* CIF Keep Specific Geode PARAMNAMES control_data */
-	SIGNAL put_control_data (DroneControllerInput);
+	SIGNAL put_control_data (MultiDroneControllerInput);
 
 	PROCEDURE store_control_data COMMENT '#c_predef';
 		FPAR
-			IN control_input DroneControllerInput;
+			IN control_input MultiDroneControllerInput;
  	EXTERNAL;
 
 	PROCEDURE send_control_data COMMENT '#c_predef';
 		FPAR
-			IN control_input DroneControllerInput;
+			IN control_input MultiDroneControllerInput;
  	EXTERNAL;
 
 	CHANNEL c

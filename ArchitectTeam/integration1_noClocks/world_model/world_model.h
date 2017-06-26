@@ -13,11 +13,11 @@ extern "C" {
 
 void world_model_startup();
 
-void world_model_PI_store_MSD(const asn1SccAgent *);
+void world_model_PI_store_MSD(const asn1SccMultiAgents *);
 
-void world_model_PI_store_ASD(const asn1SccAgent *);
+void world_model_PI_store_ASD(const asn1SccMultiAgents *);
 
-void world_model_PI_store_control_data(const asn1SccDroneControllerInput *);
+void world_model_PI_store_control_data(const asn1SccMultiDroneControllerInput *);
 
 extern void world_model_RI_update_world_data(const asn1SccWorldData *);
 

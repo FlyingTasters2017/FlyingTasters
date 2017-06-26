@@ -44,7 +44,7 @@ Agent ::= SEQUENCE {
     currentAcceleration Acceleration
 }
 
-Area::= SEQUENCE {
+Area ::= SEQUENCE {
     height T-Int8,
     width T-Int8,
     depth T-Int8,
@@ -52,6 +52,13 @@ Area::= SEQUENCE {
 }
 
 Color ::= ENUMERATED {black, pink, red}
+
+ControlError ::= SEQUENCE{
+    x MyReal,
+    y MyReal,
+    z MyReal,
+    yaw MyReal
+}
 
 DroneControllerInput ::= SEQUENCE {
     yawrateRef MyReal,
@@ -81,6 +88,22 @@ HoverAction ::= SEQUENCE {
     duration MyReal
 }
 
+MultiAgents ::= SEQUENCE {
+    agents SEQUENCE (SIZE (5)) OF Agent
+}
+
+MultiControlError ::= SEQUENCE{
+    bodyFrameError SEQUENCE (SIZE (5)) OF ControlError
+}
+
+MultiDroneControllerInput ::= SEQUENCE {
+    controllerInput SEQUENCE (SIZE (5)) OF DroneControllerInput
+}
+
+MultiDroneSensorData ::= SEQUENCE {
+    data SEQUENCE (SIZE (5)) OF DroneSensorData
+}
+
 MyChoice    ::= CHOICE {
     a BOOLEAN,
     b MySeq
@@ -99,8 +122,8 @@ Position ::= SEQUENCE {
 }
 
 PositionSystemData ::= SEQUENCE {
-    xAct MyReal,
-    yAct MyReal
+    xAct SEQUENCE (SIZE (5)) OF MyReal,
+    yAct SEQUENCE (SIZE (5)) OF MyReal
 }
 
 ReferenceFormation ::= SEQUENCE {
@@ -111,37 +134,36 @@ ReferenceFormation ::= SEQUENCE {
 }
 
 ReferencePath ::= SEQUENCE {
-    nlocations  T-Int32,
     locations SEQUENCE (SIZE (3)) OF Position,
     actions SEQUENCE (SIZE (3)) OF HoverAction
 }
 
 PixyData ::= SEQUENCE{
-    xPix T-UInt32,
-    yPix T-UInt32
+    xPix SEQUENCE (SIZE (5)) OF T-UInt32,
+    yPix SEQUENCE (SIZE (5)) OF T-UInt32
 }
 
-SafetyAction::= SEQUENCE {
+SafetyAction ::= SEQUENCE {
     sPosition Position
 }
 
-SafetyEvent::= ENUMERATED {safe,collision,wallColl,ceilColl}
+SafetyEvent ::= ENUMERATED {safe,collision,wallColl,ceilColl}
 
-SafetyInterupt::= SEQUENCE{
+SafetyInterupt ::= SEQUENCE {
     sEvent SafetyEvent,
-    sAction SafetyAction
+    sAction SEQUENCE (SIZE (5)) OF SafetyAction
 }
 
-SystemState::= ENUMERATED {idle, initializing, runningOk, emergencyLand, safeReturn}
+SystemState ::= ENUMERATED {idle, initializing, runningOk, emergencyLand, safeReturn}
 
 Trajectory ::= SEQUENCE{
-    x MyReal,
-    y MyReal,
-    z MyReal,
-    yaw MyReal
+    x SEQUENCE (SIZE (5)) OF MyReal,
+    y SEQUENCE (SIZE (5)) OF MyReal,
+    z SEQUENCE (SIZE (5)) OF MyReal,
+    yaw SEQUENCE (SIZE (5)) OF MyReal
 }
 
-UserCommand::= ENUMERATED {sysStart, sysPause, sysStop}
+UserCommand ::= ENUMERATED {sysStart, sysPause, sysStop}
 
 Velocity ::= SEQUENCE {
     vX MyReal, 
@@ -152,15 +174,12 @@ Velocity ::= SEQUENCE {
     vYaw MyReal
 }
 
-WorldData ::= SEQUENCE{
-    agentData Agent
+WorldData ::= SEQUENCE {
+    myArea Area,
+    refPath ReferencePath,
+    refFormation ReferenceFormation,
+    agents SEQUENCE (SIZE (5)) OF Agent
 }
---WorldData ::= SEQUENCE {
---    myArea Area,
---    refPath ReferencePath,
-    --refFormation ReferenceFormation,
-    --agents SEQUENCE (SIZE (3)) OF Agent
---}
 
 
 

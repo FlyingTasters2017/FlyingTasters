@@ -26,7 +26,7 @@ package body system_supervisor is
         world_safety_interupts : aliased asn1SccSafetyInterupt;
         user_input : aliased asn1SccMyInteger;
         proc_world_data : aliased asn1SccWorldData;
-        control_error : aliased asn1SccTrajectory;
+        control_error : aliased asn1SccMultiControlError;
     end record;
     ctxt: aliased ctxt_Ty;
     CS_Only  : constant Integer := 4;
@@ -102,8 +102,8 @@ package body system_supervisor is
                         -- writeln('calc control_input') (47,17)
                         Put("calc control_input");
                         New_Line;
-                        -- calculate_control_input(control_error,proc_world_data) (49,17)
-                        RIÜcalculate_control_input(ctxt.control_error'Access, ctxt.proc_world_data'Access);
+                        -- calculate_control_input(control_error) (49,17)
+                        RIÜcalculate_control_input(ctxt.control_error'Access);
                         -- writeln('update GUI') (51,17)
                         Put("update GUI");
                         New_Line;

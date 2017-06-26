@@ -13,9 +13,9 @@ extern "C" {
 
 void socket_client_startup();
 
-void socket_client_PI_send_control_data(const asn1SccDroneControllerInput *);
+void socket_client_PI_send_control_data(const asn1SccMultiDroneControllerInput *);
 
-extern void socket_client_RI_put_raw_asd(const asn1SccDroneSensorData *);
+extern void socket_client_RI_put_raw_asd(const asn1SccMultiDroneSensorData *);
 
 #ifdef __cplusplus
 }

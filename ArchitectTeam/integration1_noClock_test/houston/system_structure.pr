@@ -1,0 +1,36 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM houston;
+
+	/* CIF Keep Specific Geode PARAMNAMES sysSV_to_Houston_events */
+	SIGNAL talk_with_Houston (MyInteger);
+
+	PROCEDURE store_control_data COMMENT '#c_predef';
+		FPAR
+			IN control_input DroneControllerInput;
+ 	EXTERNAL;
+
+	PROCEDURE send_control_data COMMENT '#c_predef';
+		FPAR
+			IN control_input DroneControllerInput;
+ 	EXTERNAL;
+
+	/* CIF Keep Specific Geode PARAMNAMES control_data */
+	SIGNAL put_control_data (DroneControllerInput);
+
+	CHANNEL c
+		FROM ENV TO houston WITH talk_with_Houston,put_control_data;
+	ENDCHANNEL;
+
+	BLOCK houston;
+
+		SIGNALROUTE r
+			FROM ENV TO houston WITH talk_with_Houston,put_control_data;
+
+		CONNECT c and r;
+
+		PROCESS houston REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;

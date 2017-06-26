@@ -115,7 +115,7 @@ void pixyprocess_PI_processData(const asn1SccT_UInt32 *IN_x,
     int yp=y; 
     // pixy center y ,  pixels
     
-    int hdrone=0.3;   
+    int hdrone=0.41;   
     //drone height from laser sensor, m
     
     int ResX=320;   
@@ -125,7 +125,7 @@ void pixyprocess_PI_processData(const asn1SccT_UInt32 *IN_x,
     
     //FovY=47*pi/180; %narrow side FOV angle of camera
     
-    int hcam= 1.7;   
+    int hcam= 1.77;   
     //camera haight from the ground
     
     float ppg=7.4/1000;  

@@ -11,6 +11,7 @@
 
 float x_current;
 float y_current;
+int NR_OF_DRONES = 3;
 
 struct MyStack
 {
@@ -92,24 +93,10 @@ void msd_processing_startup()
 }
 
 void msd_processing_PI_process_MSD(const asn1SccPixyData *IN_raw_MSD,
-                                   asn1SccAgent *OUT_processed_MSD)
-{
-    
-    //printf("\n function 3 \n");
-    int x = (*IN_raw_MSD).xPix;
-    int y = (*IN_raw_MSD).yPix;   
-    
-    printf("x: %d and y: %d \n", x,y);
-   
-    
-    int xp=x; 
-    //pixy center x , pixels
-    
-    int yp=y; 
-    // pixy center y ,  pixels
-    
+                                   asn1SccMultiAgents *OUT_processed_MSD)
+{   
     int hdrone=0.3;   
-    //drone height from laser sensor, m
+    //drone height from laser sensor, m. IF Z IS NOT FIXED AT 0.3M, THIS SHOULD BE CHANGED
     
     int ResX=320;   
     // wide side resolution of the camera
@@ -127,23 +114,28 @@ void msd_processing_PI_process_MSD(const asn1SccPixyData *IN_raw_MSD,
     float perpix = ppg*(hcam-hdrone)/hcam;  
     //%per pix in drone height
     
+    for (int i=0;i<NR_OF_DRONES;i++)
+    {
+        //printf("\n function 3 \n");
+        int xp = (*IN_raw_MSD).xPix.arr[i];     //pixy center x , pixels
+        int yp = (*IN_raw_MSD).yPix.arr[i];     // pixy center y ,  pixels
+    
+        //printf("x: %d and y: %d \n", xp,yp);
+    
+        
+        float xtr_p=xp-ResX/2;    
+        float ytr_p=yp-ResY/2;
+        //%transferred according to the center of the frame
     
     
-    float xtr_p=xp-ResX/2;    
-    float ytr_p=yp-ResY/2;
-    //%transferred according to the center of the frame
-    
-    
-    float xreal=xtr_p*perpix;
-    float yreal=-ytr_p*perpix;
+        float xreal=xtr_p*perpix;
+        float yreal=-ytr_p*perpix;
 
-    printf("\n x: %f; y: %f; \n", xreal, yreal);
+        printf("\n x: %f; y: %f; \n", xreal, yreal);
     
-     (*OUT_processed_MSD).currentPosition .x= xreal;
-     (*OUT_processed_MSD).currentPosition .y= yreal;
+        (*OUT_processed_MSD).agents.arr[i].currentPosition.x= xreal;
+        (*OUT_processed_MSD).agents.arr[i].currentPosition.y= yreal;
+    }
     
-    //int id=1;
-    //MyStack_pop();
-    //MyStack_push(xreal,yreal,id);
 }
 

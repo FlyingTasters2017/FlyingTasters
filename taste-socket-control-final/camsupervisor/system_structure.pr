@@ -1,0 +1,25 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM camsupervisor;
+
+	SIGNAL campulse;
+
+	PROCEDURE rawdata COMMENT '#c_predef';
+ 	EXTERNAL;
+
+	CHANNEL c
+		FROM ENV TO camsupervisor WITH campulse;
+	ENDCHANNEL;
+
+	BLOCK camsupervisor;
+
+		SIGNALROUTE r
+			FROM ENV TO camsupervisor WITH campulse;
+
+		CONNECT c and r;
+
+		PROCESS camsupervisor REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;

@@ -1,8 +1,0 @@
-DeviceConfig-node1-generic-sockets-ip-pohic DEFINITIONS ::=
-BEGIN
-IMPORTS IP-Conf-T FROM POHICDRIVER-IP;
-
-
-pohidrv-node1-generic-sockets-ip-pohic-cv IP-Conf-T ::= { devname "eth0", address "127.0.0.1", port 5488}
-
-END

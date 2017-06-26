@@ -15,7 +15,7 @@ void trajectory_generator_startup();
 
 void trajectory_generator_PI_choose_trajectory(const asn1SccWorldData *,
                                                const asn1SccSafetyInterupt *,
-                                               asn1SccTrajectory *);
+                                               asn1SccMultiControlError *);
 
 #ifdef __cplusplus
 }
