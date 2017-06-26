@@ -1,0 +1,37 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM as_supervisor;
+
+	/* CIF Keep Specific Geode PARAMNAMES sysSV_to_ASSV_events */
+	SIGNAL talk_with_ASSV (MyInteger);
+
+	/* CIF Keep Specific Geode PARAMNAMES raw_asd */
+	SIGNAL put_raw_asd (DroneSensorData);
+
+	PROCEDURE store_ASD COMMENT '#c_predef';
+		FPAR
+			IN processed_asd DroneSensorData;
+ 	EXTERNAL;
+
+	PROCEDURE process_ASD COMMENT '#c_predef';
+		FPAR
+			IN raw_ASD DroneSensorData,
+			IN/OUT processed_ASD DroneSensorData;
+ 	EXTERNAL;
+
+	CHANNEL c
+		FROM ENV TO as_supervisor WITH talk_with_ASSV,put_raw_asd;
+	ENDCHANNEL;
+
+	BLOCK as_supervisor;
+
+		SIGNALROUTE r
+			FROM ENV TO as_supervisor WITH talk_with_ASSV,put_raw_asd;
+
+		CONNECT c and r;
+
+		PROCESS as_supervisor REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;
