@@ -92,12 +92,12 @@ void msd_processing_startup()
 }
 
 void msd_processing_PI_process_MSD(const asn1SccPixyData *IN_raw_MSD,
-                                   asn1SccAgent *OUT_processed_MSD)
+                                   asn1SccMultiAgents *OUT_processed_MSD)
 {
     
     //printf("\n function 3 \n");
-    int x = (*IN_raw_MSD).xPix[0];
-    int y = (*IN_raw_MSD).yPix[0];   
+    int x = (*IN_raw_MSD).xPix.arr[0];
+    int y = (*IN_raw_MSD).yPix.arr[0];   
     
     printf("x: %d and y: %d \n", x,y);
    
@@ -139,8 +139,8 @@ void msd_processing_PI_process_MSD(const asn1SccPixyData *IN_raw_MSD,
 
     printf("\n x: %f; y: %f; \n", xreal, yreal);
     
-     (*OUT_processed_MSD).currentPosition.x[0]= xreal;
-     (*OUT_processed_MSD).currentPosition.y[0]= yreal;
+     (*OUT_processed_MSD).agents.arr[0].currentPosition.x= xreal;
+     (*OUT_processed_MSD).agents.arr[0].currentPosition.y= yreal;
     
     //int id=1;
     //MyStack_pop();

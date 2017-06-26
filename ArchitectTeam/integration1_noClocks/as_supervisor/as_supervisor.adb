@@ -22,8 +22,8 @@ package body as_supervisor is
         record
         state : States;
         initDone : Boolean := False;
-        proc_asd_data : aliased asn1SccAgent;
-        raw_asd_data : aliased asn1SccDroneSensorData;
+        proc_asd_data : aliased asn1SccMultiAgents;
+        raw_asd_data : aliased asn1SccMultiDroneSensorData;
         user_input : aliased asn1SccMyInteger;
     end record;
     ctxt: aliased ctxt_Ty;
@@ -44,7 +44,7 @@ package body as_supervisor is
         end talk_with_ASSV;
         
 
-    procedure put_raw_asd(raw_asd: access asn1SccDroneSensorData) is
+    procedure put_raw_asd(raw_asd: access asn1SccMultiDroneSensorData) is
         begin
             case ctxt.state is
                 when running =>

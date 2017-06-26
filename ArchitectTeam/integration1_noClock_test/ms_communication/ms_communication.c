@@ -16,7 +16,7 @@
 
 #define BLOCK_BUFFER_SIZE    25
 int pixy_init_status;
-asn1SccPixyData *OUT_raw_pixel_data;
+asn1SccPixyData OUT_raw_pixel_data;
 
 void ms_communication_startup()
 {
@@ -139,9 +139,9 @@ void ms_communication_PI_enable_pixycam(const asn1SccMyInteger *IN_user_input)
                 y=blocks[index].y;
                 if(blocks_copied<2)
                 {
-                    (*OUT_raw_pixel_data).xPix = x;
-                    (*OUT_raw_pixel_data).yPix = y;
-                    ms_communication_RI_put_raw_MSD(OUT_raw_pixel_data);
+                    OUT_raw_pixel_data.xPix = x;
+                    OUT_raw_pixel_data.yPix = y;
+                    ms_communication_RI_put_raw_MSD(&OUT_raw_pixel_data);
                 }
             }
             printf("starting drone comm:\n");

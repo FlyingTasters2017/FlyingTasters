@@ -14,12 +14,12 @@ package as_supervisor is
     procedure talk_with_ASSV(sysSV_to_ASSV_events: access asn1SccMyInteger);
     pragma Export(C, talk_with_ASSV, "as_supervisor_talk_with_ASSV");
     --  Provided interface "put_raw_asd"
-    procedure put_raw_asd(raw_asd: access asn1SccDroneSensorData);
+    procedure put_raw_asd(raw_asd: access asn1SccMultiDroneSensorData);
     pragma Export(C, put_raw_asd, "as_supervisor_put_raw_asd");
     --  Sync required interface "store_ASD"
-    procedure RIÜstore_ASD(processed_asd: access asn1SccAgent);
+    procedure RIÜstore_ASD(processed_asd: access asn1SccMultiAgents);
     pragma import(C, RIÜstore_ASD, "as_supervisor_RI_store_ASD");
     --  Sync required interface "process_ASD"
-    procedure RIÜprocess_ASD(raw_ASD: access asn1SccDroneSensorData; processed_ASD: access asn1SccAgent);
+    procedure RIÜprocess_ASD(raw_ASD: access asn1SccMultiDroneSensorData; processed_ASD: access asn1SccMultiAgents);
     pragma import(C, RIÜprocess_ASD, "as_supervisor_RI_process_ASD");
 end as_supervisor;

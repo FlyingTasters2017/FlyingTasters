@@ -13,14 +13,14 @@ extern "C" {
 
 void control_data_storage_startup();
 
-void control_data_storage_PI_calculate_control_input(const asn1SccTrajectory *,
+void control_data_storage_PI_calculate_control_input(const asn1SccMultiControlError *,
                                                      const asn1SccWorldData *);
 
-extern void control_data_storage_RI_calc_control(const asn1SccTrajectory *,
+extern void control_data_storage_RI_calc_control(const asn1SccMultiControlError *,
                                                  const asn1SccWorldData *,
-                                                 asn1SccDroneControllerInput *);
+                                                 asn1SccMultiDroneControllerInput *);
 
-extern void control_data_storage_RI_put_control_data(const asn1SccDroneControllerInput *);
+extern void control_data_storage_RI_put_control_data(const asn1SccMultiDroneControllerInput *);
 
 #ifdef __cplusplus
 }

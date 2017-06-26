@@ -8,15 +8,15 @@ void asd_processing_startup()
        but do not make any call to a required interface. */
 }
 
-void asd_processing_PI_process_ASD(const asn1SccDroneSensorData *IN_raw_ASD,
-                                   asn1SccAgent *OUT_processed_ASD)
+void asd_processing_PI_process_ASD(const asn1SccMultiDroneSensorData *IN_raw_ASD,
+                                   asn1SccMultiAgents *OUT_processed_ASD)
 {
-    (*OUT_processed_ASD).currentAcceleration.aX     =   (*IN_raw_ASD).accxAct;
-    (*OUT_processed_ASD).currentAcceleration.aY     =   (*IN_raw_ASD).accyAct;
-    (*OUT_processed_ASD).currentAcceleration.aZ     =   (*IN_raw_ASD).acczAct;
-    (*OUT_processed_ASD).currentOrientation.roll    =   (*IN_raw_ASD).rollAct;
-    (*OUT_processed_ASD).currentOrientation.pitch   =   (*IN_raw_ASD).pitchAct;
-    (*OUT_processed_ASD).currentOrientation.yaw     =   (*IN_raw_ASD).yawAct;
+    (*OUT_processed_ASD).agents.arr[0].currentAcceleration.aX     =   (*IN_raw_ASD).data.arr[0].accxAct;
+    (*OUT_processed_ASD).agents.arr[0].currentAcceleration.aY     =   (*IN_raw_ASD).data.arr[0].accyAct;
+    (*OUT_processed_ASD).agents.arr[0].currentAcceleration.aZ     =   (*IN_raw_ASD).data.arr[0].acczAct;
+    (*OUT_processed_ASD).agents.arr[0].currentOrientation.roll    =   (*IN_raw_ASD).data.arr[0].rollAct;
+    (*OUT_processed_ASD).agents.arr[0].currentOrientation.pitch   =   (*IN_raw_ASD).data.arr[0].pitchAct;
+    (*OUT_processed_ASD).agents.arr[0].currentOrientation.yaw     =   (*IN_raw_ASD).data.arr[0].yawAct;
 
 }
 

@@ -3,10 +3,10 @@
 #include "world_model.h"
 
 
-asn1SccAgent latest_asd_estimate;
-asn1SccAgent latest_msd_estimate;
-asn1SccDroneControllerInput latest_control_input;
-asn1SccWorldData *OUT_processed_world_data;
+asn1SccMultiAgents latest_asd_estimate;
+asn1SccMultiAgents latest_msd_estimate;
+asn1SccMultiDroneControllerInput latest_control_input;
+asn1SccWorldData OUT_processed_world_data;
 
 void world_model_startup()
 {/*
@@ -34,12 +34,12 @@ void world_model_PI_store_MSD(const asn1SccAgent *IN_processed_msd)
     //update the latest msd values
     latest_msd_estimate     =   *IN_processed_msd;
     
-    (*OUT_processed_world_data).agentData.currentPosition       =   latest_msd_estimate.currentPosition ;
-    (*OUT_processed_world_data).agentData.currentVelocity       =   latest_asd_estimate.currentVelocity;
-    (*OUT_processed_world_data).agentData.currentAcceleration   =   latest_asd_estimate.currentAcceleration;
-    (*OUT_processed_world_data).agentData.currentOrientation    =   latest_asd_estimate.currentOrientation;
+    OUT_processed_world_data.agents.arr[0].currentPosition       =   latest_msd_estimate.agents.arr[0].currentPosition ;
+    OUT_processed_world_data.agents.arr[0].currentVelocity       =   latest_asd_estimate.agents.arr[0].currentVelocity;
+    OUT_processed_world_data.agents.arr[0].currentAcceleration   =   latest_asd_estimate.agents.arr[0].currentAcceleration;
+    OUT_processed_world_data.agents.arr[0].currentOrientation    =   latest_asd_estimate.agents.arr[0].currentOrientation;
     
-    world_model_RI_update_world_data(OUT_processed_world_data);
+    world_model_RI_update_world_data(&OUT_processed_world_data);
 }
 
 void world_model_PI_store_ASD(const asn1SccAgent *IN_processed_asd)

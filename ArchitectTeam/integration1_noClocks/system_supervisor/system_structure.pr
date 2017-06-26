@@ -27,12 +27,12 @@ SYSTEM system_supervisor;
 		FPAR
 			IN processed_world_data WorldData,
 			IN world_safety_interupt SafetyInterupt,
-			IN/OUT control_error Trajectory;
+			IN/OUT control_error MultiControlError;
  	EXTERNAL;
 
 	PROCEDURE calculate_control_input COMMENT '#c_predef';
 		FPAR
-			IN control_error Trajectory,
+			IN control_error MultiControlError,
 			IN processed_world_data WorldData;
  	EXTERNAL;
 

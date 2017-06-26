@@ -23,7 +23,7 @@ package body ms_supervisor is
         state : States;
         initDone : Boolean := False;
         user_input : aliased asn1SccMyInteger;
-        proc_msd_data : aliased asn1SccAgent;
+        proc_msd_data : aliased asn1SccMultiAgents;
         raw_msd_data : aliased asn1SccPixyData;
     end record;
     ctxt: aliased ctxt_Ty;

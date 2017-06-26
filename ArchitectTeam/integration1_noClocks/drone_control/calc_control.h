@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'calc_control'.
  *
- * Model version                  : 1.3
+ * Model version                  : 1.32
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Thu Jun 22 17:47:16 2017
+ * C/C++ source code generated on : Sat Jun 24 20:51:23 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -40,18 +40,18 @@
 /* Block states (auto storage) for system '<Root>' */
 typedef struct {
   real_T UD_DSTATE;                    /* '<S1>/UD' */
-  real_T UD_DSTATE_o;                  /* '<S2>/UD' */
+  real_T UD_DSTATE_b;                  /* '<S2>/UD' */
 } DW_calc_control_T;
 
 /* External inputs (root inport signals with auto storage) */
 typedef struct {
-  Trajectory control_error;            /* '<Root>/control_error' */
+  MultiControlError control_error;     /* '<Root>/control_error' */
   WorldData processed_world_data;      /* '<Root>/processed_world_data' */
 } ExtU_calc_control_T;
 
 /* External outputs (root outports fed by signals with auto storage) */
 typedef struct {
-  DroneControllerInput control_data;   /* '<Root>/control_data' */
+  MultiDroneControllerInput control_data;/* '<Root>/control_data' */
 } ExtY_calc_control_T;
 
 /* Real-time Model Data Structure */
@@ -69,7 +69,7 @@ extern ExtU_calc_control_T calc_control_U;
 extern ExtY_calc_control_T calc_control_Y;
 
 /* External data declarations for dependent source files */
-extern const DroneControllerInput calc_control_rtZDroneControllerInput;/* DroneControllerInput ground */
+extern const MultiDroneControllerInput calc_control_rtZMultiDroneControllerInput;/* MultiDroneControllerInput ground */
 
 /* Model entry point functions */
 extern void calc_control_initialize(void);

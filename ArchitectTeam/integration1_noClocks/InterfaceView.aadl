@@ -86,7 +86,7 @@ FEATURES
   world_safety_interupt : IN PARAMETER DataView::SafetyInterupt {
     Taste::encoding => UPER;
   };
-  control_error : OUT PARAMETER DataView::Trajectory {
+  control_error : OUT PARAMETER DataView::MultiControlError {
     Taste::encoding => UPER;
   };
 END RI_choose_trajectory;
@@ -96,7 +96,7 @@ END RI_choose_trajectory.others;
 
 SUBPROGRAM RI_calculate_control_input
 FEATURES
-  control_error : IN PARAMETER DataView::Trajectory {
+  control_error : IN PARAMETER DataView::MultiControlError {
     Taste::encoding => UPER;
   };
   processed_world_data : IN PARAMETER DataView::WorldData {
@@ -199,7 +199,7 @@ END PI_talk_with_ASSV.others;
 
 SUBPROGRAM PI_put_raw_asd
 FEATURES
-  raw_asd : IN PARAMETER DataView::DroneSensorData {
+  raw_asd : IN PARAMETER DataView::MultiDroneSensorData {
     Taste::encoding => UPER;
   };
 PROPERTIES
@@ -211,7 +211,7 @@ END PI_put_raw_asd.others;
 
 SUBPROGRAM RI_store_ASD
 FEATURES
-  processed_asd : IN PARAMETER DataView::Agent {
+  processed_asd : IN PARAMETER DataView::MultiAgents {
     Taste::encoding => UPER;
   };
 END RI_store_ASD;
@@ -221,10 +221,10 @@ END RI_store_ASD.others;
 
 SUBPROGRAM RI_process_ASD
 FEATURES
-  raw_ASD : IN PARAMETER DataView::DroneSensorData {
+  raw_ASD : IN PARAMETER DataView::MultiDroneSensorData {
     Taste::encoding => UPER;
   };
-  processed_ASD : OUT PARAMETER DataView::Agent {
+  processed_ASD : OUT PARAMETER DataView::MultiAgents {
     Taste::encoding => UPER;
   };
 END RI_process_ASD;
@@ -254,7 +254,7 @@ END PI_talk_with_Houston.others;
 
 SUBPROGRAM PI_put_control_data
 FEATURES
-  control_data : IN PARAMETER DataView::DroneControllerInput {
+  control_data : IN PARAMETER DataView::MultiDroneControllerInput {
     Taste::encoding => UPER;
   };
 PROPERTIES
@@ -266,7 +266,7 @@ END PI_put_control_data.others;
 
 SUBPROGRAM RI_store_control_data
 FEATURES
-  control_input : IN PARAMETER DataView::DroneControllerInput {
+  control_input : IN PARAMETER DataView::MultiDroneControllerInput {
     Taste::encoding => UPER;
   };
 END RI_store_control_data;
@@ -276,7 +276,7 @@ END RI_store_control_data.others;
 
 SUBPROGRAM RI_send_control_data
 FEATURES
-  control_input : IN PARAMETER DataView::DroneControllerInput {
+  control_input : IN PARAMETER DataView::MultiDroneControllerInput {
     Taste::encoding => UPER;
   };
 END RI_send_control_data;
@@ -297,7 +297,7 @@ FEATURES
   raw_MSD : IN PARAMETER DataView::PixyData {
     Taste::encoding => UPER;
   };
-  processed_MSD : OUT PARAMETER DataView::Agent {
+  processed_MSD : OUT PARAMETER DataView::MultiAgents {
     Taste::encoding => UPER;
   };
 PROPERTIES
@@ -317,10 +317,10 @@ WITH DataView;
 WITH TASTE_IV_Properties;
 SUBPROGRAM PI_process_ASD
 FEATURES
-  raw_ASD : IN PARAMETER DataView::DroneSensorData {
+  raw_ASD : IN PARAMETER DataView::MultiDroneSensorData {
     Taste::encoding => UPER;
   };
-  processed_ASD : OUT PARAMETER DataView::Agent {
+  processed_ASD : OUT PARAMETER DataView::MultiAgents {
     Taste::encoding => UPER;
   };
 PROPERTIES
@@ -364,7 +364,7 @@ END PI_talk_with_MSSV.others;
 
 SUBPROGRAM RI_store_MSD
 FEATURES
-  processed_msd : IN PARAMETER DataView::Agent {
+  processed_msd : IN PARAMETER DataView::MultiAgents {
     Taste::encoding => UPER;
   };
 END RI_store_MSD;
@@ -377,7 +377,7 @@ FEATURES
   raw_MSD : IN PARAMETER DataView::PixyData {
     Taste::encoding => UPER;
   };
-  processed_MSD : OUT PARAMETER DataView::Agent {
+  processed_MSD : OUT PARAMETER DataView::MultiAgents {
     Taste::encoding => UPER;
   };
 END RI_process_MSD;
@@ -411,6 +411,8 @@ FEATURES
   world_safety_interupt : OUT PARAMETER DataView::SafetyInterupt {
     Taste::encoding => UPER;
   };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_check_mission_safety;
 
 SUBPROGRAM IMPLEMENTATION PI_check_mission_safety.others
@@ -432,7 +434,7 @@ FEATURES
   world_safety_interupt : IN PARAMETER DataView::SafetyInterupt {
     Taste::encoding => UPER;
   };
-  control_error : OUT PARAMETER DataView::Trajectory {
+  control_error : OUT PARAMETER DataView::MultiControlError {
     Taste::encoding => UPER;
   };
 PROPERTIES
@@ -452,13 +454,13 @@ WITH DataView;
 WITH TASTE_IV_Properties;
 SUBPROGRAM PI_calc_control
 FEATURES
-  control_error : IN PARAMETER DataView::Trajectory {
+  control_error : IN PARAMETER DataView::MultiControlError {
     Taste::encoding => UPER;
   };
   processed_world_data : IN PARAMETER DataView::WorldData {
     Taste::encoding => UPER;
   };
-  control_data : OUT PARAMETER DataView::DroneControllerInput {
+  control_data : OUT PARAMETER DataView::MultiDroneControllerInput {
     Taste::encoding => UPER;
   };
 PROPERTIES
@@ -478,7 +480,7 @@ WITH DataView;
 WITH TASTE_IV_Properties;
 SUBPROGRAM PI_calculate_control_input
 FEATURES
-  control_error : IN PARAMETER DataView::Trajectory {
+  control_error : IN PARAMETER DataView::MultiControlError {
     Taste::encoding => UPER;
   };
   processed_world_data : IN PARAMETER DataView::WorldData {
@@ -493,13 +495,13 @@ END PI_calculate_control_input.others;
 
 SUBPROGRAM RI_calc_control
 FEATURES
-  control_error : IN PARAMETER DataView::Trajectory {
+  control_error : IN PARAMETER DataView::MultiControlError {
     Taste::encoding => UPER;
   };
   processed_world_data : IN PARAMETER DataView::WorldData {
     Taste::encoding => UPER;
   };
-  control_data : OUT PARAMETER DataView::DroneControllerInput {
+  control_data : OUT PARAMETER DataView::MultiDroneControllerInput {
     Taste::encoding => UPER;
   };
 END RI_calc_control;
@@ -509,7 +511,7 @@ END RI_calc_control.others;
 
 SUBPROGRAM RI_put_control_data
 FEATURES
-  control_data : IN PARAMETER DataView::DroneControllerInput {
+  control_data : IN PARAMETER DataView::MultiDroneControllerInput {
     Taste::encoding => UPER;
   };
 END RI_put_control_data;
@@ -527,7 +529,7 @@ WITH DataView;
 WITH TASTE_IV_Properties;
 SUBPROGRAM PI_store_MSD
 FEATURES
-  processed_msd : IN PARAMETER DataView::Agent {
+  processed_msd : IN PARAMETER DataView::MultiAgents {
     Taste::encoding => UPER;
   };
 PROPERTIES
@@ -539,7 +541,7 @@ END PI_store_MSD.others;
 
 SUBPROGRAM PI_store_ASD
 FEATURES
-  processed_asd : IN PARAMETER DataView::Agent {
+  processed_asd : IN PARAMETER DataView::MultiAgents {
     Taste::encoding => UPER;
   };
 PROPERTIES
@@ -551,7 +553,7 @@ END PI_store_ASD.others;
 
 SUBPROGRAM PI_store_control_data
 FEATURES
-  control_input : IN PARAMETER DataView::DroneControllerInput {
+  control_input : IN PARAMETER DataView::MultiDroneControllerInput {
     Taste::encoding => UPER;
   };
 PROPERTIES
@@ -581,7 +583,7 @@ WITH DataView;
 WITH TASTE_IV_Properties;
 SUBPROGRAM PI_send_control_data
 FEATURES
-  control_input : IN PARAMETER DataView::DroneControllerInput {
+  control_input : IN PARAMETER DataView::MultiDroneControllerInput {
     Taste::encoding => UPER;
   };
 PROPERTIES
@@ -593,7 +595,7 @@ END PI_send_control_data.others;
 
 SUBPROGRAM RI_put_raw_asd
 FEATURES
-  raw_asd : IN PARAMETER DataView::DroneSensorData {
+  raw_asd : IN PARAMETER DataView::MultiDroneSensorData {
     Taste::encoding => UPER;
   };
 END RI_put_raw_asd;
@@ -851,7 +853,7 @@ END Houston.others;
 SYSTEM MSD_Processing
 FEATURES
   PI_process_MSD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MSD_Processing::PI_process_MSD.others {
-    Taste::coordinates => "401 1409";
+    Taste::coordinates => "401 1420";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -895,33 +897,33 @@ END ASD_Processing.others;
 SYSTEM MS_Supervisor
 FEATURES
   PI_put_raw_MSD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MS_Supervisor::PI_put_raw_MSD.others {
-    Taste::coordinates => "620 1210";
+    Taste::coordinates => "629 1210";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "put_raw_MSD";
   };
   PI_talk_with_MSSV : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MS_Supervisor::PI_talk_with_MSSV.others {
-    Taste::coordinates => "732 1107";
+    Taste::coordinates => "732 1120";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "talk_with_MSSV";
   };
   RI_store_MSD : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::World_Model::PI_store_MSD.others {
-    Taste::coordinates => "919 1107";
+    Taste::coordinates => "919 1120";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "store_MSD";
     Taste::labelInheritance => "true";
   };
   RI_process_MSD : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::MSD_Processing::PI_process_MSD.others {
-    Taste::coordinates => "620 1409";
+    Taste::coordinates => "629 1409";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "process_MSD";
     Taste::labelInheritance => "true";
   };
   RI_enable_pixycam : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::MS_Communication::PI_enable_pixycam.others {
-    Taste::coordinates => "620 1162";
+    Taste::coordinates => "629 1162";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "enable_pixycam";
     Taste::labelInheritance => "true";
@@ -948,6 +950,7 @@ FEATURES
   PI_check_mission_safety : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Mission_Safety::PI_check_mission_safety.others {
     Taste::coordinates => "1420 138";
     Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "check_mission_safety";
   };
@@ -1141,13 +1144,13 @@ SUBCOMPONENTS
     Taste::coordinates => "1697 693 1951 1030";
   };
   MSD_Processing : SYSTEM interfaceview::IV::MSD_Processing.others {
-    Taste::coordinates => "126 1310 401 1441";
+    Taste::coordinates => "126 1321 401 1452";
   };
   ASD_Processing : SYSTEM interfaceview::IV::ASD_Processing.others {
     Taste::coordinates => "1721 1297 1996 1428";
   };
   MS_Supervisor : SYSTEM interfaceview::IV::MS_Supervisor.others {
-    Taste::coordinates => "620 1107 1016 1445";
+    Taste::coordinates => "629 1120 1025 1458";
   };
   Mission_Safety : SYSTEM interfaceview::IV::Mission_Safety.others {
     Taste::coordinates => "1289 7 1564 138";
@@ -1211,7 +1214,7 @@ CONNECTIONS
     Taste::coordinates => "1586 1405 1653 1405 1653 1402 1721 1402";
   };
   Houston_put_control_data_Control_Data_Storage_put_control_data : SUBPROGRAM ACCESS Houston.PI_put_control_data -> Control_Data_Storage.RI_put_control_data {
-    Taste::coordinates => "1807 494 1807 593 1805 593 1805 693";
+    Taste::coordinates => "1807 493 1807 593 1805 593 1805 693";
   };
   World_Model_store_control_data_Houston_store_control_data : SUBPROGRAM ACCESS World_Model.PI_store_control_data -> Houston.RI_store_control_data {
     Taste::coordinates => "1697 824 1559 824 1559 824 1416 824";
@@ -1220,7 +1223,7 @@ CONNECTIONS
     Taste::coordinates => "1951 785 2066 785 2066 782 2203 782";
   };
   MSD_Processing_process_MSD_MS_Supervisor_process_MSD : SUBPROGRAM ACCESS MSD_Processing.PI_process_MSD -> MS_Supervisor.RI_process_MSD {
-    Taste::coordinates => "620 1409 508 1409 508 1409 401 1409";
+    Taste::coordinates => "620 1409 508 1409 508 1420 401 1420";
   };
   World_Model_store_MSD_MS_Supervisor_store_MSD : SUBPROGRAM ACCESS World_Model.PI_store_MSD -> MS_Supervisor.RI_store_MSD {
     Taste::coordinates => "919 1107 919 1052 920 1052 920 995";

@@ -17,10 +17,10 @@ package ms_supervisor is
     procedure talk_with_MSSV(sysSV_to_MSSV_events: access asn1SccMyInteger);
     pragma Export(C, talk_with_MSSV, "ms_supervisor_talk_with_MSSV");
     --  Sync required interface "store_MSD"
-    procedure RIÜstore_MSD(processed_msd: access asn1SccAgent);
+    procedure RIÜstore_MSD(processed_msd: access asn1SccMultiAgents);
     pragma import(C, RIÜstore_MSD, "ms_supervisor_RI_store_MSD");
     --  Sync required interface "process_MSD"
-    procedure RIÜprocess_MSD(raw_MSD: access asn1SccPixyData; processed_MSD: access asn1SccAgent);
+    procedure RIÜprocess_MSD(raw_MSD: access asn1SccPixyData; processed_MSD: access asn1SccMultiAgents);
     pragma import(C, RIÜprocess_MSD, "ms_supervisor_RI_process_MSD");
     --  Sync required interface "enable_pixycam"
     procedure RIÜenable_pixycam(user_input: access asn1SccMyInteger);

@@ -10,13 +10,13 @@ SYSTEM ms_supervisor;
 
 	PROCEDURE store_MSD COMMENT '#c_predef';
 		FPAR
-			IN processed_msd Agent;
+			IN processed_msd MultiAgents;
  	EXTERNAL;
 
 	PROCEDURE process_MSD COMMENT '#c_predef';
 		FPAR
 			IN raw_MSD PixyData,
-			IN/OUT processed_MSD Agent;
+			IN/OUT processed_MSD MultiAgents;
  	EXTERNAL;
 
 	PROCEDURE enable_pixycam COMMENT '#c_predef';

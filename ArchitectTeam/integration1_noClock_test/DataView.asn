@@ -44,7 +44,19 @@ Agent ::= SEQUENCE {
     currentAcceleration Acceleration
 }
 
-Area::= SEQUENCE {
+MultiAgents ::= SEQUENCE {
+    agents SEQUENCE (SIZE (5)) OF Agent
+}
+
+MultiDroneSensorData ::= SEQUENCE {
+    data SEQUENCE (SIZE (5)) OF DroneSensorData
+}
+
+MultiDroneControllerInput ::= SEQUENCE {
+    controllerInput SEQUENCE (SIZE (5)) OF DroneControllerInput
+}
+
+Area ::= SEQUENCE {
     height T-Int8,
     width T-Int8,
     depth T-Int8,
@@ -120,9 +132,9 @@ PixyData ::= SEQUENCE{
     yPix T-UInt32
 }
 
-SafetyEvent::= ENUMERATED {safe,collision,wallColl,ceilColl}
+SafetyEvent ::= ENUMERATED {safe,collision,wallColl,ceilColl}
 
-SystemState::= ENUMERATED {idle, initializing, runningOk, emergencyLand, safeReturn}
+SystemState ::= ENUMERATED {idle, initializing, runningOk, emergencyLand, safeReturn}
 
 Trajectory ::= SEQUENCE{
     x MyReal,
@@ -131,7 +143,7 @@ Trajectory ::= SEQUENCE{
     yaw MyReal
 }
 
-UserCommand::= ENUMERATED {sysStart, sysPause, sysStop}
+UserCommand ::= ENUMERATED {sysStart, sysPause, sysStop}
 
 Velocity ::= SEQUENCE {
     vX MyReal, 

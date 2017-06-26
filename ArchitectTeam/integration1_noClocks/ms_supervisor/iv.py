@@ -271,7 +271,7 @@ functions['system_supervisor']['interfaces']['choose_trajectory']['in']['world_s
 }
 
 functions['system_supervisor']['interfaces']['choose_trajectory']['out']['control_error'] = {
-    'type': 'Trajectory',
+    'type': 'MultiControlError',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -304,7 +304,7 @@ functions['system_supervisor']['interfaces']['calculate_control_input']['paramsI
 functions['system_supervisor']['interfaces']['calculate_control_input']['paramsOutOrdered'] = []
 
 functions['system_supervisor']['interfaces']['calculate_control_input']['in']['control_error'] = {
-    'type': 'Trajectory',
+    'type': 'MultiControlError',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -572,7 +572,7 @@ functions['as_supervisor']['interfaces']['put_raw_asd']['paramsInOrdered'] = ['r
 functions['as_supervisor']['interfaces']['put_raw_asd']['paramsOutOrdered'] = []
 
 functions['as_supervisor']['interfaces']['put_raw_asd']['in']['raw_asd'] = {
-    'type': 'DroneSensorData',
+    'type': 'MultiDroneSensorData',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -605,7 +605,7 @@ functions['as_supervisor']['interfaces']['store_ASD']['paramsInOrdered'] = ['pro
 functions['as_supervisor']['interfaces']['store_ASD']['paramsOutOrdered'] = []
 
 functions['as_supervisor']['interfaces']['store_ASD']['in']['processed_asd'] = {
-    'type': 'Agent',
+    'type': 'MultiAgents',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -638,7 +638,7 @@ functions['as_supervisor']['interfaces']['process_ASD']['paramsInOrdered'] = ['r
 functions['as_supervisor']['interfaces']['process_ASD']['paramsOutOrdered'] = ['processed_ASD']
 
 functions['as_supervisor']['interfaces']['process_ASD']['in']['raw_ASD'] = {
-    'type': 'DroneSensorData',
+    'type': 'MultiDroneSensorData',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -648,7 +648,7 @@ functions['as_supervisor']['interfaces']['process_ASD']['in']['raw_ASD'] = {
 }
 
 functions['as_supervisor']['interfaces']['process_ASD']['out']['processed_ASD'] = {
-    'type': 'Agent',
+    'type': 'MultiAgents',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -723,7 +723,7 @@ functions['houston']['interfaces']['put_control_data']['paramsInOrdered'] = ['co
 functions['houston']['interfaces']['put_control_data']['paramsOutOrdered'] = []
 
 functions['houston']['interfaces']['put_control_data']['in']['control_data'] = {
-    'type': 'DroneControllerInput',
+    'type': 'MultiDroneControllerInput',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -756,7 +756,7 @@ functions['houston']['interfaces']['store_control_data']['paramsInOrdered'] = ['
 functions['houston']['interfaces']['store_control_data']['paramsOutOrdered'] = []
 
 functions['houston']['interfaces']['store_control_data']['in']['control_input'] = {
-    'type': 'DroneControllerInput',
+    'type': 'MultiDroneControllerInput',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -789,7 +789,7 @@ functions['houston']['interfaces']['send_control_data']['paramsInOrdered'] = ['c
 functions['houston']['interfaces']['send_control_data']['paramsOutOrdered'] = []
 
 functions['houston']['interfaces']['send_control_data']['in']['control_input'] = {
-    'type': 'DroneControllerInput',
+    'type': 'MultiDroneControllerInput',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -841,7 +841,7 @@ functions['msd_processing']['interfaces']['process_MSD']['in']['raw_MSD'] = {
 }
 
 functions['msd_processing']['interfaces']['process_MSD']['out']['processed_MSD'] = {
-    'type': 'Agent',
+    'type': 'MultiAgents',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -883,7 +883,7 @@ functions['asd_processing']['interfaces']['process_ASD']['paramsInOrdered'] = ['
 functions['asd_processing']['interfaces']['process_ASD']['paramsOutOrdered'] = ['processed_ASD']
 
 functions['asd_processing']['interfaces']['process_ASD']['in']['raw_ASD'] = {
-    'type': 'DroneSensorData',
+    'type': 'MultiDroneSensorData',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -893,7 +893,7 @@ functions['asd_processing']['interfaces']['process_ASD']['in']['raw_ASD'] = {
 }
 
 functions['asd_processing']['interfaces']['process_ASD']['out']['processed_ASD'] = {
-    'type': 'Agent',
+    'type': 'MultiAgents',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -1001,7 +1001,7 @@ functions['ms_supervisor']['interfaces']['store_MSD']['paramsInOrdered'] = ['pro
 functions['ms_supervisor']['interfaces']['store_MSD']['paramsOutOrdered'] = []
 
 functions['ms_supervisor']['interfaces']['store_MSD']['in']['processed_msd'] = {
-    'type': 'Agent',
+    'type': 'MultiAgents',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -1044,7 +1044,7 @@ functions['ms_supervisor']['interfaces']['process_MSD']['in']['raw_MSD'] = {
 }
 
 functions['ms_supervisor']['interfaces']['process_MSD']['out']['processed_MSD'] = {
-    'type': 'Agent',
+    'type': 'MultiAgents',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -1191,7 +1191,7 @@ functions['trajectory_generator']['interfaces']['choose_trajectory']['in']['worl
 }
 
 functions['trajectory_generator']['interfaces']['choose_trajectory']['out']['control_error'] = {
-    'type': 'Trajectory',
+    'type': 'MultiControlError',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -1233,7 +1233,7 @@ functions['drone_control']['interfaces']['calc_control']['paramsInOrdered'] = ['
 functions['drone_control']['interfaces']['calc_control']['paramsOutOrdered'] = ['control_data']
 
 functions['drone_control']['interfaces']['calc_control']['in']['control_error'] = {
-    'type': 'Trajectory',
+    'type': 'MultiControlError',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -1253,7 +1253,7 @@ functions['drone_control']['interfaces']['calc_control']['in']['processed_world_
 }
 
 functions['drone_control']['interfaces']['calc_control']['out']['control_data'] = {
-    'type': 'DroneControllerInput',
+    'type': 'MultiDroneControllerInput',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -1295,7 +1295,7 @@ functions['control_data_storage']['interfaces']['calculate_control_input']['para
 functions['control_data_storage']['interfaces']['calculate_control_input']['paramsOutOrdered'] = []
 
 functions['control_data_storage']['interfaces']['calculate_control_input']['in']['control_error'] = {
-    'type': 'Trajectory',
+    'type': 'MultiControlError',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -1338,7 +1338,7 @@ functions['control_data_storage']['interfaces']['calc_control']['paramsInOrdered
 functions['control_data_storage']['interfaces']['calc_control']['paramsOutOrdered'] = ['control_data']
 
 functions['control_data_storage']['interfaces']['calc_control']['in']['control_error'] = {
-    'type': 'Trajectory',
+    'type': 'MultiControlError',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -1358,7 +1358,7 @@ functions['control_data_storage']['interfaces']['calc_control']['in']['processed
 }
 
 functions['control_data_storage']['interfaces']['calc_control']['out']['control_data'] = {
-    'type': 'DroneControllerInput',
+    'type': 'MultiDroneControllerInput',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -1391,7 +1391,7 @@ functions['control_data_storage']['interfaces']['put_control_data']['paramsInOrd
 functions['control_data_storage']['interfaces']['put_control_data']['paramsOutOrdered'] = []
 
 functions['control_data_storage']['interfaces']['put_control_data']['in']['control_data'] = {
-    'type': 'DroneControllerInput',
+    'type': 'MultiDroneControllerInput',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -1433,7 +1433,7 @@ functions['world_model']['interfaces']['store_MSD']['paramsInOrdered'] = ['proce
 functions['world_model']['interfaces']['store_MSD']['paramsOutOrdered'] = []
 
 functions['world_model']['interfaces']['store_MSD']['in']['processed_msd'] = {
-    'type': 'Agent',
+    'type': 'MultiAgents',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -1466,7 +1466,7 @@ functions['world_model']['interfaces']['store_ASD']['paramsInOrdered'] = ['proce
 functions['world_model']['interfaces']['store_ASD']['paramsOutOrdered'] = []
 
 functions['world_model']['interfaces']['store_ASD']['in']['processed_asd'] = {
-    'type': 'Agent',
+    'type': 'MultiAgents',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -1499,7 +1499,7 @@ functions['world_model']['interfaces']['store_control_data']['paramsInOrdered'] 
 functions['world_model']['interfaces']['store_control_data']['paramsOutOrdered'] = []
 
 functions['world_model']['interfaces']['store_control_data']['in']['control_input'] = {
-    'type': 'DroneControllerInput',
+    'type': 'MultiDroneControllerInput',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -1574,7 +1574,7 @@ functions['socket_client']['interfaces']['send_control_data']['paramsInOrdered']
 functions['socket_client']['interfaces']['send_control_data']['paramsOutOrdered'] = []
 
 functions['socket_client']['interfaces']['send_control_data']['in']['control_input'] = {
-    'type': 'DroneControllerInput',
+    'type': 'MultiDroneControllerInput',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',
@@ -1607,7 +1607,7 @@ functions['socket_client']['interfaces']['put_raw_asd']['paramsInOrdered'] = ['r
 functions['socket_client']['interfaces']['put_raw_asd']['paramsOutOrdered'] = []
 
 functions['socket_client']['interfaces']['put_raw_asd']['in']['raw_asd'] = {
-    'type': 'DroneSensorData',
+    'type': 'MultiDroneSensorData',
     'asn1_module': 'TASTE_Dataview',
     'basic_type': sequence,
     'asn1_filename': './dataview-uniq.asn',

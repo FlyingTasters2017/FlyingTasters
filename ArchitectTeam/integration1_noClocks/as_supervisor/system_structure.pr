@@ -6,17 +6,17 @@ SYSTEM as_supervisor;
 	SIGNAL talk_with_ASSV (MyInteger);
 
 	/* CIF Keep Specific Geode PARAMNAMES raw_asd */
-	SIGNAL put_raw_asd (DroneSensorData);
+	SIGNAL put_raw_asd (MultiDroneSensorData);
 
 	PROCEDURE store_ASD COMMENT '#c_predef';
 		FPAR
-			IN processed_asd Agent;
+			IN processed_asd MultiAgents;
  	EXTERNAL;
 
 	PROCEDURE process_ASD COMMENT '#c_predef';
 		FPAR
-			IN raw_ASD DroneSensorData,
-			IN/OUT processed_ASD Agent;
+			IN raw_ASD MultiDroneSensorData,
+			IN/OUT processed_ASD MultiAgents;
  	EXTERNAL;
 
 	CHANNEL c

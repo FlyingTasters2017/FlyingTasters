@@ -58,7 +58,7 @@ void trajectory_generator_startup()
 
 void trajectory_generator_PI_choose_trajectory(const asn1SccWorldData *IN_processed_world_data,
                                               const asn1SccSafetyInterupt *IN_world_safety_events,
-                                              asn1SccTrajectory *OUT_control_error)
+                                              asn1SccMultiControlError *OUT_control_error)
 {
       printf("i = %d\n",i);
       clock_gettime(CLOCK_MONOTONIC_RAW, &spec);
@@ -91,7 +91,7 @@ void trajectory_generator_PI_choose_trajectory(const asn1SccWorldData *IN_proces
       double error_y = ref_y - y;      
       double psi = IN_processed_world_data->agentData.currentOrientation.yaw;
       
-      OUT_control_error->x = error_x*cos(psi) + error_y*sin(psi);
-      OUT_control_error->y = error_y*cos(psi) - error_x*sin(psi);
+      (*OUT_control_error).bodyFrameError.arr[0].x = error_x*cos(psi) + error_y*sin(psi);
+      (*OUT_control_error).bodyFrameError.arr[0].y = error_y*cos(psi) - error_x*sin(psi);
       
 }

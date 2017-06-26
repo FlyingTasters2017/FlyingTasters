@@ -23,7 +23,7 @@ package body houston is
         state : States;
         initDone : Boolean := False;
         user_input : aliased asn1SccMyInteger;
-        control_input : aliased asn1SccDroneControllerInput;
+        control_input : aliased asn1SccMultiDroneControllerInput;
     end record;
     ctxt: aliased ctxt_Ty;
     CS_Only  : constant Integer := 4;
@@ -43,7 +43,7 @@ package body houston is
         end talk_with_Houston;
         
 
-    procedure put_control_data(control_data: access asn1SccDroneControllerInput) is
+    procedure put_control_data(control_data: access asn1SccMultiDroneControllerInput) is
         begin
             case ctxt.state is
                 when running =>
@@ -83,47 +83,37 @@ package body houston is
                             goto next_transition;
                         end if;
                     when 2 =>
-                        -- writeln('GOT control data',control_input.yawrateRef,control_input.thrustRef) (31,17)
-                        Put("GOT control data");
-                        Put(Long_Float'Image(ctxt.control_input.yawrateref));
-                        Put(Long_Float'Image(ctxt.control_input.thrustref));
-                        New_Line;
-                        -- writeln('Got control data') (33,17)
+                        -- writeln('Got control data') (31,17)
                         Put("Got control data");
                         New_Line;
-                        -- send_control_data(control_input) (35,19)
+                        -- send_control_data(control_input) (33,19)
                         RIÜsend_control_data(ctxt.control_input'Access);
-                        -- writeln('sent control data') (37,17)
+                        -- writeln('sent control data') (35,17)
                         Put("sent control data");
                         New_Line;
-                        -- store_control_data(control_input) (39,17)
+                        -- store_control_data(control_input) (37,17)
                         RIÜstore_control_data(ctxt.control_input'Access);
-                        -- writeln('stored control data',control_input.yawrateRef,control_input.thrustRef) (41,17)
-                        Put("stored control data");
-                        Put(Long_Float'Image(ctxt.control_input.yawrateref));
-                        Put(Long_Float'Image(ctxt.control_input.thrustref));
-                        New_Line;
-                        -- NEXT_STATE running (43,22) at 825, 486
+                        -- NEXT_STATE running (39,22) at 825, 385
                         trId := -1;
                         ctxt.state := running;
                         goto next_transition;
                     when 3 =>
-                        -- writeln('user inpt received by houston') (50,17)
+                        -- writeln('user inpt received by houston') (46,17)
                         Put("user inpt received by houston");
                         New_Line;
                         -- DECISION user_input (-1,-1)
-                        -- ANSWER /=1 (54,17)
+                        -- ANSWER /=1 (50,17)
                         if (ctxt.user_input) /= 1 then
-                            -- NEXT_STATE wait (56,30) at 66, 339
+                            -- NEXT_STATE wait (52,30) at 66, 339
                             trId := -1;
                             ctxt.state := wait;
                             goto next_transition;
-                            -- ANSWER =1 (58,17)
+                            -- ANSWER =1 (54,17)
                         elsif (ctxt.user_input) = 1 then
-                            -- writeln('HOUSTON go to RUNNING') (60,25)
+                            -- writeln('HOUSTON go to RUNNING') (56,25)
                             Put("HOUSTON go to RUNNING");
                             New_Line;
-                            -- NEXT_STATE running (62,30) at 231, 389
+                            -- NEXT_STATE running (58,30) at 231, 389
                             trId := -1;
                             ctxt.state := running;
                             goto next_transition;

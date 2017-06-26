@@ -14,7 +14,7 @@ extern "C" {
 void msd_processing_startup();
 
 void msd_processing_PI_process_MSD(const asn1SccPixyData *,
-                                   asn1SccAgent *);
+                                   asn1SccMultiAgents *);
 
 #ifdef __cplusplus
 }

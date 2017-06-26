@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'calc_control'.
  *
- * Model version                  : 1.3
+ * Model version                  : 1.32
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Thu Jun 22 17:47:16 2017
+ * C/C++ source code generated on : Sat Jun 24 20:51:23 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -20,13 +20,50 @@
 #include "calc_control.h"
 #include "calc_control_private.h"
 
-const DroneControllerInput calc_control_rtZDroneControllerInput = {
-  0.0,                                 /* yawrateRef */
-  0.0,                                 /* pitchRef */
-  0.0,                                 /* rollRef */
-  0.0,                                 /* heightRef */
-  0.0                                  /* thrustRef */
-} ;                                    /* DroneControllerInput ground */
+const MultiDroneControllerInput calc_control_rtZMultiDroneControllerInput = {
+  {
+    {
+      0.0,                             /* yawrateRef */
+      0.0,                             /* pitchRef */
+      0.0,                             /* rollRef */
+      0.0,                             /* heightRef */
+      0.0                              /* thrustRef */
+    },                                 /* element_00 */
+
+    {
+      0.0,                             /* yawrateRef */
+      0.0,                             /* pitchRef */
+      0.0,                             /* rollRef */
+      0.0,                             /* heightRef */
+      0.0                              /* thrustRef */
+    },                                 /* element_01 */
+
+    {
+      0.0,                             /* yawrateRef */
+      0.0,                             /* pitchRef */
+      0.0,                             /* rollRef */
+      0.0,                             /* heightRef */
+      0.0                              /* thrustRef */
+    },                                 /* element_02 */
+
+    {
+      0.0,                             /* yawrateRef */
+      0.0,                             /* pitchRef */
+      0.0,                             /* rollRef */
+      0.0,                             /* heightRef */
+      0.0                              /* thrustRef */
+    },                                 /* element_03 */
+
+    {
+      0.0,                             /* yawrateRef */
+      0.0,                             /* pitchRef */
+      0.0,                             /* rollRef */
+      0.0,                             /* heightRef */
+      0.0                              /* thrustRef */
+    },                                 /* element_04 */
+    0                                  /* length */
+  }                                    /* controllerInput */
+} ;                                    /* MultiDroneControllerInput ground */
 
 /* Block states (auto storage) */
 DW_calc_control_T calc_control_DW;
@@ -45,7 +82,7 @@ RT_MODEL_calc_control_T *const calc_control_M = &calc_control_M_;
 void calc_control_step(void)
 {
   real_T rtb_TSamp;
-  real_T rtb_TSamp_o;
+  real_T rtb_TSamp_h;
   real_T u0;
 
   /* Gain: '<S3>/Gain' incorporates:
@@ -54,16 +91,16 @@ void calc_control_step(void)
    *  Sum: '<S3>/Sum'
    */
   u0 = (0.0 -
-        calc_control_U.processed_world_data.agentData.currentOrientation.yaw) *
-    -0.5;
+        calc_control_U.processed_world_data.agents.element_00.currentOrientation.yaw)
+    * -0.5;
 
   /* Saturate: '<S3>/Saturation' */
   if (u0 > 30.0) {
-    calc_control_Y.control_data.yawrateRef = 30.0;
+    calc_control_Y.control_data.controller_input.element_00.yawrateRef = 30.0;
   } else if (u0 < -30.0) {
-    calc_control_Y.control_data.yawrateRef = -30.0;
+    calc_control_Y.control_data.controller_input.element_00.yawrateRef = -30.0;
   } else {
-    calc_control_Y.control_data.yawrateRef = u0;
+    calc_control_Y.control_data.controller_input.element_00.yawrateRef = u0;
   }
 
   /* End of Saturate: '<S3>/Saturation' */
@@ -74,7 +111,7 @@ void calc_control_step(void)
    * About '<S1>/TSamp':
    *  y = u * K where K = 1 / ( w * Ts )
    */
-  rtb_TSamp = calc_control_U.control_error.x * -350.0;
+  rtb_TSamp = calc_control_U.control_error.bodyFrameError.element_00.x * -350.0;
 
   /* Sum: '<Root>/Sum3' incorporates:
    *  Gain: '<Root>/Gain1'
@@ -90,16 +127,16 @@ void calc_control_step(void)
    *
    *  Store in Global RAM
    */
-  u0 = -5.0 * calc_control_U.control_error.x + (rtb_TSamp -
-    calc_control_DW.UD_DSTATE);
+  u0 = -5.0 * calc_control_U.control_error.bodyFrameError.element_00.x +
+    (rtb_TSamp - calc_control_DW.UD_DSTATE);
 
   /* Saturate: '<Root>/Saturation' */
   if (u0 > 10.0) {
-    calc_control_Y.control_data.pitchRef = 10.0;
+    calc_control_Y.control_data.controller_input.element_00.pitchRef = 10.0;
   } else if (u0 < -10.0) {
-    calc_control_Y.control_data.pitchRef = -10.0;
+    calc_control_Y.control_data.controller_input.element_00.pitchRef = -10.0;
   } else {
-    calc_control_Y.control_data.pitchRef = u0;
+    calc_control_Y.control_data.controller_input.element_00.pitchRef = u0;
   }
 
   /* End of Saturate: '<Root>/Saturation' */
@@ -110,7 +147,8 @@ void calc_control_step(void)
    * About '<S2>/TSamp':
    *  y = u * K where K = 1 / ( w * Ts )
    */
-  rtb_TSamp_o = calc_control_U.control_error.y * -350.0;
+  rtb_TSamp_h = calc_control_U.control_error.bodyFrameError.element_00.y *
+    -350.0;
 
   /* Sum: '<Root>/Sum5' incorporates:
    *  Gain: '<Root>/Gain2'
@@ -126,26 +164,83 @@ void calc_control_step(void)
    *
    *  Store in Global RAM
    */
-  u0 = -5.0 * calc_control_U.control_error.y + (rtb_TSamp_o -
-    calc_control_DW.UD_DSTATE_o);
+  u0 = -5.0 * calc_control_U.control_error.bodyFrameError.element_00.y +
+    (rtb_TSamp_h - calc_control_DW.UD_DSTATE_b);
 
   /* Saturate: '<Root>/Saturation1' */
   if (u0 > 10.0) {
-    calc_control_Y.control_data.rollRef = 10.0;
+    calc_control_Y.control_data.controller_input.element_00.rollRef = 10.0;
   } else if (u0 < -10.0) {
-    calc_control_Y.control_data.rollRef = -10.0;
+    calc_control_Y.control_data.controller_input.element_00.rollRef = -10.0;
   } else {
-    calc_control_Y.control_data.rollRef = u0;
+    calc_control_Y.control_data.controller_input.element_00.rollRef = u0;
   }
 
   /* End of Saturate: '<Root>/Saturation1' */
 
-  /* BusCreator: '<Root>/control_data_DroneControllerInput_BusCre' incorporates:
+  /* BusCreator: '<Root>/control_data_MultiDroneControllerInput_BusCre1' incorporates:
    *  Constant: '<Root>/Constant1'
    *  Constant: '<Root>/Constant2'
    */
-  calc_control_Y.control_data.heightRef = 0.3;
-  calc_control_Y.control_data.thrustRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_00.heightRef = 0.3;
+  calc_control_Y.control_data.controller_input.element_00.thrustRef = 0.3;
+
+  /* BusCreator: '<Root>/control_data_MultiDroneControllerInput_BusCre3' incorporates:
+   *  Constant: '<Root>/Constant3'
+   *  Constant: '<Root>/Constant4'
+   *  Constant: '<Root>/Constant5'
+   *  Constant: '<Root>/Constant6'
+   *  Constant: '<Root>/Constant7'
+   */
+  calc_control_Y.control_data.controller_input.element_01.yawrateRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_01.pitchRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_01.rollRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_01.heightRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_01.thrustRef = 0.0;
+
+  /* BusCreator: '<Root>/control_data_MultiDroneControllerInput_BusCre4' incorporates:
+   *  Constant: '<Root>/Constant10'
+   *  Constant: '<Root>/Constant11'
+   *  Constant: '<Root>/Constant12'
+   *  Constant: '<Root>/Constant8'
+   *  Constant: '<Root>/Constant9'
+   */
+  calc_control_Y.control_data.controller_input.element_02.yawrateRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_02.pitchRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_02.rollRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_02.heightRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_02.thrustRef = 0.0;
+
+  /* BusCreator: '<Root>/control_data_MultiDroneControllerInput_BusCre5' incorporates:
+   *  Constant: '<Root>/Constant13'
+   *  Constant: '<Root>/Constant14'
+   *  Constant: '<Root>/Constant15'
+   *  Constant: '<Root>/Constant16'
+   *  Constant: '<Root>/Constant17'
+   */
+  calc_control_Y.control_data.controller_input.element_03.yawrateRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_03.pitchRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_03.rollRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_03.heightRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_03.thrustRef = 0.0;
+
+  /* BusCreator: '<Root>/control_data_MultiDroneControllerInput_BusCre6' incorporates:
+   *  Constant: '<Root>/Constant18'
+   *  Constant: '<Root>/Constant19'
+   *  Constant: '<Root>/Constant20'
+   *  Constant: '<Root>/Constant21'
+   *  Constant: '<Root>/Constant22'
+   */
+  calc_control_Y.control_data.controller_input.element_04.yawrateRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_04.pitchRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_04.rollRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_04.heightRef = 0.0;
+  calc_control_Y.control_data.controller_input.element_04.thrustRef = 0.0;
+
+  /* BusCreator: '<Root>/control_data_MultiDroneControllerInput_BusCre2' incorporates:
+   *  Constant: '<Root>/Constant23'
+   */
+  calc_control_Y.control_data.controller_input.length = 5;
 
   /* Update for UnitDelay: '<S1>/UD'
    *
@@ -161,7 +256,7 @@ void calc_control_step(void)
    *
    *  Store in Global RAM
    */
-  calc_control_DW.UD_DSTATE_o = rtb_TSamp_o;
+  calc_control_DW.UD_DSTATE_b = rtb_TSamp_h;
 }
 
 /* Model initialize function */
@@ -180,7 +275,7 @@ void calc_control_initialize(void)
   (void)memset((void *)&calc_control_U, 0, sizeof(ExtU_calc_control_T));
 
   /* external outputs */
-  calc_control_Y.control_data = calc_control_rtZDroneControllerInput;
+  calc_control_Y.control_data = calc_control_rtZMultiDroneControllerInput;
 }
 
 /* Model terminate function */

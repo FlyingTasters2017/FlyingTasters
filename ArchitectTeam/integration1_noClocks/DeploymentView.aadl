@@ -132,3 +132,4 @@ PROPERTIES
   Taste::HWLibraries => ("../../../tool-inst/share/ocarina/AADLv2/ocarina_components.aadl");
 END deploymentview::DV;
 
+-- copied aadl libraries

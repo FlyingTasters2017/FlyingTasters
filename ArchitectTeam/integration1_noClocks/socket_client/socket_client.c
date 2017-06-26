@@ -25,7 +25,7 @@ char droneref[256];
 float x_pos, y_pos;
 
 int yawOld,pitchOld,rollOld,zrangeOld;
-asn1SccDroneSensorData OUT_sensor_data;
+asn1SccMultiDroneSensorData OUT_sensor_data;
 
 //global variables end*/
 
@@ -126,7 +126,7 @@ void socket_client_startup()
     printf("initialization ended\n");
 }
 
-void socket_client_PI_send_control_data(const asn1SccDroneControllerInput *IN_control_input)
+void socket_client_PI_send_control_data(const asn1SccMultiDroneControllerInput *IN_control_input)
 {
     time_count = clock(); 
    char buf[256]; 
@@ -158,7 +158,7 @@ void socket_client_PI_send_control_data(const asn1SccDroneControllerInput *IN_co
 //       printf("stabilizer.yaw: %.*s\n", t[i+1].end-t[i+1].start,buf + t[i+1].start);
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
-            OUT_sensor_data.yawAct = strtod(temp, &ptr);
+            OUT_sensor_data.data.arr[0].yawAct = strtod(temp, &ptr);
             receivedYaw = strtod(temp, &ptr) * 1000; //Convert to int having 3 zeros after comma xx.xxx
             i++;
     }         
@@ -168,7 +168,7 @@ void socket_client_PI_send_control_data(const asn1SccDroneControllerInput *IN_co
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
-            OUT_sensor_data.pitchAct = strtod(temp, &ptr);
+            OUT_sensor_data.data.arr[0].pitchAct = strtod(temp, &ptr);
       i++;
     }
     else if (jsoneq(buf, &t[i], "stabilizer.roll") == 0) {
@@ -177,7 +177,7 @@ void socket_client_PI_send_control_data(const asn1SccDroneControllerInput *IN_co
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
-            OUT_sensor_data.rollAct = strtod(temp, &ptr);
+            OUT_sensor_data.data.arr[0].rollAct = strtod(temp, &ptr);
       i++;
     }   
     else if (jsoneq(buf, &t[i], "acc.x") == 0) {
@@ -187,7 +187,7 @@ void socket_client_PI_send_control_data(const asn1SccDroneControllerInput *IN_co
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
-            OUT_sensor_data.accxAct = strtod(temp, &ptr);
+            OUT_sensor_data.data.arr[0].accxAct = strtod(temp, &ptr);
       i++;
     }
     else if (jsoneq(buf, &t[i], "acc.y") == 0) {
@@ -197,7 +197,7 @@ void socket_client_PI_send_control_data(const asn1SccDroneControllerInput *IN_co
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
-            OUT_sensor_data.accyAct = strtod(temp, &ptr);
+            OUT_sensor_data.data.arr[0].accyAct = strtod(temp, &ptr);
       i++;
     }
     else if (jsoneq(buf, &t[i], "acc.z") == 0) {
@@ -206,7 +206,7 @@ void socket_client_PI_send_control_data(const asn1SccDroneControllerInput *IN_co
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
-            OUT_sensor_data.acczAct = strtod(temp, &ptr);
+            OUT_sensor_data.data.arr[0].acczAct = strtod(temp, &ptr);
       i++;
     }
     else if (jsoneq(buf, &t[i], "range.zrange") == 0) {
@@ -215,7 +215,7 @@ void socket_client_PI_send_control_data(const asn1SccDroneControllerInput *IN_co
             strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
             temp[t[i+1].end-t[i+1].start] = '\0';
             //printf("yaw is %f \n", strtod(temp, &ptr));
-            OUT_sensor_data.baropAct = strtod(temp, &ptr);
+            OUT_sensor_data.data.arr[0].baropAct = strtod(temp, &ptr);
         }
     else {
       printf("Unexpected key: %.*s\n", t[i].end-t[i].start,buf + t[i].start);
@@ -245,11 +245,11 @@ void socket_client_PI_send_control_data(const asn1SccDroneControllerInput *IN_co
    char *pitchc;
    
 
-   yawrate = htonl(IN_control_input->yawrateRef);
-   roll = htonl(IN_control_input->rollRef);
-   pitch = htonl(IN_control_input->pitchRef);
-    height = htonl((IN_control_input->heightRef));
-    thrust = htonl((IN_control_input->thrustRef));
+   yawrate = htonl(*IN_control_input.controllerInput.arr[0].yawrateRef);
+   roll = htonl(*IN_control_input.controllerInput.arr[0].rollRef);
+   pitch = htonl(*IN_control_input.controllerInput.arr[0].pitchRef);
+    height = htonl((*IN_control_input.controllerInput.arr[0].heightRef));
+    thrust = htonl((*IN_control_inputcontrollerInput.arr[0].thrustRef));
     
    
    bzero(droneref,256);   

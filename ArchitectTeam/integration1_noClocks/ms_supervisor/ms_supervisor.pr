@@ -4,7 +4,7 @@ process ms_supervisor;
     -- Text area for declarations and comments
     
     dcl raw_MSD_data PixyData;
-    dcl proc_MSD_data Agent;
+    dcl proc_MSD_data MultiAgents;
     dcl user_input MyInteger;
     /* CIF ENDTEXT */
     /* CIF START (320, 10), (70, 35) */
