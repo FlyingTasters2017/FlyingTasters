@@ -245,11 +245,11 @@ void socket_client_PI_send_control_data(const asn1SccMultiDroneControllerInput *
    char *pitchc;
    
 
-   yawrate = htonl(*IN_control_input.controllerInput.arr[0].yawrateRef);
-   roll = htonl(*IN_control_input.controllerInput.arr[0].rollRef);
-   pitch = htonl(*IN_control_input.controllerInput.arr[0].pitchRef);
-    height = htonl((*IN_control_input.controllerInput.arr[0].heightRef));
-    thrust = htonl((*IN_control_inputcontrollerInput.arr[0].thrustRef));
+   yawrate = htonl((*IN_control_input).controllerInput.arr[0].yawrateRef);
+   roll = htonl((*IN_control_input).controllerInput.arr[0].rollRef);
+   pitch = htonl((*IN_control_input).controllerInput.arr[0].pitchRef);
+    height = htonl((*IN_control_input).controllerInput.arr[0].heightRef);
+    thrust = htonl((*IN_control_input).controllerInput.arr[0].thrustRef);
     
    
    bzero(droneref,256);   

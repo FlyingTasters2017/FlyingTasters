@@ -26,7 +26,7 @@ package body system_supervisor is
         world_safety_interupts : aliased asn1SccSafetyInterupt;
         user_input : aliased asn1SccMyInteger;
         proc_world_data : aliased asn1SccWorldData;
-        control_error : aliased asn1SccTrajectory;
+        control_error : aliased asn1SccMultiControlError;
     end record;
     ctxt: aliased ctxt_Ty;
     CS_Only  : constant Integer := 4;

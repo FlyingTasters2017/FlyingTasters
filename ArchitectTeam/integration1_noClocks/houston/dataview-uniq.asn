@@ -122,8 +122,8 @@ Position ::= SEQUENCE {
 }
 
 PositionSystemData ::= SEQUENCE {
-    xAct MyReal,
-    yAct MyReal
+    xAct SEQUENCE (SIZE (5)) OF MyReal,
+    yAct SEQUENCE (SIZE (5)) OF MyReal
 }
 
 ReferenceFormation ::= SEQUENCE {
@@ -139,8 +139,8 @@ ReferencePath ::= SEQUENCE {
 }
 
 PixyData ::= SEQUENCE{
-    xPix T-UInt32,
-    yPix T-UInt32
+    xPix SEQUENCE (SIZE (5)) OF T-UInt32,
+    yPix SEQUENCE (SIZE (5)) OF T-UInt32
 }
 
 SafetyAction ::= SEQUENCE {

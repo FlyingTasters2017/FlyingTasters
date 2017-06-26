@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'calc_control'.
  *
- * Model version                  : 1.32
+ * Model version                  : 1.1
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Sat Jun 24 20:51:23 2017
+ * C/C++ source code generated on : Mon Jun 26 10:33:25 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -39,8 +39,12 @@
 
 /* Block states (auto storage) for system '<Root>' */
 typedef struct {
-  real_T UD_DSTATE;                    /* '<S1>/UD' */
-  real_T UD_DSTATE_b;                  /* '<S2>/UD' */
+  real_T UD_DSTATE;                    /* '<S4>/UD' */
+  real_T UD_DSTATE_p;                  /* '<S5>/UD' */
+  real_T UD_DSTATE_o;                  /* '<S7>/UD' */
+  real_T UD_DSTATE_n;                  /* '<S8>/UD' */
+  real_T UD_DSTATE_b;                  /* '<S10>/UD' */
+  real_T UD_DSTATE_a;                  /* '<S11>/UD' */
 } DW_calc_control_T;
 
 /* External inputs (root inport signals with auto storage) */
@@ -82,8 +86,12 @@ extern RT_MODEL_calc_control_T *const calc_control_M;
 /*-
  * These blocks were eliminated from the model due to optimizations:
  *
- * Block '<S1>/Data Type Duplicate' : Unused code path elimination
- * Block '<S2>/Data Type Duplicate' : Unused code path elimination
+ * Block '<S4>/Data Type Duplicate' : Unused code path elimination
+ * Block '<S5>/Data Type Duplicate' : Unused code path elimination
+ * Block '<S7>/Data Type Duplicate' : Unused code path elimination
+ * Block '<S8>/Data Type Duplicate' : Unused code path elimination
+ * Block '<S10>/Data Type Duplicate' : Unused code path elimination
+ * Block '<S11>/Data Type Duplicate' : Unused code path elimination
  */
 
 /*-
@@ -101,9 +109,18 @@ extern RT_MODEL_calc_control_T *const calc_control_M;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'calc_control'
- * '<S1>'   : 'calc_control/Discrete Derivative'
- * '<S2>'   : 'calc_control/Discrete Derivative1'
- * '<S3>'   : 'calc_control/yaw control'
+ * '<S1>'   : 'calc_control/droneController'
+ * '<S2>'   : 'calc_control/droneController1'
+ * '<S3>'   : 'calc_control/droneController2'
+ * '<S4>'   : 'calc_control/droneController/Discrete Derivative'
+ * '<S5>'   : 'calc_control/droneController/Discrete Derivative1'
+ * '<S6>'   : 'calc_control/droneController/yaw control'
+ * '<S7>'   : 'calc_control/droneController1/Discrete Derivative'
+ * '<S8>'   : 'calc_control/droneController1/Discrete Derivative1'
+ * '<S9>'   : 'calc_control/droneController1/yaw control'
+ * '<S10>'  : 'calc_control/droneController2/Discrete Derivative'
+ * '<S11>'  : 'calc_control/droneController2/Discrete Derivative1'
+ * '<S12>'  : 'calc_control/droneController2/yaw control'
  */
 #endif                                 /* RTW_HEADER_calc_control_h_ */
 

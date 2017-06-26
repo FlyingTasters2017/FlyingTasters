@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'calc_control'.
  *
- * Model version                  : 1.32
+ * Model version                  : 1.1
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Sat Jun 24 20:51:23 2017
+ * C/C++ source code generated on : Mon Jun 26 10:33:25 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -82,134 +82,314 @@ RT_MODEL_calc_control_T *const calc_control_M = &calc_control_M_;
 void calc_control_step(void)
 {
   real_T rtb_TSamp;
-  real_T rtb_TSamp_h;
+  real_T rtb_TSamp_je;
+  real_T rtb_TSamp_b;
+  real_T rtb_TSamp_f;
+  real_T rtb_TSamp_c;
+  real_T rtb_TSamp_o;
   real_T u0;
 
-  /* Gain: '<S3>/Gain' incorporates:
-   *  Constant: '<S3>/Constant2'
+  /* Gain: '<S6>/Gain' incorporates:
+   *  Constant: '<S6>/Constant2'
    *  Inport: '<Root>/processed_world_data'
-   *  Sum: '<S3>/Sum'
+   *  Sum: '<S6>/Sum'
    */
   u0 = (0.0 -
         calc_control_U.processed_world_data.agents.element_00.currentOrientation.yaw)
     * -0.5;
 
-  /* Saturate: '<S3>/Saturation' */
+  /* Saturate: '<S6>/Saturation' */
   if (u0 > 30.0) {
-    calc_control_Y.control_data.controller_input.element_00.yawrateRef = 30.0;
+    calc_control_Y.control_data.controllerInput.element_00.yawrateRef = 30.0;
   } else if (u0 < -30.0) {
-    calc_control_Y.control_data.controller_input.element_00.yawrateRef = -30.0;
+    calc_control_Y.control_data.controllerInput.element_00.yawrateRef = -30.0;
   } else {
-    calc_control_Y.control_data.controller_input.element_00.yawrateRef = u0;
+    calc_control_Y.control_data.controllerInput.element_00.yawrateRef = u0;
   }
 
-  /* End of Saturate: '<S3>/Saturation' */
+  /* End of Saturate: '<S6>/Saturation' */
 
-  /* SampleTimeMath: '<S1>/TSamp' incorporates:
+  /* SampleTimeMath: '<S4>/TSamp' incorporates:
    *  Inport: '<Root>/control_error'
    *
-   * About '<S1>/TSamp':
+   * About '<S4>/TSamp':
    *  y = u * K where K = 1 / ( w * Ts )
    */
   rtb_TSamp = calc_control_U.control_error.bodyFrameError.element_00.x * -350.0;
 
-  /* Sum: '<Root>/Sum3' incorporates:
-   *  Gain: '<Root>/Gain1'
+  /* Sum: '<S1>/Sum3' incorporates:
+   *  Gain: '<S1>/Gain1'
    *  Inport: '<Root>/control_error'
-   *  Sum: '<S1>/Diff'
-   *  UnitDelay: '<S1>/UD'
+   *  Sum: '<S4>/Diff'
+   *  UnitDelay: '<S4>/UD'
    *
-   * Block description for '<S1>/Diff':
+   * Block description for '<S4>/Diff':
    *
    *  Add in CPU
    *
-   * Block description for '<S1>/UD':
+   * Block description for '<S4>/UD':
    *
    *  Store in Global RAM
    */
   u0 = -5.0 * calc_control_U.control_error.bodyFrameError.element_00.x +
     (rtb_TSamp - calc_control_DW.UD_DSTATE);
 
-  /* Saturate: '<Root>/Saturation' */
+  /* Saturate: '<S1>/Saturation' */
   if (u0 > 10.0) {
-    calc_control_Y.control_data.controller_input.element_00.pitchRef = 10.0;
+    calc_control_Y.control_data.controllerInput.element_00.pitchRef = 10.0;
   } else if (u0 < -10.0) {
-    calc_control_Y.control_data.controller_input.element_00.pitchRef = -10.0;
+    calc_control_Y.control_data.controllerInput.element_00.pitchRef = -10.0;
   } else {
-    calc_control_Y.control_data.controller_input.element_00.pitchRef = u0;
+    calc_control_Y.control_data.controllerInput.element_00.pitchRef = u0;
   }
 
-  /* End of Saturate: '<Root>/Saturation' */
+  /* End of Saturate: '<S1>/Saturation' */
 
-  /* SampleTimeMath: '<S2>/TSamp' incorporates:
+  /* SampleTimeMath: '<S5>/TSamp' incorporates:
    *  Inport: '<Root>/control_error'
    *
-   * About '<S2>/TSamp':
+   * About '<S5>/TSamp':
    *  y = u * K where K = 1 / ( w * Ts )
    */
-  rtb_TSamp_h = calc_control_U.control_error.bodyFrameError.element_00.y *
+  rtb_TSamp_je = calc_control_U.control_error.bodyFrameError.element_00.y *
     -350.0;
 
-  /* Sum: '<Root>/Sum5' incorporates:
-   *  Gain: '<Root>/Gain2'
+  /* Sum: '<S1>/Sum5' incorporates:
+   *  Gain: '<S1>/Gain2'
    *  Inport: '<Root>/control_error'
-   *  Sum: '<S2>/Diff'
-   *  UnitDelay: '<S2>/UD'
+   *  Sum: '<S5>/Diff'
+   *  UnitDelay: '<S5>/UD'
    *
-   * Block description for '<S2>/Diff':
+   * Block description for '<S5>/Diff':
    *
    *  Add in CPU
    *
-   * Block description for '<S2>/UD':
+   * Block description for '<S5>/UD':
    *
    *  Store in Global RAM
    */
   u0 = -5.0 * calc_control_U.control_error.bodyFrameError.element_00.y +
-    (rtb_TSamp_h - calc_control_DW.UD_DSTATE_b);
+    (rtb_TSamp_je - calc_control_DW.UD_DSTATE_p);
 
-  /* Saturate: '<Root>/Saturation1' */
+  /* Saturate: '<S1>/Saturation1' */
   if (u0 > 10.0) {
-    calc_control_Y.control_data.controller_input.element_00.rollRef = 10.0;
+    calc_control_Y.control_data.controllerInput.element_00.rollRef = 10.0;
   } else if (u0 < -10.0) {
-    calc_control_Y.control_data.controller_input.element_00.rollRef = -10.0;
+    calc_control_Y.control_data.controllerInput.element_00.rollRef = -10.0;
   } else {
-    calc_control_Y.control_data.controller_input.element_00.rollRef = u0;
+    calc_control_Y.control_data.controllerInput.element_00.rollRef = u0;
   }
 
-  /* End of Saturate: '<Root>/Saturation1' */
+  /* End of Saturate: '<S1>/Saturation1' */
 
   /* BusCreator: '<Root>/control_data_MultiDroneControllerInput_BusCre1' incorporates:
    *  Constant: '<Root>/Constant1'
    *  Constant: '<Root>/Constant2'
    */
-  calc_control_Y.control_data.controller_input.element_00.heightRef = 0.3;
-  calc_control_Y.control_data.controller_input.element_00.thrustRef = 0.3;
+  calc_control_Y.control_data.controllerInput.element_00.heightRef = 0.3;
+  calc_control_Y.control_data.controllerInput.element_00.thrustRef = 0.3;
 
-  /* BusCreator: '<Root>/control_data_MultiDroneControllerInput_BusCre3' incorporates:
+  /* Gain: '<S9>/Gain' incorporates:
+   *  Constant: '<S9>/Constant2'
+   *  Inport: '<Root>/processed_world_data'
+   *  Sum: '<S9>/Sum'
+   */
+  u0 = (0.0 -
+        calc_control_U.processed_world_data.agents.element_01.currentOrientation.yaw)
+    * -0.5;
+
+  /* Saturate: '<S9>/Saturation' */
+  if (u0 > 30.0) {
+    calc_control_Y.control_data.controllerInput.element_01.yawrateRef = 30.0;
+  } else if (u0 < -30.0) {
+    calc_control_Y.control_data.controllerInput.element_01.yawrateRef = -30.0;
+  } else {
+    calc_control_Y.control_data.controllerInput.element_01.yawrateRef = u0;
+  }
+
+  /* End of Saturate: '<S9>/Saturation' */
+
+  /* SampleTimeMath: '<S7>/TSamp' incorporates:
+   *  Inport: '<Root>/control_error'
+   *
+   * About '<S7>/TSamp':
+   *  y = u * K where K = 1 / ( w * Ts )
+   */
+  rtb_TSamp_b = calc_control_U.control_error.bodyFrameError.element_01.x *
+    -350.0;
+
+  /* Sum: '<S2>/Sum3' incorporates:
+   *  Gain: '<S2>/Gain1'
+   *  Inport: '<Root>/control_error'
+   *  Sum: '<S7>/Diff'
+   *  UnitDelay: '<S7>/UD'
+   *
+   * Block description for '<S7>/Diff':
+   *
+   *  Add in CPU
+   *
+   * Block description for '<S7>/UD':
+   *
+   *  Store in Global RAM
+   */
+  u0 = -5.0 * calc_control_U.control_error.bodyFrameError.element_01.x +
+    (rtb_TSamp_b - calc_control_DW.UD_DSTATE_o);
+
+  /* Saturate: '<S2>/Saturation' */
+  if (u0 > 10.0) {
+    calc_control_Y.control_data.controllerInput.element_01.pitchRef = 10.0;
+  } else if (u0 < -10.0) {
+    calc_control_Y.control_data.controllerInput.element_01.pitchRef = -10.0;
+  } else {
+    calc_control_Y.control_data.controllerInput.element_01.pitchRef = u0;
+  }
+
+  /* End of Saturate: '<S2>/Saturation' */
+
+  /* SampleTimeMath: '<S8>/TSamp' incorporates:
+   *  Inport: '<Root>/control_error'
+   *
+   * About '<S8>/TSamp':
+   *  y = u * K where K = 1 / ( w * Ts )
+   */
+  rtb_TSamp_f = calc_control_U.control_error.bodyFrameError.element_01.y *
+    -350.0;
+
+  /* Sum: '<S2>/Sum5' incorporates:
+   *  Gain: '<S2>/Gain2'
+   *  Inport: '<Root>/control_error'
+   *  Sum: '<S8>/Diff'
+   *  UnitDelay: '<S8>/UD'
+   *
+   * Block description for '<S8>/Diff':
+   *
+   *  Add in CPU
+   *
+   * Block description for '<S8>/UD':
+   *
+   *  Store in Global RAM
+   */
+  u0 = -5.0 * calc_control_U.control_error.bodyFrameError.element_01.y +
+    (rtb_TSamp_f - calc_control_DW.UD_DSTATE_n);
+
+  /* Saturate: '<S2>/Saturation1' */
+  if (u0 > 10.0) {
+    calc_control_Y.control_data.controllerInput.element_01.rollRef = 10.0;
+  } else if (u0 < -10.0) {
+    calc_control_Y.control_data.controllerInput.element_01.rollRef = -10.0;
+  } else {
+    calc_control_Y.control_data.controllerInput.element_01.rollRef = u0;
+  }
+
+  /* End of Saturate: '<S2>/Saturation1' */
+
+  /* BusCreator: '<Root>/control_data_MultiDroneControllerInput_BusCre2' incorporates:
    *  Constant: '<Root>/Constant3'
    *  Constant: '<Root>/Constant4'
+   */
+  calc_control_Y.control_data.controllerInput.element_01.heightRef = 0.3;
+  calc_control_Y.control_data.controllerInput.element_01.thrustRef = 0.3;
+
+  /* Gain: '<S12>/Gain' incorporates:
+   *  Constant: '<S12>/Constant2'
+   *  Inport: '<Root>/processed_world_data'
+   *  Sum: '<S12>/Sum'
+   */
+  u0 = (0.0 -
+        calc_control_U.processed_world_data.agents.element_02.currentOrientation.yaw)
+    * -0.5;
+
+  /* Saturate: '<S12>/Saturation' */
+  if (u0 > 30.0) {
+    calc_control_Y.control_data.controllerInput.element_02.yawrateRef = 30.0;
+  } else if (u0 < -30.0) {
+    calc_control_Y.control_data.controllerInput.element_02.yawrateRef = -30.0;
+  } else {
+    calc_control_Y.control_data.controllerInput.element_02.yawrateRef = u0;
+  }
+
+  /* End of Saturate: '<S12>/Saturation' */
+
+  /* SampleTimeMath: '<S10>/TSamp' incorporates:
+   *  Inport: '<Root>/control_error'
+   *
+   * About '<S10>/TSamp':
+   *  y = u * K where K = 1 / ( w * Ts )
+   */
+  rtb_TSamp_c = calc_control_U.control_error.bodyFrameError.element_02.x *
+    -350.0;
+
+  /* Sum: '<S3>/Sum3' incorporates:
+   *  Gain: '<S3>/Gain1'
+   *  Inport: '<Root>/control_error'
+   *  Sum: '<S10>/Diff'
+   *  UnitDelay: '<S10>/UD'
+   *
+   * Block description for '<S10>/Diff':
+   *
+   *  Add in CPU
+   *
+   * Block description for '<S10>/UD':
+   *
+   *  Store in Global RAM
+   */
+  u0 = -5.0 * calc_control_U.control_error.bodyFrameError.element_02.x +
+    (rtb_TSamp_c - calc_control_DW.UD_DSTATE_b);
+
+  /* Saturate: '<S3>/Saturation' */
+  if (u0 > 10.0) {
+    calc_control_Y.control_data.controllerInput.element_02.pitchRef = 10.0;
+  } else if (u0 < -10.0) {
+    calc_control_Y.control_data.controllerInput.element_02.pitchRef = -10.0;
+  } else {
+    calc_control_Y.control_data.controllerInput.element_02.pitchRef = u0;
+  }
+
+  /* End of Saturate: '<S3>/Saturation' */
+
+  /* SampleTimeMath: '<S11>/TSamp' incorporates:
+   *  Inport: '<Root>/control_error'
+   *
+   * About '<S11>/TSamp':
+   *  y = u * K where K = 1 / ( w * Ts )
+   */
+  rtb_TSamp_o = calc_control_U.control_error.bodyFrameError.element_02.y *
+    -350.0;
+
+  /* Sum: '<S3>/Sum5' incorporates:
+   *  Gain: '<S3>/Gain2'
+   *  Inport: '<Root>/control_error'
+   *  Sum: '<S11>/Diff'
+   *  UnitDelay: '<S11>/UD'
+   *
+   * Block description for '<S11>/Diff':
+   *
+   *  Add in CPU
+   *
+   * Block description for '<S11>/UD':
+   *
+   *  Store in Global RAM
+   */
+  u0 = -5.0 * calc_control_U.control_error.bodyFrameError.element_02.y +
+    (rtb_TSamp_o - calc_control_DW.UD_DSTATE_a);
+
+  /* Saturate: '<S3>/Saturation1' */
+  if (u0 > 10.0) {
+    calc_control_Y.control_data.controllerInput.element_02.rollRef = 10.0;
+  } else if (u0 < -10.0) {
+    calc_control_Y.control_data.controllerInput.element_02.rollRef = -10.0;
+  } else {
+    calc_control_Y.control_data.controllerInput.element_02.rollRef = u0;
+  }
+
+  /* End of Saturate: '<S3>/Saturation1' */
+
+  /* BusCreator: '<Root>/control_data_MultiDroneControllerInput_BusCre3' incorporates:
    *  Constant: '<Root>/Constant5'
    *  Constant: '<Root>/Constant6'
-   *  Constant: '<Root>/Constant7'
    */
-  calc_control_Y.control_data.controller_input.element_01.yawrateRef = 0.0;
-  calc_control_Y.control_data.controller_input.element_01.pitchRef = 0.0;
-  calc_control_Y.control_data.controller_input.element_01.rollRef = 0.0;
-  calc_control_Y.control_data.controller_input.element_01.heightRef = 0.0;
-  calc_control_Y.control_data.controller_input.element_01.thrustRef = 0.0;
-
-  /* BusCreator: '<Root>/control_data_MultiDroneControllerInput_BusCre4' incorporates:
-   *  Constant: '<Root>/Constant10'
-   *  Constant: '<Root>/Constant11'
-   *  Constant: '<Root>/Constant12'
-   *  Constant: '<Root>/Constant8'
-   *  Constant: '<Root>/Constant9'
-   */
-  calc_control_Y.control_data.controller_input.element_02.yawrateRef = 0.0;
-  calc_control_Y.control_data.controller_input.element_02.pitchRef = 0.0;
-  calc_control_Y.control_data.controller_input.element_02.rollRef = 0.0;
-  calc_control_Y.control_data.controller_input.element_02.heightRef = 0.0;
-  calc_control_Y.control_data.controller_input.element_02.thrustRef = 0.0;
+  calc_control_Y.control_data.controllerInput.element_02.heightRef = 0.3;
+  calc_control_Y.control_data.controllerInput.element_02.thrustRef = 0.3;
 
   /* BusCreator: '<Root>/control_data_MultiDroneControllerInput_BusCre5' incorporates:
    *  Constant: '<Root>/Constant13'
@@ -218,11 +398,11 @@ void calc_control_step(void)
    *  Constant: '<Root>/Constant16'
    *  Constant: '<Root>/Constant17'
    */
-  calc_control_Y.control_data.controller_input.element_03.yawrateRef = 0.0;
-  calc_control_Y.control_data.controller_input.element_03.pitchRef = 0.0;
-  calc_control_Y.control_data.controller_input.element_03.rollRef = 0.0;
-  calc_control_Y.control_data.controller_input.element_03.heightRef = 0.0;
-  calc_control_Y.control_data.controller_input.element_03.thrustRef = 0.0;
+  calc_control_Y.control_data.controllerInput.element_03.yawrateRef = 0.0;
+  calc_control_Y.control_data.controllerInput.element_03.pitchRef = 0.0;
+  calc_control_Y.control_data.controllerInput.element_03.rollRef = 0.0;
+  calc_control_Y.control_data.controllerInput.element_03.heightRef = 0.0;
+  calc_control_Y.control_data.controllerInput.element_03.thrustRef = 0.0;
 
   /* BusCreator: '<Root>/control_data_MultiDroneControllerInput_BusCre6' incorporates:
    *  Constant: '<Root>/Constant18'
@@ -231,32 +411,64 @@ void calc_control_step(void)
    *  Constant: '<Root>/Constant21'
    *  Constant: '<Root>/Constant22'
    */
-  calc_control_Y.control_data.controller_input.element_04.yawrateRef = 0.0;
-  calc_control_Y.control_data.controller_input.element_04.pitchRef = 0.0;
-  calc_control_Y.control_data.controller_input.element_04.rollRef = 0.0;
-  calc_control_Y.control_data.controller_input.element_04.heightRef = 0.0;
-  calc_control_Y.control_data.controller_input.element_04.thrustRef = 0.0;
+  calc_control_Y.control_data.controllerInput.element_04.yawrateRef = 0.0;
+  calc_control_Y.control_data.controllerInput.element_04.pitchRef = 0.0;
+  calc_control_Y.control_data.controllerInput.element_04.rollRef = 0.0;
+  calc_control_Y.control_data.controllerInput.element_04.heightRef = 0.0;
+  calc_control_Y.control_data.controllerInput.element_04.thrustRef = 0.0;
 
-  /* BusCreator: '<Root>/control_data_MultiDroneControllerInput_BusCre2' incorporates:
+  /* BusCreator: '<Root>/control_data_MultiDroneControllerInput_BusCre4' incorporates:
    *  Constant: '<Root>/Constant23'
    */
-  calc_control_Y.control_data.controller_input.length = 5;
+  calc_control_Y.control_data.controllerInput.length = 5;
 
-  /* Update for UnitDelay: '<S1>/UD'
+  /* Update for UnitDelay: '<S4>/UD'
    *
-   * Block description for '<S1>/UD':
+   * Block description for '<S4>/UD':
    *
    *  Store in Global RAM
    */
   calc_control_DW.UD_DSTATE = rtb_TSamp;
 
-  /* Update for UnitDelay: '<S2>/UD'
+  /* Update for UnitDelay: '<S5>/UD'
    *
-   * Block description for '<S2>/UD':
+   * Block description for '<S5>/UD':
    *
    *  Store in Global RAM
    */
-  calc_control_DW.UD_DSTATE_b = rtb_TSamp_h;
+  calc_control_DW.UD_DSTATE_p = rtb_TSamp_je;
+
+  /* Update for UnitDelay: '<S7>/UD'
+   *
+   * Block description for '<S7>/UD':
+   *
+   *  Store in Global RAM
+   */
+  calc_control_DW.UD_DSTATE_o = rtb_TSamp_b;
+
+  /* Update for UnitDelay: '<S8>/UD'
+   *
+   * Block description for '<S8>/UD':
+   *
+   *  Store in Global RAM
+   */
+  calc_control_DW.UD_DSTATE_n = rtb_TSamp_f;
+
+  /* Update for UnitDelay: '<S10>/UD'
+   *
+   * Block description for '<S10>/UD':
+   *
+   *  Store in Global RAM
+   */
+  calc_control_DW.UD_DSTATE_b = rtb_TSamp_c;
+
+  /* Update for UnitDelay: '<S11>/UD'
+   *
+   * Block description for '<S11>/UD':
+   *
+   *  Store in Global RAM
+   */
+  calc_control_DW.UD_DSTATE_a = rtb_TSamp_o;
 }
 
 /* Model initialize function */

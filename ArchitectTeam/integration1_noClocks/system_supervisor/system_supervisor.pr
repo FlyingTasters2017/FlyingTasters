@@ -1,4 +1,4 @@
-/* CIF PROCESS (250, 150), (150, 75) */
+/* CIF PROCESS (250, 149), (150, 75) */
 process system_supervisor;
     /* CIF TEXT (1343, 72), (347, 179) */
     -- Text area for declarations and comments
@@ -8,7 +8,7 @@ process system_supervisor;
     dcl raw_world_data WorldData;
     dcl proc_world_data WorldData;
     dcl world_safety_interupts SafetyInterupt;
-    dcl control_error Trajectory;
+    dcl control_error MultiControlError;
     /* CIF ENDTEXT */
     /* CIF START (215, 10), (70, 35) */
     START;

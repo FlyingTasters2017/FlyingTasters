@@ -9,7 +9,7 @@ types = {}
 variables = {}
 asn1Files.append("./dataview-uniq.asn")
 asn1Modules.append("TASTE-Dataview")
-exportedTypes["TASTE-Dataview"] = ["MyInteger", "MyReal", "MyBool", "MyEnum", "MySeq", "Acceleration", "Agent", "Area", "Color", "ControlError", "DroneControllerInput", "DroneSensorData", "FeedbackToGUI", "HoverAction", "MultiAgents", "MultiControlError", "MultiDroneControllerInput", "MultiDroneSensorData", "MyChoice", "Orientation", "Position", "PositionSystemData", "ReferenceFormation", "ReferencePath", "PixyData", "SafetyAction", "SafetyEvent", "SafetyInterupt", "SystemState", "Trajectory", "UserCommand", "Velocity", "WorldData", "MySeqOf", "MyOctStr", "WorldData-agents", "Trajectory-yaw", "Trajectory-z", "Trajectory-y", "Trajectory-x", "SafetyInterupt-sAction", "ReferencePath-actions", "ReferencePath-locations", "ReferenceFormation-nodes", "MultiDroneSensorData-data", "MultiDroneControllerInput-controllerInput", "MultiControlError-bodyFrameError", "MultiAgents-agents", "MySeq-validity", "T-Int32", "T-UInt32", "T-Int8", "T-UInt8", "T-Boolean"]
+exportedTypes["TASTE-Dataview"] = ["MyInteger", "MyReal", "MyBool", "MyEnum", "MySeq", "Acceleration", "Agent", "Area", "Color", "ControlError", "DroneControllerInput", "DroneSensorData", "FeedbackToGUI", "HoverAction", "MultiAgents", "MultiControlError", "MultiDroneControllerInput", "MultiDroneSensorData", "MyChoice", "Orientation", "Position", "PositionSystemData", "ReferenceFormation", "ReferencePath", "PixyData", "SafetyAction", "SafetyEvent", "SafetyInterupt", "SystemState", "Trajectory", "UserCommand", "Velocity", "WorldData", "MySeqOf", "MyOctStr", "WorldData-agents", "Trajectory-yaw", "Trajectory-z", "Trajectory-y", "Trajectory-x", "SafetyInterupt-sAction", "PixyData-yPix", "PixyData-xPix", "ReferencePath-actions", "ReferencePath-locations", "ReferenceFormation-nodes", "PositionSystemData-yAct", "PositionSystemData-xAct", "MultiDroneSensorData-data", "MultiDroneControllerInput-controllerInput", "MultiControlError-bodyFrameError", "MultiAgents-agents", "MySeq-validity", "T-Int32", "T-UInt32", "T-Int8", "T-UInt8", "T-Boolean"]
 exportedVariables["TASTE-Dataview"] = ["myVar"]
 importedModules["TASTE-Dataview"] = [{"TASTE-BasicTypes":{"ImportedTypes": ["T-Int32","T-UInt32","T-Int8","T-UInt8","T-Boolean"], "ImportedVariables": []}}]
 
@@ -435,12 +435,12 @@ types["PositionSystemData"] = type("PositionSystemData", (object,), {
         "Line": 124, "CharPositionInLine": 23, "kind": "SequenceType", "Children": {
             "xAct": type("xAct", (object,), {
                 "Optional": "False", "Line": 125, "CharPositionInLine": 4, "type": type("xAct_type", (object,), {
-                    "Line": 125, "CharPositionInLine": 9, "kind": "ReferenceType", "ReferencedTypeName": "MyReal", "Min": "-1000", "Max": "100000"
+                    "Line": 0, "CharPositionInLine": 0, "kind": "ReferenceType", "ReferencedTypeName": "PositionSystemData-xAct", "Min": "5", "Max": "5"
                 })
             }),
             "yAct": type("yAct", (object,), {
                 "Optional": "False", "Line": 126, "CharPositionInLine": 4, "type": type("yAct_type", (object,), {
-                    "Line": 126, "CharPositionInLine": 9, "kind": "ReferenceType", "ReferencedTypeName": "MyReal", "Min": "-1000", "Max": "100000"
+                    "Line": 0, "CharPositionInLine": 0, "kind": "ReferenceType", "ReferencedTypeName": "PositionSystemData-yAct", "Min": "5", "Max": "5"
                 })
             })
         }
@@ -491,12 +491,12 @@ types["PixyData"] = type("PixyData", (object,), {
         "Line": 141, "CharPositionInLine": 13, "kind": "SequenceType", "Children": {
             "xPix": type("xPix", (object,), {
                 "Optional": "False", "Line": 142, "CharPositionInLine": 4, "type": type("xPix_type", (object,), {
-                    "Line": 142, "CharPositionInLine": 9, "kind": "ReferenceType", "ReferencedTypeName": "T-UInt32", "Min": "0", "Max": "4294967295", "ReferencedModName": "TASTE-BasicTypes"
+                    "Line": 0, "CharPositionInLine": 0, "kind": "ReferenceType", "ReferencedTypeName": "PixyData-xPix", "Min": "5", "Max": "5"
                 })
             }),
             "yPix": type("yPix", (object,), {
                 "Optional": "False", "Line": 143, "CharPositionInLine": 4, "type": type("yPix_type", (object,), {
-                    "Line": 143, "CharPositionInLine": 9, "kind": "ReferenceType", "ReferencedTypeName": "T-UInt32", "Min": "0", "Max": "4294967295", "ReferencedModName": "TASTE-BasicTypes"
+                    "Line": 0, "CharPositionInLine": 0, "kind": "ReferenceType", "ReferencedTypeName": "PixyData-yPix", "Min": "5", "Max": "5"
                 })
             })
         }
@@ -742,6 +742,22 @@ types["SafetyInterupt-sAction"] = type("SafetyInterupt-sAction", (object,), {
     })
 })
 
+types["PixyData-yPix"] = type("PixyData-yPix", (object,), {
+    "Line": 0, "CharPositionInLine": 0, "type": type("PixyData-yPix_type", (object,), {
+        "Line": 143, "CharPositionInLine": 9, "kind": "SequenceOfType", "Min": "5", "Max": "5", "type": type("SeqOf_type", (object,), {
+            "Line": 143, "CharPositionInLine": 32, "kind": "ReferenceType", "ReferencedTypeName": "T-UInt32", "Min": "0", "Max": "4294967295", "ReferencedModName": "TASTE-BasicTypes"
+        })
+    })
+})
+
+types["PixyData-xPix"] = type("PixyData-xPix", (object,), {
+    "Line": 0, "CharPositionInLine": 0, "type": type("PixyData-xPix_type", (object,), {
+        "Line": 142, "CharPositionInLine": 9, "kind": "SequenceOfType", "Min": "5", "Max": "5", "type": type("SeqOf_type", (object,), {
+            "Line": 142, "CharPositionInLine": 32, "kind": "ReferenceType", "ReferencedTypeName": "T-UInt32", "Min": "0", "Max": "4294967295", "ReferencedModName": "TASTE-BasicTypes"
+        })
+    })
+})
+
 types["ReferencePath-actions"] = type("ReferencePath-actions", (object,), {
     "Line": 0, "CharPositionInLine": 0, "type": type("ReferencePath-actions_type", (object,), {
         "Line": 138, "CharPositionInLine": 12, "kind": "SequenceOfType", "Min": "3", "Max": "3", "type": type("SeqOf_type", (object,), {
@@ -762,6 +778,22 @@ types["ReferenceFormation-nodes"] = type("ReferenceFormation-nodes", (object,), 
     "Line": 0, "CharPositionInLine": 0, "type": type("ReferenceFormation-nodes_type", (object,), {
         "Line": 131, "CharPositionInLine": 10, "kind": "SequenceOfType", "Min": "5", "Max": "5", "type": type("SeqOf_type", (object,), {
             "Line": 131, "CharPositionInLine": 33, "kind": "ReferenceType", "ReferencedTypeName": "T-Int8", "Min": "-128", "Max": "127", "ReferencedModName": "TASTE-BasicTypes"
+        })
+    })
+})
+
+types["PositionSystemData-yAct"] = type("PositionSystemData-yAct", (object,), {
+    "Line": 0, "CharPositionInLine": 0, "type": type("PositionSystemData-yAct_type", (object,), {
+        "Line": 126, "CharPositionInLine": 9, "kind": "SequenceOfType", "Min": "5", "Max": "5", "type": type("SeqOf_type", (object,), {
+            "Line": 126, "CharPositionInLine": 32, "kind": "ReferenceType", "ReferencedTypeName": "MyReal", "Min": "-1000", "Max": "100000"
+        })
+    })
+})
+
+types["PositionSystemData-xAct"] = type("PositionSystemData-xAct", (object,), {
+    "Line": 0, "CharPositionInLine": 0, "type": type("PositionSystemData-xAct_type", (object,), {
+        "Line": 125, "CharPositionInLine": 9, "kind": "SequenceOfType", "Min": "5", "Max": "5", "type": type("SeqOf_type", (object,), {
+            "Line": 125, "CharPositionInLine": 32, "kind": "ReferenceType", "ReferencedTypeName": "MyReal", "Min": "-1000", "Max": "100000"
         })
     })
 })

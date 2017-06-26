@@ -463,8 +463,6 @@ FEATURES
   control_data : OUT PARAMETER DataView::MultiDroneControllerInput {
     Taste::encoding => UPER;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
 END PI_calc_control;
 
 SUBPROGRAM IMPLEMENTATION PI_calc_control.others
@@ -486,8 +484,6 @@ FEATURES
   processed_world_data : IN PARAMETER DataView::WorldData {
     Taste::encoding => UPER;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
 END PI_calculate_control_input;
 
 SUBPROGRAM IMPLEMENTATION PI_calculate_control_input.others
@@ -970,7 +966,7 @@ END Mission_Safety.others;
 SYSTEM Trajectory_Generator
 FEATURES
   PI_choose_trajectory : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Trajectory_Generator::PI_choose_trajectory.others {
-    Taste::coordinates => "1673 150";
+    Taste::coordinates => "1673 149";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -994,7 +990,6 @@ FEATURES
   PI_calc_control : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Drone_Control::PI_calc_control.others {
     Taste::coordinates => "2048 412";
     Taste::RCMoperationKind => unprotected;
-    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "calc_control";
   };
@@ -1014,20 +1009,19 @@ END Drone_Control.others;
 SYSTEM Control_Data_Storage
 FEATURES
   PI_calculate_control_input : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Control_Data_Storage::PI_calculate_control_input.others {
-    Taste::coordinates => "1704 356";
+    Taste::coordinates => "1704 354";
     Taste::RCMoperationKind => protected;
-    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "calculate_control_input";
   };
   RI_calc_control : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Drone_Control::PI_calc_control.others {
-    Taste::coordinates => "1894 387";
+    Taste::coordinates => "1894 385";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "calc_control";
     Taste::labelInheritance => "true";
   };
   RI_put_control_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Houston::PI_put_control_data.others {
-    Taste::coordinates => "1807 493";
+    Taste::coordinates => "1807 491";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "put_control_data";
     Taste::labelInheritance => "true";
@@ -1156,13 +1150,13 @@ SUBCOMPONENTS
     Taste::coordinates => "1289 7 1564 138";
   };
   Trajectory_Generator : SYSTEM interfaceview::IV::Trajectory_Generator.others {
-    Taste::coordinates => "1673 44 1948 175";
+    Taste::coordinates => "1673 43 1948 174";
   };
   Drone_Control : SYSTEM interfaceview::IV::Drone_Control.others {
     Taste::coordinates => "2048 332 2323 463";
   };
   Control_Data_Storage : SYSTEM interfaceview::IV::Control_Data_Storage.others {
-    Taste::coordinates => "1704 330 1894 493";
+    Taste::coordinates => "1704 328 1894 491";
   };
   World_Model : SYSTEM interfaceview::IV::World_Model.others {
     Taste::coordinates => "783 698 1417 994";
@@ -1190,10 +1184,10 @@ CONNECTIONS
     Taste::coordinates => "1421 230 1421 185 1420 185 1420 138";
   };
   Trajectory_Generator_choose_trajectory_System_Supervisor_choose_trajectory : SUBPROGRAM ACCESS Trajectory_Generator.PI_choose_trajectory -> System_Supervisor.RI_choose_trajectory {
-    Taste::coordinates => "1563 308 1618 308 1618 150 1673 150";
+    Taste::coordinates => "1563 308 1618 308 1618 149 1673 149";
   };
   Control_Data_Storage_calculate_control_input_System_Supervisor_calculate_control_input : SUBPROGRAM ACCESS Control_Data_Storage.PI_calculate_control_input -> System_Supervisor.RI_calculate_control_input {
-    Taste::coordinates => "1563 380 1609 380 1609 356 1704 356";
+    Taste::coordinates => "1563 380 1609 380 1609 354 1704 354";
   };
   Houston_talk_with_Houston_System_Supervisor_talk_with_Houston : SUBPROGRAM ACCESS Houston.PI_talk_with_Houston -> System_Supervisor.RI_talk_with_Houston {
     Taste::coordinates => "1563 486 1634 486 1634 750 1697 750";
@@ -1214,7 +1208,7 @@ CONNECTIONS
     Taste::coordinates => "1586 1405 1653 1405 1653 1402 1721 1402";
   };
   Houston_put_control_data_Control_Data_Storage_put_control_data : SUBPROGRAM ACCESS Houston.PI_put_control_data -> Control_Data_Storage.RI_put_control_data {
-    Taste::coordinates => "1807 493 1807 593 1805 593 1805 693";
+    Taste::coordinates => "1807 491 1807 593 1805 593 1805 693";
   };
   World_Model_store_control_data_Houston_store_control_data : SUBPROGRAM ACCESS World_Model.PI_store_control_data -> Houston.RI_store_control_data {
     Taste::coordinates => "1697 824 1559 824 1559 824 1416 824";
@@ -1229,7 +1223,7 @@ CONNECTIONS
     Taste::coordinates => "919 1107 919 1052 920 1052 920 995";
   };
   Drone_Control_calc_control_Control_Data_Storage_calc_control : SUBPROGRAM ACCESS Drone_Control.PI_calc_control -> Control_Data_Storage.RI_calc_control {
-    Taste::coordinates => "1894 387 1984 387 1984 412 2048 412";
+    Taste::coordinates => "1894 385 1984 385 1984 412 2048 412";
   };
 END interfaceview.others;
 

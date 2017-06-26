@@ -7,11 +7,10 @@ asn1SccMultiDroneControllerInput latest_control_input;
 
 void control_data_storage_startup()
 {
-    latest_control_input.yawrateRef    =   0.0;
-    latest_control_input.pitchRef      =   0.0;
-    latest_control_input.rollRef       =   0.0;
-    latest_control_input.thrustRef     =   0.0;
-    
+    latest_control_input.controllerInput.arr[0].yawrateRef    =   0.0;
+    latest_control_input.controllerInput.arr[0].pitchRef      =   0.0;
+    latest_control_input.controllerInput.arr[0].rollRef       =   0.0;
+    latest_control_input.controllerInput.arr[0].thrustRef     =   0.0;
 }
 
 

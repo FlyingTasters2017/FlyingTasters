@@ -69,6 +69,11 @@ void trajectory_generator_PI_choose_trajectory(const asn1SccWorldData *IN_proces
           i = i+1;
           ms_0= ms;
           s_0 =s;
+          
+          if (i>1)
+          {
+              i=0;
+          }
       }
      
       

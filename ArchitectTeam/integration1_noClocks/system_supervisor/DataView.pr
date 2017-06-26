@@ -140,8 +140,8 @@ Position ::= SEQUENCE {
 
 -- ./dataview-uniq.asn
 PositionSystemData ::= SEQUENCE {
-    xAct	MyReal,
-    yAct	MyReal
+    xAct	PositionSystemData_xAct,
+    yAct	PositionSystemData_yAct
 }
 
 -- ./dataview-uniq.asn
@@ -159,8 +159,8 @@ ReferencePath ::= SEQUENCE {
 
 -- ./dataview-uniq.asn
 PixyData ::= SEQUENCE {
-    xPix	T_UInt32,
-    yPix	T_UInt32
+    xPix	PixyData_xPix,
+    yPix	PixyData_yPix
 }
 
 -- ./dataview-uniq.asn
@@ -249,6 +249,12 @@ Trajectory_x ::= SEQUENCE (SIZE (5 .. 5)) OF MyReal
 SafetyInterupt_sAction ::= SEQUENCE (SIZE (5 .. 5)) OF SafetyAction
 
 -- ./dataview-uniq.asn
+PixyData_yPix ::= SEQUENCE (SIZE (5 .. 5)) OF T_UInt32
+
+-- ./dataview-uniq.asn
+PixyData_xPix ::= SEQUENCE (SIZE (5 .. 5)) OF T_UInt32
+
+-- ./dataview-uniq.asn
 ReferencePath_actions ::= SEQUENCE (SIZE (3 .. 3)) OF HoverAction
 
 -- ./dataview-uniq.asn
@@ -256,6 +262,12 @@ ReferencePath_locations ::= SEQUENCE (SIZE (3 .. 3)) OF Position
 
 -- ./dataview-uniq.asn
 ReferenceFormation_nodes ::= SEQUENCE (SIZE (5 .. 5)) OF T_Int8
+
+-- ./dataview-uniq.asn
+PositionSystemData_yAct ::= SEQUENCE (SIZE (5 .. 5)) OF MyReal
+
+-- ./dataview-uniq.asn
+PositionSystemData_xAct ::= SEQUENCE (SIZE (5 .. 5)) OF MyReal
 
 -- ./dataview-uniq.asn
 MultiDroneSensorData_data ::= SEQUENCE (SIZE (5 .. 5)) OF DroneSensorData

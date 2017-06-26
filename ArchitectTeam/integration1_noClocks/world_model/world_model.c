@@ -29,7 +29,7 @@ void world_model_startup()
 }
 
 
-void world_model_PI_store_MSD(const asn1SccAgent *IN_processed_msd)
+void world_model_PI_store_MSD(const asn1SccMultiAgents *IN_processed_msd)
 {
     //update the latest msd values
     latest_msd_estimate     =   *IN_processed_msd;
@@ -42,13 +42,13 @@ void world_model_PI_store_MSD(const asn1SccAgent *IN_processed_msd)
     world_model_RI_update_world_data(&OUT_processed_world_data);
 }
 
-void world_model_PI_store_ASD(const asn1SccAgent *IN_processed_asd)
+void world_model_PI_store_ASD(const asn1SccMultiAgents *IN_processed_asd)
 {
     //update the latest asd values
     latest_asd_estimate     =   *IN_processed_asd;
 }
 
-void world_model_PI_store_control_data(const asn1SccDroneControllerInput *IN_control_input)
+void world_model_PI_store_control_data(const asn1SccMultiDroneControllerInput *IN_control_input)
 {
     //update the latest input that is send to the drone
     latest_control_input    =   *IN_control_input;

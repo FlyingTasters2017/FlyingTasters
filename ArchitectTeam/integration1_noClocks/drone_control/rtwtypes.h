@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'calc_control'.
  *
- * Model version                  : 1.32
+ * Model version                  : 1.1
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Sat Jun 24 20:51:23 2017
+ * C/C++ source code generated on : Mon Jun 26 10:33:25 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)

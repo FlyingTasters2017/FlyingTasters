@@ -139,8 +139,8 @@ void ms_communication_PI_enable_pixycam(const asn1SccMyInteger *IN_user_input)
                 y=blocks[index].y;
                 if(blocks_copied<2)
                 {
-                    OUT_raw_pixel_data.xPix[0] = x;
-                    OUT_raw_pixel_data.yPix[0] = y;
+                    OUT_raw_pixel_data.xPix.arr[0] = x;
+                    OUT_raw_pixel_data.yPix.arr[0] = y;
                     ms_communication_RI_put_raw_MSD(&OUT_raw_pixel_data);
                 }
             }

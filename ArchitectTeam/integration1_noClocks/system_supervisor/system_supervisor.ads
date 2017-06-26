@@ -32,9 +32,9 @@ package system_supervisor is
     procedure RIÜcheck_mission_safety(processed_world_data: access asn1SccWorldData; world_safety_interupt: access asn1SccSafetyInterupt);
     pragma import(C, RIÜcheck_mission_safety, "system_supervisor_RI_check_mission_safety");
     --  Sync required interface "choose_trajectory"
-    procedure RIÜchoose_trajectory(processed_world_data: access asn1SccWorldData; world_safety_interupt: access asn1SccSafetyInterupt; control_error: access asn1SccTrajectory);
+    procedure RIÜchoose_trajectory(processed_world_data: access asn1SccWorldData; world_safety_interupt: access asn1SccSafetyInterupt; control_error: access asn1SccMultiControlError);
     pragma import(C, RIÜchoose_trajectory, "system_supervisor_RI_choose_trajectory");
     --  Sync required interface "calculate_control_input"
-    procedure RIÜcalculate_control_input(control_error: access asn1SccTrajectory; processed_world_data: access asn1SccWorldData);
+    procedure RIÜcalculate_control_input(control_error: access asn1SccMultiControlError; processed_world_data: access asn1SccWorldData);
     pragma import(C, RIÜcalculate_control_input, "system_supervisor_RI_calculate_control_input");
 end system_supervisor;
