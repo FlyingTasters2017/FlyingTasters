@@ -25,6 +25,16 @@ extern void socketclient_RI_controlAction(const asn1SccMyPositionControlData *,
 extern void socketclient_RI_getReference(const asn1SccMyPositionData *,
                                          asn1SccMyPositionData *);
 
+extern void socketclient_RI_controlAction2(const asn1SccMyPositionControlData *,
+                                           const asn1SccMySensorData *,
+                                           const asn1SccMyPositionControlData *,
+                                           asn1SccMyDroneData *);
+
+extern void socketclient_RI_controlAction3(const asn1SccMyPositionControlData *,
+                                           const asn1SccMySensorData *,
+                                           const asn1SccMyPositionControlData *,
+                                           asn1SccMyDroneData *);
+
 #ifdef __cplusplus
 }
 #endif

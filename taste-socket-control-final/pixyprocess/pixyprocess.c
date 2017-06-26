@@ -135,22 +135,22 @@ void pixyprocess_PI_processData(const asn1SccMyPositionData  *IN_positionData,
     
     
     //%per pix in drone height
-     printf("Red object x : %f \n",IN_positionData->x0Act);
-    printf("Red object y : %f \n",IN_positionData->y0Act);
+//      printf("Red object x : %f \n",IN_positionData->x0Act);
+//     printf("Red object y : %f \n",IN_positionData->y0Act);
 
     x[0] = IN_positionData->x0Act;
     y[0] = IN_positionData->y0Act;
             
             
-    printf("Blue object x : %f \n",IN_positionData->x1Act);
-    printf("Blue object y : %f \n",IN_positionData->y1Act);
+//     printf("Blue object x : %f \n",IN_positionData->x1Act);
+//     printf("Blue object y : %f \n",IN_positionData->y1Act);
     
     x[1] = IN_positionData->x1Act;
     y[1] = IN_positionData->y1Act;
                 
             
-    printf("Yellow object : %f \n",IN_positionData->x2Act);
-    printf("Yellow object : %f \n",IN_positionData->y2Act);
+//     printf("Yellow object : %f \n",IN_positionData->x2Act);
+//     printf("Yellow object : %f \n",IN_positionData->y2Act);
     
      x[2] = IN_positionData->x2Act;
      y[2] = IN_positionData->y2Act;
@@ -165,7 +165,7 @@ void pixyprocess_PI_processData(const asn1SccMyPositionData  *IN_positionData,
 //         IN_x++;
 //         IN_y++;
     
-        printf("x: %d and y: %d \n", x[i],y[i]);
+//         printf("x: %d and y: %d \n", x[i],y[i]);
    
     
         xp[i]=x[i]; 
@@ -182,7 +182,7 @@ void pixyprocess_PI_processData(const asn1SccMyPositionData  *IN_positionData,
         x_current[i]=xtr_p[i]*perpix;
         y_current[i]=-ytr_p[i]*perpix;
 
-        printf("\n x con : %f; y con: %f; \n", x_current[i], y_current[i]);
+//         printf("\n x con : %f; y con: %f; \n", x_current[i], y_current[i]);
         
         
     

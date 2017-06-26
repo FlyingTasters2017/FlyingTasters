@@ -30,6 +30,9 @@ asn1SccMyDroneData currDroneRef;
 asn1SccMySensorData currSensor;
 asn1SccMyReal currHeight;
 
+int ii =1;
+FILE *Data_pointer; 
+
 //global variables end*/
 static int jsoneq(const char *json, jsmntok_t *tok, const char *s) {
   if (tok->type == JSMN_STRING && (int) strlen(s) == tok->end - tok->start &&
@@ -127,6 +130,8 @@ void socketclient_startup()
     printf("initialization started\n");
     sockfd = initializeTCPSocketToServer(portno);
     printf("initialization ended\n");
+    
+    Data_pointer = fopen("Data.m", "w");
 }
 
 void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_droneData, asn1SccMySensorData *OUT_sensorData)
@@ -263,10 +268,32 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
     
     
     printf("x reference position: %f y reference position: %f \n", refPosition.xAct, refPosition.yAct);
-//     refPosition.xAct = 0.3;
-//     refPosition.yAct = 0.3;
+//     refPosition.xAct = -0.5;
+//     refPosition.yAct = 0.0;
     
     socketclient_RI_controlAction(&currPosition,&currSensor,&refPosition,&currDroneRef);
+    
+    // Write to txt file ......................................................................
+    Data_pointer = fopen("Data.m", "a");    
+    fprintf(Data_pointer, "currPosition.xAct(%d)= %f;\n",ii,currPosition.xAct);
+    fprintf(Data_pointer, "currPosition.yAct(%d)= %f;\n",ii,currPosition.yAct);
+    fprintf(Data_pointer, "currSensor.yawAct(%d)= %f;\n",ii,currSensor.yawAct);
+    fprintf(Data_pointer, "currSensor.pitchAct(%d)= %f;\n",ii,currSensor.pitchAct);
+    fprintf(Data_pointer, "currSensor.rollAct(%d)= %f;\n",ii,currSensor.rollAct);
+    fprintf(Data_pointer, "currSensor.accxAct(%d)= %f;\n",ii,currSensor.accxAct);
+    fprintf(Data_pointer, "currSensor.accyAct(%d)= %f;\n",ii,currSensor.accyAct);
+    fprintf(Data_pointer, "currSensor.acczAct(%d)= %f;\n",ii,currSensor.acczAct);
+    fprintf(Data_pointer, "currSensor.baropAct(%d)= %f;\n",ii,currSensor.baropAct);
+    fprintf(Data_pointer, "refPosition.xAct(%d)= %f;\n",ii,refPosition.xAct);
+    fprintf(Data_pointer, "refPosition.yAct(%d)= %f;\n",ii,refPosition.yAct);
+    fprintf(Data_pointer, "currDroneRef.yawrateRef(%d)= %f;\n",ii,currDroneRef.yawrateRef);
+    fprintf(Data_pointer, "currDroneRef.pitchRef(%d)= %f;\n",ii,currDroneRef.pitchRef);
+    fprintf(Data_pointer, "currDroneRef.rollRef(%d)= %f;\n",ii,currDroneRef.rollRef);
+    fprintf(Data_pointer, "currDroneRef.thrustRef(%d)= %f;\n",ii,currDroneRef.thrustRef);
+    ii = ii + 1;
+     
+    fclose(Data_pointer); 
+//.........................................................................................  
     printf("yawrate Ref: %f", currDroneRef.yawrateRef);
     printf("pitch Ref: %f", currDroneRef.pitchRef);
     printf("roll Ref: %f", currDroneRef.rollRef);

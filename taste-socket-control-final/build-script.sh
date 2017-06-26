@@ -70,6 +70,10 @@ cd "$SKELS" && rm -f controller.zip && zip controller controller/* && cd $OLDPWD
 
 cd "$SKELS" && rm -f trajectorygen.zip && zip trajectorygen trajectorygen/* && cd $OLDPWD
 
+cd "$SKELS" && rm -f controller2.zip && zip controller2 controller2/* && cd $OLDPWD
+
+cd "$SKELS" && rm -f controller3.zip && zip controller3 controller3/* && cd $OLDPWD
+
 [ ! -z "$CLEANUP" ] && rm -rf binary*
 
 if [ -f ConcurrencyView.pro ]
@@ -93,10 +97,9 @@ then
 else
     OUTPUTDIR=binary
 fi
-
+#	--debug \
 cd "$CWD" && assert-builder-ocarina.py \
 	--fast \
-	--debug \
 	--aadlv2 \
 	--keep-case \
 	--interfaceView "$INTERFACEVIEW" \
@@ -109,6 +112,8 @@ cd "$CWD" && assert-builder-ocarina.py \
 	--subC pixycam:"$SKELS"/pixycam.zip \
 	--subSIMULINK controller:"$SKELS"/controller.zip \
 	--subC trajectorygen:"$SKELS"/trajectorygen.zip \
+	--subSIMULINK controller2:"$SKELS"/controller2.zip \
+	--subSIMULINK controller3:"$SKELS"/controller3.zip \
 	$ORCHESTRATOR_OPTIONS
 
 if [ -f user_init_last.sh ]

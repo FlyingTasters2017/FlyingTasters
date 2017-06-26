@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'controlAction'.
  *
- * Model version                  : 1.1
+ * Model version                  : 1.7
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Sat Jun 24 15:38:21 2017
+ * C/C++ source code generated on : Mon Jun 26 13:05:57 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -126,7 +126,7 @@ void controlAction_step(void)
    * About '<S5>/TSamp':
    *  y = u * K where K = 1 / ( w * Ts )
    */
-  rtb_TSamp = controlAction_B.sf_DeadZone.error_dz * -750.0;
+  rtb_TSamp = controlAction_B.sf_DeadZone.error_dz * -500.0;
 
   /* Sum: '<S1>/Sum3' incorporates:
    *  Gain: '<S1>/Gain1'
@@ -168,7 +168,7 @@ void controlAction_step(void)
    * About '<S6>/TSamp':
    *  y = u * K where K = 1 / ( w * Ts )
    */
-  rtb_XError = controlAction_B.sf_DeadZone1.error_dz * -750.0;
+  rtb_XError = controlAction_B.sf_DeadZone1.error_dz * -500.0;
 
   /* Sum: '<S1>/Sum5' incorporates:
    *  Gain: '<S1>/Gain2'

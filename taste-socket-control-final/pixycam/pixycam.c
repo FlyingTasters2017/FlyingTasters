@@ -10,9 +10,9 @@
 #include <inttypes.h>
 #include <math.h>
 #include <time.h>
+#include <unistd.h> // delete later
 
 #define _POSIX_C_SOURCE 200809L
-
 
 #define BLOCK_BUFFER_SIZE    25
 int pixy_init_status;
@@ -79,15 +79,11 @@ void pixy_taste_init()
 }
 void pixycam_PI_pulse()
 {
-    printf("Start pixycam_PI_rawdata()\n");
+    printf("Start pixycam_PI_pulse()\n");
     printTime();    
     // Pixy Block buffer // 
         struct Block blocks[BLOCK_BUFFER_SIZE];
-
-
         static bool run_flag = true;
-        
-        //int      i;        
         int      index;
         int      blocks_copied;
         char     buf[128];
@@ -100,7 +96,6 @@ void pixycam_PI_pulse()
         //signal(SIGINT, handle_SIGINT);
         //printf("Hello Pixy:\n libpixyusb Version: %s\n", __LIBPIXY_VERSION__);
 
-        
         // Was there an error initializing pixy? //
         if(!pixy_init_status == 0)
         {
@@ -112,14 +107,16 @@ void pixycam_PI_pulse()
         }
         
         printf("Detecting blocks...\n");
-        
-        
         pixycam_RI_takeoff(&droneData);
         
         while(run_flag)
 
         {
-            printf("Start cycle\n");
+            printf("\n");
+            printf("\n");
+            printf("Start a new cycle\n");
+            printf("\n");
+            printf("\n");
             printTime();
             // Wait for new blocks to be available //
             while(!pixy_blocks_are_new() /*&& run_flag*/); 
@@ -132,7 +129,6 @@ void pixycam_PI_pulse()
             }
 
             // Display received blocks //
-            printf("Frame :\n");
             printf("Number of detections: %d\n", blocks_copied);
             int trueMarkerRed =0, maxAreaRed =0, areaRed =0;
             int trueMarkerYellow = 0, maxAreaYellow =0, areaYellow =0;
@@ -179,60 +175,26 @@ void pixycam_PI_pulse()
                 }
             }
             
-            printf("Red object : %d \n",trueMarkerRed);
-            printf("Blue object : %d \n",trueMarkerBlue);
-            printf("Yellow object : %d \n",trueMarkerYellow);
-            
-            
-            
-//             printf("Red object x : %d \n",x[0]);
-//             printf("Red object y : %d \n",y[0]);
-//             
-//            
-//             
-//             printf("Blue object x : %d \n",x[1]);
-//             printf("Blue object y : %d \n",y[1]);
-//             
-//             
-//             
-//             printf("Yellow object : %d \n",x[2]);
-//             printf("Yellow object : %d \n",y[2]);
-            
+            //printf("Red object : %d \n",trueMarkerRed);
+//             printf("Blue object : %d \n",trueMarkerBlue);
+//             printf("Yellow object : %d \n",trueMarkerYellow);             
             positionData.x0Act = x[0];
             positionData.y0Act = y[0];
-            printf("Red object x : %f \n", positionData.x0Act);
-            printf("Red object y : %f \n", positionData.y0Act);
+//             printf("Red object x : %f \n", positionData.x0Act);
+//             printf("Red object y : %f \n", positionData.y0Act);
             
             positionData.x1Act = x[1];
             positionData.y1Act = y[1];
-            printf("Red object x : %f \n", positionData.x1Act);
-            printf("Red object y : %f \n", positionData.y1Act);;
+//             printf("Red object x : %f \n", positionData.x1Act);
+//             printf("Red object y : %f \n", positionData.y1Act);;
             
             positionData.x2Act = x[2];
             positionData.y2Act = y[2];
-            printf("Yellow object : %f \n",positionData.x2Act);
-            printf("Yellow object : %f \n",positionData.y2Act);
-            
-            
+//             printf("Yellow object : %f \n",positionData.x2Act);
+//             printf("Yellow object : %f \n",positionData.y2Act);
             pixycam_RI_processData(&positionData, &procpositionData);
             
-//             positionData[0].xAct = x_proc[0];
-//             positionData[0].yAct = y_proc[0];
-//             printf("Red object x : %f \n",x_proc[0]);
-//             printf("Red object y : %f \n",y_proc[0]);
-//             
-//             positionData[1].xAct = x_proc[1];
-//             positionData[1].yAct = y_proc[1];
-//             printf("Blue object x : %f \n",x_proc[1]);
-//             printf("Blue object y : %f \n",y_proc[1]);
-//             
-//             positionData[2].xAct = x_proc[2];
-//             positionData[2].yAct = y_proc[2];
-//             printf("Yellow object : %f \n",x_proc[2]);
-//             printf("Yellow object : %f \n",y_proc[2]);
             
-            
-        
             printf("starting drone comm:\n");
             printTime();
             pixycam_RI_readStabilizerSendThrust(&droneData,&procpositionData,&sensorData);
