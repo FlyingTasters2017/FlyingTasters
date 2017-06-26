@@ -630,6 +630,8 @@ FEATURES
   control_input : OUT PARAMETER DataView::MyInteger {
     Taste::encoding => UPER;
   };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
 END PI_calculate_control_input;
 
 SUBPROGRAM IMPLEMENTATION PI_calculate_control_input.others
@@ -1010,7 +1012,7 @@ FEATURES
     Taste::InterfaceName => "send_control_data";
   };
   RI_put_drone_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Houston::PI_put_drone_data.others {
-    Taste::coordinates => "2198 917";
+    Taste::coordinates => "2198 912";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "put_drone_data";
     Taste::labelInheritance => "true";
@@ -1192,6 +1194,7 @@ FEATURES
   PI_calculate_control_input : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Drone_Control::PI_calculate_control_input.others {
     Taste::coordinates => "1686 379";
     Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "calculate_control_input";
   };
@@ -1314,7 +1317,7 @@ CONNECTIONS
     Taste::coordinates => "1586 1405 1653 1405 1653 1402 1721 1402";
   };
   Houston_put_drone_data_Drone_Dummy_put_drone_data : SUBPROGRAM ACCESS Houston.PI_put_drone_data -> Drone_Dummy.RI_put_drone_data {
-    Taste::coordinates => "2199 917 2089 917 2089 911 1968 911";
+    Taste::coordinates => "2198 912 2089 912 2089 911 1968 911";
   };
   Drone_Dummy_send_control_data_Houston_send_control_data : SUBPROGRAM ACCESS Drone_Dummy.PI_send_control_data -> Houston.RI_send_control_data {
     Taste::coordinates => "1967 833 2057 833 2057 832 2198 832";
