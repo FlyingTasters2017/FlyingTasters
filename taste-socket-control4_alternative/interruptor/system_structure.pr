@@ -1,0 +1,36 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM interruptor;
+
+	/* CIF Keep Specific Geode PARAMNAMES onoffvalue */
+	SIGNAL onOff (MyInteger);
+
+	PROCEDURE startStop COMMENT '#c_predef';
+		FPAR
+			IN ssvalue MyInteger;
+ 	EXTERNAL;
+
+	PROCEDURE pulse COMMENT '#c_predef';
+		FPAR
+			IN startvalue MyInteger;
+ 	EXTERNAL;
+
+	/* CIF Keep Specific Geode PARAMNAMES dopulsevalue */
+	SIGNAL dopulse (MyInteger);
+
+	CHANNEL c
+		FROM ENV TO interruptor WITH onOff,dopulse;
+	ENDCHANNEL;
+
+	BLOCK interruptor;
+
+		SIGNALROUTE r
+			FROM ENV TO interruptor WITH onOff,dopulse;
+
+		CONNECT c and r;
+
+		PROCESS interruptor REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;

@@ -1,0 +1,26 @@
+/* CIF PROCESS (250, 150), (150, 75) */
+process interruptor;
+    /* CIF TEXT (726, 196), (272, 140) */
+    -- Text area for declarations and comments
+    
+    dcl onoffvalue MyInteger;
+    /* CIF ENDTEXT */
+    /* CIF START (320, 10), (70, 35) */
+    START;
+        /* CIF NEXTSTATE (320, 60), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (320, 60), (70, 35) */
+    state Wait;
+        /* CIF input (244, 115), (132, 35) */
+        input onOff(onoffvalue);
+            /* CIF PROCEDURECALL (261, 170), (97, 35) */
+            call startStop(0);
+            /* CIF NEXTSTATE (275, 220), (70, 35) */
+            NEXTSTATE wait;
+        /* CIF input (396, 115), (70, 35) */
+        input d;
+    endstate;
+    /* CIF state (450, 10), (70, 35) */
+    state Wait;
+    endstate;
+endprocess interruptor;

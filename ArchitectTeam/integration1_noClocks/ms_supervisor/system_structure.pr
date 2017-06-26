@@ -1,0 +1,42 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM ms_supervisor;
+
+	/* CIF Keep Specific Geode PARAMNAMES raw_MSD */
+	SIGNAL put_raw_MSD (PixyData);
+
+	/* CIF Keep Specific Geode PARAMNAMES sysSV_to_MSSV_events */
+	SIGNAL talk_with_MSSV (MyInteger);
+
+	PROCEDURE store_MSD COMMENT '#c_predef';
+		FPAR
+			IN processed_msd MultiAgents;
+ 	EXTERNAL;
+
+	PROCEDURE process_MSD COMMENT '#c_predef';
+		FPAR
+			IN raw_MSD PixyData,
+			IN/OUT processed_MSD MultiAgents;
+ 	EXTERNAL;
+
+	PROCEDURE enable_pixycam COMMENT '#c_predef';
+		FPAR
+			IN user_input MyInteger;
+ 	EXTERNAL;
+
+	CHANNEL c
+		FROM ENV TO ms_supervisor WITH put_raw_MSD,talk_with_MSSV;
+	ENDCHANNEL;
+
+	BLOCK ms_supervisor;
+
+		SIGNALROUTE r
+			FROM ENV TO ms_supervisor WITH put_raw_MSD,talk_with_MSSV;
+
+		CONNECT c and r;
+
+		PROCESS ms_supervisor REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;

@@ -242,45 +242,45 @@ WITH TASTE_IV_Properties;
 SYSTEM OBSW
 FEATURES
   PI_Pulse : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::OBSW::PI_Pulse.others {
-    Taste::coordinates => "463 548";
+    Taste::coordinates => "465 553";
     Taste::RCMoperationKind => cyclic;
     Taste::RCMperiod => 100 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "Pulse";
   };
   PI_Takeoff : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::OBSW::PI_Takeoff.others {
-    Taste::coordinates => "642 787";
+    Taste::coordinates => "644 792";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "Takeoff";
   };
   RI_GetHeight : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Ground::PI_GetHeight.others {
-    Taste::coordinates => "802 787";
+    Taste::coordinates => "804 792";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "GetHeight";
     Taste::labelInheritance => "true";
   };
   RI_Compute_Force : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Controller::PI_Compute_Force.others {
-    Taste::coordinates => "1147 534";
+    Taste::coordinates => "1149 539";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "Compute_Force";
     Taste::labelInheritance => "true";
   };
   RI_Response : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Drone_Model::PI_Response.others {
-    Taste::coordinates => "1147 688";
+    Taste::coordinates => "1149 693";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "Response";
     Taste::labelInheritance => "true";
   };
   RI_GetTrajectory : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::TrajectoryGenerator::PI_GetTrajectory.others {
-    Taste::coordinates => "1147 456";
+    Taste::coordinates => "1149 461";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "GetTrajectory";
     Taste::labelInheritance => "true";
   };
   RI_GetRef : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Ground::PI_GetRef.others {
-    Taste::coordinates => "968 787";
+    Taste::coordinates => "970 792";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "GetRef";
     Taste::labelInheritance => "true";
@@ -305,21 +305,21 @@ END OBSW.others;
 SYSTEM Ground
 FEATURES
   PI_GetHeight : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Ground::PI_GetHeight.others {
-    Taste::coordinates => "802 1068";
+    Taste::coordinates => "800 1073";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "GetHeight";
   };
   PI_GetRef : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Ground::PI_GetRef.others {
-    Taste::coordinates => "968 1068";
+    Taste::coordinates => "966 1073";
     Taste::RCMoperationKind => sporadic;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "GetRef";
   };
   RI_Takeoff : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::OBSW::PI_Takeoff.others {
-    Taste::coordinates => "643 1068";
+    Taste::coordinates => "641 1073";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "Takeoff";
     Taste::labelInheritance => "true";
@@ -388,7 +388,7 @@ END Controller.others;
 SYSTEM TrajectoryGenerator
 FEATURES
   PI_GetTrajectory : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::TrajectoryGenerator::PI_GetTrajectory.others {
-    Taste::coordinates => "1644 379";
+    Taste::coordinates => "1603 367";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -416,10 +416,10 @@ END interfaceview;
 SYSTEM IMPLEMENTATION interfaceview.others
 SUBCOMPONENTS
   OBSW : SYSTEM interfaceview::IV::OBSW.others {
-    Taste::coordinates => "463 361 1147 787";
+    Taste::coordinates => "465 366 1149 792";
   };
   Ground : SYSTEM interfaceview::IV::Ground.others {
-    Taste::coordinates => "490 1068 1109 1422";
+    Taste::coordinates => "488 1073 1107 1427";
   };
   Drone_Model : SYSTEM interfaceview::IV::Drone_Model.others {
     Taste::coordinates => "1670 921 2066 1180";
@@ -428,26 +428,26 @@ SUBCOMPONENTS
     Taste::coordinates => "1656 617 2059 872";
   };
   TrajectoryGenerator : SYSTEM interfaceview::IV::TrajectoryGenerator.others {
-    Taste::coordinates => "1644 320 2061 542";
+    Taste::coordinates => "1603 308 2020 530";
   };
 CONNECTIONS
   OBSW_Takeoff_Ground_Takeoff : SUBPROGRAM ACCESS OBSW.PI_Takeoff -> Ground.RI_Takeoff {
-    Taste::coordinates => "643 1068 643 981 642 981 642 787";
+    Taste::coordinates => "641 1073 641 981 644 981 644 792";
   };
   Ground_GetHeight_OBSW_GetHeight : SUBPROGRAM ACCESS Ground.PI_GetHeight -> OBSW.RI_GetHeight {
-    Taste::coordinates => "802 787 802 982 802 982 802 1068";
+    Taste::coordinates => "804 792 804 982 800 982 800 1073";
   };
   Controller_Compute_Force_OBSW_Compute_Force : SUBPROGRAM ACCESS Controller.PI_Compute_Force -> OBSW.RI_Compute_Force {
-    Taste::coordinates => "1147 534 1362 534 1362 792 1656 792";
+    Taste::coordinates => "1149 539 1362 539 1362 792 1656 792";
   };
   Drone_Model_Response_OBSW_Response : SUBPROGRAM ACCESS Drone_Model.PI_Response -> OBSW.RI_Response {
-    Taste::coordinates => "1147 688 1319 688 1319 1001 1670 1001";
+    Taste::coordinates => "1149 693 1319 693 1319 1001 1670 1001";
   };
   TrajectoryGenerator_GetTrajectory_OBSW_GetTrajectory : SUBPROGRAM ACCESS TrajectoryGenerator.PI_GetTrajectory -> OBSW.RI_GetTrajectory {
-    Taste::coordinates => "1147 456 1362 456 1362 379 1644 379";
+    Taste::coordinates => "1149 461 1362 461 1362 367 1603 367";
   };
   Ground_GetRef_OBSW_GetRef : SUBPROGRAM ACCESS Ground.PI_GetRef -> OBSW.RI_GetRef {
-    Taste::coordinates => "968 787 968 928 968 928 968 1068";
+    Taste::coordinates => "970 792 970 928 966 928 966 1073";
   };
 END interfaceview.others;
 
