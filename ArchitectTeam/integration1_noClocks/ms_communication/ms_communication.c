@@ -72,7 +72,7 @@ void pixy_taste_init()
     }
 }
 
-void ms_communication_PI_enable_pixycam(const asn1SccMyInteger *IN_user_input)
+void ms_communication_PI_enable_pixycam_pass(const asn1SccMyInteger *IN_user_input)
 {
     bool run_flag = false;
      
