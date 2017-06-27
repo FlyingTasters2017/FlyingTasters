@@ -19,19 +19,19 @@ SYSTEM ms_supervisor;
 			IN/OUT processed_MSD MultiAgents;
  	EXTERNAL;
 
-	PROCEDURE enable_pixycam COMMENT '#c_predef';
-		FPAR
-			IN user_input MyInteger;
- 	EXTERNAL;
+	/* CIF Keep Specific Geode PARAMNAMES user_input */
+	SIGNAL enable_pixycam (MyInteger);
 
 	CHANNEL c
 		FROM ENV TO ms_supervisor WITH put_raw_MSD,talk_with_MSSV;
+		FROM ms_supervisor TO ENV WITH enable_pixycam;
 	ENDCHANNEL;
 
 	BLOCK ms_supervisor;
 
 		SIGNALROUTE r
 			FROM ENV TO ms_supervisor WITH put_raw_MSD,talk_with_MSSV;
+			FROM ms_supervisor TO ENV WITH enable_pixycam;
 
 		CONNECT c and r;
 

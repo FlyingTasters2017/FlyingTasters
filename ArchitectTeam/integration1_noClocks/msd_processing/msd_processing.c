@@ -5,13 +5,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include<assert.h>
-
+#include <assert.h>
+#include "../../Configuration.h"
 #define MAXSIZE 20
 
 float x_current;
 float y_current;
-int NR_OF_DRONES = 3;
+
 
 struct MyStack
 {

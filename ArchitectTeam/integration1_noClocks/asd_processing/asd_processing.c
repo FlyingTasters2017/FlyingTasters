@@ -1,8 +1,7 @@
 /* User code: This file will not be overwritten by TASTE. */
 
 #include "asd_processing.h"
-
-int NR_OF_DRONES=3;
+#include "../../Configuration.h"
 
 void asd_processing_startup()
 {

@@ -1,0 +1,21 @@
+/* CIF PROCESS (250, 150), (150, 75) */
+process enable_pass;
+    /* CIF TEXT (1019, 57), (272, 140) */
+    -- Text area for declarations and comments
+    
+    dcl user_input 
+    /* CIF ENDTEXT */
+    /* CIF START (320, 10), (70, 35) */
+    START;
+        /* CIF NEXTSTATE (320, 60), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (320, 60), (70, 35) */
+    state Wait;
+        /* CIF input (259, 115), (192, 35) */
+        input enable_pixycam(user_input);
+            /* CIF PROCEDURECALL (320, 170), (70, 35) */
+            call ;
+            /* CIF NEXTSTATE (320, 225), (70, 35) */
+            NEXTSTATE ;
+    endstate;
+endprocess enable_pass;

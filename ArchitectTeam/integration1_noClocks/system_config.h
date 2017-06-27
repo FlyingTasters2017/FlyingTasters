@@ -16,8 +16,8 @@
 #define __NEED_MyInteger_UPER
 #define __NEED_WorldData_NATIVE
 #define __NEED_MyInteger_NATIVE
-#define __NEED_MyInteger_UPER
 #define __NEED_PixyData_UPER
+#define __NEED_MyInteger_UPER
 #define __NEED_MyInteger_UPER
 #define __NEED_MultiDroneSensorData_UPER
 #define __NEED_MultiAgents_UPER
@@ -54,3 +54,5 @@
 #define __NEED_WorldData_UPER
 #define __NEED_MultiDroneControllerInput_UPER
 #define __NEED_MultiDroneSensorData_UPER
+#define __NEED_MyInteger_UPER
+#define __NEED_MyInteger_UPER

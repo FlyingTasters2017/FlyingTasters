@@ -68,6 +68,9 @@ cd "$SKELS"/houston && opengeode --toAda houston.pr system_structure.pr && cd $O
 # Generate code for OpenGEODE function ms_supervisor
 cd "$SKELS"/ms_supervisor && opengeode --toAda ms_supervisor.pr system_structure.pr && cd $OLDPWD
 
+# Generate code for OpenGEODE function enable_pass
+cd "$SKELS"/enable_pass && opengeode --toAda enable_pass.pr system_structure.pr && cd $OLDPWD
+
 cd "$SKELS" && rm -f system_supervisor.zip && zip system_supervisor system_supervisor/* && cd $OLDPWD
 
 cd "$SKELS" && rm -f ms_communication.zip && zip ms_communication ms_communication/* && cd $OLDPWD
@@ -93,6 +96,8 @@ cd "$SKELS" && rm -f control_data_storage.zip && zip control_data_storage contro
 cd "$SKELS" && rm -f world_model.zip && zip world_model world_model/* && cd $OLDPWD
 
 cd "$SKELS" && rm -f socket_client.zip && zip socket_client socket_client/* && cd $OLDPWD
+
+cd "$SKELS" && rm -f enable_pass.zip && zip enable_pass enable_pass/* && cd $OLDPWD
 
 [ ! -z "$CLEANUP" ] && rm -rf binary*
 
@@ -139,4 +144,5 @@ cd "$CWD" && assert-builder-ocarina.py \
 	--subC control_data_storage:"$SKELS"/control_data_storage.zip \
 	--subC world_model:"$SKELS"/world_model.zip \
 	--subC socket_client:"$SKELS"/socket_client.zip \
+	--subAda enable_pass:"$SKELS"/enable_pass.zip \
 	$ORCHESTRATOR_OPTIONS

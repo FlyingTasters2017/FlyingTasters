@@ -152,18 +152,6 @@ PUBLIC
 WITH Taste;
 WITH DataView;
 WITH TASTE_IV_Properties;
-SUBPROGRAM PI_enable_pixycam
-FEATURES
-  user_input : IN PARAMETER DataView::MyInteger {
-    Taste::encoding => UPER;
-  };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
-END PI_enable_pixycam;
-
-SUBPROGRAM IMPLEMENTATION PI_enable_pixycam.others
-END PI_enable_pixycam.others;
-
 SUBPROGRAM RI_put_raw_MSD
 FEATURES
   raw_MSD : IN PARAMETER DataView::PixyData {
@@ -173,6 +161,16 @@ END RI_put_raw_MSD;
 
 SUBPROGRAM IMPLEMENTATION RI_put_raw_MSD.others
 END RI_put_raw_MSD.others;
+
+SUBPROGRAM PI_enable_pixycam_pass
+FEATURES
+  user_input : IN PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+END PI_enable_pixycam_pass;
+
+SUBPROGRAM IMPLEMENTATION PI_enable_pixycam_pass.others
+END PI_enable_pixycam_pass.others;
 
 END interfaceview::FV::MS_Communication;
 
@@ -593,6 +591,36 @@ END RI_put_raw_asd.others;
 
 END interfaceview::FV::Socket_Client;
 
+PACKAGE interfaceview::FV::Enable_Pass
+PUBLIC
+
+WITH Taste;
+WITH DataView;
+WITH TASTE_IV_Properties;
+SUBPROGRAM PI_enable_pixycam
+FEATURES
+  user_input : IN PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_enable_pixycam;
+
+SUBPROGRAM IMPLEMENTATION PI_enable_pixycam.others
+END PI_enable_pixycam.others;
+
+SUBPROGRAM RI_enable_pixycam_pass
+FEATURES
+  user_input : IN PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+END RI_enable_pixycam_pass;
+
+SUBPROGRAM IMPLEMENTATION RI_enable_pixycam_pass.others
+END RI_enable_pixycam_pass.others;
+
+END interfaceview::FV::Enable_Pass;
+
 PACKAGE interfaceview::IV
 PUBLIC
 
@@ -609,6 +637,7 @@ WITH interfaceview::FV::World_Model;
 WITH interfaceview::FV::ASD_Processing;
 WITH interfaceview::FV::Socket_Client;
 WITH interfaceview::FV::MSD_Processing;
+WITH interfaceview::FV::Enable_Pass;
 WITH interfaceview::FV::Drone_Control;
 WITH interfaceview::FV;
 WITH Taste;
@@ -719,18 +748,16 @@ END GUI.others;
 
 SYSTEM MS_Communication
 FEATURES
-  PI_enable_pixycam : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MS_Communication::PI_enable_pixycam.others {
-    Taste::coordinates => "399 1147";
-    Taste::RCMoperationKind => protected;
-    Taste::RCMperiod => 0 ms;
-    Taste::Deadline => 0 ms;
-    Taste::InterfaceName => "enable_pixycam";
-  };
   RI_put_raw_MSD : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::MS_Supervisor::PI_put_raw_MSD.others {
     Taste::coordinates => "399 1214";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "put_raw_MSD";
     Taste::labelInheritance => "true";
+  };
+  PI_enable_pixycam_pass : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MS_Communication::PI_enable_pixycam_pass.others {
+    Taste::coordinates => "399 1134";
+    Taste::RCMoperationKind => unprotected;
+    Taste::InterfaceName => "enable_pixycam_pass";
   };
 PROPERTIES
   Source_Language => (C);
@@ -741,11 +768,11 @@ SUBCOMPONENTS
   flagsToLinkWith : DATA DataView::Taste_directive {
     Taste::FS_Default_Value => "linker-option:""-L /usr/local/lib/ -lpixyusb -lboost_system -lboost_chrono -lusb-1.0 -lboost_thread -lstdc++""";
   };
-  enable_pixycam_impl : SUBPROGRAM interfaceview::FV::MS_Communication::PI_enable_pixycam.others {
+  enable_pixycam_pass_impl : SUBPROGRAM interfaceview::FV::MS_Communication::PI_enable_pixycam_pass.others {
     Compute_Execution_Time => 0 ms .. 0 ms;
   };
 CONNECTIONS
-  OpToPICnx_enable_pixycam_impl : SUBPROGRAM ACCESS enable_pixycam_impl -> PI_enable_pixycam;
+  OpToPICnx_enable_pixycam_pass_impl : SUBPROGRAM ACCESS enable_pixycam_pass_impl -> PI_enable_pixycam_pass;
 END MS_Communication.others;
 
 SYSTEM AS_Supervisor
@@ -910,8 +937,8 @@ FEATURES
     Taste::InterfaceName => "process_MSD";
     Taste::labelInheritance => "true";
   };
-  RI_enable_pixycam : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::MS_Communication::PI_enable_pixycam.others {
-    Taste::coordinates => "629 1162";
+  RI_enable_pixycam : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Enable_Pass::PI_enable_pixycam.others {
+    Taste::coordinates => "629 1174";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "enable_pixycam";
     Taste::labelInheritance => "true";
@@ -958,7 +985,7 @@ END Mission_Safety.others;
 SYSTEM Trajectory_Generator
 FEATURES
   PI_choose_trajectory : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Trajectory_Generator::PI_choose_trajectory.others {
-    Taste::coordinates => "1673 149";
+    Taste::coordinates => "1675 149";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
@@ -1002,20 +1029,20 @@ END Drone_Control.others;
 SYSTEM Control_Data_Storage
 FEATURES
   PI_calculate_control_input : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Control_Data_Storage::PI_calculate_control_input.others {
-    Taste::coordinates => "1704 354";
+    Taste::coordinates => "1702 354";
     Taste::RCMoperationKind => protected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "calculate_control_input";
   };
   RI_calc_control : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Drone_Control::PI_calc_control.others {
-    Taste::coordinates => "1894 385";
+    Taste::coordinates => "1892 385";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "calc_control";
     Taste::labelInheritance => "true";
   };
   RI_put_control_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Houston::PI_put_control_data.others {
-    Taste::coordinates => "1796 491";
+    Taste::coordinates => "1794 491";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "put_control_data";
     Taste::labelInheritance => "true";
@@ -1036,28 +1063,28 @@ END Control_Data_Storage.others;
 SYSTEM World_Model
 FEATURES
   PI_store_MSD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::World_Model::PI_store_MSD.others {
-    Taste::coordinates => "920 994";
+    Taste::coordinates => "922 987";
     Taste::RCMoperationKind => protected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "store_MSD";
   };
   PI_store_ASD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::World_Model::PI_store_ASD.others {
-    Taste::coordinates => "1273 994";
+    Taste::coordinates => "1275 987";
     Taste::RCMoperationKind => protected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "store_ASD";
   };
   PI_store_control_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::World_Model::PI_store_control_data.others {
-    Taste::coordinates => "1417 824";
+    Taste::coordinates => "1419 817";
     Taste::RCMoperationKind => unprotected;
     Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "store_control_data";
   };
   RI_update_world_data : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::System_Supervisor::PI_update_world_data.others {
-    Taste::coordinates => "1069 698";
+    Taste::coordinates => "1071 691";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "update_world_data";
     Taste::labelInheritance => "true";
@@ -1111,6 +1138,32 @@ CONNECTIONS
   OpToPICnx_send_control_data_impl : SUBPROGRAM ACCESS send_control_data_impl -> PI_send_control_data;
 END Socket_Client.others;
 
+SYSTEM Enable_Pass
+FEATURES
+  PI_enable_pixycam : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Enable_Pass::PI_enable_pixycam.others {
+    Taste::coordinates => "601 983";
+    Taste::RCMoperationKind => sporadic;
+    Taste::InterfaceName => "enable_pixycam";
+  };
+  RI_enable_pixycam_pass : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::MS_Communication::PI_enable_pixycam_pass.others {
+    Taste::coordinates => "424 1040";
+    Taste::RCMoperationKind => any;
+    Taste::InterfaceName => "enable_pixycam_pass";
+    Taste::labelInheritance => "true";
+  };
+PROPERTIES
+  Source_Language => (SDL);
+END Enable_Pass;
+
+SYSTEM IMPLEMENTATION Enable_Pass.others
+SUBCOMPONENTS
+  enable_pixycam_impl : SUBPROGRAM interfaceview::FV::Enable_Pass::PI_enable_pixycam.others {
+    Compute_Execution_Time => 0 ms .. 0 ms;
+  };
+CONNECTIONS
+  OpToPICnx_enable_pixycam_impl : SUBPROGRAM ACCESS enable_pixycam_impl -> PI_enable_pixycam;
+END Enable_Pass.others;
+
 SYSTEM interfaceview
 END interfaceview;
 
@@ -1144,26 +1197,29 @@ SUBCOMPONENTS
     Taste::coordinates => "1289 7 1564 138";
   };
   Trajectory_Generator : SYSTEM interfaceview::IV::Trajectory_Generator.others {
-    Taste::coordinates => "1673 43 1948 174";
+    Taste::coordinates => "1675 43 1950 174";
   };
   Drone_Control : SYSTEM interfaceview::IV::Drone_Control.others {
     Taste::coordinates => "2048 332 2323 463";
   };
   Control_Data_Storage : SYSTEM interfaceview::IV::Control_Data_Storage.others {
-    Taste::coordinates => "1704 328 1894 491";
+    Taste::coordinates => "1702 328 1892 491";
   };
   World_Model : SYSTEM interfaceview::IV::World_Model.others {
-    Taste::coordinates => "783 698 1417 994";
+    Taste::coordinates => "785 691 1419 987";
   };
   Socket_Client : SYSTEM interfaceview::IV::Socket_Client.others {
     Taste::coordinates => "2203 736 2488 926";
+  };
+  Enable_Pass : SYSTEM interfaceview::IV::Enable_Pass.others {
+    Taste::coordinates => "424 958 601 1056";
   };
 CONNECTIONS
   System_Supervisor_set_user_input_GUI_set_user_input : SUBPROGRAM ACCESS System_Supervisor.PI_set_user_input -> GUI.RI_set_user_input {
     Taste::coordinates => "477 209 477 380 633 380";
   };
   System_Supervisor_update_world_data_World_Model_update_world_data : SUBPROGRAM ACCESS System_Supervisor.PI_update_world_data -> World_Model.RI_update_world_data {
-    Taste::coordinates => "1069 698 1069 649 1067 649 1067 600";
+    Taste::coordinates => "1071 691 1071 649 1067 649 1067 600";
   };
   GUI_update_GUI_System_Supervisor_update_GUI : SUBPROGRAM ACCESS GUI.PI_update_GUI -> System_Supervisor.RI_update_GUI {
     Taste::coordinates => "752 230 752 152 600 152";
@@ -1178,34 +1234,34 @@ CONNECTIONS
     Taste::coordinates => "1421 230 1421 185 1420 185 1420 138";
   };
   Trajectory_Generator_choose_trajectory_System_Supervisor_choose_trajectory : SUBPROGRAM ACCESS Trajectory_Generator.PI_choose_trajectory -> System_Supervisor.RI_choose_trajectory {
-    Taste::coordinates => "1563 308 1618 308 1618 149 1673 149";
+    Taste::coordinates => "1563 308 1618 308 1618 149 1675 149";
   };
   Control_Data_Storage_calculate_control_input_System_Supervisor_calculate_control_input : SUBPROGRAM ACCESS Control_Data_Storage.PI_calculate_control_input -> System_Supervisor.RI_calculate_control_input {
-    Taste::coordinates => "1563 380 1609 380 1609 354 1704 354";
+    Taste::coordinates => "1563 380 1609 380 1609 354 1702 354";
   };
   Houston_talk_with_Houston_System_Supervisor_talk_with_Houston : SUBPROGRAM ACCESS Houston.PI_talk_with_Houston -> System_Supervisor.RI_talk_with_Houston {
     Taste::coordinates => "1563 486 1634 486 1634 750 1697 750";
   };
-  MS_Communication_enable_pixycam_MS_Supervisor_enable_pixycam : SUBPROGRAM ACCESS MS_Communication.PI_enable_pixycam -> MS_Supervisor.RI_enable_pixycam {
-    Taste::coordinates => "620 1162 509 1162 509 1147 399 1147";
-  };
   MS_Supervisor_put_raw_MSD_MS_Communication_put_raw_MSD : SUBPROGRAM ACCESS MS_Supervisor.PI_put_raw_MSD -> MS_Communication.RI_put_raw_MSD {
     Taste::coordinates => "399 1214 479 1214 479 1210 620 1210";
+  };
+  MS_Communication_enable_pixycam_pass_Enable_Pass_enable_pixycam_pass : SUBPROGRAM ACCESS MS_Communication.PI_enable_pixycam_pass -> Enable_Pass.RI_enable_pixycam_pass {
+    Taste::coordinates => "424 1040 406 1040 406 1134 399 1134";
   };
   AS_Supervisor_put_raw_asd_Socket_Client_put_raw_asd : SUBPROGRAM ACCESS AS_Supervisor.PI_put_raw_asd -> Socket_Client.RI_put_raw_asd {
     Taste::coordinates => "2203 892 2075 892 2075 1195 1586 1195";
   };
   World_Model_store_ASD_AS_Supervisor_store_ASD : SUBPROGRAM ACCESS World_Model.PI_store_ASD -> AS_Supervisor.RI_store_ASD {
-    Taste::coordinates => "1273 1109 1273 1053 1273 1053 1273 995";
+    Taste::coordinates => "1273 1109 1273 1053 1275 1053 1275 987";
   };
   ASD_Processing_process_ASD_AS_Supervisor_process_ASD : SUBPROGRAM ACCESS ASD_Processing.PI_process_ASD -> AS_Supervisor.RI_process_ASD {
     Taste::coordinates => "1586 1405 1653 1405 1653 1402 1721 1402";
   };
   Houston_put_control_data_Control_Data_Storage_put_control_data : SUBPROGRAM ACCESS Houston.PI_put_control_data -> Control_Data_Storage.RI_put_control_data {
-    Taste::coordinates => "1796 491 1796 593 1805 593 1805 693";
+    Taste::coordinates => "1794 491 1794 593 1805 593 1805 693";
   };
   World_Model_store_control_data_Houston_store_control_data : SUBPROGRAM ACCESS World_Model.PI_store_control_data -> Houston.RI_store_control_data {
-    Taste::coordinates => "1697 824 1559 824 1559 824 1416 824";
+    Taste::coordinates => "1697 824 1559 824 1559 817 1419 817";
   };
   Socket_Client_send_control_data_Houston_send_control_data : SUBPROGRAM ACCESS Socket_Client.PI_send_control_data -> Houston.RI_send_control_data {
     Taste::coordinates => "1951 785 2066 785 2066 782 2203 782";
@@ -1214,10 +1270,13 @@ CONNECTIONS
     Taste::coordinates => "620 1409 508 1409 508 1409 399 1409";
   };
   World_Model_store_MSD_MS_Supervisor_store_MSD : SUBPROGRAM ACCESS World_Model.PI_store_MSD -> MS_Supervisor.RI_store_MSD {
-    Taste::coordinates => "919 1107 919 1052 920 1052 920 995";
+    Taste::coordinates => "919 1107 919 1052 922 1052 922 987";
+  };
+  Enable_Pass_enable_pixycam_MS_Supervisor_enable_pixycam : SUBPROGRAM ACCESS Enable_Pass.PI_enable_pixycam -> MS_Supervisor.RI_enable_pixycam {
+    Taste::coordinates => "629 1174 615 1174 615 983 601 983";
   };
   Drone_Control_calc_control_Control_Data_Storage_calc_control : SUBPROGRAM ACCESS Drone_Control.PI_calc_control -> Control_Data_Storage.RI_calc_control {
-    Taste::coordinates => "1894 385 1984 385 1984 412 2048 412";
+    Taste::coordinates => "1892 385 1984 385 1984 412 2048 412";
   };
 END interfaceview.others;
 

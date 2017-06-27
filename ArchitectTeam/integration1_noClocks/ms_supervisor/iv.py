@@ -430,39 +430,6 @@ functions['ms_communication'] = {
     'functional_states' : {}
 }
 
-functions['ms_communication']['interfaces']['enable_pixycam'] = {
-    'port_name': 'enable_pixycam',
-    'parent_fv': 'ms_communication',
-    'direction': PI,
-    'in': {},
-    'out': {},
-    'synchronism': synch,
-    'rcm': protected,
-    'period': 0,
-    'wcet_low': 0,
-    'wcet_low_unit': 'ms',
-    'wcet_high': 0,
-    'wcet_high_unit': 'ms',
-    'distant_fv': '',
-    'calling_threads': {},
-    'distant_name': '',
-    'queue_size': 1
-}
-
-functions['ms_communication']['interfaces']['enable_pixycam']['paramsInOrdered'] = ['user_input']
-
-functions['ms_communication']['interfaces']['enable_pixycam']['paramsOutOrdered'] = []
-
-functions['ms_communication']['interfaces']['enable_pixycam']['in']['user_input'] = {
-    'type': 'MyInteger',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': integer,
-    'asn1_filename': './dataview-uniq.asn',
-    'encoding': UPER,
-    'interface': 'enable_pixycam',
-    'param_direction': param_in
-}
-
 functions['ms_communication']['interfaces']['put_raw_MSD'] = {
     'port_name': 'put_raw_MSD',
     'parent_fv': 'ms_communication',
@@ -493,6 +460,39 @@ functions['ms_communication']['interfaces']['put_raw_MSD']['in']['raw_MSD'] = {
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'put_raw_MSD',
+    'param_direction': param_in
+}
+
+functions['ms_communication']['interfaces']['enable_pixycam_pass'] = {
+    'port_name': 'enable_pixycam_pass',
+    'parent_fv': 'ms_communication',
+    'direction': PI,
+    'in': {},
+    'out': {},
+    'synchronism': synch,
+    'rcm': unprotected,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': 'ms',
+    'wcet_high': 0,
+    'wcet_high_unit': 'ms',
+    'distant_fv': '',
+    'calling_threads': {},
+    'distant_name': '',
+    'queue_size': 1
+}
+
+functions['ms_communication']['interfaces']['enable_pixycam_pass']['paramsInOrdered'] = ['user_input']
+
+functions['ms_communication']['interfaces']['enable_pixycam_pass']['paramsOutOrdered'] = []
+
+functions['ms_communication']['interfaces']['enable_pixycam_pass']['in']['user_input'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'enable_pixycam_pass',
     'param_direction': param_in
 }
 
@@ -1049,14 +1049,14 @@ functions['ms_supervisor']['interfaces']['enable_pixycam'] = {
     'direction': RI,
     'in': {},
     'out': {},
-    'synchronism': synch,
-    'rcm': protected,
+    'synchronism': asynch,
+    'rcm': sporadic,
     'period': 0,
     'wcet_low': 0,
     'wcet_low_unit': '',
     'wcet_high': 0,
     'wcet_high_unit': '',
-    'distant_fv': 'ms_communication',
+    'distant_fv': 'enable_pass',
     'calling_threads': {},
     'distant_name': 'enable_pixycam',
     'queue_size': 1
@@ -1573,5 +1573,80 @@ functions['socket_client']['interfaces']['put_raw_asd']['in']['raw_asd'] = {
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'put_raw_asd',
+    'param_direction': param_in
+}
+
+functions['enable_pass'] = {
+    'name_with_case' : 'Enable_Pass',
+    'runtime_nature': thread,
+    'language': OG,
+    'zipfile': '',
+    'interfaces': {},
+    'functional_states' : {}
+}
+
+functions['enable_pass']['interfaces']['enable_pixycam'] = {
+    'port_name': 'enable_pixycam',
+    'parent_fv': 'enable_pass',
+    'direction': PI,
+    'in': {},
+    'out': {},
+    'synchronism': asynch,
+    'rcm': sporadic,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': 'ms',
+    'wcet_high': 0,
+    'wcet_high_unit': 'ms',
+    'distant_fv': '',
+    'calling_threads': {},
+    'distant_name': '',
+    'queue_size': 1
+}
+
+functions['enable_pass']['interfaces']['enable_pixycam']['paramsInOrdered'] = ['user_input']
+
+functions['enable_pass']['interfaces']['enable_pixycam']['paramsOutOrdered'] = []
+
+functions['enable_pass']['interfaces']['enable_pixycam']['in']['user_input'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'enable_pixycam',
+    'param_direction': param_in
+}
+
+functions['enable_pass']['interfaces']['enable_pixycam_pass'] = {
+    'port_name': 'enable_pixycam_pass',
+    'parent_fv': 'enable_pass',
+    'direction': RI,
+    'in': {},
+    'out': {},
+    'synchronism': synch,
+    'rcm': unprotected,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': '',
+    'wcet_high': 0,
+    'wcet_high_unit': '',
+    'distant_fv': 'ms_communication',
+    'calling_threads': {},
+    'distant_name': 'enable_pixycam_pass',
+    'queue_size': 1
+}
+
+functions['enable_pass']['interfaces']['enable_pixycam_pass']['paramsInOrdered'] = ['user_input']
+
+functions['enable_pass']['interfaces']['enable_pixycam_pass']['paramsOutOrdered'] = []
+
+functions['enable_pass']['interfaces']['enable_pixycam_pass']['in']['user_input'] = {
+    'type': 'MyInteger',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': integer,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'enable_pixycam_pass',
     'param_direction': param_in
 }

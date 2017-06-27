@@ -13,9 +13,9 @@ extern "C" {
 
 void ms_communication_startup();
 
-void ms_communication_PI_enable_pixycam(const asn1SccMyInteger *);
-
 extern void ms_communication_RI_put_raw_MSD(const asn1SccPixyData *);
+
+void ms_communication_PI_enable_pixycam_pass(const asn1SccMyInteger *);
 
 #ifdef __cplusplus
 }

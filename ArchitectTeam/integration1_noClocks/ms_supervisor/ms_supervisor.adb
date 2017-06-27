@@ -69,42 +69,42 @@ package body ms_supervisor is
                         ctxt.state := Wait;
                         goto next_transition;
                     when 1 =>
-                        -- enable_pixycam(user_input) (19,17)
-                        RIÜenable_pixycam(ctxt.user_input'Access);
                         -- DECISION user_input (-1,-1)
-                        -- ANSWER /=1 (23,17)
+                        -- ANSWER /=1 (21,17)
                         if (ctxt.user_input) /= 1 then
-                            -- NEXT_STATE wait (25,30) at 552, 329
+                            -- NEXT_STATE wait (23,30) at 552, 279
                             trId := -1;
                             ctxt.state := wait;
                             goto next_transition;
-                            -- ANSWER 1 (27,17)
+                            -- ANSWER 1 (25,17)
                         elsif (ctxt.user_input) = 1 then
-                            -- NEXT_STATE running (29,30) at 693, 329
+                            -- NEXT_STATE running (27,30) at 693, 279
                             trId := -1;
                             ctxt.state := running;
                             goto next_transition;
                         end if;
                     when 2 =>
-                        -- process_MSD(raw_msd_data,proc_msd_data) (34,17)
+                        -- process_MSD(raw_msd_data,proc_msd_data) (32,17)
                         RIÜprocess_MSD(ctxt.raw_msd_data'Access, ctxt.proc_msd_data'Access);
-                        -- store_MSD(proc_msd_data) (36,17)
+                        -- store_MSD(proc_msd_data) (34,17)
                         RIÜstore_MSD(ctxt.proc_msd_data'Access);
-                        -- NEXT_STATE running (38,22) at 887, 271
+                        -- NEXT_STATE running (36,22) at 887, 271
                         trId := -1;
                         ctxt.state := running;
                         goto next_transition;
                     when 3 =>
                         -- DECISION user_input (-1,-1)
-                        -- ANSWER /=1 (47,17)
+                        -- ANSWER /=1 (45,17)
                         if (ctxt.user_input) /= 1 then
-                            -- NEXT_STATE wait (49,30) at 275, 283
+                            -- NEXT_STATE wait (47,30) at 226, 283
                             trId := -1;
                             ctxt.state := wait;
                             goto next_transition;
-                            -- ANSWER 1 (51,17)
+                            -- ANSWER 1 (49,17)
                         elsif (ctxt.user_input) = 1 then
-                            -- NEXT_STATE running (53,30) at 367, 283
+                            -- enable_pixycam(user_input) (51,27)
+                            RIÜenable_pixycam(ctxt.user_input'Access);
+                            -- NEXT_STATE running (53,30) at 367, 333
                             trId := -1;
                             ctxt.state := running;
                             goto next_transition;

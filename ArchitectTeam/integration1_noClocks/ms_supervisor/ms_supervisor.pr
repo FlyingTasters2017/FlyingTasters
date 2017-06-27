@@ -15,17 +15,15 @@ process ms_supervisor;
     state running;
         /* CIF input (537, 111), (190, 35) */
         input talk_with_MSSV(user_input);
-            /* CIF PROCEDURECALL (536, 166), (192, 35) */
-            call enable_pixycam(user_input);
-            /* CIF decision (589, 216), (86, 50) */
+            /* CIF decision (589, 166), (86, 50) */
             decision user_input;
-                /* CIF ANSWER (552, 286), (70, 23) */
+                /* CIF ANSWER (552, 236), (70, 23) */
                 (/=1):
-                    /* CIF NEXTSTATE (552, 329), (70, 35) */
+                    /* CIF NEXTSTATE (552, 279), (70, 35) */
                     NEXTSTATE wait;
-                /* CIF ANSWER (693, 286), (70, 23) */
+                /* CIF ANSWER (693, 236), (70, 23) */
                 (1):
-                    /* CIF NEXTSTATE (693, 329), (70, 35) */
+                    /* CIF NEXTSTATE (693, 279), (70, 35) */
                     NEXTSTATE running;
             enddecision;
         /* CIF input (821, 111), (203, 35) */
@@ -43,13 +41,15 @@ process ms_supervisor;
         input talk_with_MSSV(user_input);
             /* CIF decision (312, 170), (86, 50) */
             decision user_input;
-                /* CIF ANSWER (275, 240), (70, 23) */
+                /* CIF ANSWER (226, 240), (70, 23) */
                 (/=1):
-                    /* CIF NEXTSTATE (275, 283), (70, 35) */
+                    /* CIF NEXTSTATE (226, 283), (70, 35) */
                     NEXTSTATE wait;
                 /* CIF ANSWER (367, 240), (70, 23) */
                 (1):
-                    /* CIF NEXTSTATE (367, 283), (70, 35) */
+                    /* CIF output (306, 283), (192, 35) */
+                    output enable_pixycam(user_input);
+                    /* CIF NEXTSTATE (367, 333), (70, 35) */
                     NEXTSTATE running;
             enddecision;
     endstate;
