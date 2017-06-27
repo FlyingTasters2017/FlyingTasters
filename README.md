@@ -10,6 +10,9 @@ Here you will find detailed description of:
 * the process to build your own FlyingTasters,
 * the steps required in order to make changes and extend the FlyingTasters system.
 
+# TODO [Add high level diagram of the system and its components]
+
+
 # Where is the information?
 
 Please access our [wiki](https://github.com/FlyingTasters2017/FlyingTasters/wiki)
