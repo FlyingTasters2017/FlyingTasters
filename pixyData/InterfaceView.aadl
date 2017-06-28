@@ -19,7 +19,7 @@ END PI_pulse;
 SUBPROGRAM IMPLEMENTATION PI_pulse.others
 END PI_pulse.others;
 
-SUBPROGRAM RI_getdata
+SUBPROGRAM RI_processdata
 FEATURES
   x : IN PARAMETER DataView::T_UInt32 {
     Taste::encoding => NATIVE;
@@ -27,10 +27,10 @@ FEATURES
   y : IN PARAMETER DataView::T_UInt32 {
     Taste::encoding => NATIVE;
   };
-END RI_getdata;
+END RI_processdata;
 
-SUBPROGRAM IMPLEMENTATION RI_getdata.others
-END RI_getdata.others;
+SUBPROGRAM IMPLEMENTATION RI_processdata.others
+END RI_processdata.others;
 
 END interfaceview::FV::Function1;
 
@@ -40,7 +40,7 @@ PUBLIC
 WITH Taste;
 WITH DataView;
 WITH TASTE_IV_Properties;
-SUBPROGRAM PI_getdata
+SUBPROGRAM PI_processdata
 FEATURES
   x : IN PARAMETER DataView::T_UInt32 {
     Taste::encoding => NATIVE;
@@ -48,12 +48,10 @@ FEATURES
   y : IN PARAMETER DataView::T_UInt32 {
     Taste::encoding => NATIVE;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
-END PI_getdata;
+END PI_processdata;
 
-SUBPROGRAM IMPLEMENTATION PI_getdata.others
-END PI_getdata.others;
+SUBPROGRAM IMPLEMENTATION PI_processdata.others
+END PI_processdata.others;
 
 END interfaceview::FV::Function3;
 
@@ -75,10 +73,10 @@ FEATURES
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "pulse";
   };
-  RI_getdata : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Function3::PI_getdata.others {
+  RI_processdata : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::Function3::PI_processdata.others {
     Taste::coordinates => "2052 683";
     Taste::RCMoperationKind => any;
-    Taste::InterfaceName => "getdata";
+    Taste::InterfaceName => "processdata";
     Taste::labelInheritance => "true";
   };
 PROPERTIES
@@ -99,12 +97,11 @@ END Function1.others;
 
 SYSTEM Function3
 FEATURES
-  PI_getdata : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Function3::PI_getdata.others {
+  PI_processdata : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Function3::PI_processdata.others {
     Taste::coordinates => "1856 1319";
     Taste::RCMoperationKind => unprotected;
-    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
-    Taste::InterfaceName => "getdata";
+    Taste::InterfaceName => "processdata";
   };
 PROPERTIES
   Source_Language => (C);
@@ -112,11 +109,11 @@ END Function3;
 
 SYSTEM IMPLEMENTATION Function3.others
 SUBCOMPONENTS
-  getdata_impl : SUBPROGRAM interfaceview::FV::Function3::PI_getdata.others {
+  processdata_impl : SUBPROGRAM interfaceview::FV::Function3::PI_processdata.others {
     Compute_Execution_Time => 0 ms .. 0 ms;
   };
 CONNECTIONS
-  OpToPICnx_getdata_impl : SUBPROGRAM ACCESS getdata_impl -> PI_getdata;
+  OpToPICnx_processdata_impl : SUBPROGRAM ACCESS processdata_impl -> PI_processdata;
 END Function3.others;
 
 SYSTEM interfaceview
@@ -131,7 +128,7 @@ SUBCOMPONENTS
     Taste::coordinates => "1605 1319 2344 1770";
   };
 CONNECTIONS
-  Function3_getdata_Function1_getdata : SUBPROGRAM ACCESS Function3.PI_getdata -> Function1.RI_getdata {
+  Function3_processdata_Function1_processdata : SUBPROGRAM ACCESS Function3.PI_processdata -> Function1.RI_processdata {
     Taste::coordinates => "2052 683 2052 873 1856 873 1856 1319";
   };
 END interfaceview.others;

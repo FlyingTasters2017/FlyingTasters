@@ -12,7 +12,7 @@ void function3_startup()
        but do not make any call to a required interface. */
 }
 
-void function3_PI_getdata(const asn1SccT_UInt32 *IN_x,
+void function3_PI_processdata(const asn1SccT_UInt32 *IN_x,
                           const asn1SccT_UInt32 *IN_y)
 {
     /* Write your code here! */
