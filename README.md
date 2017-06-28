@@ -17,9 +17,17 @@ Here you will find detailed description of:
 
 Please access our [wiki](https://github.com/FlyingTasters2017/FlyingTasters/wiki)
 
-# Useful command
+# Running the project
 
-```taste-python-socket-client - example how to connect from TASTE to the drone using Python socket server```
+In order to run the latest version of **FlyingTasters**, please follow these steps:
+
+* Prepare a Debian environment on your machine.
+* Make sure the dongle's drivers are installed in your system.
+* Make sure the PixyCam's drivers are installed in your system.
+* Clone the repository into your machine.
+* Start the Python server.
+* Build the TASTE project.
+* Run FlyingTasters.
 
 
 # LICENSE
@@ -27,3 +35,13 @@ Please access our [wiki](https://github.com/FlyingTasters2017/FlyingTasters/wiki
 Licensed under the NU GENERAL PUBLIC LICENSE, Version 3; you may not use this file except in compliance with the License. You may obtain a copy of the License at:
 
 <https://www.gnu.org/licenses/licenses.html>
+
+
+
+***
+***
+***
+
+# Useful command
+
+```taste-python-socket-client - example how to connect from TASTE to the drone using Python socket server```
