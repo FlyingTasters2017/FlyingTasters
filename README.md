@@ -20,7 +20,7 @@ Please access our [wiki](https://github.com/FlyingTasters2017/FlyingTasters/wiki
 # Make your drones to fly 
 In order to run the latest version of **FlyingTasters**, please follow these steps:
 
-* [Install TASTE on your Debian machine.]
+* Install TASTE on your Debian machine.
 ```
 > git clone https://gitrepos.estec.esa.int/taste/taste-setup.git tool-src
 > cd tool-src
