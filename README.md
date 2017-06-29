@@ -22,12 +22,12 @@ In order to run the latest version of **FlyingTasters**, please follow these ste
 
 * [Install TASTE on your Debian machine.]
 ```
->git clone https://gitrepos.estec.esa.int/taste/taste-setup.git tool-src
->cd tool-src
->git checkout crazyflie
->git submodule init
->git submodule update
->./Update-TASTE.sh
+> git clone https://gitrepos.estec.esa.int/taste/taste-setup.git tool-src
+> cd tool-src
+> git checkout crazyflie
+> git submodule init
+> git submodule update
+> ./Update-TASTE.sh
 ```
 
 * [Make sure the dongle's drivers are installed in your system.](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Setup-guide#configuring-the-radio-dongle)
