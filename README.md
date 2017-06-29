@@ -20,7 +20,16 @@ Please access our [wiki](https://github.com/FlyingTasters2017/FlyingTasters/wiki
 # Make your drones to fly 
 In order to run the latest version of **FlyingTasters**, please follow these steps:
 
-* [Prepare a Debian environment on your machine.](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Prepare-(Native)-Debian-environment-for-TASTE)
+* [Install TASTE on your Debian machine.]
+```
+>git clone https://gitrepos.estec.esa.int/taste/taste-setup.git tool-src
+>cd tool-src
+>git checkout crazyflie
+>git submodule init
+>git submodule update
+>./Update-TASTE.sh
+```
+
 * [Make sure the dongle's drivers are installed in your system.](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Setup-guide#configuring-the-radio-dongle)
 * [Make sure the PixyCam's drivers are installed in your system.](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Setup-guide#configuring-the-pixy-camera)
 * Clone the repository into your machine.
