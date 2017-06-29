@@ -152,6 +152,18 @@ PUBLIC
 WITH Taste;
 WITH DataView;
 WITH TASTE_IV_Properties;
+SUBPROGRAM PI_enable_pixycam_pass
+FEATURES
+  user_input : IN PARAMETER DataView::MyInteger {
+    Taste::encoding => UPER;
+  };
+PROPERTIES
+  Taste::Associated_Queue_Size => 1;
+END PI_enable_pixycam_pass;
+
+SUBPROGRAM IMPLEMENTATION PI_enable_pixycam_pass.others
+END PI_enable_pixycam_pass.others;
+
 SUBPROGRAM RI_put_raw_MSD
 FEATURES
   raw_MSD : IN PARAMETER DataView::PixyData {
@@ -161,16 +173,6 @@ END RI_put_raw_MSD;
 
 SUBPROGRAM IMPLEMENTATION RI_put_raw_MSD.others
 END RI_put_raw_MSD.others;
-
-SUBPROGRAM PI_enable_pixycam_pass
-FEATURES
-  user_input : IN PARAMETER DataView::MyInteger {
-    Taste::encoding => UPER;
-  };
-END PI_enable_pixycam_pass;
-
-SUBPROGRAM IMPLEMENTATION PI_enable_pixycam_pass.others
-END PI_enable_pixycam_pass.others;
 
 END interfaceview::FV::MS_Communication;
 
@@ -748,16 +750,18 @@ END GUI.others;
 
 SYSTEM MS_Communication
 FEATURES
+  PI_enable_pixycam_pass : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MS_Communication::PI_enable_pixycam_pass.others {
+    Taste::coordinates => "399 1134";
+    Taste::RCMoperationKind => unprotected;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
+    Taste::InterfaceName => "enable_pixycam_pass";
+  };
   RI_put_raw_MSD : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::MS_Supervisor::PI_put_raw_MSD.others {
     Taste::coordinates => "399 1214";
     Taste::RCMoperationKind => any;
     Taste::InterfaceName => "put_raw_MSD";
     Taste::labelInheritance => "true";
-  };
-  PI_enable_pixycam_pass : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MS_Communication::PI_enable_pixycam_pass.others {
-    Taste::coordinates => "399 1134";
-    Taste::RCMoperationKind => unprotected;
-    Taste::InterfaceName => "enable_pixycam_pass";
   };
 PROPERTIES
   Source_Language => (C);
@@ -1143,6 +1147,8 @@ FEATURES
   PI_enable_pixycam : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Enable_Pass::PI_enable_pixycam.others {
     Taste::coordinates => "601 983";
     Taste::RCMoperationKind => sporadic;
+    Taste::RCMperiod => 0 ms;
+    Taste::Deadline => 0 ms;
     Taste::InterfaceName => "enable_pixycam";
   };
   RI_enable_pixycam_pass : REQUIRES SUBPROGRAM ACCESS interfaceview::FV::MS_Communication::PI_enable_pixycam_pass.others {
@@ -1242,11 +1248,11 @@ CONNECTIONS
   Houston_talk_with_Houston_System_Supervisor_talk_with_Houston : SUBPROGRAM ACCESS Houston.PI_talk_with_Houston -> System_Supervisor.RI_talk_with_Houston {
     Taste::coordinates => "1563 486 1634 486 1634 750 1697 750";
   };
-  MS_Supervisor_put_raw_MSD_MS_Communication_put_raw_MSD : SUBPROGRAM ACCESS MS_Supervisor.PI_put_raw_MSD -> MS_Communication.RI_put_raw_MSD {
-    Taste::coordinates => "399 1214 479 1214 479 1210 620 1210";
-  };
   MS_Communication_enable_pixycam_pass_Enable_Pass_enable_pixycam_pass : SUBPROGRAM ACCESS MS_Communication.PI_enable_pixycam_pass -> Enable_Pass.RI_enable_pixycam_pass {
     Taste::coordinates => "424 1040 406 1040 406 1134 399 1134";
+  };
+  MS_Supervisor_put_raw_MSD_MS_Communication_put_raw_MSD : SUBPROGRAM ACCESS MS_Supervisor.PI_put_raw_MSD -> MS_Communication.RI_put_raw_MSD {
+    Taste::coordinates => "399 1214 479 1214 479 1210 620 1210";
   };
   AS_Supervisor_put_raw_asd_Socket_Client_put_raw_asd : SUBPROGRAM ACCESS AS_Supervisor.PI_put_raw_asd -> Socket_Client.RI_put_raw_asd {
     Taste::coordinates => "2203 892 2075 892 2075 1195 1586 1195";

@@ -300,8 +300,6 @@ FEATURES
   processed_MSD : OUT PARAMETER DataView::Agent {
     Taste::encoding => UPER;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
 END PI_process_MSD;
 
 SUBPROGRAM IMPLEMENTATION PI_process_MSD.others
@@ -421,8 +419,6 @@ FEATURES
   processed_world_data : IN PARAMETER DataView::WorldData {
     Taste::encoding => UPER;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
 END PI_calculate_control_input;
 
 SUBPROGRAM IMPLEMENTATION PI_calculate_control_input.others
@@ -467,8 +463,6 @@ FEATURES
   processed_msd : IN PARAMETER DataView::Agent {
     Taste::encoding => UPER;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
 END PI_store_MSD;
 
 SUBPROGRAM IMPLEMENTATION PI_store_MSD.others
@@ -479,8 +473,6 @@ FEATURES
   processed_asd : IN PARAMETER DataView::Agent {
     Taste::encoding => UPER;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
 END PI_store_ASD;
 
 SUBPROGRAM IMPLEMENTATION PI_store_ASD.others
@@ -491,8 +483,6 @@ FEATURES
   control_input : IN PARAMETER DataView::DroneControllerInput {
     Taste::encoding => UPER;
   };
-PROPERTIES
-  Taste::Associated_Queue_Size => 1;
 END PI_store_control_data;
 
 SUBPROGRAM IMPLEMENTATION PI_store_control_data.others
@@ -886,7 +876,6 @@ FEATURES
   PI_process_MSD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::MSD_Processing::PI_process_MSD.others {
     Taste::coordinates => "401 1409";
     Taste::RCMoperationKind => unprotected;
-    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "process_MSD";
   };
@@ -996,7 +985,6 @@ FEATURES
   PI_calculate_control_input : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::Control_Data_Storage::PI_calculate_control_input.others {
     Taste::coordinates => "1704 356";
     Taste::RCMoperationKind => protected;
-    Taste::RCMperiod => 0 ms;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "calculate_control_input";
   };
@@ -1029,22 +1017,19 @@ SYSTEM World_Model
 FEATURES
   PI_store_MSD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::World_Model::PI_store_MSD.others {
     Taste::coordinates => "920 994";
-    Taste::RCMoperationKind => unprotected;
-    Taste::RCMperiod => 0 ms;
+    Taste::RCMoperationKind => protected;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "store_MSD";
   };
   PI_store_ASD : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::World_Model::PI_store_ASD.others {
     Taste::coordinates => "1273 994";
-    Taste::RCMoperationKind => unprotected;
-    Taste::RCMperiod => 0 ms;
+    Taste::RCMoperationKind => protected;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "store_ASD";
   };
   PI_store_control_data : PROVIDES SUBPROGRAM ACCESS interfaceview::FV::World_Model::PI_store_control_data.others {
     Taste::coordinates => "1417 824";
-    Taste::RCMoperationKind => unprotected;
-    Taste::RCMperiod => 0 ms;
+    Taste::RCMoperationKind => protected;
     Taste::Deadline => 0 ms;
     Taste::InterfaceName => "store_control_data";
   };

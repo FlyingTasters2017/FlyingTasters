@@ -122,10 +122,9 @@ then
     echo -e "${INFO} Executing user-defined init script"
     source user_init_post.sh
 fi
-
+#	--debug \
 cd "$CWD" && assert-builder-ocarina.py \
 	--fast \
-	--debug \
 	--aadlv2 \
 	--keep-case \
 	--interfaceView "$INTERFACEVIEW" \

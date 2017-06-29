@@ -7,25 +7,33 @@
 #include "../../Configuration.h"
 
 #define PI 3.14159265
-
+ 
 long            ms_0; // Milliseconds
-time_t          s_0;
 long            ms;
-time_t          s;
 struct timespec spec;
+double Path_x[4] = {0.4, 0.4, -0.4, -0.4};
+double Path_y[4] = {0.4, -0.4, -0.4, 0.4};
+double r = 0.7;
+double omega = 2*PI/10;
 
-asn1SccTrajectory Ref;
+// asn1SccReferencePath myFlightPlan;
 
-int i =0;
+void trajectory_generator_startup()
+{
+    clock_gettime(CLOCK_MONOTONIC_RAW, &spec);
+ 
+    ms_0 = spec.tv_sec;
 
-asn1SccReferencePath myFlightPlan;
+}
 
+
+/*
 void trajectory_generator_startup()
 {
     /* Write your initialization code here,
        but do not make any call to a required interface. */
 
-    
+/*
     myFlightPlan.locations.arr[0].x=0.1;
     myFlightPlan.locations.arr[0].y=0.1;
     myFlightPlan.locations.arr[0].z=0.1;
@@ -45,11 +53,13 @@ void trajectory_generator_startup()
 
     ms_0 = round(spec.tv_nsec/1e6);
 }
-
+*/
+    
 void trajectory_generator_PI_choose_trajectory(const asn1SccWorldData *IN_processed_world_data,
                                                const asn1SccSafetyInterupt *IN_world_safety_events,
                                                asn1SccMultiControlError *OUT_control_error)
 {
+    /*
       printf("i = %d\n",i);
       clock_gettime(CLOCK_MONOTONIC_RAW, &spec);
       s = spec.tv_sec;
@@ -77,19 +87,36 @@ void trajectory_generator_PI_choose_trajectory(const asn1SccWorldData *IN_proces
               i=0;
           }
       }
-     
+     */
       
-      ref_x = myFlightPlan.locations.arr[i].x;
-      ref_y = myFlightPlan.locations.arr[i].y;
+    clock_gettime(CLOCK_MONOTONIC_RAW, &spec);
+    ms = spec.tv_sec; 
+    
+    double xRef_i,yRef_i,xOut_i,yOut_i,xError_i,yError_i,psi_i;
+    if ((ms-ms_0) > 7)
+    {
+        for (int i=0;i<NR_OF_DRONES;i++)
+        {
+            xRef_i  =   Path_x[i];
+            yRef_i  =   Path_y[i];
+            
+            xOut_i  = (*IN_processed_world_data).agents.arr[i].currentPosition.x;
+            yOut_i  = (*IN_processed_world_data).agents.arr[i].currentPosition.y;
+            
+            xError_i= xRef_i-xOut_i;
+            yError_i= yRef_i-yOut_i;
+            
+            psi_i = (*IN_processed_world_data).agents.arr[i].currentOrientation.yaw;
       
-      double error_x = ref_x - x;
-      double error_y = ref_y - y;      
-      double psi = (*IN_processed_world_data).agents.arr[0].currentOrientation.yaw;
-      
-      (*OUT_control_error).bodyFrameError.arr[0].x = error_x*cos(psi) + error_y*sin(psi);
-      (*OUT_control_error).bodyFrameError.arr[0].y = error_y*cos(psi) - error_x*sin(psi);
-      (*OUT_control_error).bodyFrameError.arr[0].z = 0.3;               //this is actually not an error, but a reference height!!!
-      (*OUT_control_error).bodyFrameError.arr[0].yaw = 0.0-psi;
-      
+            (*OUT_control_error).bodyFrameError.arr[i].x = xError_i*cos(psi_i) + yError_i*sin(psi_i);
+            (*OUT_control_error).bodyFrameError.arr[i].y = yError_i*cos(psi_i) - xError_i*sin(psi_i);
+            (*OUT_control_error).bodyFrameError.arr[i].z = 0.3;               //this is actually not an error, but a reference height!!!
+            (*OUT_control_error).bodyFrameError.arr[i].yaw = 0.0-psi_i;
+            
+            
+            
+        }
+        ms_0= ms;
+    }
 }
 

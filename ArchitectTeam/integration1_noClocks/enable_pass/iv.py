@@ -430,39 +430,6 @@ functions['ms_communication'] = {
     'functional_states' : {}
 }
 
-functions['ms_communication']['interfaces']['put_raw_MSD'] = {
-    'port_name': 'put_raw_MSD',
-    'parent_fv': 'ms_communication',
-    'direction': RI,
-    'in': {},
-    'out': {},
-    'synchronism': asynch,
-    'rcm': sporadic,
-    'period': 0,
-    'wcet_low': 0,
-    'wcet_low_unit': '',
-    'wcet_high': 0,
-    'wcet_high_unit': '',
-    'distant_fv': 'ms_supervisor',
-    'calling_threads': {},
-    'distant_name': 'put_raw_MSD',
-    'queue_size': 1
-}
-
-functions['ms_communication']['interfaces']['put_raw_MSD']['paramsInOrdered'] = ['raw_MSD']
-
-functions['ms_communication']['interfaces']['put_raw_MSD']['paramsOutOrdered'] = []
-
-functions['ms_communication']['interfaces']['put_raw_MSD']['in']['raw_MSD'] = {
-    'type': 'PixyData',
-    'asn1_module': 'TASTE_Dataview',
-    'basic_type': sequence,
-    'asn1_filename': './dataview-uniq.asn',
-    'encoding': UPER,
-    'interface': 'put_raw_MSD',
-    'param_direction': param_in
-}
-
 functions['ms_communication']['interfaces']['enable_pixycam_pass'] = {
     'port_name': 'enable_pixycam_pass',
     'parent_fv': 'ms_communication',
@@ -493,6 +460,39 @@ functions['ms_communication']['interfaces']['enable_pixycam_pass']['in']['user_i
     'asn1_filename': './dataview-uniq.asn',
     'encoding': UPER,
     'interface': 'enable_pixycam_pass',
+    'param_direction': param_in
+}
+
+functions['ms_communication']['interfaces']['put_raw_MSD'] = {
+    'port_name': 'put_raw_MSD',
+    'parent_fv': 'ms_communication',
+    'direction': RI,
+    'in': {},
+    'out': {},
+    'synchronism': asynch,
+    'rcm': sporadic,
+    'period': 0,
+    'wcet_low': 0,
+    'wcet_low_unit': '',
+    'wcet_high': 0,
+    'wcet_high_unit': '',
+    'distant_fv': 'ms_supervisor',
+    'calling_threads': {},
+    'distant_name': 'put_raw_MSD',
+    'queue_size': 1
+}
+
+functions['ms_communication']['interfaces']['put_raw_MSD']['paramsInOrdered'] = ['raw_MSD']
+
+functions['ms_communication']['interfaces']['put_raw_MSD']['paramsOutOrdered'] = []
+
+functions['ms_communication']['interfaces']['put_raw_MSD']['in']['raw_MSD'] = {
+    'type': 'PixyData',
+    'asn1_module': 'TASTE_Dataview',
+    'basic_type': sequence,
+    'asn1_filename': './dataview-uniq.asn',
+    'encoding': UPER,
+    'interface': 'put_raw_MSD',
     'param_direction': param_in
 }
 
