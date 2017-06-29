@@ -22,20 +22,37 @@ In order to run the latest version of **FlyingTasters**, please follow these ste
 
 * Install TASTE on your Debian machine.
 ```
-> git clone https://gitrepos.estec.esa.int/taste/taste-setup.git tool-src
-> cd tool-src
-> git checkout crazyflie
-> git submodule init
-> git submodule update
-> ./Update-TASTE.sh
+git clone https://gitrepos.estec.esa.int/taste/taste-setup.git tool-src
+cd tool-src
+git checkout crazyflie
+git submodule init
+git submodule update
+./Update-TASTE.sh
 ```
 
 * [Make sure the dongle's drivers are installed in your system.](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Setup-guide#configuring-the-radio-dongle)
 * [Make sure the PixyCam's drivers are installed in your system.](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Setup-guide#configuring-the-pixy-camera)
 * Clone the repository into your machine.
+```
+git clone https://github.com/FlyingTasters2017/FlyingTasters.git
+cd FlyingTasters
+```
 * Start the Python server.
+```
+cd theFolderIfNecessary
+python3 theNameoftheScript.py &
+```
 * Build the TASTE project.
+```
+cd theNameofTheFinalProject
+./build-script.sh
+```
 * Run FlyingTasters.
+```
+cd binary.c/binaries
+./x86_partition &
+./GUI-gui &
+```
 
 
 # LICENSE
