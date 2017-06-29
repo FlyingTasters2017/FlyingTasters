@@ -54,19 +54,7 @@ cd binary.c/binaries
 ./GUI-gui &
 ```
 
-
 # LICENSE
 
-Licensed under the NU GENERAL PUBLIC LICENSE, Version 3; you may not use this file except in compliance with the License. You may obtain a copy of the License at:
+Licensed under the NU GENERAL PUBLIC LICENSE, Version 3; you may not use this file except in compliance with the License. You may obtain a copy of the License [here](https://www.gnu.org/licenses/licenses.html).
 
-<https://www.gnu.org/licenses/licenses.html>
-
-
-
-***
-***
-***
-
-# Useful command
-
-```taste-python-socket-client - example how to connect from TASTE to the drone using Python socket server```
