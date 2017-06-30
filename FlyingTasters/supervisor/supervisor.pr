@@ -1,0 +1,52 @@
+/* CIF PROCESS (318, 133), (150, 75) */
+process supervisor;
+    /* CIF TEXT (1593, 111), (272, 140) */
+    -- Text area for declarations and comments
+    
+    dcl droneData MyDroneData;
+    dcl sensorData MySensorData;
+    dcl n myInteger;
+    /* CIF ENDTEXT */
+    /* CIF START (319, 67), (70, 35) */
+    START;
+        /* CIF PROCEDURECALL (276, 122), (156, 35) */
+        call writeln('SDL Startup');
+        /* CIF NEXTSTATE (319, 177), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (1198, 116), (71, 35) */
+    state Running;
+        /* CIF input (664, 175), (70, 35) */
+        input pulse;
+            /* CIF PROCEDURECALL (618, 230), (162, 35) */
+            call writeln('Starting cycle');
+            /* CIF PROCEDURECALL (658, 280), (81, 35) */
+            call printTime;
+            /* CIF task (629, 330), (140, 38) */
+            task n :=n+1;
+            /* CIF PROCEDURECALL (613, 388), (172, 35) */
+            call write('Cycle number= ',n);
+            /* CIF PROCEDURECALL (629, 443), (139, 35) */
+            call takeoff(droneData);
+            /* CIF PROCEDURECALL (538, 498), (322, 35) */
+            call readStabilizerSendThrust(droneData,sensorData);
+            /* CIF PROCEDURECALL (576, 553), (245, 35) */
+            call writeln('Drone data read/send done');
+            /* CIF PROCEDURECALL (658, 608), (81, 35) */
+            call printTime;
+            /* CIF PROCEDURECALL (581, 658), (236, 35) */
+            call writeln('Waiting for the next pulse');
+            /* CIF NEXTSTATE (663, 708), (71, 35) */
+            NEXTSTATE Running;
+    endstate;
+    /* CIF state (319, 177), (70, 35) */
+    state Wait;
+        /* CIF input (62, 232), (70, 35) */
+        input pulse;
+            /* CIF PROCEDURECALL (0, 287), (195, 35) */
+            call writeln('Stuck Here_ Tag1 ');
+            /* CIF task (62, 342), (70, 35) */
+            task n:=0;
+            /* CIF NEXTSTATE (61, 392), (71, 35) */
+            NEXTSTATE Running;
+    endstate;
+endprocess supervisor;

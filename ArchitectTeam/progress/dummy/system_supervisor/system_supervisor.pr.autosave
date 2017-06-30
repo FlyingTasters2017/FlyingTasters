@@ -1,0 +1,39 @@
+/* CIF PROCESS (250, 150), (150, 75) */
+process system_supervisor;
+    /* CIF TEXT (1010, 43), (272, 140) */
+    -- Text area for declarations and comments
+    
+    dcl msd_storage MyInteger;
+    
+    /* CIF ENDTEXT */
+    /* CIF START (320, 10), (70, 35) */
+    START;
+        /* CIF NEXTSTATE (320, 60), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (717, 54), (77, 35) */
+    state running;
+        /* CIF input (569, 109), (112, 35) */
+        input set_user_input;
+            /* CIF NEXTSTATE (590, 164), (70, 35) */
+            NEXTSTATE wait;
+        /* CIF input (765, 109), (70, 35) */
+        input clock;
+            /* CIF PROCEDURECALL (691, 164), (219, 35) */
+            call get_MSD_storage(msd_storage);
+            /* CIF output (710, 219), (181, 35) */
+            output update_GUI(msd_storage);
+            /* CIF NEXTSTATE (765, 274), (70, 38) */
+            NEXTSTATE running;
+    endstate;
+    /* CIF state (320, 60), (70, 35) */
+    state Wait;
+        /* CIF input (275, 115), (70, 35) */
+        input clock;
+            /* CIF NEXTSTATE (275, 170), (70, 35) */
+            NEXTSTATE wait;
+        /* CIF input (364, 116), (112, 35) */
+        input set_user_input;
+            /* CIF NEXTSTATE (385, 171), (70, 35) */
+            NEXTSTATE running;
+    endstate;
+endprocess system_supervisor;

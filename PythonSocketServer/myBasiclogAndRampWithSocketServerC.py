@@ -114,7 +114,7 @@ class LoggingExample:
         # pitch = 0
         # roll = 0
         # yawrate = 0
-        self._cf.commander.send_zdistance_setpoint(roll, pitch, yawrate, thrust)
+        self._cf.commander.send_zdistance_setpoint(roll, pitch, yawrate, zdistance)
 
     def send_setpoint(self, roll=0, pitch=0, yawrate=0, thrust=0):
         # pitch = 0
@@ -202,7 +202,7 @@ if __name__ == '__main__':
     # Initialize the low-level drivers (don't list the debug drivers)
     cflib.crtp.init_drivers(enable_debug_driver=False)
     #Insert correct Crazyflie URI
-    le1 = LoggingExample("radio://0/82/2M",socket= mySocket)
+    le1 = LoggingExample("radio://0/83/2M",socket= mySocket)
     #le2 = LoggingExample("radio://0/85/2M",socket = mySocket)
     list = [le1] #, le2] #,le3]
     #time.sleep(10)
@@ -260,6 +260,10 @@ if __name__ == '__main__':
             thrust = socket.ntohl(int(thrust) & 0xffffffff)
             thrust = float(thrust)/1000
 
+            # height = socket.ntohl(int(height) & 0xffffffff)
+            # height = int32(height)
+            # height = float(height)/1000
+
             vx = 0.17*pitch
             vy = 0.17*roll
             zref = thrust
@@ -268,6 +272,7 @@ if __name__ == '__main__':
             print("pitch data", pitch)
             print("roll data", roll)
             print("thrust data", thrust)
+            # print("height data", height)
 
             #Unlock all the drones.
             if unlock_drones:
@@ -279,7 +284,8 @@ if __name__ == '__main__':
             if thrust > 0:
                 for le in list:
                      # le.send_hover_setpoint(vx,vy,yawrate,zref)
-                    le.send_setpoint(roll,pitch,yawrate,thrust)
+                    le.send_zrange_setpoint(roll,pitch,yawrate,zref)
+
     conn.close()
         # file.close()
     sys.exit(2)

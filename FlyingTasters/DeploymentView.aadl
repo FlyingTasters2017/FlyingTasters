@@ -1,0 +1,99 @@
+---------------------------------------------------
+-- AADL2.0
+-- TASTE
+-- 
+-- 
+---------------------------------------------------
+
+PACKAGE deploymentview::DV::Node1
+PUBLIC
+
+WITH Taste;
+WITH Deployment;
+WITH TASTE_DV_Properties;
+PROCESS x86_partition
+END x86_partition;
+
+PROCESS IMPLEMENTATION x86_partition.others
+END x86_partition.others;
+
+END deploymentview::DV::Node1;
+
+PACKAGE deploymentview::DV
+PUBLIC
+
+WITH ocarina_processors_x86;
+WITH deploymentview::DV::Node1;
+WITH Taste;
+WITH Deployment;
+WITH interfaceview::IV;
+WITH TASTE_DV_Properties;
+SYSTEM Node1
+END Node1;
+
+SYSTEM IMPLEMENTATION Node1.others
+SUBCOMPONENTS
+  IV_socketClient : SYSTEM interfaceview::IV::socketClient.others {
+    Taste::coordinates => "810 1240 1421 1466";
+    Taste::FunctionName => "socketClient";
+  };
+  IV_Pixycam : SYSTEM interfaceview::IV::Pixycam.others {
+    Taste::coordinates => "831 949 1201 1174";
+    Taste::FunctionName => "Pixycam";
+  };
+  IV_PixyProcess : SYSTEM interfaceview::IV::PixyProcess.others {
+    Taste::coordinates => "790 1519 1067 1678";
+    Taste::FunctionName => "PixyProcess";
+  };
+  IV_controller : SYSTEM interfaceview::IV::controller.others {
+    Taste::coordinates => "1513 944 1852 1149";
+    Taste::FunctionName => "controller";
+  };
+  IV_trajectoryGen : SYSTEM interfaceview::IV::trajectoryGen.others {
+    Taste::coordinates => "1206 1498 1390 1693";
+    Taste::FunctionName => "trajectoryGen";
+  };
+  IV_controller2 : SYSTEM interfaceview::IV::controller2.others {
+    Taste::coordinates => "1564 1231 1836 1426";
+    Taste::FunctionName => "controller2";
+  };
+  IV_controller3 : SYSTEM interfaceview::IV::controller3.others {
+    Taste::coordinates => "1559 1523 1877 1667";
+    Taste::FunctionName => "controller3";
+  };
+  x86_partition : PROCESS deploymentview::DV::Node1::x86_partition.others {
+    Taste::coordinates => "675 821 2367 1708";
+    Deployment::Port_Number => 0;
+  };
+  x86_linux32 : PROCESSOR ocarina_processors_x86::x86.linux32 {
+    Taste::coordinates => "464 567 2578 1835";
+  };
+PROPERTIES
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_socketClient;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Pixycam;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_PixyProcess;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_controller;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_trajectoryGen;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_controller2;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_controller3;
+  Actual_Processor_Binding => (reference (x86_linux32)) APPLIES TO x86_partition;
+END Node1.others;
+
+SYSTEM deploymentview
+END deploymentview;
+
+SYSTEM IMPLEMENTATION deploymentview.others
+SUBCOMPONENTS
+  Node1 : SYSTEM Node1.others {
+    Taste::coordinates => "200 205 2842 2016";
+  };
+  interfaceview : SYSTEM interfaceview::IV::interfaceview.others;
+END deploymentview.others;
+
+PROPERTIES
+  Taste::coordinates => "0 0 2970 2100";
+  Taste::version => "1.3.19";
+  Taste::interfaceView => "InterfaceView.aadl";
+  Taste::HWLibraries => ("../../tool-inst/share/ocarina/AADLv2/ocarina_components.aadl");
+END deploymentview::DV;
+

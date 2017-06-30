@@ -1,0 +1,56 @@
+/* CIF PROCESS (251, 149), (150, 75) */
+process ms_supervisor;
+    /* CIF TEXT (1274, 90), (272, 140) */
+    -- Text area for declarations and comments
+    
+    dcl raw_MSD_data PixyData;
+    dcl proc_MSD_data Agent;
+    dcl user_input MyInteger;
+    /* CIF ENDTEXT */
+    /* CIF START (320, 10), (70, 35) */
+    START;
+        /* CIF NEXTSTATE (320, 60), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (753, 56), (70, 35) */
+    state running;
+        /* CIF input (537, 111), (190, 35) */
+        input talk_with_MSSV(user_input);
+            /* CIF PROCEDURECALL (536, 166), (192, 35) */
+            call enable_pixycam(user_input);
+            /* CIF decision (589, 216), (86, 50) */
+            decision user_input;
+                /* CIF ANSWER (552, 286), (70, 23) */
+                (/=1):
+                    /* CIF NEXTSTATE (552, 329), (70, 35) */
+                    NEXTSTATE wait;
+                /* CIF ANSWER (693, 286), (70, 23) */
+                (1):
+                    /* CIF NEXTSTATE (693, 329), (70, 35) */
+                    NEXTSTATE running;
+            enddecision;
+        /* CIF input (821, 111), (203, 35) */
+        input put_raw_MSD(raw_msd_data);
+            /* CIF PROCEDURECALL (773, 166), (299, 35) */
+            call process_MSD(raw_msd_data,proc_msd_data);
+            /* CIF PROCEDURECALL (825, 216), (195, 35) */
+            call store_MSD(proc_msd_data);
+            /* CIF NEXTSTATE (887, 271), (70, 35) */
+            NEXTSTATE running;
+    endstate;
+    /* CIF state (320, 60), (70, 35) */
+    state Wait;
+        /* CIF input (260, 115), (190, 35) */
+        input talk_with_MSSV(user_input);
+            /* CIF decision (312, 170), (86, 50) */
+            decision user_input;
+                /* CIF ANSWER (275, 240), (70, 23) */
+                (/=1):
+                    /* CIF NEXTSTATE (275, 283), (70, 35) */
+                    NEXTSTATE wait;
+                /* CIF ANSWER (367, 240), (70, 23) */
+                (1):
+                    /* CIF NEXTSTATE (367, 283), (70, 35) */
+                    NEXTSTATE running;
+            enddecision;
+    endstate;
+endprocess ms_supervisor;
