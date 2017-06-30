@@ -71,7 +71,9 @@ git submodule update
 git clone https://github.com/FlyingTasters2017/FlyingTasters.git
 cd FlyingTasters
 ```
-**7** Start the Python server.
+**7** Initialization
+
+**8** Start the Python server.
 ```
 cd theFolderIfNecessary
 python3 theNameoftheScript.py &
