@@ -14,7 +14,25 @@ Here you will find detailed description of:
 
 
 # User's manual 
-In order to run the latest version of **FlyingTasters**, please follow these steps:
+This manual is intended to give assistance to the people using the **FlyingTasters** system. In order to have this system up and running this is the process that the user needs to follow.
+
+### Pre-requirements:
+These are the pre requirements that the user should implement before running the project:
+
+**1** This project uses 3 quadcopters - [Crazyflie 2.0](https://www.bitcraze.io/crazyflie-2/)   
+
+**2** One PixyCam - TODO link for the website
+
+**3** Non reflective floor carpet - TODO see puicture
+
+**4** Isolated room
+
+**5** Drone markers - TODO see picture
+
+### Prepare environement
+This chapter explains how to prepare the environment 
+
+### System configuration
 
 * Install TASTE on your Debian machine.
 ```
