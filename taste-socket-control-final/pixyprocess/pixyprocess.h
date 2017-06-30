@@ -13,11 +13,8 @@ extern "C" {
 
 void pixyprocess_startup();
 
-void pixyprocess_PI_processData(const asn1SccMyPositionData *,
-                                asn1SccMyPositionData *);
-
-void pixyprocess_PI_getPosition(const asn1SccMyReal *,
-                                asn1SccMyPositionData *);
+void pixyprocess_PI_processData(const asn1SccMyPositionControlData *,
+                                asn1SccMyPositionControlData *);
 
 #ifdef __cplusplus
 }

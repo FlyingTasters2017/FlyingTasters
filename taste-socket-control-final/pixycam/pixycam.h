@@ -15,16 +15,9 @@ void pixycam_startup();
 
 void pixycam_PI_pulse();
 
-extern void pixycam_RI_readStabilizerSendThrust(const asn1SccMyDroneData *,
-                                                const asn1SccMyPositionData *,
-                                                asn1SccMySensorData *);
-
-extern void pixycam_RI_takeoff(asn1SccMyDroneData *);
-
-extern void pixycam_RI_printTime();
-
-extern void pixycam_RI_processData(const asn1SccMyPositionData *,
-                                   asn1SccMyPositionData *);
+extern void pixycam_RI_readStabilizerSendThrust(const asn1SccMyPositionControlData *,
+                                                const asn1SccMyPositionControlData *,
+                                                const asn1SccMyPositionControlData *);
 
 #ifdef __cplusplus
 }

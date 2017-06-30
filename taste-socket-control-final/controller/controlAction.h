@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'controlAction'.
  *
- * Model version                  : 1.7
+ * Model version                  : 1.1
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Mon Jun 26 13:05:57 2017
+ * C/C++ source code generated on : Tue Jun 27 22:07:12 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -52,7 +52,7 @@ typedef struct {
 /* Block states (auto storage) for system '<Root>' */
 typedef struct {
   real_T UD_DSTATE;                    /* '<S5>/UD' */
-  real_T UD_DSTATE_a;                  /* '<S6>/UD' */
+  real_T UD_DSTATE_g;                  /* '<S6>/UD' */
 } DW_controlAction_T;
 
 /* External inputs (root inport signals with auto storage) */

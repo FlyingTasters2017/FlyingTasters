@@ -34,39 +34,31 @@ END Node1;
 SYSTEM IMPLEMENTATION Node1.others
 SUBCOMPONENTS
   IV_socketClient : SYSTEM interfaceview::IV::socketClient.others {
-    Taste::coordinates => "1703 984 1887 1210";
+    Taste::coordinates => "810 1240 1421 1466";
     Taste::FunctionName => "socketClient";
   };
   IV_Pixycam : SYSTEM interfaceview::IV::Pixycam.others {
-    Taste::coordinates => "1021 985 1216 1210";
+    Taste::coordinates => "831 949 1201 1174";
     Taste::FunctionName => "Pixycam";
   };
   IV_PixyProcess : SYSTEM interfaceview::IV::PixyProcess.others {
-    Taste::coordinates => "1303 1021 1580 1180";
+    Taste::coordinates => "790 1519 1067 1678";
     Taste::FunctionName => "PixyProcess";
   };
-  IV_cClient : SYSTEM interfaceview::IV::cClient.others {
-    Taste::coordinates => "780 1390 929 1575";
-    Taste::FunctionName => "cClient";
-  };
-  IV_Timer : SYSTEM interfaceview::IV::Timer.others {
-    Taste::coordinates => "1067 1313 1185 1626";
-    Taste::FunctionName => "Timer";
-  };
   IV_controller : SYSTEM interfaceview::IV::controller.others {
-    Taste::coordinates => "1928 1267 2267 1472";
+    Taste::coordinates => "1513 944 1852 1149";
     Taste::FunctionName => "controller";
   };
   IV_trajectoryGen : SYSTEM interfaceview::IV::trajectoryGen.others {
-    Taste::coordinates => "2088 1000 2272 1195";
+    Taste::coordinates => "1206 1498 1390 1693";
     Taste::FunctionName => "trajectoryGen";
   };
   IV_controller2 : SYSTEM interfaceview::IV::controller2.others {
-    Taste::coordinates => "1359 1282 1631 1477";
+    Taste::coordinates => "1564 1231 1836 1426";
     Taste::FunctionName => "controller2";
   };
   IV_controller3 : SYSTEM interfaceview::IV::controller3.others {
-    Taste::coordinates => "1621 1554 1939 1698";
+    Taste::coordinates => "1559 1523 1877 1667";
     Taste::FunctionName => "controller3";
   };
   x86_partition : PROCESS deploymentview::DV::Node1::x86_partition.others {
@@ -80,8 +72,6 @@ PROPERTIES
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_socketClient;
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Pixycam;
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_PixyProcess;
-  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_cClient;
-  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Timer;
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_controller;
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_trajectoryGen;
   Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_controller2;

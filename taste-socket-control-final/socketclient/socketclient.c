@@ -14,14 +14,22 @@
 #include <time.h>
 #include <math.h>
 
-// global variables start
+/* global variables start */
 
 #define NUMBER_OF_DRONES 3
 #define BUFFER_SIZE 1024
 
 char droneRed[15] = "radio://0/83/2M";
 char droneBlue[15] = "radio://0/82/2M";
-char droneYellow[15] = "radio://0/84/2M";
+char droneGreen[15] = "radio://0/85/2M";
+
+
+long            s_0;
+long            ms_0; 
+long            s;
+long            ms;
+int indexTime = 1;
+struct timespec spec;
 
 int portno = 50012;
 int sockfd;
@@ -50,13 +58,25 @@ struct droneSensorData {
 } droneSensor[NUMBER_OF_DRONES];
 
 
-asn1SccMyPositionData currPosition, refPosition, currPosition2, refPosition2, currPosition3, refPosition3;
-asn1SccMyPositionControlData currDronePosition, currDronePosition2, currDronePosition3, refDronePosition, refDronePosition2, refDronePosition3;
-asn1SccMyDroneData currDroneCmd, currDroneCmd2, currDroneCmd3;
-asn1SccMySensorData currSensor, currSensor2, currSensor3;
-asn1SccMyReal currHeight;
 
-//global variables end*/
+
+/* For storing Raw position data from camera*/
+asn1SccMyPositionControlData rawPositionRed, rawPositionBlue, rawPositionGreen; 
+
+/* For storing Processed position data in terms of real world coordinates*/
+asn1SccMyPositionControlData processedPositionRed, processedPositionBlue, processedPositionGreen;
+
+/* For storing Reference position data from trajectory generation*/
+asn1SccMyPositionControlData refPositionRed, refPositionBlue, refPositionGreen;
+
+/* Fro storing control commands from controller namely yawrate,pitch, roll and zref*/
+asn1SccMyDroneData currDroneCmd, currDroneCmd2, currDroneCmd3;
+
+/* Fro storing sensor data and passing to controllers*/
+asn1SccMySensorData currSensor, currSensor2, currSensor3;
+
+
+
 static int jsoneq(const char *json, jsmntok_t *tok, const char *s) {
   if (tok->type == JSMN_STRING && (int) strlen(s) == tok->end - tok->start &&
       strncmp(json + tok->start, s, tok->end - tok->start) == 0) {
@@ -64,6 +84,9 @@ static int jsoneq(const char *json, jsmntok_t *tok, const char *s) {
   }
   return -1;
 }
+/*global variables end*/
+
+
 /* A sort-of graceful error handler */
 void error(char *msg){
      perror(msg);
@@ -156,8 +179,6 @@ int integerSize(int num)
     
         return 1;
     }
-    
-    
 }
 
 
@@ -168,12 +189,16 @@ void socketclient_startup()
        but do not make any call to a required interface. */    
 
     sockfd = initializeTCPSocketToServer(portno);
-    Data_pointer = fopen("Data2.m", "w");
+    clock_gettime(CLOCK_MONOTONIC_RAW, &spec);
+ 
+    s_0 = spec.tv_sec;
+    ms_0=spec.tv_nsec;
+    Data_pointer = fopen("Data2.m", "w"); //for logging Data in a m-file
 
     
 }
 
-void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_droneData, const asn1SccMyPositionData *IN_procpositionData, asn1SccMySensorData *OUT_sensorData)
+void socketclient_PI_readStabilizerSendThrust(const asn1SccMyPositionControlData *IN_positionDataRed, const asn1SccMyPositionControlData *IN_positionDataBlue, const asn1SccMyPositionControlData *IN_positionDataGreen)
 {
     
     char buf[BUFFER_SIZE]; 
@@ -205,14 +230,13 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
         }
     }
 
+    /* Parsing of json data coming from Python socket server*/
     for (j = 0; j < numberOfConnectedDrone; j++) {
         bzero(buf,BUFFER_SIZE);
         strcpy(buf, droneSensorJSON[j]);
         char temp[BUFFER_SIZE];
         char *ptr;
         jsmn_init(&p);
-        
-        
         
         r = jsmn_parse(&p, buf, strlen(buf), t, sizeof(t)/sizeof(t[0]));
         if (r < 0) {
@@ -225,7 +249,6 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
                 temp[t[i+1].end-t[i+1].start] = '\0';
                 //OUT_sensorData->yawAct = strtod(temp, &ptr);
                 droneSensor[j].yaw = strtod(temp, &ptr);
-                printf("yaw is %f \n", droneSensor[j].yaw);
                 i++;
             }         
             else if (jsoneq(buf, &t[i], "stabilizer.pitch") == 0) {
@@ -233,7 +256,6 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
                 temp[t[i+1].end-t[i+1].start] = '\0';
                 //OUT_sensorData->pitchAct = strtod(temp, &ptr);
                 droneSensor[j].pitch = strtod(temp, &ptr);
-                printf("pitch is %f \n", strtod(temp, &ptr));
                 i++;
             }
             else if (jsoneq(buf, &t[i], "stabilizer.roll") == 0) {
@@ -241,41 +263,17 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
                 temp[t[i+1].end-t[i+1].start] = '\0';
                 //OUT_sensorData->rollAct = strtod(temp, &ptr);
                 droneSensor[j].roll = strtod(temp, &ptr);
-                printf("roll is %f \n", strtod(temp, &ptr));
                 i++;
             }   
-            /*else if (jsoneq(buf, &t[i], "acc.x") == 0) {
-                strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
-                temp[t[i+1].end-t[i+1].start] = '\0';
-                //printf("yaw is %f \n", strtod(temp, &ptr));
-                OUT_sensorData->accxAct = strtod(temp, &ptr);
-                i++;
-            }
-            else if (jsoneq(buf, &t[i], "acc.y") == 0) {
-                strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
-                temp[t[i+1].end-t[i+1].start] = '\0';
-                //printf("yaw is %f \n", strtod(temp, &ptr));
-                OUT_sensorData->accyAct = strtod(temp, &ptr);
-                i++;
-            }
-            else if (jsoneq(buf, &t[i], "acc.z") == 0) {
-                strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
-                temp[t[i+1].end-t[i+1].start] = '\0';
-                //printf("yaw is %f \n", strtod(temp, &ptr));
-                OUT_sensorData->acczAct = strtod(temp, &ptr);
-                i++;
-            }*/
             else if (jsoneq(buf, &t[i], "range.zrange") == 0) {
                 strncpy(temp, buf + t[i+1].start, t[i+1].end-t[i+1].start);
                 temp[t[i+1].end-t[i+1].start] = '\0';
                 //OUT_sensorData->baropAct = strtod(temp, &ptr);
                 droneSensor[j].zRange = strtod(temp, &ptr);
-                printf("zRange is %f \n", strtod(temp, &ptr));
                 i++;
             }
             else if (jsoneq(buf, &t[i], "uri") == 0) {
                 strncpy(droneSensor[j].uri, buf + t[i+1].start, t[i+1].end-t[i+1].start);
-                printf("uri is %s \n", droneSensor[j].uri);
                 i++;
             }
             else {
@@ -285,92 +283,61 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
     }
     printf("\n");
 
-  //TODO: Controller for the drone. Put here
-//     socketclient_RI_getPosition(&currHeight,&currPosition);
-//     x_pos = currPosition.xAct;
-//     y_pos = currPosition.yAct;
-//     
+
+    /* processing the pixel data from camera to convert it into real world coordinates */
+
+    for(i = 0;i<numberOfConnectedDrone;i++)
+    {
     
-    x_pos[0] = IN_procpositionData->x0Act;
-    y_pos[0] = IN_procpositionData->y0Act;
+        if (strcmp(droneSensor[i].uri, droneGreen)==0) //Green Marker
+        {
+            rawPositionGreen.xAct = IN_positionDataGreen->xAct;
+            rawPositionGreen.yAct = IN_positionDataGreen->yAct;
+            rawPositionGreen.zAct = droneSensor[i].zRange;
+            socketclient_RI_processData(&rawPositionGreen, &processedPositionGreen);
+            
+        }
+        else if (strcmp(droneSensor[i].uri,droneBlue)==0) //Blue Marker
+        {
+            rawPositionBlue.xAct = IN_positionDataBlue->xAct;
+            rawPositionBlue.yAct = IN_positionDataBlue->yAct;
+            rawPositionBlue.zAct = droneSensor[i].zRange;
+            socketclient_RI_processData(&rawPositionBlue, &processedPositionBlue);
+
+        }
+        else // Red Marker
+        {
+            rawPositionRed.xAct = IN_positionDataRed->xAct;
+            rawPositionRed.yAct = IN_positionDataRed->yAct;
+            rawPositionRed.zAct = droneSensor[i].zRange;
+            socketclient_RI_processData(&rawPositionRed, &processedPositionRed);
+        }
+        
+    }
     
-    x_pos[1] = IN_procpositionData->x1Act;
-    y_pos[1] = IN_procpositionData->y1Act;
-    
-    x_pos[2] = IN_procpositionData->x2Act;
-    y_pos[2] = IN_procpositionData->y2Act;
-    
-//     printf("Red x position: %f y position: %f \n", x_pos[0], y_pos[0]);
-//     printf("Blue x position: %f y position: %f \n", x_pos[1], y_pos[1]);
-//     printf("Yellow x position: %f y position: %f \n", x_pos[2], y_pos[2]);
-    
-    currPosition.x0Act = x_pos[0];
-    currPosition.y0Act = y_pos[0];
-    currPosition.x1Act = x_pos[1];
-    currPosition.y1Act = y_pos[1];
-    currPosition.x1Act = x_pos[2];
-    currPosition.y1Act = y_pos[2];
-    
-    
-    
-//     x_ref = refPosition.xAct;
-//     y_ref = refPosition.yAct;
-//     printf("x reference position: %f y reference position: %f \n", x_ref, y_ref);
-    
-      
-    
-    socketclient_RI_getReference(&currPosition,&refPosition);
-    
-//     printf("Red Reference x position: %f y position: %f \n", x_pos[0], y_pos[0]);
-//     printf("Blue x position: %f y position: %f \n", x_pos[1], y_pos[1]);
-//     printf("Yellow x position: %f y position: %f \n", x_pos[2], y_pos[2]);
-    
-    x_ref[0] = refPosition.x0Act;
-    y_ref[0] = refPosition.y0Act;
-    x_ref[1] = refPosition.x1Act;
-    y_ref[1] = refPosition.y1Act;
-    x_ref[2] = refPosition.x2Act;
-    y_ref[2] = refPosition.y2Act;
-    
-    
-//     x_ref[0] = 0.4;
-//     y_ref[0] = 0.4;
-//     x_ref[1] = 0.4;
-//     y_ref[1] = -0.4;
-//     x_ref[2] = -0.4;
-//     y_ref[2] = -0.4;
-    
-//     strcpy(droneBlue, "radio://0/82/2M");
-//     strcpy(droneRed, "radio://0/83/2M");
-//     strcpy(droneYellow, "radio://0/84/2M");
+    /* getting the reference trajectory*/
+    socketclient_RI_getReference(&processedPositionRed,&processedPositionBlue,&processedPositionGreen,&refPositionRed,&refPositionBlue,&refPositionGreen);
     
 
-    
-//     printf("droneRed %s\n", droneRed);
-//     printf("droneBlue %s\n", droneBlue);
-//     printf("droneYellow %s\n", droneYellow);
-//     
-//     printf("droneSensor0 = %c\n", droneSensor[0].uri[11]);
-//     printf("droneSensor1 = %c\n", droneSensor[1].uri[11]);
-//     printf("droneSensor2 = %c\n", droneSensor[2].uri[11]);
-    
-    
-  
-    
-    
-    
-    
-    
-//     printf("x reference position: %f y reference position: %f \n", refPosition.xAct, refPosition.yAct);
-//     refPosition.xAct = -0.5;
-//     refPosition.yAct = 0.0;
-    
+       clock_gettime(CLOCK_MONOTONIC_RAW, &spec);
+ 
+       s = spec.tv_sec; 
+       ms = spec.tv_nsec;
+       
+       Data_pointer = fopen("Data2.m", "a");
+       fprintf(Data_pointer, "Timediff(%d)= %f;\n",indexTime,(s*1000 +ms/1e6 - s_0*1000 -ms_0/1e6));
+       fclose(Data_pointer);
+       s_0 =s;
+       ms_0=ms;
+       indexTime++;
+       
+    /* calling the controllers*/
     for(i = 0;i<numberOfConnectedDrone;i++)
     {
     
         
         
-        if (strcmp(droneSensor[i].uri, droneYellow)==0) //Yellow Marker
+        if (strcmp(droneSensor[i].uri, droneGreen)==0) //Green Marker
         {
             currSensor3.yawAct = droneSensor[i].yaw;
             currSensor3.pitchAct = droneSensor[i].pitch;
@@ -380,27 +347,19 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
             currSensor3.acczAct = 0.0;
             currSensor3.baropAct = droneSensor[i].zRange;
             
-            currDronePosition3.xAct = x_pos[2];
-            currDronePosition3.yAct = y_pos[2];
-        
-            refDronePosition3.xAct = x_ref[2];
-            refDronePosition3.yAct = y_ref[2]; 
             
-            socketclient_RI_controlAction3(&currDronePosition3,&currSensor3,&refDronePosition3,&currDroneCmd3);
+            socketclient_RI_controlAction3(&processedPositionGreen,&currSensor3,&refPositionGreen,&currDroneCmd3);
         
             droneSensor[i].yawCmd = 1000*currDroneCmd3.yawrateRef;
             droneSensor[i].pitchCmd = 1000*currDroneCmd3.pitchRef;
             droneSensor[i].rollCmd = 1000*currDroneCmd3.rollRef;
-            droneSensor[i].zRangeCmd = 1000*currDroneCmd3.thrustRef;
-            
-            printf("Current drone: %s \n",droneSensor[i].uri);
-            printf("Current position: x =  %f y = %f \n", currDronePosition3.xAct, currDronePosition3.yAct);
-            printf("Reference position: %f y position: %f \n", refDronePosition3.xAct, refDronePosition3.yAct);
+            droneSensor[i].zRangeCmd = 1000*currDroneCmd3.zRef;
+        
             
                     // Write to txt file ......................................................................
             Data_pointer = fopen("Data2.m", "a");    
-            fprintf(Data_pointer, "currPosition3.xAct(%d)= %f;\n",ii_3,currDronePosition3.xAct);
-            fprintf(Data_pointer, "currPosition3.yAct(%d)= %f;\n",ii_3,currDronePosition3.yAct);
+            fprintf(Data_pointer, "currPosition3.xAct(%d)= %f;\n",ii_3,processedPositionGreen.xAct);
+            fprintf(Data_pointer, "currPosition3.yAct(%d)= %f;\n",ii_3,processedPositionGreen.yAct);
             fprintf(Data_pointer, "currSensor3.yawAct(%d)= %f;\n",ii_3,currSensor3.yawAct);
             fprintf(Data_pointer, "currSensor3.pitchAct(%d)= %f;\n",ii_3,currSensor3.pitchAct);
             fprintf(Data_pointer, "currSensor3.rollAct(%d)= %f;\n",ii_3,currSensor3.rollAct);
@@ -408,17 +367,17 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
             fprintf(Data_pointer, "currSensor3.accyAct(%d)= %f;\n",ii_3,currSensor3.accyAct);
             fprintf(Data_pointer, "currSensor3.acczAct(%d)= %f;\n",ii_3,currSensor3.acczAct);
             fprintf(Data_pointer, "currSensor3.baropAct(%d)= %f;\n",ii_3,currSensor3.baropAct);
-            fprintf(Data_pointer, "refPosition3.xAct(%d)= %f;\n",ii_3,refDronePosition3.xAct);
-            fprintf(Data_pointer, "refPosition3.yAct(%d)= %f;\n",ii_3,refDronePosition3.yAct);
+            fprintf(Data_pointer, "refPosition3.xAct(%d)= %f;\n",ii_3,refPositionGreen.xAct);
+            fprintf(Data_pointer, "refPosition3.yAct(%d)= %f;\n",ii_3,refPositionGreen.yAct);
             fprintf(Data_pointer, "currDroneCmd3.yawrateRef(%d)= %f;\n",ii_3,currDroneCmd3.yawrateRef);
             fprintf(Data_pointer, "currDroneCmd3.pitchRef(%d)= %f;\n",ii_3,currDroneCmd3.pitchRef);
             fprintf(Data_pointer, "currDroneCmd3.rollRef(%d)= %f;\n",ii_3,currDroneCmd3.rollRef);
-            fprintf(Data_pointer, "currDroneCmd3.thrustRef(%d)= %f;\n",ii_3,currDroneCmd3.thrustRef);
+            fprintf(Data_pointer, "currDroneCmd3.thrustRef(%d)= %f;\n",ii_3,currDroneCmd3.zRef);
+            
             ii_3 = ii_3 + 1;
+            
      
             fclose(Data_pointer); 
-//.........................................................................................  
-    
             
         }
         else if (strcmp(droneSensor[i].uri,droneBlue)==0) //Blue Marker
@@ -430,29 +389,18 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
             currSensor2.accyAct = 0.0;
             currSensor2.acczAct = 0.0;
             currSensor2.baropAct = droneSensor[i].zRange;
-        
-            currDronePosition2.xAct = x_pos[1];
-            currDronePosition2.yAct = y_pos[1];
-        
-            refDronePosition2.xAct = x_ref[1];
-            refDronePosition2.yAct = y_ref[1]; 
             
-            socketclient_RI_controlAction2(&currDronePosition2,&currSensor2,&refDronePosition2,&currDroneCmd2);
+            socketclient_RI_controlAction2(&processedPositionBlue,&currSensor2,&refPositionBlue,&currDroneCmd2);
         
             droneSensor[i].yawCmd = 1000*currDroneCmd2.yawrateRef;
             droneSensor[i].pitchCmd = 1000*currDroneCmd2.pitchRef;
             droneSensor[i].rollCmd = 1000*currDroneCmd2.rollRef;
-            droneSensor[i].zRangeCmd = 1000*currDroneCmd2.thrustRef;
-            
-            printf("Current drone: %s \n",droneSensor[i].uri);
-            printf("Current position: x =  %f y = %f \n", currDronePosition2.xAct, currDronePosition2.yAct);
-            printf("Reference position: %f y position: %f \n", refDronePosition2.xAct, refDronePosition2.yAct);
+            droneSensor[i].zRangeCmd = 1000*currDroneCmd2.zRef;
             
             
-            // Write to txt file ......................................................................
             Data_pointer = fopen("Data2.m", "a");    
-            fprintf(Data_pointer, "currPosition2.xAct(%d)= %f;\n",ii_2,currDronePosition2.xAct);
-            fprintf(Data_pointer, "currPosition2.yAct(%d)= %f;\n",ii_2,currDronePosition2.yAct);
+            fprintf(Data_pointer, "currPosition2.xAct(%d)= %f;\n",ii_2,processedPositionBlue.xAct);
+            fprintf(Data_pointer, "currPosition2.yAct(%d)= %f;\n",ii_2,processedPositionBlue.yAct);
             fprintf(Data_pointer, "currSensor2.yawAct(%d)= %f;\n",ii_2,currSensor2.yawAct);
             fprintf(Data_pointer, "currSensor2.pitchAct(%d)= %f;\n",ii_2,currSensor2.pitchAct);
             fprintf(Data_pointer, "currSensor2.rollAct(%d)= %f;\n",ii_2,currSensor2.rollAct);
@@ -460,13 +408,15 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
             fprintf(Data_pointer, "currSensor2.accyAct(%d)= %f;\n",ii_2,currSensor2.accyAct);
             fprintf(Data_pointer, "currSensor2.acczAct(%d)= %f;\n",ii_2,currSensor2.acczAct);
             fprintf(Data_pointer, "currSensor2.baropAct(%d)= %f;\n",ii_2,currSensor2.baropAct);
-            fprintf(Data_pointer, "refPosition2.xAct(%d)= %f;\n",ii_2,refDronePosition2.xAct);
-            fprintf(Data_pointer, "refPosition2.yAct(%d)= %f;\n",ii_2,refDronePosition2.yAct);
+            fprintf(Data_pointer, "refPosition2.xAct(%d)= %f;\n",ii_2,refPositionBlue.xAct);
+            fprintf(Data_pointer, "refPosition2.yAct(%d)= %f;\n",ii_2,refPositionBlue.yAct);
             fprintf(Data_pointer, "currDroneCmd2.yawrateRef(%d)= %f;\n",ii_2,currDroneCmd2.yawrateRef);
             fprintf(Data_pointer, "currDroneCmd2.pitchRef(%d)= %f;\n",ii_2,currDroneCmd2.pitchRef);
             fprintf(Data_pointer, "currDroneCmd2.rollRef(%d)= %f;\n",ii_2,currDroneCmd2.rollRef);
-            fprintf(Data_pointer, "currDroneCmd2.thrustRef(%d)= %f;\n",ii_2,currDroneCmd2.thrustRef);
+            fprintf(Data_pointer, "currDroneCmd2.thrustRef(%d)= %f;\n",ii_2,currDroneCmd2.zRef);
+           
             ii_2 = ii_2 + 1;
+            
      
             fclose(Data_pointer); 
         }
@@ -479,29 +429,19 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
             currSensor.accyAct = 0.0;
             currSensor.acczAct = 0.0;
             currSensor.baropAct = droneSensor[i].zRange;
-        
-            currDronePosition.xAct = x_pos[0];
-            currDronePosition.yAct = y_pos[0];
-        
-            refDronePosition.xAct = x_ref[0];
-            refDronePosition.yAct = y_ref[0]; 
             
-            socketclient_RI_controlAction(&currDronePosition,&currSensor,&refDronePosition,&currDroneCmd);
+            socketclient_RI_controlAction(&processedPositionRed,&currSensor,&refPositionRed,&currDroneCmd);
         
             droneSensor[i].yawCmd = 1000*currDroneCmd.yawrateRef;
             droneSensor[i].pitchCmd = 1000*currDroneCmd.pitchRef;
             droneSensor[i].rollCmd = 1000*currDroneCmd.rollRef;
-            droneSensor[i].zRangeCmd = 1000*currDroneCmd.thrustRef;
-            
-            printf("Current drone: %s \n",droneSensor[i].uri);
-            printf("Current position: x =  %f y = %f \n", currDronePosition.xAct, currDronePosition.yAct);
-            printf("Reference position: %f y position: %f \n", refDronePosition.xAct, refDronePosition.yAct);
+            droneSensor[i].zRangeCmd = 1000*currDroneCmd.zRef;
             
             
             // Write to txt file ......................................................................
             Data_pointer = fopen("Data2.m", "a");    
-            fprintf(Data_pointer, "currPosition.xAct(%d)= %f;\n",ii_1,currDronePosition.xAct);
-            fprintf(Data_pointer, "currPosition.yAct(%d)= %f;\n",ii_1,currDronePosition.yAct);
+            fprintf(Data_pointer, "currPosition.xAct(%d)= %f;\n",ii_1,processedPositionRed.xAct);
+            fprintf(Data_pointer, "currPosition.yAct(%d)= %f;\n",ii_1,processedPositionRed.yAct);
             fprintf(Data_pointer, "currSensor.yawAct(%d)= %f;\n",ii_1,currSensor.yawAct);
             fprintf(Data_pointer, "currSensor.pitchAct(%d)= %f;\n",ii_1,currSensor.pitchAct);
             fprintf(Data_pointer, "currSensor.rollAct(%d)= %f;\n",ii_1,currSensor.rollAct);
@@ -509,170 +449,47 @@ void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *IN_drone
             fprintf(Data_pointer, "currSensor.accyAct(%d)= %f;\n",ii_1,currSensor.accyAct);
             fprintf(Data_pointer, "currSensor.acczAct(%d)= %f;\n",ii_1,currSensor.acczAct);
             fprintf(Data_pointer, "currSensor.baropAct(%d)= %f;\n",ii_1,currSensor.baropAct);
-            fprintf(Data_pointer, "refPosition.xAct(%d)= %f;\n",ii_1,refDronePosition.xAct);
-            fprintf(Data_pointer, "refPosition.yAct(%d)= %f;\n",ii_1,refDronePosition.yAct);
+            fprintf(Data_pointer, "refPosition.xAct(%d)= %f;\n",ii_1,refPositionRed.xAct);
+            fprintf(Data_pointer, "refPosition.yAct(%d)= %f;\n",ii_1,refPositionRed.yAct);
             fprintf(Data_pointer, "currDroneCmd.yawrateRef(%d)= %f;\n",ii_1,currDroneCmd.yawrateRef);
             fprintf(Data_pointer, "currDroneCmd.pitchRef(%d)= %f;\n",ii_1,currDroneCmd.pitchRef);
             fprintf(Data_pointer, "currDroneCmd.rollRef(%d)= %f;\n",ii_1,currDroneCmd.rollRef);
-            fprintf(Data_pointer, "currDroneCmd.thrustRef(%d)= %f;\n",ii_1,currDroneCmd.thrustRef);
+            fprintf(Data_pointer, "currDroneCmd.thrustRef(%d)= %f;\n",ii_1,currDroneCmd.zRef);
+            
             ii_1 = ii_1 + 1;
      
             fclose(Data_pointer); 
         }
         
-        
-        
-
-//         socketclient_RI_controlAction(&currDronePosition,&currSensor,&refDronePosition,&currDroneCmd);
-//         
-//         droneSensor[i].yawCmd = 1000*currDroneCmd.yawrateRef;
-//         droneSensor[i].pitchCmd = 1000*currDroneCmd.pitchRef;
-//         droneSensor[i].rollCmd = 1000*currDroneCmd.rollRef;
-//         droneSensor[i].zRangeCmd = 1000*currDroneCmd.thrustRef;
-//         
-//         printf("yawrate Ref: %d\t", droneSensor[i].yawCmd);
-//         printf("pitch Ref: %d\t", droneSensor[i].pitchCmd);
-//         printf("roll Ref: %d\t", droneSensor[i].rollCmd);
-//         printf("z Ref: %d\t", droneSensor[i].zRangeCmd);
-        
-        
     }
     
-//     for(i = 0;i<numberOfConnectedDrone;i++)
-//     {
-//     
-//         currSensor.yawAct = droneSensor[i].yaw;
-//         currSensor.pitchAct = droneSensor[i].pitch;
-//         currSensor.rollAct = droneSensor[i].roll;
-//         currSensor.accxAct = 0.0;
-//         currSensor.accyAct = 0.0;
-//         currSensor.acczAct = 0.0;
-//         currSensor.baropAct = droneSensor[i].zRange;
-//         
-//         if (strcmp(droneSensor[i].uri, droneYellow)==0) //Yellow Marker
-//         {
-//             printf("droneYellow after strcmp %s\n", droneYellow);
-//             currDronePosition.xAct = x_pos[2];
-//             currDronePosition.yAct = y_pos[2];
-//         
-//             refDronePosition.xAct = x_ref[2];
-//             refDronePosition.yAct = y_ref[2]; 
-//         }
-//         else if (strcmp(droneSensor[i].uri,droneBlue)==0) //Blue Marker
-//             {
-//         
-//             currDronePosition.xAct = x_pos[1];
-//             currDronePosition.yAct = y_pos[1];
-//         
-//             refDronePosition.xAct = x_ref[1];
-//             refDronePosition.yAct = y_ref[1]; 
-//         }
-//         else // Red Marker
-//             {
-//         
-//             currDronePosition.xAct = x_pos[0];
-//             currDronePosition.yAct = y_pos[0];
-//         
-//             refDronePosition.xAct = x_ref[0];
-//             refDronePosition.yAct = y_ref[0]; 
-//         }
-//         
-//         printf("Current drone: %s \n",droneSensor[i].uri);
-//         printf("Current position: x =  %f y = %f \n", currDronePosition.xAct, currDronePosition.yAct);
-//         printf("Reference position: %f y position: %f \n", refDronePosition.xAct, refDronePosition.yAct);
-//         
-// 
-//         socketclient_RI_controlAction(&currDronePosition,&currSensor,&refDronePosition,&currDroneCmd);
-//         
-//         droneSensor[i].yawCmd = 1000*currDroneCmd.yawrateRef;
-//         droneSensor[i].pitchCmd = 1000*currDroneCmd.pitchRef;
-//         droneSensor[i].rollCmd = 1000*currDroneCmd.rollRef;
-//         droneSensor[i].zRangeCmd = 1000*currDroneCmd.thrustRef;
-//         
-//         printf("yawrate Ref: %d\t", droneSensor[i].yawCmd);
-//         printf("pitch Ref: %d\t", droneSensor[i].pitchCmd);
-//         printf("roll Ref: %d\t", droneSensor[i].rollCmd);
-//         printf("z Ref: %d\t", droneSensor[i].zRangeCmd);
-//         
-//         
-//     }
-    
-    
-    
-    
-//     currPosition.x0Act = x_pos[1];
-//     currPosition.y0Act = y_pos[1];
-// 
-//     
-//     
-//     printf("yawrate Ref: %f", currDroneRef.yawrateRef);
-//     printf("pitch Ref: %f", currDroneRef.pitchRef);
-//     printf("roll Ref: %f", currDroneRef.rollRef);
-//     printf("z Ref: %f", currDroneRef.thrustRef);
-//     
-//     
-// 
-//     
-//   
-//   
-//   
-//    printf("Sending to Python server: \n");
-//    int thrust, roll, pitch, yawrate;
-//    char *thrustc;
-//    char *rollc;
-//    char *yawratec;
-//    char *pitchc;
-//    
-//    thrust = htonl(1000*currDroneRef.thrustRef);
-//    yawrate = htonl(1000*currDroneRef.yawrateRef);
-//    roll = htonl(1000*(currDroneRef.rollRef));
-//    pitch = htonl(1000*(currDroneRef.pitchRef));
    
+//--------------SENDING COMMANDS TO MULTIPLE DRONES------------------
    
-//--------------SEND MULTIPLE DRONE add------------------
-   
-//    droneSensor[0].yawCmd = 10;
-//    droneSensor[0].pitchCmd = 11;
-//    droneSensor[0].rollCmd = 12;
-//    droneSensor[0].zRangeCmd = 10000;
-//    droneSensor[1].zRangeCmd = 20000;
-//    
-//    printf("droneSensor[0].zRangeCmd %d\n", droneSensor[0].zRangeCmd);
    
    char *main_buff = malloc(sizeof(char)*BUFFER_SIZE);
    bzero(main_buff,BUFFER_SIZE);
 
    
-    strcat(main_buff, "{");
+    strcat(main_buff, "[");
     for (int i=0; i<numberOfConnectedDrone; i++){
         int size_buff = strlen(droneSensor[i].uri) +  integerSize(droneSensor[i].zRangeCmd) +integerSize(droneSensor[i].yawCmd) + integerSize(droneSensor[i].pitchCmd) +integerSize(droneSensor[i].rollCmd);
-//         printf("size of uri: %d",strlen(droneSensor[i].uri));
-//         printf("size of temp dynamic buffer: %d",size_buff);
         int tmp_key_size = strlen("{'uri':'','thrust':,'yaw':,'pitch':,'roll':}");
-//         printf("size of temp static buffer: %d",tmp_key_size);
         int tmp_total_size = size_buff + tmp_key_size +1;
-//         printf("size of temp total buffer: %d",tmp_total_size);
         char tmp_buf[tmp_total_size];
         bzero(tmp_buf,tmp_total_size);
 
         snprintf(tmp_buf, tmp_total_size, "{'uri':'%s','thrust':%d,'yaw':%d,'pitch':%d,'roll':%d}", droneSensor[i].uri, droneSensor[i].zRangeCmd, droneSensor[i].yawCmd, droneSensor[i].pitchCmd, droneSensor[i].rollCmd);
-//         printf("%s\n", tmp_buf);
         strcat(main_buff, tmp_buf);
         if(i != numberOfConnectedDrone - 1){
             strcat(main_buff, ",");}
         printf("%s\n", main_buff);
     }
-    strcat(main_buff, "}");
+    strcat(main_buff, "]");
     strcat(main_buff, "ESA");
-
-   
-   //------------END SEND MULTIPLE DRONE add--------------------
-   
-   
-  // bzero(droneref,BUFFER_SIZE);   
-  // snprintf(droneref, sizeof( droneref ), "%d %d %d %d ", yawrate, pitch, roll, thrust);
 
     sendRequest(sockfd, main_buff);  
     free(main_buff);    
+    //------------END SENDING TO MULTIPLE DRONES--------------------
 }
 

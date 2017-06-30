@@ -60,10 +60,6 @@ cd "$SKELS" && rm -f socketclient.zip && zip socketclient socketclient/* && cd $
 
 cd "$SKELS" && rm -f pixyprocess.zip && zip pixyprocess pixyprocess/* && cd $OLDPWD
 
-cd "$SKELS" && rm -f cclient.zip && zip cclient cclient/* && cd $OLDPWD
-
-cd "$SKELS" && rm -f timer.zip && zip timer timer/* && cd $OLDPWD
-
 cd "$SKELS" && rm -f pixycam.zip && zip pixycam pixycam/* && cd $OLDPWD
 
 cd "$SKELS" && rm -f controller.zip && zip controller controller/* && cd $OLDPWD
@@ -97,9 +93,10 @@ then
 else
     OUTPUTDIR=binary
 fi
-#	--debug \
+
 cd "$CWD" && assert-builder-ocarina.py \
 	--fast \
+	--debug \
 	--aadlv2 \
 	--keep-case \
 	--interfaceView "$INTERFACEVIEW" \
@@ -107,8 +104,6 @@ cd "$CWD" && assert-builder-ocarina.py \
 	-o "$OUTPUTDIR" \
 	--subC socketclient:"$SKELS"/socketclient.zip \
 	--subC pixyprocess:"$SKELS"/pixyprocess.zip \
-	--subC cclient:"$SKELS"/cclient.zip \
-	--subC timer:"$SKELS"/timer.zip \
 	--subC pixycam:"$SKELS"/pixycam.zip \
 	--subSIMULINK controller:"$SKELS"/controller.zip \
 	--subC trajectorygen:"$SKELS"/trajectorygen.zip \

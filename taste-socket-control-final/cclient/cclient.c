@@ -37,7 +37,7 @@ void cclient_PI_takeoff(asn1SccMyDroneData *OUT_droneData)
     
     
     
-    droneData.thrustRef=15000;
+    droneData.zRef=0.3;
     droneData.yawrateRef=0.25;
     droneData.rollRef=0.25;
     droneData.pitchRef=0;

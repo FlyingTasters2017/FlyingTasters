@@ -13,17 +13,21 @@ extern "C" {
 
 void socketclient_startup();
 
-void socketclient_PI_readStabilizerSendThrust(const asn1SccMyDroneData *,
-                                              const asn1SccMyPositionData *,
-                                              asn1SccMySensorData *);
+void socketclient_PI_readStabilizerSendThrust(const asn1SccMyPositionControlData *,
+                                              const asn1SccMyPositionControlData *,
+                                              const asn1SccMyPositionControlData *);
 
 extern void socketclient_RI_controlAction(const asn1SccMyPositionControlData *,
                                           const asn1SccMySensorData *,
                                           const asn1SccMyPositionControlData *,
                                           asn1SccMyDroneData *);
 
-extern void socketclient_RI_getReference(const asn1SccMyPositionData *,
-                                         asn1SccMyPositionData *);
+extern void socketclient_RI_getReference(const asn1SccMyPositionControlData *,
+                                         const asn1SccMyPositionControlData *,
+                                         const asn1SccMyPositionControlData *,
+                                         asn1SccMyPositionControlData *,
+                                         asn1SccMyPositionControlData *,
+                                         asn1SccMyPositionControlData *);
 
 extern void socketclient_RI_controlAction2(const asn1SccMyPositionControlData *,
                                            const asn1SccMySensorData *,
@@ -34,6 +38,9 @@ extern void socketclient_RI_controlAction3(const asn1SccMyPositionControlData *,
                                            const asn1SccMySensorData *,
                                            const asn1SccMyPositionControlData *,
                                            asn1SccMyDroneData *);
+
+extern void socketclient_RI_processData(const asn1SccMyPositionControlData *,
+                                        asn1SccMyPositionControlData *);
 
 #ifdef __cplusplus
 }

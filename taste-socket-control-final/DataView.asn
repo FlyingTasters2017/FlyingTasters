@@ -28,7 +28,8 @@ MyPositionData ::= SEQUENCE {
 
 MyPositionControlData ::= SEQUENCE {
     xAct MyReal,
-    yAct MyReal
+    yAct MyReal,
+    zAct MyReal
 }
 
 MySensorData ::= SEQUENCE {
@@ -44,7 +45,7 @@ MyDroneData ::= SEQUENCE {
     yawrateRef MyReal,
     pitchRef MyReal,
     rollRef MyReal,
-    thrustRef MyReal
+    zRef MyReal
 }
 
 MyChoice    ::= CHOICE {

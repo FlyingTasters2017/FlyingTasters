@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'controlAction3'.
  *
- * Model version                  : 1.5
+ * Model version                  : 1.1
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Mon Jun 26 13:00:22 2017
+ * C/C++ source code generated on : Tue Jun 27 22:14:07 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -24,7 +24,7 @@ const MyDroneData controlAction3_rtZMyDroneData = {
   0.0,                                 /* yawrateRef */
   0.0,                                 /* pitchRef */
   0.0,                                 /* rollRef */
-  0.0                                  /* thrustRef */
+  0.0                                  /* zRef */
 } ;                                    /* MyDroneData ground */
 
 /* Block signals (auto storage) */
@@ -70,26 +70,8 @@ void controlAction3_step(void)
   real_T rtb_sinpsi;
   real_T rtb_cospsi;
   real_T rtb_YError;
+  real_T rtb_Gain1;
   real_T rtb_TSamp;
-  real_T u0;
-
-  /* Gain: '<S2>/Gain' incorporates:
-   *  Constant: '<S2>/Constant2'
-   *  Inport: '<Root>/sensorData3'
-   *  Sum: '<S2>/Sum'
-   */
-  u0 = (0.0 - controlAction3_U.sensorData3.yawAct) * -0.5;
-
-  /* Saturate: '<S2>/Saturation' */
-  if (u0 > 30.0) {
-    controlAction3_Y.droneData3.yawrateRef = 30.0;
-  } else if (u0 < -30.0) {
-    controlAction3_Y.droneData3.yawrateRef = -30.0;
-  } else {
-    controlAction3_Y.droneData3.yawrateRef = u0;
-  }
-
-  /* End of Saturate: '<S2>/Saturation' */
 
   /* Sum: '<S1>/Sum' incorporates:
    *  Inport: '<Root>/posData3'
@@ -122,39 +104,15 @@ void controlAction3_step(void)
   controlAction3_DeadZone(rtb_XError * rtb_cospsi + rtb_YError * rtb_sinpsi,
     &controlAction3_B.sf_DeadZone);
 
+  /* Gain: '<S1>/Gain1' */
+  rtb_Gain1 = -18.0 * controlAction3_B.sf_DeadZone.error_dz;
+
   /* SampleTimeMath: '<S5>/TSamp'
    *
    * About '<S5>/TSamp':
    *  y = u * K where K = 1 / ( w * Ts )
    */
-  rtb_TSamp = controlAction3_B.sf_DeadZone.error_dz * -500.0;
-
-  /* Sum: '<S1>/Sum3' incorporates:
-   *  Gain: '<S1>/Gain1'
-   *  Sum: '<S5>/Diff'
-   *  UnitDelay: '<S5>/UD'
-   *
-   * Block description for '<S5>/Diff':
-   *
-   *  Add in CPU
-   *
-   * Block description for '<S5>/UD':
-   *
-   *  Store in Global RAM
-   */
-  u0 = -18.0 * controlAction3_B.sf_DeadZone.error_dz + (rtb_TSamp -
-    controlAction3_DW.UD_DSTATE);
-
-  /* Saturate: '<S1>/Saturation' */
-  if (u0 > 10.0) {
-    controlAction3_Y.droneData3.pitchRef = 10.0;
-  } else if (u0 < -10.0) {
-    controlAction3_Y.droneData3.pitchRef = -10.0;
-  } else {
-    controlAction3_Y.droneData3.pitchRef = u0;
-  }
-
-  /* End of Saturate: '<S1>/Saturation' */
+  rtb_TSamp = controlAction3_B.sf_DeadZone.error_dz * -250.0;
 
   /* MATLAB Function: '<S1>/Dead Zone1' incorporates:
    *  Product: '<S1>/Product1'
@@ -169,7 +127,56 @@ void controlAction3_step(void)
    * About '<S6>/TSamp':
    *  y = u * K where K = 1 / ( w * Ts )
    */
-  rtb_XError = controlAction3_B.sf_DeadZone1.error_dz * -500.0;
+  rtb_XError = controlAction3_B.sf_DeadZone1.error_dz * -250.0;
+
+  /* Gain: '<S2>/Gain' incorporates:
+   *  Constant: '<S2>/Constant2'
+   *  Inport: '<Root>/sensorData3'
+   *  Sum: '<S2>/Sum'
+   */
+  rtb_sinpsi = (0.0 - controlAction3_U.sensorData3.yawAct) * -0.5;
+
+  /* Saturate: '<S2>/Saturation' */
+  if (rtb_sinpsi > 30.0) {
+    /* Outport: '<Root>/droneData3' */
+    controlAction3_Y.droneData3.yawrateRef = 30.0;
+  } else if (rtb_sinpsi < -30.0) {
+    /* Outport: '<Root>/droneData3' */
+    controlAction3_Y.droneData3.yawrateRef = -30.0;
+  } else {
+    /* Outport: '<Root>/droneData3' */
+    controlAction3_Y.droneData3.yawrateRef = rtb_sinpsi;
+  }
+
+  /* End of Saturate: '<S2>/Saturation' */
+
+  /* Sum: '<S1>/Sum3' incorporates:
+   *  Sum: '<S5>/Diff'
+   *  UnitDelay: '<S5>/UD'
+   *
+   * Block description for '<S5>/Diff':
+   *
+   *  Add in CPU
+   *
+   * Block description for '<S5>/UD':
+   *
+   *  Store in Global RAM
+   */
+  rtb_sinpsi = (rtb_TSamp - controlAction3_DW.UD_DSTATE) + rtb_Gain1;
+
+  /* Saturate: '<S1>/Saturation' */
+  if (rtb_sinpsi > 10.0) {
+    /* Outport: '<Root>/droneData3' */
+    controlAction3_Y.droneData3.pitchRef = 10.0;
+  } else if (rtb_sinpsi < -10.0) {
+    /* Outport: '<Root>/droneData3' */
+    controlAction3_Y.droneData3.pitchRef = -10.0;
+  } else {
+    /* Outport: '<Root>/droneData3' */
+    controlAction3_Y.droneData3.pitchRef = rtb_sinpsi;
+  }
+
+  /* End of Saturate: '<S1>/Saturation' */
 
   /* Sum: '<S1>/Sum5' incorporates:
    *  Gain: '<S1>/Gain2'
@@ -184,24 +191,28 @@ void controlAction3_step(void)
    *
    *  Store in Global RAM
    */
-  u0 = -18.0 * controlAction3_B.sf_DeadZone1.error_dz + (rtb_XError -
-    controlAction3_DW.UD_DSTATE_o);
+  rtb_sinpsi = -18.0 * controlAction3_B.sf_DeadZone1.error_dz + (rtb_XError -
+    controlAction3_DW.UD_DSTATE_g);
 
   /* Saturate: '<S1>/Saturation1' */
-  if (u0 > 10.0) {
+  if (rtb_sinpsi > 10.0) {
+    /* Outport: '<Root>/droneData3' */
     controlAction3_Y.droneData3.rollRef = 10.0;
-  } else if (u0 < -10.0) {
+  } else if (rtb_sinpsi < -10.0) {
+    /* Outport: '<Root>/droneData3' */
     controlAction3_Y.droneData3.rollRef = -10.0;
   } else {
-    controlAction3_Y.droneData3.rollRef = u0;
+    /* Outport: '<Root>/droneData3' */
+    controlAction3_Y.droneData3.rollRef = rtb_sinpsi;
   }
 
   /* End of Saturate: '<S1>/Saturation1' */
 
-  /* BusCreator: '<Root>/droneData3_MyDroneData_BusCre' incorporates:
-   *  Constant: '<Root>/Constant2'
+  /* Outport: '<Root>/droneData3' incorporates:
+   *  Inport: '<Root>/refData3'
+   *  Product: '<Root>/Product'
    */
-  controlAction3_Y.droneData3.thrustRef = 0.3;
+  controlAction3_Y.droneData3.zRef = controlAction3_U.refData3.zAct;
 
   /* Update for UnitDelay: '<S5>/UD'
    *
@@ -217,7 +228,7 @@ void controlAction3_step(void)
    *
    *  Store in Global RAM
    */
-  controlAction3_DW.UD_DSTATE_o = rtb_XError;
+  controlAction3_DW.UD_DSTATE_g = rtb_XError;
 }
 
 /* Model initialize function */

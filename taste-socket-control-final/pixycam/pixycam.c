@@ -16,6 +16,15 @@
 
 #define BLOCK_BUFFER_SIZE    25
 int pixy_init_status;
+int skip = 1;
+
+struct timespec spec;
+
+long            s_0;
+long            ms_0; /// Milliseconds
+long            s;
+long            ms;
+long systemrate;
 
 asn1SccT_UInt32 x[3];
 asn1SccT_UInt32 y[3];
@@ -23,11 +32,19 @@ asn1SccT_UInt32 y[3];
 asn1SccT_UInt32 x_proc[3];
 asn1SccT_UInt32 y_proc[3];
 
+asn1SccMyPositionControlData procpositionDataRed, procpositionDataBlue, procpositionDataGreen;
+asn1SccMyPositionControlData positionDataRed, positionDataBlue, positionDataGreen;
+
 void pixycam_startup()
 {
     /* Write your initialization code here,
        but do not make any call to a required interface. */
     pixy_taste_init();
+    
+    clock_gettime(CLOCK_MONOTONIC_RAW, &spec);
+ 
+    s_0 = spec.tv_sec; 
+    ms_0 = spec.tv_nsec;
     
 }
 
@@ -36,7 +53,7 @@ void printTime() {
     time_t          s;  // Seconds
     struct timespec spec;
 
-    clock_gettime(CLOCK_REALTIME, &spec);
+    clock_gettime(CLOCK_MONOTONIC_RAW, &spec);
 
     s  = spec.tv_sec;
     ms = round(spec.tv_nsec / 1.0e6); // Convert nanoseconds to milliseconds
@@ -87,10 +104,11 @@ void pixycam_PI_pulse()
         int      index;
         int      blocks_copied;
         char     buf[128];
-        asn1SccMyDroneData droneData;
-        asn1SccMySensorData sensorData;
-        asn1SccMyPositionData positionData;
-        asn1SccMyPositionData procpositionData;
+//         asn1SccMyDroneData droneData;
+//         asn1SccMySensorData sensorData;
+//         asn1SccMyPositionData positionData;
+
+//         asn1SccMyPositionData procpositionData;
 
         // Catch CTRL+C (SIGINT) signals //
         //signal(SIGINT, handle_SIGINT);
@@ -107,11 +125,23 @@ void pixycam_PI_pulse()
         }
         
         printf("Detecting blocks...\n");
-        pixycam_RI_takeoff(&droneData);
+//         pixycam_RI_takeoff(&droneData);
+        
+        
         
         while(run_flag)
 
         {
+            clock_gettime(CLOCK_MONOTONIC_RAW, &spec);
+            s  = spec.tv_sec;
+            ms = spec.tv_nsec;
+        
+            systemrate = (s*1000 +ms/1e6 - s_0*1000 -ms_0/1e6);
+//             printf("system rate time : %d \n", systemrate);
+//             if(systemrate>=50.0){
+            printf("system rate time : %d \n", systemrate);
+            ms_0 =ms;
+            s_0 = s;
             printf("\n");
             printf("\n");
             printf("Start a new cycle\n");
@@ -119,6 +149,7 @@ void pixycam_PI_pulse()
             printf("\n");
             printTime();
             // Wait for new blocks to be available //
+            
             while(!pixy_blocks_are_new() /*&& run_flag*/); 
             // Get blocks from Pixy //
             blocks_copied = pixy_get_blocks(BLOCK_BUFFER_SIZE, &blocks[0]);
@@ -131,8 +162,10 @@ void pixycam_PI_pulse()
             // Display received blocks //
             printf("Number of detections: %d\n", blocks_copied);
             int trueMarkerRed =0, maxAreaRed =0, areaRed =0;
-            int trueMarkerYellow = 0, maxAreaYellow =0, areaYellow =0;
+            int trueMarkerGreen = 0, maxAreaGreen =0, areaGreen =0;
             int trueMarkerBlue = 0, maxAreaBlue =0, areaBlue =0;
+            if(skip%3==0)
+            {
             for(index = 0; index != blocks_copied; ++index) 
             {    
                 sprintf(buf, "CC block! (%d decimal) x: %d y: %d width: %d height: %d angle %d", blocks[index].signature, blocks[index].x, blocks[index].y, blocks[index].width, blocks[index].height, blocks[index].angle);
@@ -161,43 +194,45 @@ void pixycam_PI_pulse()
                         y[1]=blocks[trueMarkerBlue].y;
                     }                    
                 }
-                if(blocks[index].signature==4)
+                if(blocks[index].signature==3)
                 {
-                    areaYellow = blocks[index].height*blocks[index].width;
-                    if(areaYellow>maxAreaYellow)
+                    areaGreen = blocks[index].height*blocks[index].width;
+                    if(areaGreen>maxAreaGreen)
                     {
-                        trueMarkerYellow=index;
-                        maxAreaYellow = areaYellow;
-                        x[2]=blocks[trueMarkerYellow].x;
-                        y[2]=blocks[trueMarkerYellow].y;
+                        trueMarkerGreen=index;
+                        maxAreaGreen = areaGreen;
+                        x[2]=blocks[trueMarkerGreen].x;
+                        y[2]=blocks[trueMarkerGreen].y;
                         
                     }                    
                 }
             }
             
-            //printf("Red object : %d \n",trueMarkerRed);
-//             printf("Blue object : %d \n",trueMarkerBlue);
-//             printf("Yellow object : %d \n",trueMarkerYellow);             
-            positionData.x0Act = x[0];
-            positionData.y0Act = y[0];
-//             printf("Red object x : %f \n", positionData.x0Act);
-//             printf("Red object y : %f \n", positionData.y0Act);
+                         
+            positionDataRed.xAct = x[0];
+            positionDataRed.yAct = y[0];
+
             
-            positionData.x1Act = x[1];
-            positionData.y1Act = y[1];
-//             printf("Red object x : %f \n", positionData.x1Act);
-//             printf("Red object y : %f \n", positionData.y1Act);;
+            positionDataBlue.xAct = x[1];
+            positionDataBlue.yAct = y[1];
             
-            positionData.x2Act = x[2];
-            positionData.y2Act = y[2];
-//             printf("Yellow object : %f \n",positionData.x2Act);
-//             printf("Yellow object : %f \n",positionData.y2Act);
-            pixycam_RI_processData(&positionData, &procpositionData);
+            positionDataGreen.xAct = x[2];
+            positionDataGreen.yAct = y[2];
+
             
             
             printf("starting drone comm:\n");
             printTime();
-            pixycam_RI_readStabilizerSendThrust(&droneData,&procpositionData,&sensorData);
+            pixycam_RI_readStabilizerSendThrust(&positionDataRed,&positionDataBlue,&positionDataGreen);
+            }
+            skip++;
+            
+            
+            
+            
+            
+//             }
+            
         }
         printf("end of pixycam_PI_rawdata()\n");
         printTime();

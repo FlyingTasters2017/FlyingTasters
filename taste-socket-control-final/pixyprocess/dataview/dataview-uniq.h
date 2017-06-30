@@ -47,13 +47,14 @@ flag asn1SccMyPositionData_IsConstraintValid(const asn1SccMyPositionData* val, i
 typedef struct {
     asn1SccMyReal xAct;
     asn1SccMyReal yAct;
+    asn1SccMyReal zAct;
 } asn1SccMyPositionControlData;
 
-#define asn1SccMyPositionControlData_REQUIRED_BYTES_FOR_ENCODING       26 
-#define asn1SccMyPositionControlData_REQUIRED_BITS_FOR_ENCODING        208
-#define asn1SccMyPositionControlData_REQUIRED_BYTES_FOR_ACN_ENCODING   26 
-#define asn1SccMyPositionControlData_REQUIRED_BITS_FOR_ACN_ENCODING    208
-#define asn1SccMyPositionControlData_REQUIRED_BYTES_FOR_XER_ENCODING   173
+#define asn1SccMyPositionControlData_REQUIRED_BYTES_FOR_ENCODING       39 
+#define asn1SccMyPositionControlData_REQUIRED_BITS_FOR_ENCODING        312
+#define asn1SccMyPositionControlData_REQUIRED_BYTES_FOR_ACN_ENCODING   39 
+#define asn1SccMyPositionControlData_REQUIRED_BITS_FOR_ACN_ENCODING    312
+#define asn1SccMyPositionControlData_REQUIRED_BYTES_FOR_XER_ENCODING   236
 
 void asn1SccMyPositionControlData_Initialize(asn1SccMyPositionControlData* pVal);
 flag asn1SccMyPositionControlData_IsConstraintValid(const asn1SccMyPositionControlData* val, int* pErrCode);
@@ -83,14 +84,14 @@ typedef struct {
     asn1SccMyReal yawrateRef;
     asn1SccMyReal pitchRef;
     asn1SccMyReal rollRef;
-    asn1SccMyReal thrustRef;
+    asn1SccMyReal zRef;
 } asn1SccMyDroneData;
 
 #define asn1SccMyDroneData_REQUIRED_BYTES_FOR_ENCODING       52 
 #define asn1SccMyDroneData_REQUIRED_BITS_FOR_ENCODING        416
 #define asn1SccMyDroneData_REQUIRED_BYTES_FOR_ACN_ENCODING   52 
 #define asn1SccMyDroneData_REQUIRED_BITS_FOR_ACN_ENCODING    416
-#define asn1SccMyDroneData_REQUIRED_BYTES_FOR_XER_ENCODING   315
+#define asn1SccMyDroneData_REQUIRED_BYTES_FOR_XER_ENCODING   305
 
 void asn1SccMyDroneData_Initialize(asn1SccMyDroneData* pVal);
 flag asn1SccMyDroneData_IsConstraintValid(const asn1SccMyDroneData* val, int* pErrCode);

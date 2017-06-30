@@ -13,8 +13,12 @@ extern "C" {
 
 void trajectorygen_startup();
 
-void trajectorygen_PI_getReference(const asn1SccMyPositionData *,
-                                   asn1SccMyPositionData *);
+void trajectorygen_PI_getReference(const asn1SccMyPositionControlData *,
+                                   const asn1SccMyPositionControlData *,
+                                   const asn1SccMyPositionControlData *,
+                                   asn1SccMyPositionControlData *,
+                                   asn1SccMyPositionControlData *,
+                                   asn1SccMyPositionControlData *);
 
 #ifdef __cplusplus
 }

@@ -60,15 +60,15 @@ cd "$SKELS" && rm -f socketclient.zip && zip socketclient socketclient/* && cd $
 
 cd "$SKELS" && rm -f pixyprocess.zip && zip pixyprocess pixyprocess/* && cd $OLDPWD
 
-cd "$SKELS" && rm -f cclient.zip && zip cclient cclient/* && cd $OLDPWD
-
-cd "$SKELS" && rm -f timer.zip && zip timer timer/* && cd $OLDPWD
-
 cd "$SKELS" && rm -f pixycam.zip && zip pixycam pixycam/* && cd $OLDPWD
 
 cd "$SKELS" && rm -f controller.zip && zip controller controller/* && cd $OLDPWD
 
 cd "$SKELS" && rm -f trajectorygen.zip && zip trajectorygen trajectorygen/* && cd $OLDPWD
+
+cd "$SKELS" && rm -f controller2.zip && zip controller2 controller2/* && cd $OLDPWD
+
+cd "$SKELS" && rm -f controller3.zip && zip controller3 controller3/* && cd $OLDPWD
 
 [ ! -z "$CLEANUP" ] && rm -rf binary*
 
@@ -104,11 +104,11 @@ cd "$CWD" && assert-builder-ocarina.py \
 	-o "$OUTPUTDIR" \
 	--subC socketclient:"$SKELS"/socketclient.zip \
 	--subC pixyprocess:"$SKELS"/pixyprocess.zip \
-	--subC cclient:"$SKELS"/cclient.zip \
-	--subC timer:"$SKELS"/timer.zip \
 	--subC pixycam:"$SKELS"/pixycam.zip \
 	--subSIMULINK controller:"$SKELS"/controller.zip \
 	--subC trajectorygen:"$SKELS"/trajectorygen.zip \
+	--subSIMULINK controller2:"$SKELS"/controller2.zip \
+	--subSIMULINK controller3:"$SKELS"/controller3.zip \
 	$ORCHESTRATOR_OPTIONS
 
 if [ -f user_init_last.sh ]

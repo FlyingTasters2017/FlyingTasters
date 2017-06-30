@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'controlAction3'.
  *
- * Model version                  : 1.5
+ * Model version                  : 1.1
  * Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016
- * C/C++ source code generated on : Mon Jun 26 13:00:22 2017
+ * C/C++ source code generated on : Tue Jun 27 22:14:07 2017
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -81,7 +81,7 @@ int_T main(int_T argc, const char *argv[])
   controlAction3_initialize();
 
   /* Attach rt_OneStep to a timer or interrupt service routine with
-   * period 0.03 seconds (the model's base sample time) here.  The
+   * period 0.06 seconds (the model's base sample time) here.  The
    * call syntax for rt_OneStep is
    *
    *  rt_OneStep();
