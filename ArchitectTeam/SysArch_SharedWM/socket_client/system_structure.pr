@@ -1,0 +1,34 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM socket_client;
+
+	/* CIF Keep Specific Geode PARAMNAMES control_input */
+	SIGNAL send_control_data (MyInteger);
+
+	/* CIF Keep Specific Geode PARAMNAMES raw_asd */
+	SIGNAL put_raw_asd (MyInteger);
+
+	PROCEDURE talk_with_drone COMMENT '#c_predef';
+		FPAR
+			IN control_data MyInteger,
+			IN/OUT raw_asd MyInteger;
+ 	EXTERNAL;
+
+	CHANNEL c
+		FROM ENV TO socket_client WITH send_control_data;
+		FROM socket_client TO ENV WITH put_raw_asd;
+	ENDCHANNEL;
+
+	BLOCK socket_client;
+
+		SIGNALROUTE r
+			FROM ENV TO socket_client WITH send_control_data;
+			FROM socket_client TO ENV WITH put_raw_asd;
+
+		CONNECT c and r;
+
+		PROCESS socket_client REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;

@@ -1,0 +1,139 @@
+---------------------------------------------------
+-- AADL2.0
+-- TASTE
+-- 
+-- 
+---------------------------------------------------
+
+PACKAGE deploymentview::DV::Node1
+PUBLIC
+
+WITH Taste;
+WITH Deployment;
+WITH TASTE_DV_Properties;
+PROCESS x86_partition
+END x86_partition;
+
+PROCESS IMPLEMENTATION x86_partition.others
+END x86_partition.others;
+
+END deploymentview::DV::Node1;
+
+PACKAGE deploymentview::DV
+PUBLIC
+
+WITH ocarina_processors_x86;
+WITH deploymentview::DV::Node1;
+WITH Taste;
+WITH Deployment;
+WITH interfaceview::IV;
+WITH TASTE_DV_Properties;
+SYSTEM Node1
+END Node1;
+
+SYSTEM IMPLEMENTATION Node1.others
+SUBCOMPONENTS
+  IV_World_Model : SYSTEM interfaceview::IV::World_Model.others {
+    Taste::coordinates => "1062 1175 1672 1416";
+    Taste::FunctionName => "World_Model";
+  };
+  IV_Control_Data_Storage : SYSTEM interfaceview::IV::Control_Data_Storage.others {
+    Taste::coordinates => "2031 1067 2267 1257";
+    Taste::FunctionName => "Control_Data_Storage";
+  };
+  IV_Socket_Client : SYSTEM interfaceview::IV::Socket_Client.others {
+    Taste::coordinates => "2401 1477 2575 1672";
+    Taste::FunctionName => "Socket_Client";
+  };
+  IV_Enable_Pass : SYSTEM interfaceview::IV::Enable_Pass.others {
+    Taste::coordinates => "492 1462 764 1580";
+    Taste::FunctionName => "Enable_Pass";
+  };
+  IV_Drone_Control : SYSTEM interfaceview::IV::Drone_Control.others {
+    Taste::coordinates => "2350 975 2534 1236";
+    Taste::FunctionName => "Drone_Control";
+  };
+  IV_Trajectory_Generator : SYSTEM interfaceview::IV::Trajectory_Generator.others {
+    Taste::coordinates => "2144 728 2467 918";
+    Taste::FunctionName => "Trajectory_Generator";
+  };
+  IV_Mission_Safety : SYSTEM interfaceview::IV::Mission_Safety.others {
+    Taste::coordinates => "1775 554 2031 887";
+    Taste::FunctionName => "Mission_Safety";
+  };
+  IV_MS_Supervisor : SYSTEM interfaceview::IV::MS_Supervisor.others {
+    Taste::coordinates => "754 1641 1159 1821";
+    Taste::FunctionName => "MS_Supervisor";
+  };
+  IV_ASD_Processing : SYSTEM interfaceview::IV::ASD_Processing.others {
+    Taste::coordinates => "2303 1770 2519 1924";
+    Taste::FunctionName => "ASD_Processing";
+  };
+  IV_MSD_Processing : SYSTEM interfaceview::IV::MSD_Processing.others {
+    Taste::coordinates => "354 1780 708 1944";
+    Taste::FunctionName => "MSD_Processing";
+  };
+  IV_Houston : SYSTEM interfaceview::IV::Houston.others {
+    Taste::coordinates => "2016 1318 2329 1600";
+    Taste::FunctionName => "Houston";
+  };
+  IV_AS_Supervisor : SYSTEM interfaceview::IV::AS_Supervisor.others {
+    Taste::coordinates => "1677 1641 1985 1949";
+    Taste::FunctionName => "AS_Supervisor";
+  };
+  IV_MS_Communication : SYSTEM interfaceview::IV::MS_Communication.others {
+    Taste::coordinates => "292 1570 462 1749";
+    Taste::FunctionName => "MS_Communication";
+  };
+  IV_GUI : SYSTEM interfaceview::IV::GUI.others {
+    Taste::coordinates => "487 708 821 949";
+    Taste::FunctionName => "GUI";
+  };
+  IV_System_Supervisor : SYSTEM interfaceview::IV::System_Supervisor.others {
+    Taste::coordinates => "1067 682 1626 1077";
+    Taste::FunctionName => "System_Supervisor";
+  };
+  x86_partition : PROCESS deploymentview::DV::Node1::x86_partition.others {
+    Taste::coordinates => "151 460 2590 1965";
+    Deployment::Port_Number => 0;
+  };
+  x86_linux32 : PROCESSOR ocarina_processors_x86::x86.linux32 {
+    Taste::coordinates => "63 191 2878 2001";
+  };
+PROPERTIES
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_World_Model;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Control_Data_Storage;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Socket_Client;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Enable_Pass;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Drone_Control;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Trajectory_Generator;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Mission_Safety;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_MS_Supervisor;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_ASD_Processing;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_MSD_Processing;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Houston;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_AS_Supervisor;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_MS_Communication;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_GUI;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_System_Supervisor;
+  Actual_Processor_Binding => (reference (x86_linux32)) APPLIES TO x86_partition;
+END Node1.others;
+
+SYSTEM deploymentview
+END deploymentview;
+
+SYSTEM IMPLEMENTATION deploymentview.others
+SUBCOMPONENTS
+  Node1 : SYSTEM Node1.others {
+    Taste::coordinates => "46 97 2939 2057";
+  };
+  interfaceview : SYSTEM interfaceview::IV::interfaceview.others;
+END deploymentview.others;
+
+PROPERTIES
+  Taste::coordinates => "0 0 2970 2100";
+  Taste::version => "1.3.19";
+  Taste::interfaceView => "InterfaceView.aadl";
+  Taste::HWLibraries => ("../../../tool-inst/share/ocarina/AADLv2/ocarina_components.aadl");
+END deploymentview::DV;
+

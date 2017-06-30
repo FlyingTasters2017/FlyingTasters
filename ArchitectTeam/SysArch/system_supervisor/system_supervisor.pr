@@ -1,0 +1,83 @@
+/* CIF PROCESS (250, 150), (150, 75) */
+process system_supervisor;
+    /* CIF TEXT (1490, 71), (347, 188) */
+    -- Text area for declarations and comments
+    
+    dcl user_input MyInteger;
+    dcl msd_storage MyInteger;
+    dcl asd_storage MyInteger;
+    dcl raw_world_data MyInteger;
+    dcl proc_world_data MyInteger;
+    dcl world_safety_events MyInteger;
+    dcl control_error MyInteger;
+    dcl control_input MyInteger;
+    /* CIF ENDTEXT */
+    /* CIF START (215, 10), (70, 35) */
+    START;
+        /* CIF NEXTSTATE (215, 60), (70, 35) */
+        NEXTSTATE Wait;
+    /* CIF state (802, 36), (77, 35) */
+    state running;
+        /* CIF input (519, 91), (183, 35) */
+        input set_user_input(user_input);
+            /* CIF decision (567, 146), (86, 50) */
+            decision user_input;
+                /* CIF ANSWER (530, 216), (70, 23) */
+                (/=1):
+                    /* CIF output (470, 259), (190, 35) */
+                    output talk_with_MSSV(user_input);
+                    /* CIF output (471, 314), (188, 35) */
+                    output talk_with_ASSV(user_input);
+                    /* CIF NEXTSTATE (530, 364), (70, 35) */
+                    NEXTSTATE wait;
+                /* CIF ANSWER (670, 216), (70, 23) */
+                (=1):
+                    /* CIF NEXTSTATE (670, 259), (70, 35) */
+                    NEXTSTATE running;
+            enddecision;
+        /* CIF input (946, 91), (70, 35) */
+        input clock;
+            /* CIF PROCEDURECALL (871, 146), (219, 35) */
+            call get_MSD_storage(msd_storage);
+            /* CIF PROCEDURECALL (874, 201), (213, 35) */
+            call get_ASD_storage(asd_storage);
+            /* CIF PROCEDURECALL (771, 256), (419, 35) */
+            call process_world_data(msd_storage+asd_storage,proc_world_data);
+            /* CIF PROCEDURECALL (783, 311), (395, 35) */
+            call check_mission_safety(proc_world_data,world_safety_events);
+            /* CIF PROCEDURECALL (750, 366), (461, 35) */
+            call choose_trajectory(proc_world_data,world_safety_events,control_error);
+            /* CIF PROCEDURECALL (810, 421), (342, 35) */
+            call calculate_control_input(control_error,control_input);
+            /* CIF PROCEDURECALL (836, 471), (290, 35) */
+            call control_agents(control_input);
+            /* CIF output (849, 521), (263, 35) */
+            output update_GUI(msd_storage+asd_storage);
+            /* CIF NEXTSTATE (946, 576), (70, 38) */
+            NEXTSTATE running;
+    endstate;
+    /* CIF state (215, 60), (70, 35) */
+    state Wait;
+        /* CIF input (109, 115), (70, 35) */
+        input clock;
+            /* CIF NEXTSTATE (109, 170), (70, 35) */
+            NEXTSTATE wait;
+        /* CIF input (223, 116), (183, 35) */
+        input set_user_input(user_input);
+            /* CIF decision (271, 171), (86, 50) */
+            decision user_input;
+                /* CIF ANSWER (184, 246), (70, 23) */
+                (/=1):
+                    /* CIF NEXTSTATE (184, 289), (70, 35) */
+                    NEXTSTATE wait;
+                /* CIF ANSWER (327, 241), (70, 23) */
+                (=1):
+                    /* CIF output (264, 284), (196, 35) */
+                    output talk_with_MSSV(user_input);
+                    /* CIF output (268, 339), (188, 38) */
+                    output talk_with_ASSV(user_input);
+                    /* CIF NEXTSTATE (327, 395), (70, 35) */
+                    NEXTSTATE running;
+            enddecision;
+    endstate;
+endprocess system_supervisor;

@@ -1,0 +1,28 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM enable_pass;
+
+	/* CIF Keep Specific Geode PARAMNAMES user_input */
+	SIGNAL enable_pixycam (MyInteger);
+
+	PROCEDURE enable_pixycam_pass COMMENT '#c_predef';
+		FPAR
+			IN user_input MyInteger;
+ 	EXTERNAL;
+
+	CHANNEL c
+		FROM ENV TO enable_pass WITH enable_pixycam;
+	ENDCHANNEL;
+
+	BLOCK enable_pass;
+
+		SIGNALROUTE r
+			FROM ENV TO enable_pass WITH enable_pixycam;
+
+		CONNECT c and r;
+
+		PROCESS enable_pass REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;

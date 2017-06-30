@@ -1,0 +1,62 @@
+/* CIF Keep Specific Geode ASNFilename 'dataview-uniq.asn' */
+USE Datamodel;
+SYSTEM system_supervisor;
+
+	SIGNAL update_clock;
+
+	/* CIF Keep Specific Geode PARAMNAMES user_input */
+	SIGNAL set_user_input (MyInteger);
+
+	/* CIF Keep Specific Geode PARAMNAMES world_data */
+	SIGNAL update_GUI (MyInteger);
+
+	/* CIF Keep Specific Geode PARAMNAMES sysSV_to_MSSV_events */
+	SIGNAL talk_with_MSSV (MyInteger);
+
+	/* CIF Keep Specific Geode PARAMNAMES sysSV_to_ASSV_events */
+	SIGNAL talk_with_ASSV (MyInteger);
+
+	PROCEDURE check_mission_safety COMMENT '#c_predef';
+		FPAR
+			IN processed_world_data MyInteger,
+			IN/OUT world_safety_events MyInteger;
+ 	EXTERNAL;
+
+	PROCEDURE choose_trajectory COMMENT '#c_predef';
+		FPAR
+			IN processed_world_data MyInteger,
+			IN world_safety_events MyInteger,
+			IN/OUT control_error MyInteger;
+ 	EXTERNAL;
+
+	PROCEDURE calculate_control_input COMMENT '#c_predef';
+		FPAR
+			IN control_error MyInteger;
+ 	EXTERNAL;
+
+	PROCEDURE update_world_data COMMENT '#c_predef';
+		FPAR
+			IN/OUT processed_world_data MyInteger;
+ 	EXTERNAL;
+
+	/* CIF Keep Specific Geode PARAMNAMES sysSV_to_Houston_events */
+	SIGNAL talk_with_Houston (MyInteger);
+
+	CHANNEL c
+		FROM ENV TO system_supervisor WITH update_clock,set_user_input;
+		FROM system_supervisor TO ENV WITH update_GUI,talk_with_MSSV,talk_with_ASSV,talk_with_Houston;
+	ENDCHANNEL;
+
+	BLOCK system_supervisor;
+
+		SIGNALROUTE r
+			FROM ENV TO system_supervisor WITH update_clock,set_user_input;
+			FROM system_supervisor TO ENV WITH update_GUI,talk_with_MSSV,talk_with_ASSV,talk_with_Houston;
+
+		CONNECT c and r;
+
+		PROCESS system_supervisor REFERENCED;
+
+	ENDBLOCK;
+
+ENDSYSTEM;
