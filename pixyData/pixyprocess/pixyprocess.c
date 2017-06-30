@@ -1,19 +1,19 @@
 /* User code: This file will not be overwritten by TASTE. */
 
-#include "function3.h"
+#include "pixyprocess.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 
-void function3_startup()
+void pixyprocess_startup()
 {
     /* Write your initialization code here,
        but do not make any call to a required interface. */
 }
 
-void function3_PI_processdata(const asn1SccT_UInt32 *IN_x,
-                          const asn1SccT_UInt32 *IN_y)
+void pixyprocess_PI_processdata(const asn1SccT_UInt32 *IN_x,
+                                const asn1SccT_UInt32 *IN_y)
 {
     /* Write your code here! */
     printf("\n function 3 \n");

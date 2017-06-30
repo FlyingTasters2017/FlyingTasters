@@ -2,8 +2,8 @@
 
 /* Declaration of the functions that have to be provided by the user */
 
-#ifndef __USER_CODE_H_function2__
-#define __USER_CODE_H_function2__
+#ifndef __USER_CODE_H_pixycam__
+#define __USER_CODE_H_pixycam__
 
 #include "C_ASN1_Types.h"
 
@@ -11,10 +11,12 @@
 extern "C" {
 #endif
 
-void function2_startup();
+void pixycam_startup();
 
-void function2_PI_getX(const asn1SccMyReal *,
-                       const asn1SccMyReal *);
+void pixycam_PI_pulse();
+
+extern void pixycam_RI_processdata(const asn1SccT_UInt32 *,
+                                   const asn1SccT_UInt32 *);
 
 #ifdef __cplusplus
 }

@@ -33,13 +33,13 @@ END Node1;
 
 SYSTEM IMPLEMENTATION Node1.others
 SUBCOMPONENTS
-  IV_Function1 : SYSTEM interfaceview::IV::Function1.others {
-    Taste::coordinates => "1272 1226 1523 1488";
-    Taste::FunctionName => "Function1";
+  IV_PixyCam : SYSTEM interfaceview::IV::PixyCam.others {
+    Taste::coordinates => "1226 1303 1657 1411";
+    Taste::FunctionName => "PixyCam";
   };
-  IV_Function3 : SYSTEM interfaceview::IV::Function3.others {
-    Taste::coordinates => "1221 1534 1682 1683";
-    Taste::FunctionName => "Function3";
+  IV_PixyProcess : SYSTEM interfaceview::IV::PixyProcess.others {
+    Taste::coordinates => "1298 1544 1806 1739";
+    Taste::FunctionName => "PixyProcess";
   };
   x86_partition : PROCESS deploymentview::DV::Node1::x86_partition.others {
     Taste::coordinates => "926 1045 1872 1811";
@@ -49,8 +49,8 @@ SUBCOMPONENTS
     Taste::coordinates => "868 917 2042 1867";
   };
 PROPERTIES
-  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Function1;
-  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_Function3;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_PixyCam;
+  Taste::APLC_Binding => (reference (x86_partition)) APPLIES TO IV_PixyProcess;
   Actual_Processor_Binding => (reference (x86_linux32)) APPLIES TO x86_partition;
 END Node1.others;
 
@@ -69,6 +69,6 @@ PROPERTIES
   Taste::coordinates => "0 0 2970 2100";
   Taste::version => "1.3.19";
   Taste::interfaceView => "InterfaceView.aadl";
-  Taste::HWLibraries => ("../../tool-inst/share/ocarina/AADLv2/ocarina_components.aadl");
+  Taste::HWLibraries => ("../../../tool-inst/share/ocarina/AADLv2/ocarina_components.aadl");
 END deploymentview::DV;
 
