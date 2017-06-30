@@ -1,3 +1,3 @@
 # ignore binary.c directory to commit
 **/binary\.c/**
-**/\.idea**
+**/\.idea/**
