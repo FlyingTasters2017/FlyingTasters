@@ -17,7 +17,7 @@ Here you will find detailed description of:
 
 Please access our [wiki](https://github.com/FlyingTasters2017/FlyingTasters/wiki)
 
-# Make your drones fly 
+# User's manual 
 In order to run the latest version of **FlyingTasters**, please follow these steps:
 
 * Install TASTE on your Debian machine.
