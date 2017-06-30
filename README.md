@@ -86,8 +86,7 @@ cd theNameofTheFinalProject
 **9** Run FlyingTasters.
 ```
 cd binary.c/binaries
-./x86_partition &
-./GUI-gui &
+./x86_partition 
 ```
 # Further information
 
