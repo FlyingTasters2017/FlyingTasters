@@ -21,20 +21,36 @@ These are the pre requirements that the user should implement before running the
 
 **1** This project uses 3 quadcopters - [Crazyflie 2.0](https://www.bitcraze.io/crazyflie-2/)   
 
-**2** One PixyCam - TODO link for the website
+**2** One radio dongle - see [link](https://www.bitcraze.io/2012/02/the-crazyradio-dongle/)
 
-**3** Non reflective floor carpet - TODO see puicture
+**3** One PixyCam - TODO link for the website
 
-**4** Isolated room
+**4** Non reflective floor carpet - TODO see puicture
 
-**5** Drone markers - TODO see picture
+**5** Isolated room
+
+**6** Drone markers - TODO see picture
+
+### Prepare the PixyCam
+
+**1** Follow the instructions on this [link](http://cmucam.org/projects/cmucam5/wiki/Installing_PixyMon_on_Linux)
+
+**2** Train the camera following the instructions on this [link](https://www.youtube.com/watch?v=7znEmgYZXL0&feature=youtu.be). When training the camera use the drone markers that you want to stick on top of the drone as showed on the picture TODO add picture of drone with markers. For more info see [here](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Position-Detection#object-teaching-and-configuring-the-camera)
 
 ### Prepare environement
-This chapter explains how to prepare the environment 
+This chapter explains how to prepare the environment for the drones formation flight.
+
+**1** TODO Arrange a room with this properties - See picture
+
+**2** Attach the PixyCam on X meter hight
+
+**3** Set the non reflective floor carpet on the floor, under the camera view's field.
 
 ### System configuration
 
-* Install TASTE on your Debian machine.
+**1** For configuring the PixyCam on Linux follow steps on this [link](http://cmucam.org/projects/cmucam5/wiki/Building_the_libpixyusb_example_on_Linux)
+
+**2** Install TASTE on your Debian machine.
 ```
 git clone https://gitrepos.estec.esa.int/taste/taste-setup.git tool-src
 cd tool-src
@@ -44,24 +60,28 @@ git submodule update
 ./Update-TASTE.sh
 ```
 
-* [Make sure the dongle's drivers are installed in your system.](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Setup-guide#configuring-the-radio-dongle)
-* [Make sure the PixyCam's drivers are installed in your system.](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Setup-guide#configuring-the-pixy-camera)
-* Clone the repository into your machine.
+**3** Follow the steps described [here](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Developer's-manual#configuring-the-pixy-camera) to configure the camera for TASTE
+
+**4** [Make sure the PixyCam's drivers are installed in your system.](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Setup-guide#configuring-the-pixy-camera)
+
+**5** [Make sure the dongle's drivers are installed in your system.](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Setup-guide#configuring-the-radio-dongle)
+
+**6** Clone the repository into your machine.
 ```
 git clone https://github.com/FlyingTasters2017/FlyingTasters.git
 cd FlyingTasters
 ```
-* Start the Python server.
+**7** Start the Python server.
 ```
 cd theFolderIfNecessary
 python3 theNameoftheScript.py &
 ```
-* Build the TASTE project.
+**8** Build the TASTE project.
 ```
 cd theNameofTheFinalProject
 ./build-script.sh
 ```
-* Run FlyingTasters.
+**9** Run FlyingTasters.
 ```
 cd binary.c/binaries
 ./x86_partition &
