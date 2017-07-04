@@ -71,9 +71,9 @@ git submodule update
 
 **3** Follow the steps described [here](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Developer's-manual#configuring-the-pixy-camera) to configure the camera for TASTE
 
-**4** [Make sure the PixyCam's drivers are installed in your system.](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Developer's-manual#configuring-the-pixy-camera)
+**4** Make sure the PixyCam's drivers are installed in your system - see [link](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Developer's-manual#configuring-the-pixy-camera)
 
-**5** [Make sure the dongle's drivers are installed in your system.](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Developer's-manual#configuring-the-radio-dongle)
+**5** Make sure the dongle's drivers are installed in your system - see [link](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Developer's-manual#configuring-the-radio-dongle)
 
 **6** Clone the repository into your machine.
 ```
