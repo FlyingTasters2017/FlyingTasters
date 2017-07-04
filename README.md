@@ -10,7 +10,8 @@ Here you will find detailed description of:
 * The process describing how to build your own FlyingTasters
 * The steps of how to contribute to the FlyingTasters project
 
-# TODO [Add high level diagram of the system and its components]
+# High level diagram of the system and its components
+![external library](https://github.com/FlyingTasters2017/FlyingTasters/blob/development/images/high_level_diagram_of_the_system.jpeg)
 
 
 # User's manual 
@@ -23,22 +24,28 @@ These are the pre requirements that the user should implement before running the
 
 **2** One radio dongle - see [link](https://www.bitcraze.io/2012/02/the-crazyradio-dongle/)
 
-**3** One PixyCam - TODO link for the website
+**3** One PixyCam - see [link](http://cmucam.org/projects/cmucam5)
 
-**4** Non reflective floor carpet - TODO see puicture
+**4** Non reflective floor carpet - see the picture bellow 
+
+![external library](https://github.com/FlyingTasters2017/FlyingTasters/blob/development/images/markers.jpeg)
 
 **5** Isolated room
 
-**6** Drone markers - TODO see picture
+**6** Drone markers - see picture bellow
+
+![external library](https://github.com/FlyingTasters2017/FlyingTasters/blob/development/images/markers_diff_col.jpg)
 
 ### Prepare the PixyCam
 
 **1** Follow the instructions on this [link](http://cmucam.org/projects/cmucam5/wiki/Installing_PixyMon_on_Linux)
 
-**2** Train the camera following the instructions on this [link](https://www.youtube.com/watch?v=7znEmgYZXL0&feature=youtu.be). When training the camera use the drone markers that you want to stick on top of the drone as showed on the picture TODO add picture of drone with markers. For more info see [here](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Position-Detection#object-teaching-and-configuring-the-camera)
+**2** Train the camera following the instructions on this [link](https://www.youtube.com/watch?v=7znEmgYZXL0&feature=youtu.be). When training the camera use the drone markers that you want to stick on top of the drone as showed on the picture above. More info on this [link](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Position-Detection#object-teaching-and-configuring-the-camera)
 
 ### Prepare environement
-This chapter explains how to prepare the environment for the drones formation flight.
+This chapter explains how to prepare the environment for the drones formation flight. SSee the picture bellow for reference. 
+
+![external library](https://github.com/FlyingTasters2017/FlyingTasters/blob/development/images/room_set_up.jpeg)
 
 **1** TODO Arrange a room with this properties - See picture
 
