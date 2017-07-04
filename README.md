@@ -51,7 +51,9 @@ This chapter explains how to prepare the environment for the drones formation fl
 
 **2** Attach the PixyCam on 1.7 meter hight
 
-**3** Set the non reflective floor carpet on the floor, under the camera view's field.
+**3** Set the non reflective floor carpet on the floor, under the camera's view field.
+
+**4** Set the drones on the carpet under the camera, on safe distance from each other.
 
 ### System configuration
 
@@ -69,9 +71,9 @@ git submodule update
 
 **3** Follow the steps described [here](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Developer's-manual#configuring-the-pixy-camera) to configure the camera for TASTE
 
-**4** [Make sure the PixyCam's drivers are installed in your system.](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Setup-guide#configuring-the-pixy-camera)
+**4** [Make sure the PixyCam's drivers are installed in your system.](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Developer's-manual#configuring-the-pixy-camera)
 
-**5** [Make sure the dongle's drivers are installed in your system.](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Setup-guide#configuring-the-radio-dongle)
+**5** [Make sure the dongle's drivers are installed in your system.](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Developer's-manual#configuring-the-radio-dongle)
 
 **6** Clone the repository into your machine.
 ```
