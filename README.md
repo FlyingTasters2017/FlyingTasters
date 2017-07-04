@@ -43,11 +43,11 @@ These are the pre requirements that the user should implement before running the
 **2** Train the camera following the instructions on this [link](https://www.youtube.com/watch?v=7znEmgYZXL0&feature=youtu.be). When training the camera use the drone markers that you want to stick on top of the drone as showed on the picture above. More info on this [link](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Position-Detection#object-teaching-and-configuring-the-camera)
 
 ### Prepare environement
-This chapter explains how to prepare the environment for the drones formation flight. SSee the picture bellow for reference. 
+This chapter explains how to prepare the environment for the drones formation flight. See the picture bellow for reference. 
 
 ![external library](https://github.com/FlyingTasters2017/FlyingTasters/blob/development/images/room_set_up.jpeg)
 
-**1** TODO Arrange a room with this properties - See picture
+**1** Arrange a room where the drones can fly safely
 
 **2** Attach the PixyCam on 1.7 meter hight
 
