@@ -82,7 +82,7 @@ git clone https://github.com/FlyingTasters2017/FlyingTasters.git
 cd FlyingTasters
 ```
 
-**4** Make sure the PixyCam's drivers are linked in TASTE - see [link](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Developer's-manual#using-the-pixy-camera-in-taste)
+**4** Make sure the PixyCam's drivers are linked in TASTE - see [link](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Developer's-manual#using-the-pixy-camera-in-tastes)
 
 **5** Start the Python server.
 ```
