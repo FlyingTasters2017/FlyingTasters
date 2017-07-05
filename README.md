@@ -49,11 +49,11 @@ This chapter explains how to prepare the environment for the drones formation fl
 
 **1** Arrange a room where the drones can fly safely
 
-**2** Attach the PixyCam on 1.7 meter hight
+**2** Attach the PixyCam on 1.7 meter height
 
 **3** Set the non reflective floor carpet on the floor, under the camera's view field.
 
-**4** Set the drones on the carpet under the camera, on safe distance from each other.
+**4** Set the drones on the carpet under the camera, at safe distance from each other.
 
 ### System configuration
 
