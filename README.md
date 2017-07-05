@@ -55,7 +55,12 @@ This chapter explains how to prepare the environment for the drones formation fl
 
 **3** Set the non reflective floor carpet on the floor, under the camera's view field.
 
-**4** Set the drones on the carpet under the camera, at safe distance from each other.
+**4** Set the drones on the carpet under the camera, at safe distance from each other
+
+**5** Make sure that the x-coordinate of the Crazyflie (x crazyflie - shown in the right half on the picture below) coincides with the x-coordinate of the camera (x camera+ - shown in the left half on the picture bellow).
+Remark: Notice that these axes are not coinceding on the picture. You have to make sure that you set the drones accordingly.
+
+![external library](https://github.com/FlyingTasters2017/FlyingTasters/blob/development/images/camr_drone_orientation.jpeg)
 
 ### System configuration
 
@@ -86,7 +91,7 @@ python3 severMultipleDrones.py
 ```
 **6** Build the TASTE project.
 ```
-cd theNameofTheFinalProject
+cd FlyingTasters
 ./build-script.sh
 ```
 **7** Run FlyingTasters.
