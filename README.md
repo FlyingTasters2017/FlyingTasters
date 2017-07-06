@@ -37,7 +37,7 @@ These are the pre requirements that the user should implement before running the
 ![external library](https://github.com/FlyingTasters2017/FlyingTasters/blob/development/images/markers_diff_col.jpg)
 
 ### Prepare the Drones
-**1** The drones have the same radio channel by default. To differentiate between drones, this channel on each drone needs to be changed usinf the CrazyFlie client (Connect->Configure 2.0) as shown in the picture below 
+**1** The drones have the same radio channel by default. To differentiate between drones, this channel on each drone needs to be changed using the CrazyFlie client (Once connected to a drone, click on Connect to open drop-down menu, then select Configure 2.0) as shown in the picture below 
 
 ![external library](https://github.com/FlyingTasters2017/FlyingTasters/blob/development/images/change_cf_channel.JPG)
 
