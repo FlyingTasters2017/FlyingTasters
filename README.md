@@ -37,10 +37,12 @@ These are the pre requirements that the user should implement before running the
 ![external library](https://github.com/FlyingTasters2017/FlyingTasters/blob/development/images/markers_diff_col.jpg)
 
 ### Prepare the Drones
-**1** The drones have the same radio channel by default. To differentiate between drones, this channel on each drone needs to be changed usinf the CrazyFlie client as shown in the picture below 
+**1** The drones have the same radio channel by default. To differentiate between drones, this channel on each drone needs to be changed usinf the CrazyFlie client (Connect->Configure 2.0) as shown in the picture below 
+
 ![external library](https://github.com/FlyingTasters2017/FlyingTasters/blob/development/images/change_cf_channel.JPG)
+
 REMARK: The three drones in our project had the following addresses: 
-'radio://0/85/2M' 'radio://0/82/2M' and 'radio://0/83/2M', i.e. channel 85, 82 and 83. 
+'radio://0/85/2M', 'radio://0/82/2M' and 'radio://0/83/2M', i.e. channel 85, 82 and 83. 
 
 ### Prepare the PixyCam
 
