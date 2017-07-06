@@ -87,7 +87,7 @@ cd FlyingTasters
 **5** Start the Python server.
 ```
 cd PythonSocketServer
-python3 severMultipleDrones.py
+python3 serverMultipleDrones.py
 ```
 **6** Build the TASTE project.
 ```
