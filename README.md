@@ -48,7 +48,7 @@ REMARK: The three drones in our project had the following addresses:
 
 **1** Follow the instructions on this [link](http://cmucam.org/projects/cmucam5/wiki/Installing_PixyMon_on_Linux)
 
-**2** Train the camera following the instructions on this [link](https://www.youtube.com/watch?v=7znEmgYZXL0&feature=youtu.be). When training the camera use the drone markers that you want to stick on top of the drone as showed on the picture above. 
+**2** Train the camera following the instructions on this [link](http://cmucam.org/projects/cmucam5/wiki/Teach_Pixy_an_Object_2). When training the camera use the drone markers that you want to stick on top of the drone as showed on the picture above. 
 
 **3** Follow the steps described [here](https://github.com/FlyingTasters2017/FlyingTasters/wiki/Developer's-manual#configuring-the-pixy-camera)
 
